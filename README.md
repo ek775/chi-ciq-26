@@ -62,6 +62,16 @@ records, and does not create an archive. A successful batch exports the **entire
 connected database**, including prior runs, not just this batch. Rerunning inputs
 creates new meeting records; it does not skip existing files.
 
+Both examples emit timestamped progress logs for model loading, audio extraction,
+full-file diarization, and each chunk's Whisper, embedding, and database stages.
+Chunk logs identify the meeting, speaker, and recording-relative audio offsets.
+Each video reports elapsed wall-clock time as `H:MM:SS` and seconds, including
+on failure; the batch timer also includes model loading and database export.
+Timers use a monotonic clock and do not change stored recording timestamps.
+They report at stage boundaries, not as a continuously updating countdown.
+Empty Whisper output still raises an error and marks the meeting incomplete;
+logging does not skip silent chunks or suppress model warnings.
+
 Archives have unique names such as `transcription-20261111T201500Z-<id>.dump`.
 Incomplete exports are removed, and completed archives are not overwritten.
 The default `data/database/` directory is gitignored except for its `.gitkeep`.

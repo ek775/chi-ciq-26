@@ -27,6 +27,7 @@ dependencies = [
     "sqlalchemy",
     "psycopg[binary]",
     "pgvector",
+    "tqdm",
 ]
 
 [project.optional-dependencies]

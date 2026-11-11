@@ -1,3 +1,4 @@
+import logging
 import os
 import shutil
 import subprocess
@@ -83,7 +84,8 @@ def test_export_requires_pg_dump(tmp_path, monkeypatch):
         batch.export_database("postgresql://localhost/transcription", tmp_path)
 
 
-def test_batch_closes_iterator_on_processing_error():
+def test_batch_closes_iterator_on_processing_error(caplog):
+    caplog.set_level(logging.INFO)
     closed = []
 
     def transcribe(path):
@@ -102,6 +104,9 @@ def test_batch_closes_iterator_on_processing_error():
     with pytest.raises(RuntimeError, match="model failed"):
         batch.transcribe_recordings(workflow, [Path("first.mp4"), Path("second.mp4")])
     assert closed == [Path("first.mp4")]
+    assert "Video 1/2: first.mp4" in caplog.text
+    assert "Video first.mp4: failed or interrupted in" in caplog.text
+    assert "Video 2/2" not in caplog.text
 
 
 def test_cli_env_defaults_and_overrides(tmp_path, monkeypatch):

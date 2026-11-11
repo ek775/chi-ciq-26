@@ -1,3 +1,4 @@
+import logging
 import shutil
 import subprocess
 import wave
@@ -165,7 +166,8 @@ def test_model_failure_keeps_prior_rows_and_propagates(workflow, source, store):
         assert session.scalar(select(func.count()).select_from(TranscriptSegment)) == 1
 
 
-def test_empty_transcript_is_not_silently_discarded(workflow, source, store):
+def test_empty_transcript_is_not_silently_discarded(workflow, source, store, caplog):
+    caplog.set_level(logging.INFO)
     workflow.transcriber.transcribe = lambda audio: " "
     with pytest.raises(ValueError, match="empty text"):
         list(workflow.transcribe(source))
@@ -173,6 +175,11 @@ def test_empty_transcript_is_not_silently_discarded(workflow, source, store):
         assert session.scalar(select(Meeting.status)) == "incomplete"
         assert session.scalar(select(Meeting.recording_duration_seconds)) >= 3
         assert session.scalar(select(func.count()).select_from(TranscriptSegment)) == 0
+    assert "FFmpeg extraction: completed in" in caplog.text
+    assert "full-file diarization: completed in" in caplog.text
+    assert "3 speaker turns" in caplog.text
+    assert "chunk 1 SPEAKER_00 [0.000-1.000s]: Whisper" in caplog.text
+    assert "status=incomplete" in caplog.text
 
 
 def test_ffmpeg_errors_are_visible(workflow, tmp_path, store):

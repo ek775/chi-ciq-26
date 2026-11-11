@@ -1,4 +1,5 @@
 import argparse
+import logging
 import os
 import shutil
 import subprocess
@@ -18,8 +19,11 @@ from chi_ciq_transcription import (
     create_database,
     parse_filename,
 )
+from chi_ciq_transcription.progress import timed_operation
 
-from .transcribe import build_workflow
+from .transcribe import build_workflow, configure_logging
+
+logger = logging.getLogger(__name__)
 
 
 def discover_recordings(directory: Path) -> list[Path]:
@@ -41,10 +45,13 @@ def discover_recordings(directory: Path) -> list[Path]:
 def transcribe_recordings(
     workflow: TranscriptionWorkflow, recordings: Sequence[Path]
 ) -> None:
-    for recording in recordings:
-        print(f"Transcribing {recording.name}", flush=True)
+    for index, recording in enumerate(recordings, start=1):
+        logger.info("Video %d/%d: %s", index, len(recordings), recording.name)
         count = 0
-        with closing(workflow.transcribe(recording)) as segments:
+        with (
+            timed_operation(f"Video {recording.name}"),
+            closing(workflow.transcribe(recording)) as segments,
+        ):
             for segment in segments:
                 count += 1
                 print(
@@ -125,7 +132,9 @@ def main(argv: Sequence[str] | None = None) -> None:
         default=Path(os.environ.get("TRANSCRIPTION_OUTPUT_DIR", "data/database")),
     )
     args = parser.parse_args(argv)
+    configure_logging()
     recordings = discover_recordings(args.input_dir)
+    logger.info("Found %d MP4 files in %s", len(recordings), args.input_dir)
     if shutil.which("pg_dump") is None:
         raise FileNotFoundError(
             "pg_dump is required; install the PostgreSQL client tools"
@@ -137,10 +146,12 @@ def main(argv: Sequence[str] | None = None) -> None:
     database_url = os.environ["DATABASE_URL"]
     engine = create_database(database_url)
     try:
-        workflow = build_workflow(TranscriptStore(engine), os.environ["HF_TOKEN"])
-        transcribe_recordings(workflow, recordings)
-        archive = export_database(database_url, args.output_dir)
-        print(f"Database archive: {archive}", flush=True)
+        with timed_operation("Batch (model loading, videos, and database export)"):
+            workflow = build_workflow(TranscriptStore(engine), os.environ["HF_TOKEN"])
+            transcribe_recordings(workflow, recordings)
+            with timed_operation("Database export"):
+                archive = export_database(database_url, args.output_dir)
+            print(f"Database archive: {archive}", flush=True)
     finally:
         engine.dispose()
 

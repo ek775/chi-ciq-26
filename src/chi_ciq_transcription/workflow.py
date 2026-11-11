@@ -1,3 +1,4 @@
+import logging
 import math
 import subprocess
 import wave
@@ -11,6 +12,9 @@ from .backends import SAMPLE_RATE, Diarizer, TextEmbedder, Transcriber, VoiceEmb
 from .database import TranscriptStore
 from .metadata import parse_filename
 from .models import TranscriptSegment
+from .progress import timed_operation
+
+logger = logging.getLogger(__name__)
 
 
 def extract_audio(source: Path, destination: Path) -> None:
@@ -75,10 +79,12 @@ class TranscriptionWorkflow:
             voice_embedding_model=self.voice_embedder.model_name,
         )
         completed = False
+        logger.info("Meeting %s: %s", meeting_id, source.name)
         try:
             with TemporaryDirectory(prefix="chi-ciq-") as directory:
                 audio_path = Path(directory) / "audio.wav"
-                extract_audio(source, audio_path)
+                with timed_operation(f"Meeting {meeting_id}: FFmpeg extraction"):
+                    extract_audio(source, audio_path)
                 with wave.open(str(audio_path), "rb") as audio_file:
                     if (
                         audio_file.getframerate() != SAMPLE_RATE
@@ -92,7 +98,17 @@ class TranscriptionWorkflow:
                     self.store.set_recording_duration(
                         meeting_id, frame_count / SAMPLE_RATE
                     )
-                    turns = self.diarizer.diarize(str(audio_path))
+                    logger.info(
+                        "Meeting %s: recording duration %.2fs; chunk limit %.2fs",
+                        meeting_id,
+                        frame_count / SAMPLE_RATE,
+                        self.max_chunk_frames / SAMPLE_RATE,
+                    )
+                    with timed_operation(
+                        f"Meeting {meeting_id}: full-file diarization"
+                    ):
+                        turns = list(self.diarizer.diarize(str(audio_path)))
+                    logger.info("Meeting %s: %d speaker turns", meeting_id, len(turns))
                     sequence = 0
                     for turn in turns:
                         if not (
@@ -118,23 +134,39 @@ class TranscriptionWorkflow:
                                 np.frombuffer(pcm, dtype="<i2").astype(np.float32)
                                 / 32768
                             )
-                            transcript = self.transcriber.transcribe(chunk)
+                            label = (
+                                f"Meeting {meeting_id}: chunk {sequence + 1} "
+                                f"{turn.speaker} [{start / SAMPLE_RATE:.3f}-"
+                                f"{end / SAMPLE_RATE:.3f}s]"
+                            )
+                            with timed_operation(f"{label}: Whisper"):
+                                transcript = self.transcriber.transcribe(chunk)
                             if not transcript.strip():
                                 raise ValueError(
                                     f"Whisper returned empty text at {start / SAMPLE_RATE}s"
                                 )
-                            segment = self.store.append(
-                                meeting_id,
-                                sequence=sequence,
-                                speaker=turn.speaker,
-                                start=start / SAMPLE_RATE,
-                                end=end / SAMPLE_RATE,
-                                transcript=transcript,
-                                text_embedding=self.text_embedder.embed(transcript),
-                                voice_embedding=self.voice_embedder.embed(chunk),
-                            )
+                            with timed_operation(f"{label}: text embedding"):
+                                text_embedding = self.text_embedder.embed(transcript)
+                            with timed_operation(f"{label}: voice embedding"):
+                                voice_embedding = self.voice_embedder.embed(chunk)
+                            with timed_operation(f"{label}: database commit"):
+                                segment = self.store.append(
+                                    meeting_id,
+                                    sequence=sequence,
+                                    speaker=turn.speaker,
+                                    start=start / SAMPLE_RATE,
+                                    end=end / SAMPLE_RATE,
+                                    transcript=transcript,
+                                    text_embedding=text_embedding,
+                                    voice_embedding=voice_embedding,
+                                )
                             sequence += 1
                             yield segment
             completed = True
         finally:
             self.store.finish(meeting_id, completed=completed)
+            logger.info(
+                "Meeting %s: status=%s",
+                meeting_id,
+                "completed" if completed else "incomplete",
+            )
