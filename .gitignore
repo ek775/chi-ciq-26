@@ -1,0 +1,16 @@
+# sensitive info
+.env
+
+# large data files
+data/**
+!data/**/
+!data/**/.gitkeep
+
+# Python development
+.venv/
+__pycache__/
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+build/
+dist/

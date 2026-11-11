@@ -1,0 +1,46 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "chi-ciq-transcription"
+version = "0.1.0"
+description = "Local MP4 transcription and speaker diarization workflow."
+requires-python = ">=3.12"
+dependencies = [
+    # Hugging Face model loading and inference.
+    "huggingface-hub",
+    "transformers",
+    "accelerate",
+    # Whisper transcription and pyannote speaker diarization.
+    "openai-whisper",
+    "pyannote.audio",
+    "torch",
+    "torchaudio",
+    "torchcodec",
+    "numpy",
+    # Requires system FFmpeg with shared libraries (e.g. apt install ffmpeg).
+    "ffmpeg-python",
+    # Load HF_TOKEN from .env; gated pyannote models also require accepting terms.
+    "python-dotenv",
+    "sentence-transformers",
+    "sqlalchemy",
+    "psycopg[binary]",
+    "pgvector",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest",
+    "ruff",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.ruff]
+target-version = "py312"
+line-length = 88
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

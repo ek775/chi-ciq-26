@@ -1,0 +1,12 @@
+{
+    "name": "MP4 transcription",
+    "dockerComposeFile": "../compose.yaml",
+    "service": "app",
+    "workspaceFolder": "/workspace",
+    "shutdownAction": "stopCompose",
+    "customizations": {
+        "vscode": {
+            "extensions": ["ms-python.python", "ms-python.vscode-pylance"]
+        }
+    }
+}
