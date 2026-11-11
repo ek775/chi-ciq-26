@@ -6,7 +6,7 @@ services:
       POSTGRES_DB: transcription
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in .env}
     ports:
-      - "127.0.0.1:5432:5432"
+      - "127.0.0.1:5433:5432"
     volumes:
       - postgres-data:/var/lib/postgresql/data
     healthcheck:
@@ -16,6 +16,7 @@ services:
       retries: 10
   app:
     build: .
+    gpus: all
     init: true
     working_dir: /workspace
     volumes:
@@ -23,6 +24,8 @@ services:
       - model-cache:/root/.cache
     environment:
       HF_TOKEN: ${HF_TOKEN:-}
+      TRANSCRIPTION_INPUT_DIR: ${TRANSCRIPTION_INPUT_DIR:-data/mp4}
+      TRANSCRIPTION_OUTPUT_DIR: ${TRANSCRIPTION_OUTPUT_DIR:-data/database}
       DATABASE_URL: postgresql+psycopg://transcription:${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in .env}@db:5432/transcription
     depends_on:
       db:

@@ -225,3 +225,16 @@ def test_duration_persists_before_diarization(workflow, source, store):
     with store.sessions() as session:
         assert session.scalar(select(Meeting.status)) == "incomplete"
         assert session.scalar(select(Meeting.recording_duration_seconds)) >= 3
+
+
+def test_directory_batch_processes_all_recordings(workflow, source, store):
+    from examples.batch_transcribe import discover_recordings, transcribe_recordings
+
+    second = source.parent / "2026-11-11_budget.mp4"
+    shutil.copyfile(source, second)
+    transcribe_recordings(workflow, discover_recordings(source.parent))
+    with store.sessions() as session:
+        meetings = session.scalars(select(Meeting).order_by(Meeting.meeting_date)).all()
+        assert [meeting.filename for meeting in meetings] == [source.name, second.name]
+        assert all(meeting.status == "completed" for meeting in meetings)
+        assert session.scalar(select(func.count()).select_from(TranscriptSegment)) == 8

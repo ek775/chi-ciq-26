@@ -26,10 +26,63 @@ Review each model's license and conditions before use.
 For host development, install FFmpeg, use Python 3.12, run
 `python -m pip install -e ".[dev]"`, and start only the database with
 `docker compose up -d db`. The example loads `.env` automatically.
+PostgreSQL is exposed on `127.0.0.1:5433` for host connections; use port `5433`
+in your local `.env` `DATABASE_URL`. Containers still connect to `db:5432`.
 Dependencies are intentionally unpinned; resolve and lock a tested PyTorch,
 TorchAudio, and TorchCodec combination before production use.
 
 ## Python API
+
+### Directory batch and database archive
+
+Process every MP4 directly inside a directory (non-recursive, sorted by filename),
+then write a custom-format PostgreSQL archive to the output directory:
+
+```sh
+docker compose up --build -d
+docker compose exec app python -m examples.batch_transcribe \
+  --input-dir data/mp4 --output-dir data/database
+```
+
+Or set `TRANSCRIPTION_INPUT_DIR` and `TRANSCRIPTION_OUTPUT_DIR` in `.env` and run:
+
+```sh
+docker compose exec app python -m examples.batch_transcribe
+```
+
+For host execution, use the same `python -m examples.batch_transcribe` command
+from the repository root. Install `pg_dump` and `pg_restore` from PostgreSQL client
+tools, with a client major version matching or newer than the server.
+The development image includes client version 17 for its PostgreSQL 17 service.
+
+The models load once for the batch. All filenames are validated before processing.
+Non-MP4 files are ignored; an empty input directory or invalid filename is an
+error. Processing stops on the first failure, preserves previously committed
+records, and does not create an archive. A successful batch exports the **entire
+connected database**, including prior runs, not just this batch. Rerunning inputs
+creates new meeting records; it does not skip existing files.
+
+Archives have unique names such as `transcription-20261111T201500Z-<id>.dump`.
+Incomplete exports are removed, and completed archives are not overwritten.
+The default `data/database/` directory is gitignored except for its `.gitkeep`.
+Other output directories are not automatically ignored; treat archives as
+sensitive because they contain transcripts, voice vectors, and source paths.
+PostgreSQL remains the live database; the output is a backup, not a database
+that can be opened directly as a file.
+
+Restore into a **new, empty** PostgreSQL database on a server with pgvector
+installed, using a role allowed to create the extension:
+
+```sh
+pg_restore --dbname="$RESTORE_DATABASE_URL" --no-owner --no-acl \
+  data/database/transcription-<timestamp>-<id>.dump
+```
+
+`RESTORE_DATABASE_URL` is a standard PostgreSQL/libpq URL (`postgresql://...`),
+not SQLAlchemy's `postgresql+psycopg://...`. Restoring a client-17 archive to
+PostgreSQL 17 or newer is recommended.
+
+### Single-recording library usage
 
 ```python
 import os
@@ -96,8 +149,32 @@ first. This is initial schema setup, not a schema migration system.
   resulting voice vectors are not guaranteed to identify a person. Speaker labels
   are local to a meeting, not verified or globally matched identities.
 - Default adapters target the pyannote 4 API. Model loading is lazy at adapter
-  construction, not package import. Pass `device="cuda"` to each adapter only in
-  an appropriately configured GPU environment; the supplied container is CPU-first.
+  construction, not package import. Both examples check `torch.cuda.is_available()`
+  once at run setup, print the selected device, and pass it to all four adapters.
+  They use CUDA when available and CPU otherwise. GPU model-loading errors
+  propagate rather than silently retrying on CPU. Direct library callers can
+  pass `device="cuda"` explicitly; adapter defaults remain CPU.
+
+### NVIDIA GPU access in Docker
+
+The single Compose configuration exposes all NVIDIA GPUs to the app container.
+It requires NVIDIA drivers and NVIDIA Container Toolkit configured for Docker,
+as well as CUDA-compatible PyTorch. Start it with the normal command:
+
+```sh
+docker compose up --build -d
+docker compose exec app python -c \
+  'import torch; print("CUDA available:", torch.cuda.is_available())'
+```
+
+Then start a new single-file or batch run normally. Existing Python processes
+do not switch devices mid-run. Enabling GPU access recreates the app container,
+so let an active transcription finish first. If Docker reports
+`could not select device driver ... with capabilities: [[gpu]]`, install
+[NVIDIA Container Toolkit](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html)
+on the host and configure its Docker runtime. Docker must support GPU requests
+before the container can start; the Python CPU fallback applies only after startup.
+There is no separate GPU configuration or startup option.
 
 ## Filename metadata
 
@@ -182,8 +259,10 @@ python -m ruff format --check src tests examples
 ```
 
 PostgreSQL integration tests skip unless `TEST_DATABASE_URL` is set. They create
-and drop uniquely named test schemas; the test role needs schema/extension
-creation privileges. To include them inside the development container:
+and drop uniquely named test schemas; dump/restore tests also create and drop a
+uniquely named database. The test role needs schema/extension and database creation
+privileges. Dump/restore tests require `pg_dump` and `pg_restore`. To include them
+inside the development container:
 
 ```sh
 docker compose exec app sh -c 'TEST_DATABASE_URL="$DATABASE_URL" python -m pytest'
