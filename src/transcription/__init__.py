@@ -1,4 +1,5 @@
 from .backends import (
+    DiarizedChunk,
     PyannoteDiarizer,
     PyannoteVoiceEmbedder,
     SentenceTextEmbedder,
@@ -9,9 +10,11 @@ from .backends import (
 from .database import TranscriptStore, create_database
 from .metadata import MeetingMetadata, parse_filename
 from .models import Meeting, Speaker, TranscriptSegment
+from .streaming import StreamingPyannoteDiarizer
 from .workflow import TranscriptionWorkflow
 
 __all__ = [
+    "DiarizedChunk",
     "Meeting",
     "MeetingMetadata",
     "PyannoteDiarizer",
@@ -19,6 +22,7 @@ __all__ = [
     "SentenceTextEmbedder",
     "Speaker",
     "SpeakerTurn",
+    "StreamingPyannoteDiarizer",
     "TranscribedWord",
     "TranscriptSegment",
     "TranscriptStore",

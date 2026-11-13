@@ -18,6 +18,15 @@ class SpeakerTurn:
 
 
 @dataclass(frozen=True)
+class DiarizedChunk:
+    """Finalized, contiguous audio-sample interval and recording-relative turns."""
+
+    start: int
+    end: int
+    turns: list[SpeakerTurn]
+
+
+@dataclass(frozen=True)
 class TranscribedWord:
     """Whisper word text and offsets relative to the supplied audio window."""
 
@@ -29,7 +38,9 @@ class TranscribedWord:
 class Diarizer(Protocol):
     model_name: str
 
-    def diarize(self, audio_path: str) -> Iterable[SpeakerTurn]: ...
+    def diarize_chunks(
+        self, audio_path: str, chunk_frames: int
+    ) -> Iterable[DiarizedChunk]: ...
 
 
 class Transcriber(Protocol):
@@ -181,12 +192,15 @@ class PyannoteVoiceEmbedder:
         token: str,
         model_name: str = "pyannote/wespeaker-voxceleb-resnet34-LM",
         device: str = "cpu",
+        *,
+        subfolder: str | None = None,
     ):
         import torch
         from pyannote.audio import Inference, Model
 
         self.model_name = model_name
-        model = Model.from_pretrained(model_name, token=token)
+        options = {} if subfolder is None else {"subfolder": subfolder}
+        model = Model.from_pretrained(model_name, token=token, **options)
         if model is None:
             raise RuntimeError(f"Unable to load voice embedding model: {model_name}")
         self.inference = Inference(model, window="whole")
