@@ -1,0 +1,2795 @@
+[00:06:54.190] Right, we need eight?
+[00:06:54.970] Yeah.
+[00:06:55.790] All right. The Committee on Environmental Protection and Energy will come
+[00:06:59.770] to order.
+[00:07:03.390] Good afternoon, everybody.
+[00:07:06.870] Thank you for being here today.
+[00:07:09.510] Today, the committee has one agenda item, a subject matter
+[00:07:13.010] hearing regarding the provision in
+[00:07:15.390] SO2024-0008201,
+[00:07:19.510] which directed the Department of Environment to report on the environmental and
+[00:07:22.850] energy impacts of data centers in Chicago.
+[00:07:25.790] I will begin with a roll call to establish quorum.
+[00:07:28.650] Chair Hadden is present. Vice Chair Knudsen.
+[00:07:32.850] Alder Espada.
+[00:07:34.440] Alder Ramirez. Alder Lopez.
+[00:07:36.950] Present.
+[00:07:37.550] Alder Tavares.
+[00:07:39.050] Present.
+[00:07:40.270] Oh, we'll get to you for the Rule 59, Alder Tavares.
+[00:07:43.270] Alder Sigcho-Lopez. Alder Cruz.
+[00:07:46.590] Alder Rodriguez-Sanchez. Alder Conway. Alder Riley.
+[00:07:50.710] Present.
+[00:07:51.350] Alder Lawson.
+[00:07:52.870] Alder Clay.
+[00:07:54.390] Alder Martin,
+[00:07:55.950] and Alder Manaa-Hoppenworth.
+[00:07:58.270] All right.
+[00:08:00.110] We have nine members? Nine members present.
+[00:08:02.550] We have a quorum.
+[00:08:06.270] Joining us virtually are Alders Tavares,
+[00:08:09.190] and per Rule 59, could I have a motion to approve Alder
+[00:08:12.910] Tavares' remote participation now that we've established quorum?
+[00:08:16.430] All right. Alder Manaa-Hoppenworth so moves.
+[00:08:19.150] All those in favor say aye.
+[00:08:21.550] All those opposed, nay. In the opinion of Chair, the ayes have it.
+[00:08:26.250] Fantastic. And Alder Tavares, thank you for being here today.
+[00:08:29.050] You'll be marked present.
+[00:08:31.310] Non-members? Nope. So at this time, we will begin the public
+[00:08:35.270] comment period. Public comment is limited to 30 minutes, and out of respect for
+[00:08:39.270] everybody's time, each speaker is limited to three minutes.
+[00:08:46.690] Our first speaker for public comment is Shakeena Sims.
+[00:08:57.899] Good afternoon, everyone. I'm Shakeena Sims with NRDC Safe Water
+[00:09:01.770] Initiative. As we continue discussions around data centers, I want to
+[00:09:05.470] ensure that one resource that affects every Chicago resident,
+[00:09:09.110] business, and neighborhood doesn't get lost in the conversation, and that's water.
+[00:09:13.610] Studies show that low-income households spend a disproportionate amount of their
+[00:09:17.210] income on water bills. At the same time, Chicagoans are looking to their
+[00:09:20.990] leaders to invest in long overdue infrastructure upgrades to
+[00:09:24.630] deliver safer drinking water to their homes and alleviate flooding in their
+[00:09:28.050] basements. Safe water and a dry basement shouldn't be a luxury, and
+[00:09:31.950] affordability shouldn't be an afterthought.
+[00:09:34.490] That's why it's important that we're careful about the demands we're placing on our
+[00:09:38.290] aging infrastructure and the pockets of our residents.
+[00:09:41.700] There is rapid data center growth across the country, and communities across
+[00:09:45.310] demographics continue to voice concerns.
+[00:09:48.170] On the energy side, utility bills are skyrocketing and residents are at
+[00:09:52.140] threat of disconnection due to high energy burdens.
+[00:09:55.310] On the water side, residents share similar concerns.
+[00:09:58.470] How much water do the data centers use?
+[00:10:00.890] Will usage result in higher water bills and lower water pressure?
+[00:10:04.790] And what other environmental impacts are at play, especially on communities
+[00:10:08.630] already burdened with pollution?
+[00:10:10.690] That's why community voices must be meaningfully included at
+[00:10:14.550] every stage of the process. It builds trust and ensures local priorities and
+[00:10:18.510] concerns are reflected in decisions that will ultimately affect communities for
+[00:10:22.510] decades. The community deserves transparency.
+[00:10:25.840] Data centers should be required to report water usage, and the
+[00:10:29.450] information should be clear and accessible, and that transparency must be
+[00:10:33.430] paired with accountability. Reporting is one thing, but what are the
+[00:10:36.930] consequences where shared commitments and standards aren't met?
+[00:10:40.640] These are just two pieces of a much broader list.
+[00:10:43.630] There's also a lot for us to learn from other communities across the country.
+[00:10:47.270] But community involvement, transparency, and accountability
+[00:10:53.230] should always remain at the forefront. Thank you so much.
+[00:11:03.750] All right. Thank you. Our next speaker is Ayanna Simba.
+[00:11:16.330] Hello. Good morning, committee. My name is Ayanna
+[00:11:20.350] Simba, and I'm here on behalf of the Illinois Environmental Council as their
+[00:11:24.330] City Government Affairs Director.
+[00:11:26.050] IEC, we represent nearly 130 environmental orgs across
+[00:11:30.020] the state, including many that are here in the room today that work on
+[00:11:32.830] environmental policies here in Chicago.
+[00:11:35.330] And I want to talk about this data center report.
+[00:11:37.570] First, I want to say thank you to Committee Chairwoman Hadden for hosting this
+[00:11:40.870] hearing. Second, I want to thank the Sustainable Data Centers Working Group
+[00:11:44.810] for putting together this timely report.
+[00:11:47.590] As artificial
+[00:11:49.070] intelligence continues to be widely adopted, we are seeing an unprecedented level
+[00:11:52.810] of data center expansion. Chicago specifically being along Lake
+[00:11:56.550] Michigan and experiencing long, cold winters is an ideal place
+[00:12:00.490] positioned for data center expansion.
+[00:12:03.090] And while there are already data centers here in Chicago, 39 to date, the
+[00:12:07.090] city's current policies and regulations related to them are far
+[00:12:10.630] outdated and do not reflect the growing demand of AI.
+[00:12:14.510] Data center zoning is currently classified in the same category as office
+[00:12:17.870] buildings, and it can be permitted by right, meaning they experience a
+[00:12:21.630] streamlined approval process and does not require public hearings or special
+[00:12:25.270] conditions, of course, depending on the size.
+[00:12:28.250] While some data center construction may trigger the plan development
+[00:12:32.230] process that does include public comment,
+[00:12:34.910] all data centers, regardless of size, location, et cetera, should
+[00:12:38.750] require input from the public and the local alderman.
+[00:12:42.670] Related to zoning, in a city where we have one of the highest asthma rates in the
+[00:12:46.030] country and we are experiencing more heat waves, we need additional
+[00:12:49.890] regulation for diesel backup generators.
+[00:12:52.780] These generators not only increase greenhouse gas emissions, they also release
+[00:12:56.590] large amounts of pollution during peak hours and emergencies.
+[00:13:00.110] They are also a major source of noise pollution when generating up to 105
+[00:13:03.990] decibels, which is basically comparable to a jet flying
+[00:13:07.170] overhead. Equally, we need renewable energy
+[00:13:11.150] requirements for data centers. There are existing
+[00:13:14.490] battery storage technology that can replace diesel generators and
+[00:13:18.510] provide cleaner, quieter, and more reliable power backup.
+[00:13:22.750] We also cannot talk about data centers without recognizing their electricity and
+[00:13:26.550] water demand. Chicago's already experiencing brownouts and aging
+[00:13:30.350] infrastructure with high summer demand.
+[00:13:32.370] When we have these large data centers that cluster in neighborhoods, they intensify
+[00:13:35.470] the strain on the grid. We also know that there are
+[00:13:39.270] water impacts from data centers as well.
+[00:13:42.230] Lake Michigan is vast. However, we are already seeing an increasing number of
+[00:13:45.590] suburbs that are seeking water from the lake from the City of Chicago, and we have
+[00:13:49.250] residents who cannot afford their water.
+[00:13:51.730] At minimum, we deserve transparency around
+[00:13:55.730] data center water and energy usage.
+[00:13:58.410] Finally, this report
+[00:14:02.050] is a long time coming. Almost two years ago, IEC and our partners worked closely
+[00:14:05.730] with Alderman Villegas, whose leadership on this has led to the consideration
+[00:14:09.730] of environmental challenges for future data center approval, and we also thank him
+[00:14:13.350] for his expressed support of the POWER Act.
+[00:14:15.610] With this, we hope that the data center report will in-
+[00:14:20.630] You almost made it.
+[00:14:22.670] You almost made it.
+[00:14:27.650] Our next speaker is Mr. George Blakemore.
+[00:14:37.030] One, environment is very important.
+[00:14:40.690] Historically, pollution and
+[00:14:44.790] waste have always, and these data centers or
+[00:14:48.790] whatever, have always been in the poor
+[00:14:52.290] neighborhoods.
+[00:14:55.090] The poor neighborhoods. The rich, they don't have this
+[00:14:58.970] problem.
+[00:15:00.830] Did you know the rich live longer than the poor, too?
+[00:15:04.910] And they get all kind of benefits. So the negative
+[00:15:08.950] effect that these data
+[00:15:11.610] centers have on the poor, particularly poor Black
+[00:15:15.270] people.
+[00:15:17.630] Poor Black people. I have seen this happen
+[00:15:21.570] on the North Side with these steel mills leaving
+[00:15:25.730] the Lincoln Yard and going to the 8th Ward.
+[00:15:29.670] Well, the Black ward.
+[00:15:32.190] So Black people, you should have a
+[00:15:34.650] vested interest in these data
+[00:15:38.270] centers, and see how many of them will be placed
+[00:15:42.210] on the Gold Coast
+[00:15:44.570] in the rich areas. See, America has
+[00:15:48.450] rich
+[00:15:49.870] and poor people. America have Black and white
+[00:15:53.590] people. People that was enslaved in America.
+[00:15:58.030] Enslaved in America. Not God bless America,
+[00:16:02.090] but God didn't bless these Black people came over here.
+[00:16:05.890] Now I'm giving you a little history.
+[00:16:08.570] So when they get ready for these data centers or
+[00:16:12.570] daily
+[00:16:13.690] whatever, or whatever, Mr. Blakemore, be more
+[00:16:17.030] articulate. They going to put them in the
+[00:16:19.610] hood, in the poor areas,
+[00:16:23.930] not in the rich.
+[00:16:26.090] In a capitalist system, the golden rule is he who has the
+[00:16:30.030] gold. This is not a democratic system.
+[00:16:32.820] They all here are Democrats. They're not talking about that big H white
+[00:16:36.850] man, Trump.
+[00:16:39.250] Right here is racism, nepotism, corruption.
+[00:16:43.210] Right here. So these
+[00:16:46.290] centers will be placed in the
+[00:16:49.410] poor Black areas.
+[00:16:53.490] Why not?
+[00:16:55.690] Why not? Why not in the rich areas? In the
+[00:16:59.610] rich white areas? They're looking at me. Why not?
+[00:17:03.910] So that's why it's very important for a man of Mr.
+[00:17:07.250] Blakemore caliber to come to these meetings, to call them out.
+[00:17:12.310] Waste, fraud, and abuse. Well, it goes on here.
+[00:17:16.450] Racism with these data centers, where are they going to be
+[00:17:20.391] placed? And this is only subject matter
+[00:17:23.190] only. When you know better, you do better.
+[00:17:27.990] They will be placed in these poor
+[00:17:31.370] areas, poor Hispanic areas, poor
+[00:17:35.130] white areas, poor Black areas, so that-
+[00:17:43.190] Thank you, Mr. Blakemore. Next up, we have Henry Winston.
+[00:17:54.050] And I'd like to recognize Alders Cruz and Ramirez for
+[00:17:57.830] purposes of quorum. Thank you for joining us.
+[00:18:03.630] Hi, my name's Henry Winston. I'm a resident of Chicago, and I'm here representing
+[00:18:07.630] Sierra Club.
+[00:18:09.870] We're very concerned about data centers in the city,
+[00:18:13.650] especially as the fight continues throughout the state
+[00:18:17.466] Speaking on the same issues that have already been brought up, we're concerned
+[00:18:20.466] about the effects on the energy grid, and we would like to see
+[00:18:24.246] prioritized data centers bringing their own clean energy onto the grid
+[00:18:28.386] to operate off of.
+[00:18:30.186] Like Ayana brought up, Chicago is already experiencing issues with brownouts.
+[00:18:34.246] We saw New York have significant brownouts
+[00:18:37.906] as the
+[00:18:39.466] load increased on their energy grid with summertime heat
+[00:18:42.766] waves. That's an issue we'll only see increase with climate change, and we're only
+[00:18:46.566] going to increase the load on our already aging electric grid
+[00:18:49.926] infrastructure. And so we think it's of the most importance that
+[00:18:53.866] these new data centers are bringing their own clean energy to operate off of.
+[00:18:57.406] Also with water, making sure that there are publicly
+[00:19:01.346] available information and clear reports and robust
+[00:19:05.086] enforcement of those metrics. Sierra Club just last year sued
+[00:19:08.926] the Trump Tower downtown for improper
+[00:19:13.606] maintenance of their water system and pulling in too much water from the Chicago
+[00:19:16.526] River. So we've seen that if
+[00:19:19.306] the buildings in the city are not held accountable, that they will abuse
+[00:19:23.146] our natural resources.
+[00:19:26.386] Also speaking on land use, data centers provide jobs in the short term,
+[00:19:30.306] but in the long term, they provide very little economic opportunity, and they're a
+[00:19:34.226] permanent land use change in the city.
+[00:19:36.946] And we're also worried about potentially overbuilding our concrete infrastructure
+[00:19:40.846] as computing capacity keeps getting smaller.
+[00:19:43.686] What is the city going to do if we have multiple data centers taking up massive
+[00:19:47.126] tracts of land that we have to tear down because they have no current usage
+[00:19:50.106] anymore?
+[00:19:51.506] So we'd like to see robust shutdowns and a lot part of putting
+[00:19:55.506] those stops in place is also having transparency with the community and
+[00:19:59.366] having community meetings and guarantees of CBAs.
+[00:20:03.146] If we're going to be bringing noise pollution and potentially air pollution into
+[00:20:06.166] these communities
+[00:20:07.766] because they're supposed to see some type of reward and tax incentives,
+[00:20:12.226] or that they get that on the back end, we have to see those
+[00:20:15.986] CBAs secured for those communities.
+[00:20:18.246] And we are very concerned about the usage of those diesel generators to secure
+[00:20:22.166] that 24/7 operation for data centers.
+[00:20:25.325] And we know that is heavily related to asthma in communities.
+[00:20:31.146] So
+[00:20:32.446] Sierra Club would like to see the fight on environmental issues continue
+[00:20:36.306] along with community transparency and government
+[00:20:40.026] accountability. The fight is happening on the state level, but we need to make sure
+[00:20:43.986] these occurrences are happening on the local level.
+[00:20:46.546] There are state legislators across the state who are signing NDAs to have
+[00:20:50.346] conversations with data center developers under the guise
+[00:20:54.186] of them disclosing proprietary information, and we need to see practices like that
+[00:20:57.816] stopped and we need to see practices like that prevented against in our city
+[00:21:00.946] officials. Thank you so much for your time today.
+[00:21:06.346] Thank you.
+[00:21:08.486] Our final speaker is Jane Goldenberg.
+[00:21:15.046] Hello.
+[00:21:16.426] My name is Jane Goldenberg. I'm a resident of the 44th Ward and a member of the
+[00:21:20.426] Chicago Metro chapter of the Climate Reality Project.
+[00:21:23.266] Thank you very much for taking up this critical issue.
+[00:21:26.526] As we've already heard, data centers pose a multiplicity of environmental and
+[00:21:30.006] economic challenges. They also present a significant obstacle to our city
+[00:21:33.886] achieving the goals outlined in the 2022 Chicago Climate Action
+[00:21:37.646] Plan to significantly reduce greenhouse gas emissions from buildings.
+[00:21:41.866] The fast expansion of data centers supplied mainly by nuclear
+[00:21:45.566] power is overwhelming our energy supply.
+[00:21:47.846] As a result, there is more pressure to add power from methane gas backed by
+[00:21:51.606] diesel generators, the worst of the worst for local particulate pollution.
+[00:21:55.906] Chicago data centers should be required to get their power from renewable
+[00:21:59.336] energy to protect the livability of our planet and our air
+[00:22:02.566] quality. We are already suffering harmful impacts from
+[00:22:06.286] climate change, such as heating and flooding, as well as threats to our
+[00:22:10.206] wildlife and ecosystems. The air quality is threatened by the
+[00:22:14.206] dirty emissions from fossil fuel vehicles, our air quality, and regional
+[00:22:17.806] polluters such as the three steel plants in Northwest Indiana.
+[00:22:21.746] According to Climate Trace, those three steel plants are the third, fourth, and
+[00:22:25.266] fifth largest emitters of greenhouse gas emissions in our region, not to
+[00:22:29.086] mention their noxious pollution.
+[00:22:30.706] Our top regional source of greenhouse gas emissions is road transportation,
+[00:22:34.645] and second, residential buildings.
+[00:22:36.906] The upshot is that the pollution from data centers or steel plants doesn't stay
+[00:22:40.606] put. This is a regional issue, and Chicago should actively be working with
+[00:22:44.466] legislators in the General Assembly to pass the Power Act.
+[00:22:47.676] Estimates vary about the number of data centers in Chicago, with many concentrated
+[00:22:51.546] on the South Side, which as we have heard, many projects due to come online in
+[00:22:55.546] our region are planned for the suburbs.
+[00:22:57.546] All of these threaten the ability of the grid to keep up with demand.
+[00:23:01.046] Goldman Sachs projects electricity demand for US data centers will double by
+[00:23:05.026] 2027. As of 2025, data centers account for
+[00:23:08.646] 2% of total emissions. According to the report, the pressure on our grid will
+[00:23:12.586] intensify in the summer, when their share of total US peak power demand is
+[00:23:16.626] projected to jump to 8.5% in 2027
+[00:23:20.546] from 4.2% in 2025. This is a time our grid is
+[00:23:24.486] already under great strain. Of course, data centers are only one significant source
+[00:23:28.466] of greenhouse gas emissions. To put this into context, another concerning
+[00:23:32.206] growing source of emissions is petrochemical production, primarily for plastics,
+[00:23:36.286] but also for fertilizer. These emissions already account for 5% of total
+[00:23:40.546] US greenhouse gas emissions comparable to the entire national footprint of
+[00:23:44.426] Poland. A study by the Rhodium Group projects those emissions could grow by
+[00:23:47.926] one-third from 2023 levels by 2030.
+[00:23:52.146] Estimates vary, but as much as 40% of plastic production is for packaging, much
+[00:23:56.126] of this for single-use plastic. At the end of the day, your actions on data centers
+[00:24:00.046] as well as other sources of greenhouse gas emissions should be driven by concerns
+[00:24:03.766] about affordability, the safety of our air and water, but also about
+[00:24:07.616] our climate. That is the quality of life for our children and
+[00:24:10.806] grandchildren. Thank you for the opportunity to speak
+[00:24:13.186] today.
+[00:24:17.862] Thank you, and thank you to all of our speakers today.
+[00:24:21.982] That concludes our public comment period.
+[00:24:24.662] I would like to note that the committee received one written public comment that
+[00:24:27.902] has been emailed out to committee members via
+[00:24:32.502] city email. Our first order of business is our Rule 45
+[00:24:36.142] report from May 11th, 2026, which was distributed to the
+[00:24:39.902] committee. Could I have a motion to approve that May Rule 45
+[00:24:43.602] report?
+[00:24:45.182] All right. Alderperson Romero so moves. All those in favor say aye.
+[00:24:49.402] All those opposed say nay. In the opinion of the chair, the ayes have it.
+[00:24:54.002] To the meat of our meeting today. So our
+[00:24:57.822] only agenda item is the subject matter hearing on a report from our
+[00:25:01.662] Department of Environment regarding the environmental and energy impacts of
+[00:25:05.562] data centers in Chicago. This report was triggered by the passage
+[00:25:09.502] of
+[00:25:10.422] SO2024-0008201,
+[00:25:14.802] which set requirements for the city data to be processed, stored,
+[00:25:19.022] transmitted, and,
+[00:25:21.282] yeah, disposed of within the United States.
+[00:25:24.042] It also provides preference to bidders with our Department of
+[00:25:27.602] Procurement Services for data to be stored in data centers located
+[00:25:31.562] within the city of Chicago or the state of Illinois.
+[00:25:35.152] The second section of that same ordinance triggered this report,
+[00:25:39.622] which convened the Sustainable Data Centers Working Group to analyze the
+[00:25:43.242] impacts of data centers and make recommendations for city council to
+[00:25:46.962] consider as the proliferation of data centers accelerates across the
+[00:25:50.762] region.
+[00:25:56.262] Currently,
+[00:25:57.622] we have approximately 39 data centers in Chicago, with Illinois
+[00:26:01.422] having some of the largest numbers of facilities and the highest power
+[00:26:04.902] consumption in the US. The explosive demand for AI
+[00:26:08.832] has driven the expansion of data centers nationwide.
+[00:26:12.742] Chicago is seen as an attractive market for data centers because of our skilled
+[00:26:16.142] workforce, our fiber optic network, our central location, energy
+[00:26:19.962] infrastructure, proximity to fresh water, and other things that you all mentioned,
+[00:26:24.022] many of you know. And of course, we're the best
+[00:26:27.861] city. We know this, but we connect both US coasts
+[00:26:31.882] and serve as a major financial hub with strong growth, which is why our region is
+[00:26:35.802] seeing increased interest.
+[00:26:38.142] As we see this expansion continue across the region, municipalities have addressed
+[00:26:41.892] data centers with mixed approaches.
+[00:26:44.382] While some have embraced data centers, touting their economic development
+[00:26:47.762] opportunities, others have seen neighbors turn out in large numbers in
+[00:26:51.482] opposition to new data centers in our communities.
+[00:26:54.662] Some municipalities have issued moratoriums or imposed legislative
+[00:26:58.142] actions to regulate data centers in their communities,
+[00:27:01.962] and the Sustainable Data Center report includes a table of legislative
+[00:27:05.782] actions taken by cities across the US.
+[00:27:08.422] You'll find it in the appendix, starting on page 55.
+[00:27:12.162] The expansion of data centers and data center adjacent facilities
+[00:27:15.802] presents environmental consequences due to the high energy and water
+[00:27:19.622] consumption, which we'll learn more about during today's hearing.
+[00:27:23.042] We've also seen utility ratepayers see significant increases in monthly electric
+[00:27:27.062] bills due to increased demand that data centers are putting on our grid.
+[00:27:31.542] Today, we'll hear from our Department of Environment, the Department of Planning
+[00:27:35.132] and Development, and a panel of experts who will share results from the report
+[00:27:39.302] and provide insights into how cities and regions are addressing the
+[00:27:42.882] issue and facilitating dialogue on potential legislative
+[00:27:46.622] avenues so that we can protect and
+[00:27:49.822] benefit for all Chicagoans.
+[00:27:53.522] Ahead of today's meeting, we did email the Sustainable Data Center report from the
+[00:27:57.202] Department of Environment to committee members to review,
+[00:28:00.122] as well as extended an invite to committee members for the Committee on
+[00:28:04.062] Economic, Technology, and Capital Development.
+[00:28:07.902] I'll say, as we are about to hit another heat wave,
+[00:28:11.962] many of you know, certainly our panelists who are here, many who are
+[00:28:15.962] in the audience who have attended committee hearings before,
+[00:28:22.522] we find ourselves
+[00:28:26.062] urgently trying to take action, and I think
+[00:28:30.062] one of the things that we try to use the committee here for is to
+[00:28:36.181] bring the urgency we're feeling, right, from the heat
+[00:28:39.762] waves, from
+[00:28:41.642] the changes we might be seeing in other cities and
+[00:28:45.322] municipalities. I think
+[00:28:48.122] I've observed a lot of concern. I think very legitimate concern and, in
+[00:28:52.122] some cases, fear as we see
+[00:28:55.862] technology moving faster than we
+[00:28:59.002] can legislate,
+[00:29:01.702] as we see development sometimes happening faster
+[00:29:05.662] than we can legislate. And as we've seen, I think maybe not yet
+[00:29:09.682] here in Chicago, but in other places
+[00:29:13.202] where the process is opaque, right?
+[00:29:17.222] Where all of a sudden,
+[00:29:20.802] four football fields of land are taken up and
+[00:29:25.122] energy and water are promised through a sole source process
+[00:29:29.042] and community members don't see. And while again, we haven't had
+[00:29:32.962] that happen here in Chicago, I think that everyone gathered
+[00:29:36.822] here and with the purpose of the report, that's really what we're trying to
+[00:29:40.042] address.
+[00:29:42.082] From data centers to other
+[00:29:47.282] large developments, we really appreciate you, Commissioner Tovar, and your
+[00:29:51.322] team,
+[00:29:52.722] helping us to answer these really difficult questions. How do we as a city grow?
+[00:29:57.322] How do we have economic development?
+[00:29:59.402] How do we keep up with technology? How do we stay relevant
+[00:30:03.282] and central in our city? And how do we do it without
+[00:30:06.422] repeating the same environmental mistakes and
+[00:30:10.082] harms that have happened to our communities in the past, without
+[00:30:13.782] overburdening people while making safe and sound decisions,
+[00:30:17.322] while setting guidelines first Before
+[00:30:21.048] diving in to
+[00:30:23.158] just another boom. So, really appreciate you guys to be here.
+[00:30:26.958] And for everyone that's here, this is an opening conversation.
+[00:30:30.418] I don't imagine it will be our last conversation as we try to just
+[00:30:34.158] grapple with these questions. So,
+[00:30:38.698] joining us today we have Commissioner Angela Tovar, Deputy
+[00:30:42.478] Commissioner Paula Cicchiao, and Jared Patton with the Department of Environment.
+[00:30:46.998] We have Sarah Moskowitz with the Citizens Utility Board, Andrew Wren with
+[00:30:50.798] Prairie Rivers Network, Kavi Chintam with Vote Solar, and Craig Huffman with
+[00:30:54.858] MetroEdge. Bradley Roback from the Department of Planning and Development
+[00:30:59.058] is also joining us today. Thanks for being our flank over
+[00:31:02.678] there. And we can all shift in a little bit more too, when as
+[00:31:06.318] needed.
+[00:31:08.818] So, he's here for the Q&A portion of the meeting.
+[00:31:12.358] So following all panelist testimony, we'll have time for Q&A for members.
+[00:31:16.458] And with that, I'll turn it over to our panelists to more fully introduce
+[00:31:19.358] themselves and start their presentation.
+[00:31:21.268] And we'll start with you, Commissioner Tovar.
+[00:31:26.618] Good morning, Chairs Hadden, members of the committee, and members of the
+[00:31:30.478] public. My name is Angela Tovar, and I'm the Chief Sustainability Officer and the
+[00:31:34.498] Commissioner for the Department of Environment.
+[00:31:36.938] I want to first thank Chair Hadden for her leadership, and the opportunity to
+[00:31:40.838] present the recommendations of the Interdepartmental Sustainable Data Centers
+[00:31:44.858] Working Group.
+[00:31:46.438] One of the city's fundamental responsibilities is to protect the
+[00:31:50.378] health of our residents and the infrastructural and natural resources
+[00:31:54.338] on which our communities depend.
+[00:31:56.758] As data centers continue to expand in Chicago, it is critical that
+[00:32:00.758] our regulatory framework keeps pace with their demands on our
+[00:32:04.398] energy system, water resources, air quality, and
+[00:32:07.978] surrounding neighborhoods.
+[00:32:09.938] Chicago's climate commitments and sustainability goals require us to
+[00:32:13.318] proactively address these impacts before they become more
+[00:32:16.758] difficult and more costly to mitigate.
+[00:32:19.908] The recommendations before you are intended to strengthen environmental
+[00:32:23.498] protections, improve accountability, and ensure that future
+[00:32:27.438] development better aligns with the city's sustainability
+[00:32:31.238] priorities while ensuring that our economic development goals continue to
+[00:32:35.118] advance responsibly. Next slide.
+[00:32:39.418] We'll begin with why this work was necessary.
+[00:32:42.548] We'll then provide background on data centers in Chicago and the environmental and
+[00:32:46.578] community impacts associated with their growth.
+[00:32:49.618] Next, we'll discuss the working group's process and the extensive engagement that
+[00:32:53.498] informed these recommendations.
+[00:32:55.998] Finally, we'll present the working group's recommendations for strengthening
+[00:32:59.078] Chicago's regulatory framework.
+[00:33:01.808] The first portion of today's presentation provides context before we discuss
+[00:33:05.678] each recommendation in greater detail.
+[00:33:10.638] The next slide, sorry. The city did not undertake this effort in
+[00:33:14.458] anticipation of future challenges alone.
+[00:33:17.078] We undertook it because residents, policymakers, and city
+[00:33:20.918] departments recognized that existing regulations have
+[00:33:24.518] not kept pace with the scale and impacts of modern data
+[00:33:28.538] centers. The next few slides explain the problem we set out to
+[00:33:32.258] address, the process that we followed, and the recommendations.
+[00:33:37.438] Data centers are expanding rapidly in Chicago, and with that growth comes
+[00:33:41.238] significant environmental impacts.
+[00:33:43.718] These facilities can consume substantial amounts of electricity and water,
+[00:33:47.918] contribute to greenhouse gas emissions through increased energy demand,
+[00:33:52.398] and create persistent noise and diesel air pollution in
+[00:33:56.138] surrounding communities.
+[00:33:58.198] Many of these impacts are borne most directly by residents
+[00:34:01.838] nearby, making thoughtful regulation both an environmental and
+[00:34:05.758] quality-of-life issue.
+[00:34:08.058] Chicago's current regulatory framework was not designed for today's
+[00:34:11.899] modern, more resource-intensive facilities.
+[00:34:15.998] The working group was charged with identifying practical policy
+[00:34:19.339] changes that better protect public health, infrastructure, natural
+[00:34:23.328] resources, and community quality of life.
+[00:34:27.399] The working group approached this effort, next slide, sorry, with a
+[00:34:31.379] simple question. What policies are needed to better protect
+[00:34:35.018] people and the environment as this industry grows?
+[00:34:38.758] For over about 18 months, city departments worked alongside technical
+[00:34:42.379] experts, utilities, community leaders, environmental
+[00:34:45.958] experts, Chicagoans with lived experience, and industry
+[00:34:49.698] representatives. Throughout this process, Chicagoans consistently
+[00:34:53.738] emphasized concerns about air pollution, noise, water
+[00:34:57.298] consumption, transparency, and environmental justice.
+[00:35:01.218] Those concerns helped us shape the recommendations before you today and
+[00:35:05.038] reinforced the need for stronger environmental oversight.
+[00:35:09.778] Next slide.
+[00:35:11.198] The working group's recommendations are centered on prevention,
+[00:35:14.778] accountability, and environmental protection.
+[00:35:17.618] They call for stronger safeguards to reduce pollution and better protect
+[00:35:21.418] nearby communities. They recommend updated zoning
+[00:35:25.078] policies so environmental impacts are considered before
+[00:35:28.738] facilities are approved for construction.
+[00:35:31.438] And they establish greater transparency around electricity and
+[00:35:35.218] water consumption so the city can better understand the
+[00:35:38.978] impacts and make informed decisions on the future of our water and
+[00:35:43.258] energy use.
+[00:35:44.898] Collectively, these recommendations recognize that public health and the
+[00:35:48.518] environment must remain central to how
+[00:35:52.258] Chicago manages the continued growth of data centers.
+[00:35:58.618] Before discussing these recommendations, next slide, it is helpful to understand
+[00:36:02.298] what data centers are and why their impacts have become an important environmental
+[00:36:06.278] policy issue. This will be covered by Jared Patton, the project
+[00:36:09.938] manager at Department of Environment.
+[00:36:12.338] This next section provides the background and explains why the working group
+[00:36:15.838] concluded that updates to Chicago's
+[00:36:19.318] regulatory framework are warranted.
+[00:36:21.918] We'll then return to the recommendations and discuss each of those in detail.
+[00:36:25.788] Thank you.
+[00:36:28.858] All right. Hello, everyone. Thank you for that introduction, Commissioner Tovar,
+[00:36:31.978] and thank you to the committee for having us here today.
+[00:36:33.918] We definitely appreciate the opportunity to share the work that we've been up to
+[00:36:37.198] for the past year and a half.
+[00:36:39.618] As Commissioner Tovar mentioned, I will be providing an overview of data centers
+[00:36:42.758] generally before-
+[00:36:43.418] Chair, are you able to move the mic a little closer?
+[00:36:45.998] Yes, I can. Is that better?
+[00:36:47.178] Yeah. There we go.
+[00:36:47.828] Okay. Sorry about that.
+[00:36:48.348] For the recording.
+[00:36:49.038] All right. Well, thank you all for having us here today.
+[00:36:52.638] I'll be providing an overview of data centers generally, and then our working group
+[00:36:56.058] process specifically, and I want to start by providing a working definition of what
+[00:37:00.058] we mean when we say data centers to make sure that we're all on the same page.
+[00:37:03.858] Throughout our process, we have thought of data centers as facilities that house
+[00:37:07.738] computing equipment used to store, manipulate, and process digital
+[00:37:10.998] information. Importantly, data centers can be standalone facilities
+[00:37:14.998] that were purpose-built to function as data centers, or they can be one part
+[00:37:18.938] of a larger mixed-use building, for example, a couple of floors on a mid or
+[00:37:22.698] high-rise building.
+[00:37:24.378] And it's important to keep both of those types of centers in mind as we go through
+[00:37:27.508] this conversation.
+[00:37:29.398] So, this is the definition. I think it's also helpful to look at some pictures so
+[00:37:33.118] you can visualize what a data center is.
+[00:37:35.918] So this slide shows the interior of a data center, and these facilities
+[00:37:39.778] house rows and rows of server cabinets that contain the computing equipment, the
+[00:37:43.558] processing chips, all of the material in interconnected
+[00:37:46.978] rows. This equipment is highly
+[00:37:50.498] specialized. It's expensive. But from an
+[00:37:54.498] impact perspective, we are most concerned not with the computing equipment itself,
+[00:37:58.298] but with the systems that enable that equipment to function.
+[00:38:00.908] And specifically, we're talking about cooling systems and generators.
+[00:38:04.438] And to get an idea of those systems, I think it's helpful to step outside of the
+[00:38:07.738] building and look at it from the exterior.
+[00:38:10.678] So this somewhat grainy image here is an aerial Google Earth image of a
+[00:38:14.558] data center in northern Virginia.
+[00:38:16.538] For this presentation, I'm going to be using examples from outside of our region so
+[00:38:19.798] we can focus at the policy level and not get hung up on the details of any specific
+[00:38:23.518] site.
+[00:38:24.578] And there are a few things in this picture that immediately tip us off that we're
+[00:38:27.338] looking at a data center. The first are all of these vents and
+[00:38:30.858] fans and air compressors on the roof.
+[00:38:33.458] This equipment is part of the cooling system.
+[00:38:36.518] Data centers use a tremendous amount of electricity, and that electricity
+[00:38:40.358] gets converted to heat. To keep the microchips processing or
+[00:38:43.798] functioning, you have to remove that heat and push it outside of the
+[00:38:47.118] building. These cooling systems function any time
+[00:38:50.538] the computing equipment is functioning, which is typically 24
+[00:38:54.578] hours a day. So it produces a large amount of low volume, constant noise.
+[00:38:59.178] These cooling systems can also use a lot of water depending on the type of system
+[00:39:03.198] that's in place, and they also use a lot of electricity.
+[00:39:07.218] In some cases, 40% to 50% of the electricity used in a data center does
+[00:39:11.118] not go to powering the chips themselves, but rather keeping those chips cool.
+[00:39:16.558] The next thing I want to highlight are these boxes that almost look like
+[00:39:19.638] semi-trucks docked into the facility.
+[00:39:21.968] These are industrial-scale diesel generators.
+[00:39:25.198] Data centers sell themselves on their ability to provide continuous, uninterrupted
+[00:39:29.158] power 24 hours a day, 365 days a year.
+[00:39:33.148] And doing that requires one-for-one power backup, and today that
+[00:39:36.898] almost always means diesel generators.
+[00:39:39.578] Fortunately, we live in a region with a fairly secure grid, so these
+[00:39:43.318] generators rarely power the facility themselves, but every unit must be
+[00:39:47.138] tested once a month, and that test can last from minutes to hours,
+[00:39:50.898] depending on what is being tested.
+[00:39:53.018] And because diesel generators are dirtiest during the ignition process,
+[00:39:56.898] this can produce a plume of diesel exhaust that is noticeable
+[00:40:00.858] to people in the area, and it contributes to air pollution.
+[00:40:03.998] Testing can also be quite loud.
+[00:40:07.618] If you look closely, you will also see fuel storage tanks.
+[00:40:10.238] If you're going to have several dozen diesel generators, you need to have fuel
+[00:40:13.498] on-site to operate them. So you'll often see on-site fuel storage.
+[00:40:17.768] And then finally, in the background, you can see this substation.
+[00:40:21.568] Data centers use a lot of power, more power than is typically available
+[00:40:25.358] in distribution lines. So they're typically located along
+[00:40:28.778] high-capacity transmission lines.
+[00:40:30.888] The electricity in those lines is at a higher voltage than the facility can use, so
+[00:40:34.738] they need to have a step-down substation that converts it into a usable
+[00:40:37.938] form. This equipment takes up a lot of space, and it's also quite
+[00:40:41.738] expensive, and that's one of the reasons why we have seen electricity price
+[00:40:45.358] increases in recent years.
+[00:40:48.618] So, this is a typical purpose-built data center, and we have several
+[00:40:52.608] facilities that look like this in our city.
+[00:40:55.548] You might be looking at this picture and thinking, "That's not what Chicago looks
+[00:40:59.278] like," and you're correct. In most cases, Chicago is denser than this,
+[00:41:03.158] and for that reason, I want to also share examples of urban data centers.
+[00:41:07.718] So this facility is located in downtown Boston.
+[00:41:10.838] If you look closely at the building in the center of the image, you can see a lot
+[00:41:13.978] of the same features from the last image are also present here.
+[00:41:16.958] We have cooling systems, we have generators, but it's in a much more compact
+[00:41:20.678] footprint. One of the big apparent things that you see when you look at this is
+[00:41:24.638] that there are a lot more impacts when you're building in an urban area.
+[00:41:28.338] Neighbors are closer. You can't have vegetative buffers, and that is, in fact, one
+[00:41:32.078] of the things that we have heard from residents.
+[00:41:35.238] Here's another example of an urban data center, this one coming from Charlotte,
+[00:41:38.418] North Carolina. This is more of a mid-rise development.
+[00:41:41.348] You see a lot of the same equipment on the roof, but what I want to draw your
+[00:41:44.378] attention to here is the gap between the two buildings.
+[00:41:47.778] That's a generator yard. There are several diesel generators at ground level,
+[00:41:51.698] which is an attractive option for data center
+[00:41:55.358] operators because it's cheaper, faster, easier to maintain,
+[00:41:59.258] build, and service generators at the ground level, but that produces a whole
+[00:42:02.998] another range of impacts for people in the nearby area.
+[00:42:07.838] So you may be wondering, why would you build a data center in Chicago?
+[00:42:10.798] Why are they being built here? There are a few good reasons for that.
+[00:42:13.978] One is proximity to users. Chicago has a lot of people and a lot of
+[00:42:17.318] businesses, and the closer a user is to the data center that is housing the
+[00:42:21.338] software they're using, the faster that software will function.
+[00:42:24.458] For example, if you're streaming a video, it will load much more quickly if it's
+[00:42:28.278] being stored in a data center in our region rather than the other side of the
+[00:42:31.638] country or the other side of the world.
+[00:42:33.788] That's even more important when you talk about high-demand, complicated software
+[00:42:37.558] that's processing a lot of data, operating things for purposes
+[00:42:41.078] like operating remote machinery, real-time data analysis,
+[00:42:45.118] automated services, things that are more of a commercial use.
+[00:42:48.258] For those uses, proximity is very important.
+[00:42:52.462] Additionally, City of Chicago has a lot of great infrastructure that data centers
+[00:42:55.782] want to take advantage of, especially our access to long-haul fiber optic
+[00:42:59.622] lines. The nation's fiber optic system was built following
+[00:43:03.262] existing transportation and utility corridors, especially railroads and
+[00:43:07.302] highways. And because we're a hub of both of those
+[00:43:10.982] systems, we're also a hub of fiber optic connections.
+[00:43:14.062] That is very expensive infrastructure to build, so if you build a data center
+[00:43:17.462] directly adjacent to it, you can save a lot of upfront construction costs.
+[00:43:22.132] The City of Chicago and the Great Lakes region also has abundant and relatively
+[00:43:25.942] cheap water. There are, of course, concerns for sustainability in the
+[00:43:29.622] region, but we charge much less for water than what is charged in more
+[00:43:33.622] arid parts of the country. Then finally, electricity.
+[00:43:36.582] We have historically had plentiful and clean electricity, which is very
+[00:43:40.462] attractive to data center developers.
+[00:43:42.562] I should note that electricity is also a constraint on the size of data centers
+[00:43:46.122] that can be built.
+[00:43:47.662] It is very difficult to build the amount of electricity infrastructure that's
+[00:43:51.552] needed to power the largest gigawatt scale data centers.
+[00:43:55.602] And as a result, the data centers built here tend to be more on the small to medium
+[00:43:59.042] size. Then finally, a highly skilled workforce.
+[00:44:02.122] Data centers are precision facilities.
+[00:44:03.822] It takes a lot of skilled electricians, engineers, IT
+[00:44:07.602] professionals, construction workers to build these facilities.
+[00:44:10.572] It can be difficult to assemble those project teams in more rural areas, and that's
+[00:44:14.142] not as much of a concern here in Chicago.
+[00:44:17.922] All right, where are our data centers located today?
+[00:44:20.452] Most of these facilities in Chicago are centrally located.
+[00:44:24.202] The South Loop is probably the biggest hub.
+[00:44:26.752] There are also a number of data centers that are built following utility corridors
+[00:44:30.482] leading to downtown. In both of those cases, they are sited there to take
+[00:44:34.462] advantage of the infrastructure that's available, specifically fiber optic
+[00:44:38.482] and electricity.
+[00:44:40.412] Most of our facilities are colocation or enterprise data centers, which is to say
+[00:44:44.342] they are not AI training facilities.
+[00:44:46.102] We do not currently have any of the gigawatt scale AI training centers in
+[00:44:49.562] Chicago.
+[00:44:51.062] A colocation facility means that a developer has built a facility,
+[00:44:54.962] and they rent out some or all of their server space to other users so that
+[00:44:58.922] a business that wants to use a data center doesn't have to build their own.
+[00:45:02.182] They just rent space. We have many of those here.
+[00:45:05.522] And the final bullet point on this slide, Chicago's land use patterns and
+[00:45:09.482] population density require thoughtful policy solutions.
+[00:45:12.082] This is just an acknowledgment that we are not suburban Chicagoland, we are not
+[00:45:15.702] northern Virginia, and we can't just copy and paste what other people have done
+[00:45:18.982] here. We need to be really thoughtful and really careful to make sure that all of
+[00:45:22.442] our recommendations are tailored to the specific context here in
+[00:45:25.382] Chicago.
+[00:45:28.422] Okay, so how are we regulating data centers today?
+[00:45:30.722] Our zoning ordinance classifies data centers as electronic data storage
+[00:45:34.642] centers, and they are permitted by right in all commercial districts, all
+[00:45:38.622] manufacturing districts, and some business districts.
+[00:45:42.042] In practice, about half of the data centers that have been built here have gone
+[00:45:45.802] through the planned development process.
+[00:45:47.962] That's not because PD review is required, but because they are hitting other
+[00:45:51.582] triggers related to their location or their size.
+[00:45:55.182] Aside from the zoning process, there is currently no data center specific permit
+[00:45:58.962] that a data center needs to receive in order to operate.
+[00:46:04.542] My last few slides in this section focus on the specific impacts of data
+[00:46:08.362] centers, and many of these have already been mentioned by other speakers today.
+[00:46:12.402] One of the biggest concerns comes from price increases for electricity.
+[00:46:16.342] The chart on the right side of this screen highlights the changes in
+[00:46:20.062] demand in electricity in recent years.
+[00:46:22.682] From 2000 to about 2022, the United States saw
+[00:46:26.362] relatively flat demand in electricity, and that changed drastically a few years
+[00:46:30.342] ago. We've already seen a small spike, but we expect to see an even greater
+[00:46:34.342] spike in the coming years, and that's the right side of that chart.
+[00:46:38.522] This demand has a direct impact on electricity prices
+[00:46:42.322] because a good portion of our electricity bill is established by a
+[00:46:46.422] capacity auction that takes supply and demand into account.
+[00:46:50.731] There are also concerns for grid
+[00:46:53.082] stability. Data centers use a lot of electricity in a very small
+[00:46:56.842] footprint. In some cases, you're using as much electricity as an entire
+[00:47:00.562] city in just a few blocks. Our grid wasn't built for that, so it takes a lot of
+[00:47:04.362] planning to retrofit it. But the biggest concerns are at
+[00:47:08.282] times of peak demand. When you have a heat wave or other
+[00:47:12.242] disruption to our power system, there can be concerns about demand
+[00:47:16.262] outstripping supply. And what we are likely to see here is not
+[00:47:20.322] a blackout across the whole city, but rather data centers being kicked off of the
+[00:47:23.942] grid. And when a data center moves the grid, it doesn't necessarily mean that it's
+[00:47:27.732] shutting down. Instead, it means they're converting to that backup diesel power.
+[00:47:32.082] And in a worst case scenario, that could result in several hundred megawatts of
+[00:47:36.042] diesel generators operating in dense urban areas at a time of
+[00:47:39.922] extreme heat when there are many other concerns people are dealing with.
+[00:47:44.182] And then finally, all of this electricity has to come from somewhere, and we've
+[00:47:47.562] already seen data centers prolonging the lifespan of fossil
+[00:47:51.542] fuel power plants, and that's a major concern moving forward.
+[00:47:54.922] In many cases, data centers have funded new, clean, renewable
+[00:47:58.782] energy. They're one of the biggest funders of clean energy today.
+[00:48:01.542] But that is not a requirement, and we are seeing a lot of
+[00:48:06.002] power plants stay online to support them.
+[00:48:10.542] The next impact is air and sound pollution.
+[00:48:12.702] This is the biggest concern that we hear from residents through 311 complaints.
+[00:48:16.402] If someone's making a complaint, it's almost always because the data center nearby
+[00:48:19.662] is loud or it's dirty. Sound comes from cooling systems that
+[00:48:23.442] operate at a low level around the clock, as well as from
+[00:48:27.102] generator testing, which is a shorter period but more intense sound.
+[00:48:31.662] Air pollution comes from diesel generator testing, and,
+[00:48:35.662] as I mentioned previously, these generators are dirtiest when they turn
+[00:48:39.482] on.
+[00:48:40.642] If you have several dozen generators, even though you only test each one
+[00:48:44.662] once a month, you'll often be testing several in one day.
+[00:48:49.022] And then finally, water. This has already been mentioned a couple of times
+[00:48:51.622] today. The amount of water a facility
+[00:48:55.462] uses really depends on the cooling system in place.
+[00:48:58.222] We have a statistic on the slide here that an average data center uses as much
+[00:49:01.962] water as 1,000 households, but it is really hard to pin down what an
+[00:49:05.942] average data center is. The centers that use
+[00:49:09.322] evaporative air cooling are some of the most intense water users in the
+[00:49:13.122] country today, at the same level as power plants.
+[00:49:16.042] While other facilities with more efficient equipment use less water.
+[00:49:19.852] And I mention this because of the final point.
+[00:49:22.311] There is no requirement for water usage transparency, and that creates this
+[00:49:26.182] interesting bifurcation where, depending on who you talk to, water is either a
+[00:49:29.942] huge concern that needs to be addressed or it's not a problem at all, and it really
+[00:49:33.842] complicates the policy-making process.
+[00:49:38.862] So that is the conclusion of my overview of data centers, and I want to move
+[00:49:42.362] briefly to highlight what our process for developing this report has
+[00:49:46.342] been. And I'll begin with a quick timeline.
+[00:49:49.442] So as was previously mentioned, this work started with a city ordinance passed in
+[00:49:53.162] the fall of 2024. We began meeting as a working group in
+[00:49:56.802] January of 2025 and have continued to have meetings for the past
+[00:50:00.682] year and a half. In those early meetings, we explored what a
+[00:50:04.502] data center is, what those big impacts are, what is most important for us as the
+[00:50:08.322] City of Chicago to address, and then transitioned to having more
+[00:50:11.942] conversations about recommendations and what are the tools at our disposal
+[00:50:15.942] for addressing some of these impacts.
+[00:50:18.582] Along the way, we did quite a bit of outreach, which I'll speak to in a moment.
+[00:50:21.702] That included an industry roundtable earlier this
+[00:50:25.362] spring, and a
+[00:50:29.122] community meeting in May of this year.
+[00:50:31.882] We released our report earlier this month and are here today to share our
+[00:50:35.462] findings.
+[00:50:37.282] Our working group has been interdepartmental in nature, with representatives from
+[00:50:40.822] the Departments of Environment, Planning and Development, Public Health, and
+[00:50:44.262] Technology and Innovation.
+[00:50:47.222] A little more information about the outreach.
+[00:50:49.502] We really focused our outreach on
+[00:50:52.402] speaking with people who had more experience working with data centers than we do,
+[00:50:56.202] or certainly have more experience in specific topics related to data centers.
+[00:51:00.422] We casted a wide net. We spoke with businesses.
+[00:51:03.462] We spoke with government agencies, policy people,
+[00:51:06.882] academics, community groups. We wanted to get a wide range of
+[00:51:10.382] opinions. Those engagements included informal
+[00:51:14.022] conversations, roundtable discussions.
+[00:51:16.942] We invited people to attend our working group meetings.
+[00:51:19.322] We hosted conference meetings. We had webinars.
+[00:51:21.822] A whole range of engagements. We
+[00:51:25.822] also hosted an industry roundtable, as I previously mentioned.
+[00:51:28.672] That included roughly a dozen people from businesses and
+[00:51:31.982] industry-affiliated organizations.
+[00:51:34.182] We discussed the current status of the data center industry in Chicago, as well as
+[00:51:37.902] the future. We discussed some of the concerns that had come up and opportunities
+[00:51:41.682] for addressing those concerns and really maximizing the benefits of data centers
+[00:51:45.582] while mitigating those impacts.
+[00:51:48.142] And then finally, we had a public meeting this past May.
+[00:51:50.882] That was our community conversation on data centers.
+[00:51:53.082] It was held at Arturo Velázquez Institute.
+[00:51:55.722] It featured a panel discussion with several of the people who you'll hear from in a
+[00:51:59.522] moment today, as well as an open house where attendees were invited to share their
+[00:52:03.342] perspectives on a wide range of data center questions.
+[00:52:06.162] You can see a couple pictures from that meeting on the slide here, and there is a
+[00:52:09.902] detailed overview of what we heard, not just at that meeting, but in other parts of
+[00:52:13.482] our process in the appendix of our report.
+[00:52:16.982] Before I stop, I do want to highlight a couple of the things that we heard during
+[00:52:20.802] that public meeting. There was widespread concern for air quality and
+[00:52:24.762] sound, which aligns with what we've heard through 311.
+[00:52:27.662] But there were also concerns about environmental justice, water, and then
+[00:52:31.422] finally, transparency. And that means transparency not just about the impacts, how
+[00:52:35.302] much water a data center is using, how much air pollution are they producing, but
+[00:52:38.722] also the process through which data centers are approved and built.
+[00:52:42.262] And then finally, there was broad support for additional regulation on data centers
+[00:52:46.262] within the city.
+[00:52:49.202] And that concludes my section, so I will now hand the microphone over to my
+[00:52:52.202] colleague, Jared Pelliccio.
+[00:52:55.362] You're getting double Jareds today.
+[00:53:00.082] Thanks, Jared.
+[00:53:01.962] So I'm Jared Pelliccio. I'm the first deputy here.
+[00:53:04.891] I'm going to just close us out by circling back to where
+[00:53:08.821] the commissioners
+[00:53:11.022] started with, which was the key
+[00:53:14.402] recommendations that the
+[00:53:18.922] working group delivered to the committees in submitting our
+[00:53:22.742] report. So if you want to go to the next slide.
+[00:53:26.862] So like the commissioner said, we have three
+[00:53:30.462] actionable recommendations that I'll talk about
+[00:53:34.682] one by one right now. And then following that, you'll see
+[00:53:38.562] that we also have several additional
+[00:53:42.482] recommendations of actions that require further research
+[00:53:46.402] and due diligence, but rose to the top of the working
+[00:53:50.282] group's
+[00:53:52.922] consensus as other items that should be evaluated.
+[00:53:57.002] The difference being the three that you see on the screen here,
+[00:54:00.502] the will of the working group is that these are
+[00:54:05.202] action items that, in our opinion,
+[00:54:09.162] council and the administration should begin considering
+[00:54:13.122] specific
+[00:54:14.602] development of language and policies.
+[00:54:17.482] Whereas the second set that you'll see after that are a set of
+[00:54:21.482] items that seem very promising but require some further research and evaluation.
+[00:54:26.062] So I will go to the first of the main three
+[00:54:30.042] recommendations. And
+[00:54:32.702] hopefully you were listening to the first part of the presentation because this
+[00:54:35.542] will build on a lot of the learning that we
+[00:54:39.002] gained over the past year and that Jared
+[00:54:42.722] ably presented over the past few minutes.
+[00:54:45.122] So the first recommendation is strong environmental safeguards.
+[00:54:48.882] As you heard, one of the consistent things that we heard from
+[00:54:53.022] neighbors of facilities is concern about
+[00:54:57.222] air and noise pollution and its effect on public health, on the environment, and on
+[00:55:01.162] quality of life. And so that's what this recommendation is designed
+[00:55:04.702] to responsibly address. This would
+[00:55:09.042] occur through the city's
+[00:55:11.782] Environmental protection part of its code, and then regulations rules
+[00:55:15.642] that are used to implement that part of the code.
+[00:55:18.922] This really is designed to address how data centers
+[00:55:22.722] operate. You'll see in a second, we'll move to zoning.
+[00:55:25.822] And so this is, as you see on the screen, the
+[00:55:29.822] details here, if enacted, would apply to both new and existing
+[00:55:33.402] facilities that fall within a
+[00:55:37.362] definition of a data center in
+[00:55:40.922] revised environmental protection parts of the code and any
+[00:55:44.702] regulations that then also need to be enacted to
+[00:55:48.542] implement those parts of the code.
+[00:55:52.382] The good news here for all three of these recommendations, and for this one
+[00:55:56.242] specifically, is that we did a ton of peer benchmarking, as you heard,
+[00:55:59.962] and there are actionable things that can
+[00:56:03.982] be done to improve the effects of air pollution from
+[00:56:07.932] generators, and noise from
+[00:56:11.842] facilities. There are things that can be done here, and the idea would be to
+[00:56:15.842] work out
+[00:56:17.842] details through revised environmental permitting
+[00:56:21.422] requirements related to those impacts.
+[00:56:25.432] So I'll go to the next recommendation.
+[00:56:28.732] So the next recommendation regards responsible zoning and land
+[00:56:32.642] use. I think
+[00:56:36.122] absolutely one of the top-line conclusions of the working group was
+[00:56:39.942] that the existing zoning requirements
+[00:56:43.942] for data centers
+[00:56:45.742] are to a large degree outdated and need to be
+[00:56:49.102] modernized to meet the current state of the industry.
+[00:56:52.502] As Jared Patton talked about,
+[00:56:55.062] the nature and the intensity of data centers has changed over time.
+[00:56:59.582] And our recommendation is that our zoning and land use
+[00:57:03.522] requirements need to evolve and modernize with those changes.
+[00:57:07.682] So this would occur through amendments to the zoning code.
+[00:57:11.622] And
+[00:57:13.262] the recommendation of the working group is that there's a
+[00:57:16.662] series of aspects of the zoning code that could be
+[00:57:20.062] modernized and specifics could be developed
+[00:57:24.242] working with partners like DPD, who we've been alongside of during this
+[00:57:28.042] process. That includes everything from use standards
+[00:57:31.462] to siting requirements, thresholds that could trigger
+[00:57:35.362] things like a planned development process
+[00:57:39.282] or sustainable development policy requirements.
+[00:57:42.462] And along with those substantive changes, additional
+[00:57:47.702] changes to how community-- Oh my gosh.
+[00:57:53.922] All right. We're going to take a brief recess. Brief recess.
+[00:58:02.042] No, wait, we need to stop.
+[00:58:06.232] You need to stop?
+[00:58:06.232] Yeah, she's on the phone. But we should continue the presentation.
+[00:58:09.202] Oh,
+[00:58:10.202] 911?
+[00:58:11.862] We're calling 911.
+[00:58:15.342] Yeah. Who wants to-
+[00:58:19.022] This is great.
+[00:58:23.362] Don't
+[00:58:28.662] worry about Sam. Here. Yeah, well done.
+[00:58:31.422] It looks like she's-
+[00:58:32.502] Thank you. It's automatically going to record.
+[00:58:37.622] Oh, sorry.
+[00:58:38.622] Hello, Sergeant. Arms just passed out in room
+[00:58:41.942] 2018.
+[00:59:54.222] All right. We'll reconvene.
+[00:59:57.802] She's getting medical attention, just for everybody to know.
+[01:00:04.162] All right, please continue.
+[01:00:05.682] Okay. Thank you, Chair.
+[01:00:08.042] So I'll return and recap this
+[01:00:11.642] item.
+[01:00:13.742] So we first talked about potential changes to environmental
+[01:00:17.362] permitting that addresses public health, environmental, and quality of life impacts
+[01:00:21.202] during operation. This proposed policy change of the working
+[01:00:24.892] group addresses modernizing the zoning and
+[01:00:28.762] land use designations for data centers.
+[01:00:32.342] And we talked extensively about
+[01:00:36.562] the
+[01:00:40.382] changes that have occurred in the industry.
+[01:00:42.492] There haven't been parallel changes to our zoning code
+[01:00:47.002] as well. So, the recommendation here is
+[01:00:51.162] to be very specific, changes to the zoning code, part of the municipal code
+[01:00:54.942] amendments to the zoning code. There are a number of actionable things
+[01:00:58.882] that can be done here. Use standards can be added to this particular
+[01:01:02.862] use type. Changes could be made to siting
+[01:01:06.062] requirements. Changes could be made to the threshold
+[01:01:10.122] of certain additional reviews, so the threshold for
+[01:01:13.882] a planned development review, the threshold for
+[01:01:17.822] potentially data center-specific sustainable development requirements
+[01:01:22.170] And then in addition, you've heard both from us and then
+[01:01:25.890] also from the chair
+[01:01:28.350] about a clear desire on the part of
+[01:01:32.430] members of the public for additional ability to engage in process
+[01:01:36.310] related to development of these facilities.
+[01:01:40.010] So, our recommendation is when we're thinking about the substantive
+[01:01:43.750] changes to zoning standards for data centers, also to think
+[01:01:47.790] about additional community engagement requirements at that time.
+[01:01:52.110] So that's the second major recommendation,
+[01:01:55.210] and then the final is transparent data reporting and accountability.
+[01:01:59.870] When it comes to this one, this is
+[01:02:03.790] one where Chicago is poised to really be able to take action quickly here if
+[01:02:08.010] the council so chose. And that's because, as many of you all may
+[01:02:11.990] be familiar, we have an existing program here called the
+[01:02:15.710] Chicago Energy Benchmarking Ordinance.
+[01:02:17.570] This is an ordinance where buildings of a certain size are
+[01:02:21.490] already required to report their energy usage, through a
+[01:02:25.450] very standard platform used across the country called
+[01:02:29.490] Energy Star Portfolio Manager.
+[01:02:32.210] That platform also allows for water reporting as well.
+[01:02:34.790] And in fact, it's a voluntary option even today for
+[01:02:39.010] Chicago buildings. So,
+[01:02:42.070] of the three of these major recommendations, this is by far the easiest to
+[01:02:45.810] just fit on one slide, so to speak. What the working group is
+[01:02:49.690] recommending is simply better data on
+[01:02:53.790] how these facilities are impacting
+[01:02:57.210] energy and water in Chicago. And there's an easy way to do that, which is
+[01:03:01.070] to change our energy benchmarking ordinance to require that they
+[01:03:05.370] do so. Of course, we would have to work out the specifics of the type of facility
+[01:03:09.170] that has to report and
+[01:03:12.710] ensuring that there's a way of identifying those facilities to enter into our
+[01:03:16.710] database. But it's very easy to summarize in one slide the path
+[01:03:20.550] forward for this particular
+[01:03:23.070] of the three major recommendations.
+[01:03:26.370] I will now go to what I mentioned earlier, which is five
+[01:03:30.050] additional items that rose to the top absolutely of
+[01:03:33.670] our work, but require continued action and
+[01:03:37.410] continued evaluation, as opposed to the first three, where
+[01:03:41.290] we recommend
+[01:03:43.550] that the council and the administration consider
+[01:03:46.590] specific policy development immediately.
+[01:03:48.450] So those five are looking at
+[01:03:52.290] how the city
+[01:03:55.390] sets its rates for industrial uses, including data centers, but
+[01:03:59.550] this would obviously involve a look at other
+[01:04:02.910] uses of industrial facilities that utilize
+[01:04:06.890] Department of Water Management-provided water. So that's the first one.
+[01:04:10.490] Second one is obviously kind of wrapped up in that same conversation, which
+[01:04:14.450] is encouraging greater water reuse.
+[01:04:16.890] If you do follow this industry, you'll see a lot of talk about
+[01:04:21.210] creating ways to use what's called gray water, which is water that's
+[01:04:25.030] already been treated, as opposed to potable water.
+[01:04:29.130] There's a lot of room for innovation.
+[01:04:31.850] And in fact, as you all probably know, Chicago's a leading innovator in the water
+[01:04:35.610] space. Our recommendation is that
+[01:04:39.230] we should really take a close look, along with partner entities
+[01:04:43.450] here in the region, as to how we could encourage
+[01:04:47.610] pilots and full implementation of water reuse strategies.
+[01:04:51.630] Third is again another of those sort of circularity concepts, which is,
+[01:04:55.510] as Jared Patton talked about, these facilities generate a tremendous amount
+[01:04:59.470] of heat. There is an entire industry in
+[01:05:03.190] industrial engineering that focuses on
+[01:05:06.710] reusing heat from industrial facilities to generate
+[01:05:11.430] power and energy with that heat.
+[01:05:15.210] And so there's a lot of opportunity here.
+[01:05:16.770] Again, this wouldn't be something novel solely to the data center world.
+[01:05:20.750] It would be a matter of pushing for innovation and
+[01:05:24.610] pilots within this space, building on waste
+[01:05:28.390] heat strategies that have been used elsewhere geographically and in
+[01:05:32.370] other industries.
+[01:05:34.810] Fourth, you'll hear in a second,
+[01:05:38.690] as I pass the baton to the other panelists, you'll hear in a second about
+[01:05:43.509] strategies for ensuring that communities that host data center facilities
+[01:05:48.490] receive benefits themselves. And so
+[01:05:52.150] that was a clear message we heard
+[01:05:55.990] both in our community meeting and
+[01:05:59.230] in discussions with various other stakeholders over the past year.
+[01:06:03.290] And five is kind of just a catchall.
+[01:06:05.430] So I'm going to pass the baton in a second.
+[01:06:09.110] So with that, we thank you for
+[01:06:13.410] attending our Data Centers 101 class over the last few minutes.
+[01:06:17.670] We're excited to answer any questions that you have.
+[01:06:21.010] But we're also excited to hear from a bunch of really great
+[01:06:24.570] panelists who have additional perspectives.
+[01:06:28.290] And as we close, that's the list of folks here at the city that
+[01:06:32.510] generously gave their time in participating on this working group.
+[01:06:36.970] Fantastic. Thank you so much. Thank you to the Department of
+[01:06:40.730] Environment for that presentation.
+[01:06:42.490] And for committee members, don't worry, and the public, these slides will be made
+[01:06:46.130] available publicly, if you couldn't get all your screen
+[01:06:49.570] grabs just yet. All right, now we'll hear
+[01:06:53.530] from Sarah Moskowitz from the Citizens Utility Board.
+[01:06:56.510] And
+[01:06:57.650] you're a pro at this, but don't forget to bring that pole, you can move that mic.
+[01:07:02.510] Thank you.
+[01:07:03.510] Is this on? Yes, it is. Great.
+[01:07:11.090] All right. Thank you, Jared, for setting me up
+[01:07:14.910] here. I hope not to be too repetitive.
+[01:07:19.030] And thank you to Chairwoman Hadden and members of the committee for allowing me
+[01:07:22.990] to speak today. I'm Sarah Moskowitz.
+[01:07:25.130] I'm Director of the Citizens Utility Board, or CUB.
+[01:07:28.330] We are a utility consumer advocate working throughout the state of
+[01:07:31.910] Illinois. And for the past several months,
+[01:07:35.710] my CUB colleagues and I have been traveling the state,
+[01:07:39.610] speaking to rooms packed with people- Absolutely
+[01:07:43.474] livid about data centers. Data centers have
+[01:07:47.274] really become a focal point for a broad set of concerns,
+[01:07:51.794] including environmental impacts like air and
+[01:07:56.014] noise pollution, questions about corporate accountability,
+[01:08:00.474] along with deeper anxieties about what artificial intelligence means for
+[01:08:04.414] our jobs and for the economy. But I was invited today to talk about
+[01:08:08.374] the impact data centers have on electricity costs and examine
+[01:08:11.974] possible solutions to protect everyday customers from shouldering
+[01:08:15.974] the bill for big tech's energy needs.
+[01:08:19.514] Data centers have been around for many years, but
+[01:08:22.855] AI is now driving a trend toward larger,
+[01:08:26.494] more power-hungry facilities, the largest of which can
+[01:08:30.434] require the same amount of electricity as a medium-sized city,
+[01:08:34.775] although not the ones we're seeing so far in Chicago,
+[01:08:37.494] obviously. Our electric bills have already gone
+[01:08:41.355] up because of data centers and will continue
+[01:08:45.195] to do so unless policymakers at multiple
+[01:08:48.934] levels take action. To drill down on how this works just a little bit,
+[01:08:54.014] Illinois is a restructured state, meaning that our local
+[01:08:57.334] distribution utilities, like ComEd, do not own power
+[01:09:01.414] plants. ComEd doesn't generate the power that they sell to
+[01:09:05.334] us. ComEd makes its money off of building and maintaining the
+[01:09:09.114] infrastructure to deliver the power to us locally.
+[01:09:12.894] The price for the electricity, the juice itself now,
+[01:09:17.695] that is set by wholesale power markets, and the one that serves
+[01:09:21.714] ComEd's territory is called PJM, which spans 13
+[01:09:25.655] states from here through the Mid-Atlantic, including Virginia and Washington,
+[01:09:29.674] D.C., Pennsylvania, New Jersey.
+[01:09:32.775] You can see the distinction on your ComEd bill.
+[01:09:34.574] I forgot to bring my ComEd bill, but there's a part of your bill labeled delivery,
+[01:09:38.315] which is overseen at the state level, whereas the supply portion of your bill is
+[01:09:41.914] the part that's more directly subject to the vagaries of the markets, which are
+[01:09:45.894] ultimately overseen by the Federal Energy Regulatory Commission.
+[01:09:50.974] Data center costs are hitting us in both places.
+[01:09:54.934] To start, we have the higher delivery transmission charges to cover data
+[01:09:58.714] center-related grid upgrades. In an Illinois Commerce
+[01:10:02.494] Commission proceeding currently underway, we just found out that
+[01:10:06.474] since 2021, ComEd has spent more than
+[01:10:10.414] three billion, billion with a B,
+[01:10:13.654] dollars to connect large facilities to the system.
+[01:10:17.904] Most or all of those were data centers.
+[01:10:21.094] The deposits that ComEd collected from those customers,
+[01:10:24.254] however, only covered about 25% of
+[01:10:28.154] those costs. The rest, who pays for the rest?
+[01:10:31.594] You and me, everyone else.
+[01:10:33.634] Now, the utility did recently increase certain deposits and
+[01:10:37.194] charges for large loads, and that is good.
+[01:10:39.454] Requiring these large customers to put more skin in the game when they request to
+[01:10:43.374] interconnect is definitely better than how things were before.
+[01:10:47.554] But according to our preliminary calculations, even had that
+[01:10:51.274] updated policy been in place these last five years, the
+[01:10:55.214] rest of ComEd's customers would still have been left covering a
+[01:10:58.834] huge chunk of big tech's interconnection costs.
+[01:11:02.834] We're still working on the math of that, and it's really hard to get more precise
+[01:11:06.434] on how much would be socialized under current regulations,
+[01:11:10.654] because largely, we don't know which of those giant customers will
+[01:11:14.174] actually show up.
+[01:11:16.994] If the data centers all max out their load ramp and pay maximal
+[01:11:21.054] transmission security agreement charges, less of their
+[01:11:24.614] interconnection charges costs are
+[01:11:27.994] socialized. On the other hand, if the large loads don't show
+[01:11:32.094] up or use less than they say they will, the rest of us end up
+[01:11:35.854] paying more.
+[01:11:37.314] So it's not just the vast appetites of these hyperscalers
+[01:11:41.134] that's throwing our system out of whack.
+[01:11:43.614] It's the speculative nature of data center development, too.
+[01:11:48.094] We're also seeing the effects of all this on the supply side of the bill, as I
+[01:11:51.054] said.
+[01:11:52.334] Soaring demand projected for new and proposed
+[01:11:56.394] data centers has tightened the supply-demand balance in the wholesale
+[01:12:00.454] markets and increased the cost of reserve
+[01:12:03.914] electricity or capacity at the auctions that are run by
+[01:12:07.794] PJM.
+[01:12:09.254] PJM's independent market monitor found that data centers
+[01:12:13.224] were behind the capacity price spike that ballooned ComEd customers'
+[01:12:16.994] bills starting in June of 2025, which actually
+[01:12:20.814] coincided with a giant heat wave, so we saw some insane bills last summer,
+[01:12:24.874] as we're seeing this summer.
+[01:12:27.114] The independent market monitor at PJM said, quote, "The current
+[01:12:30.474] conditions are not the result of organic load growth.
+[01:12:34.254] The current conditions in the capacity market are almost entirely the result
+[01:12:38.194] of large load additions from data centers, both actual,
+[01:12:41.904] historical, and forecast."
+[01:12:44.914] Forecast. All of these expenses are locked in ahead of time based
+[01:12:48.714] on forecasted future energy demand.
+[01:12:51.724] Data center development is notoriously speculative, however, and these
+[01:12:55.614] forecasts certainly include projects that will never
+[01:12:59.314] actually get built. Unless data center developers make the
+[01:13:02.834] necessary financial commitments up front, the rest of us are
+[01:13:06.594] left holding the bag.
+[01:13:09.234] So you're probably getting the sense that as a ratepayer advocate, I'm
+[01:13:12.734] mostly focused on cost implications of data centers
+[01:13:16.654] and protecting everyday consumers from shouldering those costs.
+[01:13:20.914] But there are indeed system-wide and local environmental impacts,
+[01:13:24.754] too. Over the years, the state of Illinois has enacted
+[01:13:28.514] some really ambitious clean energy goals that I think we can all be
+[01:13:32.384] proud of. But unfortunately, the load growth we're seeing from data
+[01:13:36.234] centers is threatening our clean energy progress at the state and regional
+[01:13:40.214] levels.
+[01:13:41.554] There's more to come on that as state regulators put together Illinois'
+[01:13:45.474] first integrated resource plan under the Clean and Reliable
+[01:13:49.414] Grid Affordability Act, which is due to be filed this November.
+[01:13:53.894] This IRP will, among other things, address whether
+[01:13:57.474] adjustments to the state's clean energy targets will be needed
+[01:14:01.434] to ensure ongoing resource adequacy.
+[01:14:04.354] Our clean energy targets were set before data centers were really a
+[01:14:08.234] thing, and now data centers have come on the scene and have thrown all of
+[01:14:12.274] those goals into question.
+[01:14:15.454] So what to do? This is a ComEd-wide problem,
+[01:14:19.394] this is a
+[01:14:21.594] state-wide problem, this is a PJM-wide problem, and ultimately it is
+[01:14:25.594] also a national problem, and work has been happening at all
+[01:14:29.174] levels. For example, FERC recently issued a show cause order to
+[01:14:33.554] the six regional grid operators, including PJM, giving
+[01:14:37.494] them two months to either justify why their current
+[01:14:41.234] rules are just and reasonable with respect to data center load,
+[01:14:45.153] or if not, to file tariff changes to make them just and
+[01:14:48.894] reasonable. For its part, PJM is also
+[01:14:52.694] working on the issue. I won't get into that, spend way too much of my time
+[01:14:56.594] dealing with PJM, but I'll just say that given their governance
+[01:15:00.134] structure, we are very concerned that the policies adopted by
+[01:15:04.054] PJM will not go nearly far enough to protect
+[01:15:07.534] residential electricity customers.
+[01:15:09.914] And whatever happens at the federal and regional level, we are going to need state
+[01:15:13.114] action to ensure everyday customers don't end up on the hook for even
+[01:15:16.874] higher costs due to data centers. And that's why CUB is one of many
+[01:15:20.554] organizations, many of whom are represented here in the audience, that support the
+[01:15:24.154] POWER Act, HB5513, which would
+[01:15:27.854] require utilities to create new rules to protect their existing
+[01:15:31.494] customers from subsidizing data center related upgrades to
+[01:15:35.114] transmission and distribution infrastructure.
+[01:15:38.064] It would also require data centers to bring their own new clean power if they
+[01:15:41.874] want firm electric service that won't be curtailed at times of
+[01:15:45.834] high demand. And we're working to get language added that makes clear that any
+[01:15:49.833] costs coming down to us from PJM, that PJM
+[01:15:53.134] identifies as being data center related, actually get allocated
+[01:15:57.114] here at the utility level to the customers that brought about those costs.
+[01:16:02.724] So here we are in the city of Chicago, and I'm here to reassure you that meanwhile,
+[01:16:05.694] there is plenty that we can do at the municipal level.
+[01:16:08.634] I applaud the working group's recommendations that the city
+[01:16:12.174] create a permitting program specific to data centers and
+[01:16:15.854] update the city's zoning ordinance to address data center impacts.
+[01:16:20.174] Curbing the air and noise pollution impacts of these facilities will be key
+[01:16:24.174] to protecting Chicagoans' quality of life.
+[01:16:26.774] When I go to some of these really spicy meetings out in the
+[01:16:30.514] suburbs, people are most angry about noise.
+[01:16:34.214] And the City of Chicago is in a position to establish strong
+[01:16:37.894] environmental safeguards, and I urge you to do so.
+[01:16:41.214] I'm also pleased to see that the working group called out the need for
+[01:16:44.334] transparent energy and water use reporting.
+[01:16:47.974] As Jared said in his presentation, it's hard to regulate something without the
+[01:16:51.914] details. And I think it's wise to keep in mind the
+[01:16:55.654] potential for waste heat reuse and the city's leverage when
+[01:16:59.654] it comes to hammering out community benefits agreements or similar mechanisms to
+[01:17:03.414] bring value to residents when a development is
+[01:17:05.954] proposed. I'd also like to flag the opportunity that
+[01:17:09.474] revisiting the city's franchise agreement negotiations with ComEd
+[01:17:13.234] might offer us. If you remember that in early,
+[01:17:17.294] I think January of 2023, an agreement was reached
+[01:17:21.194] in which the utility would have been granted a 15-year contract
+[01:17:25.174] extension in return for, I think it was $100 million for the
+[01:17:29.154] city to use to combat climate change.
+[01:17:32.634] That agreement never went anywhere for a lot of reasons, but I'd
+[01:17:36.654] like to remind everyone that the franchise is still there as a potential point of
+[01:17:40.374] leverage.
+[01:17:42.274] Because with or without the data center
+[01:17:45.854] related challenges, many of my recommendations for the city
+[01:17:49.834] actually remain the same.
+[01:17:52.094] Mostly, it's find ways to support your residents who are
+[01:17:56.114] struggling to afford their bills.
+[01:17:58.914] All of the regulated utilities in Illinois submit reports to the ICC
+[01:18:03.033] each month, listing credit and collections activities for their
+[01:18:06.754] customers by zip code. To all the aldermen here,
+[01:18:10.914] check out your zip codes on those reports.
+[01:18:13.394] It is fascinating and heartbreaking.
+[01:18:16.214] Those numbers are clear that when it comes to utility
+[01:18:19.714] affordability, ComEd customers in Chicago are much more stressed
+[01:18:24.234] than customers across the entirety of ComEd's footprint.
+[01:18:28.094] In May, this is the most recent data we have right now. It's from May.
+[01:18:33.214] Nearly 20% of ComEd customers in Chicago were behind on their
+[01:18:36.814] bills. In the three worst off zip codes,
+[01:18:40.834] nearly 32%, almost a third of
+[01:18:44.454] residential customers were behind on their bills and assessed late payment fees.
+[01:18:49.334] So I love it when the city intervenes in ICC
+[01:18:52.364] proceedings. These are the dockets where millions of dollars of
+[01:18:56.194] ratepayer money is on the line. As I mentioned, the city can also use
+[01:19:00.034] franchise and procurement negotiations to secure affordability commitments.
+[01:19:04.594] It can coordinate with ward offices and city departments to better connect
+[01:19:08.414] residents to programs, and it can make it easier for households to get
+[01:19:12.174] solar and battery storage installed, especially given that the state does
+[01:19:16.234] have programs in place to install solar and soon battery storage in
+[01:19:20.114] low and moderate income households.
+[01:19:22.354] And what a great way that is to help people keep their homes safe and comfy while
+[01:19:26.134] saving energy and money. So I look forward to continuing the
+[01:19:29.694] conversation on all the ways we can work together on this, and thanks again for
+[01:19:32.954] letting me talk.
+[01:19:34.474] Thank you. Thank you for your presentation
+[01:19:37.514] and your willingness to show up, as always.
+[01:19:41.194] Next up we have Andrew Wren with Prairie Rivers Network, who's joining us
+[01:19:44.614] virtually. Andrew, you can unmute now.
+[01:19:48.494] Can you hear me okay?
+[01:19:50.722] All right. Try again.
+[01:19:51.942] Can you hear me okay?
+[01:19:54.722] Yeah.
+[01:19:55.242] That's a yes? Okay, great.
+[01:19:57.542] I'm going to quickly share some slides and-- Oh,
+[01:20:01.562] I have to request.
+[01:20:03.502] My name's Andrew Raine. I'm the climate policy director at Prairie Rivers
+[01:20:07.242] Network. We're located downstate in Champaign.
+[01:20:10.962] But we work statewide on water resources issues, and I've been working on
+[01:20:15.182] data center issues for a year and a half now, actually, with Sarah
+[01:20:19.162] and Covey in the room there.
+[01:20:21.702] And we've been thinking about water issues, of course, for decades.
+[01:20:25.602] Our organization has been around for
+[01:20:28.182] 59 years, 60 next year. So,
+[01:20:31.402] a lot of experience on water resources issues.
+[01:20:35.722] Let me see if I have sharing yet. I do. Great.
+[01:20:39.142] And
+[01:20:40.542] I do want to say I just came off vacation, so these slides are a little bit
+[01:20:44.682] shorter than I-- Not shorter. A little bit less comprehensive than I would
+[01:20:48.602] like them to be. And I do want to give a shout-out to the Alliance for Water
+[01:20:52.442] Efficiency, who have a really excellent slide deck.
+[01:20:55.642] If you want to learn more about anything that I say here today,
+[01:20:58.962] I've shared a link in the end of the notes for looking in their
+[01:21:02.482] resources because--
+[01:21:04.242] And actually, Joanna with the Alliance for Water Efficiency was the person that I
+[01:21:07.302] recommended before myself for speaking here, but she wasn't
+[01:21:11.302] available. So, you got me instead, and I'll do my best.
+[01:21:15.342] And
+[01:21:17.362] the other thing I want to say is, I think you've got a very comprehensive-- Your
+[01:21:19.622] team at the department has very comprehensive understanding of this, and I think
+[01:21:23.242] their presentation was really good.
+[01:21:24.522] So I will go quickly over things that I think maybe they've already covered.
+[01:21:28.322] I also thought the comments by Illinois Environmental Council and NRDC in the
+[01:21:32.082] public comment section were very good, addressing the challenges related to water
+[01:21:35.582] resources and data centers. So with that, I'm going to just dive in, and
+[01:21:39.582] I'll go through pretty quickly. Are the slides visible?
+[01:21:44.062] Somebody thumbs up?
+[01:21:46.622] Great.
+[01:21:48.422] Okay. So,
+[01:21:51.602] just a few things.
+[01:21:53.262] Data centers, where are they getting their water, and where does it go?
+[01:21:55.982] So, the vast majority of data centers, and I would expect in Chicago,
+[01:21:59.622] probably all of the data centers-- Well, no, that's not true.
+[01:22:02.722] A lot will get the water from community water supplies.
+[01:22:06.302] They're going to get the clean drinking water and use that in their system.
+[01:22:11.022] But some data centers may also be getting from surface water
+[01:22:14.802] or groundwater. So that would be maybe a data center that's on the river that's
+[01:22:18.522] pulling in surface water for once-through cooling.
+[01:22:22.142] And then you also have the opportunity for
+[01:22:25.142] wastewater reuse, which was mentioned as an
+[01:22:28.582] opportunity by the Department of Environment, because that's a
+[01:22:32.562] way to mitigate without using new water that your treatment plant has had to
+[01:22:36.582] treat. If the data center can use wastewater, that sort of
+[01:22:40.302] alleviates some of the burden that the overall system is bearing.
+[01:22:44.322] I will say that some rivers do depend on wastewater, especially down where I
+[01:22:48.242] live, that's more of an issue. But up in Chicago, there is a lot more
+[01:22:52.202] flow,
+[01:22:53.382] and wastewater reuse is definitely a good solution there.
+[01:22:57.502] And then where does it go? It's kind of one of two places.
+[01:22:59.922] They could be discharging directly to waters, so either probably
+[01:23:03.722] a river or a lake, or data centers will often discharge
+[01:23:07.522] to a wastewater treatment plant that will then take their water and treat
+[01:23:11.382] it.
+[01:23:12.822] So just so folks have an understanding of the different kind of possibilities here,
+[01:23:16.222] and I think for the most part, we're seeing to and from community
+[01:23:20.242] water supplies and to wastewater treatment plants.
+[01:23:23.082] And as you've heard already today, data centers can use a lot of
+[01:23:26.962] water.
+[01:23:28.602] The primary way that data centers use water is for cooling.
+[01:23:33.082] And this will depend a lot on the technology that the data center chooses to
+[01:23:37.222] use.
+[01:23:38.442] There are ways to use actually very little water for cooling, that would be like
+[01:23:42.122] air conditioning your data center, or there's ways to use a lot of water.
+[01:23:45.522] But a larger data center with cooling technology that evaporates water
+[01:23:49.722] can be using a really substantial 5 million gallons per
+[01:23:53.622] day
+[01:23:54.722] amount of water, again, depending on all that technology.
+[01:23:58.422] And our statistics on this aren't as good as the energy use statistics because
+[01:24:02.942] there is less reporting. There is less transparency.
+[01:24:05.212] And so I want to underscore that need for transparency and reporting on data
+[01:24:09.002] center water use, because I think that will help us truly understand
+[01:24:12.562] what the actual usages are and how we should be responding to them.
+[01:24:17.082] The other key consideration here is what happens off-site.
+[01:24:20.222] Because data centers, as you've heard, use so much energy, there's a lot of
+[01:24:23.182] off-site water usage from that energy generation,
+[01:24:27.222] and that is actually a big portion of their impact as well.
+[01:24:29.842] So there's kind of two angles you need to think about water use in data centers
+[01:24:32.662] from. So digging in on that cooling side of things, you
+[01:24:36.662] have this kind of spectrum, and this is a fairly simple way to look at it.
+[01:24:39.802] Typically, you're either using more water or you're going to be using more energy.
+[01:24:43.712] And I think this is an easier way to look at it,
+[01:24:47.622] but the real details are much more complicated depending on technologies.
+[01:24:51.542] And this is in the Alliance for Water Efficiency's
+[01:24:55.482] report, and it really breaks down the different technologies for
+[01:24:59.842] water efficiency and energy efficiency and cooling capacity.
+[01:25:03.862] As data centers become more heat dense or more resour-- As they're putting more and
+[01:25:07.782] more of these energy-intensive chips into one place, they
+[01:25:12.342] need more and more cooling because they're using more and more energy.
+[01:25:15.682] A chip basically turns all of the energy they consume
+[01:25:19.722] into heat. That is what a computer chip does.
+[01:25:22.042] Computing power and heat are the main outputs.
+[01:25:25.002] And so as you look at different cooling technologies,
+[01:25:28.462] we start at facility scale coolings, like simply air conditioning the place, and
+[01:25:32.322] you get down to things like direct to chip, and this is what we're seeing more and
+[01:25:35.642] more of. That means that-- Or immersive cooling, where the
+[01:25:39.642] chip is immersed in a fluid that is then being cooled.
+[01:25:44.862] These component layer technologies
+[01:25:48.482] are what you're seeing at the more advanced data centers
+[01:25:52.422] that have higher cooling needs. Also probably more expensive, but that's for
+[01:25:56.402] the data center to figure out.
+[01:25:58.782] And as I was just saying, yeah, so you have the rack density.
+[01:26:01.982] This is saying how much computing power Are you putting on a single
+[01:26:06.006] rack? And you saw the racks and the images that were shared from the Department of
+[01:26:09.366] Environment.
+[01:26:10.866] And as you increase that density, you leave behind
+[01:26:14.526] your air cooling, and you get to these more intensive
+[01:26:18.506] or more direct to chip type technologies.
+[01:26:21.826] And just what you want to think about when you're looking at cooling
+[01:26:25.926] is that these are all loops. So when we talk about a
+[01:26:29.926] cooling loop, yeah, maybe we're doing direct to chip, but that heat still
+[01:26:33.826] has to leave the facility. And so you have to understand the full process of
+[01:26:37.926] how do you get the heat away from your computer chips and out of your
+[01:26:41.386] facility. And ultimately, that means that your heat is going to interact
+[01:26:44.826] with air or water in some way. There is no
+[01:26:48.026] truly closed loop, because that would mean that the heat is
+[01:26:51.506] staying within your facility. So you have closed loops maybe within your facility,
+[01:26:55.786] but eventually it reaches an exchange point where that heat has to leave.
+[01:26:59.126] So, if you're considering regulations, you want to be thinking
+[01:27:02.866] about what are the terminologies we want to use to ensure that, you can't just say
+[01:27:06.926] closed loop, you have to be a bit more robust than that because
+[01:27:10.085] the closed loop itself is not a singular technology.
+[01:27:14.826] And the other side of this is then
+[01:27:18.386] offsite water usage. And so I just want to make a point about energy
+[01:27:21.906] consumption. The data center that was recently approved in Joliet is
+[01:27:25.366] 1,800 megawatts, and Chicago uses 3,500
+[01:27:28.886] megawatts altogether as a city. So one data center is an
+[01:27:32.806] energy demand
+[01:27:34.826] almost half of Chicago. And there's another one like Joliet that's about the
+[01:27:38.766] same size about to be approved. And so now we've got two that are going to be the
+[01:27:42.746] same usage as Chicago. And Sarah with CUB kind of
+[01:27:46.526] talked about what are the implications on our grid, to our bills when we
+[01:27:50.526] think about these large data centers coming in.
+[01:27:53.406] Well, the impact on our water resource is important to consider, too.
+[01:27:56.766] That unprecedented energy demand, if it's met with
+[01:28:00.686] things like natural gas or coal or nuclear,
+[01:28:04.366] become very water consumptive. And this table on the right just kind of shows
+[01:28:08.486] when you're looking at those technologies, we're talking about liters of water
+[01:28:11.546] being consumed, versus renewable technologies, almost no water
+[01:28:15.605] is consumed in the process of using renewable technologies
+[01:28:19.526] to meet that energy demand. And so this synergy becomes really important when
+[01:28:22.986] you're asking, as the city considering, what can we do to make our data centers
+[01:28:26.726] have less of an impact on water? One of the answers is actually using renewable
+[01:28:30.626] energy to mitigate that offsite impact, in addition to
+[01:28:34.406] what might be happening onsite for water usage.
+[01:28:38.806] So that just brings me to a list of things to consider when
+[01:28:42.726] addressing water and data centers.
+[01:28:46.406] The first is, as I think you've heard a couple of times now, let's get
+[01:28:50.006] transparent usage planning, reporting, and enforcement.
+[01:28:52.666] Let's know what our data centers are using.
+[01:28:55.286] Let's make sure they're accurately reporting that information so that we have a
+[01:28:58.806] base level understanding of where to go next.
+[01:29:02.506] You might also consider water use efficiency requirements.
+[01:29:05.686] So that can be technological minimums, things like you can't
+[01:29:09.746] use once-through cooling, you have to use a closed loop system of some kind as a
+[01:29:14.186] minimum. And then you get into that above that floor,
+[01:29:17.966] innovations in technology, things like direct to chip that fall within that broader
+[01:29:21.806] closed loop umbrella. Or you might look at energy metrics, things like
+[01:29:25.786] water use efficiency or data center resource efficiency, which is a new metric
+[01:29:29.756] that is being driven by industry,
+[01:29:32.246] that looks at the whole data center bringing in power and water
+[01:29:35.906] together as a metric. Aurora, for example, has set a water
+[01:29:39.906] use efficiency for data centers that are going to be built in
+[01:29:43.726] Aurora. They've set a fixed number that you have to meet.
+[01:29:47.326] You also might consider evaluations on resource impacts.
+[01:29:50.546] This is one of the things that we're proposing in the POWER Act.
+[01:29:53.346] There's actually a study that's going to be done for each data center by the
+[01:29:55.966] Illinois State Water Survey, if we get the bill.
+[01:29:58.986] And that study will look at, okay, what is this data center's withdrawals actually
+[01:30:02.546] going to do to
+[01:30:04.606] the resource it's pulling from? What is it going to do to the river?
+[01:30:07.026] What is it going to do to the lake? And it looks through the
+[01:30:10.826] community water supply. So you have to know where a community water supply is
+[01:30:13.686] getting water to really trace that impact through.
+[01:30:18.126] You might want to consider, again, reducing offsite water impacts
+[01:30:21.965] by requiring renewable energy to be providing the power for a data
+[01:30:25.906] center.
+[01:30:27.726] You want to be thinking about scarcity.
+[01:30:29.466] So a data center gets built, it might be sustainable in the moment,
+[01:30:33.986] but you want to be thinking about, what about our peak demands when there's peak
+[01:30:36.846] heating needs? What does the water consumption look like at that data center, and
+[01:30:40.566] how does it compete against other water consumptions happening that may
+[01:30:44.346] also be at their peaks? And then also long-term scarcity planning.
+[01:30:47.946] So droughts, what happens when a data center that's dependent on
+[01:30:51.886] water for cooling hits a drought? And how are those resources allocated between the
+[01:30:55.716] data center, between people who want to drink the water, between other businesses?
+[01:31:01.346] On the infrastructure side, you want to be thinking about protecting ratepayers and
+[01:31:04.706] consumers from infrastructure costs.
+[01:31:06.836] So this can also come in the form of ensuring that any
+[01:31:10.686] costs that are, let's say, your water treatment plant has to install a new
+[01:31:14.586] system to meet the demand of a data center, and then that data center goes belly
+[01:31:17.806] up. How are you ensuring that your
+[01:31:20.926] drinking water infrastructure is not going to be paid for, that new infrastructure
+[01:31:24.326] that has no usage is not paid for by your ratepayers, is instead
+[01:31:28.066] somehow paid for by that data center?
+[01:31:29.486] So you can do things like upfront bonding or other sort of financial mechanisms to
+[01:31:33.246] protect yourselves. And then pollution.
+[01:31:36.046] So, runoff from data centers, the footprint.
+[01:31:40.346] You also have concentration effects as they evaporate water.
+[01:31:43.386] That means that whatever's in that water gets concentrated.
+[01:31:46.226] And for example, in Oregon, we saw nitrate pollution becoming an issue because the
+[01:31:49.966] water that had nitrates in it when it came into the data center got concentrated,
+[01:31:53.686] and then it was discharged with essentially water that had extremely high
+[01:31:56.946] concentrations of nitrate. They didn't add that nitrate, but they made it a
+[01:32:00.566] concentrated problem, and that became a problem for the treatment plant.
+[01:32:05.176] And then thinking about are you discharging to water or wastewater treatment
+[01:32:09.156] system? And then again, also flagged by your Department of the Environment, you
+[01:32:13.156] have opportunities, things like waste heat reuse.
+[01:32:16.176] So when a data center, what they're producing is actually heat,
+[01:32:20.096] and it's all waste heat right now. If they're just trying to cool their data
+[01:32:23.616] center, they're just trying to get that into the environment, so into the air or
+[01:32:26.316] into water around it so that it goes away.
+[01:32:29.056] Waste heat reuse says, well, what if we plug that into systems that actually want
+[01:32:32.676] to use it? Thermal energy network
+[01:32:35.156] that maybe is heating a block or being used by an industry.
+[01:32:39.276] These are very synergistic that can actually reduce your impact because you're
+[01:32:44.256] not wasting the heat, you're using it for something that's beneficial.
+[01:32:47.316] And that wastewater reuse is another opportunity here for
+[01:32:52.316] mitigating the impact of a data center through using something like
+[01:32:56.016] wastewater from a treatment plant.
+[01:32:58.976] Just briefly, at the state level, the POWER Act is
+[01:33:02.296] proposing a water impact permit at the Illinois EPA
+[01:33:06.136] level. And this is a yes or no on a data center
+[01:33:10.176] based on an actual resource impact study.
+[01:33:13.076] So the Illinois State Water Survey will look at,
+[01:33:15.796] here's the data center, they're going to pull this much water from this river.
+[01:33:18.796] What is it going to do to that river? Are its other uses going to be maintained?
+[01:33:22.836] And that becomes a yes or no at the Illinois EPA.
+[01:33:26.676] We're also requiring a floor of closed loop cooling, so that
+[01:33:31.016] they have to look at different cooling technologies within the closed loop world
+[01:33:34.866] and pick one that is at least as efficient as, so they can't do
+[01:33:38.876] one through evaporative cooling if it's going to be wildly inefficient.
+[01:33:42.516] And then ensuring that infrastructure costs are paid for by the data center
+[01:33:46.596] and don't fall on rate payers one way or the other.
+[01:33:50.676] And this is achieved through basic planning, a plan from the data center, and
+[01:33:54.576] then also ongoing usage reporting, and all of that being made public
+[01:33:58.596] on a publicly available website. And
+[01:34:02.296] that's really all I have to share with you.
+[01:34:04.356] I commend the city for taking on this process and for considering these questions,
+[01:34:08.216] and the work that's been done by the Department of Environment is impressive.
+[01:34:12.356] These links, I can send them if they're not available from the slides, so that they
+[01:34:15.816] can be available, and I look forward to your questions.
+[01:34:19.076] Great. Thank you, Andrew. I appreciate it. And we hope you had a nice vacation.
+[01:34:25.896] Next up, we'll hear from Kavi Chintham with Vote Solar.
+[01:34:31.896] Hello. Okay, cool.
+[01:34:33.996] Good afternoon, Chair Hadden and members of the committee, and thank you for the
+[01:34:37.516] opportunity to testify today. My name is Kavi Chintham.
+[01:34:40.936] I'm the campaign manager for Illinois at Vote Solar.
+[01:34:44.166] We're a national advocacy organization working to make solar
+[01:34:48.156] more accessible and affordable across the country and propel us toward
+[01:34:52.176] a 100% clean energy future. Vote Solar is
+[01:34:55.756] also an active member of the Illinois Clean Jobs Coalition.
+[01:35:00.036] I also hold a PhD in chemical engineering from Northwestern
+[01:35:03.476] University, and I'm a resident of the 48th Ward here in Chicago,
+[01:35:07.696] where I organize on the north side around environmental justice issues.
+[01:35:12.486] The recent rapid growth of data centers here in Illinois and across the
+[01:35:16.296] country raises fundamental questions about how we protect our
+[01:35:19.736] communities, environment, power grid, and water resources.
+[01:35:23.716] It is the growth of artificial intelligence that has created unprecedented
+[01:35:27.556] demand for new data centers. These facilities, as everyone
+[01:35:31.416] has been alluding to, are not simply another commercial development.
+[01:35:35.956] A modern hyperscale data center is one of the largest industrial
+[01:35:39.636] facilities a community can host and has real and lasting
+[01:35:43.256] impacts on the communities where they're built and beyond.
+[01:35:46.506] A single campus can require hundreds of megawatts of electricity,
+[01:35:50.596] enough to power hundreds of thousands of homes.
+[01:35:53.716] It may require significant amounts of water for cooling, dozens of
+[01:35:57.456] backup diesel generators, and new substations and transmission
+[01:36:00.856] infrastructure.
+[01:36:02.396] Because of their scale, these projects affect land use decisions, water
+[01:36:06.176] resources, air quality, noise, transportation,
+[01:36:09.936] emergency planning, utility infrastructure, housing,
+[01:36:13.776] economic development, and the quality of life of nearby residents.
+[01:36:18.136] Chicago has a unique responsibility to address the
+[01:36:21.756] outsized impacts data centers have on our communities because of its
+[01:36:25.315] history.
+[01:36:26.616] For decades, Black, Latinx, and low-income communities in the
+[01:36:30.596] south and west sides in particular,
+[01:36:34.116] have borne a disproportionate share of the city's industrial
+[01:36:37.556] pollution and infrastructure burdens.
+[01:36:40.206] That history has taught us an important lesson.
+[01:36:43.096] We cannot evaluate new projects in isolation.
+[01:36:47.296] We have to ask what they mean in the context of the pollution
+[01:36:50.396] infrastructure and environmental burdens communities are already living
+[01:36:54.356] in. That principle that cumulative impacts matter is
+[01:36:58.376] one that environmental justice advocates in Chicago have fought for over
+[01:37:02.276] many years and is increasingly being reflected in both state and local
+[01:37:05.956] policy discussions.
+[01:37:08.736] Over the past few months, as Sarah shared, members of the Illinois Clean Jobs
+[01:37:12.776] Coalition, including myself, have engaged in town halls and community
+[01:37:16.716] meetings across the state to listen to residents' concerns about data center
+[01:37:20.706] development.
+[01:37:22.096] Together, we've heard from communities in Waukegan, Rockford,
+[01:37:25.716] Springfield, Aurora, and beyond.
+[01:37:28.516] And repeatedly, we hear the same questions.
+[01:37:31.896] Who pays for new infrastructure? Will utility
+[01:37:35.536] bills increase? How much water will these facilities use?
+[01:37:39.896] Will polluting diesel generators affect local air qualities?
+[01:37:43.736] And will communities have a meaningful voice before decisions are made?
+[01:37:48.566] These concerns are not hypothetical, and local governments across the
+[01:37:52.436] state have already begun recognizing that existing policies are not
+[01:37:56.416] enough.
+[01:37:58.256] In Aurora, data centers were allowed under zoning rules that treated them
+[01:38:02.216] like warehouses. Nearby residents began reporting constant
+[01:38:06.076] humming, vibrations, and concerns about the scale of polluting backup
+[01:38:10.076] diesel generators supporting these campuses, which they stated
+[01:38:14.016] sounded like jet engines.
+[01:38:16.832] Those experiences ultimately led the city to adopt a temporary
+[01:38:20.432] moratorium in order to craft, and eventually passed, one of the most
+[01:38:24.472] comprehensive data center ordinances in the country.
+[01:38:28.172] In Sangamon County, residents raised concerns about a proposed
+[01:38:32.172] 280-acre hyperscale data center campus expected to
+[01:38:35.832] require up to 600 megawatts of electricity.
+[01:38:39.432] Despite extensive public testimony, the project ultimately
+[01:38:43.292] moved forward.
+[01:38:44.862] That experience underscores why communities need clear standards and
+[01:38:48.792] guardrails in place before projects are proposed,
+[01:38:52.792] rather than trying to address these issues during a single zoning hearing.
+[01:38:57.592] In Champaign and Morgan Counties, local officials chose to
+[01:39:01.152] temporarily pause new data centers while they develop
+[01:39:04.992] zoning standards that better reflect the scale of these facilities.
+[01:39:08.992] And in Grays Lake, residents expressed frustrations not only with the
+[01:39:12.852] scale of a proposed hyperscale data center, but also with how
+[01:39:16.592] little information was publicly available during the approval process,
+[01:39:20.972] prompting broader conversations in Lake County about model regulations and
+[01:39:24.992] a temporary moratorium. And there are many more examples like this.
+[01:39:29.752] These examples are all unique, but they point to the same lesson.
+[01:39:33.592] Communities should not have to figure out how to regulate data centers one
+[01:39:37.312] project at a time.
+[01:39:39.352] Chicago has an opportunity to act on this lesson.
+[01:39:43.202] This hearing and report should serve as the launch of this
+[01:39:46.602] conversation so that Chicago proactively establishes
+[01:39:50.212] guardrails before the next data center proposal is on your agenda.
+[01:39:55.252] And at the state level, as folks have already said, the Illinois
+[01:39:59.192] Clean Jobs Coalition has been working with legislators on the POWER Act,
+[01:40:03.152] legislation designed to establish statewide guardrails for large data
+[01:40:06.952] centers. And the bill also recognizes that some challenges
+[01:40:10.992] cannot be solved by municipalities alone.
+[01:40:14.172] Statewide protections are critical, but they're only part of the solution
+[01:40:18.112] since many of the impacts people experience are inherently local.
+[01:40:22.672] Furthermore, local policies will push for more comprehensive policies by
+[01:40:26.612] state legislators, creating lasting protections that communities
+[01:40:30.612] can choose to build on as appropriate for their own needs.
+[01:40:34.292] Chicago has an opportunity to establish clear expectations
+[01:40:38.112] before data center development accelerates with no guardrails.
+[01:40:42.372] We also have an opportunity and responsibility to ensure that data
+[01:40:46.332] centers support and not undermine our clean energy future.
+[01:40:50.732] If massive new electricity demand arrives without new clean energy
+[01:40:55.012] storage and flexible operations, it can increase consumer
+[01:40:58.852] bills, strain the grid, and make it harder for us to meet our climate
+[01:41:02.752] goals. If a company is building one of the largest new electricity
+[01:41:06.532] loads in the state, it should also help build a clean new energy
+[01:41:10.572] needed to serve that load, rather than taking the new clean energy
+[01:41:14.612] that folks like us are using.
+[01:41:17.552] That approach not only protects existing customers, it also
+[01:41:21.112] reduces pressure on the grid and ensures that the clean energy transition is
+[01:41:25.112] bolstered. With the right guardrails, data centers can
+[01:41:28.472] support new renewable energy, deploy battery storage, and improve
+[01:41:32.412] grid reliability.
+[01:41:34.792] Ultimately, this conversation is about how Chicago meets the moment.
+[01:41:38.772] We have an opportunity to learn from what's happening across Illinois and put the
+[01:41:42.752] right guardrails in place now, so that if data centers are built
+[01:41:47.032] increasingly in Chicago, they're developed in a way that protects our communities
+[01:41:51.012] and reflects the values the city has worked so hard to advance. Thank you.
+[01:41:57.332] Thank you so much.
+[01:41:59.452] And lastly,
+[01:42:02.652] I turned my own mic off. We'll hear from Craig Huffman from
+[01:42:05.192] MetroEdge.
+[01:42:06.762] Thank you.
+[01:42:09.392] Good afternoon, Chairman, members of the committee, Commissioner
+[01:42:13.592] Tovar, and the working group.
+[01:42:16.492] Thank you for this report and the chance to testify today.
+[01:42:20.652] I read the report closely, and I believe this committee is pursuing a
+[01:42:24.012] thoughtful, serious approach to future data center development
+[01:42:27.952] in Chicago. And I want to be part of getting it right.
+[01:42:31.912] My name is Craig Huffman. I am the co-founder and CEO of MetroEdge
+[01:42:35.632] Development Partners. We're a commercial real estate development firm,
+[01:42:39.832] and we're not headquartered in Loudoun County or Northern Virginia.
+[01:42:43.852] We're based here in Chicago by Chicagoans.
+[01:42:47.112] Our inaugural development, IMD1, is located in the Illinois
+[01:42:50.952] Medical District. Our land is located on the Illinois Medical
+[01:42:54.552] District on the West Side of Chicago, and we are joint venturing with one
+[01:42:58.552] of the top data center developers, H5 Data Centers, to
+[01:43:02.632] build a world-class facility.
+[01:43:05.132] H5 is partnering with us because our site is now very
+[01:43:08.812] valuable at a time when data center sites are hard to secure,
+[01:43:12.712] and frankly, we know Chicago better than they do.
+[01:43:16.892] A little bit about my background. I was born and raised on the South Side by two
+[01:43:20.812] public school educators who fled the Jim Crow South in the
+[01:43:24.272] 1960s. I attended public elementary school, went on to
+[01:43:28.052] Morehouse College, then returned to Chicago for two master's
+[01:43:31.732] degrees from the University of Chicago, one in nonprofit
+[01:43:35.612] management and an MBA in finance. I left the stability
+[01:43:39.532] of working for someone else in 2004 to become a
+[01:43:43.272] full-time real estate entrepreneur, and I became the first in my family to do
+[01:43:47.252] so.
+[01:43:48.212] MetroEdge has been the hardest venture that I've ever pursued
+[01:43:51.952] because I came to this industry lacking the privilege that many of
+[01:43:55.922] my colleagues and competitors enjoy.
+[01:43:58.632] It has taken years of navigating skeptical looks,
+[01:44:02.292] rising anti-data center sentiment, and way too many
+[01:44:05.572] microaggressions to even count while I learned this high
+[01:44:09.452] barrier to entry industry from the ground up,
+[01:44:13.632] all while there was no guarantee that our plan to bring a data center to the
+[01:44:17.572] West Side would work. As of today, I am the only
+[01:44:21.532] African American equity partner in an active data center development
+[01:44:25.372] in Chicago.
+[01:44:27.136] Over the last six years, I've traveled the US meeting with data center
+[01:44:30.636] operators, developers, and investors.
+[01:44:33.756] Given the enormous upfront capital
+[01:44:38.516] investment this industry now requires, there's almost no
+[01:44:42.256] representation of traditional US minority groups in data center
+[01:44:46.276] development, and that absence isn't an accident.
+[01:44:50.256] It reflects who has historically had access to investment capital,
+[01:44:54.056] technology relationships, and the private conversations where
+[01:44:57.516] confidential transaction details are often negotiated and
+[01:45:01.416] finalized. That's part of why I'm here, not to defend
+[01:45:05.296] our data center development, but to show what's possible when the
+[01:45:09.136] data center industry looks different than it historically has,
+[01:45:13.416] and when the people building it have a real commitment to the
+[01:45:16.476] communities where they invest. In 2025,
+[01:45:20.136] technology and data center investment drove over 80% of the
+[01:45:24.016] total US GDP growth. Illinois has been a top
+[01:45:27.636] destination for the last few years.
+[01:45:30.096] We cannot pretend this infrastructure isn't relevant to Chicago's
+[01:45:33.396] future as a global city. At the end of the day, data centers
+[01:45:37.326] are the plumbing for the internet.
+[01:45:41.296] Why
+[01:45:42.436] does all this matter? The committee's report highlights a pattern of massive,
+[01:45:46.476] out-of-town capital showing up with a permit application, a
+[01:45:50.276] name nobody's heard of, and a promise nobody can verify.
+[01:45:55.676] Communities have asked, "What's with the secret
+[01:45:58.936] NDAs? Why is there no public dialogue?
+[01:46:02.496] Where's the transparency?" These are not unreasonable questions.
+[01:46:07.036] For us, transparency has meant showing up at meetings ourselves,
+[01:46:11.536] using our own names, answering hard questions in the room,
+[01:46:15.956] rather than through a law firm or a lobbyist.
+[01:46:19.096] When the working group lays out its framework, environmental permitting,
+[01:46:22.776] responsible zoning, transparent reporting, I don't hear a
+[01:46:26.576] burden. I really don't.
+[01:46:29.116] I hear how we, as MetroEdge, have approached IMD1
+[01:46:33.156] from day one, before anyone required it.
+[01:46:36.676] And here are three reasons why we believe our model should
+[01:46:40.656] be a model this committee considers for future
+[01:46:44.896] investment. First, our development will have near zero
+[01:46:48.776] water use. Water was the most frequently
+[01:46:52.456] raised concern at the last community conversation event, and the report
+[01:46:56.496] notes hyperscale water use can rival a small town's daily
+[01:47:00.376] consumption. We agree.
+[01:47:02.556] IMD1 is designed with a closed-loop system that will
+[01:47:06.296] allow us to meet a water usage efficiency of zero.
+[01:47:10.876] We will not be putting a hose in Lake Michigan for our cooling,
+[01:47:14.836] as some people have alleged. This is not a future goal or
+[01:47:18.576] promise on paper. It's a direct built-in answer to the report's
+[01:47:22.536] central concern.
+[01:47:24.416] Second, IMD1 is the smaller infill
+[01:47:28.136] redevelopment model the report says Chicago should pursue,
+[01:47:32.516] not the sprawling hyperscale campuses driving national
+[01:47:36.036] concern. We have a four-story, roughly
+[01:47:39.576] 150,000 square foot facility on less than
+[01:47:43.376] four acres on a site that's been vacant for 50
+[01:47:47.316] years.
+[01:47:49.216] We're bringing investment back to this site, and our data center will serve
+[01:47:53.176] healthcare and life sciences institutions within the
+[01:47:56.696] district itself. Not an out-of-state AI training load,
+[01:48:00.696] a genuinely different use case than the ones driving the report's
+[01:48:04.616] grid strain and land use concerns.
+[01:48:07.556] And then third, I really want to emphasize this, community benefits.
+[01:48:11.396] The report demanded local hiring, job training
+[01:48:14.796] pipelines, and tax reinvestment rather than buy-right
+[01:48:18.356] development with no community return.
+[01:48:21.336] We believe the committee's recommendations are a really good start,
+[01:48:25.356] but not enough.
+[01:48:27.396] There needs to be more. Data centers should prioritize
+[01:48:30.776] recruiting and training talent from local neighborhoods and
+[01:48:34.636] pursue more inclusive partnerships with the wide range of
+[01:48:38.616] vendors that have profited from the recent data center investment
+[01:48:42.636] boom. In our West Side location, we're also pursuing a charitable
+[01:48:46.576] vehicle known as a donor-advised fund that would
+[01:48:49.896] incentivize some of the very large customers that rely on data
+[01:48:53.616] centers, such as Amazon, Microsoft, Google Cloud,
+[01:48:57.956] Oracle, Meta, CoreWeave, and many others,
+[01:49:01.436] to support college scholarships, home buyer down
+[01:49:05.336] payment assistance, and workforce training.
+[01:49:08.156] To date, only out-of-town philanthropy has shown interest in this idea,
+[01:49:12.536] which tells you something about the need to include more groups in
+[01:49:16.156] community benefit discussions. At the end of the day, a data
+[01:49:19.916] center should not just be in the community, it should also be of the
+[01:49:23.816] community. In closing, I understand the instinct to
+[01:49:27.616] slow everything down until every question is answered.
+[01:49:30.886] The concerns in this report, noise, emissions, grid
+[01:49:34.776] strain, water use, Chicago dollars leaving Chicago,
+[01:49:38.716] are all legitimate and deserve rigor.
+[01:49:42.316] But data centers are no longer optional
+[01:49:45.256] infrastructure. They run hospital records, payroll
+[01:49:49.016] systems, and the internet that many of us,
+[01:49:53.056] and those of you that are elected officials, your very constituents, will use when
+[01:49:56.796] they go home tonight.
+[01:49:58.556] The question was never whether Chicago hosts the
+[01:50:01.456] infrastructure. It's how we do it in an environmentally
+[01:50:05.416] responsible way. It's who builds it and for
+[01:50:09.416] whose benefit.
+[01:50:11.756] We can curse every project at the door or do the harder
+[01:50:15.536] thing, light a candle, set the standard, and build a
+[01:50:19.536] model that lets local communities be genuine partners.
+[01:50:23.196] That's why I'm asking you to look at our joint venture with H5 and
+[01:50:26.936] consider these elements of our model in your approach going forward.
+[01:50:31.252] A homegrown developer, local. A vacant site in
+[01:50:35.112] need of investment, a vacant site not next to residential I
+[01:50:39.192] add. A plan to partner with and listen to the
+[01:50:42.892] community. And last, and certainly not least,
+[01:50:46.372] transparency on numbers. We have no problem reporting
+[01:50:50.452] any of the things that the committee has proposed.
+[01:50:53.702] It's good policy. I'm from here. I believe in this city.
+[01:50:57.432] I was born and raised here. You need to be local to have the lived
+[01:51:00.912] experience of what a city means. And so if a
+[01:51:04.732] startup Chicago company like Metro Edge can meet this bar,
+[01:51:08.812] there is no excuse for other developers not to do it.
+[01:51:12.392] Thank you, and I'm happy to take any questions.
+[01:51:16.372] Thank you so much, Craig.
+[01:51:18.332] Thank you again to all of our panelists and we're now going to open up
+[01:51:22.272] for questions from members. I've got Alder Lawson
+[01:51:26.212] up first, and then just let me know. Okay.
+[01:51:30.092] Great.
+[01:51:31.332] Thank you, Chair. There's a lot of information here, and it's a lot of good
+[01:51:34.812] information. I want to thank everybody from the panel for sharing this, and Chair,
+[01:51:38.712] for putting it together.
+[01:51:41.552] I never take my zoning hat off, so maybe I'll just start with that because
+[01:51:45.372] what I'm hearing is, I think we have opportunities to regulate
+[01:51:49.272] location, to regulate size, to regulate
+[01:51:53.112] certain usages. Obviously, if we put everything into a PD, that's
+[01:51:57.092] a lot of time and energy,
+[01:51:59.772] but maybe there's a way to look at it
+[01:52:02.572] in another way.
+[01:52:04.172] Real quick, about half are co-located, I think I heard, of the 39 in the
+[01:52:08.052] city. Is it half that are co-located with some other structure or building as
+[01:52:11.832] opposed to standalone?
+[01:52:13.772] I know half are in a PD, but not because they're required to be, because they're
+[01:52:17.592] co-located use or their campus, whatever it is, is in a PD.
+[01:52:22.692] Thanks, Alderman. Maybe I'll answer that.
+[01:52:25.492] For the record, my name's Bradley Roback with the Department of Planning and
+[01:52:28.392] Development.
+[01:52:30.432] I think what you're referring to in the report, the 39 that we identified
+[01:52:34.432] there, are about 25% that are sort of
+[01:52:37.852] standalone.
+[01:52:39.012] Okay.
+[01:52:39.252] The other 75 are located within an existing building.
+[01:52:42.752] They're a room or a bigger room or a couple of floors, something like
+[01:52:46.732] that.
+[01:52:47.252] Okay.
+[01:52:47.512] I think some of the co-location that-
+[01:52:49.001] Really quickly-
+[01:52:49.572] Sure
+[01:52:49.582] ... can the DOE team, can we get the slide back up?
+[01:52:52.952] Sorry. I know the slide that had the number.
+[01:52:56.072] Need someone to log into the computer.
+[01:52:58.072] Yeah.
+[01:52:59.332] Gina, it's your f*****g
+[01:53:01.052] All right.
+[01:53:02.072] Sorry, please continue.
+[01:53:02.952] Oh, yeah.
+[01:53:03.692] Thanks.
+[01:53:04.572] Good timing. I was going to refer to that that Jared also reported
+[01:53:08.512] on co-location.
+[01:53:09.652] Right.
+[01:53:09.982] I think there's some overlap with terms that are there.
+[01:53:13.032] Okay.
+[01:53:13.072] But I just wanted to point out that a lot of the ones that we identified are
+[01:53:16.572] actually in existing buildings already.
+[01:53:18.352] Well, and I use that term co-location because we use it for utility infrastructure
+[01:53:22.092] now. Cell towers, right?
+[01:53:24.412] Yeah.
+[01:53:24.692] If it's part of a larger facility, if it's a standalone, they're treated
+[01:53:27.572] differently, as they should be. There's a dot in Rogers Park,
+[01:53:31.572] which I assume is on Loyalist campus.
+[01:53:34.812] I'm an alum, right? So right, that's well, maybe standalone or part of a
+[01:53:38.652] building that's part of a larger PDA campus, and probably not serving anything
+[01:53:41.892] beyond the campus, I would think either.
+[01:53:44.972] Not that it would make a difference necessarily, but...
+[01:53:49.532] Yes.
+[01:53:49.932] Co-location.
+[01:53:50.132] I don't know.
+[01:53:51.182] Sorry.
+[01:53:51.212] I don't know the actual usage. We didn't have that kind of data-
+[01:53:54.572] Right
+[01:53:54.772] ... to look at.
+[01:53:55.732] Yeah. But this is the slide we wanted to look at.
+[01:54:00.652] 10 standalone, 29. Okay. All right, so you said about 25%.
+[01:54:05.712] Could I also add something about AI, just quickly?
+[01:54:10.552] There's been a lot in the news about AI.
+[01:54:13.252] The first iteration of AI was these massive campuses.
+[01:54:16.962] They don't want to do them in big cities.
+[01:54:18.352] The land's too expensive, it's too difficult.
+[01:54:20.872] You want to get 1,000 acres, you're not coming to Chicago.
+[01:54:24.052] You're going out to the middle of nowhere.
+[01:54:26.112] And a lot of the pushback has occurred.
+[01:54:28.272] I have traveled the country and seen data centers.
+[01:54:31.192] I'll be honest, when I went to Virginia, I thought to myself, "This is too many
+[01:54:34.572] damn data centers out here." They were everywhere, right?
+[01:54:37.732] Part of it is that's where the fiber came in to the country.
+[01:54:41.561] Right.
+[01:54:41.582] And so regulating is important because
+[01:54:45.272] otherwise it becomes like little kids in soccer.
+[01:54:47.612] Anybody seen little kids play soccer? Everybody runs to the ball, right?
+[01:54:50.492] Instead of spreading out. And so the first iteration of AI
+[01:54:54.512] was these massive campuses. The next iteration is going to be what's
+[01:54:58.332] known as edge data centers. These are smaller
+[01:55:01.932] footprint. Think cell phone towers when we all were using
+[01:55:05.812] mobile phones and we used to get dropped calls and we said, "Oh, the coverage is
+[01:55:09.592] going to be bad." Well, we don't really use cell phone towers the same way.
+[01:55:13.182] Data centers are providing that connectivity, and when we think about smart
+[01:55:16.852] cities, we think about autonomous vehicles, we think about all the things
+[01:55:20.712] that we frankly are going to rely upon to keep a city like
+[01:55:24.292] Chicago world-class, it's going to require this combination of
+[01:55:27.652] infrastructure that's large. And I agree.
+[01:55:30.272] Regulate the big data centers. I know some of those groups, and
+[01:55:33.972] they certainly should do more. I think at the same time, within cities,
+[01:55:38.172] think NFL cities, to expand upon the
+[01:55:41.892] massive need, they're going to need to be present.
+[01:55:44.552] So what I think you're going to see coming down the pipe
+[01:55:47.992] for Chicago is going to be more of these compact edge facilities,
+[01:55:52.232] because you just don't have the land. You don't.
+[01:55:55.012] Our site's on four acres.
+[01:55:57.552] Let that sink in, right? And quite honestly, 10
+[01:56:01.552] acres or less is really your sweet spot for edge.
+[01:56:04.702] Okay.
+[01:56:04.732] So if that's helpful in terms of, and so you could have a single
+[01:56:08.372] customer take an edge facility, but also a single
+[01:56:11.932] customer using one of these massive AI facilities-
+[01:56:15.222] Right
+[01:56:15.222] ... in the middle of nowhere.
+[01:56:16.392] Right.
+[01:56:18.752] 10 acres can be hard to come by.
+[01:56:20.972] It can. Four is easier.
+[01:56:22.592] In a neighborhood like mine, right?
+[01:56:23.852] Absolutely.
+[01:56:24.372] Two.
+[01:56:24.652] And that's another point. Our site,
+[01:56:27.912] 50 years ago, had a manufacturing facility that employed a lot of people
+[01:56:31.928] I pulled up some historical photos of this manufacturing facility, and I
+[01:56:35.808] thought it was a cloudy day. I said, "Oh, look at all the clouds." No, it was all
+[01:56:38.648] the smoke billowing out of the building-
+[01:56:40.668] Right
+[01:56:40.998] ... at a time when we measured environmental standards.
+[01:56:43.908] I think just as we looked at that era as being dirty and we correct it,
+[01:56:48.008] this is an opportunity to correct data centers going forward.
+[01:56:51.648] But I'll tell you, it shouldn't be as difficult because while I was sitting here, I
+[01:56:55.268] pulled up, even when you talk about diesel, the fuel that goes in
+[01:56:58.888] diesel. There are environmental solutions.
+[01:57:00.768] The answers-
+[01:57:01.998] Right
+[01:57:01.998] ... are within finding solutions, not just blocking the
+[01:57:05.588] progress. Sorry.
+[01:57:06.628] That's actually-
+[01:57:07.548] Oh, uh, yeah, I was going to say I think,
+[01:57:10.488] Commissioner Tovar wants to talk.
+[01:57:11.288] Yeah. I just want to offer one point.
+[01:57:13.528] And I appreciate the feedback,
+[01:57:16.348] Craig, and I think you've raised some really good points.
+[01:57:18.688] I don't want to minimize the impacts of what we would perceive
+[01:57:22.548] as smaller data centers. I think that the report lays out
+[01:57:26.548] that there are still significant impacts in an urban context that are important
+[01:57:30.128] here. That is validated by just our
+[01:57:34.228] experience with co-located facilities.
+[01:57:37.328] We're seeing an increase in 911
+[01:57:41.068] complaints or 311 complaints rather because of
+[01:57:44.968] issues related to sound, related to noise, concern about diesel generators,
+[01:57:48.948] the testing, the air pollution. Those are valid concerns.
+[01:57:51.948] And while
+[01:57:53.848] Craig is correct, we may not see these hyperscale facilities, it
+[01:57:57.608] certainly doesn't minimize the need to think about
+[01:58:01.248] important and smart regulations for what we would
+[01:58:04.888] call "small to medium facilities."
+[01:58:07.828] Right.
+[01:58:07.988] A 20 megawatt facility in the city of Chicago could be the same size
+[01:58:12.028] as what we would consider a hyperscale Amazon facility, right?
+[01:58:15.348] Or a big distribution warehouse. Those are big impacts.
+[01:58:18.708] That's a big footprint. That is a sizable amount of
+[01:58:22.228] generators that we would see, that would provide
+[01:58:25.908] backup diesel power, which
+[01:58:28.808] could burn particulate matter, which is-
+[01:58:30.528] Actually, yeah
+[01:58:31.058] ... a carcinogen, and that is concerning for us.
+[01:58:33.048] So I do just want to name that both of those are
+[01:58:36.768] important,
+[01:58:38.808] as we think about this within the context of the city of Chicago.
+[01:58:40.987] Sure. I did want to ask about diesel, so maybe I just go over to
+[01:58:44.708] there. What's the other option? There are backups of all
+[01:58:48.448] kinds. I've had diesel generators outside Wrigley Field, Commissioner, as you know.
+[01:58:53.268] And I can't imagine 10 of them all in a row.
+[01:58:55.448] I can-- Oh.
+[01:58:56.508] Yeah, you guys want to-
+[01:58:57.528] I can speak on that.
+[01:58:58.308] Mm-hmm.
+[01:58:58.508] Yeah. So first of all, for diesel generators, there are different
+[01:59:02.138] tiers.
+[01:59:02.808] Right.
+[01:59:02.848] So tier four, like the most efficient ones, they're still
+[01:59:06.468] polluting, to be clear, but they are more efficient than tier one to tier
+[01:59:10.248] three.
+[01:59:11.277] Right.
+[01:59:11.328] The cleanest option to replace those are battery
+[01:59:15.228] storage. Those can act in the same way, where you have
+[01:59:18.988] batteries. They could be standalone batteries or they could be powered
+[01:59:22.968] by clean energy, like solar or wind or whatever.
+[01:59:25.808] And they can be the same as diesel, where you flip a switch,
+[01:59:30.368] but they'll be battery storage instead.
+[01:59:32.108] So
+[01:59:33.208] highly recommend requiring
+[01:59:36.368] data centers to either use battery storage partially in like
+[01:59:40.368] a hybrid setup and certainly,
+[01:59:43.568] combined with, if you do still want them to be
+[01:59:47.608] allowed to use diesel generators, make them the most efficient ones possible.
+[01:59:52.088] Okay. All right.
+[01:59:53.308] Could I add a little bit of perspective?
+[01:59:55.258] Sure.
+[01:59:55.828] We're in a medical district with our site,
+[01:59:58.608] four of the largest hospitals. Every hospital uses
+[02:00:02.238] substantial number of generators because they're mission critical facilities.
+[02:00:06.148] Every hospital in Chicago requires generators.
+[02:00:08.368] I'm not comparing, but I'm saying just like every golf course uses
+[02:00:12.258] substantially more water than many data centers.
+[02:00:15.308] We have to begin to understand that, yes, we should do it
+[02:00:18.828] better, but we also have to be consistent.
+[02:00:21.868] When it comes to batteries, I agree.
+[02:00:24.288] In our design, we have batteries as a backup.
+[02:00:27.228] But when we talk to customers, right, some of the large names that are driving
+[02:00:31.228] our economy, they dictate. They're the tenant.
+[02:00:34.268] They say, "No, we really want generators instead of battery.
+[02:00:37.608] No, we don't want solar." I love solar. I'm putting it on my home.
+[02:00:40.888] I tried to explore it. Some of this is a
+[02:00:43.928] negotiation that has to happen both at
+[02:00:47.848] the community level, but also these companies that are using have to
+[02:00:51.687] understand that if they're going to come into a city, the requirements to operate
+[02:00:55.688] are going to be X, Y, right? It's not
+[02:00:59.688] just the developer making a decision in a bubble.
+[02:01:03.128] It's also the groups that are going to use the data center.
+[02:01:05.768] Because case in point, when we build this, I won't even have access to parts of the
+[02:01:09.548] building that the customer is in for security purposes.
+[02:01:14.068] Right. I think sort of
+[02:01:17.988] speaks to my next question as to what we can regulate and what the state has to
+[02:01:20.788] regulate, right? Obviously, location, things like that.
+[02:01:24.008] But the type of generator being used, is that something we
+[02:01:26.808] don't need the state on?
+[02:01:29.968] Energy limits and water limits are a state issue, though.
+[02:01:32.348] If we were to say,
+[02:01:34.808] per
+[02:01:35.908] center or per
+[02:01:38.828] capacity, you're limited to a certain number of gallons or
+[02:01:42.988] megawatts.
+[02:01:44.088] Can I be a traitor to my industry for a minute?
+[02:01:46.808] You might have been already.
+[02:01:48.028] Yeah, right. I think I have got some death threats.
+[02:01:50.888] But what I want to say is, I think a lot of the pushback on data centers
+[02:01:54.848] in the long run is good. I really do.
+[02:01:57.708] And I'll tell you why, because it forces innovation.
+[02:02:01.208] I'm having conversations with some of the hyperscalers.
+[02:02:03.688] They're not ignoring what's happening around the country.
+[02:02:06.548] At the end of the day, these are extremely profitable
+[02:02:10.028] investments, right? I hope no one missed the fact that
+[02:02:14.088] I am sitting on a financial model where we are proposing to pay for
+[02:02:17.948] college scholarships, down payment assistance, and training.
+[02:02:22.608] It can be afforded in our business model and some.
+[02:02:26.188] Right.
+[02:02:26.368] So what I would say to people is the secrecy around this industry is a
+[02:02:30.168] problem, but there's also a need for us to have conversations about, hey,
+[02:02:34.188] the environmental is non-negotiable, but are there other things that you can do in
+[02:02:38.168] the community? I use the example, right?
+[02:02:40.288] I'm old enough to remember Little League baseball teams sponsored by local
+[02:02:43.368] businesses. And those businesses had a connection.
+[02:02:47.388] As we went national franchises, we lost that You rarely see
+[02:02:51.384] sports teams sponsored by a local business.
+[02:02:55.164] If a data center is going to require local resources, it
+[02:02:59.064] needs to think like a local business.
+[02:03:01.184] It needs to be a community partner and operate that way.
+[02:03:03.384] I think that's sort of where my question is going, as to what ability
+[02:03:07.344] do we have to require or regulate that?
+[02:03:09.764] I know we can put together a CVA on anything,
+[02:03:13.944] but our ability to enforce it and require it is maybe where the teeth are here.
+[02:03:17.924] Yeah. I can add a little bit, Alderman.
+[02:03:21.784] So, without getting into the nitty-gritty of a very specific
+[02:03:26.044] requirement, the short answer is,
+[02:03:28.784] absolutely the state, and as Sarah talked about, the federal government certainly
+[02:03:32.704] have a lot to say about energy. But that doesn't mean that local
+[02:03:36.584] governments can't craft particular requirements
+[02:03:40.424] around, for example, a deployment of renewable energy
+[02:03:44.064] or water efficiency.
+[02:03:47.304] To give a couple examples, the
+[02:03:50.464] city of Aurora actually has a minimum
+[02:03:54.184] renewable energy
+[02:03:56.144] provision in the ordinance that it recently passed.
+[02:03:59.244] Okay.
+[02:03:59.414] So this is an ordinance that actually is on the books now
+[02:04:03.424] as of earlier this spring. So that's just one example locally.
+[02:04:07.104] And you see similar examples in other parts of the
+[02:04:10.764] country. Like I said earlier, the nice thing here is we have so many
+[02:04:14.624] communities working on this issue at the same time.
+[02:04:17.284] You're really seeing great ideas bubble up to the surface.
+[02:04:21.104] So you're absolutely right that the state has a lot to say, specifically
+[02:04:24.464] about utilities and energy. But
+[02:04:28.084] that doesn't mean that we, as a city, just as things
+[02:04:31.764] exist for the larger questions regarding our electric utility, we
+[02:04:35.724] as a city and you as a council
+[02:04:39.324] work on various issues relating to regulating ComEd all the time, even
+[02:04:43.124] though absolutely the state legislature and the ICC have
+[02:04:47.224] a big role to play. So I wouldn't count it out.
+[02:04:49.704] Well, I think we're going to have to work with them closely as this rolls out,
+[02:04:52.204] right? That's going to be clear
+[02:04:54.684] for everyone's use. Just a couple other quick questions, then I'll turn it
+[02:04:58.624] back over, Chair.
+[02:05:00.564] Well, let me say, this is not the first emerging industry the city's
+[02:05:04.444] been behind the eight ball on. You name it. I've been around here a long time.
+[02:05:07.644] Whether it was Uber or Lyft, or Rideshare, or HouseShare, or
+[02:05:11.844] I got the Coco and the Serve going. You name it, right?
+[02:05:15.444] Government is usually the last one to react, and local government sometimes even
+[02:05:19.444] more so. So,
+[02:05:21.464] we have to get up to speed and figure things out, but
+[02:05:25.404] what are we doing right now?
+[02:05:27.384] So, what does the approval process look like right now?
+[02:05:30.284] Is it just sort of all by right everywhere, unless it's in the PD for some
+[02:05:34.284] other reason?
+[02:05:36.624] Yeah.
+[02:05:38.424] Thanks, Alderman.
+[02:05:39.073] Or a B, C, and M, right? You can't do it in a B1 or an R.
+[02:05:42.644] Yeah. There's a table in the report-
+[02:05:44.564] Correct
+[02:05:44.573] ... that explains where you can do it by right-
+[02:05:47.064] Right
+[02:05:47.244] ... currently. It would be a planned development if it exceeds the thresholds that
+[02:05:51.144] are in the zone.
+[02:05:51.604] Sure.
+[02:05:54.044] Who's storing our data,
+[02:05:55.924] the city's data right now? Who do we use? Where is it at? Do we know?
+[02:05:59.704] That's a report. Alderman Vegas is-
+[02:06:01.224] If they tell you...
+[02:06:04.884] Will they have to kill me if they do?
+[02:06:07.044] We'll have a closed briefing on that one, maybe through the chair.
+[02:06:09.584] I think we can briefly answer, but we could certainly, through the chair, get back
+[02:06:13.204] through DTI.
+[02:06:14.504] Yeah.
+[02:06:14.824] I believe some of it is in city facilities, and then if we have cloud
+[02:06:18.744] providers like Microsoft, some of it is likely in
+[02:06:21.824] Microsoft contracted facilities. I think that's the short answer.
+[02:06:25.284] It's a mix.
+[02:06:26.364] Okay. Great. That's all I have. I look forward to working together on all this.
+[02:06:30.104] Again, I'll keep my zoning hat on and be helpful there. Thank you.
+[02:06:33.624] Thank you, Chair.
+[02:06:34.104] Can I just add-
+[02:06:34.544] Thanks, Alderman.
+[02:06:35.964] Can I just add one thing?
+[02:06:37.324] Oh, yeah. Mm-hmm.
+[02:06:37.524] Okay, there we go.
+[02:06:38.904] I just wanted to share a list of the regulations that are in
+[02:06:42.944] the Aurora Responsible Data Center Ordinance to get a sense of
+[02:06:46.904] the kinds of things that they were able to do.
+[02:06:48.804] And then if we could get a copy of that afterwards,
+[02:06:52.864] too, so we can share.
+[02:06:53.694] Yeah, absolutely. For sure. But just briefly, they
+[02:06:57.364] regulate operational impacts, including energy use, water use,
+[02:07:01.144] noise, landscaping and screening, emergency backup power,
+[02:07:05.164] stormwater management, environmental performance standards, and
+[02:07:08.923] operational reporting requirements.
+[02:07:11.394] They also establish zoning and siting standards,
+[02:07:15.344] require city council approval, and conditional use review for new facilities.
+[02:07:19.244] And then lastly, they created a data center privacy
+[02:07:22.924] protection ordinance that governs privacy-related practices.
+[02:07:26.664] But I can share the full thing-
+[02:07:29.254] Great
+[02:07:29.384] ... for sure.
+[02:07:29.924] Thank you. All right. Alder Ramirez, and then Alder Cruz.
+[02:07:35.524] The press. Okay, great. Well, I want to thank the committee.
+[02:07:38.304] It's a really great panel from the working group, to hearing Craig's
+[02:07:41.564] perspective. I don't know if we can get the map of where
+[02:07:45.484] the data centers currently exist back up.
+[02:07:48.704] I'm really interested about this land use, this idea about four
+[02:07:52.584] acres versus maybe a much larger space.
+[02:07:56.304] And then also something that you said, Jared, just about the demand
+[02:08:00.164] needed in terms of close proximity.
+[02:08:03.424] Can you talk a little bit about where we started as a
+[02:08:07.124] city, that growth to where we are now, and what you
+[02:08:10.584] expect, I guess, in the future in terms of that demand?
+[02:08:15.184] I guess what I really want to know is that does it make
+[02:08:19.144] sense if the demand is there and we need to build out to
+[02:08:23.004] have smaller ones in various places?
+[02:08:26.544] What I'm worried about is manufacturing districts where I'm from on the
+[02:08:30.224] southwest side, that we have that land capacity, and
+[02:08:33.904] that we potentially have just a very large one in a very
+[02:08:37.644] concrete area, concentrated area.
+[02:08:41.688] Yeah, absolutely. So several people have mentioned, I believe myself
+[02:08:45.588] included, that Chicago was an early center for data center development.
+[02:08:49.388] We started to develop data centers here, I believe as recently as
+[02:08:53.408] 20 years ago, where some of the currently operating data centers were
+[02:08:56.648] founded. That was long before artificial intelligence.
+[02:08:59.828] Those data centers primarily served a telecommunications function, so
+[02:09:03.808] the internet, but also phone calls, text message, all cloud
+[02:09:07.488] services. Those go through data centers totally separate from
+[02:09:11.178] artificial intelligence. The large boom that we're seeing today is due
+[02:09:15.208] primarily to the growth in artificial intelligence.
+[02:09:18.248] The really large giga scale, hyper scale facilities that you see
+[02:09:22.228] on the news are for training artificial intelligence models.
+[02:09:26.508] But there are also separate, smaller artificial intelligence data centers.
+[02:09:29.968] Those are known as inference data centers.
+[02:09:31.888] You can kind of think of it as a training center
+[02:09:35.608] is an oil refinery, and an inference center
+[02:09:39.628] is more of a gas station. So when you are actually running
+[02:09:43.328] ChatGPT or another program, that's not going to the large gigawatt
+[02:09:47.328] scale facility in rural areas. That's probably going to a smaller edge
+[02:09:51.228] data center to help speed up the processing time.
+[02:09:54.788] So we likely will see more of those smaller data centers popping up.
+[02:09:58.828] I will also say that the growth in artificial intelligence has also
+[02:10:02.468] increased demand for other types of data centers.
+[02:10:06.068] So as more people are using these digital services, there's more demand for cloud
+[02:10:10.108] storage, which creates demand for more of those smaller distributed data
+[02:10:12.968] centers as
+[02:10:16.208] well. I will caveat all of this by saying I am not an expert in
+[02:10:20.188] industry forecasts, and, as Sarah mentioned previously, this
+[02:10:23.828] industry is notoriously speculative, so it's really hard to say with certain
+[02:10:27.748] this is what the industry will look like in the future.
+[02:10:30.168] But I will broadly agree with your assertion that we will likely see more of these
+[02:10:33.768] smaller data centers in urban areas while these larger facilities will
+[02:10:37.608] likely be concentrated in more rural areas.
+[02:10:41.888] Thank you. My next set of questions is
+[02:10:45.828] around something that Sarah was talking about, about the grid.
+[02:10:49.868] And so,
+[02:10:51.647] in my opinion, ComEd
+[02:10:55.128] did a recent communication that was
+[02:10:58.158] asking residents, mostly from the West Side,
+[02:11:03.748] also predominantly Latino, African American areas,
+[02:11:07.788] about their usage on the grid. And so there was large conversation online
+[02:11:11.468] about
+[02:11:12.968] why that was a chosen selected group
+[02:11:16.688] to use less power when we had data centers that were presumably
+[02:11:20.388] using more. And so I guess my question is,
+[02:11:23.328] I guess outside of land use, how else are
+[02:11:27.208] we thinking about the power grid, how it should be obviously serving
+[02:11:31.148] our residents that are most vulnerable,
+[02:11:34.348] clearly now during the heat wave especially.
+[02:11:37.568] And,
+[02:11:38.948] is there something that we could request from ComEd as well?
+[02:11:42.648] Because you mentioned sort of this $3 billion investment that they had
+[02:11:45.928] made, and so is there a demand there for us to have a conversation?
+[02:11:50.828] Yeah. Well, so first of all, if you have
+[02:11:55.768] an example of a call for
+[02:11:59.268] conservation from ComEd to a specific community,
+[02:12:03.288] I'd like to see that, because I did not see that. I'm not aware of that.
+[02:12:06.968] I know that during the
+[02:12:09.868] heat waves of late,
+[02:12:12.788] a lot of us, especially those of us on special like time of use
+[02:12:16.588] rates or hourly rates that are time variant, not just levelized over the
+[02:12:20.608] course of the day, but
+[02:12:22.808] signed up proactively for a time variant rate, did receive
+[02:12:26.728] alerts that the real-time prices were high.
+[02:12:30.668] And so I get those. But I'm unaware of
+[02:12:34.548] anything that went out to a specific neighborhood, so I want to see that
+[02:12:38.408] because that might be problematic.
+[02:12:39.277] Commissioner, do you want to-
+[02:12:41.168] It was for the West Side substation area, I
+[02:12:45.028] think.
+[02:12:45.508] Oh my goodness.
+[02:12:46.308] I think, Commissioner.
+[02:12:47.128] I don't know, Commissioner. Oh, sorry. Jared.
+[02:12:48.728] Not to derail on the larger question.
+[02:12:52.828] Yeah. So
+[02:12:54.308] Alder,
+[02:12:55.588] we know what you're referring to.
+[02:12:58.847] Our understanding, obviously not representing the company directly, but our
+[02:13:02.508] understanding is that the company was
+[02:13:07.148] mitigating a possible risk of a
+[02:13:10.468] substation
+[02:13:12.528] off of I-555 that if it had gone
+[02:13:16.108] down, would have affected the west and southwest sides of the
+[02:13:20.088] city, as well as a number of west suburban communities.
+[02:13:24.388] I think as far as we understand at DOE, this
+[02:13:28.048] was a localized issue with that
+[02:13:31.308] substation.
+[02:13:33.408] I think you make a very valid point about
+[02:13:37.028] the role that data centers will play during extreme heat
+[02:13:40.648] events where there's a concern about having enough power.
+[02:13:44.417] This particular issue was more
+[02:13:48.448] due to this local facility. So
+[02:13:51.448] a data center
+[02:13:53.388] going off the grid would only have helped there if it was within the
+[02:13:57.028] footprint of this particular substation, which I don't think we know one way or
+[02:14:01.028] the other whether there are particular data centers that would've
+[02:14:04.908] helped in that sense.
+[02:14:05.768] And I'll add to that. So ComEd did reach out, and it was
+[02:14:09.908] a
+[02:14:11.068] mechanical risk at a particular substation, so they
+[02:14:14.988] said, like, "Hey, customers in that area are going to get a note with
+[02:14:18.908] this ask while we work on repairing this to
+[02:14:22.768] make sure that it doesn't go out."
+[02:14:24.068] Yeah.
+[02:14:24.308] Yeah.
+[02:14:24.748] But can I throw one thing in, though, where you are very much raising
+[02:14:28.128] an important issue. Meanwhile, during the heat
+[02:14:31.868] wave, PJM, which runs the overall grid from here all the
+[02:14:35.848] way to the East Coast, so the big grid that supplies us, it's
+[02:14:39.908] much broader than just ComEd- They also had to begin looking
+[02:14:43.844] at extreme measures due to a concern that the
+[02:14:47.624] overall grid was going to run out of supply, and they actually went to
+[02:14:51.344] FERC, that's this federal agency that regulates the big grids.
+[02:14:55.144] They asked for permission, if need be, to order the data centers
+[02:14:59.244] to go offline, which means that they would've been using backup
+[02:15:02.654] generations solely. Now, my understanding, you can correct me if I'm wrong, Sarah,
+[02:15:06.184] did they actually take that measure or they just had the permission to take it?
+[02:15:09.924] They had permission to take it.
+[02:15:11.474] Yeah. It didn't quite come to that point, but we're certainly headed
+[02:15:15.424] into some very difficult questions, when
+[02:15:19.204] the grid is potentially hitting a point where there's not enough power.
+[02:15:23.444] Managing
+[02:15:25.304] peaks in demand for electricity is a lot
+[02:15:29.284] of what drives up overall costs year round.
+[02:15:32.614] I talked about those wholesale capacity auctions at PJM.
+[02:15:36.124] Capacity is basically extra payments that we make to
+[02:15:39.764] generators to ensure they're there when it's super hot outside and
+[02:15:43.744] we're all running our air conditioning all at once, and there are data centers
+[02:15:47.344] running, too. And so that's really expensive, and that is also
+[02:15:51.544] dirty.
+[02:15:52.944] We have peaker plants. In fact, your great report talks
+[02:15:56.724] about, I think, peaker plants in the city of Chicago
+[02:16:00.304] that burn fossil fuels that run only a
+[02:16:04.284] very limited number of hours every year.
+[02:16:06.914] They only kick on when there's an immense strain, immense peak in the
+[02:16:10.744] grid. So I think it's really important, a lot of what I do when I educate
+[02:16:14.464] consumers about how our electric grid works is tell them that.
+[02:16:17.044] A lot of what we're paying for when we're paying for electricity is not
+[02:16:20.984] the energy that we're using, it's the energy that we could be
+[02:16:24.944] using during these periods of peak demand.
+[02:16:27.804] We have to build up all this generation and grid infrastructure to
+[02:16:31.864] meet these demands. And a lot of what I
+[02:16:35.544] focus on is trying to help put together policies that
+[02:16:39.124] incentivize
+[02:16:41.604] households and institutions to curb their usage at these peak times if they're
+[02:16:45.624] able to safely. Not to force my
+[02:16:49.184] grandma to do that, but ways to leverage any kind of
+[02:16:53.184] flexibility. And that's what we would love to see from data centers, as long
+[02:16:57.144] as flexibility doesn't mean running diesel generators,
+[02:17:01.384] which nowadays is what it looks like.
+[02:17:03.325] So
+[02:17:04.364] the point, and I'm mad at my friends at
+[02:17:08.404] ComEd for not giving me the heads-up about this alert that went out.
+[02:17:11.144] I'm going to be calling my friends over there to be like, "Hey."
+[02:17:15.425] Because I think we do a lot of work in the field, and we need to know that this is
+[02:17:18.544] happening out there. I'm
+[02:17:21.325] so glad I'm here because I'm-
+[02:17:22.594] Yeah
+[02:17:22.594] ... bowled over by the fact that this happened. I had no clue.
+[02:17:27.404] But it's also really important to make sure
+[02:17:30.724] that these
+[02:17:34.644] strains on the grid aren't used as an excuse
+[02:17:38.484] to gold plate the system. That's the term that we use in utility
+[02:17:42.144] regulation is gold plating, because that's how the utilities make money,
+[02:17:46.064] is by spending our money. They can earn a return on that.
+[02:17:49.665] So that's what we're in the middle of with these multi-year grid plan
+[02:17:53.684] at the Illinois Commerce Commission right now.
+[02:17:56.085] And like I said earlier, it's always wonderful when the city of Chicago
+[02:17:59.964] has the capacity to show up in some of these proceedings because it's really
+[02:18:02.925] important. Okay, we know some investment is needed.
+[02:18:05.544] We don't want to have to turn off people in your neighborhood,
+[02:18:09.505] lest the substation explode or whatever.
+[02:18:13.144] But on the other hand, we don't want this to be an excuse for just unchecked
+[02:18:17.404] spending.
+[02:18:20.304] Do you want to add, Craig, or...?
+[02:18:22.464] Yeah, I was going to talk about our deal.
+[02:18:24.644] I think I may be the only person here that's a partner in a data center
+[02:18:28.224] transaction, so there's a lot of information I have, because the last six years
+[02:18:31.624] I've been banging my head against the wall.
+[02:18:34.724] ComEd is about to have us pay $4 million to upgrade the two substations that are
+[02:18:38.144] going to feed our site. We've spent about $10 million to date,
+[02:18:41.844] just permits and approval. This is not a cheap
+[02:18:45.544] business, and I guess what I'm saying is you have billionaires that are
+[02:18:49.344] financing this business. They should do their part.
+[02:18:52.624] ComEd was asking for too little years ago.
+[02:18:55.544] They have adjusted that. It was long overdue.
+[02:18:59.024] Five data center developers might chase Microsoft needing one
+[02:19:02.584] site. They all go to ComEd and say, "We need a
+[02:19:05.604] gigawatt," but it's only one gigawatt, it's not
+[02:19:09.624] five gigawatts. So there are a lot of things about this industry where we're
+[02:19:13.544] building the car as we're driving it.
+[02:19:15.724] But the thing I want to add, I think the data center industry has room for
+[02:19:19.245] improvement, but there's also room for it in Chicago.
+[02:19:22.464] Why do I say that? We need revenue. Unless there's a better
+[02:19:26.165] idea, data centers generate the highest property tax
+[02:19:29.505] revenue of any commercial real estate asset in the United States.
+[02:19:33.544] Hard stop. So when we begin to think about vacant
+[02:19:37.104] areas, right? And I can tell you, I've traveled the country.
+[02:19:39.964] The billionaires who don't look like me that run this industry, and
+[02:19:43.745] 99.9% of them would rather not be in Chicago.
+[02:19:47.724] They've told me this. They think the politics, whether it's
+[02:19:51.684] folks that they think are too liberal or whatever, they don't want to be in the
+[02:19:55.584] big cities because they don't know how to navigate.
+[02:19:57.664] And so the opportunity is to think about these conversations, not
+[02:20:01.624] in a way to say, "We don't want you." But if you're going to be here, here are the
+[02:20:05.424] expectations on the environmental side.
+[02:20:07.964] But again, I don't want to skip over this.
+[02:20:09.604] These are extremely profitable assets that can help people deal with the rising
+[02:20:13.644] cost of inflation, the uncertainty of job losses, and try
+[02:20:17.624] to pave the way for people to feel a little less certain.
+[02:20:21.264] It's not going to solve the city's problems, but in the neighborhood, our view was
+[02:20:24.524] the IMD has 29,000 employees,
+[02:20:27.564] roughly. We can't impact them all, but that's an area that we
+[02:20:31.184] consider our community. Each business should be thinking that way,
+[02:20:35.444] right? And I'll be honest with you, as I've talked to some of the people that are
+[02:20:38.904] in this business, that's not how they're wired.
+[02:20:41.364] The guy with the master's in nonprofit, right, who spent time
+[02:20:45.184] community organizing can think that way.
+[02:20:47.544] If you've only been on the business side, it's a foreign language, and that's a lot
+[02:20:51.384] of our problems here. People aren't thinking about the folks that are in the
+[02:20:55.052] neighborhoods and what we need to do to balance that.
+[02:20:58.332] But the good news is,
+[02:21:00.272] if you go to a hospital and say, "Get rid of your generators," their profit margin
+[02:21:03.652] doesn't allow them to do it.
+[02:21:05.962] This industry, it's a little different story.
+[02:21:09.852] Okay. I'll ask
+[02:21:13.752] another question. I'll allow my other colleagues.
+[02:21:16.232] The sustainable development part.
+[02:21:18.612] I know that you guys have proposed ideas about ordinances that we could
+[02:21:22.452] potentially pass.
+[02:21:24.332] Are you guys
+[02:21:26.252] wanting it to be retroactive? Is there a way for us to work with the
+[02:21:30.072] people that already exist in the city and make things better?
+[02:21:34.472] I don't know if Jared or Angela, you wanted to...
+[02:21:38.072] Retroactive sustainable development policy.
+[02:21:43.272] It's an environmental permit.
+[02:21:44.772] So yeah, my question is really about how are we working with the data
+[02:21:48.572] centers that exist. If we do come to find
+[02:21:52.552] that a lot of the data shows that some of the centers are
+[02:21:56.392] harmful for the community,
+[02:21:58.812] is there going to be room for them to make those changes?
+[02:22:01.032] Yeah. So what I can speak to is on the environmental permitting side, because
+[02:22:05.012] I think that that's a very important question.
+[02:22:07.592] I'll say on the zoning side, and I'll let Brad elaborate, there is no precedence
+[02:22:11.302] for retroactive measures on the zoning end, especially if something was
+[02:22:15.292] permitted by right.
+[02:22:16.912] And so I won't speak to that. But what I can say is that on the environmental
+[02:22:20.772] permitting end, the proposal in the report does lay out a
+[02:22:24.852] very concrete strategy for us to build an environmental permitting
+[02:22:28.912] requirement, both for new and existing data centers.
+[02:22:32.132] And I would urge council to really consider that.
+[02:22:36.232] Right now,
+[02:22:37.932] on the environmental permitting side, the only required permit that a data
+[02:22:41.772] center has to pursue, and much like any other
+[02:22:46.232] diesel generator user, is an air pollution control permit.
+[02:22:50.292] Having an environmental permit creates a regulatory framework.
+[02:22:54.232] It could require reporting. It could require
+[02:22:57.852] ongoing monitoring. It could require new environmental standards.
+[02:23:02.712] And that could happen, and that could be a required
+[02:23:07.752] check-in, a renewal permit at a much more frequent cadence than
+[02:23:11.692] what we have with our air pollution control.
+[02:23:14.012] So it really does move us to think about a standard for data
+[02:23:17.932] centers specifically that does not exist today.
+[02:23:20.981] And again, that could be something that we would require
+[02:23:24.932] that for existing data centers as well.
+[02:23:29.092] That proposal would require
+[02:23:32.932] council approval.
+[02:23:34.692] But it would certainly be something that I would love to work with this
+[02:23:38.592] group here on ensuring that we have the right measures in place to pursue.
+[02:23:43.952] Thank you so much. Thank you, Chair.
+[02:23:46.352] Thank you. All right, Alder Cruz.
+[02:23:51.332] Thank you, Chairman Hadden, and also thank you to the panelists.
+[02:23:54.632] I think this is a great panelist from experts across the board, not
+[02:23:58.632] only the city advocacy group and also for people from the industry.
+[02:24:02.552] So I want to say I appreciate that. Typically, sometimes we have one or the
+[02:24:06.472] other. So this is a very well-balanced panel.
+[02:24:10.512] But I do have some questions and more also
+[02:24:13.652] clarification on certain things. And I'll start with Sarah.
+[02:24:17.332] Sarah, at one point you said
+[02:24:20.092] something between the lines of data centers
+[02:24:23.992] should have some financial commitment up front.
+[02:24:27.172] And based on the report on page 38,
+[02:24:31.152] it mentions the possibility of making industrial users pay
+[02:24:34.912] more for water. So my question is, is this
+[02:24:38.792] trying to make the larger users pay for more once they
+[02:24:42.732] cross a certain threshold of
+[02:24:46.352] quantity use? So what will be the impact if
+[02:24:51.332] there will be a bigger financial commitment up front?
+[02:24:54.352] What would this mean to everyone? Because we talked about
+[02:24:58.472] the commit bill and how this reflects to everyone.
+[02:25:01.772] I want to see a little more, if you can explain that and what will be the impact,
+[02:25:05.612] but also to Craig and the industry,
+[02:25:09.572] what is that up front? What would that mean to the industry as
+[02:25:13.312] well? I think we're all trying to balance how do we keep up technology, but
+[02:25:17.232] also how we are environmental responsibly.
+[02:25:20.672] So I just wanted to get your thoughts on that.
+[02:25:23.332] Yeah, sure. So to the water side, I'll probably defer to my friends at the city
+[02:25:27.152] because
+[02:25:28.852] my expertise is around the state-regulated utilities,
+[02:25:32.632] not municipal water systems. I don't know anything about ComEd's water rate making
+[02:25:37.532] or what kind of deposit policies the City of
+[02:25:41.472] Chicago has in place for water. But when it comes
+[02:25:45.412] to ComEd and the grid operators
+[02:25:49.332] and the kinds of arrangements that the utility has with these
+[02:25:53.072] large facilities over interconnecting to the ComEd system,
+[02:25:57.032] this is heavily regulated and it's something that we're actively a
+[02:26:01.032] part of. Craig mentioned that the
+[02:26:04.692] old scheme for assessing deposits, ComEd
+[02:26:08.752] would charge deposits to data centers if they wanted to interconnect.
+[02:26:12.432] But before, those deposits were
+[02:26:15.212] negligible. It was like $1 million per customer, which
+[02:26:19.132] to me sounds like a lot of money, but it's chump change to the-- Was it
+[02:26:23.112] less for smaller ones? It was chump change for maximum $1
+[02:26:26.252] million. Chump change for a lot of these hyperscalers.
+[02:26:28.992] And so those deposits
+[02:26:32.912] are now higher. The ICC approved a
+[02:26:36.912] new tariff where it's kind of a stepped deposit
+[02:26:41.232] structure. Now, the point I was making during my remarks is
+[02:26:45.192] we believe that for a lot of
+[02:26:48.132] interconnections Even those new deposit levels
+[02:26:52.228] won't suffice to cover their costs in their
+[02:26:55.628] entirety, and this is something that's been uncovered in a
+[02:26:59.688] currently active ICC docket. So that's what we're
+[02:27:03.528] talking about on the electric side.
+[02:27:05.368] It's about
+[02:27:07.868] forcing these facilities to pay upfront for the
+[02:27:11.448] investments that they require, the grid
+[02:27:15.148] upgrades that they require, so that if they don't show up,
+[02:27:19.128] or that the rest of us aren't on the hook.
+[02:27:23.488] Otherwise, all those costs get socialized across the rest of
+[02:27:27.068] customers. And so we want to make sure...
+[02:27:29.548] I'm all about minimizing that risk that these guys are
+[02:27:33.388] leading to infrastructure investments that at least part of it is being
+[02:27:37.368] covered by the rest of us. But on the water side, I'll let my friends over
+[02:27:41.348] here say.
+[02:27:42.228] Yeah.
+[02:27:43.228] Thanks for the question, Alder. We can quickly describe and
+[02:27:46.828] elaborate on what that... So first of all, this was one of the recommendations, if
+[02:27:50.248] you recall, at the end, where more study
+[02:27:53.708] would be needed before proceeding.
+[02:27:55.908] But what we heard from a number of different stakeholders was
+[02:27:59.888] to look at
+[02:28:02.528] and research whether the city should change
+[02:28:07.068] the way it currently charges all customers for water, which is uniform.
+[02:28:10.808] Basically, whether you are a single-family
+[02:28:14.368] homeowner or you are a large industrial facility
+[02:28:17.948] or, in the middle, you're a restaurant, let's say,
+[02:28:21.988] everyone is charged a uniform rate per, I think it's cubic feet is
+[02:28:26.028] the measurement. It's one rate per cubic feet.
+[02:28:29.948] There are other jurisdictions where there are
+[02:28:33.708] rates by type of customer, commercial, industrial,
+[02:28:37.268] residential, and that's actually also, as Sarah was alluding to, that's how it's
+[02:28:40.848] done when it comes to things like electricity
+[02:28:44.628] or natural gas. So there's a set of rates,
+[02:28:48.528] like quantified rates for small
+[02:28:52.298] residential customers that live in apartments, for single-family
+[02:28:55.728] customers, for large industrial. There's a whole bunch of different categories.
+[02:28:59.488] That's what the recommendation
+[02:29:02.088] is about. It's about whether the city should take steps to
+[02:29:05.968] investigate whether that structure is
+[02:29:10.448] better for
+[02:29:12.208] 2026 and onward, for all of the customers
+[02:29:16.228] that receive water here.
+[02:29:17.588] Makes sense. Okay.
+[02:29:19.768] I'm also going to go to Andrew. I know he was with us in Zoom,
+[02:29:23.588] but he had a
+[02:29:27.168] chart with cooling technology
+[02:29:29.348] trade-offs, and one of them it says one is more
+[02:29:33.168] expensive for data centers. So just would be
+[02:29:36.908] interested to see that and-
+[02:29:40.688] Andrew, are you still with us?
+[02:29:41.608] Yeah, I'm still here. Hi.
+[02:29:44.048] And let me just pull that slide up so I can share it.
+[02:29:47.048] This is from the
+[02:29:49.828] Alliance for Water Efficiency's deck on data center primer.
+[02:29:53.828] It's really good. But it actually doesn't talk
+[02:29:57.648] about costs here. I would say I sort of
+[02:30:01.248] asserted that the
+[02:30:03.968] direct to chip cooling technologies are more expensive, which is
+[02:30:08.388] true, versus just sort of
+[02:30:11.608] running broad heating for the whole system.
+[02:30:14.058] But you should be able to see this slide now, is that right?
+[02:30:16.988] Yeah. So Andrew, based on that, in your research, because you gave
+[02:30:20.908] us a lot of good information, whether it is the
+[02:30:24.848] three different options.
+[02:30:27.368] Based on your experience and what others are doing,
+[02:30:31.308] what do you think is working best? I know there's some good
+[02:30:35.208] on water efficiency. There's some other betters on energy.
+[02:30:40.008] But based on your experience, out of those three areas, what
+[02:30:43.848] is working better for other communities or is
+[02:30:47.808] better received from community members?
+[02:30:51.788] I would say I don't feel fully equipped to answer that question,
+[02:30:55.748] and part of it is this
+[02:30:58.868] just came out and another report looking
+[02:31:02.448] at comparing different
+[02:31:05.488] efficiencies at data centers is just coming out.
+[02:31:07.627] So we're really on this sort of the high end of what does efficiency
+[02:31:11.468] look like and what does cost effectiveness look like.
+[02:31:14.308] We're kind of pretty early. The research is all happening right now.
+[02:31:18.268] And so
+[02:31:20.228] what I think is the best way to approach this is to
+[02:31:24.208] set floors of some kind, is to say, "Look, this is the standard you
+[02:31:28.248] have to meet." So in Aurora, the floor that they're setting is a water use
+[02:31:32.308] efficiency standard. It's a number, and it compares the amount of liters your data
+[02:31:36.048] center consumes to the amount of energy that it's using on its IT
+[02:31:39.808] infrastructure. That's one sort of benchmark you could
+[02:31:43.888] look at. Another would just be a more broad technological benchmark that
+[02:31:47.888] just says, "You have to pick among this suite of
+[02:31:51.328] technologies and better."
+[02:31:56.608] So it sort of kicks out some of these less effective
+[02:32:00.788] technologies.
+[02:32:02.848] And the other thing I just want to note is direct to chip doesn't
+[02:32:06.728] ever exist by itself, because that's going to get the heat off of your chip
+[02:32:10.568] and into some system that's still in your
+[02:32:14.188] facility. And again, the heat has to get out of your facility.
+[02:32:17.048] That's how they're operating these.
+[02:32:18.208] So,
+[02:32:19.808] you'll have a direct to chip paired with some other closed loop system that's
+[02:32:24.068] carrying a fluid from your heat source to your heat
+[02:32:27.948] sink, which is either going to be the air or it's going
+[02:32:31.888] to be like a cooling tower that is using
+[02:32:35.348] water, evaporating water to get heat out
+[02:32:39.288] of that loop. And then that loop brings the cool fluid back to your chips, and then
+[02:32:42.688] it takes the heat from your chips, and it brings the hot fluid back, and then
+[02:32:46.408] that's your closed loop system. So,
+[02:32:49.728] I'm not sure if I was able to answer your question, but my gut says
+[02:32:54.740] Find good floors to set and don't too much
+[02:32:58.560] constrain innovation because there is some innovation happening here.
+[02:33:03.080] Or find benchmarks.
+[02:33:04.580] Yeah. No, I think as you said, trade-offs, and again,
+[02:33:09.620] one of the panelists talked about in another what is going on, I believe you said
+[02:33:13.360] in Aurora, we're trying to see what is working. What is working?
+[02:33:16.780] What are some other things that perhaps we can mirror, we can look
+[02:33:20.660] into? So that was my questions. What is something will work?
+[02:33:24.200] But this was great information. I know this is something that just new came out.
+[02:33:28.060] But I think, Craig, you had your hand
+[02:33:31.320] up.
+[02:33:31.989] Yeah. No, I think you addressed it.
+[02:33:33.440] I
+[02:33:34.420] don't want to be too dominant. I feel like I've been talking a lot.
+[02:33:36.840] But I think at the end of the day, we're still in the early innings.
+[02:33:40.680] This industry is moving fast. It's breaking things and
+[02:33:44.680] moving fast. It's hard to keep track.
+[02:33:47.440] The key piece is to have real conversations, not
+[02:33:51.480] to assume that the people on the data center side are all
+[02:33:54.780] bad.
+[02:33:57.240] Like any industry, there are good people and bad people, but the question is, what
+[02:34:00.340] are the parameters? How do you set guidelines that are going to protect
+[02:34:03.920] communities? That's really what you want to do.
+[02:34:06.720] I will tell you, edge computing will have groups
+[02:34:10.580] that right now aren't looking at Chicago.
+[02:34:12.640] There may be 39 data centers, but I would challenge you to say within the last
+[02:34:16.600] 10 years, how many of those 39 have been built?
+[02:34:19.800] And I would dare say not many. I probably know them.
+[02:34:22.620] I could probably name them on one hand.
+[02:34:24.480] And so the issue that you want to balance is you don't want to
+[02:34:28.280] allow people to come in and do whatever they want, and I feel like data centers
+[02:34:31.280] were given that latitude more than they should in certain communities.
+[02:34:35.720] But you also don't want to erect these walls that shut
+[02:34:39.140] down what could be investment that keeps your city world-class
+[02:34:43.010] and relevant. You're going to hear people talking about smart cities.
+[02:34:46.460] Mm-hmm.
+[02:34:46.580] That means they have the infrastructure to be relevant.
+[02:34:49.680] Do you want to be the city forward-facing, or do you want to be the old industrial
+[02:34:53.620] city that's dying?
+[02:34:55.580] It's really a question, and how do you balance it, right?
+[02:34:58.840] And I don't think you just give it all to the billionaires, right, but you
+[02:35:02.640] certainly also don't say no to anyone.
+[02:35:05.680] I think it's a balancing act. I've named a couple things here.
+[02:35:08.560] The property tax revenue. The City of Chicago has some pretty substantial
+[02:35:13.120] unfunded pension obligations. Data centers won't fix it, but they should
+[02:35:17.000] certainly be contributing tax revenue and other forms of
+[02:35:20.460] revenue to support that, right? And this is an industry,
+[02:35:24.200] again, I'm probably telling too much, can certainly afford it.
+[02:35:28.880] It's okay. That's why we're here, to have those conversations.
+[02:35:32.349] And I have more, but I know it's been a long day
+[02:35:36.280] for all of us. But maybe when I talked about
+[02:35:40.300] safeguards and strong environment, and one of the recommendations was to
+[02:35:44.060] protect residents from air and noise
+[02:35:46.840] pollution, and the idea was like, how do we do it,
+[02:35:50.820] right? We enhance environment permitting process.
+[02:35:54.480] Do you have more how to elaborate, like how do we do that?
+[02:35:57.340] How do we protect our residents from
+[02:36:00.900] noise and air pollution on data centers?
+[02:36:04.300] If you have that, if you want to speak at it now, or if you want to send it through
+[02:36:06.980] the chair, it's fine.
+[02:36:08.260] And as a clarification, Alder Cruz, maybe some
+[02:36:11.960] examples of what the standards would be?
+[02:36:14.700] Yes.
+[02:36:15.260] Yes. Mm-hmm.
+[02:36:16.200] We'd be happy to submit some examples of that through the chair.
+[02:36:20.600] Where we wanted to end in the report was not to be overly
+[02:36:24.340] prescriptive, but to really give you a set of
+[02:36:27.980] recommendations and an invitation to work closely with us to come together
+[02:36:32.040] to design the regulations that are required to meet the needs of
+[02:36:35.860] modern data centers. So for us, this was an
+[02:36:39.480] offering and an invitation to continue working together.
+[02:36:42.960] I think everyone on the panel,
+[02:36:45.080] we're all clear, and we're in alignment that regulations need to happen.
+[02:36:49.240] And so we'd be happy to share an example of what that can look like.
+[02:36:52.960] Of course, we regulate many things across the city with
+[02:36:56.940] environmental permits, and so there's certainly other precedences that we can point
+[02:37:00.800] to where we've regulated
+[02:37:03.420] very specific types of equipment or kept things below a threshold.
+[02:37:07.840] I do want to just underscore Andrew's point that I think we can
+[02:37:11.780] offer a floor just in terms of what the standards could be and still
+[02:37:15.780] allow for ways in which we can both ensure that we
+[02:37:19.820] are driving new innovation, and that we are continuing to support
+[02:37:23.840] responsible growth. I think all of those things are possible
+[02:37:27.480] together.
+[02:37:29.020] And I think that the floor model is a really good pathway for the
+[02:37:32.860] city to explore that. I do also just want to offer, we have the sustainable
+[02:37:36.860] development policy here, which has
+[02:37:40.060] provided an incredible example of ways in which we have
+[02:37:43.820] advanced green building across the city.
+[02:37:46.250] There are some emerging pathways that are
+[02:37:50.140] new.
+[02:37:51.820] Part of the sustainable development policy is that you can require
+[02:37:55.720] a third-party
+[02:37:59.460] framework, sustainable development guidelines to utilize,
+[02:38:03.640] and get a third-party pathway to fulfill that goal.
+[02:38:07.840] There are new
+[02:38:11.060] ways in which you can do that with data centers as well.
+[02:38:13.580] There are new frameworks that are available.
+[02:38:16.360] And so I think continued coordination with DPD to think about how to use
+[02:38:20.300] that framework as a way to lever green building principles,
+[02:38:24.160] new innovation is an exciting prospect as well.
+[02:38:28.560] If I can add, our design, as we went through the City of Chicago's process,
+[02:38:32.760] technically makes it a lead design facility
+[02:38:36.860] or a greener data center. This is where we need to take the conversation.
+[02:38:40.420] How do we make these data centers more environmentally friendly?
+[02:38:43.710] And the good news is that the major hyperscalers,
+[02:38:46.980] I've traveled to some of them, they're all talking about this.
+[02:38:49.460] So these aren't conversations that aren't already occurring.
+[02:38:53.360] It's how do you plug in and look at best practices around the country?
+[02:38:57.460] I'd love to be part of identifying examples that are positive.
+[02:39:01.430] I was talking to someone yesterday saying, "Hey, give me examples where data
+[02:39:05.100] centers are not as negative." Right?
+[02:39:09.540] And I think that's where we want to start, because to say that we don't want any
+[02:39:13.560] data centers, and I know this committee's not saying that, I just think it's
+[02:39:16.550] shortsighted. It's cursing the darkness instead of figuring out ways to light a
+[02:39:19.860] candle.
+[02:39:21.024] And I've got Andrew. I see your hand.
+[02:39:23.104] Andrew wanted to respond as well, and then Alderman Anna Hoppenworth.
+[02:39:27.544] Thanks. Yeah, just to flag a few thoughts.
+[02:39:30.064] One is, I think regulations are critical to defend against bad
+[02:39:33.884] actors. That's why we do this, right?
+[02:39:35.844] And that is an important--
+[02:39:39.264] You're not regulating for the person who wants to come in and do the
+[02:39:43.084] right thing. I guess you should try to be as frictionless as possible if someone's
+[02:39:46.724] going to do the right thing. But it's important to set standards so that we are
+[02:39:49.714] ensuring that there is no bad data center developer that lands
+[02:39:53.664] a data center anywhere in Illinois, but
+[02:39:57.164] for Chicago.
+[02:39:59.824] It sounds like the
+[02:40:01.964] team in the department environment, I'm sorry if that's not the right title, I'm
+[02:40:06.004] familiar with Chicago's
+[02:40:07.904] groups, but
+[02:40:09.704] has a good understanding of this. But I'll just flag power and water trade-off,
+[02:40:13.384] right? And if you say a data center is going to use zero water,
+[02:40:17.224] you're proposing they will air condition nonstop, which is going to be
+[02:40:20.624] extremely energy intensive, and you're going to see water impacts at
+[02:40:24.743] the generation side, and noise impacts locally.
+[02:40:28.314] And so you do want to be thoughtful.
+[02:40:30.384] And setting things like floors is helpful for allowing
+[02:40:34.264] some of that flexibility for the right solution to be found without allowing
+[02:40:38.184] anybody to come in below that floor that you've set and
+[02:40:42.484] propose a solution that is extremely water consumptive.
+[02:40:46.024] Or again, those pure air conditioning setups are not
+[02:40:49.904] necessarily what I think anybody wants to see, because that's going to be
+[02:40:53.104] pressuring our climate goals as well.
+[02:40:54.684] So, just offering a little bit of perspective on that.
+[02:40:59.444] Yeah, no, I appreciate everyone. And, just going back to what Commissioner
+[02:41:03.344] Torrez said, I think that's really crucial what you said, and I think I praised
+[02:41:06.724] that at the beginning. We're such a well-balanced group that you all
+[02:41:10.624] have. Again, understanding what are the things we're trying to do, what
+[02:41:14.544] is realistic, what is happening in the industry, and how do we come together.
+[02:41:18.124] And you're right, it seems that everybody is in agreement to making some
+[02:41:21.784] changes to ensure that, again, we are putting safeguards and we're
+[02:41:25.504] protecting others. So I appreciate everybody's time.
+[02:41:28.984] I know it has been a long day, but, I think this is a good way to start this
+[02:41:32.964] conversation. I know things are moving fast, but so we've got to move fast
+[02:41:36.844] as well on this topic. So, thank you, Chairman.
+[02:41:39.844] Thank you so much. Alderman Anna Hoppenworth.
+[02:41:42.954] Thank you, Chair. Thank you for having this hearing, Commissioner
+[02:41:46.824] Tovar, and DOE, and DPD.
+[02:41:50.204] Thank you, Craig and Kabi, and also Sarah for being
+[02:41:54.004] here.
+[02:41:55.324] I represent the 48th Ward, Edgewater and Uptown, right
+[02:41:59.384] next to the lakefront. And so we are very
+[02:42:03.164] concerned about protecting our greatest asset,
+[02:42:07.084] which is our lakefront, and at the same time, have a
+[02:42:10.764] diversity
+[02:42:12.524] of people who live in our ward. And
+[02:42:16.724] we're concerned about utilities and affordability, and
+[02:42:20.204] generally just trying to stay in the city,
+[02:42:24.404] to pay for all these things,
+[02:42:27.024] including our water and our electricity.
+[02:42:29.884] At the same time, we don't have any data centers
+[02:42:33.184] really in Edgewater and Uptown. But I am concerned
+[02:42:37.184] about the impact on our environment and
+[02:42:42.024] of our people.
+[02:42:44.784] I learned a lot today
+[02:42:47.044] from everyone, including you, Craig, and Andrew,
+[02:42:51.024] talking about the trade-offs. If there's no water being
+[02:42:54.884] used, then impact is going to be on electricity.
+[02:42:57.584] I would have appreciated a utility company
+[02:43:01.444] being here, maybe ComEd. That would've been helpful
+[02:43:06.424] just to
+[02:43:07.804] frame, what is it that we can actually do here together?
+[02:43:10.784] I'm glad to hear
+[02:43:12.384] you bringing up
+[02:43:14.504] other cities that are in Illinois, not in
+[02:43:18.184] Virginia, that we can model
+[02:43:20.624] our efforts to protect
+[02:43:24.764] our environment and also to look at the opportunities,
+[02:43:29.544] like what is it that we're doing with the wastewater.
+[02:43:31.544] That's very interesting to me. Thank you for the
+[02:43:35.504] sustainable development framework.
+[02:43:37.644] I know that things are already in the works, that
+[02:43:41.384] there was a lot of preparation that came into this hearing, so I just
+[02:43:45.184] wanted to thank you all for that. And
+[02:43:49.024] absolutely, we need to be faster
+[02:43:53.144] because, as you said, there are 39 data
+[02:43:56.904] centers in Chicago, but many of them have not been
+[02:44:00.824] built yet. And also, AI consumption is rabid right
+[02:44:04.604] now. So I just don't know what that's going to look like
+[02:44:08.204] for my own neighborhood and what is going to be
+[02:44:11.724] required of us from the city. So we must have guardrails in
+[02:44:15.344] place, and so I am
+[02:44:18.644] urging all of us to work together to figure that out
+[02:44:22.464] and to not be behind Aurora.
+[02:44:27.764] Thank you.
+[02:44:30.624] Thank you so much, Alderman Anna Hoppenworth.
+[02:44:33.984] I want to thank
+[02:44:35.824] our panelists today. Again, thank you for
+[02:44:39.304] your time. Thank you for your work.
+[02:44:42.824] To the DOE team, thank you for the report, right, and from the working group and
+[02:44:46.384] working group members. And
+[02:44:51.544] I'm going to take a poll. I
+[02:44:53.824] will say a lot of my colleagues, our colleagues, are still over in committee in
+[02:44:57.484] finance,
+[02:44:59.644] where the 78 and parking
+[02:45:02.944] meters 2.0 are up for a
+[02:45:06.544] vote. And I think that's where the rest of us will probably be
+[02:45:10.484] headed after we convene here. But I will say,
+[02:45:14.444] for myself, very interested in moving on some of these recommendations.
+[02:45:19.144] And I appreciate
+[02:45:21.284] the way you've organized them and tiered them as also knowing that
+[02:45:25.224] there are things we can do right now
+[02:45:27.964] that are going to help us actually maybe think of other things we should do, right?
+[02:45:31.944] So I really like that idea of the transparency.
+[02:45:34.564] Let's just start getting information.
+[02:45:37.724] So, maybe we can intro that on Wednesday.
+[02:45:40.704] What do you think, Leslie?
+[02:45:43.704] But just saying, you guys in? Lenny,
+[02:45:47.584] Ruth?
+[02:45:48.404] Jump.
+[02:45:48.414] You on board? All right.
+[02:45:50.924] We're going to do it. Yeah, we're just going to intro it on the floor.
+[02:45:53.804] But for real, to just get going on that, and then we'll gather more
+[02:45:57.704] information that's going to help us inform
+[02:46:00.844] more of what we want. Alderman Anna Hoppenworth, to your point, I
+[02:46:04.224] know with ComEd, when we had our summer preparedness
+[02:46:08.184] hearing this year, we were happy to get that update from them that Sarah
+[02:46:11.844] mentioned, right, which was the permission that they got
+[02:46:15.484] from our state governing body to require higher
+[02:46:19.644] bonds for peace. But what else,
+[02:46:23.344] right? To your point, what else should we be looking at?
+[02:46:26.104] I think Alder Ramirez's question was around that of what are the
+[02:46:29.564] investments that we could be doing?
+[02:46:31.724] Where could we even be directing people if they're coming, of
+[02:46:35.204] knowing we've got a site and a space?
+[02:46:38.164] So I think we have continued conversations.
+[02:46:43.064] So thank you for that. Look forward to taking some action
+[02:46:47.384] with you all and with our committee members here.
+[02:46:51.064] So, having no more questions,
+[02:46:53.984] this concludes the items before our committee today.
+[02:46:56.764] And with no further business, may I have a motion to adjourn?
+[02:47:01.064] So moved. Alder Cruz moves.
+[02:47:04.304] At 2:44, hearing no objections, so ordered.
+[02:47:07.664] The meeting on the Committee on Environmental Protection and Energy is now
+[02:47:10.204] adjourned. Thank you.

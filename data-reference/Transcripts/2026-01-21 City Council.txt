@@ -1,0 +1,3344 @@
+[00:09:01.325] Good morning, members of the city council.
+[00:09:03.675] The meeting will begin shortly.
+[00:09:05.635] Please remember to log into your devices. Thank you. I
+[00:15:34.820] Good morning, members of the city council.
+[00:15:36.885] The meeting will begin shortly.
+[00:15:38.925] Please remember to log into your devices. Thank you.
+[00:17:10.465] Good morning. The council will come to order.
+[00:17:12.925] Madam Clerk, please take a quorum roll call.
+[00:17:20.895] The quorum is now open. The quorum is now open.
+[00:17:23.935] Please use the eev. The quorum is now open.
+[00:18:23.725] I will not take a voice vote
+[00:18:24.845] that has not used the Eev device.
+[00:18:26.965] Alderman LaSpada. LaSpada is present.
+[00:18:31.445] Alderman Hopkins. Hopkins is not present in chambers.
+[00:18:37.675] Alderwoman Dow. Oh, Hopkins is present in chambers.
+[00:18:43.505] Alderman Dow is present in chambers. Alderman Robinson.
+[00:18:50.635] Robinson not present in chambers.
+[00:18:53.075] Alderman Hall Hall is not present in chambers.
+[00:18:57.695] Alderman Mitchell. Mitchell is not present in chambers.
+[00:19:03.895] Alderman Beal. Beal is present in chambers.
+[00:19:09.305] Alderman Lee Lee is present in chambers.
+[00:19:14.355] Alderwoman Ramirez, not present in chambers.
+[00:19:18.355] Alderwoman Coleman not present in chambers. Alderman Moore.
+[00:19:24.305] Alderman Moore is present. Alderman Curtis.
+[00:19:28.075] Curtis is present. Alderman Osha. OSHA is present.
+[00:19:34.165] Alderwoman tab Baras not present in chambers.
+[00:19:38.275] Alder person, Fuentes present in chambers.
+[00:19:42.275] Alderman Burnett Burnett present in chambers.
+[00:19:46.955] Alderwoman Cruz Cruz present in chambers.
+[00:19:51.885] Um, alderman Wapac. Wapac is present in chambers.
+[00:19:58.155] Alderman Ada Keda is present in chambers.
+[00:20:02.415] Alderwoman mitts. Mitts is present in chambers.
+[00:20:06.705] Alderman Sato Sato is present in chambers.
+[00:20:12.695] Alderman Vasquez present virtually.
+[00:20:15.705] Oh, I'll come back to you Alderman.
+[00:20:18.265] Uh, not present in chambers. Alderman Riley.
+[00:20:22.015] Riley is present in chambers. Alderman Lawson.
+[00:20:26.295] Lawson is present in chambers. Alderman Gardner.
+[00:20:31.375] Gardner is not present in chambers. Alderwoman Clay.
+[00:20:36.455] Clay is present in chambers.
+[00:20:40.035] Alder woman, Mona Howorth not present in chambers.
+[00:20:43.795] Alderwoman Hadden Hadden is present.
+[00:20:48.305] You're mayor. We are, your honor. We have a quorum.
+[00:20:52.415] Very well. There are 41 members present.
+[00:20:54.885] Uh, quorum has been established for reason stated
+[00:20:58.485] in Rule 59.
+[00:20:59.685] The following members have requested to participate
+[00:21:02.795] in today's meeting remotely.
+[00:21:04.855] Alders Ramirez, Cole Coleman, tabes, mana,
+[00:21:08.525] Haworth and Vasquez.
+[00:21:10.415] Madam Clerk, could you confirm their attendance online?
+[00:21:14.215] Alderwoman Ramirez. Present Ramirez is present.
+[00:21:19.785] Alderwoman Coleman Present.
+[00:21:25.075] Coleman is present. Alderwoman Tabes.
+[00:21:27.835] Present to borrows is present. Alderman Vasquez present.
+[00:21:33.815] Vasquez is present. Elder
+[00:21:35.725] or per older woman, Mount Haworth Present.
+[00:21:39.695] Mount Haworth is present very
+[00:21:41.405] Well. All members have
+[00:21:42.405] confirmed their partic
+[00:21:43.775] their presence online.
+[00:21:45.545] All those in favor of the motion. I'm sorry.
+[00:21:50.185] Can I get a motion for the approval of those members?
+[00:21:52.875] Very well. It's been moved.
+[00:21:54.025] All those in favor signified by saying aye.
+[00:21:56.425] Any opposed, say nay.
+[00:21:57.445] And the opinion of the chair, the ayes have it.
+[00:21:59.985] Please add those following members
+[00:22:03.265] who have verbally confirmed their presence remotely
+[00:22:05.505] as a part of the quorum roll call.
+[00:22:06.985] Please rise for the Pledge of Allegiance.
+[00:22:13.695] I pledge allegiance
+[00:22:15.075] To the flag of the United States of America
+[00:22:18.505] and to the republic.
+[00:22:19.745] For Richard stands, one Nation, nation under God,
+[00:22:23.715] indivisible, with liberty and justice. All
+[00:22:27.295] Thank you. Please remain
+[00:22:28.295] standing for our invocation,
+[00:22:31.335] which will be delivered this morning
+[00:22:32.825] by Reverend Stephen Thurston II from New Covenant
+[00:22:36.045] Missionary Baptist Church.
+[00:22:37.865] Let us pray. Gracious God, we gather in this chamber
+[00:22:40.815] where decisions are made not in isolation, but in echoes.
+[00:22:44.425] We recognize that decisions made today will reverberate
+[00:22:47.325] through classrooms not yet built.
+[00:22:49.155] Your neighborhood's not yet imagined
+[00:22:50.785] and lives not yet born Grantee's, leader's wisdom
+[00:22:53.955] that runs deeper than consistent consensus.
+[00:22:56.985] Wisdom rooted in conscience in moments when political
+[00:23:00.565] pressure whispers in one direction
+[00:23:01.945] and their moral compass points.
+[00:23:03.285] Another. Straighten them to trust their inner north star.
+[00:23:08.145] But Lord remind them that this compass points not just
+[00:23:11.565] to principle, but to people.
+[00:23:13.715] Help them lead with emotional intelligence and open hearts
+[00:23:16.905] and set up situations.
+[00:23:18.145] God, where the adversary across the aisle who's carrying
+[00:23:21.205] wounds we don't even see to transitions into an ally.
+[00:23:24.845] I ask that you'd employ grace
+[00:23:26.505] to foster understanding, to crack open.
+[00:23:28.755] What argument never could bless this
+[00:23:31.125] service and their sacrifice.
+[00:23:32.635] Sustain their mental health during the seasons
+[00:23:35.045] of criticism and critique.
+[00:23:36.735] Guide them through this sacred complexity
+[00:23:38.605] of serving the 2.7 million residents whose lives they shape
+[00:23:41.805] with every vote, every moment of courage
+[00:23:44.865] as they deliberate and decide today.
+[00:23:46.785] Remind them that they represent possibilities,
+[00:23:49.755] that they carry forth the dreams of those
+[00:23:51.465] who built this city and the hopes
+[00:23:53.245] of those who will inherit it.
+[00:23:54.865] God, thank you for making Chicago the best
+[00:23:57.245] freaking city in the world.
+[00:23:58.785] Now help us prove it through our words
+[00:24:00.425] and our works today. Amen.
+[00:24:02.715] Amen. Thank you. You may be seated.
+[00:24:45.605] All right. This is the portion
+[00:24:46.425] of the meeting for public comments.
+[00:24:47.725] Mr. Clerk.
+[00:24:49.485] The council will now begin the public comment period,
+[00:24:51.465] which is limited to a maximum of 30 minutes.
+[00:24:53.935] Each speaker is limited to three minutes.
+[00:24:56.025] Speakers cannot yield
+[00:24:57.205] or transfer their time to another speaker.
+[00:24:59.285] Any written comments that have been submitted will be posted
+[00:25:01.485] and made available for all automatic review.
+[00:25:03.925] Our first speaker this morning is Sam Toya.
+[00:25:12.515] Please press star six to mute.
+[00:25:16.085] We can hear you. Welcome.
+[00:25:20.555] Alright. Good morning, members of the City Council.
+[00:25:23.265] I'm Sam Toya, president
+[00:25:24.485] and CEO of the Illinois Restaurant Association.
+[00:25:27.025] I'm here today to express my support
+[00:25:29.585] for the proposed ordinance regarding hemp products.
+[00:25:32.665] I'd like to start off by thanking Alder Quinn
+[00:25:35.105] for bringing the hospitality industry
+[00:25:36.985] to the table on this matter.
+[00:25:39.065] All we say, I'd rather be at the table than on the menu.
+[00:25:41.745] He worked with us to craft an ordinance
+[00:25:43.525] that benefits all parties under this ordinance, bars
+[00:25:46.925] and restaurants will still be allowed
+[00:25:49.505] to serve hemp beverages.
+[00:25:51.275] Well, hemp sales will be restricted to those 21 and older.
+[00:25:55.055] We're keeping hemp out of the hands
+[00:25:56.605] of children while preserving an important source of revenue.
+[00:25:59.825] For many members of the hospitality industry,
+[00:26:02.595] this is especially important
+[00:26:03.765] as our industry has struggled in the last few years.
+[00:26:06.635] Wholesale food prices have increased 38% since the pandemic
+[00:26:10.305] and labor costs are up 35%.
+[00:26:12.555] According to the Wall Street
+[00:26:13.925] Journals, there were more there.
+[00:26:15.235] More restaurant bankruptcy in 2024 than any year since 2020.
+[00:26:19.945] And in Chicago 496 restaurants closed in the first half
+[00:26:23.845] of 2025 alone.
+[00:26:25.975] These closures affect more than just business owners.
+[00:26:28.635] They're also hurting service bartenders, cooks, busters,
+[00:26:32.445] everyone who plays a role in the hospitality industry due
+[00:26:35.365] to surging costs, many restaurants
+[00:26:37.325] and buyers have been forced to cut employees shifts,
+[00:26:39.595] introduce new technology that reduces the need for employees
+[00:26:43.665] or even layoff workers, entirely allowing restaurant
+[00:26:47.125] and borrowers to keep a lucrative source of revenue.
+[00:26:49.375] Especially as people are ordering fewer alcohol,
+[00:26:51.925] drinks keeps owners from having
+[00:26:53.705] to make these tough decisions.
+[00:26:56.405] Having hemp beverages on the menu made it be defining factor
+[00:26:59.825] that allows the borrow a restaurant to keep its stores open
+[00:27:03.325] and its workers employees throughout our 77 communities.
+[00:27:06.945] I would also like to thank Alder Quinn for the guardrails
+[00:27:10.295] that will ensure these drinks are limited
+[00:27:12.165] to those ages 21 and older.
+[00:27:14.085] We don't wanna see hemp beverages ending up in the hands
+[00:27:16.185] of children or teens, restaurants and bars.
+[00:27:19.515] Staff are already well trained at carting patrons
+[00:27:22.805] who wanna purchase alcohol.
+[00:27:24.325] And we're ready to do the same thing with hemp beverages.
+[00:27:27.135] This ordinance preserves a crucial source of revenue
+[00:27:29.885] for good actors while also making sure kids can't have a
+[00:27:33.745] hold of hemp beverages.
+[00:27:35.085] For that reason, I encourage members
+[00:27:36.945] of city council vote yes on this ordinance.
+[00:27:39.675] Thank you.
+[00:27:41.465] Thank you very much for your comments.
+[00:27:43.515] Our next speaker is Arnold Bradford.
+[00:27:56.455] Good morning City Council. Good morning, mayor Johnson.
+[00:28:01.145] My name is Arnold Bradford in the
+[00:28:02.565] neighborhood they call me Mr.
+[00:28:03.925] B. I'm an active senior, currently serving
+[00:28:07.625] as executive director of the Crossroads Collaborative
+[00:28:10.865] and as a member of the South Works Coalition,
+[00:28:15.175] as a resident of the South Chicago community
+[00:28:17.655] and the 10th Ward, I'm here to ask the Chicago City Council
+[00:28:22.895] and my alderman Peter Chico
+[00:28:27.415] to support a community benefits agreement.
+[00:28:32.675] We want this agreement for the South Chicago community
+[00:28:36.215] because of the contamination
+[00:28:39.115] and the work being done at the former US Steel
+[00:28:42.805] site on the lakefront.
+[00:28:45.665] Our coalition currently supports clean development on
+[00:28:49.925] that site and we've been doing it for over a decade.
+[00:28:53.865] But without resident displacement,
+[00:28:56.505] we don't wanna lose our homes
+[00:28:58.245] because we can't pay our bills.
+[00:29:01.005] I think most of you understand that bills are going up,
+[00:29:04.875] taxes are going up.
+[00:29:06.245] You know it. We don't
+[00:29:10.775] want resident displacement.
+[00:29:13.845] We don't want increased electric bills, utility bills.
+[00:29:17.605] We don't want increases in our data rates
+[00:29:20.025] 'cause that's coming and they
+[00:29:21.955] haven't told you the whole story.
+[00:29:25.815] Now let me just say one more thing. I have a list of things.
+[00:29:29.105] It's so long I didn't bring it with me,
+[00:29:30.935] but I just have a few bullet points.
+[00:29:32.455] If you bear with me. We are asking you, that's the council
+[00:29:37.545] and our other elected official to protect us from a century
+[00:29:42.985] of accumulated poisons and pollutants.
+[00:29:45.145] You say, wait a minute. Now the Illinois Environmental
+[00:29:47.445] Protection Agency's already doing that for you.
+[00:29:49.625] Oh no, they, they passed the buck
+[00:29:51.595] because you are the ones that do permitting.
+[00:29:54.705] You are the ones that control construction in this city
+[00:29:57.945] and you've been doing it since I was a baby.
+[00:30:00.705] So let's get on it. I'm sorry,
+[00:30:03.505] I sometimes I get a little excited.
+[00:30:05.115] Mayor, we want you
+[00:30:07.155] to monitor the fast track permitting process,
+[00:30:10.395] the construction process.
+[00:30:11.635] You know what fast track means? Somebody slipped it through.
+[00:30:14.075] You understand that. We know it's important to the state.
+[00:30:16.835] We agree with that.
+[00:30:18.315] It is important, but let's do it the right way
+[00:30:22.045] to protect our children, families,
+[00:30:24.705] and adjacent neighborhoods, schools and parks.
+[00:30:28.155] We wanna do that for them near our quantum site.
+[00:30:31.995] The quantum site, for those that you don't know, it's
+[00:30:33.735] between 79th and the and the Calumet River.
+[00:30:36.805] It's a huge site. It's gonna affect all of us.
+[00:30:41.135] It's on the late people.
+[00:30:43.895] And we want you to protect our health.
+[00:30:46.565] Don't we have a health department here?
+[00:30:48.535] We want you to watch and observe and monitor.
+[00:30:52.975] We found as residents fugitive dust
+[00:30:57.325] being produced by the construction.
+[00:31:01.375] Thank you very much for your comments. Our next
+[00:31:05.075] Speaker this morning is Zoe Lee.
+[00:31:14.905] Happy New Year. Um,
+[00:31:18.605] my birthday is Friday Aquarius season.
+[00:31:22.305] I just came back from um, Atlanta. That's where I came from.
+[00:31:26.765] You know, where I started this fight.
+[00:31:28.925] Be with my friends and uh, I was at this event
+[00:31:32.645] and a couple of our guys was like, yo,
+[00:31:37.315] y'all may are doing good.
+[00:31:39.245] And I'm like, Brendan Johnson, you know,
+[00:31:43.115] and I had to like break it down to him.
+[00:31:46.395] But for me to come back
+[00:31:48.955] and you banned my whole group, except for me
+[00:31:55.165] for 60 days is wild
+[00:31:58.395] because I wanna know why
+[00:32:01.765] December 11th, 2025.
+[00:32:04.525] 'cause we're in a 0.1 what? $1.5 billion deficit.
+[00:32:08.345] So I decided to tell my homeboy like, anyway,
+[00:32:13.505] you gave Trinity United
+[00:32:16.865] Church Childcare Center,
+[00:32:19.795] $16.5 million.
+[00:32:24.895] Then when I started going
+[00:32:26.525] and looking, it's like 4 million,
+[00:32:31.385] 5 million, 6 million, 9 million.
+[00:32:35.095] But property taxes is through the roof.
+[00:32:39.725] People are losing their properties,
+[00:32:44.335] they're losing their equity in their properties.
+[00:32:47.325] All of this. And y'all keep talking about Trump.
+[00:32:52.255] Trump don't got nothing to do with you giving that money
+[00:32:54.705] to Trinity United Church Childcare Centers.
+[00:33:00.775] We cannot pay taxes.
+[00:33:03.645] I wouldn't pay no tax, honestly, like even the little taxes
+[00:33:07.235] that they have like on a receipt, I just get a guess.
+[00:33:09.705] Get a restaurant cash
+[00:33:12.105] because we need a forensic audit.
+[00:33:16.105] Okay? We need the Department of Justice
+[00:33:18.055] to come in here, okay?
+[00:33:20.265] Because you have a spending problem.
+[00:33:23.425] Well, you have a stealing problem and the, and the,
+[00:33:26.735] and the legislative body.
+[00:33:29.775] Y'all let it happen. 'cause y'all stealing too.
+[00:33:33.035] And then y'all can't tell on nobody
+[00:33:36.255] 'cause y'all do stuff like what Michael Scott Jr.
+[00:33:38.245] Just did to Andre Smith.
+[00:33:42.585] Y'all are like, y'all just, it's just sad.
+[00:33:45.575] You know what I'm saying? Like, it's just sad.
+[00:33:46.775] I said that for my new year. I wasn't gonna curse.
+[00:33:49.445] Like I'm like, I I'm not drinking no more.
+[00:33:51.755] So I'm not gonna do that anymore.
+[00:33:53.115] But I just want, I just had to let Atlanta know that you
+[00:33:57.725] are a 6.6 mayor, okay?
+[00:34:02.575] And they also are losing.
+[00:34:05.455] So Andre doing something wrong down there too.
+[00:34:08.355] 'cause y'all like this.
+[00:34:12.065] Thank you very much for your comments.
+[00:34:15.015] Our next speaker is John Strat.
+[00:34:25.915] Um, thank you very much for listening.
+[00:34:29.855] Uh, what I have to say, millions of words.
+[00:34:35.295] Uh, basically what I'm proposing is that I've been in, uh,
+[00:34:40.355] software for 62 years.
+[00:34:43.655] I started programming the day
+[00:34:44.895] after Kennedy got shot 30 years ago.
+[00:34:48.665] My partner and I, uh, Paul Esco, who's now deceased, uh,
+[00:34:53.575] founded Kognito Incorporated, which was an AI
+[00:34:59.025] company far beyond what we have today, as a matter of fact,
+[00:35:02.815] but not for PCs.
+[00:35:05.355] I've worked with software for in the city, uh, and voting
+[00:35:10.545] and census, uh, in a lot
+[00:35:13.485] of different government departments.
+[00:35:15.985] Folks, this is 2 20 25.
+[00:35:20.195] What I propose to do is set up the ai.
+[00:35:23.285] So it's like a little Pacman jump, jump, jump, jump, jump.
+[00:35:28.615] It speaks 192 languages plus
+[00:35:32.535] all the software languages.
+[00:35:35.325] So if I tell my little Pacman, translate this into Java
+[00:35:39.145] or whatever, it'll do that.
+[00:35:42.065] And within a very short period of time, the whole
+[00:35:46.325] software systems will be redesigned into a unified set.
+[00:35:51.205] I have it all defined in this book.
+[00:35:53.085] I published from Dystopia to Utopia.
+[00:35:57.205] It's at Barnes and Noble and on Amazon.
+[00:36:00.115] And it's also my life story as to how I learned,
+[00:36:02.535] what I learned and why I learned.
+[00:36:06.725] The whole idea is that we're all one family,
+[00:36:10.605] whether we like it or not.
+[00:36:12.175] I traveled the world and I know that if I got cut in Africa
+[00:36:16.955] and I needed a blood, I would never ask
+[00:36:21.445] whoever donated the blood to replenish me
+[00:36:24.015] what color their skin was.
+[00:36:26.635] Folks we're all blood brothers
+[00:36:29.105] and sisters, whether we like it or not.
+[00:36:32.775] It's a stupid ego attitude.
+[00:36:35.805] The gimme, gimme, gimme, gimme the fear fearful one
+[00:36:39.745] that they're gonna lose something they never owned.
+[00:36:43.025] None of us own anything.
+[00:36:44.575] As soon as you say you own something, it actually owns you,
+[00:36:48.305] your spirit, part of your spirit.
+[00:36:50.095] You give it up in order to say, I own that folks,
+[00:36:54.355] we're all one big, beautiful picture.
+[00:36:57.855] DaVinci said it, learn
+[00:37:01.375] to see everything is connected.
+[00:37:04.835] The love of karma. As Isaac Newton is saying,
+[00:37:07.115] for a reaction, there's an equal and opposite reaction.
+[00:37:10.375] Let's throw out some compassion.
+[00:37:12.255] Let's throw out some love out there.
+[00:37:14.695] Let's pick up a homeless person for a Sunday dinner.
+[00:37:18.355] Give of yourself. You'll, you'll gather much,
+[00:37:21.245] much more than you ever imagined.
+[00:37:23.545] That's my message.
+[00:37:27.655] Thank you very much for your comments.
+[00:37:30.155] Our next speaker is Prosperity Group.
+[00:37:34.475] Thank you.
+[00:37:41.765] Hello. And I'm gonna jump right in.
+[00:37:44.455] This is for you Brandon Johnson, Isaiah 10 and one.
+[00:37:49.555] Woe to those of you who enact unjust decrees
+[00:37:53.655] and write grievous laws that were not
+[00:37:57.825] given by God.
+[00:38:00.045] Think about it. Your executive orders
+[00:38:02.575] and all these other things that you do out of spite
+[00:38:05.415] to hurt the American citizens,
+[00:38:07.765] preventing us from getting our federal funding from
+[00:38:12.055] Donald J. Trump to give
+[00:38:15.495] to the illegal aliens, the ones
+[00:38:17.795] that you won't call out when you went down
+[00:38:19.715] to Washington DC when all of those congressmen called out
+[00:38:23.795] that name and you said, not a word, just sat there
+[00:38:26.145] with your mouth muted.
+[00:38:28.715] Interesting. But then you can jump on one
+[00:38:30.835] of the journalists, Mark Armstrong for saying that word.
+[00:38:36.325] Interesting. You pick and choose who you wanna jump on.
+[00:38:38.545] Do you? Okay, and let's go now to my next bullet point.
+[00:38:44.285] Alderman Hall, though none of you all accept that agreement
+[00:38:47.475] that he wants to sign into, uh, a ordinance for giving laws,
+[00:38:52.775] fines and fees to the social media platforms
+[00:38:56.405] because he outright didn't tell the truth.
+[00:38:59.545] He started off talking about the black communities
+[00:39:03.025] and saying that the money was for them,
+[00:39:04.545] but then he didn't wanna appropriate it directly for
+[00:39:07.405] that funding and said, it's for all lies.
+[00:39:10.935] Tired of the lies.
+[00:39:12.385] That's what frustrates me watching this BS go on down here.
+[00:39:17.225] And no one that has a right mind
+[00:39:21.345] will generally have to say too much
+[00:39:23.195] because they might get punished.
+[00:39:25.815] We know all of you who do stand up
+[00:39:27.435] and we know all of you who don't.
+[00:39:29.705] Your names are on the list of the dos and the don't.
+[00:39:32.435] So don't think we don't know, but you who stand up for us.
+[00:39:36.805] Thank you. For those of you who don't get a life, get out
+[00:39:41.275] of the position, get outta your
+[00:39:42.715] roles 'cause you're not needed.
+[00:39:44.535] Now let's also go to, um, my next point
+[00:39:48.545] that you black people who are still on the plantation,
+[00:39:51.735] I'm just gonna bring it to you.
+[00:39:53.675] Y'all need to get a life, get your new master, a God
+[00:39:57.805] and not man who runs your life
+[00:40:00.135] because you need to understand where you gonna have
+[00:40:03.145] to answer to when it comes to the end.
+[00:40:05.125] For those of you who turn on us,
+[00:40:07.485] who are black Americans calling yourselves the
+[00:40:10.495] tethers of this world.
+[00:40:12.365] Forget you all because we don't need any of you.
+[00:40:15.245] So I'm just gonna keep it real with all of you.
+[00:40:18.125] You all need to get this stuff cleaned up down here
+[00:40:20.665] because it is raunchy.
+[00:40:22.525] $200 million, two illegal aliens to service them.
+[00:40:26.775] Brandon Johnson, with property taxes hitting the black
+[00:40:29.505] communities south and the west side.
+[00:40:32.085] Oh, you will have to answer to that to God.
+[00:40:34.925] I'm letting you know that you heard it.
+[00:40:37.135] It's gonna be recorded, documented,
+[00:40:39.185] and play back by the time you go to answer to Judgment day.
+[00:40:42.895] Have a good
+[00:40:45.595] Thank you very much for your comments.
+[00:40:50.105] Our next, our next speaker,
+[00:41:13.295] Thank you, sir, would ask
+[00:41:14.845] that you refrain from the outbursts.
+[00:41:19.575] Sergeant at arms please restore order
+[00:41:35.725] And no one
+[00:41:52.815] and no one standing.
+[00:42:09.095] Want, want, want it Now.
+[00:42:49.055] If, if you continue to make an outburst, I'm gonna ask
+[00:42:51.555] that you be removed as well.
+[00:42:56.655] Thank you for restoring order.
+[00:42:58.545] The sergeant at arms chair, clerk, please continue.
+[00:43:03.435] Our next speaker this morning is Life Beyond Limits, Inc.
+[00:43:13.575] God bless everyone. I wanna honor you, mayor Johnson.
+[00:43:17.275] I honor, uh, the council on today
+[00:43:19.775] and I honor all of the, um, organizations
+[00:43:23.115] that I represented.
+[00:43:24.755] I wanna say to the, uh, council on this morning,
+[00:43:27.735] and I wanna just dispel the myth of black people are angry.
+[00:43:32.265] What we just saw was a black
+[00:43:35.525] mother that's hurting.
+[00:43:39.005] I had a teacher by the name of Lou Meyers, who was one
+[00:43:41.805] of the best, uh, civil rights attorney of our time.
+[00:43:45.305] And one of the things that he taught me, he said,
+[00:43:47.245] laws are made for the people who make them.
+[00:43:50.865] And, and nothing ever happens until it happens
+[00:43:53.465] to the people who make the law.
+[00:43:55.865] And so Mayor Johnson, there was something that stood out
+[00:43:58.325] to me that you said, you talked about my condolences to you,
+[00:44:02.305] but you talked about having a brother by the name of Leon
+[00:44:05.425] and you talked about how the funding was cut, um,
+[00:44:08.605] from the federal level.
+[00:44:10.265] You talked about mental health and addiction.
+[00:44:12.995] Well, I wanna say to you, just as you have a brother
+[00:44:15.625] by the name of Leon, I have a brother by the name of Kevin
+[00:44:19.025] and he died from Fentanyl.
+[00:44:21.065] So when I'm out in the street advocating, you know,
+[00:44:23.805] for the things that we have going on in our community, it's
+[00:44:26.765] because just like you, I'm out there
+[00:44:28.965] and I see the real issues of the people
+[00:44:30.685] that are hurting in our community.
+[00:44:32.625] We just had a young lady over in Woodlawn, a mother
+[00:44:35.625] of five shot in the, in an alley.
+[00:44:38.265] We just had a, a celebration of Dr. Martin Luther King.
+[00:44:41.765] I wanna say to the council, I know
+[00:44:43.965] that Dr. King probably would be proud
+[00:44:45.845] that we have a black mayor, that we have a, a black, uh,
+[00:44:49.315] cook County president over the board,
+[00:44:51.875] that we have a black police chief, uh, that we have all
+[00:44:55.245] of these, uh, different black aldermen
+[00:44:57.125] and all of churches on every corner,
+[00:44:59.145] really in our communities that are black.
+[00:45:01.465] But I think that he would not be happy with all
+[00:45:04.445] of the violence, the murders, the shootings,
+[00:45:06.985] and even when we have things going on in our community,
+[00:45:09.645] where's the outcry?
+[00:45:11.015] Where are the pastors
+[00:45:12.125] and leaders that get all of this funding?
+[00:45:13.835] They come and they're, you know, they have,
+[00:45:15.845] they sit on boards, they have all
+[00:45:17.965] of these connections to you.
+[00:45:19.545] But when all of this stuff is going on in our communities,
+[00:45:21.965] where are the pastors and the leaders?
+[00:45:23.995] They are nowhere to be found.
+[00:45:26.205] I can't even count on my hand, 10 churches
+[00:45:30.295] where we have pastors
+[00:45:31.565] and leaders that actually go in the community
+[00:45:33.535] where these young men are in poverty killing each other
+[00:45:36.985] to really bring about solutions.
+[00:45:38.945] And so I'm saying to you, as I've been saying, uh,
+[00:45:41.665] as I come here, you have author.
+[00:45:44.285] I mean, you have a lot of pool.
+[00:45:45.545] As the mayor, we can bring truces to the city of Chicago.
+[00:45:49.445] I think that you can make one phone call,
+[00:45:52.025] you can call G Herbo.
+[00:45:53.425] You probably can call Oprah Winfrey.
+[00:45:55.805] I see all of these people that come
+[00:45:57.385] and they get the red carpet treatment.
+[00:45:59.705] Uh, mayor Johnson, they take pictures
+[00:46:01.445] with you when it benefit them.
+[00:46:03.265] But where are these people when we have all of this violence
+[00:46:05.865] and killing going on in our communities?
+[00:46:08.265] And so it just, it, it is time for change.
+[00:46:10.625] We gotta change the system because the system is flawed.
+[00:46:14.225] And I say this respectively to you.
+[00:46:17.355] Thank you very much for your comments.
+[00:46:20.565] Our next speaker this morning is Esme Marcos.
+[00:46:27.855] Good morning everyone. My name is Esme.
+[00:46:30.285] I'm proud to be part of Tiva Cafe
+[00:46:32.035] where I've dedicated the last two years promoting the
+[00:46:34.265] benefits of hemp in our city.
+[00:46:35.725] We provide a safe space for adults
+[00:46:37.265] to explore hemps benefits,
+[00:46:38.425] helping our customers and community thrive.
+[00:46:40.455] When I joined Tiva, I was homeless, sleeping on couches,
+[00:46:43.025] and prior to that, I was sleeping in
+[00:46:44.305] a tent in a forest preserve.
+[00:46:45.905] I was excited to be part of an innovative
+[00:46:47.465] and sustainable business, not only to serve my community,
+[00:46:49.845] but to help rebuild my life.
+[00:46:51.255] However, recent developments have put all of that at risk.
+[00:46:54.625] Alderman and Marty Quinn has introduced a new ordinance
+[00:46:56.385] that rather than genuinely regulating
+[00:46:58.025] seems to be a power grab.
+[00:46:59.495] Many remember Mr. Quinn's history dating back
+[00:47:01.465] to the Mike Madigan days a time filled
+[00:47:03.745] with questionable decisions.
+[00:47:04.935] This ordinance is presented as a means of safety,
+[00:47:07.325] but feels like a way to control our industry.
+[00:47:09.485] The heavy restrictions threatened
+[00:47:11.105] to stifle local businesses like ours
+[00:47:12.865] and local livelihoods like mine,
+[00:47:14.545] prioritizing power over support.
+[00:47:16.575] Instead of fostering responsible practices,
+[00:47:18.645] it creates fear and barriers.
+[00:47:20.945] I urge all you to stand with me, TIVA Cafe
+[00:47:23.285] and the rest of our industry.
+[00:47:24.715] Let's push back against the misuse of power
+[00:47:27.045] and advocate for fair regulations
+[00:47:28.705] that truly support our community and entrepreneurs.
+[00:47:31.325] Together we can ensure our voices are heard
+[00:47:33.305] and our stories are acknowledged.
+[00:47:34.665] We deserve an industry that thrives, not one stifled
+[00:47:37.085] by political maneuvering.
+[00:47:38.255] Thank you for your time and support.
+[00:47:40.215] Thank you. Thank you very much for your comments.
+[00:47:43.305] Our next speaker is Glenn Mcg Elfish,
+[00:48:01.685] Mayor Johnson, alderman Quinn
+[00:48:03.735] and others of the city Council.
+[00:48:05.485] Thank you very much for the opportunity to speak today.
+[00:48:08.175] My name is Glenn Mcal and I'm the CEO of Ply,
+[00:48:10.835] a Chicago based hemp beverage company.
+[00:48:12.635] A co-founder of Perfectly Dosed the leading hemp beverage
+[00:48:15.435] ingredient company, also based in Chicago
+[00:48:17.575] and a board member of the Hemp Beverage Alliance.
+[00:48:19.215] And perhaps most importantly,
+[00:48:20.675] I'm also a proud resident of the 50th Ward.
+[00:48:23.375] I'm here today to show my strong support
+[00:48:25.175] for Alderman Quinn's Hemp Regulation Ordinance.
+[00:48:28.015] I'm deeply grateful for, to Alderman Quinn
+[00:48:30.435] and the city council for creating a pathway
+[00:48:32.695] for responsible hemp beverage businesses like ply
+[00:48:35.455] and perfectly dosed to operate in Chicago while putting an
+[00:48:38.495] end to the unsafe hemp products found across the city.
+[00:48:41.665] This ordinance is a step forward for Chicago.
+[00:48:44.495] I'm happy to be a resource for anyone on the council
+[00:48:46.775] and I deeply appreciate the opportunity to testify today.
+[00:48:50.195] I respectfully encourage all of you
+[00:48:51.635] to vote yes on Alderman Quinn's ordinance today.
+[00:48:54.085] Thank you Alderman Quinn, thank you
+[00:48:55.675] to the council and thank you Mayor Johnson.
+[00:48:59.815] Thank you very much for your comments.
+[00:49:01.785] Our next speaker this morning is George Blakemore.
+[00:49:06.925] Listen to the speakers
+[00:49:08.965] and I say, now what are you going to speak on Mr.
+[00:49:11.575] Blakemore? You deserve the government.
+[00:49:13.705] You get all you black ones deserve,
+[00:49:17.345] the government you get.
+[00:49:19.865] You deserve the ghetto.
+[00:49:22.155] You deserve, uh, uh, your people, uh, uh, youth,
+[00:49:26.795] 12 years in school and reading on a fourth grade level.
+[00:49:30.595] You deserve these no good black altimas.
+[00:49:33.675] You deserve these no good white altars.
+[00:49:36.435] You deserve the Hispanic and the Asian Alt you deserve.
+[00:49:40.725] What, what you get.
+[00:49:43.345] You deserve a non-functional government here.
+[00:49:47.065] You deserve that.
+[00:49:48.705] So you getting exactly what you deserve or outrage or,
+[00:49:53.465] or something stinks here.
+[00:49:55.475] Something is funky here. Something is un-American here.
+[00:49:59.695] Maybe it's America.
+[00:50:01.435] This country was built on fighting and, and, and misery
+[00:50:06.025] and pain of the black man, the black man
+[00:50:10.305] and the black woman was enslaved in America.
+[00:50:13.065] So, uh, uh, if I ancestors could see us right today,
+[00:50:17.585] we deserve this.
+[00:50:19.665] You deserve these bigay white men telling you what to do.
+[00:50:23.145] You deserve being in slavery.
+[00:50:24.945] You deserve a corrupt, uh, uh, uh, government.
+[00:50:28.905] You deserve a, a full desert.
+[00:50:31.905] You deserve no economic development.
+[00:50:35.545] So you get exactly what you deserve.
+[00:50:38.785] You get it because you deserve it.
+[00:50:41.065] You got to do what you got to do to empower you.
+[00:50:44.745] You got to become selfish.
+[00:50:47.105] Not go red, not go blue, but to your black b***h.
+[00:50:51.795] You got to be true on this new plantation.
+[00:50:55.395] You deserve this man here you deserve
+[00:50:59.915] and the deal you deserve all of 'em.
+[00:51:02.355] All of 'em. That's why you got 'em. That's why you got 'em.
+[00:51:07.325] You deserve Mitchell.
+[00:51:08.965] You deserve all these non-functional people here.
+[00:51:12.765] You deserve exactly what you get
+[00:51:15.325] and you get what you deserve.
+[00:51:17.005] And if you don't use what you got, don't need what you got.
+[00:51:21.485] Look at it now and the bill, look at him, look at him.
+[00:51:25.645] Look at all of you.
+[00:51:26.875] You got all these black faces in high places
+[00:51:30.515] and you, you deserve it.
+[00:51:32.975] You deserve exactly what they're giving you.
+[00:51:35.465] Look, Mr. Hall, how you doing? Sit down.
+[00:51:37.755] You deserve all of them. All of them.
+[00:51:41.495] You deserve all of them. Evan, sit down.
+[00:51:45.175] You deserve all of them. All of them. Don't go.
+[00:51:48.885] Don't get mad at them.
+[00:51:50.225] Look in the mirror, nasty hair, your big nose
+[00:51:54.735] and your black homes.
+[00:51:57.375] All right? Be selfish. Black mans. Be selfish.
+[00:52:01.765] Black women, birds of a feather brought together.
+[00:52:05.935] You deserve the government you get.
+[00:52:08.255] So you deserve all these.
+[00:52:12.405] Thank you very much for your comments.
+[00:52:16.525] Our next speaker this morning is Charles Wu.
+[00:52:34.295] Exactly what the black,
+[00:52:46.295] Just, just a second.
+[00:52:52.585] Alright. Very well. Oh, are we,
+[00:52:57.735] Can you guys hear me? Yes,
+[00:52:58.835] We can please. Morning,
+[00:52:59.835] mayor. Good morning. And members of the council.
+[00:53:02.895] My name is Charles Wu
+[00:53:04.135] and I'm here on behalf
+[00:53:05.475] of the Illinois Hemp Business Association.
+[00:53:08.155] I'm also here as the owner of Sativa.
+[00:53:10.515] We operate two retail hemp storefronts in Wicker
+[00:53:12.935] Park and the South Loop.
+[00:53:14.605] More importantly, I'm here on behalf of my two employees
+[00:53:17.435] who are here with me, Mariah and Esme.
+[00:53:20.035] You heard Esme, she's a little passionate.
+[00:53:22.355] And right now the economy is tough.
+[00:53:24.835] And after hearing the story of Esme,
+[00:53:26.795] what you didn't hear is she was complaining
+[00:53:28.485] to me this morning that she's now in a higher tax bracket.
+[00:53:31.465] And that's a good thing. But all
+[00:53:33.325] of this will disappear if the Quinn Ordinance passes.
+[00:53:36.465] As written now about us,
+[00:53:38.785] we do not allow people under 21 onto our premises.
+[00:53:42.265] We card an ID scan every customers.
+[00:53:45.145] Our products are tested, we pay taxes.
+[00:53:48.185] And many of you have met me
+[00:53:49.365] because I've been advocating to ask to pay more taxes
+[00:53:52.705] to the city because we are not a bad actor.
+[00:53:55.655] We've been asking to be regulated even on par
+[00:53:58.205] with the cannabis industry.
+[00:53:59.745] And that's what's important
+[00:54:01.275] because the Quinn Ordinance is not about safety.
+[00:54:05.195] This ordinance is about economic favoritism.
+[00:54:08.325] I am not part of the alcohol industry,
+[00:54:10.985] nor as I am influential as the restaurant association.
+[00:54:15.265] I'm just a small business owner
+[00:54:17.075] with a standalone hemp business
+[00:54:18.875] that isn't given a seat at the table.
+[00:54:21.635] With this ordinance passing, I have no way to comply
+[00:54:25.185] and I will have to shut down.
+[00:54:27.165] I will have to lay off ESMI and Mariah
+[00:54:30.025] and our other employees,
+[00:54:31.625] and they will be out trying to fend for themselves.
+[00:54:35.655] Additionally, this favoritism creates issues
+[00:54:39.405] that exposes the city to unnecessary litigation.
+[00:54:43.785] If intoxication is the concern,
+[00:54:46.315] that concern does not disappear in a beverage.
+[00:54:49.425] If safety is the concern, banning storefronts that are 21
+[00:54:53.245] and only that card
+[00:54:54.765] and rigorously test their products makes no sense.
+[00:54:58.985] And if fairness is the concern,
+[00:55:01.145] we should all be given a seat at the table.
+[00:55:03.865] Alternative ordinance language has already been circulated.
+[00:55:07.595] Language that maintains strict standards on testing,
+[00:55:11.095] age limits, labeling, enforcement,
+[00:55:13.815] and licensing, while also ensuring parity across industries.
+[00:55:19.765] I am not here asking for special treatment.
+[00:55:22.545] I'm asking for clear rules, consistent enforcement,
+[00:55:26.465] and a path to compliance that applies equally to everyone.
+[00:55:31.115] Please consider the proposed regulatory alternatives
+[00:55:34.595] and work with operators like me to build a framework
+[00:55:37.845] that protects consumers, supports small businesses,
+[00:55:41.805] does not pick winners and losers,
+[00:55:44.315] and keeps the market transparent
+[00:55:46.395] and accountable. Thank you for your time.
+[00:55:49.455] Thank you. Thank
+[00:55:50.805] You very much, your Honor.
+[00:55:52.445] There are no further speakers
+[00:55:53.445] who have timely signed off for the public comment
+[00:55:55.115] Very well. This completes
+[00:55:56.115] our public common portion of the meeting.
+[00:55:58.105] Before we get to our resolution, there's uh,
+[00:56:01.385] one acknowledgement that Alders Lawson
+[00:56:05.385] and Robinson would like to make a memorializing
+[00:56:08.745] of the life of Mr.
+[00:56:09.995] Rick Garcia. Chair recognizes Alderman Lamont Robinson.
+[00:56:17.865] Mr. Mayor, thank you very much. Uh,
+[00:56:23.285] It is, uh, weighing
+[00:56:26.815] heavy on my heart as
+[00:56:31.835] Altman Bennett takes his seat, uh, as we recognize
+[00:56:37.185] the memory of Rick Garcia, uh, trailblazer
+[00:56:40.645] and the LGBTQ plus community,
+[00:56:45.905] often we think about a city
+[00:56:50.625] that, uh, is accepting of everyone, Mr.
+[00:56:54.475] Mayor. But this work was shaped
+[00:57:00.795] by Rick and others.
+[00:57:04.065] And unfortunately, as we look at the world today,
+[00:57:08.135] particularly with the headwinds
+[00:57:10.485] that are coming from Washington, DC uh,
+[00:57:14.125] Rick Rick's work is still necessary
+[00:57:19.015] in 2026, unfortunately.
+[00:57:22.205] And so, uh, behalf, behalf
+[00:57:24.785] of the L-G-B-T-Q Caucus, and if I may, Mr.
+[00:57:28.685] Mayor, the City of Chicago, uh,
+[00:57:33.215] I'm sending today to thank Rick Garcia for his work
+[00:57:37.975] and to continue his legacy that is much needed
+[00:57:44.065] as it relates to not only the city
+[00:57:46.565] of Chicago with the United States.
+[00:57:49.975] And so I want to thank my colleague, partner in crime,
+[00:57:55.505] Altman Lawson for drafting today's resolution.
+[00:57:59.515] Uh, and Mr. Mayor, I want to thank you
+[00:58:02.075] for your continued support of the lgbtq plus community.
+[00:58:07.285] And lastly, as I've stated
+[00:58:10.195] before, there are 50 wars in the city of Chicago
+[00:58:15.225] and 77 neighborhoods understand that
+[00:58:19.975] in all 77 neighborhoods, undoubtedly
+[00:58:24.235] there is a member of the lgbtq plus community.
+[00:58:29.955] And we are looking for
+[00:58:35.075] continued support, not only from you Mr.
+[00:58:38.495] Mayor, but from every member and this council.
+[00:58:42.015] Thank you very much. Thank you.
+[00:58:44.155] Chair recognizes Alderman Lawson.
+[00:58:46.435] Thank you, Mr. President.
+[00:58:47.525] Uh, apologize that I, I had stepped out.
+[00:58:49.885] Um, I am proud to be able
+[00:58:52.705] to bring this resolution honoring a real trailblazing
+[00:58:55.865] leader in our community.
+[00:58:57.645] Um, who passed last week, Rick Garcia was, uh,
+[00:59:01.245] an activist from high school on, um, where he saw injustice.
+[00:59:04.765] He spoke out, um, with a sharp tongue usually, um,
+[00:59:09.325] and a great wit, uh, that had a way
+[00:59:11.265] of bringing people in around him.
+[00:59:13.565] Um, he was part of the Gang of Four that lobbied this body
+[00:59:16.125] to pass our Equal rights bill in 1988.
+[00:59:19.605] Um, the, uh, half of them are now gone.
+[00:59:22.775] Um, John Henry Naski and Rick Garcia.
+[00:59:25.615] Uh, Lori Ditman has retired from City Service
+[00:59:27.935] and Art Johnson, of course still still runs Sidetrack.
+[00:59:30.335] But, um, it's amazing to think, uh, what they had to do then
+[00:59:33.995] and who the opponents of equality were.
+[00:59:36.055] Um, it was the parish priest. Um, it was the local business.
+[00:59:40.935] It was, uh, the labor union in in some cases.
+[00:59:43.895] And, and all of that has changed.
+[00:59:46.215] Um, thanks to the leadership and work of Rick Garcia.
+[00:59:50.115] I got to meet him when I was a very young man, uh,
+[00:59:52.475] starting out in politics, working the
+[00:59:54.155] state's human rights bill.
+[00:59:55.815] Um, I worked for State Senator Carol Ronan,
+[00:59:57.875] who carried the bill in the Senate.
+[00:59:59.495] Um, and Rick was the chief lobbyist.
+[01:00:01.375] Um, and so we would do a lot of role calling.
+[01:00:03.155] That's probably where I learned how to do it.
+[01:00:04.895] And he had the angle on everybody, um, who,
+[01:00:08.335] how do we get to this person?
+[01:00:09.865] Well, she's got a lesbian sister, she's got, you know,
+[01:00:12.355] her pastor is good with it.
+[01:00:13.475] We can get to her. Labor came in for equality
+[01:00:16.735] and that changed the game.
+[01:00:18.215] But he knew what everyone's angle was
+[01:00:20.495] and he knew how to talk to everybody to get to everybody,
+[01:00:23.255] um, and to put things together.
+[01:00:25.095] And that's a skill that, uh, we admire.
+[01:00:28.135] Um, and it really takes, uh,
+[01:00:30.035] somebody who's dedicated to what they're doing.
+[01:00:32.095] Um, Rick wasn't afraid
+[01:00:33.875] to say something a little controversial every now and then.
+[01:00:37.255] Um, he could go viral before you could go viral, um,
+[01:00:40.695] and was good at it and, and brought awareness, uh, where
+[01:00:43.675] otherwise we may not have had it.
+[01:00:45.695] And so, um, I thank him for the work that he did, uh,
+[01:00:50.515] on behalf of our community, the groundwork he laid
+[01:00:53.105] that makes our nine member caucus possible today.
+[01:00:55.755] And, and we can invite every, every member here to,
+[01:00:58.015] to co-sponsor this resolution.
+[01:00:59.975] Um, I know Richard Streetman is here, uh, who is, uh,
+[01:01:02.915] here on behalf of the family.
+[01:01:04.775] Um, and so we send our deepest consults on behalf
+[01:01:07.955] of a grateful city, uh, for a life well lived.
+[01:01:10.525] Thank you, mayor. You're
+[01:01:11.635] Welcome. Thank you Alderman.
+[01:01:12.635] I do wanna acknowledge
+[01:01:14.275] and thank the Alpha Kappa Alpha Sorority Incorporated
+[01:01:18.325] celebrated 118 years of service
+[01:01:21.375] to all humankind on January 15th,
+[01:01:24.485] Delta Sigma Theta commemorated 113 years
+[01:01:28.255] of sisterhood on January 13th
+[01:01:31.855] and Zeta five beta who celebrated 106 years
+[01:01:36.655] for finer womanhood.
+[01:01:38.135] We extend our sincere thanks for their enduring service,
+[01:01:41.315] leadership, and commitment to our city, alderman Mitchell
+[01:01:46.285] for a motion for the temporary suspension of the rules so
+[01:01:49.545] that we can take up for immediate
+[01:01:51.105] consideration this resolution.
+[01:01:52.405] Before I do that, please uh, like
+[01:01:53.945] to be counted as, uh, present for
+[01:01:55.385] Court. Please add Alderman
+[01:01:56.385] Mitchell as part
+[01:01:57.425] of the quorum roll call Alderman Mitchell. I
+[01:01:59.545] Move every, uh, temp
+[01:02:00.705] for the temporary suspension of the rules.
+[01:02:02.975] Very well, hearing no objections sole ordered.
+[01:02:05.845] Um, in the interest of respecting people's time,
+[01:02:08.085] we will forego reading the resolution
+[01:02:10.185] and go straight to the remarks of the city council.
+[01:02:12.565] Uh, this resolution commemorate commemorates,
+[01:02:15.125] the International Holocaust Day
+[01:02:16.665] of Remembrance Chair recognizes all Alderwoman Silverstein.
+[01:02:21.485] Thank you Mr. Ram. Mayor, I don't believe the copy
+[01:02:23.935] of the resolution was passed out to my colleagues,
+[01:02:27.535] so we're gonna get that.
+[01:02:29.605] Okay. Thank you. Um, esteem members
+[01:02:33.745] of the Chicago City Council and distinguished guests.
+[01:02:38.385] Today we come together
+[01:02:39.715] to recognize international Holocaust Remembrance Day,
+[01:02:43.695] a day set aside by the global community to remember one
+[01:02:47.415] of the darkest chapters in human history
+[01:02:50.435] and to reaffirm our shared responsibility
+[01:02:53.435] to confront hatred wherever it appears.
+[01:02:56.715] As we reflect on the Holocaust,
+[01:02:59.285] we remember the 6 million Jewish men, women,
+[01:03:02.405] and children who were systematically murdered
+[01:03:05.405] by the N Nazi regime
+[01:03:07.485] and its collaborators, along with millions of others
+[01:03:11.745] targeted because of their identity, beliefs,
+[01:03:14.285] or perceived differences.
+[01:03:16.805] The Holocaust stands as a chilling reminder of
+[01:03:19.865] what happens when antisemitism, bigotry
+[01:03:23.565] and dehumanization are allowed to grow.
+[01:03:26.295] Unchecked remembrance,
+[01:03:28.495] however, is not only about the past,
+[01:03:31.875] it is also about the world we are living in today.
+[01:03:36.315] Anti-Semitism is not a relic of history.
+[01:03:39.955] It is a present and growing threat here in Chicago.
+[01:03:45.105] anti-Semitic hate crimes increased by 58% last year.
+[01:03:50.505] A staggering and deeply troubling statistic.
+[01:03:54.375] My community strongly felt this reality when a Jewish member
+[01:03:58.475] of the 50th ward was shot.
+[01:04:00.675] Recently while walking
+[01:04:01.975] to synagogue on the Sabbath around the world.
+[01:04:06.175] We are also witnessing a shocking rise in anti-Semitic
+[01:04:09.955] violence and rhetoric, including the horrific
+[01:04:12.675] terrorist attack at Bondi Beach,
+[01:04:15.045] which killed 15 innocent people
+[01:04:17.815] and injured another 40 who had gathered
+[01:04:20.175] to celebrate the Jewish holiday of Hanukkah.
+[01:04:24.295] These acts remind us that the lessons
+[01:04:26.345] of the Holocaust are not abstract
+[01:04:29.065] and not relegated to the past.
+[01:04:31.235] They are urgently relevant today
+[01:04:33.825] and right here in Chicago, which is why it is so important
+[01:04:37.825] for us to recognize Holocaust Remembrance Day
+[01:04:41.325] and to learn more about the horrors of the Holocaust.
+[01:04:45.305] I am grateful to my colleagues
+[01:04:47.045] who will be joining me tomorrow on my yearly delegation
+[01:04:50.505] to the Illinois Holocaust Museum.
+[01:04:53.285] And for those of you who have not yet RSVP'd,
+[01:04:56.325] you are all still invited and would love for you to come.
+[01:05:01.085] It is a unique honor that we are joined here this morning
+[01:05:04.365] by our Holocaust survivor, Yvonne Aronson.
+[01:05:08.405] It is truly a privilege to have you with us.
+[01:05:12.135] We do not take lightly the courage it takes for you
+[01:05:14.715] to share your story
+[01:05:16.575] nor the responsibility we bear as listeners.
+[01:05:20.315] Your presence is a living testament to resilience,
+[01:05:24.385] to survival, and to the moral obligation we all have
+[01:05:28.585] to remember and to act.
+[01:05:30.745] Hearing directly from a survivor is a profound gift.
+[01:05:34.295] And we are grateful beyond words that you are willing
+[01:05:37.535] to share your experience.
+[01:05:39.895] I also want to recognize
+[01:05:41.195] and thank all of our distinguished guests who are here today
+[01:05:44.595] and whose work ensures that the memory
+[01:05:46.475] and lessons of the Holocaust endure.
+[01:05:49.535] Besides Yvonne, we have from the Illinois Holocaust Museum
+[01:05:53.445] and Education Center, Bernard Kosoff, Amanda
+[01:05:58.465] Erman, Allison Satir
+[01:06:01.725] and board members Andy Lowenthal and Ari Ari Ette.
+[01:06:05.605] And from the Jewish United Fund,
+[01:06:07.445] the Jewish Federation of Chicago.
+[01:06:09.205] We have Daniel Goldwyn, Eric Sedler,
+[01:06:11.935] Natalie Glick and Jane Charney.
+[01:06:14.685] And we also have Yesi held from Stan with us.
+[01:06:17.815] He's here and Alison Slo was here from the Simon
+[01:06:21.545] Weisfeld Center as well.
+[01:06:24.285] Thank you all for your leadership, your advocacy,
+[01:06:27.055] and your unwavering commitment to preserving the memory
+[01:06:30.055] and lessons of the Holocaust on this international Holocaust
+[01:06:34.475] Remembrance Day let us recommit ourselves to the promise
+[01:06:38.375] of never again.
+[01:06:40.375] Let us honor those who were lost.
+[01:06:42.765] Stand with those who survived
+[01:06:44.935] and resolve here in this chamber
+[01:06:46.535] and beyond to confront anti-Semitism
+[01:06:49.455] and hatred wherever they appear.
+[01:06:53.215] Thank you so much for allowing me to speak
+[01:06:55.425] and I now move that Yvonne Aronson, our holocaust survivor,
+[01:06:59.945] be granted leave to address the body
+[01:07:01.885] Al Alt woman Silverstein.
+[01:07:03.325] If we could, um, reserve that moment, uh, for the end
+[01:07:06.585] to give Alders an opportunity to speak, we're happy
+[01:07:08.765] to grant that leave, right?
+[01:07:10.755] Okay, sure. Are there any elders, any additional elders
+[01:07:13.685] that wish to speak to this resolution
+[01:07:14.925] before we grant leave Chair recognizes Alder Hadden.
+[01:07:21.175] Thank you Mr. President.
+[01:07:22.985] Um, now our guests can make sure to you get
+[01:07:27.685] to wrap everything up for us.
+[01:07:30.065] We can be lengthy sometimes, uh, in our comments.
+[01:07:34.105] Um, I want to thank, uh, chairwoman Silverstein
+[01:07:36.705] for bringing this resolution and our guest
+[01:07:38.545] and the survivor, uh, here today.
+[01:07:41.505] Um, I've enjoyed the annual visits that you've done.
+[01:07:44.805] I've been able to go a couple of times
+[01:07:46.385] and visit the Holocaust Museum and this week
+[01:07:50.345] and this year as we acknowledge Holocaust Remembrance Day
+[01:07:55.665] and talk about the commitment for never again.
+[01:07:59.145] Um, I can't help
+[01:08:00.945] but think about what's happening in Minneapolis,
+[01:08:04.225] what's happening in Chicago,
+[01:08:06.105] what's happening in other cities across our country.
+[01:08:09.625] Um, we are, um, meant
+[01:08:14.555] to hold our histories close so that we can learn.
+[01:08:17.585] Um, I have a tattoo on my arm that you can't see
+[01:08:20.365] 'cause I'm very respectable during city
+[01:08:21.805] council meetings of course.
+[01:08:23.585] Um, and it's a Sankofa, which is a West African symbol.
+[01:08:27.705] It comes in a couple forms
+[01:08:28.945] and um, it largely encourages us
+[01:08:32.905] to return and get it.
+[01:08:35.345] So it's a symbol of a bird.
+[01:08:37.115] It's reaching back over its back
+[01:08:39.145] and it's about learning from our history
+[01:08:41.385] and bringing that forward for our future.
+[01:08:44.305] So the bird's feet face forward,
+[01:08:48.105] Holocaust Remembrance Day and the visits that I've gone
+[01:08:50.695] and all the efforts for lifting up the stories
+[01:08:54.375] of the survivors and of the people who didn't survive,
+[01:08:58.825] I think are core to the American experience
+[01:09:02.465] that I have as well.
+[01:09:03.815] Because as a black American, we are always looking
+[01:09:08.085] to our past to center ourselves in the fights
+[01:09:12.785] that we also still face.
+[01:09:14.845] And right now in our country, as we think about the extremes
+[01:09:18.885] of ethnic cleansing, antisemitism,
+[01:09:23.505] anti-blackness, uh, xenophobia, we're seeing
+[01:09:27.565] that carried out from the halls of our highest office.
+[01:09:32.575] We have a president in this land that is demonizing people
+[01:09:37.315] that don't look like him.
+[01:09:39.315] We've seen that before.
+[01:09:41.565] We've got armed troops without the authorization
+[01:09:45.675] of Congress acting on American soil, breaking down doors
+[01:09:49.815] of homes and stealing people out of their houses.
+[01:09:54.965] I've heard these stories before.
+[01:09:57.815] Um, I've heard these stories
+[01:09:59.395] before they've happened, they've happened here, especially
+[01:10:02.815] to black Americans.
+[01:10:04.785] They've happened to Jewish people around the world.
+[01:10:09.185] They're happening now.
+[01:10:11.695] And so I appreciate this remembrance day
+[01:10:15.375] and also that lesson of never again
+[01:10:18.615] and about us taking action
+[01:10:20.015] and encourage all of us in this moment, in this body,
+[01:10:22.855] in this audience, to be aware, to do your homework,
+[01:10:26.375] to pay attention to what's happening.
+[01:10:28.715] 'cause it's happening now.
+[01:10:30.095] And it is upon all of us to take action.
+[01:10:33.735] We have our history, we know the lessons,
+[01:10:36.935] and right now we have ethnic cleansing, xenophobia,
+[01:10:41.695] anti-blackness, anti-poverty happening
+[01:10:45.375] and being carried out by our government.
+[01:10:49.185] They are acting against us, they are stealing our people,
+[01:10:52.265] they are kidnapping them and they're trampling our rights.
+[01:10:55.655] And what's next? From the stories that I've heard
+[01:10:58.975] of survivors like Ms.
+[01:11:00.345] Aronson, we know what's next and it's ugly
+[01:11:03.815] and we don't want it to happen ever again.
+[01:11:06.255] So, Mr. President, thank you for allowing me to speak
+[01:11:09.135] and to my colleagues, pay attention, um,
+[01:11:13.065] heed what's happening and let's work together
+[01:11:15.455] to protect Chicagoans and to take action for our country.
+[01:11:19.315] Thank you. Are there any other
+[01:11:22.045] elders that wish to speak to this?
+[01:11:23.345] The chair recognizes Alderman Lopez.
+[01:11:28.025] Thank you Mr. President
+[01:11:29.175] and good morning members of the city Council.
+[01:11:30.735] Good morning to all of our guests
+[01:11:32.795] and to whom we're gonna hear from shortly.
+[01:11:36.095] I rise in support of this resolution
+[01:11:41.175] and in support of our Jewish community as St.
+[01:11:46.185] John Paul would call them, our beloved brothers and sisters.
+[01:11:53.045] We oftentimes hear the saying
+[01:11:56.865] that we can never allow the holocaust to happen again.
+[01:12:01.505] And as we have seen unfold,
+[01:12:07.355] October 7th happened again
+[01:12:13.425] on the beach, happened again.
+[01:12:17.325] And even in discussions here in our own city
+[01:12:21.455] with our own comm commission on human relations,
+[01:12:24.145] which held hearings in this body, in this room, excuse me,
+[01:12:29.495] discussing as our colleague from the 15
+[01:12:32.605] 50th ward said the 58% increase in
+[01:12:37.125] Jewish hate crimes in the city
+[01:12:38.585] of Chicago in the year alone last year alone, we continue
+[01:12:43.335] to have issues with calling out
+[01:12:48.245] the origins, the inklings,
+[01:12:53.045] and the initial acts of Jewish hatred in our own city.
+[01:12:58.075] We allow public spaces to become breeding grounds of hatred.
+[01:13:04.325] We allow demonstrators to burn an effigy.
+[01:13:09.205] Those who would stand against the very beginnings of
+[01:13:13.545] what we saw happen decades ago.
+[01:13:18.025] We continuously ask those of us that care,
+[01:13:22.365] how is it something so her so horrible
+[01:13:25.165] can happen in modern times
+[01:13:27.925] and yet we're living it every single day.
+[01:13:36.265] It's easy to fall back on
+[01:13:42.265] generational tropes that victimize one group
+[01:13:46.135] point the finger play stereotypes.
+[01:13:49.795] But it's much harder for us to educate our own families,
+[01:13:53.375] our own communities, to stand up and say this is wrong.
+[01:13:56.915] To remind people that are faiths that we claim to care
+[01:14:01.095] so much about says this is wrong.
+[01:14:09.045] I've had to witness friends of mine both in this room
+[01:14:12.925] and out break down
+[01:14:17.105] because they don't know how to walk out the door
+[01:14:21.195] head held high in their own heritage without feeling the
+[01:14:25.775] fear of being attacked.
+[01:14:30.545] Most of us have never felt that way.
+[01:14:33.775] Some of us can never stop.
+[01:14:39.875] The Holocaust was not a singular event, ladies
+[01:14:42.835] and gentlemen, because it exists in the hearts
+[01:14:45.515] and minds of so many, both the victims
+[01:14:47.815] and families of those who survived and who are here,
+[01:14:50.215] but also those who seek to perpetrate it again,
+[01:14:54.825] who deny that it even happened
+[01:14:56.865] or question what we all know was
+[01:15:01.735] one of the darkest chapters in human history.
+[01:15:08.575] This isn't something we just remember in January.
+[01:15:11.665] It is something that we should fight against every single
+[01:15:14.705] day and everything that we do.
+[01:15:20.315] And yes, we can recognize that there are communities
+[01:15:23.855] who feel and have been victimized, who've been tortured,
+[01:15:29.605] who've been the targets of racism and oppression.
+[01:15:33.365] But we cannot dilute
+[01:15:35.395] what we know is overwhelmingly going on in our city right
+[01:15:38.245] now as we speak.
+[01:15:42.125] We have to continue to be the bears of light
+[01:15:46.915] so that we never allow the memories of those who perished
+[01:15:52.595] to be extinguished.
+[01:15:57.475] This is something that transcends all of us,
+[01:16:02.655] many of us who say we have faith
+[01:16:05.685] and practice it.
+[01:16:08.645] Your faith commands you to stand up, to defend
+[01:16:14.355] our dear beloved brothers and sisters.
+[01:16:18.105] And I'm glad that we have the chance to hear from one today.
+[01:16:21.415] Thank you Mr. President.
+[01:16:22.735] Thank you. Are there other members of the body that wish
+[01:16:25.325] to speak to the resolution before we provide leave for Ms.
+[01:16:30.285] Aronson? Very well.
+[01:16:34.265] There are no other hands.
+[01:16:35.995] And let me just again, thank um, older woman Silverstein,
+[01:16:39.785] all of the guests that are with us today.
+[01:16:42.385] Uh, Yvonne Aronson,
+[01:16:44.275] Bernard Sheva.
+[01:16:48.335] So Allison Sati, Andy Lowenthal,
+[01:16:52.815] Amanda Friedman, Ari Sege, Jane
+[01:16:57.185] Charney, Eric Sr.
+[01:16:58.985] Daniel Goldwin, David Golder, Natalie, uh, Glick.
+[01:17:03.995] Um, Chicago is home as we all know,
+[01:17:05.995] to a very proud Jewish community whose rich culture
+[01:17:09.250] and heritage has greatly contributed
+[01:17:11.485] to the fabric of our beloved city.
+[01:17:13.885] Our Jewish community has deep,
+[01:17:16.975] profound impact on our entire city.
+[01:17:20.855] The Jewish community, of course, deeply affected and harmed
+[01:17:24.515] and brutalized by the Holocaust with many residents being
+[01:17:28.695] direct descendants of Holocaust survivors,
+[01:17:30.835] victims or refugees.
+[01:17:32.775] January 27th was designated international Holocaust
+[01:17:35.905] Remembrance Day by the United Nations as a day to remember,
+[01:17:39.225] recognized and honor the millions of Jews killed
+[01:17:41.505] by the Nazis and their, uh,
+[01:17:43.545] collaborators in concentration camps.
+[01:17:46.125] Uh, through the horrors of those camps 81 years ago.
+[01:17:50.215] We are seeing sadly, a dramatic increase in hate crime
+[01:17:53.975] and outright violence against the Jewish community.
+[01:17:57.705] Now more than ever, it is important
+[01:17:58.885] that we fight back against the actions of antisemitism,
+[01:18:02.585] holocaust deniers and racism
+[01:18:04.135] and hatred against any single group of people.
+[01:18:07.165] I do want to thank the Illinois Holocaust Museum
+[01:18:09.145] and Education Center, the Jewish United Fund
+[01:18:11.465] and 3G Chicago for their ongoing efforts
+[01:18:14.705] to educate people about the Holocaust
+[01:18:16.505] and uh, as well as to honor the legacy of Holocaust victims
+[01:18:19.905] and survivors administration is committed
+[01:18:22.715] to making Chicago the most welcoming city
+[01:18:25.215] and show the world that it is no place for hatred,
+[01:18:27.635] discrimination, or holocaust denial.
+[01:18:30.795] And that is why I'm proud to stand with you all to recognize
+[01:18:34.215] and celebrate the International Holocaust Remembrance Day.
+[01:18:36.955] And with that leave from this body to allow for Ms.
+[01:18:40.675] Yvonne Aaronson to speak.
+[01:18:43.925] All right, leave is granted that the floor is yours.
+[01:18:48.045] Good morning, mayor Johnson
+[01:18:49.475] and members of the City Council. Good
+[01:18:51.495] Morning.
+[01:18:52.675] Thank you Alderwoman Deborah Silverstein for the honor
+[01:18:55.725] of inviting me to speak today.
+[01:18:58.245] My name is Yvonne Aronson and I am a holocaust survivor.
+[01:19:02.525] My world and that of my family forever changed in May
+[01:19:06.545] of 1940 when the Germans invaded
+[01:19:09.525] and occupied Belgium, a neutral country.
+[01:19:13.255] Soon after my father, who was originally from Austria
+[01:19:16.305] and not a Belgian citizen, was rounded up
+[01:19:19.145] and sent to a forced labor camp in southern France.
+[01:19:22.685] My family had celebrated my first birthday
+[01:19:25.655] just a month earlier.
+[01:19:27.765] My mother, great-grandmother, great aunt
+[01:19:29.865] and I remained in Brussels, the Belgian capital.
+[01:19:33.445] As conditions for Belgian Jews deteriorated
+[01:19:36.445] and deportations began.
+[01:19:38.405] We went into hiding in a convent.
+[01:19:41.155] After a time my mother grew concerned about the safe,
+[01:19:44.405] our safety in the convent,
+[01:19:46.245] and we returned to our apartment in Brussels when my mother
+[01:19:49.845] became seriously ill, our local pharmacist at great risk
+[01:19:53.965] to himself and his family took us in
+[01:19:57.045] and hit us in his cellar while my mother recovered
+[01:20:00.855] once she did with help from the Belgian resistance,
+[01:20:04.485] my mother located a kind widow who agreed to take me in.
+[01:20:09.405] I lived with her under a false identity for three years
+[01:20:13.495] until the war ended and the danger had passed.
+[01:20:16.875] Belgium was liberated by Alled forces in September, 1944,
+[01:20:21.665] but the war did not officially end until May 8th, 1945.
+[01:20:27.075] Following the end of the war known as victory in Europe
+[01:20:30.985] or VE day.
+[01:20:32.065] My mother came to the widow's home to reclaim me.
+[01:20:36.325] I soon learned that my great-grandmother
+[01:20:38.185] and great aunt had also miraculously survived.
+[01:20:41.435] Also with the assistance of the brave non-Jewish Belgians
+[01:20:45.665] who risked themselves to help my family.
+[01:20:48.645] I was six years old
+[01:20:49.785] and began school while adjusting
+[01:20:52.325] to being reunited with my family.
+[01:20:55.185] We would soon learn that my father tragically was
+[01:20:57.925] among the nearly 25,000 Jews deported from Belgium
+[01:21:02.105] who were murdered at the Killing Center at Auschwitz
+[01:21:05.285] Birkenau in March of 19, 7 47, just weeks
+[01:21:09.665] before my eighth birthday, my mother
+[01:21:11.465] and I immigrated to the United States.
+[01:21:14.505] We settled on the south side of Chicago
+[01:21:16.745] and I became a Chicago public school student
+[01:21:20.835] enrolling at Kenwood Elementary School now Kenwood Academy.
+[01:21:25.835] Gradually I learned English, made friends
+[01:21:28.385] and bega began a new life as an American.
+[01:21:32.625] People have asked me why I share my story.
+[01:21:35.715] Some have asked me why I think my story is important
+[01:21:39.425] for people to hear when I wasn't imprisoned in a
+[01:21:43.205] concentration camp or according to them,
+[01:21:45.505] didn't really suffer to those.
+[01:21:49.205] I say, rather than attempt to compare
+[01:21:52.345] or quantify the suffering of others, we must empathize with
+[01:21:57.325] E, pardon me, empathize with it and learn from it.
+[01:22:02.225] My father was taken from me when I was just a year old.
+[01:22:06.325] I was separated from my remaining family as a toddler.
+[01:22:09.935] Three years later, my familiar routine was disrupted again.
+[01:22:13.425] As I was returned to my family members, I barely remembered
+[01:22:18.735] their survival and mine were nothing short of miraculous,
+[01:22:22.505] but the upheaval was difficult
+[01:22:24.705] and confusing for a young child.
+[01:22:27.435] Soon after our lives were upended again as my mother
+[01:22:31.265] and I began our lives over yet again.
+[01:22:34.555] This time in a place
+[01:22:35.965] where we did not speak the language and knew no one.
+[01:22:39.785] And why did all of these things happen to my family?
+[01:22:43.665] Why was my early childhood so different from
+[01:22:47.715] what we think of as normal?
+[01:22:49.825] Not because of anything we had said or done, but
+[01:22:53.005] because of who we were.
+[01:22:55.635] Because my parents, grandparents,
+[01:22:58.105] and countless generations of my family were Jewish.
+[01:23:02.065] We were targeted. We were taken from our homes
+[01:23:05.265] or forced into hiding and separated from our loved ones.
+[01:23:10.395] Antisemitic hatred was allowed to grow and spread unchecked.
+[01:23:15.065] My family was in some ways luckier than many even.
+[01:23:19.025] So we were targeted and victimized
+[01:23:21.085] because of who we were while the world stood by and watched.
+[01:23:26.145] Please learn from my family's experience, remember
+[01:23:30.235] what happened to us and so many others
+[01:23:33.425] and think about what you can do
+[01:23:35.265] to prevent something similar from happening
+[01:23:37.725] to someone else. Thank you.
+[01:23:40.485] Thank you
+[01:24:05.975] Altman Mitchell, can I get a motion
+[01:24:07.315] for the passage of this resolution?
+[01:24:10.135] I move passage of this resolution.
+[01:24:11.765] Unanimous hearing. No objections. So ordered.
+[01:24:14.965] Thank you all again for being with us. This today.
+[01:24:17.325] Thank you Altman Mitchell.
+[01:24:20.915] A motion to return to the regular order of business.
+[01:24:24.055] Ms I move that return to the regular hearing. No objection.
+[01:24:26.745] Sole ordered Communications
+[01:24:31.355] Publicity Council, the city Chicago.
+[01:24:33.545] Ladies and gentlemen, the request
+[01:24:34.805] of the comptroller I transmit here
+[01:24:36.365] with an ordinance approving the 2026 municipal depositories.
+[01:24:39.555] Your consideration, this ordinance will we be
+[01:24:41.125] appreciated very truly years.
+[01:24:42.285] Brandon Johnson, mayor per the committee on finance.
+[01:24:45.185] Ladies and gentlemen, request the comptroller transmit here
+[01:24:47.685] with an ordinance amending the municipal code
+[01:24:49.285] regarding the publication requirements for rules proposed
+[01:24:51.565] by the Department of Finance,
+[01:24:52.995] your favorable considerations ordinance be appreciated.
+[01:24:55.005] Very truly yours, Brandon Johnson, mayor,
+[01:24:56.805] further the committee on finance.
+[01:24:58.505] Ladies and gentlemen, request
+[01:24:59.905] of the commissioner planning and Development.
+[01:25:01.445] I transmit here with an ordinance authorized an execution
+[01:25:03.885] of an amended redevelopment agreement
+[01:25:05.645] with BR Congress owner LLC
+[01:25:07.605] and Congress Cedar, LLC, your favorable considerations.
+[01:25:10.085] This ordinance will appreciated. Vary to yours.
+[01:25:11.725] Brandon Johnson, mayor for the Committee on Finance.
+[01:25:14.425] Ladies and gentlemen, request of commissioner Planning
+[01:25:16.125] and redevelopment and Development.
+[01:25:17.445] I transmit here with an ordinance authorizing the execution
+[01:25:19.885] of agreement and instruments necessary for implementation
+[01:25:22.885] of section 1 0 8 Housing
+[01:25:24.025] and Urban Development loan for the Congress Theater Project.
+[01:25:26.915] Your consideration
+[01:25:27.925] of this ordinance will be appreciated very two years.
+[01:25:29.645] Brandon Johnson, mayor referred the committee on finance.
+[01:25:32.385] Ladies and gentlemen, request
+[01:25:33.645] a commissioner Planning and development.
+[01:25:34.725] I trans here with an ordinance authorizing
+[01:25:36.285] the sale of city owned property.
+[01:25:37.795] Located at 10 14 South ca,
+[01:25:39.885] California Avenue in a good company in
+[01:25:42.185] to end, good company Chicago.
+[01:25:43.755] Your favorable considerations ordinance will be appreciated.
+[01:25:45.645] Very true years. Brandon Johnson, mayor
+[01:25:47.345] for the Committee on Housing and Real Estate.
+[01:25:49.225] Ladies and gentlemen, the request a corporation Counsel
+[01:25:52.005] transmit here and or here with an
+[01:25:53.245] ordinance amending the municipal code.
+[01:25:54.475] Provide clarification regarding the sports weight wage
+[01:25:57.085] during license, your favor, concern,
+[01:25:59.165] concerns in ordinance to be appreciated.
+[01:26:00.885] Very truly yours, Brandon Johnson, mayor
+[01:26:02.465] for the Committee on Licensing consumer protection.
+[01:26:05.265] Ladies and gentlemen, request the
+[01:26:06.565] Commissioner of Planning and Development.
+[01:26:07.965] I transmit here with an ordinance authorizing the
+[01:26:09.845] expenditure of open space impact fee funds
+[01:26:11.825] for outdoor space improvements at
+[01:26:13.725] Disney two Elementary School.
+[01:26:15.035] Your favorite consideration of this ordinance
+[01:26:16.405] will be appreciated very two years.
+[01:26:17.515] Brandon Johnson, mayor
+[01:26:18.625] for the Committee on Special
+[01:26:19.565] Events cultural Affairs and Recreation.
+[01:26:21.665] Ladies and gentlemen, requested Commissioner of Planning
+[01:26:23.445] and Development I transmitted to here
+[01:26:24.725] with an ordinance authorizing the expenditure
+[01:26:26.445] of open space impact fee funds for the development
+[01:26:28.965] of a turf field at Riley Elementary School.
+[01:26:31.925] Consideration. This ordinance will be
+[01:26:32.885] appreciated very two years.
+[01:26:33.725] Brandon Johnson Mayer
+[01:26:34.805] for the Committee on Special Events
+[01:26:36.045] Cultural Affairs and Recreation.
+[01:26:37.385] Ladies and gentlemen, request the commissioner
+[01:26:39.125] of transportation and transmit here
+[01:26:40.485] with an ordinance authorizing the re
+[01:26:41.965] subdivision of land to facilitate.
+[01:26:43.735] Facilitate the development
+[01:26:44.845] of residential properties n this ordinance.
+[01:26:47.325] Be appreciated very until years.
+[01:26:48.445] Brandon Johnson, mayor
+[01:26:49.465] for the Committee on Transportation Public Way.
+[01:26:52.375] Ladies and gentlemen, request
+[01:26:53.555] the commissioner Planning and Development.
+[01:26:54.635] I transmit here with an OR ordinance authorizing execution
+[01:26:57.235] intergovernmental agreement
+[01:26:58.275] with the Regional Transportation Authority
+[01:26:59.755] of the Belmont Blue Line Equitable Transit Orient plan.
+[01:27:02.945] Favorable constituent ordinance.
+[01:27:04.315] Ordinance will be cons, will be appreciated.
+[01:27:06.715] Very truly yours, Brandon Johnson Mayor referred the
+[01:27:08.795] committee on zoning landmarks and building standards.
+[01:27:11.535] Ladies and gentlemen, I transmit here with appointments
+[01:27:13.555] to various special service areas.
+[01:27:15.065] Your favor consideration, these appointments be appreciated.
+[01:27:17.585] Very truly. Brandon Johnson May referred the Community
+[01:27:20.035] Committee on Economic Capital and Technology Development.
+[01:27:23.035] I city clerk Anna Valencia hereby informed the city council
+[01:27:25.595] that the following documents were filed in my office
+[01:27:27.315] relating to the respective subjects Ased as follows,
+[01:27:29.875] notification of Sales City, Chicago, Multi-Family Housing,
+[01:27:32.395] revenue Bonds and D trails.
+[01:27:33.755] Apartment Project series 2026, office
+[01:27:36.175] of Inspector General's.
+[01:27:37.315] Fourth quarter report for year 2025
+[01:27:39.955] I City Clerk Valencia informed the city council all those
+[01:27:42.035] matters which were considered by the city council.
+[01:27:43.915] The regular meeting held on December 20th, 2025.
+[01:27:46.695] She required by statute to be published in
+[01:27:48.415] Booker pamphlet form in one or more.
+[01:27:49.875] Newspapers were published in pamphlet form on
+[01:27:51.715] January 21st, 2026.
+[01:27:53.295] By being printed in full text
+[01:27:54.655] and printed pamphlet, copies of the Journal of Proceedings
+[01:27:56.635] of the City Council, city of Chicago I City Clerk Valencia,
+[01:27:59.235] also informed the city council that all those matters
+[01:28:00.835] matters, which were considered
+[01:28:01.915] by the city council at the regular meeting held on
+[01:28:03.595] December 29th, 2025.
+[01:28:05.105] Drew required by statute to be published in Booker pamphlet
+[01:28:07.355] form or one in more newspapers were published in pamphlet
+[01:28:09.395] form on January 21st, 2026 of being printed in full text
+[01:28:12.895] and printed pamphlet copies the journal Proceedings
+[01:28:15.155] of City Council, city of Chicago ICD clerk also transmit
+[01:28:18.755] here with the following miscellaneous communications reports
+[01:28:20.995] requiring city council action zoning reclassification
+[01:28:23.475] of the particular areas referred
+[01:28:24.635] to the committee on zoning landmarks.
+[01:28:25.995] Building standards claims against the city
+[01:28:27.475] of Chicago is referred to the Committee on Finance
+[01:28:28.875] recommendation by commission on Chicago Landmarks
+[01:28:31.435] for designation of original Providence Baptist Church at
+[01:28:34.275] five 15 North Pine Avenue Chicago Landmark, which referred
+[01:28:36.795] to committee on zoning landmarks
+[01:28:37.995] and building standards in correction of December 19th, 2025.
+[01:28:40.675] City Council Journal and Proceedings, which referred
+[01:28:42.155] to the Committee on Committee's rules, your Honor,
+[01:28:43.915] that concludes the reports and communications
+[01:28:45.435] to the mayor and other city officers. Thank you
+[01:28:46.835] Madam Clerk, for our committee reports.
+[01:28:48.055] We will begin with the finance committee chair
+[01:28:50.675] recognizes chairwoman Dow.
+[01:28:52.775] Uh, thank you Mr. President
+[01:28:54.075] and members of the city council reporting
+[01:28:56.035] for the City Council's Committee on Finance,
+[01:28:58.325] which held a committee meeting on January 14th, 2026.
+[01:29:02.665] The following items received a due pass
+[01:29:05.005] recommendation from the committee.
+[01:29:07.315] Item number one is the substitute ordinance executing a TIF
+[01:29:12.415] redevelopment agreement with 30 North LaSalle MF
+[01:29:16.015] redevelopment LLC
+[01:29:17.555] and downtown Chicago Neighborhood Council NFP
+[01:29:21.675] for the property at 30 northwest South Street in the 34th
+[01:29:25.775] Ward in an amount not to exceed 57 million.
+[01:29:29.395] Mr. President, unless someone wishes to speak on this,
+[01:29:32.055] I move passage of this item by roll call vote hearing.
+[01:29:36.415] I see no hands members, please use your EVO application
+[01:29:40.855] to record your vote at this time.
+[01:29:51.905] The voting is now open. The voting is now open.
+[01:29:54.005] Please use your Eev device. The voting is now open.
+[01:30:53.845] I will now call those who have not used their Eev device
+[01:30:55.965] and those virtual alderman Hopkins.
+[01:30:59.305] Hopkins is a yes. Alderman Hall not present.
+[01:31:05.355] Alderwoman Ramirez?
+[01:31:07.845] Yes, Ramirez is a yes. Alderwoman Coleman.
+[01:31:13.475] Yes, Coleman is a yes.
+[01:31:16.635] Alderman Moore not present. Chambers.
+[01:31:20.565] Alderman Rodriguez Rodriguez is a yes.
+[01:31:25.105] Alderwoman tab. Yes. Tab is a yes.
+[01:31:29.625] Alderwoman Rodriguez Sanchez not present.
+[01:31:33.615] Alderman Conway not present. Alderman Vasquez?
+[01:31:38.095] Yes, Vasquez is a yes.
+[01:31:40.965] Alderman Knutson not present.
+[01:31:44.975] Alderwoman man. Howorth.
+[01:31:46.915] Yes. Yes. Mana Hoppen is a yes. Anyone else I missed?
+[01:31:52.425] Alman Hall, you're a yes. Alman Hall is a yes.
+[01:31:57.245] Alman Moore Moore is a yes. Anyone else walk in?
+[01:32:03.405] All right. The voting is now closed.
+[01:32:07.785] There are 47 yays, zero nays.
+[01:32:09.965] This motion passes Altman Mitchell on a motion
+[01:32:12.235] to reconsider vote to reconsider the vote.
+[01:32:14.055] All those in favor, reconsidering
+[01:32:15.435] of this vote signified by saying aye.
+[01:32:17.015] Any opposed, say nay. This motion fails.
+[01:32:19.745] Chair recognizes Chairwoman Dow.
+[01:32:22.745] Item number two is the substitute ordinance approving the
+[01:32:25.875] first amendment to the tax increment financing redevelopment
+[01:32:29.115] agreement, and the amended city deed covenants
+[01:32:32.425] with Sinai Health System at 1500 South Fairfield Avenue
+[01:32:37.175] to convey the property at 3,100
+[01:32:39.875] through 58 West Ogden Avenue
+[01:32:42.935] and at 31 42 West 16th Street
+[01:32:46.775] to one Lawndale Children's Discovery Center in the 24th
+[01:32:50.975] and 28th wards.
+[01:32:52.435] I move passage of this item
+[01:32:53.735] by the first most favorable roll call vote
+[01:32:55.695] of the Committee on Finance report in the associated
+[01:32:58.435] unsuccessful motion to reconsider.
+[01:33:00.245] Thank you. The chair recognizes Alder Rodriguez Sanchez.
+[01:33:04.695] Thank you Mr. President.
+[01:33:05.845] I would like to be added as a yes to the, uh,
+[01:33:09.085] first item on finance, please.
+[01:33:11.435] Very well. And clerk, please add Alder Rodriguez Sanchez,
+[01:33:14.945] uh, to the row to the yes vote.
+[01:33:19.865] The first item chair recognizes Altman Knutson.
+[01:33:23.995] Um, mayor, I'd like to be added
+[01:33:25.335] as yes on the first finance item on roll call. Thank
+[01:33:27.695] You can do that as well. Thank
+[01:33:28.695] you. Mad clerk. All right.
+[01:33:30.785] Hearing no objections of this, the second item. So order.
+[01:33:35.115] Thank you, Mr. President.
+[01:33:36.375] Item number three is the substitute ordinance authorizing
+[01:33:39.685] the submission of the US Department of Housing
+[01:33:42.045] and Urban Development Section 1 0 8 loan application
+[01:33:46.245] for the rehabilitation of 2135 North Milwaukee Avenue,
+[01:33:50.365] better known as the Congress Theater in the first ward in an
+[01:33:53.985] amount up to $25.25 million.
+[01:33:58.705] I move passage of this item by the same motion
+[01:34:00.905] Hearing. No objection.
+[01:34:01.905] So ordered
+[01:34:02.815] Item number four is an ordinance introduced
+[01:34:05.245] by Alderman Samantha Nugent
+[01:34:06.945] of the 39th Ward amending Article 26
+[01:34:11.535] effective dates of the 2026 Municipal Code Revenue
+[01:34:14.895] Ordinance alternative.
+[01:34:16.785] I move passage of this item by the same motion hearing.
+[01:34:19.645] No objection. So ordered
+[01:34:20.895] Item number five is a substitute resolution introduced
+[01:34:24.245] by Alderman Jason Irvin of the 28th Ward, calling
+[01:34:27.805] for a public hearing on the formation
+[01:34:29.725] of the Chicago Tourism Improvement District
+[01:34:32.485] to be held on February 27th, 2026 at 10:00 AM
+[01:34:37.405] in the city Council chambers on the second floor.
+[01:34:40.585] I move past of this item by the same motion
+[01:34:42.665] Hearing. No objection.
+[01:34:43.665] So ordered.
+[01:34:44.375] Item number six is a communication transmitting reports
+[01:34:47.725] of cases in which verdicts, judgments
+[01:34:49.885] or settlements were entered into for the month
+[01:34:52.305] of November, 2025.
+[01:34:54.525] And this item will be placed on file with the clerk.
+[01:34:58.165] Item number seven is a communication transmitting reports
+[01:35:01.555] of cases in which verdicts, judgements,
+[01:35:03.635] or settlements were entered into for the month
+[01:35:06.215] of December, 2025.
+[01:35:08.195] And this item will also be placed on file with the clerk.
+[01:35:11.795] Item number eight A is an ordinance authorizing the
+[01:35:14.845] corporation counsel to enter into
+[01:35:17.185] and execute a settlement order in the case
+[01:35:19.985] of Nicholas Santos versus City of Chicago,
+[01:35:23.395] case number 21 C 53 27 in the amount
+[01:35:27.605] of $162,500.
+[01:35:31.765] I move passage of this item by the same motion
+[01:35:34.025] as was applied to item number two with the exception
+[01:35:38.125] of Alderman David Moore
+[01:35:39.445] and Alder woman Jeanette Taylor, who both wish
+[01:35:42.205] to be recorded as voting no on this item very
+[01:35:44.725] Well like division, so ordered
+[01:35:47.815] Item number eight B is an order
+[01:35:50.265] authorizing the corporation counsel to enter into
+[01:35:53.405] and execute a settlement order in the case of Tim Anderson,
+[01:35:57.575] etal versus David Brown,
+[01:35:59.245] et Al case number 1 23
+[01:36:03.325] CV 2245 in the amount of $875,000.
+[01:36:08.925] Mr. President, I recuse myself from voting on this matter
+[01:36:12.185] during the January 14th finance committee meeting,
+[01:36:15.645] and I'm recusing myself today during counsel
+[01:36:18.855] from voting on this matter under Rule 14 of the Rules
+[01:36:21.885] of Order and Procedure out of an abundance of caution
+[01:36:25.125] as the plaintiff is the constituent of the Third Ward,
+[01:36:27.705] and I have had interactions with the plaintiff
+[01:36:30.175] regarding matters in and outside of the Ward.
+[01:36:33.185] Rell, thank you very much. Chair
+[01:36:34.625] recognizes Alderman Lopez.
+[01:36:37.255] Oh,
+[01:36:41.845] did you make the motion already? I did not.
+[01:36:43.425] Thank you. My apologies. Please.
+[01:36:44.785] I move passage of this item by the same motion
+[01:36:47.205] as was supplied to item number two with the exception
+[01:36:50.205] of Alderman Hopkins, Quinn Lopez, osha, Scott
+[01:36:55.495] Cardona, WABA Riley,
+[01:36:57.285] and Silverstein, who all wish to be recorded
+[01:36:59.965] as voting no on the item.
+[01:37:02.745] Very well, the Chair recognizes Altman Viegas.
+[01:37:06.155] Oh, I'm sorry. I thought that was satisfactory.
+[01:37:09.035] Just a second. Altman Lopez.
+[01:37:11.715] Thank you Mr. President.
+[01:37:12.925] And again, good morning members of the City Council.
+[01:37:15.825] I rise in opposition to this settlement as I, as we
+[01:37:21.005] discussed in committee a settlement
+[01:37:25.675] for 21 individuals, only two of whom made reports
+[01:37:30.065] to Copa, none of whom could identify actual police officers
+[01:37:34.515] and none of them who could identify their injuries.
+[01:37:39.375] We talk constantly ad nauseum
+[01:37:44.225] about settlements that we can win, about settlements
+[01:37:48.125] that we should fight and defend the city from,
+[01:37:51.195] and settlements that reward bad behavior.
+[01:37:54.725] This is the epitome of all of those.
+[01:38:00.265] We must reject this settlement.
+[01:38:03.065] We must fight when we are right because it sends a strong
+[01:38:07.735] and clear message that our check writing
+[01:38:11.165] days are coming to an end.
+[01:38:13.195] And for that, Mr.
+[01:38:14.425] President, I had encourage all of my colleagues
+[01:38:17.355] to vote against it and ask
+[01:38:18.635] for a roll call vote on this settlement
+[01:38:24.585] Chair recognizes Alman, ano.
+[01:38:27.975] Thank you, Mr. President.
+[01:38:29.185] Um, I, I agree with my, my colleague Fullheartedly, um,
+[01:38:34.435] for years now, uh, 11 years in, in my short term,
+[01:38:36.975] I feel like we come down here
+[01:38:38.215] and we look at these, uh, cases
+[01:38:40.315] and a lot of times it's looked at the amount
+[01:38:42.295] that is requested
+[01:38:43.675] and how much it's gonna hurt the city in the long
+[01:38:45.655] run if it's prosecuted.
+[01:38:47.235] And a lot of us come down here
+[01:38:48.655] and say, well, let's take a look at some of these cases
+[01:38:52.895] from a broader view and see if we actually can put our legal
+[01:38:55.905] teams to work and, and, and,
+[01:38:58.405] and try some of them instead of just settling it
+[01:39:00.575] because the settlement in some cases is a payout
+[01:39:04.815] to people in here, but in other cases, it's an assumption
+[01:39:07.875] of guilt to a department
+[01:39:10.585] without even having their day in court.
+[01:39:12.695] So to make this as short as possible, I,
+[01:39:14.755] I think we should start looking at some of these cases
+[01:39:17.815] and finding a way to put our legal team to work.
+[01:39:22.345] They're getting paid, they're on salary and, and,
+[01:39:25.335] and pushing some of these cases so
+[01:39:27.475] that we can close the city checkbook
+[01:39:29.385] because everyone knows it's called the city lottery.
+[01:39:32.455] You give a shot at it,
+[01:39:33.475] there's a great chance you're gonna get paid out,
+[01:39:35.535] and if it's below a certain number,
+[01:39:37.305] there's an even greater chance
+[01:39:38.795] that you're going to get paid out.
+[01:39:40.415] So for that reason, I too would like to be recorded as a no,
+[01:39:43.815] and I appreciate the
+[01:39:44.795] opportunity to speak on this Ms. President.
+[01:39:46.035] Well, there's a roll call vote.
+[01:39:47.345] It's been requested for Item eight B.
+[01:39:49.525] Madam Clerk, if you can make the EVO application available
+[01:39:52.215] so that members of this body can record
+[01:39:53.955] their votes at this time.
+[01:40:21.345] The voting is now open. The voting is now open.
+[01:40:23.405] Please use your Eev device. The voting is now open.
+[01:41:23.165] I will now take a roll call.
+[01:41:24.545] Uh, voice vote for those
+[01:41:25.605] who not use their Eev device or online.
+[01:41:28.405] Alderman LaSpada not present. Alderman Hopkins
+[01:41:40.115] Oh, did not go through.
+[01:41:40.895] Oh, there it is. Okay. Alderwoman Ramirez.
+[01:41:44.765] Yes, Ramirez is a yes.
+[01:41:47.245] Alderwoman Coleman
+[01:41:52.335] Alderwoman Coleman Alderwoman Tera,
+[01:41:58.645] no Alderwoman
+[01:42:03.205] Tera, no.
+[01:42:06.745] Tab is a no.
+[01:42:08.445] Alderman ro not President Chambers.
+[01:42:13.465] Alderman Rodriguez Sanchez, not President Chambers.
+[01:42:17.545] Alderman Conway. Yes. Conway is a yes.
+[01:42:23.425] Alderwoman Nugent. A
+[01:42:27.405] Nugent is a yes.
+[01:42:29.305] Uh, alderman Vasquez. Yes. Vasquez is a yes.
+[01:42:35.275] Alderwoman Hadden. I'm sorry. Alderwoman. Mana Haworth. Yes.
+[01:42:40.315] Mana Haworth is a yes.
+[01:42:42.785] Alderman Ro Aye to Farrah is a yes.
+[01:42:47.855] Anyone else walk in? Okay.
+[01:42:51.685] The voting is now closed.
+[01:42:55.415] 31. There are 31 Yays 16 nays.
+[01:42:59.315] This motion passes Alderman Mitchell on a motion
+[01:43:02.275] to reconsider reconsidered vote votes in favor
+[01:43:04.435] of the reconsideration of this vote, signify by saying Aye.
+[01:43:06.605] Those opposed say nay. This motion fails.
+[01:43:10.575] Chair recognizes Chairwoman Dow.
+[01:43:12.745] Uh, thank you Mr. President.
+[01:43:14.115] Item number eight C is an order authorizing the corporation
+[01:43:18.085] counsel to enter into
+[01:43:19.445] and execute a settlement order in the case
+[01:43:22.085] of Orlando j Ramirez and Jesus Alvarez Vasquez,
+[01:43:27.225] and as joint special coad, administrators of the estate
+[01:43:30.425] of Angel e Alvarez, Montesinos deceased
+[01:43:35.625] versus City of Chicago, Michael Spilotro iii,
+[01:43:40.635] Eric Arroyo, John Doz individually
+[01:43:44.525] and his agents of the City of Chicago.
+[01:43:47.195] Case number 2023 L
+[01:43:50.585] 0 1 0 1 6 4 in the amount of $22 million,
+[01:43:55.745] 22 20 million by the city
+[01:43:57.945] and 2 million by the city's insurance.
+[01:44:00.565] I move passage of this item by the same motion
+[01:44:02.985] as was applied to item number two, hearing.
+[01:44:05.345] No objection. So ordered
+[01:44:07.315] Item number nine in 10 consists of orders of authorization
+[01:44:11.265] for the payment of various small claims against the city
+[01:44:14.005] of Chicago and the denials of payment
+[01:44:16.865] of various small claims against the city of Chicago.
+[01:44:19.675] This was a direct introduction,
+[01:44:21.585] and if there are no objections, I move
+[01:44:23.245] that these items be placed
+[01:44:24.365] with passage in the omnibus and Ms.
+[01:44:26.285] President. That concludes my report.
+[01:44:27.995] Hearing none so ordered. Thank you Madam Chair.
+[01:44:30.205] Committee on Aviation Chair recognizes chair osha,
+[01:44:44.125] Mr. President, members of
+[01:44:45.125] the city council reporting
+[01:44:46.745] of your Committee on Aviation,
+[01:44:48.395] which held a meeting on Tuesday, January 20th, 2026.
+[01:44:52.725] The committee recommends passage of the following item,
+[01:44:56.695] ordinance
+[01:44:57.685] 2 0 2 5 0 2 1 6 8 2,
+[01:45:02.805] an amendment of municipal code sections 10 dash three,
+[01:45:06.285] six dash 3 51
+[01:45:08.485] and 10 dash three six dash 3 55
+[01:45:11.295] through 10 dash 3 6 3 58.
+[01:45:14.885] Adding provisions regarding fines for violations
+[01:45:19.055] occurring at both midway and O'Hare International Airports.
+[01:45:26.195] Very well. I move passage of this ordinance
+[01:45:30.235] by the first payroll call roll call vote
+[01:45:32.935] of the Committee on Finance and associated unsuccessful
+[01:45:35.375] motion to reconsider hearing.
+[01:45:37.375] No objection. So ordered.
+[01:45:39.815] Mr. President, this concludes my
+[01:45:41.555] Report. Thank you Mr. Chair
+[01:45:42.555] for the committee on budget
+[01:45:43.715] and government operations chair recognizes
+[01:45:46.315] Chairman Irvin. Thank
+[01:45:47.475] You Mr. President reporting
+[01:45:48.475] for the committee on the budget
+[01:45:49.555] and government operations,
+[01:45:50.595] which held the meeting on January 15th.
+[01:45:53.095] The committee has a series
+[01:45:54.135] of reports recommended passage of the following items.
+[01:45:56.685] Items one and two are communications recommending the
+[01:45:59.635] appointments of Jacqueline Rosa
+[01:46:01.415] and John Dale Van Sly, each as a member
+[01:46:04.535] of the Chicago Public Library Board, I move passage
+[01:46:07.295] of these items by the first favorable roll call vote
+[01:46:10.275] of the Committee on Finance
+[01:46:11.415] and the associated unsuccessful motion to reconsider
+[01:46:13.875] Hearing no objections. So ordered.
+[01:46:15.905] Item number three is a communication
+[01:46:18.155] recommending a proposed ordinance
+[01:46:19.275] concerning an annual appropriation ordinance year 2026,
+[01:46:22.625] amendment within fund 9 2 5.
+[01:46:25.885] I make the same motion. If there is no objection,
+[01:46:27.685] Hearing none so ordered.
+[01:46:29.075] Item number four is a communication recommending a
+[01:46:31.445] proposed ordinance concerning an annual appropriation
+[01:46:33.645] ordinance year 2026 amendment.
+[01:46:36.525] Shifting appropriation code for CVI funding
+[01:46:38.985] and CDPH,
+[01:46:40.055] which moves funds from one account to the proper account.
+[01:46:43.035] 9 9 29 E Community Violence Intervention Program
+[01:46:46.705] and also puts the project administration position position
+[01:46:49.165] back in the CDPH, uh, from the Department of Environment.
+[01:46:52.525] I make the same motion. If there is no objection, hearing
+[01:46:54.605] None so ordered.
+[01:46:55.665] Uh, items five and six were transfers
+[01:46:57.485] of fund ordinances within Wards 16 and 39 for years 2025.
+[01:47:02.085] Respectfully, I make the same motion.
+[01:47:03.885] If there's no objection, hearing
+[01:47:05.285] None. So ordered.
+[01:47:06.545] Uh, Mr. President, that concludes my
+[01:47:08.125] Report. Thank you, Mr. Chair. For
+[01:47:09.125] the Committee on Economic Capital
+[01:47:10.425] and Technology Development.
+[01:47:12.285] The chair recognizes Chairman Vigas.
+[01:47:31.855] Good afternoon, Mr. President members
+[01:47:33.225] of the city council reporting
+[01:47:34.505] for the Committee on Economic Capital
+[01:47:36.385] and Technology Development Development,
+[01:47:37.945] which meant on Tuesday, January 31st Committee held a
+[01:47:40.785] meeting to recommend paths of the following items.
+[01:47:42.575] Item one on the report is an appointment with Sergio Garia
+[01:47:45.845] to the Community Development Commission.
+[01:47:47.905] I move per move for paths of this item,
+[01:47:49.565] but a first favorable roll call vote
+[01:47:51.065] of the Committee on Finance and the associated unsuccessful
+[01:47:53.625] motion to reconsider hearing.
+[01:47:54.665] No objection. So ordered item
+[01:47:56.005] Two through four on the report are appointments
+[01:47:58.165] of Ivy Spec
+[01:47:59.425] and Jennifer Deeds to SSA 17 dash 2025,
+[01:48:03.405] the Central Lakeview Wrigleyville Commission
+[01:48:05.305] and the reappointment of Eve moron to SSA 16 Greek Town.
+[01:48:09.145] I move for pass of these items by the first favor
+[01:48:10.865] of a roll call of the committee on financing the associated
+[01:48:13.345] unsuccessful motion to reconsider
+[01:48:14.735] Hearing no objections. So ordered items
+[01:48:16.615] Five through six, five.
+[01:48:17.945] Items five and six on report are ordinances designated
+[01:48:20.545] to Greater Southwest Development Corporation
+[01:48:22.805] as your interim service provider
+[01:48:24.125] for special service areas number three
+[01:48:25.765] and number 59 dash 2022.
+[01:48:28.305] I move for passage of these items by the first way,
+[01:48:30.465] a roll call of the Committee on finance
+[01:48:32.125] and the associated unsuccessful motion to reconsider hearing
+[01:48:34.705] No objections. So ordered Item
+[01:48:36.225] Seven and eight on the report are ordinances
+[01:48:38.545] to approve Class six B property tax incentives
+[01:48:40.845] for properties located at 1 0 4 59 South Muskegon Avenue
+[01:48:44.725] and 1532 West Fulton Street.
+[01:48:47.785] I move for pass of these items by the first favor
+[01:48:49.585] of a roll call of the Committee on Finance
+[01:48:51.405] and the associated unsuccessful motion
+[01:48:52.985] to reconsider hearing.
+[01:48:54.025] No objections. So ordered. Thank
+[01:48:55.585] You Mr. President. That concludes
+[01:48:56.585] my report.
+[01:48:56.905] Thank you Mr. Chair for the Committee on Education
+[01:48:58.705] and Child Development chair recognizes Chairwoman Taylor.
+[01:49:03.975] Thank you Mr. President and members of the city council.
+[01:49:06.465] I'm here reporting on your Committee of Education
+[01:49:08.565] and Child Development, which held the meeting on Tuesday,
+[01:49:10.885] January 13th, 2026.
+[01:49:13.185] The committee had one item to report, one appointment
+[01:49:16.525] for the board trustee for the community college
+[01:49:19.525] district number 5 0 8 8 2 0 2 5 dash
+[01:49:23.235] 0 2 1 6 7 5.
+[01:49:26.145] The appointment of Fernando Diaz is moved
+[01:49:28.605] for passage by the first favor.
+[01:49:29.795] Roll call of the finance committee along
+[01:49:32.845] with the associated unsuccessful motion to reconsider
+[01:49:36.155] Hearing. No objections.
+[01:49:37.155] So ordered.
+[01:49:38.115] That concludes my report. Thank you Mr. President.
+[01:49:41.065] Thank you. Thank you. Mad chair
+[01:49:42.815] for the Committee on Housing and Real Estate.
+[01:49:44.675] The chair recognizes chair Citro Lopez.
+[01:49:48.155] Thank you Mr. President.
+[01:49:49.525] Um, members of the city council reporting
+[01:49:51.845] for your committee on Housing
+[01:49:53.165] and real estate, which held a meeting on January 14th, 2026.
+[01:49:58.525] The committee has a series of reports recommending passage
+[01:50:01.725] of nine ordinances that include one rite of entry agreement
+[01:50:05.525] and various land sales.
+[01:50:07.335] Item number one is from the Department of Fleet
+[01:50:09.385] and Facility Management Ordinance
+[01:50:11.225] 20 25 0 0 25 1 8.
+[01:50:14.605] Second Amendment to right of entry agreement
+[01:50:17.775] with Columbia Yatch Club for renewed access
+[01:50:20.245] to city home parking lot located under northbound lanes
+[01:50:24.085] of South Sabel Lakes.
+[01:50:25.865] Sho Drive north of East Randolph in the 42nd Ward.
+[01:50:29.705] A move passes of this item
+[01:50:30.845] by this first most favorable roll call vote on the Committee
+[01:50:33.785] of Finance and Associated
+[01:50:35.265] and unsu successful motion to reconsider hearing
+[01:50:37.605] No objections. So
+[01:50:38.605] order
+[01:50:39.935] The remaining, the remaining items from the Department
+[01:50:42.475] of Planning and Development are
+[01:50:43.595] grouped together for convenience.
+[01:50:45.385] Item two through six are for the sale of city owned property
+[01:50:49.695] through DPDs Missing Middle Infield housing program in the
+[01:50:53.215] sixth, seventh, and 21st wards.
+[01:50:55.275] The ordinances are ordinance
+[01:50:56.615] 20 25 0 0, 21, 6 85 0 0 21, 6 87 0 0 2 1 6 89 0 0 29, 7 7
+[01:51:06.355] and 0 0 21 6 8 8.
+[01:51:08.695] I move passage of these five items by the same motion.
+[01:51:11.015] Hearing. No objection. So ordered
+[01:51:12.885] Item seven, ordinance 20 25 0 0 0, 21 6 8 4 sale
+[01:51:17.615] of city owned property at 64 21 South Lawrence Avenue
+[01:51:21.695] through the Check Block Builder Open Space Land Sale program
+[01:51:25.755] to blacks in green.
+[01:51:27.235] Um, big NFP.
+[01:51:28.825] These land sale will facilitate the creation
+[01:51:31.675] of the Teal Mobile House Museum Garden in the 20th ward
+[01:51:35.355] and will add to the Teal Mobile House Museum adjacent
+[01:51:38.795] to the open Spaceland.
+[01:51:40.895] I referred to Chairwoman Taylor to say a few words
+[01:51:43.835] and then I move passes of this item by the same motion.
+[01:51:46.365] Very well. Thank you Mr. Chair.
+[01:51:47.455] The chair recognizes Alderwoman Taylor.
+[01:51:49.905] Thank you Mr. President.
+[01:51:51.635] Too often we forget about this histories, um,
+[01:51:56.475] passed and Emmett Till was a young man
+[01:51:59.595] who actually lived in Woodlawn.
+[01:52:01.875] Um, and it's important that we honor his legacy.
+[01:52:06.475] Um, he is not the first nor the last person to be lynched,
+[01:52:11.635] and the system failed Emmett Till and his family.
+[01:52:16.195] And so it's important that a community organization
+[01:52:19.805] that exists in the community, blacks
+[01:52:21.735] and greens, is able to revitalize not only the home,
+[01:52:24.795] but the yard next to it,
+[01:52:26.195] to allow our community to honor our past.
+[01:52:28.505] Thank you Mr. President. Thank
+[01:52:29.855] You. All the women. There's a motion on
+[01:52:30.855] the floor
+[01:52:31.595] for the passage of this item.
+[01:52:33.545] Again, hearing no objections to other hands. So ordered.
+[01:52:38.125] Thank you, Mr. President.
+[01:52:39.225] Item eight, ordinance 20 25, 0 0, 21 6 9 8.
+[01:52:43.905] Sale of city owned property at 37 17
+[01:52:46.825] and 37 13 West Chicago Avenue
+[01:52:49.275] through the Check Block Builder Open Space Land Sale
+[01:52:51.845] program to blocks together.
+[01:52:53.605] NFP. This land sale will facilitate the creation
+[01:52:56.285] of an open public community space in the 27th Ward adjacent
+[01:53:00.105] to the main offices for blocks together, NFP at fer, also
+[01:53:04.125] to Alderman, um, red Burnett to say a few words
+[01:53:07.185] and then we can move passage on this ordinance.
+[01:53:09.515] Very well. Thank you. Chairman Chair
+[01:53:11.485] recognizes Alderman Burnett.
+[01:53:13.655] Thank you Mr. President.
+[01:53:15.225] Uh, it's another great initiative, uh,
+[01:53:18.385] by the committee on getting green space in the 27th Ward
+[01:53:21.805] and allowing the community to activate land that
+[01:53:25.785] hasn't been used in the proper way.
+[01:53:27.385] So super excited to, excited to,
+[01:53:32.225] uh, have this move forward
+[01:53:33.825] and for the community process to proceed. Thank you.
+[01:53:36.215] Thank you on your motion.
+[01:53:38.155] Thank you. Yeah. So move, uh,
+[01:53:39.605] so move on This item by the same motion. The
+[01:53:42.185] Same motion hearing. No objection.
+[01:53:43.185] So ordered
+[01:53:44.795] Item nine is Ordinance 20 25 0 0 21 6 85 is
+[01:53:49.245] for the market rate sale of city owned property at 25 0 3
+[01:53:52.525] through 25 63 West Lake Street
+[01:53:55.665] and 25 22 through 25 68 West Maple Avenue
+[01:54:00.585] to Commonwealth Edison Company in the 27th water move
+[01:54:03.845] passage of this item by the same motion hearing.
+[01:54:05.845] No objection. So order,
+[01:54:07.775] Finally, the committee held a subject matter hearing
+[01:54:10.695] with the Chief homelessness Officer Sandy Soto on the five
+[01:54:14.255] year blueprint on the ending and preventing homelessness
+[01:54:17.015] because the drop plan is up for review on the mayor's office
+[01:54:20.385] and homelessness website
+[01:54:21.645] and open for the public comment until January 30th, 2026.
+[01:54:25.225] Under the get involved tab, I encourage all to review
+[01:54:28.525] and comment on this important report
+[01:54:30.805] so we can all participate on the changes
+[01:54:32.655] we'd like to see throughout the city.
+[01:54:34.045] Mr. President, this concludes my report.
+[01:54:35.995] Thank you, Mr. Chair. For the Committee on License
+[01:54:37.805] and Consumer Protection,
+[01:54:39.045] the chair recognizes Chairwoman Silverstein.
+[01:54:42.465] Thank you Mr. President and members of the City council.
+[01:54:45.275] I'm reporting for the Committee on License
+[01:54:46.875] and Consumer Protection.
+[01:54:48.395] We held a meeting on January 13th, 2026,
+[01:54:51.715] and the following items were passed by the committee.
+[01:54:54.805] Five ordinances regarding liquor moratoriums in the 14th,
+[01:54:58.765] 16th, 27th, 35th and 48th.
+[01:55:02.295] Wards. Oh 2 0 2 5 dash
+[01:55:05.005] 0 2 1 7 0 1
+[01:55:08.075] and others oh
+[01:55:09.325] 0 0 2 1 7 7 2 0 2 1 3 2 6 0 0 2 1 6, 9 9
+[01:55:18.595] and 0 0 2 1 8 8 5.
+[01:55:21.595] Mr. President, I move that the city council concur
+[01:55:24.855] with the recommendations of the license committee
+[01:55:27.035] of the same roll call as item number one
+[01:55:29.415] of the Committee on Finance report
+[01:55:31.135] and the associated unsuccessful motion
+[01:55:33.155] to reconsider hearing.
+[01:55:34.175] No objection. So ordered.
+[01:55:35.755] Mr. President, that concludes my
+[01:55:37.135] Report. Thank you, Madam Chair
+[01:55:38.135] for the Committee
+[01:55:39.595] on Pedestrian and Traffic Safety.
+[01:55:41.955] The chair recognizes Chair LaSpada.
+[01:55:45.355] Thank you Mr. President reporting
+[01:55:47.465] for your committee on Pedestrian
+[01:55:48.665] and Traffic safety for which meeting was held on FE
+[01:55:51.025] Wednesday, January 14th, 2026.
+[01:55:54.125] Before the committee, there were 340 routine traffic
+[01:55:57.105] items, all of which passed.
+[01:55:59.125] If there are no objections, I move passage
+[01:56:01.325] of these 340 routine traffic items
+[01:56:04.085] by the first most favorable roll call from the Committee on
+[01:56:06.785] Finance and the associated
+[01:56:08.225] unsuccessful motion to reconsider the
+[01:56:09.985] Vote. Hearing none so ordered.
+[01:56:10.985] That
+[01:56:11.945] Concludes my report. Thank
+[01:56:12.945] you for the Committee on Public Safety
+[01:56:16.515] Chair recognizes Chairman Hopkins.
+[01:56:21.625] Uh, thank you Mr. President reporting
+[01:56:23.465] for your committee on public safety,
+[01:56:24.845] which held meetings on Wednesday, January 7th
+[01:56:27.545] and Tuesday January 20th, 2026.
+[01:56:30.235] Committee recommends passage of the following items.
+[01:56:32.595] Item one, approval of the November, uh, rule 45 report.
+[01:56:36.825] Uh, item two is ordinance two 1-898-AMENDING
+[01:56:41.565] municipal code section 18 16 22 regarding declaration
+[01:56:45.465] of time in site curfew for mass gatherings
+[01:56:48.485] and custody procedures.
+[01:56:50.225] Uh, we have a substitute for that matter,
+[01:56:52.245] which is before you now.
+[01:56:53.825] Uh, I would move to accept the substitute at this time
+[01:56:56.325] following, which will provide an explanation
+[01:56:58.715] Very well. There's a motion
+[01:56:59.715] on the floor to accept the substitute,
+[01:57:03.735] uh, to the second item.
+[01:57:06.335] It's been moved. All those in favor signify by saying aye.
+[01:57:09.645] Aye. Aye. Any opposed, say nay. This motion passes.
+[01:57:12.755] Chair recognizes Chairman Hopkins.
+[01:57:14.525] Uh, thank you, Mr. President.
+[01:57:15.625] The first, uh, change that you will note is in the title.
+[01:57:18.885] Uh, all the, uh, appropriate sections remain the same,
+[01:57:21.765] but the title, uh, has been changed, uh,
+[01:57:24.785] from a time in site curfew for mass gatherings
+[01:57:28.045] to a Declaration of Disruptive Youth gatherings.
+[01:57:31.685] Uh, that's significant
+[01:57:32.745] because the problems
+[01:57:34.255] with the time in site gatherings is endemic in the name,
+[01:57:38.855] time, and site.
+[01:57:41.005] The weakness of that proposal is simply this.
+[01:57:44.205] If you declare in advance a curfew that applies
+[01:57:47.425] to a specific time and a specific site,
+[01:57:50.965] and the teen trend decides as teens often do
+[01:57:54.005] to change the time
+[01:57:56.165] or move the site, the entire curfew application
+[01:58:00.445] is voided at that moment.
+[01:58:02.015] I'll give you a specific example,
+[01:58:03.345] which actually happened a couple of summers ago.
+[01:58:05.645] Uh, in Alderman Robinson's ward, there was a teen trend
+[01:58:09.135] that was advertised for 31st Street Beach.
+[01:58:12.125] The teens got there and for whatever reason decided later
+[01:58:15.325] to go to 35th Street.
+[01:58:17.445] If you had a curfew that was a time in site application
+[01:58:20.565] for 31st Street Beach, it would be null and void
+[01:58:23.325] and could not be used by the police for its intended purpose
+[01:58:27.485] at that new location.
+[01:58:28.535] Obviously, the same thing would apply
+[01:58:30.925] if the teen trend is advertised at 6:00 PM
+[01:58:34.245] and everybody's late
+[01:58:35.445] and it doesn't start till 8:00 PM
+[01:58:38.145] you have a different time than
+[01:58:39.445] what was announced in the time inside curfew.
+[01:58:42.065] It would be unable to be used.
+[01:58:44.075] This new ordinance avoids that entirely,
+[01:58:47.145] and it does so in a way
+[01:58:48.725] that I would argue is better than the original proposal
+[01:58:52.115] because it avoids any constitutional questions
+[01:58:54.765] that were raised under the original curfew ordinance.
+[01:58:58.225] By utilizing authority that the police currently have,
+[01:59:03.455] the Chicago police currently have the full authority
+[01:59:05.975] to issue disbursement orders for illegal gatherings
+[01:59:09.455] or for gatherings that come become disruptive or,
+[01:59:12.615] or, uh, start to break out into chaos and violence.
+[01:59:15.545] They don't need to have that authority given to them
+[01:59:18.255] by this ordinance because they already have it.
+[01:59:20.905] There's no question about that,
+[01:59:22.775] and there's no constitutional issues about that.
+[01:59:25.345] What this new ordinance does is allows that tool
+[01:59:28.455] to be applied to specific teen gatherings
+[01:59:32.545] and to disperse those teen gatherings with two methods.
+[01:59:37.145] The first method, uh,
+[01:59:38.825] was successfully employed on New Year's Eve
+[01:59:41.785] to communicate the fact that we are aware
+[01:59:45.785] of a plant gathering and will not allow it to occur.
+[01:59:49.705] For all the reasons laid out in the curfew ordinance,
+[01:59:51.885] because of the potential for violence, which we've seen,
+[01:59:54.645] a life was lost just last month
+[01:59:57.235] because of the potential for criminal activity
+[01:59:59.785] and chaos and disruption.
+[02:00:02.025] If we have reason to believe
+[02:00:03.365] that the superintendent can then declare
+[02:00:05.795] that we will enforce the existing laws
+[02:00:08.905] for dispersing large gatherings.
+[02:00:13.195] The second piece of
+[02:00:14.495] that is if the large gathering occurs anyway,
+[02:00:17.235] the superintendent and his designated, uh,
+[02:00:20.575] officers using the rank of sergeant
+[02:00:22.915] and hire can order a dispersal of that crowd,
+[02:00:26.875] and anyone who fails to comply with
+[02:00:29.015] that order can be taken into custody.
+[02:00:31.875] If they are minors, they will be taken into custody similar
+[02:00:35.395] to curfew custody, exactly the same way we do it now.
+[02:00:39.205] They'll be brought down to the station
+[02:00:41.075] and released to a parent or a guardian.
+[02:00:43.755] No arrest, no mugshots, no fingerprints,
+[02:00:47.075] no booking exactly the same way that it functions.
+[02:00:50.875] Now this is a vastly superior tool to the one
+[02:00:55.135] that was initially proffered.
+[02:00:57.555] It avoids the constitutional questions
+[02:00:59.755] and it gives the Chicago police maximum flexibility
+[02:01:03.995] to respond to events as they occur
+[02:01:07.185] and to not be locked in to enforcing dispersal orders
+[02:01:11.425] at only a specific time and only a specific place.
+[02:01:15.065] Uh, I would move approval of this substitute at this time
+[02:01:17.785] and if no one wishes to speak, but I see someone does.
+[02:01:20.595] Okay. The Chair recognizes alderman osha.
+[02:01:23.995] Thank you Mr. President. I, I'm uncomfortable
+[02:01:28.635] with what's being put before us here on the fly.
+[02:01:32.075] W what I just heard sounds like we're opening up the city
+[02:01:35.915] of Chicago for more litigation.
+[02:01:40.495] If we've got a situation downtown like we did a few weeks
+[02:01:43.335] ago where a child went to the morgue instead of going home,
+[02:01:48.425] what does this do to prevent that from happening?
+[02:01:51.015] It, it, it, it would appear to me, what I'm reading is
+[02:01:53.595] that this is just something to placate.
+[02:01:57.345] What does this do that gives the Chicago Police Department
+[02:02:01.595] a tool to help them prevent another kid from getting shot
+[02:02:05.555] and killed in a gang
+[02:02:08.605] conflict downtown Chicago.
+[02:02:13.715] The superintendent's dispersal order, that sounds
+[02:02:18.695] to me like go to the corner young man
+[02:02:20.735] for the rest of class today.
+[02:02:24.165] Uh, I'm uncomfortable with it.
+[02:02:26.465] Is anybody else uncomfortable with this?
+[02:02:28.005] What we clearly have is a very serious public safety crisis
+[02:02:31.965] downtown, repeatedly.
+[02:02:38.145] This came out five minutes ago when every one
+[02:02:41.895] of us talks repeatedly about what are we doing
+[02:02:44.255] to protect children in our city.
+[02:02:51.285] I'm not comfortable with this
+[02:02:53.635] and the rest of us shouldn't be either.
+[02:02:56.115] Jack, complete your comments. Thank you Alderman o Shady.
+[02:02:58.545] Are any other alders interested in speaking
+[02:03:01.385] to the motion on the floor
+[02:03:03.145] for the substitute ordinance to item number two?
+[02:03:05.955] Alright, the chair recognizes Chairman Hopkins.
+[02:03:09.585] Uh, yeah. Thank you to closing
+[02:03:10.965] and I will, uh, respond to directly
+[02:03:12.605] to my colleague Goldman OSHA's question, what would this do?
+[02:03:17.065] Uh, this would do exactly the same thing
+[02:03:20.395] that the curfew ordinance would've done in that scenario.
+[02:03:23.865] In the December scenario
+[02:03:24.925] where the young 14-year-old lost his life,
+[02:03:26.865] we had advanced warning.
+[02:03:28.705] We knew that that teen trend was publicized on social media
+[02:03:33.015] under the curfew ordinance that was substituted
+[02:03:35.805] for we could have in advance declared
+[02:03:38.995] with a 12 hour advance notice
+[02:03:41.315] that Chicago police would be on scene attempting to prevent
+[02:03:45.835] that event prospectively and proactively.
+[02:03:49.715] This dispersal ordinance does the exact same thing.
+[02:03:54.145] No difference. The second piece is if the violations occur,
+[02:03:59.205] if you declare a curfew starting at 8:00 PM
+[02:04:01.325] and at 8:01 PM the crowd is still there,
+[02:04:03.725] the police are allowed to move into that crowd
+[02:04:06.085] and begin making curfew apprehensions, not arrests.
+[02:04:09.995] Again, that's an important point to make for the,
+[02:04:12.405] for the youth advocates here,
+[02:04:14.705] but curfew apprehensions, it's for their own safety.
+[02:04:19.005] If 14-year-old Amani Floyd had been taken into pro
+[02:04:21.835] protective custody, he would be alive today.
+[02:04:25.395] Unfortunately, we did not have that tool.
+[02:04:28.115] This tool would function exactly the same.
+[02:04:31.685] A dispersal order for a targeted group of youth would be
+[02:04:36.425] for their own protection as much as the, for the protection
+[02:04:40.245] of society at large.
+[02:04:41.715] This is a superior tool to the curfew ordinance
+[02:04:45.265] and it will function exactly
+[02:04:47.505] as the curfew ordinance was intended only
+[02:04:50.165] with greater flexibility.
+[02:04:52.185] Thank you. Uh, I move approval of the substitute.
+[02:04:55.265] The chair recognizes alderman osha,
+[02:04:58.895] We're, we're calling this an apprehension.
+[02:05:06.595] So we're taking children
+[02:05:10.295] and we're putting 'em in a police station
+[02:05:12.135] and we're making their parents come
+[02:05:13.475] and get, what about unlawful detainment?
+[02:05:15.705] What about the lawsuits that we continue to have meetings on
+[02:05:19.175] and settlements and tens of millions
+[02:05:22.715] of dollars in settlements?
+[02:05:24.025] What happens when something goes sideways downtown
+[02:05:27.455] and we apprehend a group of teenagers down there
+[02:05:33.285] looking to create conflict,
+[02:05:35.585] but they're held against their will for a parent
+[02:05:37.845] that doesn't show up for 12 hours or 18 hours.
+[02:05:41.125] 'cause that's what's happening a lot of times.
+[02:05:45.245] An apprehension that sounds like litigation.
+[02:05:49.245] We got plenty of lawyers in this room.
+[02:05:51.015] Doesn't that sound like litigation
+[02:05:52.505] that we're opening ourselves up for,
+[02:05:54.205] for more settlements when the police department is just
+[02:05:56.665] doing what legislation we're passing?
+[02:06:04.185] Thank you Alderman. Osha,
+[02:06:05.595] the chair recognizes Alderwoman Nugent.
+[02:06:08.505] Uh, thank you Mr. President.
+[02:06:09.825] And, um, I wanna thank Alderman Hopkins
+[02:06:12.305] for his work on this tirelessly over the last few months.
+[02:06:15.985] Uh, however, as this version is, is different than
+[02:06:19.635] what was moved out of committee, I, I would
+[02:06:22.525] respectfully request if my colleague would perhaps give us,
+[02:06:25.865] um, a little more time to review this
+[02:06:27.885] before moving it today.
+[02:06:29.465] Uh, thank you Mr. Chair.
+[02:06:31.925] Chair recognizes Chairman Hopkins.
+[02:06:35.855] Uh, yes, as the, uh, the motion
+[02:06:37.615] to substitute has already passed and the matter is pending.
+[02:06:41.415] Uh, I will hold it for the time being
+[02:06:43.615] and revisit it at the next meeting.
+[02:06:46.185] Very well. The chair has decided to hold this item.
+[02:06:50.805] Is there any other business in this committee? Chairman,
+[02:06:53.245] Uh, yes. Mr. President.
+[02:06:54.245] Item number three is Ordinance 1 9 9 8 4
+[02:06:57.545] amending municipal code chapter six 10
+[02:07:00.525] by modifying section six 10
+[02:07:03.285] and six 20 to include antisemitism
+[02:07:06.325] and discrimination in the Chicago City Council Declaration
+[02:07:10.125] of General Rights.
+[02:07:11.765] If no one wishes to speak, uh, I move passage
+[02:07:14.485] by the first most favorable roll call
+[02:07:16.105] of the Committee on Finance and associated motion
+[02:07:18.465] to reconsider see
+[02:07:19.545] In no hands here, no objections. So ordered.
+[02:07:22.135] Item number four is resolution R 1 9 9 7, calling
+[02:07:26.325] for condemnation of acts of violence, intimidation,
+[02:07:29.685] or harassment targeting individuals based on political
+[02:07:32.865] or religious beliefs.
+[02:07:34.565] If no, no one wishes to speak, I move passage
+[02:07:36.865] of this resolution by the first most favorable roll call
+[02:07:39.485] of the Committee on Finance and associated unsuccessful
+[02:07:42.405] motion to reconsider
+[02:07:44.245] Chair recognizes Alderman Gardner.
+[02:07:48.495] Thank you. Thank you, Mr. President.
+[02:07:53.015] Um, I first introduce this resolution, um, in September
+[02:07:57.575] of 2025, uh, roughly four months ago.
+[02:08:01.695] Um, I'm happy to see that it was, was presented pass
+[02:08:05.955] through committee for those who didn't get a chance
+[02:08:09.055] to see it or read it.
+[02:08:11.345] I will briefly go over some of it.
+[02:08:14.225] Um, and it, it basically says that we
+[02:08:18.895] as Chicagoan, we celebrate our di our diversity,
+[02:08:22.925] our freedom of expression.
+[02:08:25.135] We, we celebrate the expression of political
+[02:08:27.655] or religious beliefs that is protected by our constitution,
+[02:08:34.075] that we forbid harassment, intimidation,
+[02:08:36.725] and violence directed towards individuals based on their
+[02:08:39.685] political or religious views,
+[02:08:42.415] which have become unfortunately,
+[02:08:44.725] increasingly common across our nation.
+[02:08:49.965] It's very ironic that this resolution is finally
+[02:08:54.825] in front of the full city Council.
+[02:08:59.455] In this resolution I talked about
+[02:09:03.535] how important it is the urgent need to reaffirm
+[02:09:07.155] that this agreement must never escalate into harm.
+[02:09:11.025] That condemning such violent is not an endorsement
+[02:09:13.795] of any particular viewpoint,
+[02:09:15.735] but rather a defense of the right of all people,
+[02:09:20.625] regardless of ideology or creed, to live
+[02:09:23.725] and speak freely without fear of harm.
+[02:09:28.905] We condemn the assassinations of Republican
+[02:09:31.345] and conservative influencer Charlie Kirk and Democrat
+[02:09:35.405] and former Minnesota House speaker Melissa Hortman, as well
+[02:09:38.645] as all that acts of violence, intimidation,
+[02:09:41.745] or harassment, targeting individuals on the basis
+[02:09:44.825] of their political or religious beliefs
+[02:09:49.735] that is upholding our constitutional rights of free speech,
+[02:09:53.145] peaceful assembly, and religious liberty for all Chicagoans.
+[02:10:01.615] This resolution does not limit your first amendment right.
+[02:10:06.465] It uplifts it, which includes the right to worship,
+[02:10:10.725] whichever God you so choose without fear
+[02:10:13.095] of harassment and intimidation.
+[02:10:17.555] Ladies and gentlemen, colleagues,
+[02:10:19.885] what we witnessed on Sunday in Minnesota was a total
+[02:10:23.535] disgrace at city's church,
+[02:10:27.475] and it was a violation of one's rights as Americans,
+[02:10:30.295] as Christians, or any other religion
+[02:10:33.305] you so choose to follow.
+[02:10:36.885] We can agree or disagree on the immigration problem in this
+[02:10:39.785] country, but what we cannot
+[02:10:42.075] and will not tolerate are people trespassing in the houses
+[02:10:46.595] of worship and berating worshipers, including women,
+[02:10:51.355] children, elderly,
+[02:10:55.675] in the reasoning the pastor has something to do with ice.
+[02:11:01.765] That, that, that was the reasoning.
+[02:11:05.325] But instead of organizing a protest on any
+[02:11:08.425] of the other six days of the week, we decided
+[02:11:11.555] to do it on the day that they worship during the hour
+[02:11:15.045] that they are worshiping.
+[02:11:17.415] And we don't wait outside the building.
+[02:11:20.815] We go inside the building
+[02:11:23.135] and be as disrespectful as possible
+[02:11:25.975] and get in the faces of these people
+[02:11:28.095] as they're worship worshiping their God.
+[02:11:34.255] One of these renegades goes by the name of de woke farmer.
+[02:11:37.665] William Kelly felt it upon himself
+[02:11:40.845] to call these God-fearing churchgoers, white supremacist.
+[02:11:45.025] Even Don Lemon got into the act Oh yeah.
+[02:11:49.375] And then doubled down on his lawless act
+[02:11:51.475] by stating he was being singled out
+[02:11:52.995] because of his race and sexuality.
+[02:11:56.835] The ironic part about all this, many of these worshipers
+[02:12:01.805] actually helping these migrants or immigrants
+[02:12:03.905] or people who are who, who are here illegally
+[02:12:09.295] in Proverbs, Proverbs 28 states, those
+[02:12:13.375] who forsake instruction praise the wicked,
+[02:12:16.435] but those who heed it, resist them.
+[02:12:20.125] Evil doers do not understand what is right,
+[02:12:23.075] but those who seek the Lord understand it fully.
+[02:12:28.125] Anyone who truly believes in a higher power knows what,
+[02:12:32.705] what those agitators did was wrong.
+[02:12:34.845] It was evil. I ask you to join me in condemning that type
+[02:12:38.965] of harassment, regardless of your political stance.
+[02:12:42.285] And as leaders within this city, take a stand,
+[02:12:46.055] take a stand against these type of acts.
+[02:12:48.055] It's okay to come out and talk about it.
+[02:12:49.585] Even if your political party says, don't talk about it.
+[02:12:55.905] And if you stand against these acts of violence
+[02:12:58.065] and harassment, please join me.
+[02:12:59.625] Please join me as a co-sponsor. Don't be afraid.
+[02:13:04.785] Be as bold as a lion. Yeah.
+[02:13:07.405] Come out and talk about this and say, that's wrong.
+[02:13:10.495] What they're doing that's evil, what they're doing.
+[02:13:14.285] You come in and you get into faces of women,
+[02:13:16.965] you get into faces of children,
+[02:13:19.665] and you think somehow you are, you are fighting for justice.
+[02:13:23.325] You're not, you're not. It's wrong.
+[02:13:25.875] I ask you to join me in condemning this behavior.
+[02:13:28.445] Thank you. Thank you.
+[02:13:30.815] Um, the chair recognizes alderman LaSpada.
+[02:13:36.775] If I'm, if I may just say,
+[02:13:39.395] 'cause I'm, I'm trying to hear this resolution out,
+[02:13:43.415] but I am, as long as we're talking about it.
+[02:13:46.515] I do remember going to church
+[02:13:48.795] and hearing about someone who went into the temple
+[02:13:52.675] and knocked over tables to pro
+[02:13:59.135] to protest the invasion of capitalism
+[02:14:02.015] and the corruption of that temple.
+[02:14:03.835] I remember hearing that story.
+[02:14:05.915] I hear it frequently, and I do know
+[02:14:08.475] that there are church goers who are also white supremacists.
+[02:14:11.935] And so I just want to acknowledge the truth that exists
+[02:14:16.255] and the haziness in all of this.
+[02:14:18.765] I, I, I cannot listen
+[02:14:21.465] and ignore the, the cognitive dissonance
+[02:14:24.965] that I'm experiencing hearing these points.
+[02:14:27.215] Thank you, Mr. President.
+[02:14:28.285] Thank you. The chair recognizes Alderman Hopkins on your
+[02:14:31.845] motion again for the passage of item number apologies.
+[02:14:36.595] The chair recognizes Alder Manhattan.
+[02:14:41.165] Thank you, Mr. President. I, I apologize.
+[02:14:43.815] Um, I will pose this question to you.
+[02:14:46.655] Um, I similar to my colleague Alderman LaSpada,
+[02:14:51.135] I am a little confused on the sponsor
+[02:14:55.235] and what kind of, what does a positive vote
+[02:14:58.715] for this condemn?
+[02:14:59.735] Because is are we condemning discrimination?
+[02:15:03.435] Are we dis, are, are we condemning attacks on immigrants?
+[02:15:07.755] Are we condemning attacks on people
+[02:15:10.025] based on the color of their skin?
+[02:15:11.955] Or are we condemning First Amendment speech
+[02:15:15.635] for people speaking out against white supremacy?
+[02:15:18.515] So, uh, I, I know in committee, I, I supported this
+[02:15:22.175] because I thought that it read for what it was on its face,
+[02:15:25.715] but in hearing the chief sponsor, um, clarify
+[02:15:30.515] and speak on his convictions, it sounds like a vote
+[02:15:33.695] for this is a vote for
+[02:15:36.025] condemning people standing up against fascism in their city
+[02:15:39.695] while their neighbors are being pulled out of the street
+[02:15:42.315] or fighting against ice officers who have been
+[02:15:46.775] repeatedly violating First Amendment rights in due process,
+[02:15:49.705] which is what we've seen upheld in the courts.
+[02:15:52.035] Um, so maybe some clarification from the sponsor, um,
+[02:15:55.755] if it's, if the chair would allow, would help me
+[02:15:58.495] to determine whether this is a resolution
+[02:16:01.655] that reads on its face
+[02:16:03.075] or if the, the sponsor is in viewing some additional context
+[02:16:07.955] to this that maybe is not in alignment with
+[02:16:10.965] what I know the constituents of the 49th Ward,
+[02:16:13.955] um, are fighting for
+[02:16:15.855] Very well. Um,
+[02:16:16.855] just a moment. The chair recognizes Alderman Lopez.
+[02:16:24.005] Thank you, Mr. President.
+[02:16:25.175] And now good afternoon members of the city council.
+[02:16:28.395] I rise in support of the resolution written and presented
+[02:16:32.445] and passed out of committee
+[02:16:34.195] because as the resolution states clearly
+[02:16:40.955] that we are condemning assassinations
+[02:16:43.985] of Republicans and Democrats.
+[02:16:45.915] Yeah. We've seen
+[02:16:50.155] lawmakers gunned down in their homes with their spouses.
+[02:16:54.035] Our neighbor in Indiana just this weekend
+[02:16:58.675] had a superior court judge
+[02:17:01.155] and his wife shot in their homes.
+[02:17:05.875] This is what we all should be concerned about
+[02:17:08.675] because as people express their
+[02:17:12.245] constitutionally guaranteed rights, their opinions on
+[02:17:15.535] what we do, we have folks here who come here every meeting
+[02:17:18.595] to express their rights.
+[02:17:19.725] Yeah, that is an enshrined doctrine in our constitution
+[02:17:24.045] that is worth absolutely defending,
+[02:17:25.655] which this resolution specifically mentioned.
+[02:17:30.915] But when you take words
+[02:17:35.735] and turn vitriol into murder, into anger
+[02:17:41.075] that is designed to intimidate
+[02:17:43.825] and harm elected officials, I don't care
+[02:17:48.775] who you are in this room,
+[02:17:51.095] that is never acceptable a hundred percent.
+[02:17:55.325] Whether you are to the left of me, to the right of me,
+[02:17:58.175] above me or below me, none of you should feel threatened
+[02:18:02.455] simply because you think differently from
+[02:18:05.065] individuals expressing their views.
+[02:18:08.075] That is what this resolution calls them, all of us,
+[02:18:13.265] to reaffirm, to commit to.
+[02:18:19.025] I'm reading and taking at face value.
+[02:18:21.745] All I can do, everything that's presented to us.
+[02:18:25.335] To answer my colleague behind me's question how
+[02:18:30.175] what you infer from it.
+[02:18:31.365] I'm looking directly at what it is saying
+[02:18:33.145] that we are resolving ourselves to do.
+[02:18:37.885] It says that we are condemning political assassinations,
+[02:18:42.215] that we are upholding constitutional rights of free speech,
+[02:18:46.105] peaceful assembly, and religious liberty.
+[02:18:49.175] Show me by way of hands who's against that.
+[02:18:53.465] That is what we are here for, that we are continuing
+[02:18:57.955] constructive dialogue and peaceful engagement
+[02:19:00.645] and that we should share this
+[02:19:01.945] with others throughout our city.
+[02:19:04.635] That is what this resolution as presented
+[02:19:07.465] before this body from this committee says.
+[02:19:10.305] And in that spirit, that is what I think all of us
+[02:19:14.345] who pon co-sponsored it
+[02:19:16.045] with our colleague from the 45th Ward believe in
+[02:19:19.385] and what all of us, all 53 of us
+[02:19:24.325] need to reaffirm and hear in the city of Chicago.
+[02:19:27.055] Thank you. Thank you.
+[02:19:31.565] Um, I have Alderman PDO next,
+[02:19:34.885] and then if the chief sponsor wishes
+[02:19:37.325] to offer up some clarification as his colleague has
+[02:19:41.735] requested, chair recognizes Alderman pdo,
+[02:19:46.465] Thank you, Mr. President.
+[02:19:47.465] It's pretty simple to me what he's saying.
+[02:19:50.105] Maybe it's not simple to everybody.
+[02:19:51.555] I'm, I don't mean that as a knock to anybody, unfortunately,
+[02:19:55.865] or fortunately I should say.
+[02:19:57.635] This ordinance was before what happened on Sunday,
+[02:19:59.705] the deplorable actions that happened on Sunday.
+[02:20:02.765] I mean, they could have stood outside with their signs,
+[02:20:04.365] they could have done a lot of things, but to go there
+[02:20:05.885] and storm the gates with women
+[02:20:08.485] and children are trying to intimidate 'em,
+[02:20:10.185] that's just despicable.
+[02:20:11.525] That's unacceptable.
+[02:20:12.925] That's something we need to speak out against.
+[02:20:15.715] I wanna share something. What happened to me in 2020 out
+[02:20:19.315] of the blue, I got a, I got a Facebook message from a guy
+[02:20:22.515] who I don't know, from the 47th Ward,
+[02:20:25.255] nothing against you, Matt.
+[02:20:26.455] I just, I don't know what this guy was thinking.
+[02:20:28.285] This was months
+[02:20:29.295] after I called the, I called the Savages savages
+[02:20:32.775] that attacked the police at the, at the Columbus statue,
+[02:20:35.715] and he added a blue sends me this text that says,
+[02:20:38.855] I think we know who the savage is.
+[02:20:40.635] You deplorable S*****g thank and I respond to him back.
+[02:20:44.805] Thanks Timmy. His name was Tim Chipping.
+[02:20:48.045] Thanks Timmy parentheses keyboard warrior.
+[02:20:51.175] What would, what would you refer savages to that try
+[02:20:53.985] to kill our main police officers?
+[02:20:56.305] He responds back to me, go f yourself.
+[02:20:59.025] The pigs are savage, savages and shitheads.
+[02:21:02.295] Who's the keyboard warrior now? Let's go. I have guns. Okay.
+[02:21:06.605] I didn't know what to do. So I reached out to the,
+[02:21:11.005] um, to the police.
+[02:21:13.435] They have a department, a cyber department.
+[02:21:16.435] They took this pretty serious, they got ahold of the guy,
+[02:21:19.585] of course the guy who was dying and everything.
+[02:21:21.085] He don't have guns, he didn't mean
+[02:21:22.605] anything, blah, blah, blah.
+[02:21:24.275] What do you wanna do? They wanted to arrest him.
+[02:21:26.965] I let him go. I said, if he apologizes, uh, we just happen
+[02:21:30.285] to have one common friend on Facebook and, uh,
+[02:21:32.365] and he was from a, a local union.
+[02:21:34.045] I said, if you're a union president
+[02:21:35.545] and a friend asked me to forgive you
+[02:21:37.565] or forgive you to ask me, I forgave him.
+[02:21:39.045] But this is, this is, this guy doesn't even know me.
+[02:21:41.325] I mean, I don't know if he was serious.
+[02:21:42.685] I dunno what kind of a nutcase he is. I dunno, anything.
+[02:21:45.045] This, this stuff is, is terrible.
+[02:21:46.705] And we saw what happened to Hartman
+[02:21:48.245] and we saw what happened to Kirk.
+[02:21:49.555] This stuff is deplorable.
+[02:21:50.845] I I don't, I don't understand
+[02:21:51.845] what this world is thinking nowadays.
+[02:21:53.685] I I understand 100% what Jim is saying.
+[02:21:55.905] We, we shouldn't be allowing this stuff. You wanna protest?
+[02:21:58.245] I think everybody hears for First Amendment rights.
+[02:21:59.905] Go stand outside, do what you want, but intimidate women
+[02:22:02.385] and children and crash a church service.
+[02:22:04.465] To me, that's unacceptable.
+[02:22:06.065] Jim, I'm with you a hundred percent.
+[02:22:07.565] I know exactly what you're saying.
+[02:22:09.145] Uh, thank you Mr. President. Thank
+[02:22:11.005] You. Alderman
+[02:22:12.005] Alderman Gardner. Yes,
+[02:22:13.665] Mr. President, I'm gonna
+[02:22:14.665] clarify.
+[02:22:15.705] Uh, so everybody's, we we're all, I'm, I'm gonna make it
+[02:22:18.365] as clear as possible.
+[02:22:20.305] In here it says,
+[02:22:21.415] condemning such violent is not an endorsement
+[02:22:24.465] of any particular viewpoint,
+[02:22:26.545] but rather a defense of the right of all people,
+[02:22:31.485] regardless of ideology or creed, to live
+[02:22:34.465] and speak freely without fear of harm or harm.
+[02:22:40.355] In August, August 27th to 2025,
+[02:22:44.135] a man broke into a Catholic church.
+[02:22:46.385] Ironically, in Minneapolis,
+[02:22:50.215] shot multiple people killed two children, a 10-year-old
+[02:22:53.085] and an 8-year-old wounded another 30 children, I believe,
+[02:22:58.535] and this, this is the same city.
+[02:23:00.765] These indi these individuals decided, and,
+[02:23:03.995] and again, I want, I wanna make this crystal clear.
+[02:23:06.985] This is not condemning people who wanna protest.
+[02:23:10.955] You have that right as Americans, right? We celebrate that.
+[02:23:13.715] We see that endlessly you can protest
+[02:23:18.485] as much as you want, right?
+[02:23:21.375] But there should be boundaries on, on
+[02:23:23.405] where you're taking your protests.
+[02:23:25.585] When you're taking your protest.
+[02:23:27.245] Again, you could have protested on
+[02:23:30.815] any other day of the week.
+[02:23:32.055] You had six other days to do it on.
+[02:23:34.015] You had 23 other hours to choose from on that day.
+[02:23:37.815] But you chose, these individuals chose the day
+[02:23:40.115] to go in while these people were worshiping again,
+[02:23:43.225] I wrote this four months ago in September, so I had no idea.
+[02:23:48.215] This was just after the shooting occurred in Minneapolis,
+[02:23:51.695] where two children were killed, another 30 wounded.
+[02:23:56.155] And these individuals now just on Sunday,
+[02:23:58.925] took it upon themselves.
+[02:23:59.935] They thought it was a good idea. And,
+[02:24:01.095] and you could see from the video where they come in
+[02:24:02.855] and they, they plan, they strategize in the parking lot,
+[02:24:05.415] and then they walk in and they storm in
+[02:24:07.475] and they start berating these people
+[02:24:09.635] and calling 'em all types of names.
+[02:24:12.945] It, it again proves the validity of this resolution by we
+[02:24:17.285] as leaders in the city of Chicago, in this great city,
+[02:24:20.195] that we should come together, whether Democrat or Republican
+[02:24:23.495] or independent, black, white, green, Christian, Jew, Muslim,
+[02:24:30.515] stand against that, a house of worship.
+[02:24:34.385] I don't care if it's a synagogue,
+[02:24:35.565] if it's a mosque, if it's a church.
+[02:24:39.325] You don't go into somebody's home, their house of worship
+[02:24:42.545] during their worshiping hour and berate them.
+[02:24:46.705] If you can't understand that, I, I don't know how else
+[02:24:51.135] to explain that to you.
+[02:24:55.275] Thank you. Altman Gardner, right.
+[02:24:58.645] There's a motion on the floor for the passage
+[02:25:02.215] of item number four
+[02:25:05.285] by the most favorable roll call vote in the Committee on
+[02:25:08.185] finance in the associated unsuccessful motion to reconsider
+[02:25:14.225] hearing no objections, seeing other, no other hands.
+[02:25:17.975] So ordered. Chairman Hopkins.
+[02:25:21.225] Uh, thank you Mr. President.
+[02:25:22.325] That concludes the report
+[02:25:23.445] of the Committee on Public Safety. Very
+[02:25:24.965] Well chair recognizes Alderman Conway.
+[02:25:27.825] Do I I was remiss in saying, uh,
+[02:25:29.885] a little bit tardy if I could be added
+[02:25:31.225] to the first most favorable roll call
+[02:25:32.685] vote on finance. Thank you
+[02:25:33.725] Very much. Very well. Um,
+[02:25:34.725] please add Alderman Conway
+[02:25:36.645] to the most favorable roll call vote
+[02:25:38.905] and the finance committee
+[02:25:39.925] and the associated unsuccessful motion to reconsider
+[02:25:43.985] for the Committee on Transportation and Public Way.
+[02:25:46.985] The chair recognizes Chairman Mitchell,
+[02:25:50.825] Mr. President members
+[02:25:51.825] of the city council reporting for your,
+[02:25:53.985] for your committee on Transportation
+[02:25:55.705] and Public Way, which held a meeting on January 20th, 2026.
+[02:26:00.065] The following items with, uh, passed
+[02:26:02.705] by the majority of the members.
+[02:26:03.885] Present pages two
+[02:26:05.565] through four included 21 ordinances from miscellaneous items
+[02:26:09.045] introduced by the local alderman from Wards
+[02:26:11.425] 1, 2, 10, 16, 22, 25, 28, 29, 39,
+[02:26:16.185] and 45 pages five includes items ordinance
+[02:26:20.225] 2 0 2 4 0 0 2 1 9 6 7, a street opening
+[02:26:24.865] for a property located in the fourth ward.
+[02:26:27.345] If there is no objection, I'll move passion of these items
+[02:26:29.665] by the first most favorable roll call vote
+[02:26:32.145] of the Committee on Finance in the associated unsuccessful
+[02:26:34.965] motion to reconsider here. No
+[02:26:36.485] Objection. Sole order.
+[02:26:38.205] Mr. President, that concludes my report.
+[02:26:40.235] Thank you very much. That completes our committees.
+[02:26:43.245] Um, Alder woman mitts would like
+[02:26:48.335] to make a couple of acknowledgements.
+[02:26:50.335] Can I get a motion to suspend the rules?
+[02:26:54.825] All those in favor signify by saying aye. Very well.
+[02:26:58.295] This motion passes, chair recognizes Alderwoman Mitchell.
+[02:27:02.315] I'm sorry, Alderwoman. MITs.
+[02:27:04.065] Thank you Mr. Um, chairman.
+[02:27:07.555] Um, I wanted to acknowledge the fact that
+[02:27:12.225] for the West siders, uh, Alman, Irving
+[02:27:17.045] Alderman, Tyler Farrah, um, alderman Scott,
+[02:27:22.205] alderman Burnett, Mr.
+[02:27:23.435] Mary, yourself, we lost a jewel
+[02:27:27.825] on the west side and uh,
+[02:27:31.995] who lived in Ottoman, Tyler Farrah's ward,
+[02:27:34.635] but she was so well known at 102
+[02:27:38.715] or three, which one is four?
+[02:27:40.925] They'll tell me 104 years old.
+[02:27:43.745] We've celebrated her birthday for many years
+[02:27:48.035] and she was one that would not let you forget
+[02:27:51.005] that it was her birthday either.
+[02:27:53.355] So I wanted to recognize her
+[02:27:56.095] because she was not just known on the west side.
+[02:28:00.265] She was known throughout the state of Illinois.
+[02:28:04.085] You talk about legislation that's been passed.
+[02:28:07.615] I've watched Miss Drummond, Lillian Drummond
+[02:28:11.805] take on every governor that went there.
+[02:28:14.735] If you started messing with the seniors
+[02:28:17.315] and particularly big on a li Heat program,
+[02:28:21.385] helped many seniors.
+[02:28:24.105] Anybody from West Side knows Miss Drummond,
+[02:28:28.085] but she fought a good fight.
+[02:28:31.475] She left a legacy that all of us could look back on
+[02:28:35.035] and say, Hey, I hope I could do that.
+[02:28:38.035] She worked past that hundred
+[02:28:42.455] until she just couldn't work no more
+[02:28:45.585] and then she would work from her home.
+[02:28:47.375] Still that tells us that we need to
+[02:28:52.555] get that strength together
+[02:28:53.695] because when you find seniors who are still working
+[02:28:58.085] because they love helping others,
+[02:29:02.165] and that's what she loved doing, helping others, even though
+[02:29:06.985] she were a little weak at time,
+[02:29:09.825] she still wanted to help others.
+[02:29:11.665] You all get me. I want you to fill me here on this
+[02:29:14.485] because our seniors are very important to
+[02:29:20.045] the city, the state and this country.
+[02:29:24.255] Now that brings me to another point that I want
+[02:29:27.035] to talk about, which is the oldest
+[02:29:31.395] American act, the reauthorization
+[02:29:35.595] of the 2025 bill,
+[02:29:39.235] Senate Bill 2120.
+[02:29:45.275] That has been reintroduced
+[02:29:50.375] through the House and the Senate.
+[02:29:53.995] But guess what? They did pass the house,
+[02:29:58.795] didn't pass the Senate.
+[02:30:01.275] Now we are up January this year of 31.
+[02:30:06.245] That bill do not get passed.
+[02:30:09.245] We'll have our seniors out here.
+[02:30:12.255] We're gonna lose that funding, that care caregivers
+[02:30:18.755] when we start neglecting the seniors.
+[02:30:22.585] What gonna happen to the rest of us?
+[02:30:24.275] 'cause we trying to get to be there.
+[02:30:27.365] So our urges to make sure that we stay focused,
+[02:30:33.925] calling our senators, our congressmen
+[02:30:38.415] to make sure this bill, whatever we need to do
+[02:30:42.115] sometime we got to be bipartisan,
+[02:30:45.475] cross some lines to help other folks.
+[02:30:47.245] It ain't about just us. We need
+[02:30:49.225] to make sure we save this program so
+[02:30:52.385] that our seniors would not have to live in poverty.
+[02:30:56.095] And I know if Ms. Drummond was alive today,
+[02:30:58.565] she'd be one in the front line fighting this fight.
+[02:31:02.185] But because I'm here
+[02:31:03.205] and I'm getting in that age, I'm there at that senior age.
+[02:31:05.865] Now I want you all to recognize
+[02:31:08.585] that you gotta travel in the footsteps that we are going
+[02:31:12.745] through if you live there long enough,
+[02:31:15.695] but you better do the right thing
+[02:31:17.495] and the right thing now is to fight
+[02:31:19.775] while the blood is running warm in your veins. Thank you.
+[02:31:23.935] Thank you. Thank you Alderwoman.
+[02:31:26.075] MITs, uh, alderman Mitch, you on a motion to return back
+[02:31:29.355] to the regular order of business?
+[02:31:30.615] Ms. Brown move, return to the red order.
+[02:31:32.115] Of all those in favor signify by saying aye. Very well.
+[02:31:34.915] And now back to the regular order of business
+[02:31:36.955] for the agreed upon calendar.
+[02:31:38.815] Um, Alderwoman Harris,
+[02:31:41.055] Mr. President,
+[02:31:42.055] um, I have 132 I've received from the clerk, uh,
+[02:31:46.015] Andrea and Valencia.
+[02:31:47.515] A total of um, 132 items proposed
+[02:31:50.655] for the agreed calendar consisting
+[02:31:52.315] of congratulatory commemorative tribulation resolutions
+[02:31:55.835] from the following.
+[02:31:57.155] Alder persons, Alder Persons, Robinson and Lawson.
+[02:32:01.995] All person Chico,
+[02:32:03.275] all person Coleman all person osha older person,
+[02:32:06.385] moley Al person debar all person Rio, um,
+[02:32:10.715] all person Lawson Al person, Gardner and Al person Clay.
+[02:32:15.255] I move these into Omnibus sir.
+[02:32:16.615] Hearing no objection. So ordered now for new business.
+[02:32:19.415] The court will call the awards beginning with the first
+[02:32:25.925] Zoning amendments which are referred
+[02:32:27.305] to the committee on zoning landmarks
+[02:32:28.785] and building standards, traffic regulations,
+[02:32:30.865] traffic control signals and traffic signs,
+[02:32:32.385] which are referred to the Committee on Pedestrian
+[02:32:33.945] and Traffic Safety exemption from physical barrier
+[02:32:36.465] requirements for commercial driveway alley access,
+[02:32:38.715] which is referred to the Committee on
+[02:32:40.105] Transportation and Public Way.
+[02:32:43.165] All the person LaSpada has a proposed ordinance
+[02:32:44.985] for amendment of municipal code section four dash 1 56 dash
+[02:32:47.945] 3 0 5 to exempt public places
+[02:32:50.025] of amusement from license requirements if want
+[02:32:52.185] or more video game terminals is present, which is referred
+[02:32:54.825] to the Committee on License and Consumer Protection.
+[02:32:57.245] All the person Robinson has a proposed order
+[02:32:59.065] for their historical landmark fee waiver
+[02:33:01.085] for a recertification of the property at 45 43 South Ellis
+[02:33:04.345] Avenue, which is referred
+[02:33:05.465] to the committee on zoning landmarks and building standards.
+[02:33:08.045] All the person Mitchell has proposed ordinance for amendment
+[02:33:09.985] of municipal code chapter four dash four
+[02:33:11.825] by adding a new section four dash four dash 3 25
+[02:33:15.045] to prohibit issuance of additional beauty SH beauty supply
+[02:33:17.945] store licenses in the seventh ward, which is referred
+[02:33:20.305] to the Committee on License and Consumer Protection.
+[02:33:22.605] All the person Mitchell also has a proposed ordinance
+[02:33:24.585] for amendment of municipal code chapter four dash four
+[02:33:26.905] by adding a new section four dash four dash 3 26,
+[02:33:29.695] they prohibit issuance of additional convenience store
+[02:33:31.905] licenses in the seventh ward, which is referred
+[02:33:34.065] to the Committee on License and Consumer
+[02:33:35.385] Protection Alder person.
+[02:33:37.505] Mitchell also has proposed orders for amendment
+[02:33:38.905] of MSPA code section four dash 64 dash five 15
+[02:33:42.405] by prohibiting issuance of additional new
+[02:33:44.145] or renewal retail tobacco dealer licenses in the seventh
+[02:33:47.705] ward, which is referred to the Committee on License
+[02:33:49.165] and Consumer Protection Alder person Mitchell also has
+[02:33:52.575] proposed orders for amendment of municipal code section four
+[02:33:54.615] dash 1 0 8 dash 80 by replacing in its entirety
+[02:33:58.675] to prohibit sale of convenience items
+[02:34:01.075] and motor fuel at filling stations between 10:00 PM
+[02:34:03.755] and 6:00 AM in the seventh ward, which is referred
+[02:34:06.535] to the company on license consumer protection.
+[02:34:09.185] All, all their person Beal
+[02:34:10.605] and others have proposed resolution to call
+[02:34:12.365] for the city clerk to provide Illinois Gaming Board
+[02:34:14.595] with certified copies of the city council ordinance allowing
+[02:34:17.845] video gaming terminals, which is referred
+[02:34:19.845] to the Committee on Finance, while the person Gutierrez has
+[02:34:22.865] a proposed ordinance for amendment of municipal code section
+[02:34:25.135] four dash 60 dash 23
+[02:34:27.125] to allow additional package goods licenses on portion
+[02:34:29.305] of South Pulaski Road, which is referred
+[02:34:31.105] to the Committee on License and Consumer Protection.
+[02:34:33.285] All the person Gutierrez also has a proposed ordinance
+[02:34:35.585] for amendment of municipal code at section four dash 60 dash
+[02:34:37.905] 0 23 to allow additional package with licenses on portions
+[02:34:41.105] of West 51st Street, which is referred
+[02:34:42.985] to the Committee on License and Consumer Protection.
+[02:34:45.365] All the person Moore has proposed ordinance for amendment
+[02:34:47.545] of municipal code section four dash 60 dash 0 23
+[02:34:50.445] to allow additional package with licenses on portion
+[02:34:52.565] of South Racing Avenue, which is referred
+[02:34:54.705] to Committee on License and Consumer Protection while the
+[02:34:57.265] person Moore also has a proposed ordinance for amendment
+[02:34:59.025] of municipal code section four dash 60 0 23
+[02:35:01.965] to disallow additional package good licenses on portion
+[02:35:04.265] of West 69th Street, which is referred
+[02:35:06.265] to Committee on License and Consumer Protection.
+[02:35:09.015] All the person, OSHA
+[02:35:10.115] and others have proposed resolution to call
+[02:35:11.875] for hearings on the city's cash flow situation as described
+[02:35:15.235] by members of the press, which
+[02:35:16.555] is referred to the Committee on Finance.
+[02:35:18.975] All the person Scott has proposed ordinance
+[02:35:20.635] for an honorary street designation as Carol Robertson Way,
+[02:35:23.205] which is referred to the Committee on
+[02:35:24.395] Transportation and Public Way.
+[02:35:26.255] All the person Burnett has proposed orders for the issuance
+[02:35:28.435] of permits for signed sign boards at various locations,
+[02:35:30.275] which are referred to the committee on zoning
+[02:35:32.435] landmarks and building standards.
+[02:35:34.085] All the person Burnett also has proposed ordinance
+[02:35:35.945] for support of a Class six B tax incentive
+[02:35:38.005] for the property at 4 0 4 North Armor Armor Street,
+[02:35:40.915] which is referred to the committee Economic Capital
+[02:35:42.845] and Technology Development.
+[02:35:44.705] Al Firo has proposed ordinance
+[02:35:46.065] for amendment municipal code section nine dash 64 dash one
+[02:35:48.985] 70 a to allow parking
+[02:35:51.245] of taxi cabs on residential streets within the 29th ward,
+[02:35:54.035] which is referred to the committee
+[02:35:55.105] as transportation and public way.
+[02:35:57.045] All the person Tellier also has proposed orders
+[02:35:58.825] for the issuance supremist for signed sign boards at 1619
+[02:36:01.825] North Neva Avenue, which are referred to the committee
+[02:36:04.025] as zoning landmarks and building standards.
+[02:36:06.085] All the person Tere also has proposed orders for amendment
+[02:36:08.585] of the annual appropriation ordinance
+[02:36:10.125] to transfer funds within the Committee on Police
+[02:36:11.985] and Fire for the year 2026 from the commodities
+[02:36:14.665] and materials and supplies to personal services,
+[02:36:17.035] which is referred to the committee on the budget
+[02:36:18.565] and government operations while the person RO also has
+[02:36:21.705] proposed ordinance for amendment of the annual appropriation
+[02:36:23.265] ordinance to transfer funds within the Committee on Police
+[02:36:25.665] and Fire for the year 2026.
+[02:36:28.055] From, from the from the contractual services,
+[02:36:31.325] the personnel services, which is referred
+[02:36:33.185] to the committee on the budget and government operations,
+[02:36:35.485] all person fier, all says proposed ordinance for amendment
+[02:36:37.665] of the annual appropriation ordinance
+[02:36:38.945] to transfer funds within the Committee on Police
+[02:36:40.345] and Fire for the year 2026.
+[02:36:41.825] From the Miscellaneous Fund to Personal Services,
+[02:36:43.875] which is referred to the committee on the Budget
+[02:36:45.805] and Government Operations,
+[02:36:47.365] all the person Wapac has proposed order for the issuance
+[02:36:49.665] of permits for signed sign boards at 2,500 North Elston
+[02:36:52.545] Avenue, which is referred
+[02:36:53.665] to the Committee on zoning landmarks and billing standards.
+[02:36:56.205] All the person Conway has proposed orders for amendment
+[02:36:58.265] of municipal code sections eight dash 32 dash zero 60
+[02:37:01.125] and eight dash 32 dash one 20 to replace the word churches
+[02:37:05.175] with the words place, places of worship
+[02:37:07.965] in noise sensitive zones, which is referred
+[02:37:10.065] to the Committee on Public Safety.
+[02:37:12.085] All the PERSONDO has proposed ordinance for amendment
+[02:37:14.225] of the annual appropriation ordinance
+[02:37:15.485] to transfer funds from the 38th Ward.
+[02:37:17.005] All thematic expense account to the wage allowance account
+[02:37:19.845] for the year 2026, which is referred
+[02:37:21.805] to the committee on the Budget and Government operations,
+[02:37:23.895] while the person NuGen has proposed ordinance for amendment
+[02:37:26.005] of the annual appropriation ordinance to trans
+[02:37:27.905] to transfer funds from the 30 39th Ward.
+[02:37:30.005] All the medic expense account to the wage allowance account
+[02:37:32.885] for the year 2025, which is referred
+[02:37:34.845] to committee on the budget and government Operations.
+[02:37:37.265] All the person in Theano has proposed an ordinance
+[02:37:39.125] for an honorary street designation as Judy McIntyre Way,
+[02:37:41.855] which is referred to the Committee on
+[02:37:43.045] Transportation in Public Way.
+[02:37:44.745] All the person in Theano
+[02:37:45.845] and others have proposed ordinance for amendment
+[02:37:47.205] of municipal code section two dash eight dash zero 40,
+[02:37:50.125] allowing all the persons to propose up
+[02:37:52.285] to four honorary street designations per calendar year,
+[02:37:54.855] which is referred to the Committee on
+[02:37:56.125] Transportation and Public Way.
+[02:37:58.015] All the person Riley, has proposed orders for the issuance,
+[02:38:00.155] SREs for signed sign boards at various locations,
+[02:38:02.205] which are referred to the committee on
+[02:38:03.395] zoning landmarks and building standards.
+[02:38:05.435] All the person law then has a proposed ordinance
+[02:38:07.055] for amendment of the annual appropriation ordinance
+[02:38:08.575] to transfer funds from the 44th Ward,
+[02:38:10.815] ultimate expense account to the wage allowance account
+[02:38:12.895] for the year 2026, which is referred
+[02:38:14.775] to the committee on the budget and government Operations.
+[02:38:16.795] All the person. Lawson also has proposed ordinance
+[02:38:18.875] for amendment of municipal code section 17 dash seven dash
+[02:38:21.925] 5 74 to replacing its entirety
+[02:38:24.445] regarding additional dwelling units allowed in RS areas,
+[02:38:28.505] which are referred to the committee on
+[02:38:30.015] zoning landmarks and building standards.
+[02:38:32.115] All the person Lawson also has proposed ordinance
+[02:38:33.935] for amendment municipal code section four dash 60 64 dash
+[02:38:37.515] 2 0 6 to establish Sunday parking media hours on
+[02:38:40.855] non-residential streets,
+[02:38:42.105] which is referred to the Committee on Finance.
+[02:38:44.235] All the person, Lawson
+[02:38:45.295] and others have proposed resolution
+[02:38:46.795] for the amendment of the City Council.
+[02:38:48.055] Rules of order and procedure for the 2023 through 2027 term
+[02:38:52.275] to appoint new chair
+[02:38:53.335] and vice chair of the committee on zoning landmarks
+[02:38:55.335] and billing standards, which is referred
+[02:38:56.775] to the Committee on Committees and Rules.
+[02:39:00.925] All the person, Gardner and others have opposed Ordinance
+[02:39:02.945] for amendment of municipal code section two dash 1 56 dash
+[02:39:05.465] 3 85 regarding Inspector General's investigative reports
+[02:39:09.845] and probable cause findings, which is referred
+[02:39:11.945] to the Committee on Ethics and Government Oversight.
+[02:39:14.555] All the person. Gardner also has proposed ordinance
+[02:39:16.455] for an honorary street designation as J Warner Way,
+[02:39:19.015] which is referred to the Committee on
+[02:39:20.215] Transportation and Public Way.
+[02:39:21.995] All the person Silverstein has proposed order
+[02:39:23.655] for the useless permit for signed sign boards at 25 53 west
+[02:39:26.575] of V Avenue, which is referred to command
+[02:39:28.575] as zoning landmarks and billing standards.
+[02:39:31.275] Other person, Viegas
+[02:39:32.745] and others have proposed ordinance in many municipal code
+[02:39:35.135] section two dash 32 dash 3 92
+[02:39:37.855] regarding wage wage garnishments for municipal debt,
+[02:39:40.585] which is referred to Committee on finance,
+[02:39:42.915] other person Irvin has a proposed ordinance
+[02:39:44.625] concerning the establishment of the Chicago Tourism
+[02:39:47.015] Improvement District,
+[02:39:48.025] which is referred to the Committee on Finance.
+[02:39:50.335] Your Honor, that concludes the presentation of all thematic
+[02:39:52.625] Introduction. Thank you for the, uh,
+[02:39:53.625] approval of the journal
+[02:39:55.515] chair recognizes Alderman Mitchell.
+[02:39:58.865] Mr. President, I'm, I'm not aware of any corrections
+[02:40:00.925] to the journals from the December 20th, 2025
+[02:40:03.245] and December 29th, 2025 meetings
+[02:40:05.565] and move that they be approved.
+[02:40:06.605] Hearing no objection.
+[02:40:07.665] So order for unfinished business, alderman Mitchell. I'm
+[02:40:10.245] Aware of one piece of
+[02:40:11.125] unfinished business, which was filed by
+[02:40:12.805] Alderman Quinn, so I defer To him very well.
+[02:40:14.845] Thank you. The chair recognizes Alderman Quinn,
+[02:40:19.395] Pursuant to rule 33 of the city Council rules of order,
+[02:40:22.715] I move to accept a substitute ordinance
+[02:40:24.695] for 0 2 0 2 5 dash
+[02:40:28.145] 0 0 2 1 0 1 8, which was previously circulated
+[02:40:33.035] to CI city council by a majority vote.
+[02:40:36.475] Very well. There's a motion on the floor
+[02:40:37.945] to approve the substitute.
+[02:40:40.605] Is that correct? For item 0 0 2 1 0 1 8.
+[02:40:44.295] All those in favor signify by saying aye.
+[02:40:47.095] Any opposed, say nay. This motion passes Allman Quinn.
+[02:40:51.765] Thank you, Mr. Mr. Mayor.
+[02:40:54.605] I rise today in full support of a compromised hemp ordinance
+[02:40:57.645] that will ban dangerous
+[02:40:58.845] and unregulated hemp products citywide.
+[02:41:02.085] After last year's discussions, I recognized I had
+[02:41:05.775] to make some changes to the original ordinance.
+[02:41:08.785] I'm proud to say we've reached a compromise
+[02:41:10.525] that protects our city's kids.
+[02:41:13.525] How did we get here? We did the lake work required
+[02:41:16.905] to reach a compromise.
+[02:41:18.605] We looked at a problem and asked
+[02:41:20.065] ourselves, how do we solve it?
+[02:41:22.935] I personally contacted every alderman in this body
+[02:41:27.435] and for that thank you.
+[02:41:29.495] I appreciate your patience, I appreciate your feedback.
+[02:41:34.525] We heard each other out and had open
+[02:41:36.465] and honest discussions about how to move forward.
+[02:41:39.755] I'm also pleased to say this new ordinance takes into
+[02:41:42.455] account nearly all of bcps issues and concerns.
+[02:41:47.625] The compromise before us today allows for hemp beverages,
+[02:41:52.345] allows for hemp additives.
+[02:41:54.695] We've included a carve out for the hemp topical industry.
+[02:41:58.925] We also have a, a carve out
+[02:42:00.625] for hemp products intended for animals.
+[02:42:03.725] We've changed the effective date to April 1st, 2026.
+[02:42:08.535] And effective immediately, you have to be 21 years
+[02:42:11.495] or older to purchase.
+[02:42:14.755] I think we found a path forward
+[02:42:16.275] that ensures our kids are protected and safe,
+[02:42:18.855] and that's the bottom line.
+[02:42:21.175] The fact of the matter is I success.
+[02:42:23.595] I successfully banned these businesses in the 13th war,
+[02:42:27.505] and since then, many of many colleagues have asked me
+[02:42:30.645] how they can do the same in their own wards.
+[02:42:32.735] There is a strong coalition behind this compromise Ordinance
+[02:42:36.565] that can move it forward, which is why I presented today.
+[02:42:41.045] We believe this is the right move for the city of Chicago
+[02:42:43.885] and could be a model for the state
+[02:42:45.605] as they also work on this issue.
+[02:42:47.605] Uh, Mr. Mayor asked for a roll call, uh,
+[02:42:49.585] vote after, after the debate. Thank you, sir. You're
+[02:42:51.665] Welcome. Chair
+[02:42:52.665] recognizes Alderman Beal.
+[02:42:56.815] Thank you, Mr. President. Mr. President.
+[02:42:58.725] I rise to support, uh, this compromise
+[02:43:01.585] and would like to congratulate my colleague on doing the
+[02:43:05.165] hard work, uh, in order to reach this compromise.
+[02:43:08.385] Uh, this has been a hot topic, um, within the city
+[02:43:11.765] of Chicago to make sure that we protect children,
+[02:43:15.325] and that's what this has all been all about from the very
+[02:43:17.825] beginning, protecting our children
+[02:43:19.885] and keeping them out of harm's way.
+[02:43:22.245] And so listening to the industry, listening
+[02:43:24.625] to your colleagues, listening to everybody
+[02:43:27.085] to come up with this compromise.
+[02:43:28.675] Again, I commend my colleague
+[02:43:31.045] or continue to move forward working together
+[02:43:34.005] so we can do what's best for the city of Chicago.
+[02:43:35.885] So thank you so much and I'll be supporting this RESO
+[02:43:38.475] Chair. Recognizers
+[02:43:39.475] Alderman O'Shea.
+[02:43:41.125] Thank you Mr. President. I too stand in support.
+[02:43:44.335] I'd like to start out by, uh,
+[02:43:45.555] thanking my colleague from the 13th Ward, uh,
+[02:43:48.615] strong leadership on this Alderman Quinn.
+[02:43:51.235] You brought parties together, business affairs,
+[02:43:53.715] the business community colleagues that had concerns, um,
+[02:43:58.155] and has been stated multiple times here.
+[02:44:01.495] This is about protecting children. I support this.
+[02:44:06.375] I'd ask that everybody else considers supporting it. I work.
+[02:44:09.575] Oh, one more thing.
+[02:44:11.415] I'd also like to recognize Sam Toya, who helped broker some
+[02:44:14.075] of these meetings and bring people together. Nice work.
+[02:44:17.825] The chair recognizes Alderman Conway.
+[02:44:21.525] Um, I became very interested in this topic
+[02:44:24.565] and a story I've told before,
+[02:44:26.565] or my 5-year-old wanted to buy Jolly ranchers laced
+[02:44:30.465] with hemp, thinking that they were normal candy.
+[02:44:33.365] Um, and there, at that point in time,
+[02:44:36.025] I was certainly in favor of rec uh, regulation,
+[02:44:39.725] but I was concerned about this ordinance When it first came,
+[02:44:42.295] came up, I thought it was, was perhaps too broad.
+[02:44:45.765] Uh, so I actually voted no on this in committee at the time,
+[02:44:49.545] which it, which it passed through.
+[02:44:51.125] And then Alderman Quinn came to me
+[02:44:53.165] and asked me a question that we don't often ask each other.
+[02:44:56.565] He said, bill, what can I do to earn your support?
+[02:45:01.135] And I said, well, Marty, we're on a first name basis.
+[02:45:05.115] I said, well, you, uh, I think you should,
+[02:45:07.995] I think you should exempt lotion and beverages.
+[02:45:11.235] I think you gotta make it a make it over 21 plus.
+[02:45:14.655] And you know, I think you need to change some language on,
+[02:45:17.135] on, uh, enforceability.
+[02:45:18.655] And then on behalf of BACP, you probably ought
+[02:45:21.035] to back up the effective date.
+[02:45:22.115] Those are the four ass I had,
+[02:45:24.455] and I obviously, as Alderman Quinn said,
+[02:45:27.755] all of those things were done.
+[02:45:28.995] So I really, uh, I am in, in, in favor of this ordinance
+[02:45:32.455] and I want to thank you personally, alderman Quinn,
+[02:45:35.015] for your, for your Statesmanlike action
+[02:45:36.975] and behavior in putting this forward.
+[02:45:38.745] Thank you very much.
+[02:45:41.045] Chair recognizes Alderwoman Silverstein.
+[02:45:45.565] Thank you, Mr. President.
+[02:45:47.415] Um, I too wanna congratulate my colleague, Marty Quinn.
+[02:45:51.215] Um, this ordinance passed through the license committee
+[02:45:54.975] and, um, the original version we knew had some issues
+[02:46:00.415] and I had lots of discussions with Alderman Quinn,
+[02:46:03.695] and he said to me, please, let's pass it out of committee.
+[02:46:08.375] And I give you my word that I'm gonna go back
+[02:46:11.105] and make some changes and talk
+[02:46:12.885] to people and listen to people.
+[02:46:14.985] And that's exactly what he did.
+[02:46:17.545] Um, he made the correct changes while
+[02:46:19.805] still protecting our children.
+[02:46:21.685] I wanna thank you for that, Marty.
+[02:46:23.465] And, um, you have my full support
+[02:46:26.405] Chair recognizes all the woman Hadden.
+[02:46:31.555] Thank you for the support, uh, here, guys.
+[02:46:36.685] Um, thank you, Mr. President.
+[02:46:38.685] Um, I rise in opposition to this ordinance, um,
+[02:46:42.925] but I too wanna actually commend
+[02:46:44.425] to our colleague Marty Quinn.
+[02:46:45.805] So, um, I appreciate we spoke on multiple occasions.
+[02:46:49.765] Um, uh, he reached out early,
+[02:46:52.345] we were talking even yesterday.
+[02:46:54.665] Um, and I just wanna lift that up as
+[02:46:58.585] how we legislate in this body.
+[02:47:00.225] So I very much appreciate that.
+[02:47:02.225] Um, I also appreciate being able to have conversations
+[02:47:05.645] and discussion dis and disagreements on an issue
+[02:47:08.205] with people, um, that didn't end in like,
+[02:47:13.295] somebody like sliding somebody's character
+[02:47:15.315] or, uh, somebody leaving a caucus or a body or right.
+[02:47:19.815] Like this felt really nice to just have like,
+[02:47:22.975] disagreement on some policy things
+[02:47:24.715] and try to solve some problems.
+[02:47:26.475] So I appreciate that Marty, um,
+[02:47:28.635] and everybody who worked on this, um,
+[02:47:30.755] my opposition is based on, um,
+[02:47:32.815] feeling like we're not quite there on hitting some
+[02:47:36.975] of the protection goals that I know my colleagues had
+[02:47:39.575] and wanting to keep, um, certain products out of the hands
+[02:47:42.835] of bad actors, OND businesses,
+[02:47:46.595] and some of the things that we've seen create safety risks
+[02:47:49.235] for not just children,
+[02:47:50.595] but even, uh, adults who are unknowingly maybe ingesting,
+[02:47:54.915] uh, edibles or products
+[02:47:56.455] that they don't know might have some
+[02:47:58.095] intoxicating, uh, components.
+[02:48:00.695] I will say that, um,
+[02:48:03.105] we've also got a small business industry that has really
+[02:48:06.965] done that thing that a lot of us love in Chicago.
+[02:48:10.005] They have been clever, they have been creative,
+[02:48:13.075] and we've had strong entrepreneurs build whole businesses
+[02:48:15.915] around CBD
+[02:48:17.415] and hemp products, especially a lot
+[02:48:19.535] of minority owned businesses that were shut out
+[02:48:23.035] by the larger cannabis space.
+[02:48:25.555] Um, so from small events companies to little coffee shops
+[02:48:30.475] to specialty spaces, there are businesses in Chicago that
+[02:48:35.645] self-regulate, that sell to 21
+[02:48:38.255] and over that are good actors.
+[02:48:40.875] And I'm afraid that this version of the ordinance is going
+[02:48:43.495] to harm them right now while trying to do some good.
+[02:48:47.875] Um, you know, so my opposition,
+[02:48:49.695] I wish we had a little bit more time.
+[02:48:51.295] I wish we could work a bit more with our kind
+[02:48:54.855] of entrepreneurial, locally based hemp industry folks.
+[02:48:59.495] I don't think they were given much
+[02:49:01.095] voice in the conversation.
+[02:49:02.995] Um, and I'll say as a CBD right consumer, um,
+[02:49:08.605] I don't find those non intoxicating kind
+[02:49:11.325] of health benefit based things at dispensaries
+[02:49:15.395] because the answer, that's
+[02:49:16.685] what it's gonna be if you take a CBD, um, uh, gummy
+[02:49:20.725] or edible for inflammation like I did.
+[02:49:22.885] You guys know I came back from medical leave.
+[02:49:24.715] I've been living with endometriosis.
+[02:49:27.185] Um, I'm not a recreational cannabis user
+[02:49:30.185] for recreational purposes, but CBD
+[02:49:33.825] and the broad spectrum products do have a lot
+[02:49:36.085] of healing benefits for people.
+[02:49:37.665] So whether it's for anxiety, whether it's for PTSD,
+[02:49:40.645] whether it's for inflammation, there are a lot of products,
+[02:49:43.825] um, I'm not a smoker, I'm not gonna smoke it.
+[02:49:46.945] Um, there are additives
+[02:49:49.025] and those beverages that we have allowed for carve outs
+[02:49:51.765] for those are recreational, right?
+[02:49:54.195] Those are recreational in the way that we might use alcohol.
+[02:49:56.695] They're not necessarily the types of products
+[02:49:58.625] that really fall into the medicinal category.
+[02:50:01.365] Um, so it, it hurts me to see us cutting off an avenue for,
+[02:50:06.085] for healing for health,
+[02:50:07.285] but also for kind of small businesses that are really
+[02:50:10.485] the backbone of our local economy.
+[02:50:12.805] So, stand in opposition to this.
+[02:50:14.885] Um, I hope my colleagues will join me in opposing it so
+[02:50:18.385] that we can work to find a better solution
+[02:50:21.445] for all Chicagoans. Thank you.
+[02:50:23.515] Thank you Alderman Napolitano.
+[02:50:27.855] Thank you, Mr. President. Uh, I too rise in support
+[02:50:30.005] of this, uh, this ordinance.
+[02:50:31.365] And I, I, I'll make it quick.
+[02:50:33.245] I just really have to tip my hat to, uh, alderman Quinn who,
+[02:50:36.265] uh, did his due diligence to make sure that, uh,
+[02:50:38.555] everybody kind of had a say
+[02:50:40.065] or had a seat at the table
+[02:50:41.365] when it came to something like this.
+[02:50:43.145] Um, my, my, my, um, my, uh,
+[02:50:48.895] neighboring ward 45th Ward, we had a problem with this,
+[02:50:51.015] and we too, like Alderman Quinn had banded
+[02:50:53.415] from our, uh, our ward.
+[02:50:54.915] Uh, but I think the masterful part about this,
+[02:50:56.495] that Alderman Quinn is using that we're using down here and,
+[02:50:59.135] and on behalf of my colleague, is we have the ability
+[02:51:01.815] to amend as we go.
+[02:51:03.155] So the process, the wheels are turning, um,
+[02:51:06.165] hopefully this ordinance, ordinance gets passed today,
+[02:51:09.155] but as a, as colleagues who are all talking about an issue
+[02:51:13.365] that could benefit the city on revenue side,
+[02:51:15.415] but can hurt children, and there's that fine line.
+[02:51:17.895] We have the ability to use this right here to amend it
+[02:51:21.515] and make it better for the city,
+[02:51:23.395] but also to protect children.
+[02:51:25.595] And I think that's what we do best.
+[02:51:27.435] Um, there's a lot of us that have a saying down here that,
+[02:51:29.795] you know, when when you ask somebody
+[02:51:30.975] to sign their ordinance, you say,
+[02:51:32.405] this is the best thing I'm putting forward right now.
+[02:51:34.435] But as, as, as colleagues,
+[02:51:36.235] we can make it better in the future
+[02:51:37.995] or the very next city council.
+[02:51:39.835] Uh, and I think that's why this is,
+[02:51:41.765] this is a great step forward and,
+[02:51:44.295] and taken over by Alderman Quinn,
+[02:51:46.115] and I appreciate all of you to support it
+[02:51:47.775] because I think we do have to put, um, the negative side
+[02:51:50.895] to this ahead of the benefits side right now,
+[02:51:53.935] because the negative is affecting a lot of children.
+[02:51:56.355] Um, and it's kind of in a sneaky way, it's done.
+[02:51:59.275] So I I really appreciate, uh, those
+[02:52:01.815] who are supporting it and those who aren't.
+[02:52:03.785] Let's find a way to make it better
+[02:52:05.045] that it accommodates your awards and, uh,
+[02:52:07.705] and the the whole entire city of Chicago as well.
+[02:52:10.025] But thank you, uh, alderman Quinn for a great job.
+[02:52:12.465] Uh, and thank you for the opportunity, Mr. President.
+[02:52:14.375] Thank you. Chair recognizes Alder Rodriguez Sanchez.
+[02:52:17.985] Thank you, Mr. President.
+[02:52:19.275] Um, I want to echo the comments
+[02:52:20.515] of my colleague, Maria Hadden.
+[02:52:22.915] Um, but I also wanna say that I wish that
+[02:52:26.195] in this body we spend more time looking at best practices,
+[02:52:30.685] looking at research, looking at creating evidence
+[02:52:34.665] based policy.
+[02:52:37.135] Bans don't discourage people from seeking these products.
+[02:52:41.125] They just put them in the black market.
+[02:52:43.765] They just, they, they are still going to be accessible.
+[02:52:48.115] You are not necessarily protecting children just
+[02:52:50.655] because you ban something, people can still have access.
+[02:52:54.885] What you are doing is impeding these products being
+[02:52:58.165] regulated, right?
+[02:53:00.075] And I need us to think about that
+[02:53:02.575] because it feels like in this council, we do this so often.
+[02:53:05.235] We want to look busy doing something.
+[02:53:08.925] We want to tell people, I am I'm doing this
+[02:53:11.705] because I hate that kids are being targeted.
+[02:53:16.085] But the reality is that people are going
+[02:53:19.025] to access these products.
+[02:53:20.465] We just, we're just not gonna have control over it.
+[02:53:23.325] Um, so I'm very disappointed I'm going
+[02:53:26.265] to vote no on this item,
+[02:53:28.365] and I really hope that we do better in this council
+[02:53:32.345] Chair recognizes Alderman Riley.
+[02:53:37.165] Thank you, uh, Mr. President.
+[02:53:38.935] And I wanted to, uh, join the chorus of Alderman
+[02:53:42.075] who are complimenting Alderman Quinn
+[02:53:43.835] on the Workmanlike fashion.
+[02:53:45.135] He went about collaborating.
+[02:53:47.195] That's the word we use here a lot, collaboration.
+[02:53:49.375] Um, but Alderman Quinn actually exemplified that here.
+[02:53:52.455] Um, I was one of the alderman
+[02:53:53.595] who also had some concerns about the initial proposal, um,
+[02:53:56.435] perhaps being a bit too broad.
+[02:53:58.575] And I do think that the general consensus here is we don't
+[02:54:01.355] want these types of dangerous products
+[02:54:02.755] falling into the hands of kids.
+[02:54:04.695] And when you have laced Doritos and, and gummy bears and gum
+[02:54:08.875] and all these sorts of things,
+[02:54:10.375] bright colored packaging available, uh,
+[02:54:12.675] unregulated in our corner stores
+[02:54:14.535] and our gas stations, that's a real concern.
+[02:54:16.695] And I think that Derman Quid has done a good job narrowing
+[02:54:19.675] the focus here, um, while also listening
+[02:54:22.155] to concerns from members of the restaurant
+[02:54:24.075] and hospitality industry
+[02:54:25.255] and others about keeping beverages available.
+[02:54:29.355] Topicals. Um, many of the CBD products
+[02:54:31.635] that my colleague mentioned are exempted here, um,
+[02:54:35.115] because there are health benefits that, that are associated
+[02:54:37.675] with them, even for our pets.
+[02:54:40.575] Uh, and so as Alderman Napolitano said, um,
+[02:54:43.765] there is certainly opportunity as we move forward
+[02:54:46.295] to make tweaks and adjustments to this as we see fit.
+[02:54:49.335] But I do think this is a good start as far
+[02:54:51.235] as the regulatory regime goes.
+[02:54:53.635] I think it does, for the most part, help us in our effort
+[02:54:57.595] to keep these types of products away
+[02:54:59.075] from kids that don't know better.
+[02:55:00.575] So, thank you Altman Quinn,
+[02:55:02.075] for the work you've done on this, and I appreciate you
+[02:55:03.805] soliciting my opinion and the
+[02:55:05.165] opinion of others here on the council.
+[02:55:06.435] I'll be voting yes. Uh, thank you, Mr. President.
+[02:55:08.375] Thank you. Chair recognizes Alderman sdo,
+[02:55:12.455] Mr. President,
+[02:55:13.455] uh, congratulate my colleague.
+[02:55:15.515] I originally like my esteem colleague from the 34th Ward,
+[02:55:18.995] who I affectionately called Bill.
+[02:55:20.675] I was also against it.
+[02:55:22.495] Um, everything I have
+[02:55:24.115] to say was already said, but I'm gonna say it again.
+[02:55:25.755] Anyways, uh, Marty, you came up
+[02:55:28.035] with a blueprint for all of us.
+[02:55:29.335] Uh, been here 15 years, started with you,
+[02:55:31.655] and, uh, this was a great job working with everybody.
+[02:55:33.735] So, uh, maybe you could,
+[02:55:35.115] uh, print it up and give it to everybody.
+[02:55:36.275] And for our next 16 months together,
+[02:55:37.715] maybe we could all work together a little bit better.
+[02:55:39.635] I hope the, I hope to learn from what you did.
+[02:55:42.055] Uh, and just a reminder, everybody too, I mean,
+[02:55:44.275] this is a working document.
+[02:55:45.535] I'm, I'm willing to talk to some of these people.
+[02:55:47.815] Uh, for every action there's a reaction
+[02:55:49.635] and there's certainly no doubt that some people are affected
+[02:55:51.695] by this, uh, negatively,
+[02:55:53.115] but I think the positive is more, more than a negative.
+[02:55:55.355] But I'm, I'm willing to hear from those of you
+[02:55:57.115] that say we're doing the wrong thing.
+[02:55:58.955] And I, I know Marty is so, uh, just a great job.
+[02:56:01.895] Um, I support it now, um, was a no.
+[02:56:04.375] And now I'm a yes, but thank you very
+[02:56:05.955] much, Mr. President. Thank
+[02:56:07.035] You. Chair recognizes
+[02:56:08.035] Alderman LaSpada.
+[02:56:10.775] Hey, thank you very much, sir. Mr.
+[02:56:12.115] President, um, all Alderman Quinn, like I I wanna say
+[02:56:15.895] as others have, I cannot compliment you more in the process
+[02:56:21.245] that you've gone about this with.
+[02:56:23.705] I think you've been exceptionally collaborative, really open
+[02:56:26.905] to feedback on this.
+[02:56:28.295] Even when we disagreed on the feedback,
+[02:56:32.455] I think everyone in this room would agree
+[02:56:34.135] that these products should not be sold to minors.
+[02:56:37.215] That they should be regulated,
+[02:56:38.565] that there should be responsible dosage limits on this.
+[02:56:43.295] I think that the challenge for me was,
+[02:56:45.955] and again, like all the women hadn't spoke to this,
+[02:56:48.835] but I'll speak to her from my perspective, talking
+[02:56:52.905] to small businesses that sell
+[02:56:56.435] infused baked goods products that you eat
+[02:57:00.325] and soliciting their feedback on this,
+[02:57:02.735] they are not the problem businesses in my ward, the products
+[02:57:06.425] that they sell, they endeavor to regulate
+[02:57:08.405] and they want to be regulated.
+[02:57:10.565] They have been consistently safe
+[02:57:12.895] and responsible in my community,
+[02:57:15.555] and I didn't know how to square with them.
+[02:57:19.165] That if you, 'cause it's all about ingestion.
+[02:57:21.615] We talked about this earlier. It's all being digested,
+[02:57:24.355] but it's legal if you drink it with a straw
+[02:57:27.835] and it's illegal if you chew it with your mouth.
+[02:57:30.955] Um, I, I can't square that.
+[02:57:35.175] Like, what, what makes eating illegal and drinking legal?
+[02:57:40.165] And I'm glad that there's the carve out
+[02:57:42.525] for the beverage industry.
+[02:57:44.625] I couldn't square the rest.
+[02:57:46.225] I could not square why I would take
+[02:57:49.575] responsible safe actors in my community
+[02:57:52.605] and put them out of business.
+[02:57:54.445] And again, like as someone who uses
+[02:57:57.025] a hemp derived CBD product for going to bed
+[02:58:01.225] and actually having healthy sleep habits in my life,
+[02:58:05.505] I could not square how that decision
+[02:58:08.965] should be made illegal.
+[02:58:11.755] So again, like I, I appreciate everything
+[02:58:14.055] that you've brought forward in
+[02:58:15.055] the manner that you've done it.
+[02:58:16.495] I can't support this ordinance
+[02:58:18.575] for those reasons. Thank you, sir.
+[02:58:20.335] Thank you. Are there any other alters that wish
+[02:58:22.315] to speak to this item?
+[02:58:24.105] The chair recognizes Alderman Lopez.
+[02:58:26.995] Thank you chairman, and
+[02:58:28.175] good afternoon members of the committee. Good afternoon.
+[02:58:30.285] Um, Of the council, excuse me.
+[02:58:34.175] I rise in support of this
+[02:58:36.075] and many individuals have said that thanks to our colleague,
+[02:58:39.735] obviously for his collaboration.
+[02:58:41.595] But I did listen to my businesses
+[02:58:44.965] and the problem that I had was
+[02:58:46.625] that when I challenged my businesses
+[02:58:48.285] and said, what amendment can we make that you can live with?
+[02:58:52.555] No one gave me an answer.
+[02:58:57.195] When we talk about the bad actors and the good actors,
+[02:58:59.645] and there are plenty of people who are doing responsible
+[02:59:01.845] things in there, but plenty of people who are not,
+[02:59:04.305] we cannot forget that BACP during hearing said
+[02:59:07.445] that they've had zero enforcement actions.
+[02:59:11.505] Zero. When it comes to cannabis,
+[02:59:16.115] you say that we can regulate this and do things better.
+[02:59:19.395] We can't even do it right now.
+[02:59:23.645] This measure, in my opinion, as I told my businesses,
+[02:59:29.005] gives us a clean slate.
+[02:59:31.145] Is it perfect for to, for keeping good pe good actors whole?
+[02:59:35.785] No. But does it address the large scale
+[02:59:39.455] bad actors that we see?
+[02:59:41.665] Yes. That's the starting point.
+[02:59:44.015] We need, in my opinion, I believe as many
+[02:59:48.625] of my colleagues have stated that there are benefits to what
+[02:59:53.935] is legally and helpful, helpful
+[02:59:58.105] and responsibly obtained.
+[02:59:59.785] Yes. But we have to figure out what that looks like.
+[03:00:03.745] Because in the,
+[03:00:09.495] okay, because in the absence of leadership,
+[03:00:15.235] in the absence of enforcement, we have
+[03:00:18.355] to take measures into our own hands.
+[03:00:21.225] And that's exactly what we're doing today.
+[03:00:24.505] And as we hear now
+[03:00:25.685] that possibly Congress was gonna push back the date another
+[03:00:29.115] year, I don't wanna go back
+[03:00:32.855] to my neighborhood saying I did nothing to protect children
+[03:00:36.595] or to try to clarify bad actors from good
+[03:00:39.195] or to help elevate a growing industry from those
+[03:00:42.655] who would take advantage of our inaction.
+[03:00:46.715] That's what we're doing today.
+[03:00:48.475] And for everyone who says that we need to use metrics
+[03:00:52.465] or evidence-based, whatever you wanna say,
+[03:00:55.595] where's the resolution
+[03:00:56.845] or ordinance that shows exactly that,
+[03:00:58.595] what was introduced by that person?
+[03:01:02.475] We can't complain and then do nothing.
+[03:01:05.545] We can't argue against something without putting pen
+[03:01:09.165] to paper and writing something
+[03:01:11.205] because that's what got us into this place in got us
+[03:01:13.735] to this place in the, the first place.
+[03:01:15.555] So we have a choice to start fresh.
+[03:01:19.155] And that's exactly what Alderman Quinn's
+[03:01:21.445] ordinance allows us to do.
+[03:01:22.995] And I urge everyone's support of that. Thank you.
+[03:01:26.635] Very well. There's a motion on the floor
+[03:01:28.305] for a roll call vote.
+[03:01:29.785] Uh, Madam Clerk, could you make the EVO application
+[03:01:31.965] available members, Ms.
+[03:01:33.365] Body, please record your vote at this time.
+[03:01:53.075] And the e-voting is open. E-voting is open.
+[03:01:55.955] Please use your eev device. The e-voting is now open.
+[03:02:52.825] All right, I will now take the e-voting, uh,
+[03:02:55.385] or your voice votes for those who do not use the Evo
+[03:02:57.665] or the folks online.
+[03:03:00.215] Alderman Hall, not in chambers. Alderwoman Ramirez.
+[03:03:05.655] No. Ramirez say no. Alderman Coleman. Yes.
+[03:03:10.705] Coleman is a yes. Alder woman. Tab Baras. Yes.
+[03:03:14.925] Tabba is a yes. Alderman Conway.
+[03:03:18.745] Conway not in chambers. Alderman Sdo Sway. Yes.
+[03:03:23.785] Alderman Vasquez? Yes, Vasquez is a, a. Yes.
+[03:03:27.825] Alderwoman Mana Howorth. No. Mana Howorth is a no.
+[03:03:33.605] Anyone I missed? All right. The voting.
+[03:03:36.965] Oh, voting is now closed.
+[03:03:42.505] There are 32 yays 16 nays.
+[03:03:44.925] This measure passes Alderman Mitchell on a motion
+[03:03:48.835] to reconsider move to reconsider the vote.
+[03:03:50.635] All those in the favor of the reconsideration
+[03:03:52.255] of this vote signified by saying aye.
+[03:03:54.115] Any opposed, say nay. This motion fails.
+[03:03:57.645] Alderman Mitchell, are you aware
+[03:03:59.045] of any other further un since
+[03:04:01.355] I'm not aware of any more unfinished business
+[03:04:03.325] Very well from miscellaneous business, alderman Mitchell,
+[03:04:05.955] Except for the ordinance setting, the date
+[03:04:07.415] and time of the next meeting, I'm not aware of any
+[03:04:09.825] further miscellaneous business.
+[03:04:11.215] And for the date and time of the next meeting,
+[03:04:15.815] Uh, I handed up in the ordinance
+[03:04:17.195] to the clerk setting the date and time of the next meeting.
+[03:04:20.075] Madam Clerk, please read the ordinance being
+[03:04:23.425] Ordained by the city council, the City of Chicago.
+[03:04:25.265] Section one. The next regular meeting of the city Council.
+[03:04:27.505] The city of Chicago shall be held on February 18th, 2026,
+[03:04:30.705] beginning at 10:00 AM in the council chamber on the second
+[03:04:33.065] floor in City Hall, 1 21 North LaSalle Street, Chicago,
+[03:04:36.105] Illinois, section two.
+[03:04:37.185] This ordinance shall take effect
+[03:04:38.465] and be enforced from and after its passage.
+[03:04:40.215] Gregory Mitchell, alderman Seventh Ward.
+[03:04:42.605] Very well, alderman Mitchell.
+[03:04:44.775] I move, pa I move passes in the omnibus
+[03:04:48.315] Here. No objection.
+[03:04:49.315] So ordered
+[03:04:50.335] for the omnibus Alderman Mitchell. Okay,
+[03:04:52.395] Mr. President, I move that matters
+[03:04:53.395] in the omnibus be passed
+[03:04:54.795] by the first most favorable role called Vote
+[03:04:56.795] by the Committee on Finance and the unsuccessful motion
+[03:04:59.015] to, we consider hearing
+[03:05:00.135] No objection. So ordered
+[03:05:01.135] Altman Mitchell on a motion to adjourn There
+[03:05:03.835] Being no further business before this
+[03:05:05.155] body. I move that we adjourn,
+[03:05:06.395] Hearing no objection.
+[03:05:07.415] So order the meeting is adjourned.

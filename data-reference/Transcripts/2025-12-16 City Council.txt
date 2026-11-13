@@ -1,0 +1,938 @@
+[00:11:10.525] I think we will.
+[00:11:11.665] Um,
+[00:11:17.085] mic check.
+[00:11:17.565] One two. Mic check. Three, four. Mic checking. A mic.
+[00:11:21.245] Mic one. Mic two. Mic three.
+[00:11:25.075] Mic four. Yesterday. Good
+[00:11:29.315] Morning all.
+[00:11:30.935] Please remember to log into your devices.
+[00:11:33.575] The meeting will begin shortly. Thank you.
+[00:21:39.755] Good morning, members of the city council.
+[00:21:42.385] The meeting will begin shortly.
+[00:21:44.225] Please remember to log into your devices. Thank you.
+[00:28:21.110] Good morning, members of the city council.
+[00:28:23.055] The meeting will begin shortly.
+[00:28:24.815] Please remember to log into your devices. Thank you.
+[00:32:39.880] Council will come to order.
+[00:32:41.080] Madam Clerk, please take a quorum. Roll call.
+[00:32:57.925] Advised to record your votes and mark your attendance.
+[00:34:01.855] I will now call those who did not respond.
+[00:34:06.045] Alderman Robinson not present in chambers.
+[00:34:10.845] Alderman Hall not present in chambers.
+[00:34:15.395] Alderman Harris not present in chambers. Alderman Beal.
+[00:34:21.615] Alderman Beal is present. Alderwoman Ramirez,
+[00:34:27.545] not present in chambers.
+[00:34:30.135] Alderman Coleman not present in chambers.
+[00:34:35.065] Alderman Curtis. Alderman is present.
+[00:34:41.405] Alderman Osha alderman, OSHA is present.
+[00:34:46.385] Alderman Mosley not present in chambers.
+[00:34:51.815] Alderman Rodriguez not present in chambers. Alder person.
+[00:34:56.865] Fuentes not present in chambers. Alder person.
+[00:35:01.655] Rodriguez Sanchez not present in chambers.
+[00:35:07.165] Alderwoman Nugent. Alderman Nugent is present.
+[00:35:12.045] Alderman Vazquez not present in chambers.
+[00:35:16.765] Alderwoman. Clay not present in chambers.
+[00:35:21.805] Alderman, Hadden not present in chambers.
+[00:35:31.875] Your Honor, we have a quorum.
+[00:35:33.445] Very well. There are 38 present, 12 that are absent.
+[00:35:36.355] We do have a quorum. Alders Mosley, Harris
+[00:35:38.505] and Ramirez have requested
+[00:35:40.625] to participate in today's meeting remotely
+[00:35:43.785] for reasons stated in Rule 59.
+[00:35:46.585] Can we receive confirmation that they are available online?
+[00:35:51.685] Alderman Harris. Here, Orman Harris Here,
+[00:35:57.125] um, alderman Mosley.
+[00:36:02.625] Alderman Mosley and Alderman Rodriguez.
+[00:36:07.575] Ramirez is present.
+[00:36:10.215] Farewell. So Ramirez and Harris are both present. Mosley's
+[00:36:13.415] Present And Mosley is present.
+[00:36:15.415] Thank you Mme. McClure. Can I get a motion for the approval
+[00:36:17.535] of their participation remotely?
+[00:36:19.675] It's been moved. All those in favor signify by saying aye.
+[00:36:22.265] Any opposed, say nay. And the opinion of the chair?
+[00:36:23.885] The ayes have it. Madam MCC clerk, please, um, add them both
+[00:36:26.985] to the quorum role.
+[00:36:28.915] Call. Uh, let's stand for the Pledge of Allegiance, please.
+[00:36:32.085] The rise
+[00:36:37.185] aye pledge allegiance to the flag
+[00:36:39.745] of the United States of America,
+[00:36:42.045] and to the republic for which it stands,
+[00:36:44.685] one nation under God, indivisible, with liberty
+[00:36:48.765] and justice for all.
+[00:36:50.555] You can kindly, uh, remain standing, uh, for our invocation,
+[00:36:54.815] which will be delivered by
+[00:36:56.835] Pastor Jason Heston from the church in the square.
+[00:37:04.195] Thank you Mayor Johnson. Let's pray.
+[00:37:07.705] Heavenly father, you are good
+[00:37:11.055] and your steadfast love endures forever.
+[00:37:14.255] What a gift to wake up with breath in our lungs
+[00:37:16.865] and purpose in our hearts.
+[00:37:18.495] What a joy to be commissioned as your servants
+[00:37:21.355] and neighbors to do justice, love, mercy,
+[00:37:24.455] and walk humbly with you are God.
+[00:37:26.895] What a privilege to seek the welfare of our city together.
+[00:37:30.705] I pray for my friends, these who offer their intellect,
+[00:37:34.315] their ability, their time,
+[00:37:35.605] and their volition to be a terror to bad conduct
+[00:37:38.485] and participants in good trouble.
+[00:37:41.555] I pray that in their hustle, they would know your peace,
+[00:37:45.055] in their weakness, they would know your strength,
+[00:37:47.655] and in their desire, they would know your
+[00:37:49.675] goodness, truth and beauty.
+[00:37:51.335] May the words of our mouths
+[00:37:52.515] and the meditations of our hearts be pleasing to you,
+[00:37:55.055] our Lord, our rock and our redeemer.
+[00:37:57.935] In Jesus' name, amen.
+[00:38:00.185] Amen. Alright, you may have your seat
+[00:38:51.765] chair recognizes Alderman Irvin.
+[00:38:54.465] Thank you, uh, Mr. President.
+[00:38:56.835] Um, looking at today's agenda, uh, the question
+[00:39:00.575] that I I'll ask to the body is that, uh,
+[00:39:03.235] we have no committee reports.
+[00:39:05.035] Is there any other business that is sought to be done?
+[00:39:08.635] Um, today? If there is no business, then uh, I would ask
+[00:39:13.055] for a motion to adjourn.
+[00:39:14.055] But if there is other business,
+[00:39:15.255] then we should proceed if there is other business.
+[00:39:17.515] So if
+[00:39:22.395] Yes, the chair recognizes Alman, uh, bill
+[00:39:25.415] And Mr. Chairman, our rules
+[00:39:26.415] say that if we do have a quorum, we have
+[00:39:30.115] to have public comment first before we look to a ground.
+[00:39:37.455] So, all right, let's, okay.
+[00:39:40.095] So the question is, do we want to proceed
+[00:39:43.735] with the meeting if there's no business, barring, of course,
+[00:39:48.305] the, um, portion of the meeting for public comment.
+[00:39:52.765] So the question is still the same, even with
+[00:39:57.795] with with public comments.
+[00:39:59.995] Does this body wish to
+[00:40:02.295] carry out an entire meeting if there's no business?
+[00:40:04.985] Uh, well chair recognizes Alderman Lopez.
+[00:40:10.535] Thank you, Mr. President.
+[00:40:11.725] I concur with the, with our colleague from the ninth Ward.
+[00:40:15.385] Unless we are suspending the rules.
+[00:40:18.315] Um, to avoid public comment, we have to continue
+[00:40:22.485] until a motion is made to adjourn in order, in the order
+[00:40:25.735] as prescribed by the rules of order and procedure. Very,
+[00:40:28.145] Very well. I think what,
+[00:40:29.145] and I'm just gonna interpret the,
+[00:40:30.935] the question was asked, should the meeting proceed?
+[00:40:34.155] If there's no business? It's not a matter of whether
+[00:40:36.595] or not public comments will be permitted.
+[00:40:38.395] I don't believe anybody has an issue with public comments.
+[00:40:41.975] But the question is absent.
+[00:40:44.525] Would you all need to come to order?
+[00:40:45.915] Otherwise, I'm gonna ask you all to leave
+[00:40:49.705] so public comments.
+[00:40:51.185] But the question is
+[00:40:53.185] after public comments, then, do people wish to carry on
+[00:40:57.415] with a meeting with no business?
+[00:40:59.835] The chair recognizes Alderman. Bill. Thank
+[00:41:02.095] You, Mr. President. Mr. President.
+[00:41:03.095] Uh,
+[00:41:03.535] after public comment, I do have business
+[00:41:06.085] that we need to attend to. Oh,
+[00:41:07.565] Okay. Well then there we have
+[00:41:08.565] it. The chair
+[00:41:09.945] recognizes Alderman Vazquez.
+[00:41:12.575] Uh, thank you Mr. President.
+[00:41:13.855] One just wanted to be kind of a roll call,
+[00:41:15.695] but two, I had a question related
+[00:41:17.875] to items on agreed calendar as we had resolutions
+[00:41:20.475] that might pass in this meeting.
+[00:41:22.655] So is that something that would
+[00:41:23.595] move forward as part of business?
+[00:41:25.375] Okay. Well, I think we've already determined
+[00:41:26.745] that business will proceed, so thank you.
+[00:41:28.785] It was just a question. Alright.
+[00:41:31.085] The chair recognizes Alderman Hall,
+[00:41:32.855] like, like to be added to the role.
+[00:41:34.225] Yes. Please add Alderman Alderman Hall
+[00:41:37.765] and Vasquez to the Quorum roll call.
+[00:41:40.235] Alright. Are there any other ALS that wish to be added
+[00:41:42.505] to the Quorum roll call?
+[00:41:44.155] Very well, Mr. Clerk.
+[00:41:48.575] The council will now begin the public comment period,
+[00:41:50.475] which is limited to a maximum of 30 minutes.
+[00:41:53.225] Each speaker is limited to three minutes.
+[00:41:55.475] Speakers cannot yield
+[00:41:56.655] or transfer their time to another speaker.
+[00:41:58.855] Any written comments that have been submitted will be posted
+[00:42:01.015] and made available for automatic review.
+[00:42:03.255] Our first speaker this morning is George Blakemore.
+[00:42:11.065] Good morning. A non-functional government,
+[00:42:16.885] a nonfunctional government, the mayor,
+[00:42:22.515] and these 50 al
+[00:42:27.315] non-functional government.
+[00:42:29.395] And you know, they, they, this is supposed
+[00:42:32.135] to be a part-time job,
+[00:42:33.875] but they get paid a full-time money over a hundred thousand
+[00:42:38.995] or more expense
+[00:42:41.275] and all they can steal,
+[00:42:44.635] they are all corrupt here.
+[00:42:48.815] A non-functional government, the black ones,
+[00:42:53.475] the white ones, the Hispanic, the Asian, all of them
+[00:42:59.045] is no check and balance.
+[00:43:01.165] Now, what is their political party? They're all Democrat.
+[00:43:07.495] They all democrats.
+[00:43:10.245] All my life I've been a Democrat.
+[00:43:13.655] But when I was looking at this non-functional government
+[00:43:17.665] here, I decided, uh, to change
+[00:43:22.515] and I said, president Trump, uh, uh, come here
+[00:43:26.075] and clean up this swamp.
+[00:43:28.325] And then they had a go raid and then flip red.
+[00:43:32.265] I, why are you doing this, Mr. Blakemore revenge?
+[00:43:36.405] I'm doing it because of revenge.
+[00:43:39.665] A non-functioning government like communist China
+[00:43:44.645] passes Germany or Russia.
+[00:43:48.125] No chicken. One party. That's no good.
+[00:43:54.355] What does it do? Mr.
+[00:43:55.565] Blakemore is breathe, waste, fraud and abuse.
+[00:44:00.665] And they all look while I'm talking.
+[00:44:03.225] You see this man right here, O' sha,
+[00:44:05.385] and they look at Mr. Hall down here,
+[00:44:07.585] but they disrespect us,
+[00:44:10.055] especially the people in the black community
+[00:44:13.315] with this taxation without representation.
+[00:44:16.745] Sit down. Okay, sit down, out in Beverly.
+[00:44:21.705] All of y'all, all of y'all disrespectful.
+[00:44:25.645] When the public comes to speak, you must keep quiet
+[00:44:29.915] and play like you, you listening
+[00:44:31.745] to the Speak the Public speaker.
+[00:44:34.005] I think you a bully. I think I I told you called you out.
+[00:44:38.515] Now you're looking at me. We got to call 'em out one by one.
+[00:44:43.555] We got to call 'em out one by one by name.
+[00:44:49.405] All of 'em. And did you know this country was
+[00:44:53.185] built on violence?
+[00:44:54.845] The French Revolution, the American Revolution. Mr.
+[00:44:57.865] Blakemore, how can you get 'em all out?
+[00:45:01.395] Uhhuh, how can you get 'em all out?
+[00:45:05.275] What did the a colonists do?
+[00:45:07.565] The Great Britain did They vote 'em out, that they try
+[00:45:11.275] to communicate with great.
+[00:45:12.615] The boss can keep. Bye.
+[00:45:18.795] Thank you very much for your comments.
+[00:45:20.845] Our next speaker this morning is
+[00:45:22.565] Zoe Lee,
+[00:45:35.465] The bogus budget that's trying to be passed today
+[00:45:38.005] through the Committee on Finance,
+[00:45:39.395] because Christmas is next week.
+[00:45:42.275] Just know we will be working hard to unsee all of you.
+[00:45:45.955] It's time to clean house.
+[00:45:47.265] And our volunteer list is growing every day.
+[00:45:50.145] The budget is not for the working class
+[00:45:52.225] and not for small businesses to grow only more money.
+[00:45:56.065] Tax increment financing Tiff sent to CPS
+[00:45:59.725] to continue harming our children.
+[00:46:01.865] That's why we must come
+[00:46:03.145] for the disgrace 50 in the pitiful 20.
+[00:46:06.525] It's uncomfortable truth.
+[00:46:09.525] Now, Brandon,
+[00:46:15.415] you have really embarrassed the city.
+[00:46:21.085] You really do not know what you're doing. You don't care.
+[00:46:24.945] And you are arrogant and you act like you a baddy.
+[00:46:29.075] You act like we owe you.
+[00:46:34.325] Tell Mayor Stacey Davis, gates, gates, Davis,
+[00:46:37.775] whatever her name is, to tell you
+[00:46:42.485] to step down and get somebody else in here
+[00:46:48.175] to save our city.
+[00:46:51.105] You can't tax any corporations
+[00:46:53.445] 'cause we don't have any corporations.
+[00:46:56.495] Y'all killed them through COVID. Okay?
+[00:47:00.125] So you really owe them something.
+[00:47:01.845] If you want to tax corporations,
+[00:47:03.515] let's talk about these real estate corporations.
+[00:47:08.305] Wells Fargo, Wells Fargo should be paying out the
+[00:47:11.495] a for black people.
+[00:47:14.885] If you wanna talk about corporations,
+[00:47:16.505] you're not laying off anybody,
+[00:47:18.365] but you're gonna raise them raises,
+[00:47:19.985] then nobody should get no raise.
+[00:47:21.765] Nobody, nobody should get a raise. That's crazy.
+[00:47:27.645] No boat yacht tax. No tax. Period.
+[00:47:31.865] The migrant crisis. That's what you needed to talk about.
+[00:47:34.875] That $2.2 billion that you
+[00:47:37.765] and the progressive Hispanic KKK caucus stole.
+[00:47:40.635] Yeah, let's talk about the CVID 19 surplus money.
+[00:47:44.015] Let's talk about that epidemiology money.
+[00:47:47.815] Let's talk about that line item for
+[00:47:49.885] that $220 million in this 2026 budget that you put in 2024
+[00:47:55.945] for new arrivals when I'm homeless,
+[00:47:59.415] because you won't settle my case.
+[00:48:01.105] 'cause you arrogant.
+[00:48:02.665] 'cause you a baddy, you a Tony Pre Winkle.
+[00:48:04.865] Why Tony p Pre Winkle just spent a million dollars on a new
+[00:48:07.705] home while y'all property taxes going up through the roof.
+[00:48:13.495] Trump the beautiful African ladies of Amer in Chicago,
+[00:48:17.705] we need your help, right?
+[00:48:19.465] We need your help and we need you to bring the Feds
+[00:48:22.155] Federal oversight.
+[00:48:23.635] Yeah, we need federal oversight.
+[00:48:25.565] 'cause they stealing black people's property
+[00:48:27.265] and you know that, and he's doing it with the lions.
+[00:48:29.685] Then Joshua Davis, Steven Davis,
+[00:48:35.335] her the mother, I mean the su
+[00:48:39.185] Thank you very much for your comments.
+[00:48:42.005] Our next speaker is Alex Goldberg.
+[00:48:45.575] I,
+[00:49:01.255] Good morning.
+[00:49:03.285] I'm gonna do a dramatic reading
+[00:49:05.245] of a sometimes article from Friday in the voice
+[00:49:08.125] of an appalled billionaire.
+[00:49:11.265] Chicago's head tax was long called a job killer,
+[00:49:14.295] but is there evidence to back that up?
+[00:49:16.395] A WBZ analysis of employment data finds a lack of evidence
+[00:49:19.905] that Chicago's previous head tax
+[00:49:21.735] or its repeal is to blame for job trends in Chicago
+[00:49:24.855] and sheds light on who the mayor's new proposal could affect
+[00:49:27.775] by Mariah Wolfel and Amy Quinn December 12th, 2025.
+[00:49:32.695] For as long as I've been alive,
+[00:49:34.065] Chicago's employer head tax has been derided in one call
+[00:49:36.575] for way or another as a job killer.
+[00:49:39.865] In 2011 when the city council voted to slash
+[00:49:42.345] and repeal the policy by 2014,
+[00:49:44.505] former Mayor Rah Emanuel plotted the council members
+[00:49:47.105] and declared the head tax is a job killer.
+[00:49:50.025] That's right, A WBZ analysis of city tax data
+[00:49:54.365] and publicly available economic data reviewed by four
+[00:49:57.745] economic and labor experts found a lack of evidence
+[00:50:00.905] that Chicago's previous head tax
+[00:50:02.805] or its repeal is to blame for job loss or growth in Chicago.
+[00:50:06.965] Oh, no, w b's analysis sheds light on
+[00:50:10.355] who would potentially be affected by Johnson's proposal.
+[00:50:12.905] Less than 1% of all licensed businesses in Chicago,
+[00:50:15.785] roughly 20% of jobs at companies across the city
+[00:50:18.935] and companies where an average salary is estimated
+[00:50:21.515] to be roughly $110,000 per year.
+[00:50:25.225] Johnson had argued that those cuts to large, those costs
+[00:50:28.505] to large companies are worth the revenue from attacks
+[00:50:31.125] earmarked for community safety programs
+[00:50:33.115] that have played a role in historic reductions in
+[00:50:35.165] Chicago's violent crime.
+[00:50:37.425] Civic feder, no Civic federation President Joe Ferguson.
+[00:50:42.835] Joe Ferguson has seen compelling evidence
+[00:50:47.275] that would constitute calling the head tax has not seen co
+[00:50:50.355] evidence to constitute the head tax a job killer.
+[00:50:52.545] Everybody asked the question, he said,
+[00:50:54.415] and the answer is no, I haven't seen it.
+[00:51:00.155] If the head tax had been designed differently
+[00:51:02.075] to actually encompass all employers,
+[00:51:03.895] I would be more concerned about it being a job killer than
+[00:51:06.375] the way it is currently designed.
+[00:51:07.885] Said Audrey Guo, an economist at Santa Clara University
+[00:51:13.345] when Rah Emanuel worked to kill the head tax.
+[00:51:17.775] The union representing librarians, the American Federation
+[00:51:20.755] of State County and Municipal Employees Council 31 urged
+[00:51:23.915] Emanuel and the city council to reverse course the defense
+[00:51:27.155] of a corporate tax giveaway while suggesting
+[00:51:29.595] that working folks take a pay cut is out of step
+[00:51:31.955] with most people's values.
+[00:51:34.095] AFSCME spokes per spokesman.
+[00:51:35.985] Andrews Lindel told the Chicago Tribune at the time,
+[00:51:39.255] why should the men and women
+[00:51:40.455] who make our libraries run bear the funding shortfall alone?
+[00:51:46.135] Mayor rah Emanuel's priorities look a lot more like those
+[00:51:49.405] of the president's anti-union budget slashing protect the
+[00:51:52.885] wealthy political opponents.
+[00:51:55.125] That sounds about right. The evidence
+[00:51:58.985] is resounding.
+[00:52:00.945] The head tax is not a job killer.
+[00:52:05.015] Thank you very much for your comments.
+[00:52:09.855] Our next speaker is Zilli Adame.
+[00:52:24.815] I'm so sorry, what was that name again?
+[00:52:27.845] Zilli Adame.
+[00:52:32.065] Our next speaker is Dominic Capias.
+[00:52:37.365] Dominic Caps. Hello. Good idea.
+[00:52:43.635] Good morning everyone. Mayor Alders.
+[00:52:46.745] My name is Dominic CAPAs.
+[00:52:49.045] I am the general manager of Smoke station in Logan Square,
+[00:52:52.225] and I came here again today to once again urge you not
+[00:52:55.825] to pass the Quinn hemp pen and to tax
+[00:52:58.305] and regulate not ban hemp.
+[00:53:01.715] Some quick facts. I told you last week
+[00:53:04.275] that your press release says 88,000 people died from alcohol
+[00:53:09.195] related causes annually.
+[00:53:11.315] Well, the CDC D'S own figures put
+[00:53:13.205] that estimate at 178,000 for 2024.
+[00:53:19.165] Alcohol according to the CDC is the most commonly used
+[00:53:23.495] substance among people 12 and older.
+[00:53:27.185] Now, there have been no documented deaths from marijuana,
+[00:53:30.875] from cannabis, and certainly not from hemp.
+[00:53:34.675] But why are we even talking about banning
+[00:53:37.975] a substance when we tax
+[00:53:39.995] and regulate a substance that is demonstrably more dangerous
+[00:53:44.435] to our children in our communities?
+[00:53:47.565] We have tens of thousands of liquor stores in Chicago.
+[00:53:51.845] We have no problem regulating this.
+[00:53:54.645] Now, I'm not against alcohol, I'm a drinker. Mm-hmm.
+[00:53:59.065] But we must treat our regulations with reason not rhetoric
+[00:54:03.045] and not demagoguery.
+[00:54:05.205] Let me show you a quick story with my, one
+[00:54:07.025] of my regulars, her name is Miriam.
+[00:54:08.845] She and her mother live in severe chronic pain
+[00:54:11.885] and only the strong edibles that hemp stores sell,
+[00:54:17.455] give them any relief.
+[00:54:19.745] Dispensaries are prohibited from selling str uh,
+[00:54:23.915] cannabinoids with strength in that, in that quantity.
+[00:54:29.235] You can't get over a hundred milligrams from a dispensary
+[00:54:33.205] that, I'm sorry for people with severe pain.
+[00:54:34.975] That's just not enough.
+[00:54:42.815] Looks like I have plenty of time.
+[00:54:43.845] My god, I'm faster than I thought.
+[00:54:52.975] Number one, I'm gonna speak a bit off the cuff here
+[00:54:56.105] with the 50 min, with the 50 seconds that I have.
+[00:55:01.315] Look, we sell hemp to regular people.
+[00:55:06.605] We card every single individual.
+[00:55:08.205] We have never sold hemp to anyone under 21.
+[00:55:12.335] I warn people when they ask
+[00:55:14.455] for my strong stuff from the strong edibles
+[00:55:16.935] and the strong flower DL to be careful
+[00:55:21.545] to only do this when you have weight tolerance.
+[00:55:25.845] I I point them to a mild product.
+[00:55:29.375] If they don't, uh, if I don't think they'll be able
+[00:55:31.915] to handle what they're looking at.
+[00:55:35.445] And frankly, I do not appreciate being called shady
+[00:55:40.575] when we have certificates of authenticity.
+[00:55:43.285] Excuse me, COAs,
+[00:55:46.675] Thank you very much for your comments.
+[00:55:49.965] Our next speaker this morning is Marla Bramble.
+[00:56:01.615] Hi. Good morning, mayor City Council.
+[00:56:04.775] Um, I've had the pleasure
+[00:56:07.535] and sometimes not pleasure of coming here for years.
+[00:56:10.985] I've been fighting to work, uh,
+[00:56:13.575] to improve Chicago residents lives,
+[00:56:16.555] bringing affordable housing, community safety, healthcare,
+[00:56:21.055] and dozens of issues that, that frankly,
+[00:56:23.905] if we weren't organizing wouldn't happen in this city.
+[00:56:27.025] And you know it, I've worked with many
+[00:56:29.875] of you here in this council over many, many years.
+[00:56:33.855] We fought side by side
+[00:56:36.675] and I want to believe that many
+[00:56:38.535] of us still share these values together.
+[00:56:42.435] So today I am here supporting the Protect Chicago budget.
+[00:56:47.275] We need to keep moving in this direction.
+[00:56:52.635] The community safety surcharge
+[00:56:55.955] doesn't only protect people
+[00:56:57.785] who benefit from the pro programs that it funds,
+[00:57:01.185] it benefits all of Chicago.
+[00:57:04.185] For years, we've been hearing people say,
+[00:57:07.675] Chicago is so dangerous.
+[00:57:09.505] No one wants to live here. Everyone's moving out.
+[00:57:11.825] The businesses are moving out
+[00:57:16.225] while violence still happens,
+[00:57:18.235] and none is ever okay, the
+[00:57:22.175] statistics are trending downward.
+[00:57:24.915] Why would we not fund programs that help
+[00:57:29.415] continue on this track?
+[00:57:31.675] Why would we stop doing what we know works?
+[00:57:35.995] We are finally seeing statistics that we haven't seen
+[00:57:40.275] in decades, and we need money to pay for it.
+[00:57:44.935] Just like everything we're talking about
+[00:57:47.765] for the corporate head tax, we're talking about the top 1%
+[00:57:51.765] of corporations with the adjusted, um,
+[00:57:55.535] with the adjusted numbers of who pays for this.
+[00:58:00.045] Taking this to the top, uh, to corporations
+[00:58:03.175] that have over 500 employees.
+[00:58:06.285] Y'all, these are, this isn't small business.
+[00:58:09.565] These are multimillion multi-billion dollar corporations.
+[00:58:15.295] It is less than 2 cents on the dollar for them.
+[00:58:19.215] People don't even have pennies in their pocket anymore.
+[00:58:22.055] That's how irrelevant it's become.
+[00:58:25.665] Not these mil, not the people who are working there
+[00:58:28.545] and the salaries that are most affected are over
+[00:58:31.085] a hundred thousand dollars.
+[00:58:32.355] What are we really talking about?
+[00:58:34.685] Do we wanna see violence continue so
+[00:58:37.145] that we can have a reason to continue to fight
+[00:58:41.125] for draconian measures?
+[00:58:43.125] Is that really the agenda?
+[00:58:46.385] I really encourage you
+[00:58:48.165] to think about when you came into office,
+[00:58:51.055] when you were sworn into office and who you pledge to serve.
+[00:58:55.285] Are you serving Chicagoans? Are you serving corporations?
+[00:59:00.215] Because the way our country is going, we're at risk
+[00:59:03.465] of losing our democracy.
+[00:59:07.265] Thank you very much for your comments.
+[00:59:15.255] Thank you very much. Our next speaker is Brenda Duncans.
+[00:59:26.035] Our next speaker is Brenda Duncans.
+[00:59:31.275] Our next speaker is Angie l.
+[00:59:49.275] Good morning mayor and members of city council.
+[00:59:52.265] My name is Angie and I'm here
+[00:59:53.685] with the Latino Union of Chicago.
+[00:59:55.985] Across the city, black
+[00:59:57.245] and brown workers who keep Chicago running are being pushed
+[00:59:59.995] into dangerous and formal labor markets
+[01:00:02.035] with almost no protection.
+[01:00:04.675] Day. Laborers and street vendors are routinely exposed
+[01:00:07.315] to wage theft, discrimination, ice targeting,
+[01:00:10.535] and violence simply because they're looking for work
+[01:00:12.775] and are brown hiring.
+[01:00:15.075] Coroners have become sites of fear and harm where abuse
+[01:00:18.195] and intimidation are normalized
+[01:00:19.595] and accountability is absent.
+[01:00:22.245] As bambino, the face of fascism itself returns to the city.
+[01:00:26.605] The risk facing workers only intensify at this moment.
+[01:00:30.565] It is paramount that the City
+[01:00:31.865] of Chicago offers workers dignified places to work, to look
+[01:00:35.985] for work and dignified working conditions rather than
+[01:00:38.745] leaving them exposed to violence,
+[01:00:40.555] harassment and exploitation.
+[01:00:43.485] Because of the, because the city has failed everyday
+[01:00:46.375] residents have had to fill the gap.
+[01:00:48.195] The Latino Union built a network
+[01:00:49.875] of more than a hundred volunteers
+[01:00:51.355] who show up at hiring corners to accompany workers
+[01:00:54.145] deescalate conflict and document harm.
+[01:00:57.535] Neighbors stepped in because government
+[01:00:59.015] protections were absent.
+[01:01:01.185] While this volunteer network reflects the strength
+[01:01:03.455] of our community, it also exposes a bleak reality,
+[01:01:07.335] a clear gap in governmental responsibility.
+[01:01:10.605] Safe hiring sites offers a real concrete alternative.
+[01:01:13.605] They would provide indoor designated locations
+[01:01:16.135] where workers can connect with employers safely, earn income
+[01:01:19.455] with dignity and access basic protections, especially during
+[01:01:24.405] extreme weather and a period
+[01:01:25.695] of heightened targeting of our communities.
+[01:01:27.605] Without funding this initiative,
+[01:01:29.295] exploitation will continue to happen.
+[01:01:33.765] We'll continue to go unchecked,
+[01:01:35.135] and workers will keep paying the price with their bodies,
+[01:01:38.365] their wages, and their livelihoods.
+[01:01:41.225] This is not a costly, unrealistic proposal.
+[01:01:43.385] This safe hiring side pilot requires $500,000 less than a
+[01:01:47.475] fraction of 1% of Chicago's budget
+[01:01:49.175] and can be funded through ex existing resources.
+[01:01:51.835] Without cutting essential services
+[01:01:53.775] for such a modest investment, the city can reduce harm,
+[01:01:57.765] limit liability,
+[01:01:59.055] and bring stability to neighborhoods
+[01:02:00.635] that are currently being ignored.
+[01:02:03.295] Chicago depends on the labor
+[01:02:04.825] of day laborers and street vendors.
+[01:02:07.245] Yet at the moment that labor is being exploited in fuel view
+[01:02:11.085] of city, of city Hall, first city
+[01:02:13.785] that prides itself on progressive values.
+[01:02:16.575] Leaving black and brown workers
+[01:02:18.245] behind is not something to be proud.
+[01:02:21.025] We urge the city to move forward and fund safe hiring sites.
+[01:02:24.695] Thank you. And for the audience and for the audience.
+[01:02:28.185] Um, the, the, over the summer, the, uh, a lot
+[01:02:31.685] of the hiring corners saw an in surge
+[01:02:33.545] of Haitian immigrants there.
+[01:02:35.025] So this is a black and brown issue.
+[01:02:37.155] This affects, this affects our working class.
+[01:02:40.225] And as you can see, xenophobia is rampant.
+[01:02:43.375] There are de laborers right now on the street
+[01:02:45.675] running from their lives.
+[01:02:47.205] I, I just saw it in my,
+[01:02:48.445] I just saw it in my in in my in my group chat.
+[01:02:50.985] We need government action. Thank
+[01:02:53.825] You very much for your comments.
+[01:03:02.765] Thank you very much. Our next speaker is Len Feum Thomas.
+[01:03:15.585] Don't count this to my minutes,
+[01:03:16.715] but black people are the freed men of, uh,
+[01:03:18.955] the descendants of slaves only.
+[01:03:20.495] There's no such thing as black
+[01:03:21.815] and brown if you're not acknowledging descendants
+[01:03:24.175] of slaves only when you say black,
+[01:03:26.315] but members of the council,
+[01:03:27.805] Chicago is facing a 1.15 billion corporate fund deficit
+[01:03:32.565] that reality demands, discipline
+[01:03:34.335] and shared sacrifice, not gimmicks, not carve outs,
+[01:03:37.335] and not raises for people inside this building.
+[01:03:39.905] Let's start with facts. The proposed $33 head tax raises
+[01:03:44.095] about 80 million less than 7% of the deficit.
+[01:03:47.465] While discoursing hiring
+[01:03:49.075] and hurting small businesses and nonprofits.
+[01:03:52.115] It does not fix the problem, it distracts from it.
+[01:03:55.315] If we want real solutions, we have to look at
+[01:03:57.375] where the money is actually going first.
+[01:03:59.695] Overtime, the CPD reto routinely budgets about 100 million
+[01:04:04.435] for overtime and spends closer to 190 million.
+[01:04:07.565] Instead of fixing this,
+[01:04:08.915] the fiscal year 2006 proposal raises the overtime line
+[01:04:12.435] to 200 million normalizing overspending
+[01:04:15.565] like the fire department.
+[01:04:16.795] We need enforceable caps.
+[01:04:18.495] Pre-approval event cost recovery
+[01:04:20.595] and civilian scheduling reforms can conservatively save 100
+[01:04:24.835] to 150 million a year.
+[01:04:26.335] Take this down, uh, counsel, without reducing public safety.
+[01:04:30.115] Second wages
+[01:04:31.375] and personnel costs, no one is calling for layoffs,
+[01:04:33.915] but in a billion dollar deficit year,
+[01:04:36.095] a one year pause on across the board raises
+[01:04:39.075] for non-critical positions is, is responsible,
+[01:04:42.125] protect frontline workers and step in increases.
+[01:04:45.195] But Paul's blanket raises that saves one 20 to 180 million.
+[01:04:49.595] And that pause must include this body.
+[01:04:52.005] Each older person earns about 142,000 a year.
+[01:04:55.415] A typical cola adds roughly 7,000 per alderman over
+[01:04:59.255] 350,000 annually across the council,
+[01:05:02.775] compounding into future bus budgets.
+[01:05:04.915] In a deficit year, no alderman elected
+[01:05:07.155] or appointed should receive a raise
+[01:05:10.275] that's about credibility.
+[01:05:11.905] Third contract Chicago spends billions annually on vendors
+[01:05:16.055] targeted rebidding and, and consolidation in high cost
+[01:05:18.885] categories like IT, security
+[01:05:21.105] and facilities can generate 150
+[01:05:23.865] to 200 million without cutting services for program audit.
+[01:05:27.335] Since 2020, many programs expanded using temporary temporary
+[01:05:31.205] federal funds, those dollars are gone.
+[01:05:34.855] But the cost remain a 90 day outcomes audit
+[01:05:37.695] and sunset process can save 150 million while
+[01:05:40.955] protecting core services.
+[01:05:42.415] Now, C-P-S-C-P-S budgets
+[01:05:44.435] for 370 million in TIF surplus support.
+[01:05:48.335] Yet the proposal says 552 million.
+[01:05:51.015] That's 173 more than planned with no conditions.
+[01:05:54.225] That excess should be redirected
+[01:05:56.075] to stabilize the city budget.
+[01:05:57.795] CPS has acknowledged the ability
+[01:05:59.215] to make 175 million payment back to the city,
+[01:06:02.165] which should be formalized and tied to efficiency reforms.
+[01:06:05.775] That's 348 million without cutting classrooms.
+[01:06:08.475] Finally, revenue without taxing jobs,
+[01:06:10.705] high value real estate transaction tiers
+[01:06:13.355] and enforcement of existing business taxes can raise 150
+[01:06:17.095] to 250 million added up in that.
+[01:06:19.685] Thank you very much for your comments.
+[01:06:21.385] However, your time has expired.
+[01:06:28.865] Thank you very much for your comments.
+[01:06:31.005] However your time has expired.
+[01:06:41.695] Thank you very much for your comments.
+[01:06:48.625] Thank you very much for your comments.
+[01:06:50.175] However your time has expired.
+[01:07:03.305] Thank you very much for your comments.
+[01:07:07.315] Our next speaker is Brianna Champion.
+[01:07:28.085] Good morning everyone. We are disappointed.
+[01:07:32.095] We are all disappointed by
+[01:07:33.975] how agreeing on this budget has been a fight
+[01:07:36.535] and has divided seemingly connected members of city council
+[01:07:40.745] from each other and from the communities that you represent.
+[01:07:45.115] Some of you ran on similar platforms
+[01:07:47.505] and have the same values years ago,
+[01:07:51.455] I remember being a much younger organizer in this city
+[01:07:54.985] a time before some of you occupied the
+[01:07:56.945] seats that you are in today.
+[01:07:59.285] And I looked up to you,
+[01:08:01.835] I've worked alongside you in some instances
+[01:08:04.705] and fighting for the many
+[01:08:05.825] and not the few was a value we shared.
+[01:08:08.925] What happened since then?
+[01:08:11.465] You know, there is no evidence to show that a,
+[01:08:15.085] a corporate head tax is a job killer.
+[01:08:18.835] That argument only serves the interest of those who stand
+[01:08:22.045] to benefit and that is not the majority of Chicagoans.
+[01:08:26.985] I understand Nuan nuance and we know there will be give
+[01:08:30.025] and take throughout this budget process,
+[01:08:32.045] but the facts are very clear.
+[01:08:35.845] It's been two months since the Protect Chicago
+[01:08:38.095] budget has been proposed.
+[01:08:40.915] Does this alternative proposal
+[01:08:43.395] even have viable revenue solutions in it?
+[01:08:48.095] It honestly appears to have been a rushed attempt
+[01:08:51.015] to not tax very large businesses,
+[01:08:53.895] and that is dangerous policy practice.
+[01:08:57.715] You cannot claim to champion public safety
+[01:09:00.755] and be supporting this alternative package.
+[01:09:04.035] It should not be this hard
+[01:09:05.575] to agree on common sense solutions.
+[01:09:09.015] There are other aspects of this budget
+[01:09:10.825] and we need to move on to that.
+[01:09:13.945] There are only two weeks
+[01:09:16.355] before the implications are dire organizing works.
+[01:09:21.535] We've seen it year after year, even in these past few weeks.
+[01:09:25.975] And important concessions happen when we do the work.
+[01:09:29.975] You all have a lot of organizing to do amongst yourselves
+[01:09:34.935] and the communities you represent,
+[01:09:37.665] not just billionaire funders or large car corporations.
+[01:09:42.305] Please have courage in this moment
+[01:09:44.825] and stand up for your neighbors that are in economic crisis.
+[01:09:48.885] Thank you to the alders who have been courageous so far.
+[01:09:55.535] Thank you.
+[01:09:57.715] Thank you very much for your comments.
+[01:10:02.085] Our next, our next speaker is Lolly Adame.
+[01:10:09.265] Our next speaker is Brenda Duncans.
+[01:10:14.925] Your honor, there are no further speakers
+[01:10:16.535] who have timely signed up for the public
+[01:10:17.935] Very well. Thank you for all the public
+[01:10:18.935] comments. There are two members
+[01:10:19.935] that wish to participate, uh, remotely, but
+[01:10:23.645] before we get to them, chair recognizes Alder Fuentes.
+[01:10:27.725] Uh, good morning Mr. President.
+[01:10:28.945] I would like to be acknowledged for
+[01:10:30.065] the purposes of quorum. Thank you.
+[01:10:31.135] Very well. Please add, uh, Alder Fuentes
+[01:10:33.525] to the quorum roll call.
+[01:10:36.055] The chair chair recognizes Rodriguez Sanchez.
+[01:10:39.055] Mr. President, I would like to
+[01:10:40.115] be added to the roll please.
+[01:10:41.905] Very well. Please add Alder Rodriguez
+[01:10:44.595] Sanchez to the quorum please.
+[01:10:46.705] There are two members that the chair recognizes. Alder Clay.
+[01:10:50.825] Thank you Mr. President. I'd like to be recognized for
+[01:10:53.135] Quorum. Very well. Please
+[01:10:54.135] add Alderwoman
+[01:10:55.295] Clay to the quorum roll call.
+[01:10:56.415] The chair recognizes Alderwoman Coleman
+[01:10:59.055] Be recognized to be added to the quorum. Very
+[01:11:00.955] Well. Mr. Clerk,
+[01:11:01.955] please add
+[01:11:04.155] Alderwoman Coleman to the corn roll call.
+[01:11:05.515] The chair recognizes Alderman Robinson.
+[01:11:09.675] He added for roll call. Thank you. Very well.
+[01:11:11.375] Please add Alderman Robinson as well.
+[01:11:13.425] The two alders that are wishing to participate remotely, uh,
+[01:11:17.205] for reason stating in Rule 59 are Alders Hadden.
+[01:11:24.695] Mr. Clerk, could you confirm Alder Hadden?
+[01:11:27.675] Alder Hadden. Are you there Present?
+[01:11:31.235] Alderman Hadden is present. Okay,
+[01:11:34.505] and was there anyone else?
+[01:11:38.245] We already have Harris Ramirez already.
+[01:11:44.655] All right. Can I get a motion for the, for Alder Hadden
+[01:11:46.915] to participate in today's meeting remotely?
+[01:11:49.825] It's been moved. All those in favor signify by saying aye.
+[01:11:52.375] Any opposed, say nay. And the chair. The ayes have it.
+[01:11:54.765] Thank you. Uh, resolutions. We do not have any.
+[01:11:58.535] Uh, next sub communications.
+[01:12:01.865] The Honorable Anna and Valencia city clerk hereby informs
+[01:12:04.445] the city council that the following documents were filed in
+[01:12:06.765] her office relating to the respective subjects designated
+[01:12:09.405] as follows, selection of CPS HR Consulting
+[01:12:12.645] to create Inspector General Qualified Candidate Pool
+[01:12:15.505] and the Office of Inspector General's report on Chicago's
+[01:12:18.205] police department's discipline implementation options
+[01:12:20.645] and rec record keeping City Clerk Valencia also informs the
+[01:12:24.125] city council that ordinances authorizing the imposition
+[01:12:26.245] of tax levies approval of, of budgets
+[01:12:28.785] and execution of service pro provider agreements
+[01:12:31.005] for special service areas three
+[01:12:32.385] and 59 dash 2022, which were passed
+[01:12:35.245] by the city council on December 10th, 2025
+[01:12:37.825] and which were requested to be published in special pamphlet
+[01:12:40.085] form were published in special pamphlet form on
+[01:12:42.405] December 11th, 2025.
+[01:12:44.235] City Clerk Valencia also informs the city council
+[01:12:46.245] that the ordinance amending an ordinance
+[01:12:47.805] regarding the acquisition
+[01:12:48.885] of property at 1 14 14 South Halston Street from Albertson
+[01:12:53.125] LLC for use by the city as a migrant shelter,
+[01:12:56.095] which was passed by the city council on December 10th, 2025.
+[01:12:59.265] And which was requested
+[01:13:00.285] to be published in special pamphlet form was published in
+[01:13:02.845] special pamphlet form on December 11th, 2025.
+[01:13:05.435] Your Honor, that concludes the reports
+[01:13:06.885] and communications from the
+[01:13:07.805] mayor and other city offices. Very
+[01:13:08.885] Well. Thank you. We don't have any
+[01:13:09.885] committee reports either.
+[01:13:11.435] Matters of agreed upon calendar.
+[01:13:13.345] The chair recognizes all woman Dow.
+[01:13:17.235] Uh, thank you Mr. President.
+[01:13:18.975] I have received from the city clerk Anna Valencia, a total
+[01:13:22.195] of 40 items proposed for the agreed calendar consisting
+[01:13:25.975] of congratulatory, commemorative
+[01:13:28.035] and tributary tributary resolutions from Clerk Valencia
+[01:13:32.615] and the following, alderman persons Alderman Lopez,
+[01:13:35.615] alderman Fuentes, alderman Vasquez,
+[01:13:37.675] and Alderman Silverstein.
+[01:13:39.895] I move passage of the agreed calendar in the omnibus
+[01:13:42.535] Hearing. No objection.
+[01:13:43.535] So ordered now for new business.
+[01:13:45.335] The clerk will call the wars beginning with the 50th
+[01:13:53.185] Zoning amendments, which are referred
+[01:13:54.645] to the committee on zoning landmarks
+[01:13:56.205] and building standards, traffic regulations,
+[01:13:58.165] traffic control singles and traffic signs,
+[01:13:59.605] which are referred to the Committee on Pedestrian
+[01:14:01.325] and Traffic Safety exemption from physical barrier
+[01:14:03.805] requirements for commercial driveway alley access
+[01:14:05.565] for parking facilities, which are referred
+[01:14:07.285] to the Committee on Transportation and Public Way.
+[01:14:10.085] All the person admits has, has a proposed ordinance
+[01:14:11.915] for amendment of the annual appropriation ordinance.
+[01:14:13.855] The transfer funds from the 37th Ward allowance account
+[01:14:16.775] to the automatic expense account for the year 2025,
+[01:14:19.365] which is referred to the committee on the budget
+[01:14:21.015] and Government operations der person.
+[01:14:23.135] Conway has two proposed orders for the issuance s permits
+[01:14:25.515] for signed sign boards at 400 South Well Street,
+[01:14:28.005] which are referred to the Committee on zoning
+[01:14:29.995] landmarks and building standards.
+[01:14:31.455] All the person, Conway also has a proposed ordinance
+[01:14:33.355] for clarification of the original 2019 a bond ordinance
+[01:14:36.505] regarding authorization
+[01:14:37.755] and debt issuance, which
+[01:14:39.075] is referred to the Committee on Finance.
+[01:14:41.055] All the person Irvin has a proposed ordinance for amendment
+[01:14:43.235] of the annual appropriation ordinance
+[01:14:44.435] to transfer funds from the 28th Ward Al automatic expense
+[01:14:46.675] account to the wage allowance account for the year 2025.
+[01:14:50.375] And also an amendment for the
+[01:14:51.715] annual appropriation ordinance.
+[01:14:53.015] The transfer funds from the 28th Ward automatic expense
+[01:14:55.395] account to the wage allowance account for the year 2025,
+[01:14:58.305] both which are referred to the committee on the budget
+[01:15:00.295] and government operations.
+[01:15:02.385] Alder per alder person. Coleman has proposed ordinance
+[01:15:04.465] for amendment of ms, the code section four dash 60 dash 23
+[01:15:08.565] to allow additional, uh, excuse me,
+[01:15:11.025] to allow additional packaged good licenses on portions
+[01:15:13.225] of West Garfield Boulevard, which is referred
+[01:15:15.305] to the Committee on License and Consumer Protection.
+[01:15:17.685] All the person Lopez has proposed orders for amendment
+[01:15:19.705] of municipal code chapter two dash 32
+[01:15:21.785] by adding a new section two dash 32 dash 1 45
+[01:15:25.095] regarding employee back pay in event
+[01:15:27.785] of annual appropriation ordinances not enacted,
+[01:15:29.865] which is referred to the committee on the budget
+[01:15:31.405] and government operations.
+[01:15:33.365] All the person Bill has proposed ordinance for amendment
+[01:15:35.305] of the MS code section four dash 1 0 8 dash 80
+[01:15:38.215] regarding filling station hours of operation,
+[01:15:40.355] which is referred to the Committee on
+[01:15:41.545] Licens and Consumer Protection.
+[01:15:43.365] All the person Robinson has proposed to ordinance
+[01:15:45.265] for amendment of the annual appropriation ordinance
+[01:15:47.125] to transfer funds from the fourth Ward Ultimate expense
+[01:15:49.425] account to the wage allowance account for the year 2025,
+[01:15:52.475] which is referred to the committee on the budget
+[01:15:54.205] and Government Operations.
+[01:15:55.765] All the person was spotted
+[01:15:56.825] and others have proposed to ordinance for appropriations
+[01:15:58.545] for expenditures and amounts levied
+[01:16:00.125] for the fiscal year 2026, which is referred
+[01:16:02.945] to the Committee on Finance while the person LaSpada
+[01:16:05.685] and others also have proposed orders for amendment
+[01:16:07.765] of the 2026 budget recommendations, revenue estimates
+[01:16:10.805] and expenditures, which is referred
+[01:16:12.405] to the committee on the budget and Government Operations.
+[01:16:14.755] Your Honor, that concludes the
+[01:16:15.925] presentation of all the medic introduction.
+[01:16:17.205] Very well. Thank you Mr. Clark
+[01:16:18.865] for the approval of the ajour.
+[01:16:20.465] We don't have a journal to be approved for today.
+[01:16:25.105] Unfinished business. The chair recognizes Alderman Mitchell.
+[01:16:29.415] Mr. President, I'm not aware
+[01:16:30.435] of any unfinished business very well
+[01:16:32.315] for miscellaneous business.
+[01:16:33.595] Alderman Mitchell. I'm not aware
+[01:16:34.675] of any miscellaneous business either.
+[01:16:36.045] Thank you. And for the date
+[01:16:37.235] and time of the next meeting, which has been previous,
+[01:16:40.435] previously set, uh, by ordinance.
+[01:16:43.095] Uh, thank you very much. Um, president?
+[01:16:45.935] Yes, the chair recognizes Alderman Bill President.
+[01:16:48.355] I would like to offer up a substitute resolution, um,
+[01:16:51.335] to amend the current schedule for the, uh,
+[01:16:54.875] next few city council meetings
+[01:16:56.275] if we can get that passed out.
+[01:17:52.445] Gimme one more.
+[01:17:58.255] Mm-hmm.
+[01:18:03.055] Hopefully we don't need to, but
+[01:18:16.855] schedule.
+[01:19:07.125] Does everyone have a copy?
+[01:19:16.525] Chair recognizes Altman Bill. Thank
+[01:19:18.435] You Mr. President. Uh,
+[01:19:19.435] it appears everybody has a copy.
+[01:19:21.735] Uh, so I moved to substitute, um, the regular schedule
+[01:19:26.475] that was previously passed with the substitute that is
+[01:19:29.555] before us and I move for a roll call. Vote
+[01:19:32.385] Very well. The
+[01:19:33.385] chair recognizes Alderman Irvin.
+[01:19:36.385] Thank you, Mr. President.
+[01:19:37.615] I just wish to, uh, confirm with Alderman Silverstein
+[01:19:42.175] that we have no objection of meeting on Saturday the 20th.
+[01:19:46.525] Very well. I I can't answer that.
+[01:19:50.645] The question has been raised to me to get to you.
+[01:19:53.545] Alderwoman Silverstein. Uh, do you object
+[01:19:56.165] to the Saturday meeting chair
+[01:20:01.335] recognizes Alderwoman Silverstein?
+[01:20:03.495] I,
+[01:20:08.825] Um, yes, I do. Object
+[01:20:09.825] to Saturday. Very
+[01:20:10.765] Well, thank You.
+[01:20:12.025] No, I'm sorry. I do, sorry. I'm sorry.
+[01:20:17.695] Um, I am aware that, um, we have a budget crisis
+[01:20:21.215] and that this budget needs
+[01:20:22.475] to be resolved by the end of the year.
+[01:20:24.735] So, um, as much
+[01:20:28.445] as I will not be present on Saturday, um,
+[01:20:31.725] if this council needs to do what's best for the city,
+[01:20:33.825] then I do not object.
+[01:20:36.305] So no longer an objection, um,
+[01:20:38.555] from the alder of the 50th ward.
+[01:20:40.325] Thank you. Alman Irvin,
+[01:20:42.105] the chair recognizes Alderman Bill. Thank you, Mr.
+[01:20:44.125] President. Mr. President.
+[01:20:45.225] Uh, before this was done, we, we have talked
+[01:20:48.405] with Alderman Silverstein
+[01:20:50.265] and we are definitely sensitive to, um, you know,
+[01:20:53.505] her religion and, um, what goes with that.
+[01:20:57.915] Uh, however, uh, we're hoping that if things move
+[01:21:01.645] accordingly, that we won't need a Saturday meeting.
+[01:21:04.635] So, but this is just in case, uh,
+[01:21:07.035] for emergency purposes only. In order to move forward,
+[01:21:09.725] There's a motion on the floor to amend the substitution.
+[01:21:12.565] It's a roll call. Vote has been asked.
+[01:21:14.695] Fourth vote is fine for this vote. Fourth vote is fine.
+[01:21:19.015] All right. The roll call is in order. Um, thank you.
+[01:21:23.975] Madam Clerk will provide the Evo application
+[01:21:27.115] to record your vote at this time.
+[01:21:38.435] Okay. Voting is now open. Voting is all now open.
+[01:21:41.505] If you're having difficulty, please raise your hand.
+[01:22:29.615] I can see it just took me a minute. Do you mind putting,
+[01:22:40.885] okay.
+[01:22:41.255] I will now call on those who have not yet cast their vote.
+[01:22:44.255] Alder person Robinson Alder person Robinson is a no.
+[01:22:48.975] Alderwoman Harris.
+[01:22:53.745] Alderwoman Ramirez. No. Alderwoman Ramirez is a no.
+[01:22:58.385] Alderwoman Coleman. Alderwoman Coleman is a yes.
+[01:23:03.845] Alderman Mosley. What? Alderwoman Harris is a yes.
+[01:23:08.795] Alderwoman Harris is a yes. Alderman Mosley.
+[01:23:14.845] No Alderman. Mosley is a no Alder person.
+[01:23:20.055] Fuentes Alder person.
+[01:23:22.275] Fuentes is a no Alderwoman hadn't.
+[01:23:26.635] No Alderwoman had and is a no. Alderwoman Silverstein.
+[01:23:32.815] Alderwoman Silverstein is a yes.
+[01:23:37.835] Silverstein's a yes. Okay.
+[01:23:42.445] And Rodriguez.
+[01:23:48.395] Okay. Voting is now closed.
+[01:23:53.355] There are 30 yays, 19 nays.
+[01:23:57.775] The amendment passes on the motion
+[01:23:59.975] to reconsider Alderman Mitchell.
+[01:24:01.695] Mr. President, I'll move to reconsider all those in favor
+[01:24:03.595] of the reconsideration of this vote.
+[01:24:04.715] Signified by saying aye. Any opposed, say nay. Aye.
+[01:24:08.825] This motion fails, uh, for the omnibus.
+[01:24:13.465] Mr. President, I move that matters in the omnibus be
+[01:24:15.525] passed by the first most favorable roll call vote
+[01:24:17.645] by the Committee on Police and Fire
+[01:24:19.425] and the associated, uh, one second.
+[01:24:30.995] I move that matters and the omni be passed by voice. Vote
+[01:24:35.365] Very well. There's
+[01:24:36.365] been a motion to pass the omni omnibus by voice.
+[01:24:39.505] Voice vote. All those in favor signify by saying aye.
+[01:24:42.955] Any opposed? Say no. The motion passes.
+[01:24:45.095] Altman Mitchell for the motion to meet. Reconsider. Motion
+[01:24:48.055] To reconsider the vote.
+[01:24:49.275] All those in favor of the reconsideration
+[01:24:50.655] of this vote signify by saying Aye.
+[01:24:52.315] Any opposed say no opinion of the chair.
+[01:24:55.215] This motion fails very well now
+[01:24:57.695] for the motion for
+[01:24:58.495] adjournment. Altman Mitchell. Mr. Present
+[01:25:00.265] There being no further business before this body.
+[01:25:02.055] I move that we adjourn.
+[01:25:03.055] Hearing No objections to order. The meeting is adjourned,
+[01:25:24.835] but wo men Dow has an announcement.
+[01:25:27.895] Uh, yes. Just wanted to, uh, remind, uh, the members
+[01:25:30.735] of the finance committee
+[01:25:31.875] that we have a meeting immediately following this meeting.
+[01:25:34.715] I know we started at 11 and it's
+[01:25:36.395] after 11, so I just wanted to say please stay,
+[01:25:39.455] uh, gathered. Thank you
+[01:25:40.625] Very well. Thank you, chairwoman.

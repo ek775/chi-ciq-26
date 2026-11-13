@@ -1,0 +1,442 @@
+[00:00:55.380] Mic check. Mic check one, two. Mic check three, four. Mic check in the mic.
+[00:01:01.530] Mic one, mic two, mic three, mic four.
+[00:01:04.559] Boy, be N.
+[00:06:40.201] City of Chicago City Council Rules of Conduct for Public Meetings, 2023 to
+[00:06:46.110] 2027. Pursuant to Rule 58 of the Chicago City Council Rules of Order
+[00:06:52.201] and Procedure, the sergeant at arms sets forth the following rules of conduct for
+[00:06:57.240] members of the public. These rules shall be in effect at all times that a viewing
+[00:07:02.940] gallery or room is open for a meeting of the City Council or any of its committees.
+[00:07:08.550] All individuals and their belongings are subject to search at entry or upon
+[00:07:13.561] request. Individuals must remain seated at all times except, one,
+[00:07:19.800] when entering or exiting the gallery.
+[00:07:22.561] Two, when providing public comment during the portion of a meeting set aside for
+[00:07:27.420] that purpose. Or three, when asked to rise and be acknowledged by a member of the
+[00:07:33.151] City Council. Profane, threatening, harassing, abusive,
+[00:07:39.030] or defamatory behavior or speech, which in the judgment of the meeting's chair or
+[00:07:44.820] the sergeant at arms may lead to a breach of the peace or disrupt the orderly
+[00:07:50.010] conduct of the meeting is not permitted.
+[00:07:52.651] Disruptive or distracting actions, such as the stomping of feet, waving of arms,
+[00:07:58.110] throwing any item, whistling, booing, shouting, or other loud utterances are
+[00:08:03.960] not permitted when in the judgment of the meeting's chair or the sergeant at arms,
+[00:08:08.940] such actions are disrupting or impeding the orderly conduct of the meeting.
+[00:08:14.070] Any item that poses a potential safety hazards, as determined by the sergeant at
+[00:08:18.720] arms, is prohibited in the gallery.
+[00:08:21.720] Such items include, but are not limited to, one, any pointed objects, including
+[00:08:27.570] knives of any kind. Two, banners, flyers, or other forms of signage.
+[00:08:33.600] Three, food and beverages, including in glass or metal canisters.
+[00:08:39.061] Four, backpacks, large bags, and sealed packages.
+[00:08:43.110] Clear bags, not tinted in color, that do not exceed 12 inches by six inches by 12
+[00:08:49.290] are permitted and subject to search.
+[00:08:51.600] And five, firearms, ammunition, fireworks, laser pointers, stun
+[00:08:57.330] guns, tasers, mace, pepper spray, and toy weapons.
+[00:09:01.830] Cell phones and other small handheld recording devices must be placed in silent
+[00:09:06.750] mode. Can only be used while seated and can only be used in a manner that does
+[00:09:12.757] not interfere with the ability of other individuals to view or hear the
+[00:09:17.676] proceedings. Individuals or groups failing to adhere to these rules will be
+[00:09:23.466] subject to removal from the remainder of the meeting by the Sergeant at Arms.
+[00:10:16.626] City of Chicago City Council Rules of Conduct for Public Meetings, 2023 to
+[00:10:22.566] 2027. Pursuant to Rule 58 of the Chicago City Council Rules of Order
+[00:10:28.656] and Procedure, the Sergeant at Arms sets forth the following rules of conduct for
+[00:10:33.696] members of the public. These rules shall be in effect at all times that a viewing
+[00:10:39.396] gallery or room is open for a meeting of the City Council or any of its committees.
+[00:10:45.036] All individuals and their belongings are subject to search at entry or upon
+[00:10:50.016] request. Individuals must remain seated at all times except, one,
+[00:10:56.257] when entering or exiting the gallery.
+[00:10:59.016] Two, when providing public comment during the portion of a meeting set aside for
+[00:11:03.906] that purpose. Or three, when asked to rise and be acknowledged by a member of the
+[00:11:09.636] City Council. Profane, threatening, harassing, abusive,
+[00:11:15.516] or defamatory behavior or speech, which in the judgment of the meeting's chair or
+[00:11:21.277] the Sergeant at Arms may lead to a breach of the peace or disrupt the orderly
+[00:11:26.496] conduct of the meeting is not permitted.
+[00:11:29.076] Disruptive or distracting actions, such as the stomping of feet, waving of arms,
+[00:11:34.566] throwing any item, whistling, booing, shouting, or other loud utterances are
+[00:11:40.416] not permitted when in the judgment of the meeting's chair or the Sergeant at Arms
+[00:11:45.426] such actions are disrupting or impeding the orderly conduct of the meeting.
+[00:11:50.556] Any item that poses a potential safety hazard, as determined by the Sergeant at
+[00:11:55.176] Arms, is prohibited in the gallery.
+[00:11:58.176] Such items include but are not limited to, one, any pointed objects, including
+[00:12:04.027] knives of any kind. Two, banners, flyers, or other forms of signage.
+[00:12:10.056] Three, food and beverages, including in glass or metal canisters.
+[00:12:15.486] Four, backpacks, large bags, and sealed packages.
+[00:12:19.565] Clear bags, not tinted in color, that do not exceed 12 inches by 6 inches by 12
+[00:12:25.716] are permitted and subject to search.
+[00:12:28.056] And five, firearms, ammunition, fireworks, laser pointers, stun
+[00:12:33.757] guns, tasers, mace, pepper spray, and toy weapons.
+[00:12:38.316] Cell phones and other small handheld recording devices must be placed in silent
+[00:12:43.146] mode, can only be used while seated, and can only be used in a manner that
+[00:12:48.996] does not interfere with the ability of other individuals to view or hear the
+[00:12:54.157] proceedings. Individuals or groups failing to adhere to these rules will be
+[00:12:59.947] subject to removal from the remainder of the meeting by the Sergeant at Arms.
+[00:18:22.041] And we got our people in the box? Right.
+[00:19:21.501] All right, one more?
+[00:19:24.621] Waiting for Yancy.
+[00:19:26.841] Committee on Workforce Development will now come to order.
+[00:19:28.761] Today we have one item on our agenda, O2026-002-7470, an amendment of Municipal
+[00:19:34.521] Code Chapter 2-92 by adding new section
+[00:19:39.261] 2-92-4, establishing bid incentives for Chicago Jobs Plan commitment.
+[00:19:44.961] Before we begin, I'll conduct a roll call to establish quorum.
+[00:19:52.431] Alderwoman Clay, working backwards. Alderperson Vasquez.
+[00:19:57.201] Alderperson Vasquez is present.
+[00:20:01.611] Alderman Sposato.
+[00:20:04.312] Alderman Sposato is present. Alderman Quesada. Alderman Quesada is present.
+[00:20:10.941] Alderman Taliaferro. Chair Rodriguez is present. Alderman Curtis.
+[00:20:17.211] Alderman Coleman. Alderperson Vice Chair Gutierrez is present.
+[00:20:25.312] Alderman Quinn.
+[00:20:27.441] Alderwoman Ramirez on her way. Alderman Chico. Alderman Beale. Alderman Hall.
+[00:20:31.851] Alderman Yancy. Alderman Yancy is present.
+[00:20:36.471] And we do have President Pro Tem
+[00:20:39.471] Alderwoman Nugent in the house, and she is present.
+[00:20:43.941] And with that, we have a quorum. We have eight members present. We have quorum.
+[00:20:49.041] The following alders have requested Rule 59 participation,
+[00:20:53.391] and that would be Alders Hall and Chico.
+[00:20:55.881] Can I get a motion to accept them into the meeting? So moved by Alder Vasquez.
+[00:20:59.391] All those in favor signify by saying aye. Any opposed?
+[00:21:01.791] The opinion of the chair, the ayes have it, with the lone exception of the
+[00:21:06.801] colleague of the North. At this time, we will begin public comment period.
+[00:21:12.771] I want to note that written comments received prior to the deadline have been
+[00:21:16.851] presented to all committee members.
+[00:21:19.371] We will limit public comments to 30 minutes or less. It'll be less today.
+[00:21:24.081] We have three public speakers. First up, only three minutes please.
+[00:21:28.011] We have Zoe Lee.
+[00:21:34.491] I didn't get to speak at the zoning for Pro and Fair, and Fair and Pro is
+[00:21:40.431] going
+[00:21:41.961] to advance in City Council.
+[00:21:46.191] The purpose of me fighting for my family was because the City of
+[00:21:51.921] Chicago unlawfully demolished a private property
+[00:21:57.861] without a court order.
+[00:22:00.471] The Buildings Department and some aldermen, Greg Mitchell, he
+[00:22:06.411] says that
+[00:22:08.421] the aldermen have police powers to demolish buildings in their ward.
+[00:22:15.291] And the Buildings Department has said that
+[00:22:24.081] they know all the violations. The inspectors will go out and, hey,
+[00:22:31.101] they may be a corrupt inspector and get paid off and walk the other way,
+[00:22:37.611] while some of these buildings don't get torn down at all, especially the ones who
+[00:22:43.911] make sure that you guys have money in y'all campaign accounts.
+[00:22:50.421] Prime example is the Seventh Ward with the 75th South Shore building.
+[00:22:55.911] You guys knew all of those
+[00:22:59.871] violations. You guys knew the people that were living in those as well.
+[00:23:04.641] Greg Mitchell did. But because Greg Mitchell was getting kickbacks from those
+[00:23:09.801] developers, all of a sudden you guys were able to save that
+[00:23:15.591] building. But a small business owner like my godfather, who had his building
+[00:23:21.681] in that TIF zone and was paying into that TIF zone since 1998, y'all happened to
+[00:23:27.261] demolish that building. So both of the ordinance are
+[00:23:33.322] terrible. And if,
+[00:23:38.091] constituents, you are paying attention to me and my personal story, and Chicago
+[00:23:43.671] Flips Red,
+[00:23:45.711] I would call up the alderman and anyone that votes yes to that
+[00:23:51.801] or is okay with that rental registry because they're going to continue to look at
+[00:23:56.661] it, I would vote them out. I would go look whoever's running against them.
+[00:24:03.051] I would reach out to them. I would talk to them because it's about their personal
+[00:24:08.001] interests and not the homeowners, the property owners.
+[00:24:11.841] This is progressive versus moderate.
+[00:24:14.451] This is socialism and communism versus the Daley regimen.
+[00:24:19.671] They do not care about the real Chicagoans.
+[00:24:24.951] It's their ego, and we're paying for it.
+[00:24:34.371] Thank you. Next up is George Blakemore.
+[00:24:44.091] Thank you. I think the chairman is also
+[00:24:48.410] leaving the council. I think this is wonderful.
+[00:24:52.820] We should have term limitation. Two years.
+[00:24:57.231] Two years?
+[00:24:57.711] Four years. Two terms for four years. That's eight years.
+[00:25:02.511] It's not an institution for 15 or 20 years.
+[00:25:06.562] Chicago has 50 aldermen.
+[00:25:12.231] New York have 25. You're not needed here.
+[00:25:17.871] Why would you want to stay here? And guess what, Mr.
+[00:25:20.871] Blakemore, with that 100 and something thousand dollars they receive, it's a
+[00:25:26.091] part-time job. What?
+[00:25:30.741] Maybe we need to have a
+[00:25:34.011] manager,
+[00:25:35.991] like some of the cities have city managers.
+[00:25:38.841] And
+[00:25:40.341] I don't have the answer, but I know what's not the answer is to have these
+[00:25:46.252] same old political hacks
+[00:25:50.931] in place. I know that that's not the answer.
+[00:25:57.291] And it's sad. And I believe that some of them are resigning and saying
+[00:26:03.201] enough is enough because probably, maybe some of them might be indicted.
+[00:26:09.471] Mm-hmm.
+[00:26:11.812] And guess what else, Mr. Blakemore? What? With your crazy self all pent up.
+[00:26:18.052] They're all Democrats. Well, Trump's a racist.
+[00:26:23.241] Trump's not here with his non-functional government.
+[00:26:28.971] His non-functional government dealing with the workforce.
+[00:26:32.332] They have an agenda of an illegal workforce.
+[00:26:36.981] An illegal workforce. And these Black aldermen, white aldermen, Mexican, Chinese,
+[00:26:42.981] they voted for illegal. And on these union jobs, when they get to building, they're
+[00:26:48.832] talking about bidding. They have union workers and illegal workers.
+[00:26:54.981] And probably we're going to say that you got to give them
+[00:26:59.062] comprehensive healthcare, and you have to tow Sheriff Doc, don't send them
+[00:27:04.701] back
+[00:27:06.381] when they burn out. Do you think that these countries are sending their best people
+[00:27:12.411] over here?
+[00:27:14.241] They're sending their rejects here because these people in Mexico who are clashing,
+[00:27:19.911] they went way across the Rio Grande With their little babies and everything, you
+[00:27:25.269] see them, because their kid is all out in public. No, they wouldn't do that.
+[00:27:29.769] They send their untouchables here.
+[00:27:34.509] So they're grinning, and Mr. Bagmore, some of these aldermen here, the one that
+[00:27:38.859] grinning, he used the tr-
+[00:27:45.399] You're looking at one, and it takes-
+[00:27:56.019] Order, please. Thank you. Go ahead, ma'am.
+[00:27:58.090] Hey, good afternoon.
+[00:27:59.199] Good afternoon.
+[00:27:59.739] Could you all hear me?
+[00:28:01.419] We can hear you.
+[00:28:02.019] Oh, okay. My name is Quishaunna Harrison, I'm a candidate for the alderman seat for
+[00:28:06.129] the Third Ward. And today I just want to talk about policy reviews and policy
+[00:28:11.409] provision reviews and city guidelines.
+[00:28:13.929] I feel like things are not coming to line with the two, and we do need to do a
+[00:28:18.219] policy review before we keep on introducing new audience and things like that,
+[00:28:22.059] because it just doesn't align. But we talk about workforce development, we talk
+[00:28:26.499] about connecting Chicago residents with employment opportunities.
+[00:28:30.939] We have job fairs throughout the year consistently, possibly once a month, offering
+[00:28:36.999] a variety of city jobs, workforce, warehouse jobs, and et cetera.
+[00:28:42.790] But I have to ask, how are we truly going to build a strong workforce
+[00:28:48.759] if people cannot maintain stable housing?
+[00:28:51.939] We cannot continue to address employment and housing as if they are two completely
+[00:28:56.049] separate issues. A person can have a job and still be at risk for eviction.
+[00:29:01.090] A person can be working and still be in unaffordable housing in the communities
+[00:29:05.319] where they live. Chicago residents should not have to choose between remaining
+[00:29:09.730] housed and remaining in workforce.
+[00:29:14.620] We need to look at housing stability as a part of economic development.
+[00:29:18.699] When residents are protected from unnecessary displacements and a realistic of
+[00:29:23.829] opportunities to remain in their communities, there are very strong positions to
+[00:29:28.540] work and to provide their families in these particular neighborhoods and
+[00:29:34.480] contribute to Chicago's economy.
+[00:29:37.540] But where does that come to line with the residents here in Chicago?
+[00:29:42.429] The value, our taxes, everything, the commercial taxes, none of it lines up.
+[00:29:47.799] And we need to do a serious provision review on these policies with a lot of the
+[00:29:52.779] city services that we have to offer here in Chicago, especially with the guidelines
+[00:29:56.709] that we have to meet. We talk about all these unnecessary things when it's a
+[00:30:01.329] simple fix.
+[00:30:03.399] I feel like as the alderman, the position should be, if you care that much, you
+[00:30:07.149] should go to these organizations and request certain documentation that cannot be
+[00:30:11.620] found online and things like that, just to get these things in order.
+[00:30:15.309] Because we're not a commonwealth state, we're not a commonwealth city.
+[00:30:20.980] This is a city, this is Chicago. We shouldn't be exempt from certain things because
+[00:30:24.459] we're suffering as a collaborative unit.
+[00:30:26.409] Our residents are suffering, our workers are suffering, our taxpayers are suffering
+[00:30:30.639] tremendously, and our city is in debt.
+[00:30:33.909] So we have to tear it down to rebuild it, and I feel like that's the best suit if
+[00:30:39.100] we want to push forward with opening up things that were taken from us, like the
+[00:30:43.059] trauma hospitals and things like that.
+[00:30:44.949] How we get more grants and more budgeting operations if we have debt that we're
+[00:30:50.649] still playing with, piggybacking off of when it's not rocket science.
+[00:30:54.309] It's not that hard. We have developers that are coming in our city because it's
+[00:30:58.269] like a gold mine. But what about the residents?
+[00:31:00.549] We're not the gold to be digging up on. And that goes without further. Thank you.
+[00:31:05.679] Thank you, ma'am. As there are no further speakers, we will now move on to our
+[00:31:09.939] agenda item O2026-0027470, an amendment of
+[00:31:15.790] Municipal Code Chapter 2-92 by adding new Section 2-92-4, establishing bid
+[00:31:21.669] incentives for Chicago Jobs Plan commitment.
+[00:31:24.699] Before we begin
+[00:31:27.790] with our expert witnesses, we do have a substitute ordinance that was emailed to
+[00:31:32.469] all committee members before the meeting.
+[00:31:33.879] Can I get a motion to accept the substitutes?
+[00:31:37.540] So moved by Alderwoman Vice Chair Gutierrez.
+[00:31:41.590] All those in favor signify by saying aye. Any opposed? Any opinion?
+[00:31:45.579] Show of the ayes have it. The substitute is now before us.
+[00:31:48.850] Lovely.
+[00:31:51.279] All right. Today we have with us as expert witnesses
+[00:31:57.219] from
+[00:31:59.409] Jobs to Move America, the Midwest Director, Casey Baier, and
+[00:32:05.439] from the Chicago Federation of Labor, we have Director Nick Desideri.
+[00:32:11.379] I was going to say from the CFL, we got Nick D.
+[00:32:15.219] We also have Chief Procurement Officer, Assistant Corporation Counsel Ray Phillips
+[00:32:18.939] Santos from the Department of Law, General Counsel Managing Procurement Officer
+[00:32:22.359] Courtney Del Gaidis. We have with us as well the chief sponsor of this effort,
+[00:32:28.719] our amazing Vice Chair, Heydi Gutierrez. Alderwoman, why don't you take the floor?
+[00:32:35.079] Thank you so much, Chairman. Good afternoon, and thank you to all my colleagues
+[00:32:38.739] here in the Workforce Development Committee for joining us in consideration for
+[00:32:44.230] these ordinance here today. Chicago, as we all know, it's a pro-worker city.
+[00:32:50.169] We know that good jobs with high wages help working people support their families
+[00:32:54.999] and communities. It's in that spirit that I'm putting forward the Chicago Jobs Plan
+[00:33:00.519] Ordinance, which encourages the procurement of quality goods manufactured by
+[00:33:05.379] employers with high labor standards.
+[00:33:08.169] The Chicago Jobs Plan Ordinance creates up to 5% bid incentive for the
+[00:33:13.569] evaluation of price of the contract.
+[00:33:16.329] To be clear, this ordinance only applies to manufactured goods.
+[00:33:22.149] It does not include contracts for construction, installation, or professional
+[00:33:26.980] services. Possible contracts based on the city buying plan include major
+[00:33:32.529] investments of city dollars in manufactured goods like water meters, water mains,
+[00:33:37.899] and motor vehicles. Companies that commit to creating more jobs, pay higher
+[00:33:43.569] wages, and offer better benefits and training receive a higher share of the bid
+[00:33:48.730] incentive and are more likely to win the contract.
+[00:33:52.718] A bidder's job plan becomes part of its binding contract with the city.
+[00:33:57.850] Those commitments are made public and are monitored annually during the contract.
+[00:34:03.129] This ordinance helps reverse the race to the bottom of workers' wages and benefits
+[00:34:08.199] in manufacturing, and reverses course by rewarding manufacturers that provide good
+[00:34:12.759] wages, benefits, and training. It also advantages manufacturers located in
+[00:34:18.370] places with higher workforce standards, like Chicago, so high road companies are
+[00:34:24.129] not being undercut by competitors who do not invest in safety and quality
+[00:34:28.689] workforces. This idea is not new,
+[00:34:33.400] and there is a proven track record behind the Chicago Jobs Plan policy framework in
+[00:34:37.989] Chicago and across the country. The Chicago Transit Authority has incorporated a
+[00:34:43.390] jobs plan in its contracts for over a decade.
+[00:34:47.140] As a city, we should demand nothing less.
+[00:34:50.529] We have worked hard to get this ordinance right and get it into this point.
+[00:34:55.569] I would like to thank the CFL, the Chicago Federation of Labor, and Jobs to Move
+[00:35:01.239] America to trusting in me on leading this ordinance.
+[00:35:05.289] From the start, we have been in conversations with the Department of Procurement
+[00:35:08.980] Services and Chief Procurement Roberts to ensure that this ordinance will be
+[00:35:13.389] additive to their efforts and the implementation transition will be soon.
+[00:35:18.639] We have collaborated and incorporated feedback from the city and labor partners to
+[00:35:23.889] ensure this ordinance is a win-win for the city, Chicago's residents, and Chicago
+[00:35:29.859] workers. And with that, I would like to ask my colleagues to vote in favor.
+[00:35:34.689] Thank you.
+[00:35:35.679] Thank you very much, Vice Chair. We'll have a couple of minutes from each of our
+[00:35:40.480] expert witnesses, and we'll start with Director Nick Desideri.
+[00:35:44.650] You have the floor, sir.
+[00:35:46.809] Sure.
+[00:35:48.519] Good afternoon, everyone. As the chair noted, my name is Nick Desideri.
+[00:35:51.639] I'm the political director of the Chicago Federation of Labor.
+[00:35:55.269] I want to echo the points made by our sponsor after all of her hard work, and it's
+[00:35:59.949] been wonderful to work with throughout this process.
+[00:36:02.439] This ordinance is a sensible proposal that will help working people in Chicago and
+[00:36:06.189] beyond.
+[00:36:07.959] Chicago is the birthplace of the American labor movement, and we understand both
+[00:36:11.799] the moral and communal value of treating workers with dignity and respect.
+[00:36:15.879] The Chicago Jobs Plan Ordinance is an extension of those values, which will offer a
+[00:36:20.049] bid incentive for manufacturers who demonstrate a continuing commitment to high
+[00:36:23.199] labor standards. As discussed, bidders must outline to the city the number of jobs
+[00:36:27.639] created and retained and where, wage and benefits across job classes, what training
+[00:36:32.439] is provided to their workforce, and partnerships to stimulate community hiring.
+[00:36:36.189] And my colleague Casey will also go into more detail on that during her testimony
+[00:36:39.909] to really go over the nuts and bolts.
+[00:36:42.315] This framework has a strong track record of creating opportunities to win strong
+[00:36:45.435] agreements for communities and workers.
+[00:36:47.355] Jobs to Move America labor partners includes SMART, IBEW,
+[00:36:52.575] IUE-CWA, USW, as well as labor federations like my own, the CFL.
+[00:36:58.815] United Auto Workers, another supporter of this proposal, is also supporting it due
+[00:37:04.275] to the positive impact a bid incentive would have on workers in the manufacturing
+[00:37:08.715] sectors across Chicago area and for the City of Chicago itself.
+[00:37:13.096] This is also, to the sponsor's point, not new.
+[00:37:16.065] In 2016, the CFL worked with the CTA to include similar jobs plan language to
+[00:37:20.985] advance good jobs in manufacturing, which helped lead to a Chicago manufacturing
+[00:37:25.366] facility where IBEW Local 134 electricians and SMART Local 73 sheet metal
+[00:37:30.914] workers built the CTA 700 series rail cars.
+[00:37:34.905] Jobs plan language was also included in the Northern Illinois Transit Authority
+[00:37:38.175] Act, passed last year, which was heavily supported by the Illinois AFL-CIO, as well
+[00:37:43.485] as the Chicago Federation of Labor.
+[00:37:45.495] The CFL, for our part, shared this ordinance with our affiliates for their input.
+[00:37:49.485] We worked with Operating Engineers Local 150 to incorporate their feedback, and we
+[00:37:53.205] have been at the table with Alderwoman Gutierrez, Jobs to Move America, and city
+[00:37:57.195] departments to get this ordinance to a place where every stakeholder feels
+[00:38:00.855] comfortable moving forward. This ordinance is one way we can support workers in our
+[00:38:05.355] city's procurement of manufacturing goods, and as such, the CFL supports this
+[00:38:09.976] ordinance and its passage out of committee today. Thank you.
+[00:38:13.335] Thank you, Director. Up next, we have Midwest Director Casey Beyer of Jobs to Move
+[00:38:17.355] America. Go ahead, Director.
+[00:38:19.305] Thank you. I am Casey Beyer. I am the Midwest Director for Jobs to Move America.
+[00:38:23.985] We are a national organization working in community and labor coalitions to win
+[00:38:28.875] high road procurement policy and also secure community benefits across the country.
+[00:38:33.435] Can you-
+[00:38:33.885] I'm here to share context on-
+[00:38:35.985] Director, would you mind moving the mic closer to you?
+[00:38:39.525] I can. How was that?
+[00:38:40.096] Thank you so much. That's good.
+[00:38:41.505] Thank you.
+[00:38:41.805] Thank you.
+[00:38:43.455] I'm here to share context on the policy and a little bit of how the proposed
+[00:38:48.885] evaluation mechanism will work.
+[00:38:51.765] Chicago has historically set high standards for pro-worker, pro-community
+[00:38:55.965] procurement policies. We should all be proud of this.
+[00:38:59.265] Chicago and its Department of Procurement Services have led the way in advancing
+[00:39:03.495] high road manufacturing policy by leveraging the city's purchasing power to
+[00:39:07.875] incentivize bids that manufacture goods within the city and promote diversity and
+[00:39:12.945] equity among suppliers. Recent pro-worker, pro-community procurement policy
+[00:39:18.616] adopted by Chicago include a city-based manufacturer bid incentive from
+[00:39:24.585] 2012, a local business preference bid incentive in 2012, and a diverse
+[00:39:30.375] management and workforce incentive in 2022.
+[00:39:34.395] When combined, these three past ordinances paint a clear and powerful picture.
+[00:39:39.765] Chicago is a city that rewards local businesses, prioritize bidders who employ
+[00:39:44.565] Chicagoans, and empower the hiring of disadvantaged workers through our public
+[00:39:49.665] purchasing. But there is one missing component, and that is
+[00:39:55.515] good jobs, job quality. How many good jobs do these contracts create?
+[00:40:00.915] What are the wages being paid? What are the benefits being offered?
+[00:40:04.005] And what's the training provided?
+[00:40:06.525] This
+[00:40:08.055] reason for the missing piece wasn't Chicago's choice.
+[00:40:11.685] It was because of, until very recently, federal law did not allow the city's public
+[00:40:16.545] purchasing to incentivize job creation, higher wages, better benefits, and strong
+[00:40:20.775] training programs. Fortunately, Chicago once again led the way for workers.
+[00:40:26.295] In 2024, Chicago's mayor and many alderpeople, including several in this room,
+[00:40:32.325] joined our coalition's national effort to update the federal permissions of the
+[00:40:36.945] Office of Management and Budget to empower cities like Chicago to incentivize high
+[00:40:41.775] road manufacturing practices. The OMB's uniform guidance had remained largely
+[00:40:47.295] unchanged since the 1980s and severely restricted cities and states from enacting
+[00:40:53.085] procurement policies that prioritized workers.
+[00:40:56.145] I'm happy to share, in no small part because of Chicago's advocacy, we won new
+[00:41:01.366] permissions in the federal grant rules.
+[00:41:04.185] That's how we arrived at the Chicago Jobs Plan Ordinance.
+[00:41:07.755] Chicago has the opportunity to take advantage of these new federal permissions and
+[00:41:12.555] get the most public good from our public goods.
+[00:41:16.755] I now want to share just a little about how the Chicago Jobs Plan will work.
+[00:41:21.226] To qualify for the 5% bid incentive, bidders must outline their jobs plan,
+[00:41:25.995] detailing the number of jobs created or retained, minimum wages paid to
+[00:41:30.465] non-supervisory employees, benefits, and workforce training plans.
+[00:41:36.825] DPS, alongside other criteria, will evaluate a bidder's jobs plan and assign a
+[00:41:42.195] total dollar value to the bidder.
+[00:41:46.575] The bidder's total dollar value commitments will be ranked.
+[00:41:49.995] The bidder with the highest total dollar value commitment receives the full 5% bid
+[00:41:55.185] incentive. Other bidders are evaluated against the highest bidder and receive a
+[00:42:00.495] proportional amount. To make this more concrete, the highest bidder will be
+[00:42:05.175] eligible for the 5% incentive.
+[00:42:08.745] The second-highest bidder, let's say they have committed to a 50% less good plan,
+[00:42:14.925] will receive a 2.5% incentive. The specific evaluation criteria and
+[00:42:20.715] scoring mechanism for this incentive is in line with the city's preexisting bid
+[00:42:24.855] incentives and has been agreed upon by DPS and city leadership.
+[00:42:30.045] The contractor will submit annual reports to DPS to ensure compliance.
+[00:42:35.235] It's important to note that the bid incentive does not change the overall price of
+[00:42:39.616] the contract to the city. Rather, it allows the city to consider a bidder's
+[00:42:43.455] workforce investments and reward them for doing right by workers.
+[00:42:47.775] The Chicago Jobs Plan is one important tool in the city's toolbox to make sure we
+[00:42:52.515] are supporting workers both locally and nationally.
+[00:42:55.905] The Jobs Plan makes sure Chicago is investing its public dollars into businesses
+[00:43:00.375] that take the high road. Bidders who prioritize wages, training, and benefits for
+[00:43:04.846] its workforce are rewarded via the bid incentive.
+[00:43:08.505] It's hard out here for working people, as we all know, and this is one action
+[00:43:13.245] Chicago can take to
+[00:43:16.125] help workers in this moment of weakened protections and also the rising cost of
+[00:43:21.285] living crisis.
+[00:43:25.366] We can also make sure that our public money is supporting quality jobs and not just
+[00:43:30.195] getting stuck at the top with shareholders and CEOs.
+[00:43:34.125] I appreciate your leadership on this issue and look forward to working closely with
+[00:43:37.305] DPS to implement this policy to support working people. Thank you.
+[00:43:42.495] Thank you. I will now open the floor to questions or comments from committee
+[00:43:47.655] members.
+[00:43:50.085] Any questions?
+[00:43:52.155] No? Lovely. Well, I will... Alderwoman?
+[00:43:56.625] Just one quick thing.
+[00:43:57.045] Chair, question?
+[00:43:57.795] It wasn't mentioned. We're planning for it to pass and start being considered
+[00:44:04.485] January 1st of 2027.
+[00:44:07.935] Wonderful. Is that a question or is that a statement? Chair.
+[00:44:12.105] A statement.
+[00:44:14.505] Okay. Chair Vasquez.
+[00:44:16.935] Thank you. I just want to commend Alderwoman Gutierrez's work, along with the
+[00:44:21.346] partners as well. Given all the changes that we've seen at different levels of
+[00:44:25.905] government and the lack of emphasis on making sure that people have equal
+[00:44:29.085] opportunity, I appreciate the thoughtfulness in looking at the legislation to
+[00:44:33.465] address what's clearly a need. So I want to thank you, as well as the chairman and
+[00:44:37.455] all the partners here. Thank you very much. Thank you.
+[00:44:40.875] The CFL and Jobs in America have been leaders throughout the country in so many
+[00:44:46.425] different aspects of improving our workforce conditions,
+[00:44:51.976] pay for working class people, and I think this is yet again another example of that
+[00:44:57.045] amazing track record. With that said, I will ask for a motion to pass from Alder
+[00:45:02.175] Vasquez. All those in favor of do pass, please respond by saying aye.
+[00:45:07.846] Aye.
+[00:45:08.535] Any opposed? Aye. Say again? Ah. Before-
+[00:45:14.715] Aye. Aye. Thank you. Absolutely yes. Thank you.
+[00:45:18.795] Aye for Coleman.
+[00:45:20.476] Thank you. So with that,
+[00:45:23.145] S02026-0027470 has passed
+[00:45:29.085] out of committee and will be reported out at the next city council as do pass by
+[00:45:33.945] unanimous vote. Thank you so much.
+[00:45:36.165] For those in the chair, in the table there, we also want to recognize
+[00:45:42.165] Alderman Stephanie Coleman for the quorum.
+[00:45:44.265] Can I get a motion to include her as Roll 59? So moved by Alderman Yancey.
+[00:45:49.005] All those in favor, say aye. Any opposed? We got one.
+[00:45:52.635] The independent chairs, the ayes have it.
+[00:45:54.135] She will be reflected in the roll call for this meeting.
+[00:45:59.116] Without any further business, may I have a motion to adjourn from Alderman Sposato?
+[00:46:05.025] All those in favor signify by saying aye.
+[00:46:07.425] And with no opposed, the meeting is now adjourned.
+[00:46:11.805] Yeah. The Community Workforce Development is now adjourned. Thank you so very much.

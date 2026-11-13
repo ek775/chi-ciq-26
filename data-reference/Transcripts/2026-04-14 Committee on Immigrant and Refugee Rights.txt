@@ -1,0 +1,663 @@
+[00:00:08.919] 201-A: Yep.
+[00:00:13.529] 201-A: The Committee on Immigrant and Refugee Rights will now come to order.
+[00:00:17.809] 201-A: Today, we have two items on the agenda, Rule 45 approval and a subject matter hearing on the City and Committee's oversight of police technology, procurement practices, and the potential intersections with federal law enforcement, data access, and information sharing, brought to us by Alderman Matt Martin.
+[00:00:34.849] 201-A: There will be no votes taken on this item. We will begin with a roll call to establish quorum.
+[00:00:40.959] 201-A: Vice Chair Taylor?
+[00:00:44.139] 201-A: Ottawoman Dow, Alderwoman Gutierrez?
+[00:00:51.219] 201-A: Alderman Knudson? Present.
+[00:00:54.479] 201-A: Audible Person Rodriguez?
+[00:00:57.669] 201-A: Alderperson Fuentes?
+[00:01:00.479] 201-A: Alderman Talia Farrow, Alderwoman Cruz, Alderman Cardona?
+[00:01:08.289] 201-A: Alderwoman Rodriguez-Sanchez?
+[00:01:11.449] 201-A: Alderman Quesada?
+[00:01:13.769] 201-A: Alderwoman Mana Hoppenworth?
+[00:01:16.889] 201-A: Alderwoman Haddon, And myself, Chair Vasquez.
+[00:01:23.029] 201-A: There are 7 members present. We have a quorum.
+[00:01:26.699] 201-A: Currently there are no non-members present.
+[00:01:30.129] 201-A: Oh, sorry.
+[00:01:31.159] 201-A: My apologies, G sponsor.
+[00:01:33.379] 201-A: Audra Martin is here with us as well, for the record.
+[00:01:37.609] 201-A: Alderpersons Gutierrez, Taylor, and Talia Farrow have requested a virtual option for committee hearing attendance in accordance with Rule 59 of the City Council Rules of Order. Can I get a motion to allow…
+[00:01:49.109] 201-A: So moved by Alderwoman Rodriguez-Sanchez. Hearing no objections, so ordered.
+[00:01:55.119] 201-A: At this time, we will begin the public comment period. The period is limited to 30 minutes. Out of respect for everyone's time, each speaker is limited to 3 minutes. Remote speakers will comment first, followed by those in person.
+[00:02:07.439] 201-A: As of 10.15 a.m, Tuesday, April 13th, 2026,
+[00:02:12.309] 201-A: Zero callers have requested to speak today, so we will move on to in-person speakers.
+[00:02:17.539] 201-A: Our first speaker will be… Mr. George Blakemore.
+[00:02:26.879] 201-A: Chairman, what's going on here?
+[00:02:29.749] 201-A: Why did you have this meeting?
+[00:02:33.179] 201-A: Just subject matter only. Who are you informing about the subject matter?
+[00:02:39.799] 201-A: Everybody that I see here, they are employees of the city.
+[00:02:45.459] 201-A: We're the immigrants?
+[00:02:47.879] 201-A: Where the people.
+[00:02:50.379] 201-A: What do you want to ask procurement?
+[00:02:53.959] 201-A: When it comes to their interaction with ICE or whatever.
+[00:02:59.229] 201-A: Make it make sense. What do you want to ask the police force?
+[00:03:03.359] 201-A: That's dealing with technology.
+[00:03:07.349] 201-A: When it comes to ICE or illegal immigrants, what are you doing?
+[00:03:12.639] 201-A: And why did you do this?
+[00:03:14.679] 201-A: Rejoice, hinder!
+[00:03:16.909] 201-A: Just reason. Make it make sense.
+[00:03:21.139] 201-A: What are you doing here? Why are you here? Where are the people? Evidently, you didn't inform them.
+[00:03:29.839] 201-A: You didn't enlighten them. You didn't engage them. They're not here. These are all… That's been paid.
+[00:03:39.099] 201-A: What's going on here? When you threw me out?
+[00:03:42.459] 201-A: And I holler, leave, help, help, help! That chamber was packed with illegal immigrants, and the negative effect that these illegal immigrants have on our great city, with housing.
+[00:03:58.259] 201-A: with the medical, go to county, hospital.
+[00:04:02.199] 201-A: And the police department have to be bothered with high crime. Somebody got killed by these illegal immigrants. What are you doing here? Why did you have this meeting here? Now, I'm gonna sit, a set and watch this saga unfold.
+[00:04:20.239] 201-A: Just watch it unfold.
+[00:04:22.979] 201-A: It's something wrong here. It's something un-American here. And what is it? It's a corrupt machine!
+[00:04:37.779] 201-A: ALL OF YA!
+[00:04:40.869] 201-A: Man, fake news over here, sir, I know you can't do… that editor tell you, no, no, we can't show that on the morning, the afternoon. The news of people are in with them, too, with the politics. The politics, here.
+[00:04:58.129] 201-A: What is this here that you have seemed upon?
+[00:05:04.749] 201-A: What is it for matters?
+[00:05:08.299] 201-A: a certain matter only. I'm leaving this with Black Lives Matter.
+[00:05:13.649] 201-A: That's lives matter!
+[00:05:15.819] 201-A: Not illegal immigrants, but native black people that was enslaved in America.
+[00:05:23.639] 201-A: 5 miles.
+[00:05:33.169] 201-A: Thank you, Mr. Blakemore.
+[00:05:35.479] 201-A: Thank you to all of our speakers today.
+[00:05:37.909] 201-A: I would like to note that this committee received one written public comment.
+[00:05:44.299] 201-A: There being no more speakers, the public comment is now concluded.
+[00:05:48.939] 201-A: The first item… oh, for the record, I'd also like to mark Alderperson, Rodriguez for a quorum.
+[00:05:57.909] 201-A: And Fuentes, Alderperson Fuentes as well. Thank you very much, Sharon.
+[00:06:04.169] 201-A: The first item on the agenda before our committee is to approve the March 2026 Rule 45 report. Can I have a motion to approve?
+[00:06:12.899] 201-A: Alderman Quesada, so moves.
+[00:06:15.729] 201-A: Hearing no objection, so ordered.
+[00:06:18.619] 201-A: The second item is a subject matter hearing to examine the city's contracts, where the vendors also have federal immigration contracts, brought to us by Alderperson Matt Martin.
+[00:06:28.579] 201-A: We are here today to discuss an issue that couldn't be more urgent.
+[00:06:32.619] 201-A: After a year of our city being targeted for abuse and overreach from our federal agents.
+[00:06:37.109] 201-A: We are here to find out whether those same federal agents are benefiting from our technology in order to do so.
+[00:06:42.909] 201-A: Last week, we held a meeting with the ACLU, who told us that after reviewing hundreds of hours of arrest footage, their conclusion is that ICE has much greater access to data than anticipated, and their ability to use it in the field is unprecedented.
+[00:06:56.939] 201-A: We've heard reports of agents using everything from license plate, registries to public transportation security surveillance systems to target people.
+[00:07:05.799] 201-A: Our federal government has used our tax dollars to pay millions for extractive surveillance systems that violate people's right to privacy and offer unprecedented access for the federal government to target anyone who disagrees with them.
+[00:07:18.749] 201-A: In Minneapolis, we've seen agents scan the faces or license plates of peaceful observers and protesters, and then show up at their homes to intimidate and threaten them for exercising our most sacred constitutional rights.
+[00:07:31.799] 201-A: ICE terrorized our city last fall, and they continue to do so. They shot and killed Silverio Villegas Gonzalez after he dropped his children off from school. They shot Mariamo Martinez five times while she was trying to document their violence, and then lied to her… lied about her to try to blame it on her actions instead of their own.
+[00:07:51.469] 201-A: We cannot sit by and watch as our neighbors are harassed, detained, abused, and even killed.
+[00:07:57.499] 201-A: Without doing our part.
+[00:07:59.429] 201-A: As city elected officials, we owe it to our constituents to pull every lever we can to protect them from federal abuse, and to make sure we have accountability in place for systems that we do use.
+[00:08:11.129] 201-A: We have to understand whether the technology we use in effort to keep our neighbors safe is in fact being used to expose them to danger and harassment.
+[00:08:19.659] 201-A: I want to thank Alderperson Martin for bringing this issue to the committee.
+[00:08:24.909] 201-A: And for prioritizing this issue and bringing the subject matter experts to City Hall to share their thoughts. Thank you very much for that. I'll now hand it over to Alderperson Martin for his remarks.
+[00:08:36.589] 201-A: Thank you, Chairman, and good morning, colleagues. Chairman, I want to start off with thanks to you and your team for holding this hearing, which is timely, including for many of the reasons that you mentioned. You had indicated, Midway Blitz operation,
+[00:08:54.699] 201-A: created tremendous trauma across our community. We know that both during that operation and subsequently, residents all across our city have been asking whether ICE, Border Patrol, and the Department of Homeland Security more broadly have access to data that our city government collects for any number of reasons.
+[00:09:14.599] 201-A: And while, in my community, some of the questions that I was fielding were wide-ranging, many focused their attention on two areas. One was, was…
+[00:09:24.229] 201-A: Personal identifying information, including home addresses and license plate numbers being shared.
+[00:09:29.399] 201-A: Residents also keyed in on some of the surveillance technology that you just mentioned, Chairman, things like license plate readers, body-worn cameras, and pod cameras. We know that many of these cameras have facial recognition capabilities, which, among other things, raises privacy concerns, including for
+[00:09:47.799] 201-A: peaceful protesters, who immigration enforcement officials have been tracking and at times targeting. Many will remember that just last year, Secretary of State Janulius discovered that Flock Safety, which operates the largest automated license plate reader system in the country, allowed U.S. Border Protection to access Illinois license plate cameras. Upon learning this, Secretary Janulius rightly ordered
+[00:10:12.579] 201-A: flock to shut off
+[00:10:14.009] 201-A: data access immediately, but I fear that that was not a one-off incident that we need to be concerned about as Illinoisans and Chicagoans.
+[00:10:21.589] 201-A: We've also seen that a recent report revealed that in some cities that use surveillance technology from Flock, that Flock has unknowingly shared data in ways that potentially support President Trump's extreme immigration agenda. I want to make clear that, to my knowledge, the city does not contract with Flock currently, but we do have thousands of cameras, and one company
+[00:10:46.589] 201-A: that we do use, Vigilant Solutions, was named in the same report for sharing data with federal law enforcement. So I think that this is one in a series of conversations that's overdue in the city. I hope that
+[00:11:01.859] 201-A: both with this conversation and what comes after today's hearing will help shed light on whether and in what ways Chicagoans' data is potentially being shared with ICE and Border Patrol, as well as steps that city leaders can take to safeguard this information.
+[00:11:18.059] 201-A: To be clear, the focus of this is on, data collected by law enforcement, but
+[00:11:24.669] 201-A: really all of our departments, are grappling with similar issues involving data and AI, so I hope that we can have wider-ranging conversations in and outside of this committee in the coming months and years about these critical issues. Lastly, I just want to express my gratitude to Director Patterson, to Chief Roberts, and to representatives from the ACLU
+[00:11:49.669] 201-A: and Just Futures, excuse me, for joining us today and for their collaboration through the process.
+[00:11:55.709] 201-A: That's all I have for right now. Thank you, Chair. Thank you very much.
+[00:12:05.159] 201-A: Vigilant Solutions.
+[00:12:07.029] 201-A: Vigilant, vigilant solutions, yes.
+[00:12:10.899] 201-A: Thank you for that. We have 3 presenters for this subject matter hearing today.
+[00:12:15.169] 201-A: And I'd like to acknowledge that in the box, we have Chief Procurement Officer Roberts, staff within the Department of Procurement Services, as well as Executive Director, Patterson, and some of the staff from the Office of Public Safety Administration. We also have Deputy Mayor Ponce de Leon from the Office of Immigrant, Migrant, and Refugee Rights.
+[00:12:32.329] 201-A: Our first presenter is Hannah Lucal, Senior Policy Advisor at Just Futures Law, who is joining us virtually.
+[00:12:46.769] Hannah-Just Futures Law (she/her): Hi everyone, thank you so much for having me.
+[00:12:49.319] Hannah-Just Futures Law (she/her): Hi there.
+[00:12:50.499] Hannah-Just Futures Law (she/her): I'm wondering if it'd be possible to give me access to share my slides, or if someone's able to share them for me, if not.
+[00:12:58.229] 201-A: Yeah, thank you for that. We'll get, staff on it right now.
+[00:13:00.899] Hannah-Just Futures Law (she/her): Okay, great, thank you.
+[00:13:10.519] 201-A: Also, for the record, we have, Alderwoman Cruz, just came in for a quorum.
+[00:13:18.809] 97 Tech Support: Hannah, you're able to share now.
+[00:13:21.329] Hannah-Just Futures Law (she/her): Thank you so much.
+[00:13:22.669] 97 Tech Support: Where's…
+[00:13:24.649] Hannah-Just Futures Law (she/her): Alright, can you see my screen?
+[00:13:26.779] 201-A: Yes, yes we can.
+[00:13:28.079] Hannah-Just Futures Law (she/her): All right, thank you so much for having me. My name is Hannah Lukel, I'm a Senior Policy Advisor with Just Futures Law. We are a legal organization that provides advocacy and litigation support to organizers and legal practitioners.
+[00:13:41.849] Hannah-Just Futures Law (she/her): and communities who are seeking to disrupt the criminalization and deportation of immigrant communities. And today, I'm going to talk about 3 ways that ICE is getting access to localities
+[00:13:54.669] Hannah-Just Futures Law (she/her): local information. One is through direct access to this data, and I'll share a little bit more about each of these ways.
+[00:14:01.939] Hannah-Just Futures Law (she/her): The second is through city and state agencies' participation in government and law enforcement data sharing networks. And the third way is through
+[00:14:12.889] Hannah-Just Futures Law (she/her): contracts with companies like Vigilant Solutions, as was mentioned, data broker companies, surveillance technologies, and vendors who pull in or collect information from localities, and then resell or reshare that data with customers that can include ICE.
+[00:14:30.869] Hannah-Just Futures Law (she/her): So just as background on surveillance.
+[00:14:33.299] Hannah-Just Futures Law (she/her): by ICE in general. There's something called ICE Intelligence Centers. These are essentially cubicle farms that are staffed 24 hours a day by ICE data analysts who are churning through
+[00:14:45.569] Hannah-Just Futures Law (she/her): billions of records on hundreds of millions of U.S. residents.
+[00:14:49.989] Hannah-Just Futures Law (she/her): That can include commercial data, as well as public data. And they are looking for information to aid local ICE agents in deportation efforts, looking for information that will tell them where someone might be at a given time, where someone lives, etc.
+[00:15:08.469] Hannah-Just Futures Law (she/her): And so the first way that ICE is getting access to local data is through direct sharing of information. So oftentimes, when a state or a city has a sanctuary policy or some other type of law or policy that prohibits coordination.
+[00:15:23.529] Hannah-Just Futures Law (she/her): and data sharing between ICE and local agencies, this is the type of data sharing that that policy typically gets at.
+[00:15:32.349] Hannah-Just Futures Law (she/her): Those policies often do not get at the other types of data sharing that I'm going to get into. But this type of data sharing is basically an ICE agent going to a local agency.
+[00:15:42.599] Hannah-Just Futures Law (she/her): or a local government employee, and saying, I would like data on this person, or this list of people, or a local agency might give ICE access in bulk, in an ongoing way, to a particular dataset or local database.
+[00:15:59.039] Hannah-Just Futures Law (she/her): The second way that ICE gets access to local data is through government and law enforcement data sharing networks.
+[00:16:06.429] Hannah-Just Futures Law (she/her): So, one example is, and let's
+[00:16:09.689] Hannah-Just Futures Law (she/her): you all may be familiar with this, but it is basically a international law enforcement data-sharing network that city, state, regional, tribal, federal, international law enforcement agencies participate in, including ICE. We know that
+[00:16:26.979] Hannah-Just Futures Law (she/her): ICE has sought access to NLETs because one of the data sources that it can get access to through this platform is State Department of Motor Vehicle data. So that includes things like local residents' license license plate information, vehicle registration data.
+[00:16:42.939] Hannah-Just Futures Law (she/her): photo, birthdate, home address, all types of data that ICE wants access to to carry out its surveillance and deportation efforts. And I believe Illinois has actually been one of the handful of states that have
+[00:16:57.199] Hannah-Just Futures Law (she/her): chosen to cut off ICE access to the information that it shares through NLETS.
+[00:17:04.149] Hannah-Just Futures Law (she/her): However, unfortunately, as I'll get into in the third example, ICE can go to companies to get access to the same information, oftentimes.
+[00:17:14.429] Hannah-Just Futures Law (she/her): I want to briefly mention a new surveillance technology app that ICE agents are using in the streets and in our neighborhoods to carry out street-level surveillance. As you can see in the image, they can hold up their phone to someone's face.
+[00:17:27.849] Hannah-Just Futures Law (she/her): And the app will claim to identify who that person is using facial recognition technology.
+[00:17:34.519] Hannah-Just Futures Law (she/her): And it's important to know and track the new surveillance tech that ICE
+[00:17:40.849] Hannah-Just Futures Law (she/her): and Customs and Border Protection agents are using, because
+[00:17:44.699] Hannah-Just Futures Law (she/her): Increasingly, we're seeing that these technologies are pulling from disparate data sources that ICE is accessing.
+[00:17:51.529] Hannah-Just Futures Law (she/her): Through the different means that I'm talking about today. So, for example, there have been reports that indicate that this mobile Fortify phone app can pull data about people from that endless system that I just mentioned.
+[00:18:06.809] Hannah-Just Futures Law (she/her): The third way that ICE gets access to localities' information, they rely heavily on this, is through the sale of data from data broker companies and surveillance technology vendors.
+[00:18:20.629] Hannah-Just Futures Law (she/her): So, what is a data broker? This is basically a major technology company that does business and makes profit by buying up data from various sources, commercial and public, from local agencies, from government agencies.
+[00:18:36.409] Hannah-Just Futures Law (she/her): Social media data, bone location data, health records, employment records.
+[00:18:42.789] Hannah-Just Futures Law (she/her): marriage licenses, you name it. They buy up this data, they aggregate it, they repackage it, and sell it to customers, including ICE. Now, ICE heavily relies on data broker companies, because, including because…
+[00:18:57.689] Hannah-Just Futures Law (she/her): They have access to data that many laws and policies have otherwise prohibited ICE from accessing.
+[00:19:04.299] Hannah-Just Futures Law (she/her): So, for example, one data broker called LexisNexis.
+[00:19:09.469] Hannah-Just Futures Law (she/her): As you can see here in their marketing materials, they're advertising real-time access to nationwide jail data.
+[00:19:17.059] Hannah-Just Futures Law (she/her): Many localities, including in Illinois, have prohibited local jails from sharing information from their jail with ICE for immigration enforcement purposes. And so, in response, ICE has gone to data broker companies, including LexisNexis, to purchase this same information.
+[00:19:33.889] Hannah-Just Futures Law (she/her): So, it's important for contracting and procurement purposes to understand whether local data that is being shared to data brokers may be ending up with ICE.
+[00:19:43.639] Hannah-Just Futures Law (she/her): The last example I want to share, and I know this is already in the conversation, is around license plate reader companies and vendors. So, I believe Evanston, Illinois, and Oak Park, Illinois have recently canceled their contracts with Flock.
+[00:19:59.279] Hannah-Just Futures Law (she/her): the company that was mentioned due to concerns that ICE would have access to that local driver data through those cameras. But license plate readers are just one example of a kind of surveillance technology company that many localities contract with to do local surveillance, and that data can end up with ICE.
+[00:20:20.329] Hannah-Just Futures Law (she/her): I don't have a ton of time to get into recommendations, but I did just want to briefly mention that
+[00:20:25.329] Hannah-Just Futures Law (she/her): We do have these four recommendations for localities that are seeking to protect the privacy of their local residents and ensure that local data stays local and does not end up in the hands of ICE. And that is to enforce existing privacy laws and to support new legislation that is going to limit
+[00:20:41.869] Hannah-Just Futures Law (she/her): All types of surveillance, both corporate surveillance and public.
+[00:20:46.659] Hannah-Just Futures Law (she/her): Also, to look at what are the data sharing networks and law enforcement platforms that local or state agencies currently participate in, either share data to those platforms, or participate in otherwise.
+[00:21:01.759] Hannah-Just Futures Law (she/her): And does ICE also have access to those platforms? Or do federal agencies that collaborate with ICE have access to those platforms?
+[00:21:09.819] Hannah-Just Futures Law (she/her): And then lastly, to look at procurement and contracting, and to understand what contracts may expose ICE access to local data.
+[00:21:20.219] Hannah-Just Futures Law (she/her): Oftentimes, this information is deeply buried in one small paragraph in a 100-page contract, so it can be very hard to sometimes locate, but this is a key way that we know ICE is getting access to local data, and so looking at these contracts is a really important way for localities to limit ICE surveillance.
+[00:21:39.679] Hannah-Just Futures Law (she/her): I'll stop here and welcoming questions that folks have.
+[00:21:44.079] 201-A: Thank you very much, Anna. I think what we'll do is go to the subsequent presenters to hear everyone's, and then open it up for everyone for questions.
+[00:21:50.869] 201-A: So thank you. So that'll give us more time to kind of dig into what you're presenting. I appreciate it. The next presenter will be Steven Reagan, Policy and Advocacy Strategist from the ACLU.
+[00:22:12.519] 201-A: Chair Vasquez and members of the committee, thank you so much for giving me the opportunity to speak today. My name is Steven Reagan, and I work at the ACLU of Illinois on privacy technology and surveillance issues. I want to speak briefly about some of the lessons that we've learned from Operation Midway Blitz. I will try not to be repetitive.
+[00:22:32.019] 201-A: to, you know, an extensive degree. I'm going to talk a little bit about some of the technologies that,
+[00:22:37.229] 201-A: Hannah mentioned as well, and tried to, kind of chart a path, forward about some policy solutions that have, that are, that are already proposed, as well as some that we would, like to see in, the future. So during Operation Midway Blitz, the Department of, Homeland Security.
+[00:22:58.449] 201-A: Use the mobile application, as Hannah mentioned, Mobile Fortify, which, checks the… which, to scan the faces and fingerprints, according to the Attorney General's, lawsuit against DHS more than 100,000 times, comparing the faces.
+[00:23:12.329] 201-A: and fingerprints of people against a variety of government databases containing 200 million images, and a deep well of data, including name, date of birth, alien number, if they're an immigrant, and whether they have an order of deportation. So we see kind of this,
+[00:23:29.029] 201-A: this use of this problematic technology, as well as the capacity to then return, you know, associated personal information with anybody, you know, citizens, non-citizens alike, as they go about their lives on the streets, you know, here in this case, in Illinois and in Chicago.
+[00:23:46.369] 201-A: Biometric data, like finger and handprints and voice and face skins, is deeply sensitive and unique. You have one face.
+[00:23:52.529] 201-A: And unlike your bank account or social security number, you cannot change your face.
+[00:23:56.089] 201-A: So technology that seeks to use our biometrics then represent a special kind of risk, and indeed create a special kind of harm. This is most clearly seen in the current uses of facial recognition technology. A surveillance camera network with your face print can track your every movement in a defined area.
+[00:24:12.229] 201-A: Should that print be shared across networks, your movements can be tracked across multiple locations.
+[00:24:16.439] 201-A: And despite the unique nature of biometrics, technologies like facial recognition that rely on them are notoriously inaccurate, especially when it comes to identifying women, people of color, children, and the elderly, and the consequences are predictable. Facial recognition has led to wrongful arrests and unlawful detentions based on misidentifications across the country.
+[00:24:34.469] 201-A: And we know that, city agencies like CTA and CPD are using facial recognition with virtually no state or city-imposed limits, except for a prohibition on using facial recognition in conjunction with drones.
+[00:24:46.329] 201-A: I think, what I want to highlight is, you know, kind of the opaque nature of, how these technologies are used, when they're being used, kind of a lack of transparency around any safeguards in the deployment of this technology. But even going, you know, a step further back, we're talking about procurement here, and, you know, trying to create,
+[00:25:06.189] 201-A: Mechanisms for the public to have a say in this conversation, to understand If…
+[00:25:14.769] 201-A: I mean, I think that first question is if, if surveillance technologies are going to be adopted, and then how they're going to be used. I mean, you know, these are, you know, these technologies are procured using taxpayer money, and the taxpayers should have a say in, how and if they are, adopted. I also wanted to highlight the role of one third-party vendor in particular, facial recognition, Clearview AI.
+[00:25:38.449] 201-A: This company has effectively scraped the internet for facial images, and reportedly has a database of 70 billion images. Clearview AI has a contract with DHS to provide access to its database, and we know that CPD had a contract with Clearview that they canceled in 2022.
+[00:25:55.379] 201-A: Because Clearview is currently prohibited from operating in Illinois pursuant to a settlement agreement resulting from a lawsuit brought by the ACLU of Illinois along with our partners. I just wanted to highlight that, because it's a 5-year settlement agreement, and that settlement ends… that agreement ends next year.
+[00:26:11.429] 201-A: Facial recognition, itself, you know, builds on an existing infrastructure of surveillance cameras.
+[00:26:20.139] 201-A: Surveillance cameras provide this basic technical infrastructure, and I want to highlight Amazon's Ring as a leading vendor for households. Ring are doorbell cameras, and many people buy them to identify porch thieves and get a look at the person at their doorstep. The city and the state have actively enabled the proliferation of this private surveillance infrastructure, including through things like the home
+[00:26:40.009] 201-A: And Business Protection Program. In February, the state gave 1,000 domestic violence survivors an Illinois ring security camera.
+[00:26:47.099] 201-A: The intent of these initiatives are commendable, but Ring has a history of privacy-invasive practices, including long-range audio and the integration of facial recognition. Notably, that's outside of Illinois, because we have the Biometric Information Privacy Act here.
+[00:27:01.459] 201-A: in Illinois. And, you know, despite that, Ring has, you know, made law enforcement access to surveillance feeds a regular part.
+[00:27:08.159] 201-A: of its business practices. These partnership perks include Ring's Law Enforcement Neighborhood Portal, which allows law enforcement to view maps of where Ring cameras are located, and these partnerships give law enforcement the ability to directly request video from Ring users, circumventing the need to get a warrant.
+[00:27:23.949] 201-A: While Ring users are not required to give video to people, most people don't know that, and why should they?
+[00:27:29.259] 201-A: This is not something the company advertises, and without strong laws that protect our privacy, we are left in a situation of uncertainty. The ACLU of Illinois has long called for appropriate limitations on law enforcement's access to personal information.
+[00:27:41.959] 201-A: This includes advocacy on Protecting Household Privacy Act, which has passed here in the state of Illinois. This prevents law enforcement's ability to directly collect and use household electronic data without a court-issued order.
+[00:27:53.639] 201-A: There is currently a bill proposal, SB3278, that improves the law by making two important changes, clarifying the terms of consent and explicitly providing that household electronic devices include residential security and surveillance cameras.
+[00:28:07.628] 201-A: Clarifying how consent works is an important change because the consent search itself works around warrant requirements and rests on a legal fiction that people who say yes to an officer's demand for consent have actually consented.
+[00:28:24.588] 201-A: And people may not know they can refuse consent, and power dynamics create a scenario where people often feel they cannot. We have long argued for a ban on consent searches in high coercion situations like traffic stops and less coercive settings, like access to surveillance camera recordings. SB3278 provides important safeguards, including a written opt-in and transparency on the crime incident being investigated, the time frame being investigated, and
+[00:28:49.429] 201-A: the question.
+[00:28:50.919] 201-A: Agency.
+[00:28:52.389] 201-A: I also want to mention,
+[00:28:56.309] 201-A: Another surveillance camera initiative, from, from the city. So this is the Smart Streets Initiative, which equips a number of city buses, with AI-enabled object recognition technology. These buses are equipped with external-facing surveillance cameras that identify cars double-parked or blocking buses.
+[00:29:14.549] 201-A: or bike lanes to send citations. We are involved in negotiations on a statewide bill that would allow public transport agencies to use electronic rear-view cameras. And we raised these concerns about roving mobile surveillance cameras, potentially equipped with, you know, surveillance add-ons like facial recognition, and then we learned about, on the one hand, you know.
+[00:29:39.539] 201-A: potential integrations of, disparate surveillance feeds into, you know, a centralized storage location, as well as potential future,
+[00:29:49.799] 201-A: Prospects, or possibilities of facial recognition, so just flagging that for, for you all.
+[00:29:55.809] 201-A: And then I want to, you know, mention briefly, you know, AI criminal report drafting. So now, you know, law enforcement agencies have all this data and want to make sense of that. Law enforcement tech vendors are leveraging advancements in AI and large language models to generate police reports.
+[00:30:11.689] 201-A: AI-generated police reporting tools rely on technology to transform audio and video into draft narratives, typically audio and video from body-worn cameras.
+[00:30:22.419] 201-A: And they're uploaded to a system where speech recognition software converts it into a text, then pre-trained language models use this, transcription…
+[00:30:30.689] 201-A: as the foundation to generate a narrative resembling a traditional police report, but we have all heard the shortcomings of large language models and generative AI. They are inaccurate, they hallucinate, and when they are used by law enforcement to draft criminal reports, they can have very harmful effects.
+[00:30:47.079] 201-A: So here are just, you know, some potential
+[00:30:50.699] 201-A: policy, solutions that I wanted to highlight. So, Alderman Martin's ordinance, prohibiting, the use of AI criminal draft reporting.
+[00:31:00.149] 201-A: There is an ACLU initiative about automated license plate readers, HB5151. I'll just highlight that the third reading deadline for the House is this Friday, and witness slips and support are very appreciated.
+[00:31:12.729] 201-A: SB3278, I mentioned about, consent requirement, clarifying consent requirements and being explicit about surveillance cameras. SB3278,
+[00:31:21.919] 201-A: is, is the bill number there. And then, you know, community control over police surveillance is what I was, highlighting, that communities should have a say in how their taxpayer money is used.
+[00:31:35.429] 201-A: The guiding principles for this are, for community control or police surveillance, is that technology should not be funded, acquired, or used without City Council approval. Local communities should have a say in determining if and how surveillance technologies are used. The process for use of surveillance technologies by law enforcement should be transparent and well-informed.
+[00:31:55.409] 201-A: Surveillance technology should not be funded, acquired, or used without addressing impacts on civil rights and liberties.
+[00:32:03.389] 201-A: And to verify compliance surveillance, you should be reported on an annual basis. That concludes my testimony, and I look forward to, your questions.
+[00:32:11.749] 201-A: Thank you very much, Mr. Reagan. Our final presenter is Director Era Patterson, Executive Director of the City of Chicago's Office of Public Safety Administration.
+[00:32:22.709] 201-A: Good morning, Chair Vasquez, Vice Chair Taylor, and the members of the committee.
+[00:32:27.569] 201-A: Thank you for the opportunity to appear before you today to provide an overview of the Office of Public Safety Administration and our role in procurement on behalf of the City's public safety agencies.
+[00:32:39.849] 201-A: OPSA serves as the shared service administrative arm for the Chicago Police Department, the Chicago Fire Department, and the Office of Emergency Management and Communications.
+[00:32:50.299] 201-A: Our mission is to deliver administrative services, including finance, human resources, information technology, and procurement support.
+[00:32:58.249] 201-A: that allow our partner agencies to focus on their core missions, which is keeping Chicagoans safe.
+[00:33:05.329] 201-A: With respect to procurement, OPSA works in close coordination with the Department of Procurement Services and the Department of Law to support the sourcing, evaluation, and administration of contracts that enable public safety operations.
+[00:33:20.129] 201-A: These contracts span a wide range of services, from critical technology infrastructure to operational support that ensures our first responders have what they need to do their jobs effectively.
+[00:33:33.369] 201-A: At the outset, I want to acknowledge the concerns that have been raised regarding vendor-supervised services to the City of Chicago, while also maintaining contracts with federal agencies involved in immigration enforcement, including ICE and DHS.
+[00:33:49.859] 201-A: The role that private companies play in federal immigration enforcement is an important and complex issue, and I appreciate the committee's interest in better understanding our current practices and the constraints under which we operate.
+[00:34:05.369] 201-A: Let me begin by briefly walking through our current contracting landscape.
+[00:34:11.099] 201-A: OPSA currently manages several contracts with vendors that also do business with the federal government, such as Molar, Axon, Microsoft, and AT&T, to name a few.
+[00:34:24.029] 201-A: City contracts are negotiated in coordination with the Department of Law.
+[00:34:29.059] 201-A: These agreements all include boilerplate language that address data security, data sharing, and privacy protections.
+[00:34:39.979] 201-A: These provisions are designed to ensure that any information collected or maintained through the city systems is used strictly for authorized municipal purposes and is protected in accordance with the applicable law and city policy.
+[00:34:59.449] 201-A: It is also important to be clear about what the city does and does not do in this space.
+[00:35:07.079] 201-A: The City of Chicago does not collect
+[00:35:10.429] 201-A: Track, or share immigration status data.
+[00:35:15.969] 201-A: The City does not share any information regarding residents' immigration status with the federal government.
+[00:35:23.349] 201-A: Nor do we track or monitor the broader business relationships that our vendors may have with other customers, including the federal government.
+[00:35:34.109] 201-A: From a market perspective, the reality is that there are a limited number of vendors with the technical capacity, infrastructure, and scale to support a municipality as large and complex as Chicago.
+[00:35:51.129] 201-A: And many of those same firms also do business with the federal government.
+[00:35:56.629] 201-A: I also want to take a moment to situate this discussion from a broader historical and operational context.
+[00:36:04.179] 201-A: Traditionally, municipalities like Chicago have maintained cooperative and mutually beneficial relationships with the federal law enforcement partners on certain issues.
+[00:36:15.619] 201-A: Those relationships have supported information sharing, joint operations, and coordinated responses to threats that impact public safety at the local level.
+[00:36:26.339] 201-A: However, we are operating in a more complex environment today.
+[00:36:33.479] 201-A: In the current climate, we as a city
+[00:36:37.189] 201-A: Find ourselves, at times, at odds with certain federal actions.
+[00:36:43.309] 201-A: Particularly as they relate to immigration enforcement and the harm those actions have caused to migrant and immigrant residents, their families, and communities.
+[00:36:55.839] 201-A: That dynamic requires us to navigate a more complex set of considerations than we have in the past.
+[00:37:06.259] 201-A: On the one hand, we must be mindful of ensuring that our operations remain consistent with the city's values.
+[00:37:14.209] 201-A: On the other hand, we must also ensure that we maintain the operational capacity to deliver core public safety services.
+[00:37:23.569] 201-A: That includes preserving access to the tools, technologies, and partnerships that allow us to respond effectively to emergencies and protect our residents.
+[00:37:35.889] 201-A: This is a delicate, Balance.
+[00:37:40.879] 201-A: It also requires us to acknowledge that while there may be areas of disagreement, the City of Chicago continues to benefit from productive relationships with several federal law enforcement partners.
+[00:37:54.309] 201-A: Those partnerships provide capabilities and resources that are of tremendous value to the city.
+[00:38:01.659] 201-A: For example, Those partnerships support joint task force coordination for investigations of violent crime.
+[00:38:10.299] 201-A: Gun trafficking, Human trafficking?
+[00:38:14.509] 201-A: Emergency response planning, Coordination for acts of terrorism, large-scale incidents.
+[00:38:22.519] 201-A: And information sharing that enhances the city's ability to swiftly apprehend individuals who do harm.
+[00:38:30.819] 201-A: Should we find ourselves in a position where those relationships are significantly diminished or no longer available.
+[00:38:38.849] 201-A: The city is not currently equipped to fully absorb or replicate those functions on its own.
+[00:38:48.089] 201-A: In closing, OPSA remains committed to transparency, accountability, and thoughtful stewardship of the city's public safety resources.
+[00:38:58.679] 201-A: We welcome continued engagement with this committee as we begin to navigate these complex issues.
+[00:39:06.039] 201-A: And I'm happy to take any questions you might have at this time.
+[00:39:09.539] 201-A: Thank you very much, Director Patterson.
+[00:39:11.839] 201-A: Thank you all for the presentations. Before I open it up for questions, I'd like to remind everyone to please state their name, title, and organization before they answer any questions for the record. I'd like to start with a couple questions myself. First, thank you all for kind of
+[00:39:28.779] 201-A: Painting what is a concerning landscape out here.
+[00:39:32.359] 201-A: And so I've got…
+[00:39:34.079] 201-A: I know, I introduced a piece of legislation requesting the Department of Procurement to conduct a study on active contracts with the City of Chicago.
+[00:39:42.039] 201-A: Also contracted…
+[00:39:45.579] 201-A: Vending goods services to federal immigration enforcement, and they asked us to further define what is considered federal immigration enforcement activities, so that way they have more information for the actual, study.
+[00:39:58.049] 201-A: So, for the subject matter experts that are here, do you have any thoughts on how to define
+[00:40:02.949] 201-A: what that means for purposes of city study, knowing that it's not just CBP, it's not just ICE that perform federal immigration work anymore. Is there kind of a fuller picture you might be able to paint, so then we can better direct what we're looking to see for potential conflicts?
+[00:40:19.059] 201-A: That'd be for any of the subject matter experts.
+[00:40:27.709] 201-A: Define.
+[00:40:28.889] 201-A: You can answer Alex's question.
+[00:40:31.609] Hannah-Just Futures Law (she/her): I can answer this if… Yes, pretty clear.
+[00:40:34.499] 201-A: Thank you.
+[00:40:35.579] Hannah-Just Futures Law (she/her): Okay, thanks for the question. So, if I'm understanding… oh, and for the record, this is Hannah Luchel with Just Futures Law. I'm Senior Policy Advisor.
+[00:40:44.999] Hannah-Just Futures Law (she/her): And I think that the question was sort of about how to…
+[00:40:49.609] Hannah-Just Futures Law (she/her): Define use of data for immigration enforcement, knowing that there are both direct and indirect ways that immigration agents get access to data.
+[00:41:01.079] Hannah-Just Futures Law (she/her): And I think what we've seen is that in order to cover all bases, we need to look at not just direct access and indirect access, but also
+[00:41:11.709] Hannah-Just Futures Law (she/her): use.
+[00:41:12.869] Hannah-Just Futures Law (she/her): of the data. And so, for example, in California, there are federal agencies, like the Drug Enforcement Administration, that have license plate reader cameras set up on
+[00:41:28.109] Hannah-Just Futures Law (she/her): State land, state highways, and they share that data with immigration enforcement.
+[00:41:35.109] Hannah-Just Futures Law (she/her): So that immigration enforcement can use license plate reader data going by those cameras to track people for deportation. And so there's been a request to the governor in California
+[00:41:47.179] Hannah-Just Futures Law (she/her): and to permitting agencies to revoke permits for the DEA, as well as immigration agencies, for those cameras on state land.
+[00:41:58.569] Hannah-Just Futures Law (she/her): So that's… that's an example of, you know, how to understand
+[00:42:04.249] Hannah-Just Futures Law (she/her): How the data sharing operates at the federal level.
+[00:42:07.919] Hannah-Just Futures Law (she/her): whose cameras and whose data ICE might get access to, beyond the ones that it purchases or installs itself.
+[00:42:15.929] Hannah-Just Futures Law (she/her): And so look… and then looking at something like permitting and access to surveillance technology.
+[00:42:23.209] Hannah-Just Futures Law (she/her): you know, for Chicago on city land, are there federal cameras, immigration enforcement cameras, or other surveillance technology that is installed and used on city land? What would it look like to,
+[00:42:38.339] Hannah-Just Futures Law (she/her): look at that data sharing and access. But I think that overall, it's important to cut off
+[00:42:45.739] Hannah-Just Futures Law (she/her): Not just direct access to information, but also indirect pathways through data broker companies.
+[00:42:54.269] Hannah-Just Futures Law (she/her): Through other federal agencies, through data sharing networks.
+[00:42:59.119] Hannah-Just Futures Law (she/her): And so the language needs to incorporate that and cover that, as well as,
+[00:43:05.759] Hannah-Just Futures Law (she/her): direct data sharing. So I think it's a tricky question, but it's important to really look into that, because there are so many loopholes that we've seen ICE use, in order to get access to data that contracting language may otherwise prohibit.
+[00:43:25.869] 201-A: Yeah, I appreciate that. I think for, you and all the other folks that are subject matter experts, I think getting examples of what language like that looks like for different municipalities, because I think…
+[00:43:37.609] 201-A: you're talking to legislators struggling to identify how best to hold accountable something that seems to be constantly moving and shifting, right? So if the contract doesn't necessarily name
+[00:43:48.899] 201-A: How are the ways someone can or cannot use the data?
+[00:43:52.239] 201-A: that's a problem, and then I… I don't know if there's, similarly.
+[00:43:56.519] 201-A: language related to, like, enforcement, and what that looks like. So I think for recommendations, if you are seeing in other municipalities, that would be greatly appreciated, as we're looking to see what Chicago should look like.
+[00:44:08.349] 201-A: Mr. Reagan, did you have comment?
+[00:44:11.009] 201-A: Yeah, I… I wanted to try my best to answer this, this question.
+[00:44:18.289] 201-A: I… so, with this, like, CCOPS proposal, Community Control Over Police Surveillance, it tries to, you know, think about, the collection of information.
+[00:44:31.159] 201-A: And then, you know, the use of that information throughout the life cycle, and make that transparent on the front end, so people know how their taxpayer money is being used.
+[00:44:43.509] 201-A: And, so I think that I would like to, like, you know, follow up with language about surveillance technology. You know, I can just point to, you know, some examples that we've mentioned here today, like ALPRs, like facial recognition, and I think that we should also be thinking about the centralized collection of this information in things like fusion centers and real-time crime centers, which are being adopted at
+[00:45:08.109] 201-A: the municipal level. And then we need to be thinking about how we can
+[00:45:12.289] 201-A: track flows of information, right? Because Illinois does, and the city of Chicago has laws
+[00:45:17.819] 201-A: Limiting the sharing of information, you know, certainly as it's related to investigations of access to lawful healthcare, so repro and gender-affirming care, and limitations on sharing information for civil immigration purposes.
+[00:45:33.459] 201-A: We saw, you know, that's the law, but despite that, we saw how ALPR information was shared in violation of law.
+[00:45:42.589] 201-A: And, you know, even the, like, private vendor had, you know, like, documentation about the reasons that, information were being requested. You know, there was ICVP, enforcement removal operations, those were all in the, in the reason field. So, you know, I think, I think then on the front end, like, thinking about
+[00:46:01.239] 201-A: the use of and sharing of that information, because public safety is, of course, important. There has to be coordination between the state, the city, and federal agencies. But, you know, I think that we want to try to think about how we can
+[00:46:15.119] 201-A: Ensure that, information is being shared
+[00:46:19.049] 201-A: for a legitimate purpose in compliance with, city and state law, and I don't know if that's, like, you know, sharing, like, a criminal report associated with an information request. You know, there are other, like, court orders or warrant requirements to share information. You know, that's kind of something that we've talked about in the context of facial recognition, limiting, the use of that technology to, like, serious crimes.
+[00:46:43.739] 201-A: And being able to access that technology with, like, a warrant requirement is, you know, something that we are thinking about.
+[00:46:50.429] 201-A: Yes, thank you. We have point information from Alderwoman Manell Hoppenworth.
+[00:46:54.479] 201-A: Hi, thank you, Chair. Can you… you mentioned real-time crime centers. Can you explain what you mean and put it into context and what we're talking about? You're… you're talk… you're… you… from what I heard, you said that we should not do that.
+[00:47:10.489] 201-A: Not have those.
+[00:47:12.889] 201-A: I'm not saying that we shouldn't have those. I think they might be an important investigative tool. You know, it's centralizing information collection from disparate sources, so, you know, surveillance cameras, body-worn cameras.
+[00:47:29.189] 201-A: ALPRs, there are even proposals around the state to integrate private surveillance cameras into this centralized, you know, collection hub for law enforcement that, you know, gives them some sense of, you know, how these disparate surveillance technologies
+[00:47:45.329] 201-A: Are, are, being used, and how they're collecting information to, like, potentially help them respond to,
+[00:47:51.499] 201-A: two crimes, but, you know, there are no real limitations on the collection of surveillance data. And then, you know, thinking about that on the front end, and then thinking about, again, the sharing of this information and how we allow this type of, activity to,
+[00:48:07.079] 201-A: to take place, and, like, what safeguards we can put on, in that regard. Okay, thank you very much for that. I think trying to get a,
+[00:48:15.289] 201-A: a sense of the opportunity, if I understand it correctly.
+[00:48:18.969] 201-A: There could be a scenario where rather than engaging in larger contracts with larger corporations that kind of share information with everyone, almost an opportunity for a more independent
+[00:48:27.979] 201-A: businesses that we could say, this is Chicago's information, and then setting up ground rules as to how you even share that out, as opposed to using these folks who everybody uses. Would that be a strategy to maybe look at? Because if not, it feels like
+[00:48:43.369] 201-A: Almost like our cell phones. Everyone's got every information that's out there.
+[00:48:46.879] 201-A: Is it maybe starting from that kind of angle to see how to better protect the information, rather than the contracts of folks who might be sharing with everyone?
+[00:48:55.149] 201-A: Can I? Yes, absolutely, Director. If I may, I just want to be clear.
+[00:49:00.889] 201-A: Regardless of the size of the company, it is important that those types of protocols are in place, and in fact.
+[00:49:07.599] 201-A: Today, it is the standard practice of the Department of Law to ensure that all of these contracts have those
+[00:49:16.819] 201-A: data privacy provisions in them. It's a term defined as city confidential data. Vendors cannot use city data for their own purposes. Vendors cannot disclose it to third parties without authorization.
+[00:49:34.969] 201-A: So, across the board, whether you're talking about someone like a Motorola versus someone like a local Joe Schmo, all of them will… are held to the same
+[00:49:47.189] 201-A: data privacy standards, regardless of their size. I think the size comes into play when you think about being able to actually serve the needs of a city like ours, and have the capacity to take that on.
+[00:50:05.129] 201-A: Whereas, I think, smaller vendors might have to… it might be more of a disjointed way to provide services because you're having to go through even more vendors and partners.
+[00:50:20.139] 201-A: And paying all of those vendors and partners independently in order to do what ideally one larger player is able to do in a much more seamless, effective, streamlined way.
+[00:50:35.039] 201-A: Yeah, I think that's the challenge in kind of coming to decisions, is that the scale of what we're talking at is large.
+[00:50:41.869] 201-A: but also so is the scale of the corporations we're then engaging in agreements with. So I guess, to follow up on that.
+[00:50:48.599] 201-A: How does the city, or would the city, investigate
+[00:50:52.239] 201-A: anyone, even though we say they cannot do it, if they did do it, how do we know, and how we hold them accountable to it.
+[00:50:59.289] 201-A: Well, one, there are contractual provisions that they are going to be held accountable to through a court of law. There are also financial implications that are tied to any of those violations. They're pretty… I mean, it does take several months to look at all of the technical contracts and be able to really craft
+[00:51:18.359] 201-A: language to ensure the city's data, which we own, is protected and only used for the city purposes. So, the Department of Law would be in a better position to tell you how they ensure,
+[00:51:31.729] 201-A: all of that well-thought contractual provisions are actually in force, but there are a lot of really strong teeth that are attached to these contracts, and I do think that the City of Chicago, as of today.
+[00:51:45.569] 201-A: is… is not sharing the data. A lot of the data, in terms of data sharing.
+[00:51:52.149] 201-A: We are not sharing city of Chicago data, but we do have the benefit of having access to some federal data. But it's a one-way street. Okay. Yeah, I think maybe through the chair question, is how to identify it?
+[00:52:05.739] 201-A: Right? You may have rigors in place once it's identified, but then how do we even know if it's happening? Because then, if you catch somebody, great, there's stuff in the agreement to make sure you're either paying, or there's legal action to be taken. I wouldn't know how the city would even scour to identify if it's happening, which I think is a challenge. So that'd be something to kind of…
+[00:52:24.829] 201-A: get more information on. I just have two of the chair questions, and I'll open up to members.
+[00:52:30.739] 201-A: And this is for,
+[00:52:32.839] 201-A: Director Patterson, first, if you could share a comprehensive list of all joint groups in public… in the public safety realm that Chicago is involved in with federal agencies where information and data may be shared?
+[00:52:46.209] 201-A: And we'll send that through the chair questions as well. Also, a comprehensive list of all the data in the public safety realm that is sold to any data brokers.
+[00:52:55.939] 201-A: And…
+[00:52:59.619] 201-A: an explanation and understanding of how the city is able to make sure that we're not in violation, or any of the contracts we're with are in violation of the Trust Act, since that's currently the law.
+[00:53:10.939] 201-A: And then… for Officer, robbers.
+[00:53:22.199] 201-A: The question I have for you, and it could be through the chair, is kind of…
+[00:53:25.239] 201-A: If we were looking to go forward with an assessment and analysis and audit of all the city's contracts to identify who's working with the federal government, what kind of data they're with, right?
+[00:53:36.199] 201-A: an understanding if there's the capacity there on your staff to accomplish that goal, and how long that may take, so we have an understanding, for example, when we get into budget season. Once we… if we identify this is clearly a priority, to make sure you have the adequate resources so we get those answers in a…
+[00:53:53.469] 201-A: understandable amount of time, right? Because these things are moving quickly. You know, Ms. Lucao mentioned kind of these, like, data cubicle farms. With the advent of AI, you won't need those. They'll be able to go quickly and exponentially with the same kind of information, so we need to move quickly.
+[00:54:08.639] 201-A: So through the chair, you could provide what your staff looks like, they could do that kind of audit and assessment, and how long it would take with the current staff.
+[00:54:15.789] 201-A: Is that fair?
+[00:54:16.959] 201-A: Thank you, Chairman. We'll be happy… happy to provide that through the Chair. Thanks. Okay, thank you very much. I'd like to open it up. First, we'll start with Alderman Cardona, followed by Alderman Quesada.
+[00:54:27.489] 201-A: Thank you, Chairman. This is for,
+[00:54:31.509] 201-A: PSA, you talked about operational support. Can you go more in detail on that?
+[00:54:38.039] 201-A: Office of Professional Standards? In terms of, operational support between the City of Chicago and the federal law enforcement? Yes. Okay, I'm gonna ask, Dan Casey, our Director of IT, to help provide a little bit more clarification about what
+[00:54:52.499] 201-A: what that looks like.
+[00:54:53.689] 201-A: So…
+[00:54:54.689] 201-A: we're not operations, we're IT, just to be clear. But we assist with the police department when they have,
+[00:55:01.319] 201-A: relationships with, like, a federal partner for human trafficking, or crime gun intelligence, you know, trying to solve gun crimes, getting data to the ATF about ballistics information, things like that.
+[00:55:12.769] 201-A: Okay. You said that there's a certain amount of people in this space, or vendors?
+[00:55:20.029] 201-A: Do you know, can you… do you have the vendor's name that occupy the space that we are… that we are in, or working with, or have the contracts?
+[00:55:33.579] 201-A: So, through the chair, I think we're gonna provide a comprehensive list for you, but I think
+[00:55:39.499] 201-A: Generally, when we think about, I think.
+[00:55:43.389] 201-A: Larger players in this space, motorola certainly comes to mind.
+[00:55:49.619] 201-A: Axon comes to mind, AT&T… they're the typical companies that I think
+[00:55:58.559] 201-A: the typical layperson is familiar with,
+[00:56:02.949] 201-A: Those companies, because of their size, they are able to provide
+[00:56:08.759] 201-A: the capacity that we need, and generally, large companies, they do business with municipalities, because of that. So, we're happy to provide a little bit more comprehensive information to you all through
+[00:56:21.789] 201-A: the chair, and then we're happy to answer any follow-up questions that you might have after you receive that. Okay. We could assume that these companies,
+[00:56:30.419] 201-A: Are being… also have contracts with the federal government, correct?
+[00:56:35.009] 201-A: many of them contract with the federal government. But the way you explained it is that we don't… us, as a municipality.
+[00:56:43.459] 201-A: We don't share that information that we have here for our residents to that, using that same company, or that company cannot share that information to the federal government because of
+[00:56:55.649] 201-A: The agreement and the contracts that are being placed within… within the scope.
+[00:57:01.509] 201-A: Our contracts prohibit our vendors from sharing city data with anyone else, including the federal government. That's correct. Unless they have express permission from the City of Chicago to do so. And, express permission has to go through the City of Chicago, through whom?
+[00:57:21.079] 201-A: The law department, through procurement, through whom?
+[00:57:25.299] 201-A: That's a great question. I'm not sure. I'd imagine it's provided as a part of the contractual provision… Okay. …for each contract.
+[00:57:33.189] 201-A: Okay.
+[00:57:34.599] 201-A: Whoa.
+[00:57:35.559] 201-A: That's my questions. Thank you.
+[00:57:40.229] 201-A: Thank you very much. Next up, we have Alderman Quesada.
+[00:57:43.959] 201-A: Thank you very much, Chairman, and thank you to all of our presenters. Just to piggyback off of some of the questioning my colleague just had, so does the city sell any of our data to data brokers, which in turn do sell to federal agencies?
+[00:57:59.609] 201-A: Not that I'm aware of, but again, through the chair, I think that's one of the requests that, you guys will be sending us through the chair, so we'd be happy to look into that and provide that to you in writing through the chair. Off the top of your head, do you know if we have any contracts with LexisNexis?
+[00:58:15.109] 201-A: Actually, I don't know who the city has a… I don't know.
+[00:58:18.819] 201-A: No, we did not.
+[00:58:20.069] 201-A: Okay, thank you. Sorry, Shiloh Roberts, CPO. Thank you so much. Director Patterson, I was wondering if, we have any…
+[00:58:30.769] 201-A: Information if federal agencies requested access to city video cameras over the past year.
+[00:58:37.749] 201-A: That is something I'm gonna have to look into and get back to you on.
+[00:58:41.939] 201-A: Okay.
+[00:58:46.459] 201-A: And then, based off of kind of what we've been seeing over the past year and the conversations that we're having right now, does the city have any intention on re-evaluating
+[00:58:57.219] 201-A: the procurement process, or any of our contractual agreements with data brokers, with any of these surveillance technology companies? Have we learned anything that we want to apply to the end of our contracts with these companies?
+[00:59:14.529] 201-A: I mean, as you can imagine, these are very complex legal issues and questions that you are raising and that we're beginning the conversation around today.
+[00:59:23.729] 201-A: I'm not prepared to opine or comment about that today, but again, we look forward to having a continued dialogue around these issues, moving forward, but that is not something that I'm going to be able to answer today.
+[00:59:36.819] 201-A: Understood. Yeah, I guess what I'm trying to figure out is, you know, do we have, kind of, an incomplete or a complete
+[00:59:44.959] 201-A: understanding of the incomplete understanding of how data is being stored, accessed, and shared. And then, you know, how can we re-evaluate those things? But I, again, I understand the severity and the depth of
+[00:59:59.439] 201-A: how complex these issues are, and just know that, you know, our committee stands to work alongside you and the entire city apparatus to solve these issues. I'll stop my questions for now, Chairman.
+[01:00:11.809] 201-A: Thank you. Next up, we have Alderperson Rodriguez.
+[01:00:15.489] 201-A: Thank you, Chair. Thanks to you, Chair, and to the sponsor of the resolution on this hearing.
+[01:00:24.109] 201-A: Thank you for your leadership. The fact is, is we need to make sure that this committee stays on top of this issue. We know that Chicagoans were terrorized.
+[01:00:33.549] 201-A: Our undocumented brothers and sisters were terrorized, but as well.
+[01:00:37.779] 201-A: Residents, legal permanent residents, and citizens were also terrorized and shot multiple times.
+[01:00:45.229] 201-A: And we have a duty to our residents to make sure that we're doing everything we can
+[01:00:51.669] 201-A: To keep them safe, And to make sure that their data, their likeness.
+[01:00:58.689] 201-A: It's not something that we're selling to the highest bidder, either.
+[01:01:01.889] 201-A: So, I think I've heard congruence on those values.
+[01:01:07.149] 201-A: From, everyone at the table. I do have a question, but before I get to that, I just want to recognize Senator Durbin's staff, Christian Huertas, who's in the audience. I'm glad we have some federal representation here as well. And thank Imer for being in the house as well, and appreciate all your work, being the team.
+[01:01:25.239] 201-A: Just one question. Mr, forgive me, Steven Reagan from the ACOU. I heard you talk about a specific contract
+[01:01:33.709] 201-A: That the state prohibits
+[01:01:36.589] 201-A: municipalities or the state from engaging on that may… that… that, that, that derived from some legislation recently, or some lawsuit, potentially, that may be expiring? Is… could you… could you… could you say a little bit more about that matter?
+[01:01:53.529] 201-A: Yeah, I can try to clarify that. The vendors, Clearview AI, they are a company who has amassed a database, according to their website, of 70 billion images.
+[01:02:07.699] 201-A: CPD had a contract with Clearview AI. I want to say they signed it in 2020.
+[01:02:13.409] 201-A: The ACLU of Illinois, along with, partner organizations.
+[01:02:19.189] 201-A: sued Clearview AI, alleging, violations of BIPA, the Biometric Information Privacy Act.
+[01:02:27.539] 201-A: And, Clearview AI then entered into a settlement agreement.
+[01:02:31.659] 201-A: A 5-year period that prohibited them from operating in the state of Illinois, including contracting with local and state law enforcement agencies. And that settlement agreement, that 5-year period, comes to an end next year.
+[01:02:46.239] 201-A: Okay.
+[01:02:47.329] 201-A: concerning. Did the settlement agreement, to your knowledge, speak to…
+[01:02:56.018] 201-A: any wrongs they needed to right in order to be able to get back in the business of working with state of Illinois municipalities or the state of Illinois?
+[01:03:05.909] 201-A: Yeah, so,
+[01:03:08.879] 201-A: The settlement agreement highlighted the potential violations of BIPA, which is a very simple law. It requires private entities to get informed consent to collect biometric information, things like your fingerprints and your face scans and your voice prints.
+[01:03:26.369] 201-A: What is, important to mention about BIPA is that it doesn't apply to public agencies, and it also doesn't apply to private entities that contract with public agencies. Could you give us one second, please? Sure.
+[01:03:40.239] 201-A: Yeah, as the livestream is currently off, so it's, limiting access to the public, we're gonna take a pause until they get that, resolved, and then we'll start back up again.
+[01:03:52.049] 201-A: It's the biobright.
+[01:03:54.139] 201-A: Let them get your biometrics. So you're calling recess at the call of the chair?
+[01:04:00.499] 201-A: We'll stand at ease, or reset on your phone. Yeah, we'll stand at ease for, let's do… 5-minute recess.
+[01:04:06.549] 201-A: Thank you.
+[01:04:09.549] 201-A: Robert's Rules of Order.
+[01:04:15.599] 201-A: Absolutely.
+[01:04:17.379] 201-A: That's very helpful.
+[01:04:18.629] 201-A: the question.
+[01:04:20.379] 201-A: Sweetened.
+[01:04:25.399] 201-A: So we certainly don't want ice. I mean, of course not.
+[01:04:29.009] 201-A: But you just never know.
+[01:04:30.749] 201-A: People are gonna react. He mentioned my question.
+[01:04:44.569] 201-A: ETF, and, oh! Good to know. All different seals, the immigrations.
+[01:09:59.339] 201-A: That was wagging. That's okay, Angela.
+[01:26:31.139] 201-A: That was in…
+[01:27:46.209] 201-A: Yeah, why not?
+[01:28:09.599] 201-A: Yeah, it's very straightforward.
+[01:28:12.549] 201-A: two-way roundabout, I mean… Final signage, a little more signs.
+[01:28:19.139] 201-A: Paint for the, mike Lane.
+[01:28:27.979] 201-A: The Vikings kind of go around everywhere, but they also can So there's, like, a walk…
+[01:28:35.999] 201-A: Around the square.
+[01:28:38.559] 201-A: There's no arms.
+[01:28:42.859] 201-A: So, yeah, we're almost on the pass.
+[01:28:50.469] 201-A: Tim Lockwood.
+[01:28:53.269] 201-A: Very good.
+[01:28:54.839] 201-A: Totally, yeah.
+[01:29:07.759] 201-A: that, have a smaller sort of uncomfortable in, like, diversity.
+[01:29:16.789] 201-A: A big water… partner water project.
+[01:29:19.359] 201-A: Downer.
+[01:29:21.609] 201-A: Water main and sewer main.
+[01:29:24.509] 201-A: Well… I love project management.
+[01:29:29.219] 201-A: What I…
+[01:29:36.079] 201-A: Yeah.
+[01:29:39.909] 201-A: Which I never was part of.
+[01:29:41.399] 201-A: Oh.
+[01:29:48.299] 201-A: quality.
+[01:29:57.279] 201-A: There was, like…
+[01:35:01.049] 201-A: Yeah, no, I'm gonna… No, I'm gonna give you… I'm just gonna say forum, that's it.
+[01:35:07.129] 201-A: I'll say Rule 59 to make sure. Your phone is here. They're checking everything. Yeah, we got you, we got you on the record. What you, what you need, Joe? Okay, everybody ready? Are we back? It says page on our phone. Oh, we still need…
+[01:35:23.519] 201-A: We still need director… no.
+[01:35:26.719] 201-A: Director Patterson. Reagan was… Okay.
+[01:35:34.529] 201-A: I'll wait till she gets back, so she's not coming up.
+[01:35:39.429] 201-A: Went over there, 30 seconds later, we up, you know what I'm saying? I don't know what I did.
+[01:35:44.359] 201-A: Just magic. Yeah, yeah, you're magic, bro. That's all you do.
+[01:35:58.899] 201-A: Is it clear?
+[01:36:07.629] 201-A: Cheers.
+[01:36:09.229] 201-A: Program.
+[01:36:14.859] 201-A: We're back.
+[01:36:16.389] 201-A: Thank you, everyone.
+[01:36:18.619] 201-A: We are back from recess after tech supporters resolved the streaming issue. For background for the public, there is a Rule 55, part of the municipal code, where we are required to stream, or else we cannot continue. That has now been resolved. We will go back to order, with Alderperson Rodriguez, asking questions.
+[01:36:38.479] 201-A: Thank you, Mr. Chair.
+[01:36:41.279] 201-A: Back to Steven Reagan, you were in the middle of explaining… could you just go back, maybe? Because I think a couple of members just came in, and just for the sake of the record, one…
+[01:36:51.619] 201-A: Pardon me, sir. For the sake of the record, Alderwoman Gutierrez, who was here with us during Rule 59, is now present, for quorum. So thank you, just wanted to put that on the record.
+[01:37:05.079] 201-A: Steven Reagan, ACLU of Illinois, thank you for the question. So the, the question related to, a settlement agreement
+[01:37:12.319] 201-A: That, prohibited, a company, Clearview AI, a company that has amassed, according to their website, a database of 70 billion, images. The ACLU of Illinois, along with other groups, brought a lawsuit against Clearview AI for violations of Illinois state law, the biometric information.
+[01:37:34.419] 201-A: Privacy Act, that is a simple law that requires private entities to get informed consent to collect, biometric information, things like your fingerprints, your, face scans, and your, voice prints.
+[01:37:48.489] 201-A: In 2022, Clearview AI entered into a settlement agreement that, prohibited the private entity from operating
+[01:37:59.129] 201-A: in, in Illinois for a 5-year period, including contracting with, local and, state law enforcement agencies. That, settlement agreement, that 5-year period, comes to an end in, 2027, once again allowing, the…
+[01:38:13.639] 201-A: Clearview AI to contract with,
+[01:38:15.809] 201-A: local and state, law enforcement agencies. And I mentioned, as well, before, and I will just highlight it again, that, BIPA only covers private entities, it doesn't cover, public agencies, and it also doesn't cover, private entities when, they contract, with, state, state and, or public agencies, so long as they're operating pursuant to that, to that contract.
+[01:38:40.389] 201-A: And for the general public, BIPA is… what does it stand for, and what level of government, is that… is… sits… what does that…
+[01:38:49.659] 201-A: Law sit, and what level of government?
+[01:38:51.769] 201-A: So the BIPA is the Biometric Information Privacy Act. That's a statewide law. It covers private entities and requires, private entities get informed consent before they can collect biometric information, and biometric information is things like your fingerprints, your face scans, and your voice prints.
+[01:39:09.549] 201-A: And the intent of the BIPA law is to what?
+[01:39:13.199] 201-A: The intent of BIPAA is to protect the privacy of this sensitive personal information. As I've mentioned, you know, you only have one face, and you can't change your face, you can get a new bank account, you can get a new social security number, but you can't get a new face. And the intent of BIPA is to, you know, empower individuals and give them control over
+[01:39:36.869] 201-A: If…
+[01:39:37.649] 201-A: Over if the biometric information is going to be shared and who with, and then puts important accountability and enforcement provisions in place, allowing individuals to bring lawsuits to enforce their privacy rights.
+[01:39:57.089] 201-A: And is it, to your knowledge, does Clearview AI
+[01:40:01.529] 201-A: did Clearview AI have any contracts with the City of Chicago? My understanding is that Clearview AI had a contract with the Chicago Police Department. And when… and essentially, after the passage of this law, that contract
+[01:40:18.149] 201-A: Is it correct to say it was terminated by mutual consent, or another fashion?
+[01:40:23.599] 201-A: I'm… I'm not sure about that. Okay. Anybody… does anybody in the panel have knowledge of that contract? Could you speak to that contract?
+[01:40:32.379] 201-A: Speak to it.
+[01:40:35.359] 201-A: Good afternoon, Courtney DeLachudis, General Counsel in DPS. That contract was terminated, in early 2021, and we could get you the exact date if you need it. Excellent. And in the future, if a company like Clearview AI, that went through this type of procedure.
+[01:40:53.949] 201-A: or settlements, would they be, after this 5-year settlement, be re-eligible to work with the city in any capacity? Would they be dinged any points, considering our procurement processes?
+[01:41:08.779] 201-A: Would there be any other kind of…
+[01:41:13.509] 201-A: Hoops that they would have to go through, given, the status of, of this, of this,
+[01:41:19.939] 201-A: Of this settlement.
+[01:41:23.209] 201-A: And, generally speaking, after a settlement's period is over, if there's not,
+[01:41:28.669] 201-A: something continued in place that's mentioned in it. There's not a continuing legal obligation to hold them, under any additional restrictions. That vendor has not been debarred or declared ineligible to do business with the city, so they would be eligible for contracts, like, to either bid or put in a response to something like an RFP or RFQ.
+[01:41:47.879] 201-A: In all of our RFPs, it, and, really any of our contracts, our EDS does require them to… every vendor to disclose any legal actions that have happened in the last 5 years.
+[01:42:01.129] 201-A: So we always do have that information and look into possible, risk to the city, and that's part of our standard procurement process for every vendor.
+[01:42:09.819] 201-A: And Mr. Reagan, I'm assuming…
+[01:42:12.179] 201-A: Well, let me, let me state this, or let me ask this question. In these settlements, was there any long-term,
+[01:42:20.239] 201-A: agreement as far as the ACU is concerned, to…
+[01:42:24.839] 201-A: essentially hold this company accountable, to meeting the BIPA law.
+[01:42:31.619] 201-A: There, there was not.
+[01:42:34.689] 201-A: Do you know, Illinois state law is, is what holds these companies, accountable. Okay.
+[01:42:42.879] 201-A: And by the way, I'm teasing this company out, not just to single them out, just to understand the process, to understand what our jurisdiction is, what kind of accountability we have over these entities, if they were to come back to us, in what way they might come back to us, and how we might…
+[01:43:00.789] 201-A: look at their past history, engaging whether they're good for our city or not. That's really the only question I had around this. Mostly, I'm happy that the sponsor, the chair, have brought this forward, that all of you are here today, because we… I want it to be on record that the City of Chicago, this council.
+[01:43:19.219] 201-A: Is very, much focused.
+[01:43:22.369] 201-A: on, this issue. We want to hold entities accountable to make sure that our welcoming city ordinance and every law that we have,
+[01:43:34.189] 201-A: is not just something that's practiced on paper, but in public. That we're holding folks accountable, that we're making sure that our residents are safe. At the end of the day, that's what we're here for. Thank you, Mr. Chair.
+[01:43:46.429] 201-A: Thank you very much. I've got a follow-up, based on the line of questioning, so I really do appreciate it, Alderperson Elias.
+[01:43:54.079] 201-A: So, independent of the settlement, based on Clearview is the name of the company, correct?
+[01:43:59.359] 201-A: So, based on the settlement, I appreciate the answer from procurement that there was nothing that would establish
+[01:44:05.739] 201-A: A company as ineligible or barred from doing business with the city.
+[01:44:09.829] 201-A: Is the city able to create policy or rules to then say.
+[01:44:14.749] 201-A: hey, because of what this company was doing, we are now saying they're going to be ineligible or barred for… barred from operating with the city. Is…
+[01:44:23.389] 201-A: That rule is something that can be established by procurement.
+[01:44:28.199] 201-A: That's a rule that has to be established by the municipal code, so the Council.
+[01:44:33.779] 201-A: So, we could write legislation to say, hey, based on the criteria of what Clearview did, any business that has ever done anything like that, you're gonna be held ineligible by the City of Chicago. We could write that through municipal code to establish that. Is that my… is that a correct understanding?
+[01:44:50.579] 201-A: Could answer that.
+[01:44:52.909] 201-A: Hi, Courtney Del Judas, General Counsel for DPS. So,
+[01:44:58.899] 201-A: there isn't something that would prohibit you from putting something forward like that. We do have an established debarment process that's in place where there are different considerations. I don't want to speak to necessarily the facts of this without it all in front of us to say there's no way this could be. I just know this is not currently a debarred, vendor.
+[01:45:17.839] 201-A: So, that process, we can definitely provide all those rules and provide information about what's currently in it, but if there's a desire to have, something additional that's in law, that could certainly be added as well. Got it, totally understood, thank you for that. If you could send through the chair what the existing guidelines are for debarment.
+[01:45:36.849] 201-A: Holding somebody ineligible, so we can look at what those are, because to your point.
+[01:45:40.889] 201-A: we could then codify things if we're looking at, especially trying to protect data, to make sure we got those in place, so I really appreciate that. I think similarly, and this will be open to anyone here.
+[01:45:52.079] 201-A: Kind of what those violations specifically were.
+[01:45:55.709] 201-A: you know, that were in violation of the state law, and how it was identified in the first place. Like, what body established that, hey, there was a violation here? Because we want to look to see what those practices are, what models to see what municipalities need to establish, to similarly catch some of that activity, because my fear is…
+[01:46:16.029] 201-A: and I'm… I'm born and raised in this country. We definitely have history of finding out what the federal government information has decades after they've attained it.
+[01:46:25.359] 201-A: And then using that information, and so making sure we can adapt to situations to then hold accountable is something that I want to make sure we're on top of or are establishing. So, again, thank you very much for the line of questioning. Next, I will go to Alderperson Fuentes.
+[01:46:39.359] Chris Taliaferro: Mr. Chairman?
+[01:46:46.969] Chris Taliaferro: Mr. Chairman, this is Alderman Telefero, pursuant to Rule 59, I'd like to be added as person for purposes of today's quorum.
+[01:46:55.779] 201-A: Got it. Well, let me make sure. All the person tell you, well, we…
+[01:46:59.909] 201-A: We did. You've been established for Rule 59 from the beginning of the hearing.
+[01:47:03.559] Chris Taliaferro: Thank you, Zach.
+[01:47:04.459] 201-A: Yep, no problem. Alderperson Fuentes?
+[01:47:06.419] 201-A: Thank you, Chairman, and thank you, Alderman Martin, for bringing this ordinance to committee. Can…
+[01:47:14.199] 201-A: Can we talk about, briefly, if there are any vendors that we currently have contracts with that have violated the data privacy component of their contracts?
+[01:47:25.429] 201-A: And if there are vendors that have violated those data provisions, how did we find that? What triggered us to be aware? And then what were the repercussions?
+[01:47:39.459] 201-A: At this time, I'm not aware of any. That's certainly, I think, a part of another ask that has been made. We've already committed to looking into that, and we're happy to report on what we find. Okay. We… can we name the vendors that the City of Chicago has contracts with that also have contracts with ICE or Border Patrol?
+[01:48:00.229] 201-A: we're happy to do that through the chair. Okay.
+[01:48:03.809] 201-A: Vendors like Motorola Solutions have had a long-standing contract with federal agencies like ICE and Border Patrol. When we know that we also, as the city, have vendors, do we check in with these vendors just to make sure that they understand every single provision of their contract and that they're not to share
+[01:48:21.579] 201-A: Any data with federal agencies, for example, like, license plate reader data.
+[01:48:27.679] 201-A: So, as I noted earlier, there is a very rigorous contract negotiation process that the Department of Law engages directly with the vendor to ensure that they are aware of the very strict data and privacy concerns, and that they are held to
+[01:48:42.009] 201-A: those strict provisions of those contracts before those contracts get signed and finalized. Yeah. No, look, I'm well aware of the contract process, but, you know, contracts like what Motorola was signed a couple years ago, well before Operation Midway Blitz, since we've seen terror rain on our city by federal agencies.
+[01:49:00.879] 201-A: Have we revisited conversations, not contract revisions, but just conversations with our vendors to say, hey, we are a welcoming city, we have sanctuary policy, we want to ensure, despite the political climate we are seeing at the federal level, and what we are seeing here in Chicago, that people are staying true to their contracts, that we're doing proactive work.
+[01:49:20.559] 201-A: In that way.
+[01:49:21.929] 201-A: Again, this is a new conversation for us. Certainly, that is something that we are considering along with other suggestions and questions that are raised here, but to my knowledge, again, they are being held to the strict provisions of the contracts that they have signed that do protect
+[01:49:39.169] 201-A: Chicago data, and does prevent them from sharing it.
+[01:49:42.279] 201-A: And who's responsible, for monitoring the contracts that our vendors sign to ensure that they are complying?
+[01:49:48.839] 201-A: So I'd say it's a dual responsibility. Generally, the user agencies are monitoring the contracts in terms of the deliverables that are included in those contracts, and
+[01:50:00.219] 201-A: If there are concerns about the vendor's ability to meet those, then we'll work with… in partnership with the Chief Procurement Officer, we'll work with the Department of Law, and there are legal remedies in place that we have access to in order to ensure that we're holding those vendors accountable.
+[01:50:14.799] 201-A: Thank you. Following the Secretary of State's report on flock and Vigilant Solutions, what steps are we taking to make sure that all of our cameras are following the law? Again, not just their contracts, but how are we going back to make sure that our cameras are not violating any data sharing?
+[01:50:32.329] 201-A: Again, I think this was a part of a request that we've received in terms of providing information to you about those mechanisms, so we're happy to also provide that through the chair.
+[01:50:41.489] 201-A: But you're not aware of any sitting here today? I'm not able to testify to that sitting here today, no. Okay.
+[01:50:54.079] 201-A: That is all for me. Thanks.
+[01:50:56.789] 201-A: Thank you very much. Next we have Alderperson Martin.
+[01:51:03.109] 201-A: Thank you, Chairman. Good afternoon, thanks for your patience as we were dealing with
+[01:51:06.859] 201-A: our tech issues. I was wondering, through the chair, if either OPSA or procurement could share an example of the city confidential data provision. I think it'd be interesting for us to see what that looks like, and as that's shared, if,
+[01:51:24.739] 201-A: There's any additional gloss you're…
+[01:51:27.279] 201-A: able to provide in terms of, is this pretty much stock language that the city insists be in every contract, or is it something where there are permutations? Be good for us to know, but obviously, we don't need to see every single contract that has that provision in there.
+[01:51:41.689] 201-A: I think there was a reference earlier to the fact that a vendor, at least in some of these contracts, can request permission to share certain information with the federal government.
+[01:51:54.339] 201-A: To the city's knowledge, has any vendor, gone, taken that step and asked for.
+[01:52:03.079] 201-A: permission, and part of why I'm asking is not if someone says, hey, we want to share this because it's part of our business practice, it's good for us from our perspective. Thinking in particular about companies like Anthropic that are in high-stakes
+[01:52:20.629] 201-A: litigation, differences of opinion with the Trump administration, where maybe the administration, a current or future one, is pushing them to share information, and rather than just giving that, maybe that's what prompts a request. So that's kind of the context behind the question of if, to your knowledge, such a request has been made by a contractor.
+[01:52:44.239] 201-A: I'm not aware of that. I'm happy to look into that and report back to the chair if there is any examples of that that we can provide. Got it. Thank you.
+[01:52:55.939] 201-A: To the city's knowledge, do Chicago's license plate readers or surveillance cameras share data with federal law enforcement, and if so, under what circumstances?
+[01:53:08.249] 201-A: So, Dan Casey, Managing Deputy for Public Safety IT. There's been a long-standing process for the FBI and other federal agencies to request, permission to have an access to have an account on the city system, and those processes go through an approval process with CPD.
+[01:53:25.989] 201-A: Got it. Can you share a little bit more about the circumstances under which they are able to access that information once it's been approved?
+[01:53:34.199] 201-A: For example, do they have to… are they able to use it only under certain prescribed circumstances, or is it once they get access, they can access most anything?
+[01:53:44.759] 201-A: So, depending on what they've been provided access to, like, U.S. Marshals get access to cameras around, facilities, so that'd be an example. So a pool of cameras is created, they're given access to those cameras based on where they are, they're trying to protect federal facilities. So it's dependent on what the agency's doing, if it's, you know, working with a task force on gun crimes, or if it's working on drug-related
+[01:54:09.019] 201-A: high-intensity drug trafficking areas, things like that. Those tools are set up, and then they're given, access that way. Understood. And is there any sort of time limitation for that access?
+[01:54:19.619] 201-A: I'd have to check on that. I think some do, and I'll get to that through the chair. Okay, thank you.
+[01:54:25.829] 201-A: there are lots of, we're seeing an increasing usage, obviously, in AI, and I had introduced an ordinance and been in touch with CPD specifically as it pertains to the use of AI in generating reports.
+[01:54:41.429] 201-A: But I'm looking to zoom out beyond our public safety institutions and just get a sense, as to whether, in terms of citywide, if there are policies in place that regulate AI usage in the workplace, because I was talking with a colleague, and
+[01:54:57.929] 201-A: Full disclosure, I don't think City Council has one in place. That's something we should explore, but I'm curious if there's anything, to your knowledge, that's already underway across various departments that we should be aware of, that we could participate in, as we both provide oversight as well as adopt what policies we think best are for our offices.
+[01:55:17.669] 201-A: This is Dan Casey again with, Public Safety IT. Through Department of Technology and Innovation, Commissioner Nick Lucius, he had the technology, Strategy Group, and so we provided a roadmap for AI, with that, group and with Nick's leadership.
+[01:55:32.849] 201-A: And so that's available, that's publicly available on the city's website. It kind of gives next steps and, trying to get around this and, you know, where do we go from here? And we appreciate your leadership in this. Great. Thank you for flagging that. And then I have two final questions, for, our non-government panelists. For Mr. Reagan, you had mentioned the CCOPS initiative.
+[01:55:57.519] 201-A: underway, with ACLU and the public input process that's at the heart of that. I'm curious if you could speak a little bit more to the limitations that you see in, current community-slash-local oversight mechanisms, and where you see there being, kind of.
+[01:56:16.449] 201-A: Limitations, where we as government policymakers would be well-positioned to step in and fill that gap.
+[01:56:27.659] 201-A: Steven Reagan, ACLU of Illinois. Thank you for that question, Alderman.
+[01:56:31.899] 201-A: Yeah, I think that, you know, what I've tried to highlight in my testimony is kind of this lack of transparency and the opaque nature of the adoption and use of these
+[01:56:43.609] 201-A: technologies, I think, you know, the City Council has a real opportunity to, you know, mandate, or require, you know, public hearings, notice and comment periods in situations where, you know, the impacted, communities and individuals can contribute to the conversation about, technology, surve- surveillance, surveillance technology, and, and it's,
+[01:57:07.029] 201-A: adoption, you know, given the, again, given the impact, given the use of taxpayer money, and given, you know, the harms that we see resulting from the uses of these, technologies,
+[01:57:18.669] 201-A: Of course, you know, people are imperfect.
+[01:57:20.889] 201-A: Technologies are imperfect, and we should know about those imperfections, and, you know, have a voice in crafting, safeguards and processes for the adoption of, you know, again, whether these technologies are going to be adopted, and, you know, how they're going to be, used, and having, you know, a sense of oversight and accountability.
+[01:57:43.489] 201-A: Related to situations of, of misuse, you know, and creating that audit trail, that track of transparency that is demonstrable about how the tech is being used.
+[01:57:54.309] 201-A: Thank you. One follow-up to that, are there other jurisdictions, as you're keeping track of what different cities and states are doing by way of policy and lawmaking, that you think we would do well to follow? Because they're having similar conversations, or maybe they're a little bit further along in how they are making policy?
+[01:58:14.069] 201-A: Yeah, I want to say, like, you know, in particular about, facial recognition technology, about 20 cities have, adopted at least some limits, you know, some have gone further than that. 15 states have safeguards on the use of, facial recognition technology, and I want to say around 20 cities have adopted, CCOPs or some variation of it, and I'm happy to, you know, get you a list of those. Yeah, if you could provide those through the chair, that's great.
+[01:58:38.249] 201-A: And then my last question is for Ms. Luchel, if she is still on.
+[01:58:44.359] Hannah-Just Futures Law (she/her): Yep, I'm still here, thanks.
+[01:58:46.309] 201-A: Great. In your presentation, you mentioned both direct and indirect pathways through which local data may reach federal agencies. With those various pathways, I'm curious which ones you feel are either at least visible to local actors, like city council members, and or ones that you think we would do well to
+[01:59:08.409] 201-A: Focus on more quickly than others, because
+[01:59:11.569] 201-A: direct access to information, as you indicated, I think that's less of an issue, but when it comes to the latter two, government data sharing and data brokers, I'm curious which you… if you had to say, prioritize one or the other in the short term, what you would suggest and why?
+[01:59:28.599] Hannah-Just Futures Law (she/her): Thank you for that question. This is Hannah Luchel with Just Futures Law.
+[01:59:32.489] Hannah-Just Futures Law (she/her): I actually want to zoom out and share an example that I hope will be, illustrating an answer to this question. I've been hearing folks asking.
+[01:59:42.969] Hannah-Just Futures Law (she/her): what contracts the city has with companies that also contract with the federal government. And unfortunately, it isn't always as clear-cut as that. So I'm going to give you an example of what I mean that's actually,
+[01:59:58.339] Hannah-Just Futures Law (she/her): From Cook County.
+[01:59:59.979] Hannah-Just Futures Law (she/her): And in Cook County, I'm going to show you a graphic that we made to describe this concern.
+[02:00:06.839] Hannah-Just Futures Law (she/her): Cook County receives, victim notification services.
+[02:00:12.329] Hannah-Just Futures Law (she/her): from a company called APRIS,
+[02:00:15.229] Hannah-Just Futures Law (she/her): And APRIS is providing this service to Cook County. They have real-time information from the jail in Cook County, and they are able to provide notifications to survivors who want information about people leaving the jail and going into the jail.
+[02:00:34.229] Hannah-Just Futures Law (she/her): And what we learned from community groups
+[02:00:37.759] Hannah-Just Futures Law (she/her): and organizers on the ground, is that people were being released from jail, and ICE was showing up.
+[02:00:44.129] Hannah-Just Futures Law (she/her): And this was in spite of Cook County's local ordinance that prohibited data sharing between immigration enforcement and the county.
+[02:00:53.129] Hannah-Just Futures Law (she/her): So the question was, how is ICE getting access to this jail data? Now, APRIS itself does not have a contract with ICE. They are not sharing that data directly with ICE.
+[02:01:04.149] Hannah-Just Futures Law (she/her): APRIS has a contract. APRIS is a part of a, something called Risk Solutions. This is a platform that LexisNexis, the data broker that we spoke about earlier, provides. And I want to show you all that in the contract that Cook County has.
+[02:01:23.149] Hannah-Just Futures Law (she/her): or had with, APRIS, you can see underlined in yellow, the county authorizes third-party access to the data only for risk solutions. So, the county, Cook County, had
+[02:01:36.749] Hannah-Just Futures Law (she/her): In this long contract with this APRIS company, all of their boilerplate standard privacy protective language about only using the data for the purposes intended for this contract.
+[02:01:49.739] Hannah-Just Futures Law (she/her): And yet, there was this one sentence that allows LexisNexis to use the data for its Risk Solutions products.
+[02:01:58.259] Hannah-Just Futures Law (she/her): Now, the loophole here is that ICE purchases access to risk solutions, okay? So this is, like, you know, very complex, but essentially what's happening is the Cook County shares with APRIS. APRIS is a part of this LexisNexis, body of companies.
+[02:02:16.809] Hannah-Just Futures Law (she/her): And LexisNexis sells the data to ICE through Risk Solutions. So I want to share this example because I think what's telling about this story is that in order to find out where the data is getting.
+[02:02:30.539] Hannah-Just Futures Law (she/her): and who is impacted by data sharing at the local level. It's important to be in relationship with local organizations, local immigrant community groups, grassroots groups, who are actually hearing about people's interactions with ICE,
+[02:02:46.129] Hannah-Just Futures Law (she/her): And had… had the opportunity to see, oh, ICE is showing up at the jail. How are they getting that data? And that's what led to learning that this was happening, in Cook County. And I also want to mention it because in Cook County, in this example, they did have privacy protective language in all of their contracts, and yet still this loophole existed in the contract.
+[02:03:09.979] Hannah-Just Futures Law (she/her): So, I just want to mention that because I think that an entry point into doing this work is to be in relationship with community organizers and immigrant communities who understand what's happening on the ground and see where ICE is showing up.
+[02:03:25.369] Hannah-Just Futures Law (she/her): And also to be in conversation with the groups who are present here today, and, you know, privacy and data experts, who also have some insight into the surveillance technologies that ICE prioritizes most, to your question. But I do think that the corporate piece
+[02:03:42.409] Hannah-Just Futures Law (she/her): both surveillance technology vendors, like Vigilant Solutions,
+[02:03:49.249] Hannah-Just Futures Law (she/her): Vigilant Solutions. I don't know for Chicago specifically, but I do know that the data broker, Thomson Reuters.
+[02:03:57.509] Hannah-Just Futures Law (she/her): has provided in the past ICE access to vigilant Solutions data, so that could be something to look into.
+[02:04:05.489] Hannah-Just Futures Law (she/her): But yes, I would say it is a priority to look at the surveillance technology, contract vendors, and also to look at any other
+[02:04:15.619] Hannah-Just Futures Law (she/her): company that gets access to local data for any reason, because as you saw in Cook County, the reason was victim notification services, which really has nothing to do with immigration enforcement.
+[02:04:28.119] Hannah-Just Futures Law (she/her): So I hope that's a helpful example to kind of get at your question. I do think there are many people in the community and also in the state and around the country who
+[02:04:39.269] Hannah-Just Futures Law (she/her): have been studying the ways that ICE is getting access to information and the information sources that they cherish most for their surveillance, so I'm happy to connect with
+[02:04:50.539] Hannah-Just Futures Law (she/her): anyone here after the call as well to talk more through what we know and what we're seeing as ISIS surveillance apparatus is, constantly expanding as they are
+[02:05:02.329] Hannah-Just Futures Law (she/her): You know, funded with $70 billion and have tons and tons of money to buy
+[02:05:08.389] Hannah-Just Futures Law (she/her): the surveillance technology gadgets that they want. So hopefully that's helpful. I'm happy to answer follow-up questions here, and again, also after this hearing.
+[02:05:18.069] 201-A: Thank you. That was very helpful. I don't have any more questions at the moment. Thank you, Chair.
+[02:05:23.489] 201-A: Thank you very much. I've got a couple follow-ups based on the last line of questioning, and this is for Office of Public Safety Administration, but really opening it up.
+[02:05:33.059] 201-A: So, if you mention kind of, like, different levels of government when we're interacting, they kind of set up an account to then be able to access information. I guess the question I have is.
+[02:05:43.489] 201-A: let's say it's the marshals, or a federal department.
+[02:05:47.029] 201-A: what inhibits or impedes them from then taking information, sharing it across departments, or sharing it to other levels of government, right? If we're saying, hey, we're interacting
+[02:05:56.379] 201-A: Wick County in particular, is there a language there in intergovernmental agreements that would limit them from then sharing to another level of government? What does that look like, and what are penalties in place if so?
+[02:06:08.329] 201-A: Yeah, for Director, yeah, sorry. Managing Deputy Director Dan Casey for Public Safety IT, Office of Public Safety Administration.
+[02:06:15.779] 201-A: We will look into those. Some of these agreements are over 10 years old, so we'll pull them up, we'll look into that, and we'll get that to you through the chair. But the idea is for one, you know, individual agent to have that access for themselves for the task that they're working on, and it's specifically stated in the document that this is for work purposes, but if they interpret those work purposes outside of that, we'll have to see if there's additional language and get that back to you. Right, because in the…
+[02:06:39.729] 201-A: the term work could be a little ambiguous, right? So, yeah, any of the… whatever the current boilerplate language looks like would be important, and then understanding, like, with everything here, how do we investigate and identify if those things are happening in a way that allows us to inform what future legislation, guidelines, policy, contracts should look like?
+[02:06:58.859] 201-A: And this one is… For…
+[02:07:02.809] 201-A: Office of Public Safety Administration as well. I recall this from a couple incidents that occurred
+[02:07:09.249] 201-A: since we've had ICE here, CPD doesn't have
+[02:07:13.689] 201-A: Whether somebody's documented or undocumented, but it does have everyone's country of origin.
+[02:07:18.639] 201-A: And I'm curious as to why that's the case, because it's not information that I think would be deemed pertinent when it came to a public safety. So I just didn't know if there was any understanding of that part, or where that would get amended or fixed.
+[02:07:30.039] 201-A: Era Patterson, OPSA,
+[02:07:33.859] 201-A: I can't answer that. I do think that, the Chicago Police Department would be in the best position to answer the why.
+[02:07:41.219] 201-A: question, but sitting here today, that's not a question that I'm going to be able to answer. Sure, and I guess with any of that being the administration of public safety, and I'm not trying to be
+[02:07:51.369] 201-A: jovial in saying that. Is that… would any of that be under your purview to have the conversation at all?
+[02:07:58.609] 201-A: Era Patterson, OPSA, I can certainly have the conversation and include that as a part of a through-the-chair response with a contact person for CPD in case you have follow-up questions. Sure, that'd be great. Like I said, I… it just struck me that that was in there, and I saw it in particular in a police report, that
+[02:08:15.779] 201-A: if you're the federal government, you may not be looking for document or undocumented, but you sure would search countries of origin and then try to take that information and filter and take further action in a way that has some level of concern, right? So, I appreciate that. That's all the questions I have. I don't know if any other members have questions.
+[02:08:36.029] 201-A: Yes. Alderwin, Manel Hoppenworth.
+[02:08:40.619] 201-A: Thank you, Chair. I just wanted to say thank you to Alderman Martin for bringing this.
+[02:08:46.419] 201-A: forward, and for everyone for being here. I would love to stay in touch with you all, including everyone here on the panel, and it is an issue that we have been talking about in the 48th Ward and Edgewater and Uptown, especially the conversation around the flock cameras. Just trying to understand, if we have them in the city of Chicago, how does that work?
+[02:09:10.799] 201-A: There are stories of, a woman from Texas who traveled across state borders and, supposedly Flock helped identify this person and,
+[02:09:22.389] 201-A: And then she… and she was punished for having an abortion. So, it is not… it is impacting everybody and, people's right to privacy. We just want to understand a little bit more on, what…
+[02:09:36.899] 201-A: what is it that we're doing in Chicago? So I appreciate this conversation. I'm a little bit,
+[02:09:42.929] 201-A: maybe a little bit disappointed that this is the beginning of these conversations, you know, because ICE has been around for a very long time, and the fact that we're bringing up stories about how they are, of course, going to jails, you know, of course going to courthouses, you know, what have we been doing?
+[02:10:00.909] 201-A: since the beginning of ICE,
+[02:10:03.069] 201-A: That we have a roadmap is very hopeful, and so I look forward to digging into that, not just for this issue, but really zooming in on, as Alderman Martin mentioned, you know, what is it that we can do in our own offices to
+[02:10:19.469] 201-A: service our community in a way that is just and ethical and does not destroy the environment because we are using AI technologies that, as ACLU mentioned, tends to hallucinate, you know, and make up data. So,
+[02:10:38.969] 201-A: I look forward to more conversations. I just wanted to thank you all for coming, and thank you to also the organizations who have been working in this space for a very long time, and as Hannah mentioned, we have to listen to each other, so 48th Ward is here to listen as well, and I welcome more conversations ahead. Thank you.
+[02:11:01.849] 201-A: Thank you very much. Any other, other members, questions?
+[02:11:06.709] 201-A: Okay. As all presentations and questions have now concluded, I want to thank our subject matter experts for joining us today, as well as the departments. I think it's greatly appreciated. I want to thank Alderman Martin for bringing this to the attention, and I hope that the whole Council
+[02:11:22.328] 201-A: is really focused on this, because I think there's a lot of exposure.
+[02:11:26.269] 201-A: that we need to be concerned about, so thank you very much.
+[02:11:29.289] 201-A: Copies of any supplemental materials will be sent to you, members, and all materials will be hosted on the committee website, welcomeToChicago.org, within a week. Any through the chair follow-ups will be sent to Alders pending response from IGA and the presenters. With no further business before the committee, may I have a motion to adjourn?
+[02:11:49.049] 201-A: Alderman Quesada so moves, hearing no objections so ordered. This meeting of the Committee on Immigrant and Refugee Rights is now adjourned.
+[02:11:56.649] 201-A: What'd I miss… Oh, there you go.
+[02:12:01.639] 201-A: There's plenty of movement. My father's got a work to do.
+[02:12:04.539] 201-A: I'm not.
