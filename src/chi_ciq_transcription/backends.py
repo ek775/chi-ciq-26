@@ -1,3 +1,4 @@
+import re
 from collections.abc import Iterable
 from dataclasses import dataclass
 from typing import Protocol
@@ -7,6 +8,7 @@ from numpy.typing import NDArray
 
 Audio = NDArray[np.float32]
 SAMPLE_RATE = 16000
+WHISPER_WINDOW_SECONDS = 30
 
 
 @dataclass(frozen=True)
@@ -14,6 +16,15 @@ class SpeakerTurn:
     start: float
     end: float
     speaker: str
+
+
+@dataclass(frozen=True)
+class TranscribedWord:
+    """Whisper word text and offsets relative to the supplied audio window."""
+
+    start: float
+    end: float
+    text: str
 
 
 class Diarizer(Protocol):
@@ -25,7 +36,7 @@ class Diarizer(Protocol):
 class Transcriber(Protocol):
     model_name: str
 
-    def transcribe(self, audio: Audio) -> str: ...
+    def transcribe_words(self, audio: Audio) -> list[TranscribedWord]: ...
 
 
 class TextEmbedder(Protocol):
@@ -92,6 +103,25 @@ class WhisperTranscriber:
             raise TypeError("Whisper returned a non-string transcript")
         return text.strip()
 
+    def transcribe_words(self, audio: Audio) -> list[TranscribedWord]:
+        result = self.model.transcribe(
+            audio,
+            language=self.language,
+            fp16=self.model.device.type == "cuda",
+            condition_on_previous_text=False,
+            word_timestamps=True,
+        )
+        if not isinstance(result["text"], str):
+            raise TypeError("Whisper returned a non-string transcript")
+        words = [
+            TranscribedWord(word["start"], word["end"], word["word"])
+            for segment in result["segments"]
+            for word in segment["words"]
+        ]
+        if result["text"].strip() and not words:
+            raise ValueError("Whisper returned text without word timestamps")
+        return words
+
 
 class SentenceTextEmbedder:
     def __init__(
@@ -105,13 +135,45 @@ class SentenceTextEmbedder:
         self.model = SentenceTransformer(model_name, device=device)
 
     def embed(self, text: str) -> list[float]:
-        # Fail rather than silently truncate the text represented by this vector.
         tokens = self.model.tokenizer(text, truncation=False)["input_ids"]
-        if len(tokens) > self.model.max_seq_length:
-            raise ValueError(
-                "Text exceeds embedding model context; reduce max_chunk_seconds"
+        if len(tokens) <= self.model.max_seq_length:
+            return self.model.encode(text, normalize_embeddings=True).tolist()
+        chunks: list[str] = []
+        weights: list[int] = []
+        current = ""
+        special_tokens = self.model.tokenizer.num_special_tokens_to_add(pair=False)
+        for match in re.finditer(r"\S+\s*", text):
+            piece = match.group()
+            candidate = current + piece
+            size = len(self.model.tokenizer(candidate, truncation=False)["input_ids"])
+            if size > self.model.max_seq_length:
+                if not current:
+                    raise ValueError("A word exceeds the embedding model context")
+                chunks.append(current)
+                weights.append(
+                    len(self.model.tokenizer(current, truncation=False)["input_ids"])
+                    - special_tokens
+                )
+                current = piece
+                if (
+                    len(self.model.tokenizer(current, truncation=False)["input_ids"])
+                    > self.model.max_seq_length
+                ):
+                    raise ValueError("A word exceeds the embedding model context")
+            else:
+                current = candidate
+        if current:
+            chunks.append(current)
+            weights.append(
+                len(self.model.tokenizer(current, truncation=False)["input_ids"])
+                - special_tokens
             )
-        return self.model.encode(text, normalize_embeddings=True).tolist()
+        vectors = self.model.encode(chunks, normalize_embeddings=True)
+        vector = np.average(vectors, axis=0, weights=weights)
+        norm = np.linalg.norm(vector)
+        if not np.isfinite(norm) or norm == 0:
+            raise ValueError("Long-text embedding must be finite and nonzero")
+        return (vector / norm).tolist()
 
 
 class PyannoteVoiceEmbedder:

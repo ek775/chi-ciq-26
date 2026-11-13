@@ -8,6 +8,7 @@ from chi_ciq_transcription import (
     PyannoteDiarizer,
     PyannoteVoiceEmbedder,
     SentenceTextEmbedder,
+    TranscribedWord,
     WhisperTranscriber,
 )
 
@@ -31,6 +32,54 @@ def test_whisper_receives_audio_and_cpu_options(monkeypatch):
         "fp16": False,
         "condition_on_previous_text": False,
     }
+
+
+@pytest.mark.parametrize("device", ["cpu", "cuda"])
+def test_whisper_returns_word_timestamps(monkeypatch, device):
+    def transcribe(audio, **kwargs):
+        assert kwargs == {
+            "language": "en",
+            "fp16": device == "cuda",
+            "condition_on_previous_text": False,
+            "word_timestamps": True,
+        }
+        return {
+            "text": " Hello.",
+            "segments": [{"words": [{"start": 0.2, "end": 0.8, "word": " Hello."}]}],
+        }
+
+    model = SimpleNamespace(device=SimpleNamespace(type=device), transcribe=transcribe)
+    monkeypatch.setitem(
+        sys.modules, "whisper", SimpleNamespace(load_model=lambda *a, **k: model)
+    )
+    assert WhisperTranscriber(language="en").transcribe_words(
+        np.zeros(16000, dtype=np.float32)
+    ) == [TranscribedWord(0.2, 0.8, " Hello.")]
+
+
+def test_whisper_text_without_timestamps_is_an_error(monkeypatch):
+    model = SimpleNamespace(
+        device=SimpleNamespace(type="cpu"),
+        transcribe=lambda *a, **k: {"text": "Hello", "segments": []},
+    )
+    monkeypatch.setitem(
+        sys.modules, "whisper", SimpleNamespace(load_model=lambda *a, **k: model)
+    )
+    with pytest.raises(ValueError, match="without word timestamps"):
+        WhisperTranscriber().transcribe_words(np.zeros(16000, dtype=np.float32))
+
+
+def test_whisper_no_speech_returns_no_words(monkeypatch):
+    model = SimpleNamespace(
+        device=SimpleNamespace(type="cpu"),
+        transcribe=lambda *a, **k: {"text": "", "segments": []},
+    )
+    monkeypatch.setitem(
+        sys.modules, "whisper", SimpleNamespace(load_model=lambda *a, **k: model)
+    )
+    assert (
+        WhisperTranscriber().transcribe_words(np.zeros(16000, dtype=np.float32)) == []
+    )
 
 
 def test_diarizer_uses_pyannote_four_output_and_orders_turns(monkeypatch):
@@ -103,16 +152,25 @@ def test_voice_embedding_uses_whole_window_and_pads_short_turns(monkeypatch):
 
 @pytest.mark.parametrize("too_long", [False, True])
 def test_text_embedding_never_silently_truncates(monkeypatch, too_long):
-    def tokenize(text, *, truncation):
-        assert not truncation
-        return {"input_ids": [1] * (5 if too_long else 3)}
+    class Tokenizer:
+        def __call__(self, text, *, truncation):
+            assert not truncation
+            return {"input_ids": [1] * (len(text.split()) + 2)}
+
+        def num_special_tokens_to_add(self, *, pair):
+            assert not pair
+            return 2
 
     def encode(text, *, normalize_embeddings):
         assert normalize_embeddings
+        if isinstance(text, list):
+            assert text == ["One two ", "three four ", "five."]
+            assert all(len(part.split()) <= 2 for part in text)
+            return np.array([[1.0, 0.0], [0.0, 1.0], [1.0, 0.0]])
         return np.array([0.1, 0.2])
 
     model = SimpleNamespace(
-        tokenizer=tokenize,
+        tokenizer=Tokenizer(),
         encode=encode,
         max_seq_length=4,
     )
@@ -123,7 +181,49 @@ def test_text_embedding_never_silently_truncates(monkeypatch, too_long):
     )
     embedder = SentenceTextEmbedder()
     if too_long:
-        with pytest.raises(ValueError, match="context"):
-            embedder.embed("Hello")
+        vector = embedder.embed("One two three four five.")
+        np.testing.assert_allclose(vector, np.array([3, 2]) / np.sqrt(13))
+        assert np.linalg.norm(vector) == pytest.approx(1)
     else:
         assert embedder.embed("Hello") == [0.1, 0.2]
+
+
+@pytest.mark.parametrize("invalid_vector", [np.zeros((2, 2)), np.full((2, 2), np.nan)])
+def test_long_embedding_rejects_invalid_pooled_vector(monkeypatch, invalid_vector):
+    class Tokenizer:
+        def __call__(self, text, *, truncation):
+            return {"input_ids": [1] * (len(text.split()) + 2)}
+
+        def num_special_tokens_to_add(self, *, pair):
+            return 2
+
+    model = SimpleNamespace(
+        tokenizer=Tokenizer(),
+        max_seq_length=4,
+        encode=lambda *a, **k: invalid_vector,
+    )
+    monkeypatch.setitem(
+        sys.modules,
+        "sentence_transformers",
+        SimpleNamespace(SentenceTransformer=lambda *a, **k: model),
+    )
+    with pytest.raises(ValueError, match="finite and nonzero"):
+        SentenceTextEmbedder().embed("One two three four")
+
+
+def test_embedding_reports_a_single_word_exceeding_context(monkeypatch):
+    class Tokenizer:
+        def __call__(self, text, *, truncation):
+            return {"input_ids": [1] * 10}
+
+        def num_special_tokens_to_add(self, *, pair):
+            return 2
+
+    model = SimpleNamespace(tokenizer=Tokenizer(), max_seq_length=4)
+    monkeypatch.setitem(
+        sys.modules,
+        "sentence_transformers",
+        SimpleNamespace(SentenceTransformer=lambda *a, **k: model),
+    )
+    with pytest.raises(ValueError, match="word exceeds"):
+        SentenceTextEmbedder().embed("Supercalifragilisticexpialidocious")

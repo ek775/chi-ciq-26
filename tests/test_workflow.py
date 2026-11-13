@@ -4,6 +4,8 @@ import subprocess
 import wave
 from contextlib import closing
 from pathlib import Path
+from types import SimpleNamespace
+from uuid import uuid4
 
 import numpy as np
 import pytest
@@ -13,11 +15,12 @@ from chi_ciq_transcription import (
     Meeting,
     Speaker,
     SpeakerTurn,
+    TranscribedWord,
     TranscriptionWorkflow,
     TranscriptSegment,
 )
 from chi_ciq_transcription.backends import SAMPLE_RATE
-from chi_ciq_transcription.workflow import extract_audio
+from chi_ciq_transcription.workflow import align_words, extract_audio
 
 
 class FakeDiarizer:
@@ -35,10 +38,14 @@ class FakeDiarizer:
 class FakeTranscriber:
     model_name = "fake-whisper"
 
-    def transcribe(self, audio):
+    def transcribe_words(self, audio):
         assert audio.dtype == np.float32
         assert 0 < len(audio) <= SAMPLE_RATE
-        return f"Transcript for {len(audio)} samples."
+        duration = len(audio) / SAMPLE_RATE
+        return [
+            TranscribedWord(0, duration / 2, "Transcript for the first half."),
+            TranscribedWord(duration / 2, duration, " Transcript for the second half."),
+        ]
 
 
 class FakeTextEmbedder:
@@ -158,7 +165,7 @@ def test_model_failure_keeps_prior_rows_and_propagates(workflow, source, store):
     def fail(_audio):
         raise RuntimeError("model failed")
 
-    workflow.transcriber.transcribe = fail
+    workflow.transcriber.transcribe_words = fail
     with pytest.raises(RuntimeError, match="model failed"):
         next(stream)
     with store.sessions() as session:
@@ -166,20 +173,20 @@ def test_model_failure_keeps_prior_rows_and_propagates(workflow, source, store):
         assert session.scalar(select(func.count()).select_from(TranscriptSegment)) == 1
 
 
-def test_empty_transcript_is_not_silently_discarded(workflow, source, store, caplog):
+def test_empty_window_is_reported_without_aborting(workflow, source, store, caplog):
     caplog.set_level(logging.INFO)
-    workflow.transcriber.transcribe = lambda audio: " "
-    with pytest.raises(ValueError, match="empty text"):
-        list(workflow.transcribe(source))
+    workflow.transcriber.transcribe_words = lambda audio: []
+    assert list(workflow.transcribe(source)) == []
     with store.sessions() as session:
-        assert session.scalar(select(Meeting.status)) == "incomplete"
+        assert session.scalar(select(Meeting.status)) == "completed"
         assert session.scalar(select(Meeting.recording_duration_seconds)) >= 3
         assert session.scalar(select(func.count()).select_from(TranscriptSegment)) == 0
     assert "FFmpeg extraction: completed in" in caplog.text
     assert "full-file diarization: completed in" in caplog.text
     assert "3 speaker turns" in caplog.text
-    assert "chunk 1 SPEAKER_00 [0.000-1.000s]: Whisper" in caplog.text
-    assert "status=incomplete" in caplog.text
+    assert "window 1 [0.000-1.000s]: Whisper" in caplog.text
+    assert "Whisper returned no words; no segment stored" in caplog.text
+    assert "status=completed" in caplog.text
 
 
 def test_ffmpeg_errors_are_visible(workflow, tmp_path, store):
@@ -192,7 +199,7 @@ def test_ffmpeg_errors_are_visible(workflow, tmp_path, store):
         assert session.scalar(select(Meeting.recording_duration_seconds)) is None
 
 
-@pytest.mark.parametrize("seconds", [0, -1, float("nan"), float("inf")])
+@pytest.mark.parametrize("seconds", [0, -1, float("nan"), float("inf"), 30.01])
 def test_invalid_chunk_limit(seconds):
     with pytest.raises(ValueError, match="max_chunk_seconds"):
         TranscriptionWorkflow(
@@ -245,3 +252,297 @@ def test_directory_batch_processes_all_recordings(workflow, source, store):
         assert [meeting.filename for meeting in meetings] == [source.name, second.name]
         assert all(meeting.status == "completed" for meeting in meetings)
         assert session.scalar(select(func.count()).select_from(TranscriptSegment)) == 8
+
+
+class MemoryStore:
+    def __init__(self):
+        self.rows = []
+        self.status = "processing"
+
+    def start(self, *args, **kwargs):
+        return uuid4()
+
+    def set_recording_duration(self, meeting_id, duration):
+        self.duration = duration
+
+    def append(self, meeting_id, **kwargs):
+        row = SimpleNamespace(meeting_id=meeting_id, **kwargs)
+        self.rows.append(row)
+        return row
+
+    def finish(self, meeting_id, *, completed):
+        self.status = "completed" if completed else "incomplete"
+
+
+def test_tiny_turn_gets_recording_context_not_a_17ms_whisper_call(source):
+    store = MemoryStore()
+    calls = []
+    voice_lengths = []
+    diarizer = FakeDiarizer()
+    diarizer.diarize = lambda path: [
+        SpeakerTurn(1, 2.231, "A"),
+        SpeakerTurn(2.231, 2.248, "B"),
+        SpeakerTurn(2.248, 3, "A"),
+    ]
+    transcriber = FakeTranscriber()
+
+    def transcribe(audio):
+        calls.append(len(audio))
+        return [
+            TranscribedWord(1, 2.24, "Transcript for the budget."),
+            TranscribedWord(2.24, 3, " More discussion."),
+        ]
+
+    transcriber.transcribe_words = transcribe
+    voice_embedder = FakeVoiceEmbedder()
+
+    def embed(audio):
+        voice_lengths.append(len(audio))
+        return [0.4, 0.5]
+
+    voice_embedder.embed = embed
+    workflow = TranscriptionWorkflow(
+        store, diarizer, transcriber, FakeTextEmbedder(), voice_embedder
+    )
+    rows = list(workflow.transcribe(source))
+    assert workflow.max_chunk_frames == 30 * SAMPLE_RATE
+    assert calls == [round(store.duration * SAMPLE_RATE)]
+    assert len(rows) == 1
+    assert rows[0].speaker == "A"
+    assert rows[0].start == 1
+    assert rows[0].end == 3
+    assert rows[0].transcript == "Transcript for the budget. More discussion."
+    assert voice_lengths == [2 * SAMPLE_RATE]
+    assert store.status == "completed"
+
+
+def test_word_alignment_uses_total_overlap_and_retains_unknown():
+    words = [
+        TranscribedWord(0, 0.6, "One"),
+        TranscribedWord(0.6, 1, " two."),
+        TranscribedWord(1, 1.5, " Three."),
+        TranscribedWord(1.5, 1.75, " Four."),
+    ]
+    turns = [
+        SpeakerTurn(30, 30.3, "A"),
+        SpeakerTurn(30.3, 30.6, "A"),
+        SpeakerTurn(30.4, 31, "B"),
+        SpeakerTurn(31, 31.5, "C"),
+    ]
+    aligned = list(align_words(words, turns, 30 * SAMPLE_RATE, 2 * SAMPLE_RATE))
+    assert aligned == [
+        (SpeakerTurn(30, 30.6, "A"), "One"),
+        (SpeakerTurn(30.6, 31, "B"), "two."),
+        (SpeakerTurn(31, 31.5, "C"), "Three."),
+        (SpeakerTurn(31.5, 31.75, "UNKNOWN"), "Four."),
+    ]
+
+
+@pytest.mark.parametrize(
+    "word",
+    [
+        TranscribedWord(-0.1, 1, "bad"),
+        TranscribedWord(0, float("nan"), "bad"),
+        TranscribedWord(1, 0, "bad"),
+        TranscribedWord(0, 2, "bad"),
+        TranscribedWord(0, 1, " "),
+        TranscribedWord(0, 1, None),
+    ],
+)
+def test_invalid_whisper_words_raise(word):
+    with pytest.raises(ValueError, match="Whisper returned"):
+        list(align_words([word], [], 0, SAMPLE_RATE))
+
+
+def test_zero_duration_word_at_window_end_is_retained():
+    assert list(
+        align_words(
+            [TranscribedWord(1, 1, "Yes.")],
+            [SpeakerTurn(0, 1, "A")],
+            0,
+            SAMPLE_RATE,
+        )
+    ) == [(SpeakerTurn(1 - 1 / SAMPLE_RATE, 1, "A"), "Yes.")]
+
+
+def test_short_recognized_word_keeps_its_short_speaker_turn():
+    words = [
+        TranscribedWord(0, 1.231, "One."),
+        TranscribedWord(1.231, 1.248, " Yes."),
+        TranscribedWord(1.248, 2, " Two."),
+    ]
+    turns = [
+        SpeakerTurn(0, 1.231, "A"),
+        SpeakerTurn(1.231, 1.248, "B"),
+        SpeakerTurn(1.248, 2, "A"),
+    ]
+    assert list(align_words(words, turns, 0, 2 * SAMPLE_RATE)) == [
+        (turns[0], "One."),
+        (turns[1], "Yes."),
+        (turns[2], "Two."),
+    ]
+
+
+def test_out_of_order_whisper_words_raise():
+    with pytest.raises(ValueError, match="invalid word timestamps"):
+        list(
+            align_words(
+                [TranscribedWord(0.5, 0.75, "One."), TranscribedWord(0, 0.5, " Two.")],
+                [],
+                0,
+                SAMPLE_RATE,
+            )
+        )
+
+
+def test_empty_window_then_speech_continues_and_commits(source, caplog):
+    store = MemoryStore()
+    transcriber = FakeTranscriber()
+    calls = []
+
+    def transcribe(audio):
+        calls.append(len(audio))
+        if len(calls) == 1:
+            return []
+        return [TranscribedWord(0, 1, "Transcript from another window.")]
+
+    transcriber.transcribe_words = transcribe
+    workflow = TranscriptionWorkflow(
+        store,
+        FakeDiarizer(),
+        transcriber,
+        FakeTextEmbedder(),
+        FakeVoiceEmbedder(),
+        max_chunk_seconds=1,
+    )
+    rows = list(workflow.transcribe(source))
+    assert calls == [SAMPLE_RATE] * 3
+    assert [row.sequence for row in rows] == [0, 1]
+    assert [(row.start, row.end) for row in rows] == [(1, 2), (2, 3)]
+    assert store.status == "completed"
+    assert "Whisper returned no words" in caplog.text
+
+
+def test_long_monologue_uses_full_30_second_windows(source, monkeypatch):
+    def extract(_source, destination):
+        with wave.open(str(destination), "wb") as audio:
+            audio.setnchannels(1)
+            audio.setsampwidth(2)
+            audio.setframerate(SAMPLE_RATE)
+            audio.writeframes(bytes(65 * SAMPLE_RATE * 2))
+
+    monkeypatch.setattr("chi_ciq_transcription.workflow.extract_audio", extract)
+    store = MemoryStore()
+    diarizer = FakeDiarizer()
+    diarizer.diarize = lambda path: [SpeakerTurn(0, 65, "A")]
+    transcriber = FakeTranscriber()
+    calls = []
+
+    def transcribe(audio):
+        calls.append(len(audio))
+        return [TranscribedWord(0, len(audio) / SAMPLE_RATE, "Transcript.")]
+
+    transcriber.transcribe_words = transcribe
+    workflow = TranscriptionWorkflow(
+        store, diarizer, transcriber, FakeTextEmbedder(), FakeVoiceEmbedder()
+    )
+    rows = list(workflow.transcribe(source))
+    assert calls == [30 * SAMPLE_RATE, 30 * SAMPLE_RATE, 5 * SAMPLE_RATE]
+    assert [(row.start, row.end) for row in rows] == [(0, 30), (30, 60), (60, 65)]
+    assert [row.sequence for row in rows] == [0, 1, 2]
+    assert all(row.speaker == "A" for row in rows)
+    assert store.status == "completed"
+
+
+def test_invalid_words_preserve_prior_commits_and_mark_incomplete(source):
+    store = MemoryStore()
+    transcriber = FakeTranscriber()
+    calls = []
+
+    def transcribe(audio):
+        calls.append(len(audio))
+        if len(calls) == 1:
+            return [TranscribedWord(0, 1, "Transcript.")]
+        return [TranscribedWord(0, 2, "Invalid timestamp.")]
+
+    transcriber.transcribe_words = transcribe
+    workflow = TranscriptionWorkflow(
+        store,
+        FakeDiarizer(),
+        transcriber,
+        FakeTextEmbedder(),
+        FakeVoiceEmbedder(),
+        max_chunk_seconds=1,
+    )
+    with pytest.raises(ValueError, match="invalid word timestamps"):
+        list(workflow.transcribe(source))
+    assert len(store.rows) == 1
+    assert store.rows[0].sequence == 0
+    assert store.status == "incomplete"
+
+
+def test_unmatched_words_are_persisted_with_warning(source, caplog):
+    store = MemoryStore()
+    diarizer = FakeDiarizer()
+    diarizer.diarize = lambda path: [SpeakerTurn(0, 0.1, "A")]
+    transcriber = FakeTranscriber()
+    transcriber.transcribe_words = lambda audio: [
+        TranscribedWord(1, 2, "Transcript not covered by diarization.")
+    ]
+    workflow = TranscriptionWorkflow(
+        store, diarizer, transcriber, FakeTextEmbedder(), FakeVoiceEmbedder()
+    )
+    rows = list(workflow.transcribe(source))
+    assert rows[0].speaker == "UNKNOWN"
+    assert "assigning UNKNOWN" in caplog.text
+    assert store.status == "completed"
+
+
+def test_early_close_cleans_up_delegated_audio_processing(source):
+    store = MemoryStore()
+    diarizer = FakeDiarizer()
+    paths = []
+
+    def diarize(path):
+        paths.append(Path(path))
+        return [SpeakerTurn(0, 3, "A")]
+
+    diarizer.diarize = diarize
+    workflow = TranscriptionWorkflow(
+        store,
+        diarizer,
+        FakeTranscriber(),
+        FakeTextEmbedder(),
+        FakeVoiceEmbedder(),
+        max_chunk_seconds=1,
+    )
+    stream = workflow.transcribe(source)
+    first = next(stream)
+    assert store.rows == [first]
+    assert store.status == "processing"
+    assert paths[0].is_file()
+    stream.close()
+    assert store.rows == [first]
+    assert store.status == "incomplete"
+    assert not paths[0].parent.exists()
+
+
+def test_speech_windows_preserve_boundaries_and_skip_silence():
+    workflow = TranscriptionWorkflow(
+        MemoryStore(),
+        FakeDiarizer(),
+        FakeTranscriber(),
+        FakeTextEmbedder(),
+        FakeVoiceEmbedder(),
+        max_chunk_seconds=1,
+    )
+    turns = [
+        SpeakerTurn(1, 2, "A"),
+        SpeakerTurn(1.5, 3, "B"),
+        SpeakerTurn(4, 4.5, "C"),
+    ]
+    assert list(workflow._speech_windows(round(4.5 * SAMPLE_RATE), turns)) == [
+        (SAMPLE_RATE, 2 * SAMPLE_RATE, turns[:2]),
+        (2 * SAMPLE_RATE, 3 * SAMPLE_RATE, [turns[1]]),
+        (4 * SAMPLE_RATE, round(4.5 * SAMPLE_RATE), [turns[2]]),
+    ]

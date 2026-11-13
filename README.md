@@ -69,8 +69,9 @@ Each video reports elapsed wall-clock time as `H:MM:SS` and seconds, including
 on failure; the batch timer also includes model loading and database export.
 Timers use a monotonic clock and do not change stored recording timestamps.
 They report at stage boundaries, not as a continuously updating countdown.
-Empty Whisper output still raises an error and marks the meeting incomplete;
-logging does not skip silent chunks or suppress model warnings.
+Whisper windows returning no words emit a warning and produce no segment; the
+meeting continues. Model exceptions and malformed word timestamps still fail
+the meeting. Model warnings are not suppressed.
 
 Archives have unique names such as `transcription-20261111T201500Z-<id>.dump`.
 Incomplete exports are removed, and completed archives are not overwritten.
@@ -120,7 +121,7 @@ try:
         transcriber=WhisperTranscriber(language="en"),
         text_embedder=SentenceTextEmbedder(),
         voice_embedder=PyannoteVoiceEmbedder(token),
-        max_chunk_seconds=20,
+        max_chunk_seconds=30,
     )
     with closing(workflow.transcribe("data/mp4/2026-11-10_budget.mp4")) as segments:
         for segment in segments:
@@ -142,22 +143,44 @@ first. This is initial schema setup, not a schema migration system.
 - pyannote analyzes the **whole file first**. This is incremental segment
   transcription, not real-time online diarization, and diarization memory use
   depends on recording length.
-- Speaker turns are split into chunks of at most `max_chunk_seconds`. Each chunk
-  gets Whisper text, a normalized semantic text embedding, and a voice embedding.
-  Turns shorter than one second are zero-padded only for voice embedding.
+- Whisper receives recording-aligned audio windows, not individual speaker turns.
+  `max_chunk_seconds` defaults to **30 seconds**, Whisper's native context size,
+  and cannot exceed 30. Smaller positive values remain supported; the final
+  window may be shorter. Windows with no diarized speech are not transcribed.
+  Tiny speaker turns therefore do not become tiny standalone Whisper inputs.
+- Whisper word timestamps are assigned to the speaker with the greatest total
+  diarization overlap for each word. Ties use the first speaker in sorted turn
+  order. Words without any overlap are retained as `UNKNOWN` with a warning.
+  Consecutive words assigned to the same speaker form one stored segment within
+  each window; long monologues continue in subsequent windows. Words are not
+  duplicated to represent overlapping speakers.
+- Each segment gets a normalized semantic text embedding and a voice embedding
+  from its word-aligned audio span. Spans shorter than one second are zero-padded
+  only for voice embedding. Long text is split into embedding-model-sized pieces
+  without truncation; their normalized vectors are token-count-weighted and
+  averaged, then normalized again. A single word exceeding the embedding context
+  or an invalid pooled vector remains an error.
+- Custom workflow transcribers must implement
+  `transcribe_words(audio) -> list[TranscribedWord]`, with ordered, finite,
+  window-relative word offsets and original word spacing. The default
+  `WhisperTranscriber.transcribe(audio) -> str` remains available for standalone
+  use. Zero-duration words are retained with a one-sample audio span.
 - Each segment and its speaker are committed in one transaction **before yield**.
   Exhausting the iterator marks the meeting `completed`. Errors propagate, and
   failures or explicit iterator closure mark it `incomplete`. Earlier commits
   remain available. Use `closing` when you might stop iteration early.
-- Empty transcripts, invalid vectors/timestamps, and text exceeding the embedding
-  model's context raise errors rather than silently dropping data. Reduce chunk
-  length or choose a larger-context embedding model if needed.
+- Empty Whisper windows are explicitly reported and skipped, including windows
+  where diarization detected speech but Whisper found none. A fully processed
+  meeting can therefore complete without transcript rows. Invalid word output,
+  vectors/timestamps, and model failures still raise errors; empty transcript
+  rows are never stored.
 - A new invocation creates a new meeting/run, even for the same file. Automatic
   resume, deduplication, and concurrent writers to the same run are not implemented.
   A process killed without cleanup can leave a meeting `processing`.
-- Overlapping diarization turns remain overlapping and can contain another voice;
-  resulting voice vectors are not guaranteed to identify a person. Speaker labels
-  are local to a meeting, not verified or globally matched identities.
+- Overlapping diarization turns can contain another voice; assigning a word to
+  the greatest-overlap speaker does not separate mixed audio. Resulting voice
+  vectors are not guaranteed to identify a person. Speaker labels are local to
+  a meeting, not verified or globally matched identities.
 - Default adapters target the pyannote 4 API. Model loading is lazy at adapter
   construction, not package import. Both examples check `torch.cuda.is_available()`
   once at run setup, print the selected device, and pass it to all four adapters.
@@ -217,7 +240,9 @@ cascades to its speakers and segments. Speakers can have many transcript segment
 `recording_duration_seconds` is the full decoded audio track length, not elapsed
 processing time or the sum of speech segments. `start_seconds` (inclusive) and
 `end_seconds` (exclusive) are offsets from the start of that audio track, not
-wall-clock times or word-level Whisper timestamps. The store requires duration
+wall-clock times. Segment boundaries now come from the first and last assigned
+Whisper words, rounded to audio samples; individual words are not stored.
+The store requires duration
 before appending segments and rejects end offsets beyond it. Direct store callers
 must call `set_recording_duration(meeting_id, duration_seconds)` before `append`.
 `created_at` and `updated_at` remain timezone-aware database audit times only;

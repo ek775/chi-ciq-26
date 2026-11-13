@@ -3,6 +3,7 @@ from .backends import (
     PyannoteVoiceEmbedder,
     SentenceTextEmbedder,
     SpeakerTurn,
+    TranscribedWord,
     WhisperTranscriber,
 )
 from .database import TranscriptStore, create_database
@@ -18,6 +19,7 @@ __all__ = [
     "SentenceTextEmbedder",
     "Speaker",
     "SpeakerTurn",
+    "TranscribedWord",
     "TranscriptSegment",
     "TranscriptStore",
     "TranscriptionWorkflow",
