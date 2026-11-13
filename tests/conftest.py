@@ -5,7 +5,7 @@ import pytest
 from sqlalchemy import create_engine, text
 from sqlalchemy.engine import make_url
 
-from chi_ciq_transcription import TranscriptStore, create_database
+from transcription import TranscriptStore, create_database
 
 
 @pytest.fixture

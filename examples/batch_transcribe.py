@@ -13,13 +13,13 @@ from uuid import uuid4
 from dotenv import load_dotenv
 from sqlalchemy.engine import URL, make_url
 
-from chi_ciq_transcription import (
+from transcription import (
     TranscriptionWorkflow,
     TranscriptStore,
     create_database,
     parse_filename,
 )
-from chi_ciq_transcription.progress import timed_operation
+from transcription.progress import timed_operation
 
 from .transcribe import build_workflow, configure_logging
 

@@ -2,7 +2,7 @@ import logging
 
 import pytest
 
-from chi_ciq_transcription import progress
+from transcription import progress
 
 
 @pytest.mark.parametrize("fails", [False, True])

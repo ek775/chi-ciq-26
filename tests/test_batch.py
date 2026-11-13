@@ -10,8 +10,8 @@ import pytest
 from sqlalchemy import create_engine, select, text
 from sqlalchemy.engine import URL
 
-from chi_ciq_transcription import Meeting, Speaker, TranscriptSegment, parse_filename
 from examples import batch_transcribe as batch
+from transcription import Meeting, Speaker, TranscriptSegment, parse_filename
 
 
 def test_discovery_is_sorted_case_insensitive_and_nonrecursive(tmp_path):

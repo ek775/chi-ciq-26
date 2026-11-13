@@ -5,8 +5,8 @@ import pytest
 from sqlalchemy import select
 from sqlalchemy.exc import IntegrityError
 
-from chi_ciq_transcription import Meeting, Speaker, TranscriptSegment, parse_filename
-from chi_ciq_transcription.database import create_database, validate_vector
+from transcription import Meeting, Speaker, TranscriptSegment, parse_filename
+from transcription.database import create_database, validate_vector
 
 
 def start(store):

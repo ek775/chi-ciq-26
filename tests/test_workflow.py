@@ -11,7 +11,7 @@ import numpy as np
 import pytest
 from sqlalchemy import func, select
 
-from chi_ciq_transcription import (
+from transcription import (
     Meeting,
     Speaker,
     SpeakerTurn,
@@ -19,8 +19,8 @@ from chi_ciq_transcription import (
     TranscriptionWorkflow,
     TranscriptSegment,
 )
-from chi_ciq_transcription.backends import SAMPLE_RATE
-from chi_ciq_transcription.workflow import align_words, extract_audio
+from transcription.backends import SAMPLE_RATE
+from transcription.workflow import align_words, extract_audio
 
 
 class FakeDiarizer:
@@ -431,7 +431,7 @@ def test_long_monologue_uses_full_30_second_windows(source, monkeypatch):
             audio.setframerate(SAMPLE_RATE)
             audio.writeframes(bytes(65 * SAMPLE_RATE * 2))
 
-    monkeypatch.setattr("chi_ciq_transcription.workflow.extract_audio", extract)
+    monkeypatch.setattr("transcription.workflow.extract_audio", extract)
     store = MemoryStore()
     diarizer = FakeDiarizer()
     diarizer.diarize = lambda path: [SpeakerTurn(0, 65, "A")]

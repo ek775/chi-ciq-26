@@ -2,7 +2,7 @@ from datetime import date
 
 import pytest
 
-from chi_ciq_transcription import parse_filename
+from transcription import parse_filename
 
 
 @pytest.mark.parametrize(

@@ -101,7 +101,7 @@ from contextlib import closing
 
 from dotenv import load_dotenv
 
-from chi_ciq_transcription import (
+from transcription import (
     PyannoteDiarizer,
     PyannoteVoiceEmbedder,
     SentenceTextEmbedder,
@@ -271,7 +271,7 @@ Example semantic search (use a query vector from the meeting's text model):
 ```python
 from sqlalchemy import select
 from sqlalchemy.orm import Session
-from chi_ciq_transcription import TranscriptSegment
+from transcription import TranscriptSegment
 
 with Session(engine) as session:
     matches = session.scalars(

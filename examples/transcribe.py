@@ -5,7 +5,7 @@ from contextlib import closing
 
 from dotenv import load_dotenv
 
-from chi_ciq_transcription import (
+from transcription import (
     PyannoteDiarizer,
     PyannoteVoiceEmbedder,
     SentenceTextEmbedder,
@@ -14,7 +14,7 @@ from chi_ciq_transcription import (
     WhisperTranscriber,
     create_database,
 )
-from chi_ciq_transcription.progress import timed_operation
+from transcription.progress import timed_operation
 
 
 def configure_logging() -> None:

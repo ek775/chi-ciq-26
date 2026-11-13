@@ -4,7 +4,7 @@ from types import SimpleNamespace
 import numpy as np
 import pytest
 
-from chi_ciq_transcription import (
+from transcription import (
     PyannoteDiarizer,
     PyannoteVoiceEmbedder,
     SentenceTextEmbedder,
