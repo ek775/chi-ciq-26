@@ -26,7 +26,7 @@ from transcription.streaming import OnlineSpeakers
 
 
 def test_online_speakers_track_permuted_local_slots_without_merging():
-    speakers = OnlineSpeakers(3, 0.35)
+    speakers = OnlineSpeakers(0.35)
     assert speakers.assign({0: [1, 0, 0], 1: [0, 1, 0]}) == {
         0: "SPEAKER_00",
         1: "SPEAKER_01",
@@ -38,14 +38,28 @@ def test_online_speakers_track_permuted_local_slots_without_merging():
     assert speakers.assign({0: [0, 0, 1]}) == {0: "SPEAKER_02"}
     assert len(speakers.centroids) == 3
     assert speakers.assign({}) == {}
-    with pytest.raises(RuntimeError, match="capacity exhausted"):
-        speakers.assign({0: [-1, 0, 0]})
+    assert speakers.assign({0: [-1, 0, 0]}) == {0: "SPEAKER_03"}
+
+
+def test_online_speakers_exceed_previous_capacity_and_reuse_existing_labels():
+    speakers = OnlineSpeakers(0.35)
+    vectors = np.eye(128)
+    for index, vector in enumerate(vectors):
+        assert speakers.assign({0: vector.tolist()}) == {0: f"SPEAKER_{index:02d}"}
+    assert len(speakers.centroids) == 128
+    assert len(speakers.counts) == 128
+    for index in (0, 31, 32, 100, 127):
+        assert speakers.assign({0: vectors[index].tolist()}) == {
+            0: f"SPEAKER_{index:02d}"
+        }
+        assert speakers.counts[index] == 2
+    assert len(speakers.centroids) == 128
 
 
 @pytest.mark.parametrize("vector", [[0, 0], [float("nan"), 1], [float("inf"), 1]])
 def test_invalid_online_embeddings_raise(vector):
     with pytest.raises(ValueError, match="finite and nonzero"):
-        OnlineSpeakers(3, 0.35).assign({0: vector})
+        OnlineSpeakers(0.35).assign({0: vector})
 
 
 def test_workflow_rejects_offline_diarizer_before_starting_inference():
@@ -60,7 +74,7 @@ def test_workflow_rejects_offline_diarizer_before_starting_inference():
 
 
 def test_simultaneous_speakers_cannot_claim_the_same_centroid():
-    speakers = OnlineSpeakers(3, 0.35)
+    speakers = OnlineSpeakers(0.35)
     speakers.assign({0: [1, 0]})
     labels = speakers.assign({0: [1, 0.1], 1: [1, 0.2]})
     assert len(set(labels.values())) == 2
@@ -239,7 +253,6 @@ def test_incremental_inference_flushes_tail_and_resets_speaker_state(
     diarizer.window_frames = 10 * SAMPLE_RATE
     diarizer.hop_frames = 5 * SAMPLE_RATE
     diarizer.left_context = round(2.5 * SAMPLE_RATE)
-    diarizer.max_speakers = 2
     diarizer.distance_threshold = 0.35
     states = []
 
@@ -290,7 +303,7 @@ def test_segmentation_frames_are_clipped_and_local_slots_are_tracked(
         embed=lambda audio: [1, 0] if audio[0] < 0.15 else [0, 1]
     )
     audio = np.repeat(np.array([0.1, 0.2], dtype=np.float32), SAMPLE_RATE)
-    speakers = OnlineSpeakers(3, 0.35)
+    speakers = OnlineSpeakers(0.35)
     expected = [
         SpeakerTurn(0, 1, "SPEAKER_00"),
         SpeakerTurn(1, 2, "SPEAKER_01"),
@@ -342,6 +355,6 @@ def test_invalid_segmentation_output_is_an_error(monkeypatch, scores):
             0,
             0,
             2 * SAMPLE_RATE,
-            OnlineSpeakers(3, 0.35),
+            OnlineSpeakers(0.35),
             valid_end=2 * SAMPLE_RATE,
         )

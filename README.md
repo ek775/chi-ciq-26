@@ -150,9 +150,11 @@ first. This is initial schema setup, not a schema migration system.
   when no existing speaker matches. Labels remain fixed after publication; they
   reset for each recording. At least one second of clean, non-overlapping speech
   in the context window is required to identify a local speaker. Other speech
-  is retained as `UNKNOWN` with warnings. The default capacity is 32 speakers;
-  exhausting it raises an error rather than merging unrelated speakers. Configure
-  `max_speakers` and `distance_threshold` on the diarizer if needed.
+  is retained as `UNKNOWN` with warnings. There is no speaker-cluster limit;
+  unmatched voices create new labels without a capacity-exhaustion failure.
+  Configure `distance_threshold` on the diarizer if needed. Fragmented identities
+  are retained for later post-hoc analysis of stored voice embeddings; automatic
+  post-hoc merging is not implemented.
 - This replaces community-1's offline VBx clustering with a simpler online
   algorithm. **The same checkpoints do not imply equivalent diarization accuracy.**
   Thresholds need evaluation on representative meetings; short and overlapping
@@ -173,8 +175,11 @@ first. This is initial schema setup, not a schema migration system.
   Tiny speaker turns therefore do not become tiny standalone Whisper inputs.
 - Whisper itself still uses sliding 30-second model windows internally; removing
   the workflow limit does not change its native context size. Inference buffers
-  are bounded by model context, the configured batch duration and speaker capacity,
-  not recording length. There can be two queued chunks, one producer chunk waiting
+  are bounded by model context and the configured batch duration, not recording
+  length. Clustering state is separate: one centroid and counter per discovered
+  cluster, with no fixed memory ceiling. Clustering memory and matching work grow
+  with cluster count, including erroneous splits of the same person.
+  There can be two queued chunks, one producer chunk waiting
   to enqueue, and one consumer chunk being processed. Larger batch durations
   increase memory use and time to the first commit; concurrent CUDA inference
   can still exhaust device memory. No silent sequential or CPU retry is performed.
@@ -362,7 +367,7 @@ constraints, final partial chunks, per-recording reset, worker errors and cleanu
   selected here. `Model.from_pretrained(..., subfolder="segmentation", token=...)`
   and the bundled `embedding` subfolder load the existing weights. `Inference.infer`
   handles evaluation/device transfer and powerset-to-multilabel conversion.
-  A bounded online clustering layer replaces the offline global clustering step.
+  An online clustering layer replaces the offline global clustering step.
 - [Diart](https://github.com/juanmc2005/diart): offers overlap-aware online
   clustering, but release 0.9.2 still uses `use_auth_token` in its built-in loader
   and requires NumPy below 2, conflicting with this project's pyannote 4 stack.

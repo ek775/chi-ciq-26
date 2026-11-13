@@ -20,10 +20,9 @@ logger = logging.getLogger(__name__)
 
 
 class OnlineSpeakers:
-    """Bounded centroid state; published labels are never renumbered or revised."""
+    """One centroid per cluster; published labels are never renumbered or revised."""
 
-    def __init__(self, max_speakers: int, distance_threshold: float):
-        self.max_speakers = max_speakers
+    def __init__(self, distance_threshold: float):
         self.distance_threshold = distance_threshold
         self.centroids: list[NDArray[np.float64]] = []
         self.counts: list[int] = []
@@ -72,11 +71,6 @@ class OnlineSpeakers:
                 self.centroids[identity] = updated / norm
                 self.counts[identity] = count + 1
             else:
-                if len(self.centroids) >= self.max_speakers:
-                    raise RuntimeError(
-                        "Streaming speaker capacity exhausted; increase max_speakers "
-                        "or use separate Fuzzball-managed inference containers"
-                    )
                 identity = len(self.centroids)
                 self.centroids.append(vector.copy())
                 self.counts.append(1)
@@ -85,7 +79,7 @@ class OnlineSpeakers:
 
 
 class StreamingPyannoteDiarizer:
-    """Local community-1 checkpoints with fixed-memory, online speaker clustering."""
+    """Local community-1 checkpoints with streaming inference and online clustering."""
 
     def __init__(
         self,
@@ -93,11 +87,8 @@ class StreamingPyannoteDiarizer:
         model_name: str = "pyannote/speaker-diarization-community-1",
         device: str = "cpu",
         *,
-        max_speakers: int = 32,
         distance_threshold: float = 0.35,
     ):
-        if not isinstance(max_speakers, int) or max_speakers < 1:
-            raise ValueError("max_speakers must be a positive integer")
         if not math.isfinite(distance_threshold) or not 0 < distance_threshold < 1:
             raise ValueError("distance_threshold must be finite and between 0 and 1")
         import torch
@@ -118,7 +109,6 @@ class StreamingPyannoteDiarizer:
             )
         self.hop_frames = self.window_frames // 2
         self.left_context = (self.window_frames - self.hop_frames) // 2
-        self.max_speakers = max_speakers
         self.distance_threshold = distance_threshold
 
     def diarize_chunks(
@@ -126,7 +116,7 @@ class StreamingPyannoteDiarizer:
     ) -> Iterator[DiarizedChunk]:
         if not isinstance(chunk_frames, int) or chunk_frames < 1:
             raise ValueError("chunk_frames must be a positive integer")
-        speakers = OnlineSpeakers(self.max_speakers, self.distance_threshold)
+        speakers = OnlineSpeakers(self.distance_threshold)
         with wave.open(audio_path, "rb") as audio_file:
             if (
                 audio_file.getframerate() != SAMPLE_RATE
