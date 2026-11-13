@@ -199,7 +199,9 @@ def test_ffmpeg_errors_are_visible(workflow, tmp_path, store):
         assert session.scalar(select(Meeting.recording_duration_seconds)) is None
 
 
-@pytest.mark.parametrize("seconds", [0, -1, float("nan"), float("inf"), 30.01])
+@pytest.mark.parametrize(
+    "seconds", [0, -1, float("nan"), float("inf"), 0.5 / SAMPLE_RATE]
+)
 def test_invalid_chunk_limit(seconds):
     with pytest.raises(ValueError, match="max_chunk_seconds"):
         TranscriptionWorkflow(
@@ -305,7 +307,7 @@ def test_tiny_turn_gets_recording_context_not_a_17ms_whisper_call(source):
         store, diarizer, transcriber, FakeTextEmbedder(), voice_embedder
     )
     rows = list(workflow.transcribe(source))
-    assert workflow.max_chunk_frames == 30 * SAMPLE_RATE
+    assert workflow.max_chunk_frames is None
     assert calls == [round(store.duration * SAMPLE_RATE)]
     assert len(rows) == 1
     assert rows[0].speaker == "A"
@@ -423,7 +425,18 @@ def test_empty_window_then_speech_continues_and_commits(source, caplog):
     assert "Whisper returned no words" in caplog.text
 
 
-def test_long_monologue_uses_full_30_second_windows(source, monkeypatch):
+@pytest.mark.parametrize(
+    "chunk_seconds, expected_spans",
+    [
+        (None, [(0, 65)]),
+        (45, [(0, 45), (45, 65)]),
+        (90, [(0, 65)]),
+        (30, [(0, 30), (30, 60), (60, 65)]),
+    ],
+)
+def test_long_monologue_has_no_workflow_30_second_limit(
+    source, monkeypatch, chunk_seconds, expected_spans
+):
     def extract(_source, destination):
         with wave.open(str(destination), "wb") as audio:
             audio.setnchannels(1)
@@ -444,12 +457,17 @@ def test_long_monologue_uses_full_30_second_windows(source, monkeypatch):
 
     transcriber.transcribe_words = transcribe
     workflow = TranscriptionWorkflow(
-        store, diarizer, transcriber, FakeTextEmbedder(), FakeVoiceEmbedder()
+        store,
+        diarizer,
+        transcriber,
+        FakeTextEmbedder(),
+        FakeVoiceEmbedder(),
+        max_chunk_seconds=chunk_seconds,
     )
     rows = list(workflow.transcribe(source))
-    assert calls == [30 * SAMPLE_RATE, 30 * SAMPLE_RATE, 5 * SAMPLE_RATE]
-    assert [(row.start, row.end) for row in rows] == [(0, 30), (30, 60), (60, 65)]
-    assert [row.sequence for row in rows] == [0, 1, 2]
+    assert calls == [(end - start) * SAMPLE_RATE for start, end in expected_spans]
+    assert [(row.start, row.end) for row in rows] == expected_spans
+    assert [row.sequence for row in rows] == list(range(len(expected_spans)))
     assert all(row.speaker == "A" for row in rows)
     assert store.status == "completed"
 
@@ -546,3 +564,19 @@ def test_speech_windows_preserve_boundaries_and_skip_silence():
         (2 * SAMPLE_RATE, 3 * SAMPLE_RATE, [turns[1]]),
         (4 * SAMPLE_RATE, round(4.5 * SAMPLE_RATE), [turns[2]]),
     ]
+
+
+def test_full_recording_window_keeps_all_turns_and_handles_empty_audio():
+    workflow = TranscriptionWorkflow(
+        MemoryStore(),
+        FakeDiarizer(),
+        FakeTranscriber(),
+        FakeTextEmbedder(),
+        FakeVoiceEmbedder(),
+    )
+    turns = [SpeakerTurn(1, 2, "A"), SpeakerTurn(60, 65, "B")]
+    assert list(workflow._speech_windows(65 * SAMPLE_RATE, turns)) == [
+        (0, 65 * SAMPLE_RATE, turns)
+    ]
+    assert list(workflow._speech_windows(65 * SAMPLE_RATE, [])) == []
+    assert list(workflow._speech_windows(0, [])) == []

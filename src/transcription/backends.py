@@ -8,7 +8,6 @@ from numpy.typing import NDArray
 
 Audio = NDArray[np.float32]
 SAMPLE_RATE = 16000
-WHISPER_WINDOW_SECONDS = 30
 
 
 @dataclass(frozen=True)

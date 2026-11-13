@@ -121,7 +121,6 @@ try:
         transcriber=WhisperTranscriber(language="en"),
         text_embedder=SentenceTextEmbedder(),
         voice_embedder=PyannoteVoiceEmbedder(token),
-        max_chunk_seconds=30,
     )
     with closing(workflow.transcribe("data/mp4/2026-11-10_budget.mp4")) as segments:
         for segment in segments:
@@ -144,10 +143,15 @@ first. This is initial schema setup, not a schema migration system.
   transcription, not real-time online diarization, and diarization memory use
   depends on recording length.
 - Whisper receives recording-aligned audio windows, not individual speaker turns.
-  `max_chunk_seconds` defaults to **30 seconds**, Whisper's native context size,
-  and cannot exceed 30. Smaller positive values remain supported; the final
-  window may be shorter. Windows with no diarized speech are not transcribed.
+  By default, `max_chunk_seconds=None` passes the **whole recording** to Whisper
+  in one call. An explicit finite positive chunk duration of at least one audio
+  sample is supported without a 30-second upper limit; the final window may be
+  shorter. Windows with no diarized speech are not transcribed.
   Tiny speaker turns therefore do not become tiny standalone Whisper inputs.
+- Whisper itself still uses sliding 30-second model windows internally; removing
+  the workflow limit does not change its native context size. Whole-recording
+  calls increase audio/result memory use and delay the first database commit
+  until Whisper returns all words. Diarization still analyzes the whole file first.
 - Whisper word timestamps are assigned to the speaker with the greatest total
   diarization overlap for each word. Ties use the first speaker in sorted turn
   order. Words without any overlap are retained as `UNKNOWN` with a warning.

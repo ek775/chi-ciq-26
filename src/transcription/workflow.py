@@ -11,7 +11,6 @@ import numpy as np
 
 from .backends import (
     SAMPLE_RATE,
-    WHISPER_WINDOW_SECONDS,
     Audio,
     Diarizer,
     SpeakerTurn,
@@ -121,22 +120,22 @@ class TranscriptionWorkflow:
         text_embedder: TextEmbedder,
         voice_embedder: VoiceEmbedder,
         *,
-        max_chunk_seconds: float = WHISPER_WINDOW_SECONDS,
+        max_chunk_seconds: float | None = None,
     ):
-        if not (
-            math.isfinite(max_chunk_seconds)
-            and 1 / SAMPLE_RATE <= max_chunk_seconds <= WHISPER_WINDOW_SECONDS
+        if max_chunk_seconds is not None and not (
+            math.isfinite(max_chunk_seconds) and max_chunk_seconds >= 1 / SAMPLE_RATE
         ):
             raise ValueError(
-                "max_chunk_seconds must be finite, at least one audio sample, "
-                f"and at most {WHISPER_WINDOW_SECONDS} seconds"
+                "max_chunk_seconds must be None or finite and at least one audio sample"
             )
         self.store = store
         self.diarizer = diarizer
         self.transcriber = transcriber
         self.text_embedder = text_embedder
         self.voice_embedder = voice_embedder
-        self.max_chunk_frames = int(max_chunk_seconds * SAMPLE_RATE)
+        self.max_chunk_frames = (
+            None if max_chunk_seconds is None else int(max_chunk_seconds * SAMPLE_RATE)
+        )
 
     def transcribe(self, source: str | Path) -> Iterator[TranscriptSegment]:
         """Commit each segment before yielding it; close the iterator if stopping early."""
@@ -184,10 +183,14 @@ class TranscriptionWorkflow:
         frame_count = audio_file.getnframes()
         self.store.set_recording_duration(meeting_id, frame_count / SAMPLE_RATE)
         logger.info(
-            "Meeting %s: recording duration %.2fs; chunk limit %.2fs",
+            "Meeting %s: recording duration %.2fs; chunk limit %s",
             meeting_id,
             frame_count / SAMPLE_RATE,
-            self.max_chunk_frames / SAMPLE_RATE,
+            (
+                "full recording"
+                if self.max_chunk_frames is None
+                else f"{self.max_chunk_frames / SAMPLE_RATE:.2f}s"
+            ),
         )
         return frame_count
 
@@ -214,8 +217,9 @@ class TranscriptionWorkflow:
     ) -> Iterator[tuple[int, int, list[SpeakerTurn]]]:
         cursor = 0
         active: list[SpeakerTurn] = []
-        for start in range(0, frame_count, self.max_chunk_frames):
-            end = min(start + self.max_chunk_frames, frame_count)
+        chunk_frames = self.max_chunk_frames or max(frame_count, 1)
+        for start in range(0, frame_count, chunk_frames):
+            end = min(start + chunk_frames, frame_count)
             active = [turn for turn in active if turn.end > start / SAMPLE_RATE]
             while cursor < len(turns) and turns[cursor].start < end / SAMPLE_RATE:
                 if turns[cursor].end > start / SAMPLE_RATE:
@@ -232,10 +236,11 @@ class TranscriptionWorkflow:
         turns: list[SpeakerTurn],
     ) -> Iterator[TranscriptSegment]:
         sequence = 0
+        chunk_frames = self.max_chunk_frames or max(frame_count, 1)
         for start, end, active in self._speech_windows(frame_count, turns):
             chunk = read_audio(audio_file, start, end)
             label = (
-                f"Meeting {meeting_id}: window {start // self.max_chunk_frames + 1} "
+                f"Meeting {meeting_id}: window {start // chunk_frames + 1} "
                 f"[{start / SAMPLE_RATE:.3f}-{end / SAMPLE_RATE:.3f}s]"
             )
             with timed_operation(f"{label}: Whisper"):

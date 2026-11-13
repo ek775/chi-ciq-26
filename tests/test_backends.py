@@ -35,8 +35,14 @@ def test_whisper_receives_audio_and_cpu_options(monkeypatch):
 
 
 @pytest.mark.parametrize("device", ["cpu", "cuda"])
-def test_whisper_returns_word_timestamps(monkeypatch, device):
+@pytest.mark.parametrize("seconds", [1, 65])
+def test_whisper_returns_word_timestamps(monkeypatch, device, seconds):
+    audio = np.zeros(seconds * 16000, dtype=np.float32)
+    start = seconds - 0.8
+    end = seconds - 0.2
+
     def transcribe(audio, **kwargs):
+        assert audio.shape == (seconds * 16000,)
         assert kwargs == {
             "language": "en",
             "fp16": device == "cuda",
@@ -45,16 +51,16 @@ def test_whisper_returns_word_timestamps(monkeypatch, device):
         }
         return {
             "text": " Hello.",
-            "segments": [{"words": [{"start": 0.2, "end": 0.8, "word": " Hello."}]}],
+            "segments": [{"words": [{"start": start, "end": end, "word": " Hello."}]}],
         }
 
     model = SimpleNamespace(device=SimpleNamespace(type=device), transcribe=transcribe)
     monkeypatch.setitem(
         sys.modules, "whisper", SimpleNamespace(load_model=lambda *a, **k: model)
     )
-    assert WhisperTranscriber(language="en").transcribe_words(
-        np.zeros(16000, dtype=np.float32)
-    ) == [TranscribedWord(0.2, 0.8, " Hello.")]
+    assert WhisperTranscriber(language="en").transcribe_words(audio) == [
+        TranscribedWord(start, end, " Hello.")
+    ]
 
 
 def test_whisper_text_without_timestamps_is_an_error(monkeypatch):
