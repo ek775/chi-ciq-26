@@ -12,6 +12,7 @@ import pytest
 from sqlalchemy import func, select
 
 from transcription import (
+    DiarizedChunk,
     Meeting,
     Speaker,
     SpeakerTurn,
@@ -33,6 +34,26 @@ class FakeDiarizer:
             SpeakerTurn(1.5, 2, "SPEAKER_01"),
             SpeakerTurn(2, 3, "SPEAKER_00"),
         ]
+
+    def diarize_chunks(self, audio_path, chunk_frames):
+        with wave.open(audio_path, "rb") as audio:
+            frame_count = audio.getnframes()
+        turns = self.diarize(audio_path)
+        for start in range(0, frame_count, chunk_frames):
+            end = min(start + chunk_frames, frame_count)
+            active = []
+            for turn in turns:
+                if turn.end > frame_count / SAMPLE_RATE:
+                    active.append(turn)
+                elif turn.start < end / SAMPLE_RATE and turn.end > start / SAMPLE_RATE:
+                    active.append(
+                        SpeakerTurn(
+                            max(turn.start, start / SAMPLE_RATE),
+                            min(turn.end, end / SAMPLE_RATE),
+                            turn.speaker,
+                        )
+                    )
+            yield DiarizedChunk(start, end, active)
 
 
 class FakeTranscriber:
@@ -182,8 +203,7 @@ def test_empty_window_is_reported_without_aborting(workflow, source, store, capl
         assert session.scalar(select(Meeting.recording_duration_seconds)) >= 3
         assert session.scalar(select(func.count()).select_from(TranscriptSegment)) == 0
     assert "FFmpeg extraction: completed in" in caplog.text
-    assert "full-file diarization: completed in" in caplog.text
-    assert "3 speaker turns" in caplog.text
+    assert "streaming diarization: completed in" in caplog.text
     assert "window 1 [0.000-1.000s]: Whisper" in caplog.text
     assert "Whisper returned no words; no segment stored" in caplog.text
     assert "status=completed" in caplog.text
@@ -428,7 +448,7 @@ def test_empty_window_then_speech_continues_and_commits(source, caplog):
 @pytest.mark.parametrize(
     "chunk_seconds, expected_spans",
     [
-        (None, [(0, 65)]),
+        (None, [(0, 60), (60, 65)]),
         (45, [(0, 45), (45, 65)]),
         (90, [(0, 65)]),
         (30, [(0, 30), (30, 60), (60, 65)]),
@@ -545,7 +565,7 @@ def test_early_close_cleans_up_delegated_audio_processing(source):
     assert not paths[0].parent.exists()
 
 
-def test_speech_windows_preserve_boundaries_and_skip_silence():
+def test_stream_chunk_validation_preserves_sorted_turns():
     workflow = TranscriptionWorkflow(
         MemoryStore(),
         FakeDiarizer(),
@@ -554,19 +574,23 @@ def test_speech_windows_preserve_boundaries_and_skip_silence():
         FakeVoiceEmbedder(),
         max_chunk_seconds=1,
     )
-    turns = [
-        SpeakerTurn(1, 2, "A"),
-        SpeakerTurn(1.5, 3, "B"),
-        SpeakerTurn(4, 4.5, "C"),
-    ]
-    assert list(workflow._speech_windows(round(4.5 * SAMPLE_RATE), turns)) == [
-        (SAMPLE_RATE, 2 * SAMPLE_RATE, turns[:2]),
-        (2 * SAMPLE_RATE, 3 * SAMPLE_RATE, [turns[1]]),
-        (4 * SAMPLE_RATE, round(4.5 * SAMPLE_RATE), [turns[2]]),
-    ]
+    turns = [SpeakerTurn(0.5, 1, "B"), SpeakerTurn(0, 1, "A")]
+    chunk = DiarizedChunk(0, SAMPLE_RATE, turns)
+    workflow._validate_chunk(chunk, 0, SAMPLE_RATE, SAMPLE_RATE)
+    assert chunk.turns == [SpeakerTurn(0, 1, "A"), SpeakerTurn(0.5, 1, "B")]
 
 
-def test_full_recording_window_keeps_all_turns_and_handles_empty_audio():
+@pytest.mark.parametrize(
+    "chunk",
+    [
+        DiarizedChunk(1, SAMPLE_RATE, []),
+        DiarizedChunk(0, SAMPLE_RATE + 1, []),
+        DiarizedChunk(0, 0, []),
+        DiarizedChunk(0, SAMPLE_RATE, [SpeakerTurn(-1, 1, "A")]),
+        DiarizedChunk(0, SAMPLE_RATE, [SpeakerTurn(0, 1, " ")]),
+    ],
+)
+def test_stream_chunk_validation_rejects_invalid_bounds_and_turns(chunk):
     workflow = TranscriptionWorkflow(
         MemoryStore(),
         FakeDiarizer(),
@@ -574,9 +598,5 @@ def test_full_recording_window_keeps_all_turns_and_handles_empty_audio():
         FakeTextEmbedder(),
         FakeVoiceEmbedder(),
     )
-    turns = [SpeakerTurn(1, 2, "A"), SpeakerTurn(60, 65, "B")]
-    assert list(workflow._speech_windows(65 * SAMPLE_RATE, turns)) == [
-        (0, 65 * SAMPLE_RATE, turns)
-    ]
-    assert list(workflow._speech_windows(65 * SAMPLE_RATE, [])) == []
-    assert list(workflow._speech_windows(0, [])) == []
+    with pytest.raises(ValueError):
+        workflow._validate_chunk(chunk, 0, SAMPLE_RATE, SAMPLE_RATE)

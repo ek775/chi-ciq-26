@@ -63,7 +63,7 @@ connected database**, including prior runs, not just this batch. Rerunning input
 creates new meeting records; it does not skip existing files.
 
 Both examples emit timestamped progress logs for model loading, audio extraction,
-full-file diarization, and each chunk's Whisper, embedding, and database stages.
+streaming diarization, and each chunk's Whisper, embedding, and database stages.
 Chunk logs identify the meeting, speaker, and recording-relative audio offsets.
 Each video reports elapsed wall-clock time as `H:MM:SS` and seconds, including
 on failure; the batch timer also includes model loading and database export.
@@ -102,9 +102,9 @@ from contextlib import closing
 from dotenv import load_dotenv
 
 from transcription import (
-    PyannoteDiarizer,
     PyannoteVoiceEmbedder,
     SentenceTextEmbedder,
+    StreamingPyannoteDiarizer,
     TranscriptStore,
     TranscriptionWorkflow,
     WhisperTranscriber,
@@ -117,7 +117,7 @@ engine = create_database(os.environ["DATABASE_URL"])
 try:
     workflow = TranscriptionWorkflow(
         store=TranscriptStore(engine),
-        diarizer=PyannoteDiarizer(token),
+        diarizer=StreamingPyannoteDiarizer(token),
         transcriber=WhisperTranscriber(language="en"),
         text_embedder=SentenceTextEmbedder(),
         voice_embedder=PyannoteVoiceEmbedder(token),
@@ -139,19 +139,57 @@ first. This is initial schema setup, not a schema migration system.
 - FFmpeg extracts the first audio track to a temporary mono 16 kHz WAV file.
   Its sample count determines `meetings.recording_duration_seconds`, including
   silence, before diarization begins. Duration remains `NULL` if extraction fails.
-- pyannote analyzes the **whole file first**. This is incremental segment
-  transcription, not real-time online diarization, and diarization memory use
-  depends on recording length.
+- `StreamingPyannoteDiarizer` uses the community-1 **segmentation and embedding
+  checkpoints directly**, not its full-file `Pipeline`. It analyzes overlapping
+  native model windows (currently 10 seconds), publishing each central 5-second
+  interval once, with approximately 2.5 seconds of future audio context.
+  Beginning/end context is zero-padded; padded speech is not used for identification.
+  This is incremental processing of an extracted WAV, not microphone/network input.
+- Speaker identities are assigned online using normalized embedding centroids,
+  a one-to-one cosine-distance match (default threshold `0.35`), and new clusters
+  when no existing speaker matches. Labels remain fixed after publication; they
+  reset for each recording. At least one second of clean, non-overlapping speech
+  in the context window is required to identify a local speaker. Other speech
+  is retained as `UNKNOWN` with warnings. There is no speaker-cluster limit;
+  unmatched voices create new labels without a capacity-exhaustion failure.
+  Configure `distance_threshold` on the diarizer if needed. Fragmented identities
+  are retained for later post-hoc analysis of stored voice embeddings; automatic
+  post-hoc merging is not implemented.
+- This replaces community-1's offline VBx clustering with a simpler online
+  algorithm. **The same checkpoints do not imply equivalent diarization accuracy.**
+  Thresholds need evaluation on representative meetings; short and overlapping
+  speech can be harder to identify. `PyannoteDiarizer.diarize()` remains available
+  for standalone offline analysis, but is not a streaming workflow backend.
+- A worker continuously produces diarized chunks while the calling thread runs
+  Whisper, embeddings, and database commits. A **two-item bounded queue** applies
+  backpressure: when full, the worker waits rather than analyzing more audio.
+  The queue carries offsets/turns, not full audio arrays. Each thread owns its WAV
+  reader, and each model instance is called serially. Do not share a workflow's
+  adapters between concurrent recordings.
 - Whisper receives recording-aligned audio windows, not individual speaker turns.
-  By default, `max_chunk_seconds=None` passes the **whole recording** to Whisper
-  in one call. An explicit finite positive chunk duration of at least one audio
-  sample is supported without a 30-second upper limit; the final window may be
-  shorter. Windows with no diarized speech are not transcribed.
+  `max_chunk_seconds=None` now selects a bounded **60-second streaming batch**,
+  rather than a whole-recording call. Explicit finite durations of at least one
+  audio sample remain supported **without a 30-second upper limit**. Changing this
+  batch duration does not change the diarizer's native model context. The final
+  batch can be shorter. Silent chunks still advance the stream but skip Whisper.
   Tiny speaker turns therefore do not become tiny standalone Whisper inputs.
 - Whisper itself still uses sliding 30-second model windows internally; removing
-  the workflow limit does not change its native context size. Whole-recording
-  calls increase audio/result memory use and delay the first database commit
-  until Whisper returns all words. Diarization still analyzes the whole file first.
+  the workflow limit does not change its native context size. Inference buffers
+  are bounded by model context and the configured batch duration, not recording
+  length. Clustering state is separate: one centroid and counter per discovered
+  cluster, with no fixed memory ceiling. Clustering memory and matching work grow
+  with cluster count, including erroneous splits of the same person.
+  There can be two queued chunks, one producer chunk waiting
+  to enqueue, and one consumer chunk being processed. Larger batch durations
+  increase memory use and time to the first commit; concurrent CUDA inference
+  can still exhaust device memory. No silent sequential or CPU retry is performed.
+- Closing the iterator or a consumer error cancels queue waits and joins the
+  worker **before** deleting temporary audio. Worker exceptions propagate after
+  previously queued valid chunks, preserving committed rows. A truncated, invalid,
+  or out-of-order stream fails rather than completing successfully. Running native
+  inference cannot be forcibly interrupted by a Python thread; shutdown waits for
+  that call to return. If critical memory/runtime problems occur, use separate
+  Fuzzball-managed inference containers.
 - Whisper word timestamps are assigned to the speaker with the greatest total
   diarization overlap for each word. Ties use the first speaker in sorted turn
   order. Words without any overlap are retained as `UNKNOWN` with a warning.
@@ -169,6 +207,12 @@ first. This is initial schema setup, not a schema migration system.
   window-relative word offsets and original word spacing. The default
   `WhisperTranscriber.transcribe(audio) -> str` remains available for standalone
   use. Zero-duration words are retained with a one-sample audio span.
+- Custom workflow diarizers must implement
+  `diarize_chunks(audio_path, chunk_frames) -> Iterable[DiarizedChunk]`.
+  Each chunk has integer audio-sample `start`/`end` offsets and a list of
+  recording-relative `SpeakerTurn`s clipped to that interval. Chunks must cover
+  the WAV contiguously from zero through EOF, including silence, and never exceed
+  `chunk_frames`. Emit finalized results incrementally, not a full-file list.
 - Each segment and its speaker are committed in one transaction **before yield**.
   Exhausting the iterator marks the meeting `completed`. Errors propagate, and
   failures or explicit iterator closure mark it `incomplete`. Earlier commits
@@ -308,4 +352,26 @@ docker compose exec app sh -c 'TEST_DATABASE_URL="$DATABASE_URL" python -m pytes
 ```
 
 Tests use synthetic MP4 audio, real FFmpeg/PostgreSQL/pgvector, and deterministic
-model stand-ins. They do not download weights or validate recognition accuracy.
+model stand-ins. Default tests do not download weights or validate recognition
+accuracy. Streaming tests verify sustained overlap beyond the first two batches,
+two-item queue backpressure, speaker-slot permutation tracking, overlap identity
+constraints, final partial chunks, per-recording reset, worker errors and cleanup.
+
+## Streaming inference options investigated
+
+- [community-1 model card](https://huggingface.co/pyannote/speaker-diarization-community-1):
+  its standard pipeline returns full-file annotations, not finalized streaming turns.
+  Moving that same call into a Hugging Face hosted endpoint would not make its
+  algorithm streaming and would send meeting audio off-machine.
+- [pyannote Model/Inference API](https://github.com/pyannote/pyannote-audio/blob/main/src/pyannote/audio/core/inference.py):
+  selected here. `Model.from_pretrained(..., subfolder="segmentation", token=...)`
+  and the bundled `embedding` subfolder load the existing weights. `Inference.infer`
+  handles evaluation/device transfer and powerset-to-multilabel conversion.
+  An online clustering layer replaces the offline global clustering step.
+- [Diart](https://github.com/juanmc2005/diart): offers overlap-aware online
+  clustering, but release 0.9.2 still uses `use_auth_token` in its built-in loader
+  and requires NumPy below 2, conflicting with this project's pyannote 4 stack.
+  Adapting its loaders/dependencies was not the simplest compatible option.
+- [pyannoteAI streaming](https://docs.pyannote.ai/tutorials/streaming-real-time):
+  a hosted alternative, not local community-1 inference. It requires separate
+  service credentials and uploading audio, so it was not selected.

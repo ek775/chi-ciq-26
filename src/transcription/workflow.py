@@ -3,8 +3,12 @@ import math
 import subprocess
 import wave
 from collections.abc import Iterator
+from concurrent.futures import ThreadPoolExecutor
+from contextlib import closing
 from pathlib import Path
+from queue import Empty, Full, Queue
 from tempfile import TemporaryDirectory
+from threading import Event
 from uuid import UUID
 
 import numpy as np
@@ -12,6 +16,7 @@ import numpy as np
 from .backends import (
     SAMPLE_RATE,
     Audio,
+    DiarizedChunk,
     Diarizer,
     SpeakerTurn,
     TextEmbedder,
@@ -25,6 +30,8 @@ from .models import TranscriptSegment
 from .progress import timed_operation
 
 logger = logging.getLogger(__name__)
+DEFAULT_STREAM_CHUNK_SECONDS = 60
+DIARIZATION_BUFFER_CHUNKS = 2
 
 
 def align_words(
@@ -128,6 +135,11 @@ class TranscriptionWorkflow:
             raise ValueError(
                 "max_chunk_seconds must be None or finite and at least one audio sample"
             )
+        if not callable(getattr(diarizer, "diarize_chunks", None)):
+            raise TypeError(
+                "Workflow diarizers must implement diarize_chunks; use "
+                "StreamingPyannoteDiarizer, not the offline PyannoteDiarizer"
+            )
         self.store = store
         self.diarizer = diarizer
         self.transcriber = transcriber
@@ -160,9 +172,8 @@ class TranscriptionWorkflow:
                     extract_audio(source, audio_path)
                 with wave.open(str(audio_path), "rb") as audio_file:
                     frame_count = self._validate_audio(meeting_id, audio_file)
-                    turns = self._diarize(meeting_id, audio_path, frame_count)
-                    yield from self._transcribe_audio(
-                        meeting_id, audio_file, frame_count, turns
+                    yield from self._transcribe_stream(
+                        meeting_id, audio_path, audio_file, frame_count
                     )
             completed = True
         finally:
@@ -187,57 +198,129 @@ class TranscriptionWorkflow:
             meeting_id,
             frame_count / SAMPLE_RATE,
             (
-                "full recording"
+                f"{DEFAULT_STREAM_CHUNK_SECONDS}s (streaming default)"
                 if self.max_chunk_frames is None
                 else f"{self.max_chunk_frames / SAMPLE_RATE:.2f}s"
             ),
         )
         return frame_count
 
-    def _diarize(
-        self, meeting_id: UUID, audio_path: Path, frame_count: int
-    ) -> list[SpeakerTurn]:
-        with timed_operation(f"Meeting {meeting_id}: full-file diarization"):
-            turns = list(self.diarizer.diarize(str(audio_path)))
-        logger.info("Meeting %s: %d speaker turns", meeting_id, len(turns))
-        for turn in turns:
+    def _validate_chunk(
+        self, chunk: DiarizedChunk, expected_start: int, frame_count: int, limit: int
+    ) -> None:
+        if not (
+            isinstance(chunk.start, int)
+            and isinstance(chunk.end, int)
+            and chunk.start == expected_start
+            and chunk.start < chunk.end <= frame_count
+            and chunk.end - chunk.start <= limit
+        ):
+            raise ValueError("Diarizer returned invalid or non-contiguous chunk bounds")
+        for turn in chunk.turns:
             if not (
                 math.isfinite(turn.start)
                 and math.isfinite(turn.end)
-                and 0 <= turn.start < turn.end
-                and turn.end <= frame_count / SAMPLE_RATE + 1 / SAMPLE_RATE
+                and chunk.start / SAMPLE_RATE <= turn.start < turn.end
+                and turn.end <= chunk.end / SAMPLE_RATE + 1 / SAMPLE_RATE
             ):
                 raise ValueError(f"Diarizer returned invalid timestamps: {turn}")
             if not turn.speaker.strip():
                 raise ValueError("Diarizer returned an empty speaker label")
-        return sorted(turns, key=lambda turn: (turn.start, turn.end, turn.speaker))
+        chunk.turns.sort(key=lambda turn: (turn.start, turn.end, turn.speaker))
 
-    def _speech_windows(
-        self, frame_count: int, turns: list[SpeakerTurn]
-    ) -> Iterator[tuple[int, int, list[SpeakerTurn]]]:
-        cursor = 0
-        active: list[SpeakerTurn] = []
-        chunk_frames = self.max_chunk_frames or max(frame_count, 1)
-        for start in range(0, frame_count, chunk_frames):
-            end = min(start + chunk_frames, frame_count)
-            active = [turn for turn in active if turn.end > start / SAMPLE_RATE]
-            while cursor < len(turns) and turns[cursor].start < end / SAMPLE_RATE:
-                if turns[cursor].end > start / SAMPLE_RATE:
-                    active.append(turns[cursor])
-                cursor += 1
-            if active:
-                yield start, end, active
+    def _transcribe_stream(
+        self,
+        meeting_id: UUID,
+        audio_path: Path,
+        audio_file: wave.Wave_read,
+        frame_count: int,
+    ) -> Iterator[TranscriptSegment]:
+        chunk_frames = (
+            self.max_chunk_frames or DEFAULT_STREAM_CHUNK_SECONDS * SAMPLE_RATE
+        )
+        queue: Queue[DiarizedChunk] = Queue(maxsize=DIARIZATION_BUFFER_CHUNKS)
+        cancelled = Event()
+        finished = Event()
 
-    def _transcribe_audio(
+        def produce() -> None:
+            expected_start = 0
+            try:
+                with timed_operation(f"Meeting {meeting_id}: streaming diarization"):
+                    chunks = iter(
+                        self.diarizer.diarize_chunks(str(audio_path), chunk_frames)
+                    )
+                    try:
+                        for chunk in chunks:
+                            if cancelled.is_set():
+                                return
+                            self._validate_chunk(
+                                chunk, expected_start, frame_count, chunk_frames
+                            )
+                            expected_start = chunk.end
+                            while not cancelled.is_set():
+                                try:
+                                    queue.put(chunk, timeout=0.05)
+                                    break
+                                except Full:
+                                    continue
+                            if cancelled.is_set():
+                                return
+                        if expected_start != frame_count:
+                            raise ValueError(
+                                "Diarization stream ended before audio EOF"
+                            )
+                    finally:
+                        close = getattr(chunks, "close", None)
+                        if close is not None:
+                            close()
+            finally:
+                finished.set()
+
+        def consume() -> Iterator[DiarizedChunk]:
+            while True:
+                try:
+                    yield queue.get(timeout=0.05)
+                except Empty:
+                    if finished.is_set():
+                        # A final put can race with get's timeout.
+                        if not queue.empty():
+                            continue
+                        producer.result()
+                        return
+
+        with ThreadPoolExecutor(
+            max_workers=1, thread_name_prefix="diarization"
+        ) as executor:
+            producer = executor.submit(produce)
+            try:
+                with closing(consume()) as chunks:
+                    yield from self._transcribe_chunks(
+                        meeting_id, audio_file, chunk_frames, chunks
+                    )
+            finally:
+                cancelled.set()
+                # Joining must precede deletion of the worker's audio file.
+                executor.shutdown(wait=True, cancel_futures=True)
+                error = None if producer.cancelled() else producer.exception()
+                if error is not None:
+                    logger.error(
+                        "Meeting %s: diarization worker failed",
+                        meeting_id,
+                        exc_info=error,
+                    )
+
+    def _transcribe_chunks(
         self,
         meeting_id: UUID,
         audio_file: wave.Wave_read,
-        frame_count: int,
-        turns: list[SpeakerTurn],
+        chunk_frames: int,
+        chunks: Iterator[DiarizedChunk],
     ) -> Iterator[TranscriptSegment]:
         sequence = 0
-        chunk_frames = self.max_chunk_frames or max(frame_count, 1)
-        for start, end, active in self._speech_windows(frame_count, turns):
+        for diarized in chunks:
+            start, end, active = diarized.start, diarized.end, diarized.turns
+            if not active:
+                continue
             chunk = read_audio(audio_file, start, end)
             label = (
                 f"Meeting {meeting_id}: window {start // chunk_frames + 1} "
@@ -267,7 +350,7 @@ class TranscriptionWorkflow:
     ) -> TranscriptSegment:
         if turn.speaker == "UNKNOWN":
             logger.warning(
-                "Meeting %s: no diarization overlap for words at %.3f-%.3fs; "
+                "Meeting %s: unresolved speaker for words at %.3f-%.3fs; "
                 "assigning UNKNOWN",
                 meeting_id,
                 turn.start,

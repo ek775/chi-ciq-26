@@ -14,11 +14,12 @@ dependencies = [
     "accelerate",
     # Whisper transcription and pyannote speaker diarization.
     "openai-whisper",
-    "pyannote.audio",
+    "pyannote.audio>=4,<5",
     "torch",
     "torchaudio",
     "torchcodec",
     "numpy",
+    "scipy",
     # Requires system FFmpeg with shared libraries (e.g. apt install ffmpeg).
     "ffmpeg-python",
     # Load HF_TOKEN from .env; gated pyannote models also require accepting terms.

@@ -6,9 +6,9 @@ from contextlib import closing
 from dotenv import load_dotenv
 
 from transcription import (
-    PyannoteDiarizer,
     PyannoteVoiceEmbedder,
     SentenceTextEmbedder,
+    StreamingPyannoteDiarizer,
     TranscriptionWorkflow,
     TranscriptStore,
     WhisperTranscriber,
@@ -33,7 +33,7 @@ def build_workflow(store: TranscriptStore, token: str) -> TranscriptionWorkflow:
     device = "cuda" if torch.cuda.is_available() else "cpu"
     print(f"Inference device: {device}", flush=True)
     with timed_operation("Loading diarization model"):
-        diarizer = PyannoteDiarizer(token, device=device)
+        diarizer = StreamingPyannoteDiarizer(token, device=device)
     with timed_operation("Loading Whisper model"):
         transcriber = WhisperTranscriber(language="en", device=device)
     with timed_operation("Loading text embedding model"):
