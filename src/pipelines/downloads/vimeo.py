@@ -268,7 +268,14 @@ def main(argv: list[str] | None = None) -> int:
                 best_audio=args.best_audio,
                 refresh=args.refresh,
             )
-        except (OSError, ValueError, KeyError, TypeError, subprocess.SubprocessError):
+        except (
+            OSError,
+            ValueError,
+            KeyError,
+            TypeError,
+            RuntimeError,
+            subprocess.SubprocessError,
+        ):
             logger.exception("Vimeo %s acquisition failed", video)
             failures.append(video)
     if failures:
