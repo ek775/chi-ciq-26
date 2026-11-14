@@ -2,11 +2,33 @@ from uuid import uuid4
 
 import pytest
 from fastapi.testclient import TestClient
-from sqlalchemy import text
+from sqlalchemy import create_engine, text
 from test_pipelines import FakeWorkflow
 
 from pipelines.transcription.pipeline import IngestionPipeline
 from web.app import create_app
+
+
+def test_readiness_includes_configured_analytics_schema(monkeypatch):
+    from web import app as module
+
+    meetings = create_engine("sqlite://")
+    analytics = create_engine("sqlite://")
+    monkeypatch.setattr(module, "check_schema", lambda engine: None)
+    checks = []
+
+    def check(engine):
+        checks.append(engine)
+        if len(checks) > 1:
+            raise RuntimeError("Analytics views need migration")
+
+    monkeypatch.setattr(module, "check_analytics_schema", check)
+    with TestClient(create_app(meetings, analytics)) as client:
+        assert client.get("/ready").json() == {"status": "ready"}
+        response = client.get("/ready")
+        assert response.status_code == 503
+        assert response.json() == {"detail": "Database schema is not ready"}
+    assert checks == [analytics, analytics]
 
 
 @pytest.fixture

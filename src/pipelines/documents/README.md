@@ -9,18 +9,27 @@ Acquisition and scheduling remain upstream responsibilities.
 
 The current repository corpus has 202 `.txt` files under
 `data-reference/Transcripts`. For Fuzzball, stage that directory at
-`/datasets/Transcripts`, mount it read-only at `/inputs`, and run:
+`/datasets/Transcripts` and run:
 
 ```sh
-chi-ciq-ingest-documents --input-dir /inputs --namespace transcripts
+chi-ciq-ingest-documents --input-dir /datasets/Transcripts --namespace transcripts
 ```
 
 The `.vtt` captions and database dumps elsewhere under `data/` are not inputs:
 VTT is unsupported by the extractor, and database archives are for backup only.
 The shared volume's contents could not be verified through the CLI because the
 inspection workflow remained queued, so stage the transcript tree before
-ingestion. `fuzzball.draft.yaml` describes this input contract but is not a
-submittable Fuzzball workflow.
+ingestion. [fuzzball.yaml](../../../fuzzball.yaml) deploys four CPU ingestion
+tasks alongside transcription, then analytics and the final web service.
+See the [deployment guide](../../../README.md#fuzzball-deployment).
+
+For parallel ingestion, pass `--shard-index INDEX --shard-count COUNT`.
+Indices are zero-based and must cover `0..COUNT-1`; all workers use the same
+root and namespace. Relative-path hashing assigns each file to exactly one
+worker without changing its database key. Directory creation remains locked
+and preserves empty directories. The default count of one preserves unsharded
+behavior; empty shards succeed. Freeze the input tree during the array and
+protect inputs with cluster filesystem ACLs.
 
 ## Local run
 

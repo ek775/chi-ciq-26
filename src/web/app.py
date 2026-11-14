@@ -15,6 +15,7 @@ from sqlalchemy import Engine, func, select, text
 from sqlalchemy.exc import SQLAlchemyError
 from sqlalchemy.orm import Session
 
+from databases.analytics.schema import check_schema as check_analytics_schema
 from databases.meetings.models import (
     Meeting,
     PublishedSource,
@@ -116,6 +117,8 @@ def create_app(
     def ready(request: Request):
         try:
             check_schema(request.app.state.database)
+            if request.app.state.analytics is not None:
+                check_analytics_schema(request.app.state.analytics)
         except RuntimeError as error:
             logger.error("Schema readiness failed", exc_info=error)
             raise HTTPException(503, "Database schema is not ready") from error

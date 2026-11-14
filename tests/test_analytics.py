@@ -2,6 +2,7 @@ import json
 import logging
 import os
 import threading
+from concurrent.futures import ThreadPoolExecutor
 from datetime import date
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from io import StringIO
@@ -42,9 +43,13 @@ from pipelines.analytics.officials import (
     soundex,
 )
 from pipelines.analytics.pipeline import (
+    RUN_LOCK,
+    STAGES,
+    UNIT_BUCKETS,
     AnalyticsConfig,
     AnalyticsPipeline,
     Factories,
+    analytics_run_lock,
     export_roster,
     export_speakers,
     load_roster,
@@ -77,6 +82,308 @@ from pipelines.transcription import TranscriptStore
 from pipelines.transcription.pipeline import IngestionPipeline
 
 TAX = "property-tax-increase"
+
+
+def test_parallel_option_preserves_existing_positional_config_arguments():
+    config = AnalyticsConfig(("sentiment",), "test-sentiment")
+    assert config.sentiment_model == "test-sentiment"
+    assert config.parallel_stage is False
+
+
+@pytest.mark.parametrize(
+    "stages", [(), ("sync",), ("roster",), ("refresh",), ("sentiment", "emotion")]
+)
+def test_parallel_mode_rejects_unsafe_stage_selections(stages):
+    with pytest.raises(ValueError, match="Parallel mode"):
+        AnalyticsConfig(stages=stages, parallel_stage=True)
+
+
+@pytest.mark.parametrize(
+    "config",
+    [
+        {"shard_index": -1},
+        {"shard_count": 0},
+        {"shard_count": 2, "shard_index": 2},
+        {"shard_count": 257, "parallel_stage": True, "stages": ("sentiment",)},
+        {"shard_count": 2, "parallel_stage": False, "stages": ("sentiment",)},
+        {"shard_count": 2, "parallel_stage": True, "stages": ("topics",)},
+        {"shard_count": 2, "parallel_stage": True, "stages": ("attribute",)},
+    ],
+)
+def test_invalid_analytics_shards_fail(config):
+    with pytest.raises(ValueError):
+        AnalyticsConfig(**config)
+
+
+def test_parallel_stage_locks_allow_independent_work_and_exclude_mutations(
+    analytics_engine,
+):
+    def available(stage):
+        with analytics_engine.connect().execution_options(
+            isolation_level="AUTOCOMMIT"
+        ) as connection:
+            key = STAGES.index(stage) + 1
+            acquired = connection.scalar(
+                text("SELECT pg_try_advisory_lock(:namespace, :stage)"),
+                {"namespace": RUN_LOCK, "stage": key},
+            )
+            if acquired:
+                connection.execute(
+                    text("SELECT pg_advisory_unlock(:namespace, :stage)"),
+                    {"namespace": RUN_LOCK, "stage": key},
+                )
+            return acquired
+
+    with analytics_run_lock(analytics_engine, ("sentiment",), parallel_stage=True):
+        assert not available("sentiment")
+        assert available("emotion")
+        with (
+            analytics_run_lock(analytics_engine, ("emotion",), parallel_stage=True),
+            analytics_engine.connect().execution_options(
+                isolation_level="AUTOCOMMIT"
+            ) as connection,
+        ):
+            assert not connection.scalar(
+                text("SELECT pg_try_advisory_lock(:key)"), {"key": RUN_LOCK}
+            )
+    with (
+        pytest.raises(RuntimeError, match="test failure"),
+        analytics_run_lock(analytics_engine, ("stance",), parallel_stage=True),
+    ):
+        assert not available("topics")
+        assert not available("attribute")
+        assert available("mentions")
+        raise RuntimeError("test failure")
+    assert all(available(stage) for stage in ("stance", "topics", "attribute"))
+    with (
+        analytics_run_lock(analytics_engine),
+        analytics_engine.connect() as connection,
+    ):
+        assert not connection.scalar(
+            text("SELECT pg_try_advisory_lock_shared(:key)"), {"key": RUN_LOCK}
+        )
+
+
+def test_independent_analytics_stages_actually_execute_in_parallel(world):
+    world["make"](stages=("sync", "roster")).run()
+    barrier = threading.Barrier(2, timeout=10)
+
+    def run(stage):
+        pipeline = world["make"](stages=(stage,), parallel_stage=True)
+        original = getattr(pipeline, f"stage_{stage}")
+
+        def analyze():
+            barrier.wait()
+            original()
+
+        setattr(pipeline, f"stage_{stage}", analyze)
+        return pipeline.run()
+
+    with ThreadPoolExecutor(max_workers=2) as workers:
+        sentiment, emotion = list(workers.map(run, ("sentiment", "emotion")))
+    assert sentiment["sentiment_results"] == emotion["emotion_results"] == 5
+    world["make"](stages=("refresh",)).run()
+    assert len(rows(world["engine"], "SELECT * FROM dash_sources")) == 3
+
+
+def test_same_stage_disjoint_shards_execute_concurrently_and_skip_retries(world):
+    world["make"](stages=("sync", "roster")).run()
+    barrier = threading.Barrier(2, timeout=10)
+
+    def run(index):
+        pipeline = world["make"](
+            stages=("sentiment",),
+            parallel_stage=True,
+            shard_count=2,
+            shard_index=index,
+        )
+        original = pipeline.stage_sentiment
+
+        def classify():
+            barrier.wait()
+            original()
+
+        pipeline.stage_sentiment = classify
+        return pipeline.run()
+
+    with ThreadPoolExecutor(max_workers=2) as workers:
+        counts = list(workers.map(run, range(2)))
+    assert sum(count.get("sentiment_results", 0) for count in counts) == 5
+    assert len(world["sentiment"].texts) == 5
+    for index in range(2):
+        assert (
+            world["make"](
+                stages=("sentiment",),
+                parallel_stage=True,
+                shard_count=2,
+                shard_index=index,
+            ).run()
+            == {}
+        )
+
+
+def test_analytics_bucket_locks_serialize_overlapping_layouts_and_release(
+    analytics_engine,
+):
+    stage_key = STAGES.index("sentiment") + 1
+
+    def available(bucket):
+        key = stage_key * UNIT_BUCKETS + bucket
+        with analytics_engine.connect().execution_options(
+            isolation_level="AUTOCOMMIT"
+        ) as connection:
+            acquired = connection.scalar(
+                text("SELECT pg_try_advisory_lock(:namespace, :key)"),
+                {"namespace": RUN_LOCK + 1, "key": key},
+            )
+            if acquired:
+                connection.execute(
+                    text("SELECT pg_advisory_unlock(:namespace, :key)"),
+                    {"namespace": RUN_LOCK + 1, "key": key},
+                )
+            return acquired
+
+    with (
+        pytest.raises(RuntimeError, match="release buckets"),
+        analytics_run_lock(
+            analytics_engine,
+            ("sentiment",),
+            parallel_stage=True,
+            shard_index=0,
+            shard_count=2,
+        ),
+    ):
+        assert not available(0)
+        assert not available(6)  # Count 3/index 0 also owns this bucket.
+        assert not available(254)
+        assert available(1)
+        with analytics_engine.connect() as connection:
+            assert not connection.scalar(
+                text("SELECT pg_try_advisory_lock(:namespace, :stage)"),
+                {"namespace": RUN_LOCK, "stage": stage_key},
+            )
+        raise RuntimeError("release buckets")
+    assert all(available(bucket) for bucket in (0, 6, 254))
+
+
+def test_sharded_classification_and_stance_match_unsharded_results(world):
+    world["make"]().run()
+    engine = world["engine"]
+    statements = {
+        "sentiment": "SELECT unit_id, model, label, score FROM sentiment_results ORDER BY unit_id",
+        "emotion": "SELECT unit_id, model, label FROM emotion_results ORDER BY unit_id",
+        "stance": "SELECT unit_id, topic_key, model, stance, score, evidence FROM stance_results ORDER BY unit_id, topic_key",
+    }
+    expected = {stage: rows(engine, query) for stage, query in statements.items()}
+    with engine.begin() as connection:
+        for table in ("sentiment_results", "emotion_results", "stance_results"):
+            connection.execute(text(f"DELETE FROM {table}"))
+    for stage, query in statements.items():
+
+        def run(index, selected_stage=stage):
+            return world["make"](
+                stages=(selected_stage,),
+                parallel_stage=True,
+                shard_count=4,
+                shard_index=index,
+            ).run()
+
+        with ThreadPoolExecutor(max_workers=4) as workers:
+            list(workers.map(run, range(4)))
+        assert rows(engine, query) == expected[stage]
+    calls = len(world["stance"].calls)
+    for index in range(4):
+        world["make"](
+            stages=("stance",), parallel_stage=True, shard_count=4, shard_index=index
+        ).run()
+    assert len(world["stance"].calls) == calls
+
+
+def test_analytics_shard_queries_cover_every_unit_once(world):
+    world["make"](stages=("sync",)).run()
+    all_units = rows(world["engine"], "SELECT id FROM analysis_units")
+    for count in (3, 32, 128, 256):
+        assigned = []
+        with world["engine"].connect() as connection:
+            for index in range(count):
+                pipeline = world["make"](
+                    stages=("sentiment",),
+                    parallel_stage=True,
+                    shard_count=count,
+                    shard_index=index,
+                )
+                assigned.extend(
+                    connection.execute(
+                        select(analysis_units.c.id).where(pipeline._unit_shard())
+                    ).scalars()
+                )
+        assert len(assigned) == len(all_units)
+        assert set(assigned) == {row["id"] for row in all_units}
+
+
+def test_stance_shards_apply_limit_after_partitioning(world):
+    world["make"](stages=("sync", "topics")).run()
+    classifier = world["stance"]
+    all_candidates = world["make"]()._stance_candidates(classifier)
+    assert len(all_candidates) > 1
+    assigned = []
+    for index in range(4):
+        pipeline = world["make"](
+            stages=("stance",),
+            parallel_stage=True,
+            shard_count=4,
+            shard_index=index,
+        )
+        candidates = pipeline._stance_candidates(classifier)
+        assigned.extend(row.id for row in candidates)
+        limited = world["make"](
+            stages=("stance",),
+            parallel_stage=True,
+            shard_count=4,
+            shard_index=index,
+            stance_limit=1,
+        )._stance_candidates(classifier)
+        assert [row.id for row in limited] == [row.id for row in candidates[:1]]
+    assert set(assigned) == {row.id for row in all_candidates}
+    assert len(assigned) == len(all_candidates)
+
+
+def test_empty_analytics_shards_do_not_initialize_models(world):
+    world["make"](stages=("sync", "topics")).run()
+    for index in range(256):
+        pipeline = world["make"](
+            stages=("sentiment",),
+            parallel_stage=True,
+            shard_count=256,
+            shard_index=index,
+        )
+        with world["engine"].connect() as connection:
+            count = connection.scalar(
+                select(func.count())
+                .select_from(analysis_units)
+                .where(pipeline._unit_shard())
+            )
+        if count == 0:
+            break
+    else:
+        pytest.fail("Expected an empty shard in the small fixture corpus")
+
+    def unexpected_model(*args):
+        pytest.fail("An empty shard initialized an inference model")
+
+    for stage in ("sentiment", "emotion", "stance"):
+        pipeline = world["make"](
+            stages=(stage,),
+            parallel_stage=True,
+            shard_count=256,
+            shard_index=index,
+        )
+        pipeline.factories = Factories(
+            sentiment=unexpected_model,
+            emotion=unexpected_model,
+            stance=unexpected_model,
+        )
+        assert pipeline.run() == {}
 
 
 def topic(key=TAX):

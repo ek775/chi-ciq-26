@@ -69,6 +69,7 @@ dev = [
     "pytest",
     "ruff",
     "httpx",
+    "PyYAML",
 ]
 
 [tool.setuptools.package-data]

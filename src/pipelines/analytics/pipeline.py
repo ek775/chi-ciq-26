@@ -23,6 +23,7 @@ from dotenv import load_dotenv
 from sqlalchemy import Numeric, cast, delete, func, or_, select, text, update
 from sqlalchemy.dialects.postgresql import insert
 from sqlalchemy.engine import Engine
+from sqlalchemy.sql.elements import TextClause
 
 from databases.analytics.models import (
     EMOTIONS,
@@ -49,6 +50,7 @@ from databases.analytics.schema import check_schema, connect_database
 from databases.analytics.views import refresh_dashboard_views
 from shared.embeddings import TextEmbedder, validate_vector
 from shared.logging import configure_logging
+from shared.sharding import validate_shard
 
 from .attribution import SpeakerVoice, build_voiceprints, match_voices
 from .classifiers import (
@@ -93,6 +95,91 @@ STAGES = (
 )
 SOURCES = ("meetings", "documents")
 RUN_LOCK = 0x43_49_51_41  # "CIQA"
+PARALLEL_STAGES = frozenset(
+    {"attribute", "mentions", "sentiment", "emotion", "topics", "stance"}
+)
+SHARDED_STAGES = frozenset({"sentiment", "emotion", "stance"})
+UNIT_BUCKETS = 256
+
+
+def validate_analytics_shard(
+    stages: Sequence[str], *, parallel_stage: bool, index: int, count: int
+) -> None:
+    validate_shard(index, count)
+    if count > 1 and (
+        count > UNIT_BUCKETS
+        or not parallel_stage
+        or len(stages) != 1
+        or stages[0] not in SHARDED_STAGES
+    ):
+        raise ValueError(
+            "Sharding requires one parallel sentiment, emotion, or stance stage "
+            f"and at most {UNIT_BUCKETS} shards"
+        )
+
+
+@contextmanager
+def analytics_run_lock(
+    engine: Engine,
+    stages: Sequence[str] = (),
+    *,
+    parallel_stage: bool = False,
+    shard_index: int = 0,
+    shard_count: int = 1,
+) -> Iterator[None]:
+    validate_analytics_shard(
+        stages,
+        parallel_stage=parallel_stage,
+        index=shard_index,
+        count=shard_count,
+    )
+    sharded = shard_count > 1
+    with engine.connect().execution_options(isolation_level="AUTOCOMMIT") as connection:
+        mode = "_shared" if parallel_stage else ""
+        connection.execute(
+            text(f"SELECT pg_advisory_lock{mode}(:key)"), {"key": RUN_LOCK}
+        )
+        acquired = []
+        try:
+            if parallel_stage:
+                locks = set(stages)
+                # Stance reads topic relevance and (for attributed scope) speakers.
+                if "stance" in locks:
+                    locks.update(("topics", "attribute"))
+                for stage in sorted(locks):
+                    key = STAGES.index(stage) + 1
+                    # Shards share their stage gate; stance shares its read gates.
+                    shared = sharded and (
+                        stage in stages or stage in {"topics", "attribute"}
+                    )
+                    suffix = "_shared" if shared else ""
+                    connection.execute(
+                        text(f"SELECT pg_advisory_lock{suffix}(:namespace, :stage)"),
+                        {"namespace": RUN_LOCK, "stage": key},
+                    )
+                    acquired.append((RUN_LOCK, key, suffix))
+                    if sharded and stage in stages:
+                        # Fixed buckets serialize overlapping layouts, even when
+                        # retry workers use a different shard count.
+                        for bucket in range(UNIT_BUCKETS):
+                            if bucket % shard_count != shard_index:
+                                continue
+                            bucket_key = key * UNIT_BUCKETS + bucket
+                            connection.execute(
+                                text("SELECT pg_advisory_lock(:namespace, :stage)"),
+                                {"namespace": RUN_LOCK + 1, "stage": bucket_key},
+                            )
+                            acquired.append((RUN_LOCK + 1, bucket_key, ""))
+            yield
+        finally:
+            for namespace, key, suffix in reversed(acquired):
+                connection.execute(
+                    text(f"SELECT pg_advisory_unlock{suffix}(:namespace, :stage)"),
+                    {"namespace": namespace, "stage": key},
+                )
+            connection.execute(
+                text(f"SELECT pg_advisory_unlock{mode}(:key)"), {"key": RUN_LOCK}
+            )
 
 
 class SourceReader(Protocol):
@@ -119,11 +206,27 @@ class AnalyticsConfig:
     stance_concurrency: int = 4
     batch_size: int = 64
     roster_min_occurrences: int = 3
+    parallel_stage: bool = False
+    shard_index: int = 0
+    shard_count: int = 1
 
     def __post_init__(self):
         unknown = set(self.stages) - set(STAGES)
         if unknown:
             raise ValueError(f"Unknown stages: {sorted(unknown)}")
+        if self.parallel_stage and (
+            len(self.stages) != 1 or self.stages[0] not in PARALLEL_STAGES
+        ):
+            raise ValueError(
+                "Parallel mode requires one independent analysis stage; "
+                "sync, roster, and refresh must run exclusively"
+            )
+        validate_analytics_shard(
+            self.stages,
+            parallel_stage=self.parallel_stage,
+            index=self.shard_index,
+            count=self.shard_count,
+        )
         if self.stance_scope not in {"all", "attributed"}:
             raise ValueError("stance_scope must be 'all' or 'attributed'")
         if not -1 <= self.relevance_threshold <= 1 or self.relevance_top_k < 1:
@@ -178,17 +281,24 @@ class AnalyticsPipeline:
 
     @contextmanager
     def _run_lock(self) -> Iterator[None]:
-        # Session lock on a dedicated connection spans the per-stage commits.
-        with self.engine.connect().execution_options(
-            isolation_level="AUTOCOMMIT"
-        ) as connection:
-            connection.execute(text("SELECT pg_advisory_lock(:key)"), {"key": RUN_LOCK})
-            try:
-                yield
-            finally:
-                connection.execute(
-                    text("SELECT pg_advisory_unlock(:key)"), {"key": RUN_LOCK}
-                )
+        with analytics_run_lock(
+            self.engine,
+            self.config.stages,
+            parallel_stage=self.config.parallel_stage,
+            shard_index=self.config.shard_index,
+            shard_count=self.config.shard_count,
+        ):
+            yield
+
+    def _unit_shard(self, alias: str = "analysis_units") -> TextClause:
+        if self.config.shard_count == 1:
+            return text("TRUE")
+        return text(
+            f"(('x' || substr(md5(CAST({alias}.id AS text)), 1, 2))"
+            "::bit(8)::int % :shard_count) = :shard_index"
+        ).bindparams(
+            shard_count=self.config.shard_count, shard_index=self.config.shard_index
+        )
 
     def run(self) -> dict[str, int]:
         self.counts = RunCounts()
@@ -644,6 +754,7 @@ class AnalyticsPipeline:
                     select(analysis_units.c.id, analysis_units.c.text)
                     .outerjoin(table, table.c.unit_id == analysis_units.c.id)
                     .where(table.c.unit_id.is_(None) | (table.c.model != model_name))
+                    .where(self._unit_shard())
                     .order_by(analysis_units.c.id)
                     .limit(self.config.batch_size)
                 ).all()
@@ -847,6 +958,7 @@ class AnalyticsPipeline:
              AND st.prompt_version = :prompt_version
              AND st.definition_sha256 = p.definition_sha256
             WHERE st.unit_id IS NULL AND u.word_count >= :min_words {attributed_only}
+              AND {self._unit_shard("u").text}
             GROUP BY u.id, u.text, s.kind, s.body, s.meeting_date
             ORDER BY bool_or(a.speaker_id IS NOT NULL) DESC,
                      s.meeting_date DESC NULLS LAST, u.id
@@ -857,6 +969,8 @@ class AnalyticsPipeline:
             "model": classifier.model_name,
             "prompt_version": classifier.prompt_version,
             "min_words": self.config.stance_min_words,
+            "shard_count": self.config.shard_count,
+            "shard_index": self.config.shard_index,
         }
         if self.config.stance_limit is not None:
             parameters["limit"] = self.config.stance_limit
@@ -871,6 +985,7 @@ class AnalyticsPipeline:
                 .where(
                     analysis_units.c.word_count >= self.config.stance_min_words,
                     analysis_units.c.id.in_(select(topic_relevance.c.unit_id)),
+                    self._unit_shard(),
                 )
             )
         if not pending or self.config.stance_limit == 0:
@@ -1234,6 +1349,13 @@ def _parser() -> argparse.ArgumentParser:
     run = commands.add_parser("run", help="Sync sources and run analysis stages")
     run.add_argument("--sources", nargs="+", choices=SOURCES, default=list(SOURCES))
     run.add_argument("--stages", nargs="+", choices=STAGES, default=list(STAGES))
+    run.add_argument("--shard-index", type=int, default=0)
+    run.add_argument("--shard-count", type=int, default=1)
+    run.add_argument(
+        "--parallel-stage",
+        action="store_true",
+        help="Allow one independent stage to overlap other independent stages",
+    )
     run.add_argument("--taxonomy", type=Path)
     run.add_argument("--device", default="cpu")
     run.add_argument("--sentiment-model", default=DEFAULT_SENTIMENT_MODEL)
@@ -1323,10 +1445,12 @@ def main(argv: list[str] | None = None) -> None:
     try:
         check_schema(engine)
         if args.command == "roster":
-            count = load_roster(engine, read_roster(args.file))
+            with analytics_run_lock(engine):
+                count = load_roster(engine, read_roster(args.file))
             logger.info("Loaded %d representatives", count)
         elif args.command == "label-speakers":
-            count = load_speaker_labels(engine, read_speaker_labels(args.file))
+            with analytics_run_lock(engine):
+                count = load_speaker_labels(engine, read_speaker_labels(args.file))
             logger.info("Loaded %d manual speaker labels", count)
         elif args.command == "export-speakers":
             count = _write_output(
@@ -1350,12 +1474,15 @@ def main(argv: list[str] | None = None) -> None:
             )
             logger.info("Exported %d roster candidates", count)
         elif args.command == "refresh":
-            with engine.begin() as connection:
+            with analytics_run_lock(engine), engine.begin() as connection:
                 refresh_dashboard_views(connection)
             logger.info("Dashboard views refreshed")
         else:
             config = AnalyticsConfig(
                 stages=tuple(args.stages),
+                parallel_stage=args.parallel_stage,
+                shard_index=args.shard_index,
+                shard_count=args.shard_count,
                 sentiment_model=args.sentiment_model,
                 emotion_model=args.emotion_model,
                 relevance_threshold=args.relevance_threshold,

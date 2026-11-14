@@ -1,0 +1,351 @@
+version: v4
+
+defaults:
+  job:
+    env:
+      - LOG_LEVEL=INFO
+      - HOME=/tmp
+    policy:
+      timeout:
+        execute: 48h
+
+volumes:
+  datasets:
+    use: shared
+    name: datasets
+  recordings:
+    use: team8
+    name: volume_test
+
+jobs:
+  meetings-backup-before:
+    image: &meetings-image
+      uri: docker://ghcr.io/ek775/chi-ciq-26-meetings:fuzzball
+    env: &meetings-env
+      - DATABASE_URL=secret://user/chi-ciq-meetings-writer-url
+    mounts: &archive-mount
+      /datasets:
+        volume: datasets
+    resource: &small
+      cpu:
+        cores: 1
+      memory:
+        size: 1GiB
+    command: [chi-ciq-database, backup, --output-dir, /datasets/database/meetings]
+
+  documents-backup-before:
+    image: &documents-db-image
+      uri: docker://ghcr.io/ek775/chi-ciq-26-documents-db:fuzzball
+    env: &documents-env
+      - DOCUMENTS_DATABASE_URL=secret://user/chi-ciq-documents-writer-url
+    mounts: *archive-mount
+    resource: *small
+    command: [chi-ciq-documents-database, backup, --output-dir, /datasets/database/documents]
+
+  analytics-backup-before:
+    image: &analytics-db-image
+      uri: docker://ghcr.io/ek775/chi-ciq-26-analytics-db:fuzzball
+    env: &analytics-db-env
+      - ANALYTICS_DATABASE_URL=secret://user/chi-ciq-analytics-writer-url
+    mounts: *archive-mount
+    resource: *small
+    command: [chi-ciq-analytics-database, backup, --output-dir, /datasets/database/analytics]
+
+  meetings-migrate:
+    image: *meetings-image
+    env: *meetings-env
+    resource: *small
+    depends-on:
+      - {name: meetings-backup-before, status: FINISHED}
+    command: [chi-ciq-database, migrate]
+
+  documents-migrate:
+    image: *documents-db-image
+    env: *documents-env
+    resource: *small
+    depends-on:
+      - {name: documents-backup-before, status: FINISHED}
+    command: [chi-ciq-documents-database, migrate]
+
+  analytics-migrate:
+    image: *analytics-db-image
+    env: *analytics-db-env
+    resource: *small
+    depends-on:
+      - {name: analytics-backup-before, status: FINISHED}
+    command: [chi-ciq-analytics-database, migrate]
+
+  transcription:
+    image:
+      uri: docker://ghcr.io/ek775/chi-ciq-26-transcription:fuzzball
+    env:
+      - DATABASE_URL=secret://user/chi-ciq-meetings-writer-url
+      - HF_TOKEN=secret://user/chi-ciq-hf-token
+      - SHARD_COUNT=128
+    mounts:
+      /volume:
+        volume: recordings
+      /datasets:
+        volume: datasets
+    resource:
+      cpu:
+        cores: 8
+      memory:
+        size: 64GiB
+      devices:
+        nvidia.com/gpu: 1
+    task-array:
+      start: 1
+      end: 128
+      concurrency: 2
+    depends-on:
+      - {name: meetings-migrate, status: FINISHED}
+    script: |
+      #!/bin/sh
+      set -eu
+      exec chi-ciq-ingest --input-dir /volume/audio --namespace recordings \
+        --metadata-file /datasets/analytics/recording-metadata.json \
+        --shard-index "$((FB_TASK_ID - 1))" --shard-count "$SHARD_COUNT"
+
+  documents:
+    image:
+      uri: docker://ghcr.io/ek775/chi-ciq-26-documents:fuzzball
+    env:
+      - DOCUMENTS_DATABASE_URL=secret://user/chi-ciq-documents-writer-url
+      - SHARD_COUNT=4
+    mounts: *archive-mount
+    resource: &inference
+      cpu:
+        cores: 4
+      memory:
+        size: 8GiB
+    task-array:
+      start: 1
+      end: 4
+      concurrency: 4
+    depends-on:
+      - {name: documents-migrate, status: FINISHED}
+    script: |
+      #!/bin/sh
+      set -eu
+      exec chi-ciq-ingest-documents --input-dir /datasets/Transcripts \
+        --namespace transcripts --device cpu \
+        --shard-index "$((FB_TASK_ID - 1))" --shard-count "$SHARD_COUNT"
+
+  analytics-sync:
+    image: &analytics-image
+      uri: docker://ghcr.io/ek775/chi-ciq-26-analytics:fuzzball
+    env: &analytics-env
+      - ANALYTICS_DATABASE_URL=secret://user/chi-ciq-analytics-writer-url
+      - MEETINGS_DATABASE_URL=secret://user/chi-ciq-meetings-reader-url
+      - DOCUMENTS_DATABASE_URL=secret://user/chi-ciq-documents-reader-url
+      - VLLM_BASE_URL=secret://user/chi-ciq-vllm-url
+      - VLLM_API_KEY=secret://user/chi-ciq-vllm-api-key
+      - VLLM_SERVED_MODEL=local-ai
+      - OMP_NUM_THREADS=2
+      - MKL_NUM_THREADS=2
+      - OPENBLAS_NUM_THREADS=2
+    resource: *inference
+    depends-on:
+      - {name: analytics-migrate, status: FINISHED}
+      - {name: transcription, status: FINISHED}
+      - {name: documents, status: FINISHED}
+    command: [chi-ciq-analytics, run, --stages, sync]
+
+  analytics-roster:
+    image: *analytics-image
+    env: *analytics-env
+    mounts: *archive-mount
+    resource: *inference
+    depends-on:
+      - {name: analytics-sync, status: FINISHED}
+    script: |
+      #!/bin/sh
+      set -eu
+      chi-ciq-analytics run --stages roster
+      if [ -f /datasets/analytics/roster.csv ]; then
+        chi-ciq-analytics roster /datasets/analytics/roster.csv
+      fi
+      if [ -f /datasets/analytics/speaker-labels.csv ]; then
+        chi-ciq-analytics label-speakers /datasets/analytics/speaker-labels.csv
+      fi
+
+  analytics-attribute:
+    image: *analytics-image
+    env: *analytics-env
+    resource: *inference
+    depends-on: &analysis-deps
+      - {name: analytics-roster, status: FINISHED}
+    command: [chi-ciq-analytics, run, --stages, attribute, --parallel-stage]
+
+  analytics-mentions:
+    image: *analytics-image
+    env: *analytics-env
+    resource: *inference
+    depends-on: *analysis-deps
+    command: [chi-ciq-analytics, run, --stages, mentions, --parallel-stage]
+
+  analytics-sentiment:
+    image: *analytics-image
+    env: *analytics-env
+    resource: &classifier-resource
+      cpu:
+        cores: 2
+      memory:
+        size: 8GiB
+    task-array: &classifier-array
+      start: 1
+      end: 32
+      concurrency: 4
+    depends-on: *analysis-deps
+    script: |
+      #!/bin/sh
+      set -eu
+      exec chi-ciq-analytics run --stages sentiment --parallel-stage --device cpu \
+        --shard-index "$((FB_TASK_ID - 1))" --shard-count 32
+
+  analytics-emotion:
+    image: *analytics-image
+    env: *analytics-env
+    resource: *classifier-resource
+    task-array: *classifier-array
+    depends-on: *analysis-deps
+    script: |
+      #!/bin/sh
+      set -eu
+      exec chi-ciq-analytics run --stages emotion --parallel-stage --device cpu \
+        --shard-index "$((FB_TASK_ID - 1))" --shard-count 32
+
+  analytics-topics:
+    image: *analytics-image
+    env: *analytics-env
+    resource: *inference
+    depends-on: *analysis-deps
+    command: [chi-ciq-analytics, run, --stages, topics, --parallel-stage, --device, cpu]
+
+  analytics-stance:
+    image: *analytics-image
+    env: *analytics-env
+    resource:
+      cpu:
+        cores: 1
+      memory:
+        size: 2GiB
+    task-array: *classifier-array
+    depends-on:
+      - {name: analytics-topics, status: FINISHED}
+      - {name: analytics-attribute, status: FINISHED}
+    script: |
+      #!/bin/sh
+      set -eu
+      exec chi-ciq-analytics run --stages stance --parallel-stage \
+        --shard-index "$((FB_TASK_ID - 1))" --shard-count 32 \
+        --stance-concurrency 2
+
+  analytics-refresh:
+    image: *analytics-image
+    env: *analytics-env
+    resource: *small
+    depends-on:
+      - {name: analytics-attribute, status: FINISHED}
+      - {name: analytics-mentions, status: FINISHED}
+      - {name: analytics-sentiment, status: FINISHED}
+      - {name: analytics-emotion, status: FINISHED}
+      - {name: analytics-topics, status: FINISHED}
+      - {name: analytics-stance, status: FINISHED}
+    command: [chi-ciq-analytics, run, --stages, refresh]
+
+  meetings-backup-after:
+    image: *meetings-image
+    env: *meetings-env
+    mounts: *archive-mount
+    resource: *small
+    depends-on:
+      - {name: transcription, status: FINISHED}
+    command: [chi-ciq-database, backup, --output-dir, /datasets/database/meetings]
+
+  documents-backup-after:
+    image: *documents-db-image
+    env: *documents-env
+    mounts: *archive-mount
+    resource: *small
+    depends-on:
+      - {name: documents, status: FINISHED}
+    command: [chi-ciq-documents-database, backup, --output-dir, /datasets/database/documents]
+
+  analytics-backup-after:
+    image: *analytics-db-image
+    env: *analytics-db-env
+    mounts: *archive-mount
+    resource: *small
+    depends-on:
+      - {name: analytics-refresh, status: FINISHED}
+    command: [chi-ciq-analytics-database, backup, --output-dir, /datasets/database/analytics]
+
+  web-check:
+    image: &web-image
+      uri: docker://ghcr.io/ek775/chi-ciq-26-web:fuzzball
+    env: &web-env
+      - DATABASE_URL=secret://user/chi-ciq-meetings-reader-url
+      - ANALYTICS_DATABASE_URL=secret://user/chi-ciq-analytics-reader-url
+      - LOG_LEVEL=INFO
+      - HOME=/tmp
+    resource: *small
+    depends-on:
+      - {name: meetings-backup-after, status: FINISHED}
+      - {name: documents-backup-after, status: FINISHED}
+      - {name: analytics-backup-after, status: FINISHED}
+    script: |
+      #!/bin/sh
+      set -eu
+      chi-ciq-database check
+      chi-ciq-analytics-database check
+      python - <<'PY'
+      import os
+      from sqlalchemy import text
+      from databases.meetings.schema import connect_database
+      from databases.analytics.views import DASHBOARD_OBJECTS
+      for variable, tables in (
+          ("DATABASE_URL", ("meetings", "published_sources", "speakers", "transcript_segments")),
+          ("ANALYTICS_DATABASE_URL", DASHBOARD_OBJECTS),
+      ):
+          engine = connect_database(os.environ[variable])
+          try:
+              with engine.begin() as connection:
+                  connection.execute(text("SET TRANSACTION READ ONLY"))
+                  for table in tables:
+                      connection.execute(text(f"SELECT * FROM {table} LIMIT 0"))
+          finally:
+              engine.dispose()
+      PY
+
+services:
+  web:
+    image: *web-image
+    env: *web-env
+    resource:
+      cpu:
+        cores: 2
+      memory:
+        size: 2GiB
+    depends-on:
+      - {name: web-check, status: FINISHED}
+    command: [chi-ciq-web]
+    persist: true
+    network:
+      ports:
+        - {name: http, port: 8080, protocol: tcp}
+      endpoints:
+        - name: app
+          port-name: http
+          protocol: http
+          type: subdomain
+          scope: user
+    readiness-probe:
+      http-get:
+        path: /ready
+        port: 8080
+      initial-delay-seconds: 5
+      period-seconds: 10
+      timeout-seconds: 5
+      failure-threshold: 6

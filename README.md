@@ -2,21 +2,24 @@
 
 Container-oriented pipelines acquire public recordings, transcribe and diarize
 them, and publish results to PostgreSQL/pgvector for a read-only web UI. The
-Fuzzball draft stages inputs from the cluster's shared dataset volume and runs
-batch ingestion; the volume's file listing could not be verified because the
-inspection job remained unscheduled.
+Fuzzball deployment runs parallel ingestion and analytics pipelines, then starts
+the final private web application after successful publication and backups.
 
 ## Architecture and module guides
 
 ```text
-Vimeo acquisition -> shared dataset volume -> transcription batch
-                                               |
-                                      PostgreSQL/pgvector -> web UI/API
-                                               |
-                                        database backups
-transcript tree -> shared dataset volume -> document batch
-meetings + documents (read-only) -> analytics batch -> analytics DB -> dashboard
-                                         \-> vLLM stance service
+completed recordings -> 128 shards / 2 GPU workers -> meetings DB --+
+transcript tree ------> 4 CPU document shards ------> documents DB -+
+                                                                  |
+                                            analytics sync -> roster
+                                                                  |
+              attribute | mentions | sentiment[32] | emotion[32] | topics
+                       +------------------------------------------+
+                       | attribute + topics -> stance[32] (8 requests) |
+                       +-------------------- join ----------------+
+                                             refresh -> analytics DB
+                                                       |
+                                  backups -> web checks -> private web
 ```
 
 | Module | Responsibility and detailed documentation |
@@ -141,20 +144,181 @@ chi-ciq-dispatch --input-dir data/mp4 --output-dir data/dispatch \
   --image docker://your-registry/chi-ciq-transcription:commit-tag
 ```
 
-[fuzzball.draft.yaml](fuzzball.draft.yaml) is an architecture draft, **not a
-submittable Fuzzfile**. It reflects the CLI inventory: `shared/datasets` is an
-enabled persistent external NFS volume with reported size 0, and
-`team8/volume_test` is a separate enabled persistent volume. Its root `audio`
-directory contains dated and Vimeo-ID MP4 audio files; see the
-[transcription guide](src/pipelines/transcription/README.md#fuzzball-batch-input)
-for metadata mapping and safe ingestion. The local checkout contains 202 UTF-8
-transcript files, one 1.7 GB MP4 with H.264 video and AAC
-audio lasting about 9 hours, one VTT caption file, and two database dumps. The
-VTT and dumps are deliberately not pipeline inputs: the document extractor does
-not support VTT, and database archives must not be restored during ingestion.
-The contents of `shared/datasets` remain unverified, so stage the local input
-tree there before relying on it.
-See the [Fuzzball pipeline notes](src/pipelines/README.md#fuzzball-pipeline-notes).
+## Fuzzball deployment
+
+[fuzzball.yaml](fuzzball.yaml) is an executable v4 deployment Fuzzfile, validated
+with CLI v4.3.1. It uses the existing persistent volumes `shared/datasets` and
+`team8/volume_test`. PostgreSQL databases and the private vLLM service are
+managed outside this workflow; deploying the web image never replaces them.
+
+The workflow backs up and migrates each database independently, queues 128
+transcription shards with two active one-GPU tasks alongside four CPU document
+tasks, then joins both
+ingestion arrays before analytics sync and roster preparation. Attribution,
+mentions, sentiment, emotion, and topics run in parallel. Sentiment and emotion
+each use 32 shards with four active CPU tasks. Stance waits for topics
+and attribution and uses 32 shards with four active tasks, each sending at most
+two vLLM requests (eight across the array). Dashboard
+refresh waits for every analysis branch. Completed backups and reader/schema
+checks gate the persistent web service. Failed jobs prevent dependent deployment.
+
+### Build and publish
+
+Build from the repository root and push the seven service images. The image
+names below match the Fuzzfile; GHCR requires your normal registry login. For an
+immutable release, replace the `fuzzball` tag in the seven image definitions in
+the Fuzzfile and in these commands with the same unique release tag. Do not
+overwrite a tag used by an active deployment.
+
+```sh
+set -eu
+for spec in \
+  meetings:src/databases/meetings/Dockerfile \
+  documents-db:src/databases/documents/Dockerfile \
+  analytics-db:src/databases/analytics/Dockerfile \
+  transcription:src/pipelines/transcription/Dockerfile \
+  documents:src/pipelines/documents/Dockerfile \
+  analytics:src/pipelines/analytics/Dockerfile \
+  web:src/web/Dockerfile
+do
+  name=${spec%%:*}
+  dockerfile=${spec#*:}
+  image="ghcr.io/ek775/chi-ciq-26-${name}:fuzzball"
+  docker build --platform linux/arm64 -f "$dockerfile" -t "$image" .
+  docker push "$image"
+done
+```
+
+Make the images readable by cluster workers, or add a singular `image.secret`
+registry reference to each image definition (the anchored definitions cover
+repeated uses). Rebuild the workers for this release: older images do not
+support the new sharding and parallel-stage flags.
+The PGX/GB10 workstation nodes report ARM64 CPUs: build native ARM64 images on
+the workstations, or use a configured cross-platform builder. Before a GPU
+release, check that its ARM64 PyTorch build is CUDA-enabled and supports the
+installed GPU/driver; an ARM64 image alone does not guarantee GPU inference.
+Run `python -c 'import torch; assert torch.cuda.is_available()'` inside the
+transcription image on a GPU worker before bulk submission.
+
+### Inputs and credentials
+
+Before submission, finish acquisition and freeze the input tree for the entire
+ingestion run. Worker paths are not submitter-local paths:
+
+| Volume | Required paths |
+|---|---|
+| `team8/volume_test` mounted at `/volume` | Complete MP4 files directly under `/volume/audio` |
+| `shared/datasets` mounted at `/datasets` | `/datasets/Transcripts`, reviewed `/datasets/analytics/recording-metadata.json`, writable `/datasets/database` |
+
+The metadata JSON maps Vimeo IDs to dated filenames; use `{}` if all recordings
+already have valid dated names. See the
+[transcription guide](src/pipelines/transcription/README.md#fuzzball-batch-input).
+Optional `roster.csv` and `speaker-labels.csv` under `/datasets/analytics` are
+loaded after source sync and roster seeding. VTT and database archives are never
+ingestion inputs. The workers only read inputs; Fuzzball volume mounts themselves
+are not asserted to enforce read-only access. Apply cluster filesystem ACLs to
+protect the input trees while allowing archive jobs to write the backup subtree.
+The NFS backend must support POSIX locking and atomic rename for backups.
+
+Create these **user-scoped value secrets**; their values are never stored in the
+Fuzzfile. URLs must use cluster-reachable hostnames, not submitter `localhost`.
+
+| Secret name (prefix `chi-ciq-`) | Value / privileges |
+|---|---|
+| `meetings-writer-url` | SQLAlchemy PostgreSQL URL for the meetings owner |
+| `documents-writer-url` | SQLAlchemy PostgreSQL URL for the documents owner |
+| `analytics-writer-url` | SQLAlchemy PostgreSQL URL for the analytics owner |
+| `meetings-reader-url` | Meetings SELECT-only login, also used by web |
+| `documents-reader-url` | Documents SELECT-only login, including directory chunk tables |
+| `analytics-reader-url` | Dashboard `analytics_reader` login |
+| `hf-token` | Hugging Face read token with accepted pyannote model terms |
+| `vllm-url` | Private OpenAI-compatible base URL ending in `/v1` |
+| `vllm-api-key` | vLLM bearer key (empty value only if the private server has no authentication) |
+
+For example, provision one value from a protected local file without putting it
+on the command line:
+
+```sh
+fuzzball secret create secret://user/chi-ciq-meetings-writer-url \
+  /protected/meetings-writer-url.txt --from-file --type value
+```
+
+Provision reader roles first using the
+[meetings grants](src/web/web-role.sql) and
+[analytics grants](src/databases/analytics/web-role.sql), after the corresponding
+schemas exist; the workflow's `web-check` verifies SELECT privileges before
+launching the web service. Give the documents reader SELECT on the registry
+and chunk tables, including owner default privileges for newly created tables.
+Existing schema migrations re-grant dashboard views when rebuilding them.
+
+Set `VLLM_SERVED_MODEL` in the analytics environment anchor to the deployed
+model's served name (default `local-ai`). Workers need model-download egress,
+City of Chicago roster access, and private database/vLLM connectivity.
+### Two-workstation capacity
+
+The profile targets two 20-core, 128 GB workstations with one GPU each; it does
+not assume GPU slicing or oversubscription.
+
+| Work | Total shards | Active tasks | Per-task CPU / memory |
+|---|---:|---:|---|
+| Transcription | 128 | 2 | 8 cores / 64 GiB / 1 GPU |
+| Documents | 4 | 4 | 4 cores / 8 GiB |
+| Sentiment | 32 | 4 | 2 cores / 8 GiB |
+| Emotion | 32 | 4 | 2 cores / 8 GiB |
+| Stance client | 32 | 4 | 1 core / 2 GiB |
+
+Transcription plus documents request 32 CPU cores and 160 GiB in aggregate.
+Analytics inference branches conservatively total 32 cores and 96 GiB, even
+counting topics and stance together (they actually have an ordering dependency).
+BLAS/OpenMP threads are capped at two per analytics task to prevent each process
+using every CPU. These are scheduling requests, not measured peak usage; reserve
+additional capacity for the OS, unified GPU memory, databases, and inference
+services. vLLM remains external and its memory is **not** included in this budget;
+if it shares these two workstations, lower worker concurrency accordingly.
+
+Shard count controls queued work and straggler/retry granularity, not the number
+of simultaneous GPU workers. 128 shards keep two GPUs fed with smaller batches
+instead of two long-lived halves of the corpus. More shards also mean more model
+startup overhead, so tune the count from recording runtimes and model-load cost.
+Do not raise transcription concurrency above available whole GPUs without a
+separately configured and tested GPU-sharing mechanism.
+
+When changing transcription counts, keep `start: 1`, `end`, and `SHARD_COUNT`
+consistent. For analytics, match `end` and the script's `--shard-count`; analytics
+supports up to 256 shards and assigns each unit to exactly one shard.
+`concurrency` may be lower than the shard count. Stance request concurrency is
+the product of active tasks and `--stance-concurrency`; tune it to the actual
+vLLM capacity, not just client RAM. `--stance-limit` is per shard when sharded.
+Source sync, roster, attribution, mentions, topic rebuilding, and dashboard
+refresh remain unsharded to protect their global-state operations.
+
+### Submit and verify
+
+```sh
+fuzzball workflow validate fuzzball.yaml
+fuzzball workflow start fuzzball.yaml --name chi-ciq-web-release
+# Use the returned workflow ID:
+fuzzball workflow describe WORKFLOW
+fuzzball workflow endpoints WORKFLOW web app
+fuzzball workflow port-forward WORKFLOW web 8080:8080
+# In another terminal while forwarding:
+curl --fail http://127.0.0.1:8080/ready
+curl --fail http://127.0.0.1:8080/api/analytics/summary
+```
+
+The web endpoint is **user-scoped**, not public. Use Fuzzball endpoint bearer
+tokens or authenticated port forwarding; neither the application nor vLLM adds
+application authentication. `persist: true` keeps web running after batch jobs
+finish. `/ready` verifies both configured schemas. The UI is at `/`, and the
+final analytics dashboard is at `/dashboard`.
+
+For updates, freeze the next input snapshot and submit a new release with the
+same source namespaces. Do not overlap whole update workflows: the analytics
+locks protect individual runs, not a cross-workflow ingestion-to-refresh epoch.
+Verify the new endpoint before retiring the old web workflow; retain databases,
+inputs, and append-only archives. Scheduling is external, not a polling daemon.
+Schema validation alone does not verify image availability, secret values,
+input completeness, GPU capacity, inference accuracy, or live endpoint readiness.
 
 ## Logging
 
@@ -203,8 +367,8 @@ and CLI output keep their native format, so collected files are mixed text,
 not guaranteed JSONL. Add `--timestamp` to collection for server timestamps on
 native output. Keep logs private: URLs, paths, and exception details may be sensitive.
 
-The Fuzzball CLI flags above were checked locally; cluster connectivity and
-deployment remain unverified. For placeholder Compose development, use
+The Fuzzball CLI flags above were checked locally; a live application release
+still requires the images, credentials, and inputs above. For Compose development, use
 `docker compose --profile '*' logs --follow --timestamps --no-color`;
 this does not collect remote Fuzzball jobs.
 

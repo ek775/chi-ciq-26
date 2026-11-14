@@ -19,6 +19,7 @@ from databases.documents.schema import (
 )
 from shared.embeddings import SentenceTextEmbedder, TextEmbedder, validate_vector
 from shared.logging import configure_logging
+from shared.sharding import shard_paths, validate_shard
 
 from .extraction import EXTRACTION_VERSION, discover_tree, extract_text, split_text
 
@@ -117,10 +118,18 @@ class DocumentPipeline:
         return True
 
     def ingest_tree(
-        self, root: Path, *, namespace: str = "documents", force: bool = False
+        self,
+        root: Path,
+        *,
+        namespace: str = "documents",
+        force: bool = False,
+        shard_index: int = 0,
+        shard_count: int = 1,
     ) -> int:
+        validate_shard(shard_index, shard_count)
         source_key(namespace, ".")
         directories, files = discover_tree(root)
+        files = shard_paths(files, root, index=shard_index, count=shard_count)
         for directory in directories:
             with self.engine.begin() as connection:
                 ensure_directory(
@@ -150,6 +159,8 @@ def main(argv: list[str] | None = None) -> None:
     parser.add_argument("--input-dir", type=Path)
     parser.add_argument("--namespace", default="documents")
     parser.add_argument("--force", action="store_true")
+    parser.add_argument("--shard-index", type=int, default=0)
+    parser.add_argument("--shard-count", type=int, default=1)
     parser.add_argument("--chunk-characters", type=int, default=1000)
     parser.add_argument(
         "--text-model", default="sentence-transformers/all-MiniLM-L6-v2"
@@ -158,6 +169,10 @@ def main(argv: list[str] | None = None) -> None:
     args = parser.parse_args(argv)
     if args.chunk_characters <= 0:
         parser.error("--chunk-characters must be positive")
+    try:
+        validate_shard(args.shard_index, args.shard_count)
+    except ValueError as error:
+        parser.error(str(error))
     source_key(args.namespace, ".")
     configure_logging("documents")
     root = args.input_dir or Path(
@@ -173,7 +188,13 @@ def main(argv: list[str] | None = None) -> None:
             model_name=args.text_model,
             chunk_characters=args.chunk_characters,
         )
-        pipeline.ingest_tree(root, namespace=args.namespace, force=args.force)
+        pipeline.ingest_tree(
+            root,
+            namespace=args.namespace,
+            force=args.force,
+            shard_index=args.shard_index,
+            shard_count=args.shard_count,
+        )
     finally:
         engine.dispose()
 

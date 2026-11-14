@@ -44,8 +44,8 @@ meeting date. Supply or correct entries manually when titles lack meeting
 metadata, and rerun with `--metadata-file overrides.json` to skip title lookup
 for those IDs. The JSON maps IDs to dated MP4 filenames, for example
 `{"1200176629": "2026-06-11_economic_development.mp4"}`. Dated files need no
-entry. The batch validates the complete mapping before inference and processes
-recordings sequentially in one GPU job. Configure the worker's
+entry. Each worker validates the complete mapping before inference and processes
+its assigned recordings sequentially. Configure the worker's
 `DATABASE_URL` and `HF_TOKEN` using cluster secrets. The worker must be able to
 reach the private meetings database and download required models; mount a
 persistent model cache if the cluster supports it. Run the schema migration
@@ -54,9 +54,20 @@ before ingestion and back up only after the job succeeds.
 Wait for acquisition to finish before generating the mapping or ingesting:
 the observed ID-named files appeared while inspection was in progress, and
 their names alone do not prove that downloads are complete. Mount inputs
-read-only for inference. A cluster-specific runnable Fuzzfile still needs the
-supported schema, image registry reference, database endpoint, and secret
-bindings; `fuzzball.draft.yaml` is an architecture note, not that Fuzzfile.
+read-only for inference using cluster filesystem ACLs.
+[fuzzball.yaml](../../../fuzzball.yaml) queues 128 GPU shards with two active
+tasks in one dependency-aware array. Each passes `--shard-index` (zero-based)
+and `--shard-count 128` to partition
+the same directory by a stable relative-path hash. Keep the root, namespace,
+metadata, and shard count identical across workers; indices must cover
+`0..count-1`. The flags apply only to directory input. A worker with no assigned
+files succeeds without inference. See the
+[deployment guide](../../../README.md#fuzzball-deployment) for image and secret setup.
+The two-workstation profile requests 8 CPU cores, 64 GiB RAM, and one GPU per
+active task. More shards reduce long-batch stragglers and retry scope; they do
+not allow 128 simultaneous GPU jobs. Model startup repeats per shard, so measure
+that cost before increasing the count further. Whole-GPU concurrency remains
+two unless the cluster explicitly supports and has tested GPU sharing.
 
 `chi-ciq-dispatch --input-dir /volume/audio --metadata-file mapping.json ...`
 also accepts this mapping and embeds each resolved filename in the individual

@@ -15,8 +15,8 @@ that backs the web dashboard. Source databases are never written.
 ## Stages
 
 `chi-ciq-analytics run` executes these stages in order (select a subset with
-`--stages`). Each stage is incremental and safe to rerun; a session advisory lock
-prevents concurrent runs, and each run is recorded in `analysis_runs`.
+`--stages`). Each stage is incremental and safe to rerun; default runs take an
+exclusive session advisory lock, and each run is recorded in `analysis_runs`.
 
 | Stage | Work |
 |---|---|
@@ -29,6 +29,44 @@ prevents concurrent runs, and each run is recorded in `analysis_runs`.
 | `topics` | Embed the taxonomy with each source's own text-embedding model and score unit relevance by pgvector cosine similarity (`--relevance-threshold`, `--relevance-top-k`). |
 | `stance` | For relevant units, ask vLLM for a schema-constrained stance (support/oppose/mixed/neutral/not_addressed) toward each topic's proposition, with confidence, summary, and a verbatim evidence quote. Reasoning models get `--vllm-reasoning-effort` (default `low`; empty to omit) and `--vllm-reasoning-tokens` of thinking budget; `--vllm-timeout` defaults to 300 s. |
 | `refresh` | Refresh the dashboard materialized views in one transaction. |
+
+### Parallel deployment stages
+
+[fuzzball.yaml](../../../fuzzball.yaml) syncs after both ingestion arrays finish
+and prepares the roster before fanning out attribution, mentions, sentiment,
+emotion, and topics. Each independent job selects one stage and opts in with
+`--parallel-stage`. Stance waits for attribution and topics, and refresh waits
+for every branch. Sentiment, emotion, and stance each queue 32 shards with four
+active tasks; stance has two concurrent requests per task, eight across its
+array. See the [deployment guide](../../../README.md#fuzzball-deployment).
+
+Parallel mode uses a shared run lock plus an exclusive lock for each stage.
+Different independent stages can execute simultaneously. Unsharded duplicate
+stages cannot overlap. Sharded sentiment, emotion, and stance share their stage
+gate and exclusively lock their assigned fixed unit buckets; disjoint shards
+of the same stage run concurrently. Overlapping shards serialize, including
+retry workers using a different shard count. Stance additionally locks topics
+and attribution, which it reads; stance shards share those read locks.
+Sync, roster, refresh, and default full runs remain exclusive; CLI roster/label
+imports and standalone refresh also take the exclusive lock. This prevents
+source replacement or a rollup refresh while parallel analysis is in flight.
+Parallel mode rejects multiple stages and sync/roster/refresh selections.
+Complete prerequisites before launching independent stages; the option is
+not itself a scheduler. Do not overlap complete deployment/update workflows.
+
+Select unit shards with `--shard-index INDEX --shard-count COUNT` together with
+`--parallel-stage --stages sentiment` (or `emotion`/`stance`). Indices are
+zero-based, all indices must be submitted, and counts range from 1 to 256.
+SQL partitions units into 256 stable UUID-hash buckets before batch limits or
+stance limits are applied; each bucket belongs to one shard by modulo count.
+Empty shards do not load classifiers. Incremental result keys are unchanged,
+so retries skip current outputs and changing the count does not require a
+full rebuild. `--stance-limit` applies per shard; multiply active tasks by
+`--stance-concurrency` to budget total vLLM requests.
+Sync, roster, attribute, mentions, topics, and refresh reject multi-shard runs:
+they mutate global source, roster, voiceprint, or topic state. The deployment
+caps BLAS/OpenMP threads at two per worker to keep CPU arrays within the
+two-workstation resource budget.
 
 Results are keyed by model (and, for stance, prompt version and topic definition
 hash), so changing a model, the prompt, or a topic's text recomputes only the

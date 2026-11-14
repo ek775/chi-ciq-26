@@ -447,6 +447,44 @@ def test_document_cli_ingests_tree(documents_engine, tmp_path, monkeypatch):
         )
 
 
+def test_parallel_document_shards_preserve_identity_and_empty_directories(
+    documents_engine, tmp_path
+):
+    (tmp_path / "empty").mkdir()
+    (tmp_path / "nested").mkdir()
+    for index in range(12):
+        (tmp_path / "nested" / f"{index}.txt").write_text(f"Document {index}")
+
+    def run(index):
+        return DocumentPipeline(
+            documents_engine, Embedder, model_name="test-model"
+        ).ingest_tree(
+            tmp_path, namespace="transcripts", shard_index=index, shard_count=4
+        )
+
+    with ThreadPoolExecutor(max_workers=4) as workers:
+        assert sum(workers.map(run, range(4))) == 12
+        assert sum(workers.map(run, range(4))) == 0
+    with documents_engine.connect() as connection:
+        assert set(connection.execute(select(documents.c.key)).scalars()) == {
+            f"transcripts/nested/{index}.txt" for index in range(12)
+        }
+        assert set(connection.execute(select(directories.c.key)).scalars()) == {
+            "transcripts/.",
+            "transcripts/empty",
+            "transcripts/nested",
+        }
+
+
+@pytest.mark.parametrize(
+    "arguments",
+    [["--shard-count", "0"], ["--shard-index", "-1"], ["--shard-index", "1"]],
+)
+def test_document_cli_rejects_invalid_shards(arguments):
+    with pytest.raises(SystemExit):
+        main(arguments)
+
+
 @pytest.mark.skipif(
     os.environ.get("RUN_DOCUMENT_EMBEDDING_TESTS") != "1",
     reason="Set RUN_DOCUMENT_EMBEDDING_TESTS=1 to download and run the real model",

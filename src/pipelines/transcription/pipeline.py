@@ -18,6 +18,7 @@ from databases.meetings.models import Meeting, PublishedSource
 from databases.meetings.schema import check_schema, connect_database
 from databases.meetings.store import TranscriptStore
 from shared.logging import configure_logging
+from shared.sharding import shard_paths, validate_shard
 
 from .inputs import (
     content_digest,
@@ -205,10 +206,18 @@ def main(argv: list[str] | None = None) -> None:
         "--expected-sha256", help="Reject a recording changed since job creation"
     )
     parser.add_argument("--namespace", default="recordings")
+    parser.add_argument("--shard-index", type=int, default=0)
+    parser.add_argument("--shard-count", type=int, default=1)
     parser.add_argument(
         "--force", action="store_true", help="Reprocess unchanged inputs"
     )
     args = parser.parse_args(argv)
+    try:
+        validate_shard(args.shard_index, args.shard_count)
+    except ValueError as error:
+        parser.error(str(error))
+    if args.input_file is not None and (args.shard_index != 0 or args.shard_count != 1):
+        parser.error("Sharding requires directory input, not --input-file")
     if args.meeting_filename is not None and args.input_file is None:
         parser.error("--meeting-filename requires --input-file")
     if args.meeting_filename is not None and args.metadata_file is not None:
@@ -234,10 +243,15 @@ def main(argv: list[str] | None = None) -> None:
             raise FileNotFoundError(args.input_file)
         recordings = [args.input_file]
     else:
+        root = args.input_dir or Path(
+            os.environ.get("TRANSCRIPTION_INPUT_DIR", "data/mp4")
+        )
         recordings = discover_recordings(
-            args.input_dir
-            or Path(os.environ.get("TRANSCRIPTION_INPUT_DIR", "data/mp4")),
+            root,
             metadata,
+        )
+        recordings = shard_paths(
+            recordings, root, index=args.shard_index, count=args.shard_count
         )
     engine = connect_database(os.environ["DATABASE_URL"])
     try:

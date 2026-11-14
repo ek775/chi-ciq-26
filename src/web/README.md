@@ -13,7 +13,8 @@ chi-ciq-web
 ```
 
 The server binds port 8080 and requires an already migrated database.
-`/health` checks connectivity, `/ready` checks the schema, and `/docs` describes
+`/health` checks meetings connectivity, `/ready` checks the meetings schema and
+the analytics schema when configured, and `/docs` describes
 the API:
 
 - `GET /api/meetings?q=budget&limit=50&offset=0`
@@ -48,6 +49,14 @@ dashboard labels voice-inferred attributions and their confidence; treat stances
 as model output, not verified positions.
 
 ## Access control
+
+[fuzzball.yaml](../../fuzzball.yaml) deploys this image as a persistent service
+only after parallel ingestion/analytics, dashboard refresh, completed backups,
+and schema/reader-privilege checks. Its user-scoped endpoint serves both `/` and
+`/dashboard` on port 8080 and uses `/ready` as the readiness probe. See the
+[deployment guide](../../README.md#fuzzball-deployment) for builds, secret
+bindings, endpoint access, and release verification. The web container mounts
+no raw inputs or database archives and receives only reader database URLs.
 
 Use a separate database login with SELECT-only grants for the web service.
 Neither the UI nor API implements application authentication; restrict

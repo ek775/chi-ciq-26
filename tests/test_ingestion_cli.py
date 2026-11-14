@@ -88,3 +88,63 @@ def test_vimeo_directory_mapping_is_preflighted_and_passed_to_ingestion(
         ]
     )
     assert calls[1][1]["metadata_filename"] == "2026-06-12_budget.mp4"
+
+
+def test_directory_shards_process_every_recording_once(tmp_path, monkeypatch):
+    for index in range(12):
+        (tmp_path / f"2026-11-{index + 1:02}_budget.mp4").touch()
+    monkeypatch.setattr(pipeline, "load_dotenv", lambda: None)
+    monkeypatch.setenv("DATABASE_URL", "postgresql://unused")
+    monkeypatch.setattr(
+        pipeline,
+        "connect_database",
+        lambda url: SimpleNamespace(dispose=lambda: None),
+    )
+    monkeypatch.setattr(pipeline, "check_schema", lambda engine: None)
+    processed = []
+    monkeypatch.setattr(
+        pipeline,
+        "IngestionPipeline",
+        lambda engine, factory: SimpleNamespace(
+            ingest=lambda recording, **kwargs: processed.append(
+                (recording, kwargs["namespace"], kwargs["metadata_filename"])
+            )
+        ),
+    )
+    for index in range(4):
+        pipeline.main(
+            [
+                "--input-dir",
+                str(tmp_path),
+                "--shard-index",
+                str(index),
+                "--shard-count",
+                "4",
+            ]
+        )
+    assert len(processed) == 12
+    assert {recording for recording, _, _ in processed} == set(tmp_path.iterdir())
+    assert all(
+        namespace == "recordings" and filename == recording.name
+        for recording, namespace, filename in processed
+    )
+
+
+@pytest.mark.parametrize(
+    "arguments",
+    [
+        ["--shard-count", "0"],
+        ["--shard-index", "-1"],
+        ["--shard-count", "2", "--shard-index", "2"],
+        ["--input-file", "2026-11-01_budget.mp4", "--shard-count", "2"],
+    ],
+)
+def test_invalid_shards_fail_before_database_access(arguments, monkeypatch):
+    monkeypatch.setattr(pipeline, "load_dotenv", lambda: None)
+    monkeypatch.setattr(
+        pipeline,
+        "connect_database",
+        lambda url: pytest.fail("Invalid sharding reached the database"),
+    )
+    with pytest.raises(SystemExit):
+        pipeline.main(arguments)

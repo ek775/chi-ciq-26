@@ -8,7 +8,7 @@ Run shell examples from the repository root, not this module directory.
 
 - [Downloads](downloads/README.md) acquires complete MP4 files onto shared input storage.
 - [Transcription](transcription/README.md) handles initial database building and
-  periodic updates by processing the mounted recordings directory in one batch.
+  periodic updates with deterministic shards of a mounted recordings directory.
 - [Documents](documents/README.md) mirrors supported document trees into a
   separate pgvector database using CPU text embeddings by default.
 - [Analytics](analytics/README.md) reads the meetings and documents databases
@@ -44,23 +44,23 @@ matches the development shell's NVIDIA requirements.
 
 ## Fuzzball pipeline notes
 
-[fuzzball.draft.yaml](../../fuzzball.draft.yaml) records the mounted-input
-pipeline design, not an executable Fuzzfile or validated cluster schema. The CLI
-reports an enabled persistent `shared/datasets` volume backed by external NFS
-and an enabled persistent `team8/volume_test` volume. An inspection on
-2026-11-14 found dated and Vimeo-ID audio-only MP4s under `audio` at the root of
-`team8/volume_test`; new files appeared during inspection. See the
-[transcription guide](transcription/README.md#fuzzball-batch-input) for metadata
-mapping and the requirement to wait for completed downloads. The checkout
-contains 202 transcript `.txt` files and one MP4; the contents of
-`shared/datasets` remain unverified. The analytics batch reads
-its roster and speaker labels from `/datasets/analytics`, runs after source
-updates, and needs a reachable vLLM endpoint for the stance stage.
+[fuzzball.yaml](../../fuzzball.yaml) is a validated v4 deployment workflow.
+See the [deployment guide](../../README.md#fuzzball-deployment) for image builds,
+input staging, secrets, submission, and endpoint verification.
 
-The transcription batch mounts the recordings directory read-only and processes
-all validated MP4 files in that job. The documents batch mounts the transcript
-directory read-only and ingests its supported files. Downloads and completed
-database backups are the only pipeline writers to the shared volume.
-Credentials remain cluster secrets. The Fuzzball workflow schema, registry
-images, database endpoints, and secret bindings still need confirmation before
-deployment. The per-recording dispatcher remains available for larger workloads.
+128 queued transcription shards (two active GPU workers) and four CPU document
+shards run in parallel.
+Both arrays must finish before analytics sync. After roster preparation,
+attribution, mentions, sentiment, emotion, and topics fan out. Stance joins
+attribution and topics, and refresh joins every analysis branch. Sentiment,
+emotion, and stance each have 32 unit shards with four active tasks; stance
+permits two requests per task, eight total. Backups and
+reader/schema checks gate the persistent, private web service.
+
+Shard assignment hashes the input's relative path, so different mounts and
+newly added files do not move existing inputs between shards. Every shard keeps
+the same namespace and input root; each source remains an atomic update.
+Freeze inputs during ingestion and do not overlap whole release workflows.
+Workers do not write inputs; use cluster ACLs to enforce that boundary.
+Only archive jobs write to `/datasets/database`. The per-recording dispatcher
+remains available for independent submissions outside the deployment DAG.
