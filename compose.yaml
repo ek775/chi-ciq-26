@@ -25,7 +25,6 @@ services:
     environment:
       HF_TOKEN: ${HF_TOKEN:-}
       TRANSCRIPTION_INPUT_DIR: ${TRANSCRIPTION_INPUT_DIR:-data/mp4}
-      TRANSCRIPTION_OUTPUT_DIR: ${TRANSCRIPTION_OUTPUT_DIR:-data/database}
       DATABASE_URL: postgresql+psycopg://transcription:${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in .env}@db:5432/transcription
     depends_on:
       db:

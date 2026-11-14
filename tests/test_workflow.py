@@ -263,12 +263,22 @@ def test_duration_persists_before_diarization(workflow, source, store):
         assert session.scalar(select(Meeting.recording_duration_seconds)) >= 3
 
 
-def test_directory_batch_processes_all_recordings(workflow, source, store):
-    from examples.batch_transcribe import discover_recordings, transcribe_recordings
+def test_directory_ingestion_processes_all_recordings(workflow, source, store, engine):
+    from pipelines.transcription.inputs import discover_recordings
+    from pipelines.transcription.pipeline import IngestionPipeline
 
     second = source.parent / "2026-11-11_budget.mp4"
     shutil.copyfile(source, second)
-    transcribe_recordings(workflow, discover_recordings(source.parent))
+
+    def factory(staging_store):
+        workflow.store = staging_store
+        return workflow
+
+    pipeline = IngestionPipeline(engine, factory)
+    for recording in discover_recordings(source.parent):
+        assert pipeline.ingest(recording)
+    for recording in discover_recordings(source.parent):
+        assert not pipeline.ingest(recording)
     with store.sessions() as session:
         meetings = session.scalars(select(Meeting).order_by(Meeting.meeting_date)).all()
         assert [meeting.filename for meeting in meetings] == [source.name, second.name]
