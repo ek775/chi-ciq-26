@@ -132,6 +132,13 @@ shows each attribution method and confidence. Stances default to
 `zai-org/GLM-5.3-Flash`, which needs about 306 GiB of GPU memory (for example
 8× H100/H200); see [vLLM](src/vllm/README.md) for smaller alternatives.
 
+## Alderman speech and action tracker
+
+The tracker reads published transcripts from the meetings database and builds
+a separate dataset for cited speech, commitments, and official actions. See
+the [tracker runbook](src/pipelines/tracker/README.md) for the demo and
+commands to build and query the dataset.
+
 ## Quick ingestion commands
 
 ```sh
