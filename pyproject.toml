@@ -17,11 +17,14 @@ dependencies = [
 
 [project.scripts]
 chi-ciq-ingest = "pipelines.transcription.pipeline:main"
+chi-ciq-dispatch = "pipelines.transcription.dispatch:main"
+chi-ciq-download-vimeo = "pipelines.downloads.vimeo:main"
 chi-ciq-database = "databases.meetings.schema:main"
 chi-ciq-web = "web.app:main"
 
 [project.optional-dependencies]
 database = []
+downloads = ["yt-dlp"]
 web = [
     "fastapi",
     "uvicorn",
@@ -53,6 +56,7 @@ dev = [
 
 [tool.setuptools.package-data]
 web = ["static/*"]
+"pipelines.downloads" = ["vimeo-ids.txt"]
 
 [tool.setuptools.packages.find]
 where = ["src"]

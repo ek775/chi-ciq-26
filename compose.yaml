@@ -58,6 +58,14 @@ services:
     depends_on:
       meetings-migrate:
         condition: service_completed_successfully
+  downloads:
+    profiles: ["downloads"]
+    build:
+      context: .
+      dockerfile: src/pipelines/downloads/Dockerfile
+    init: true
+    volumes:
+      - ./data/mp4:/outputs
   meetings-backup:
     profiles: ["pipelines"]
     build:

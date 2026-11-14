@@ -4,10 +4,24 @@
 status: draft
 
 containers:
+  pipelines.downloads:
+    source: src/pipelines/downloads
+    dockerfile: src/pipelines/downloads/Dockerfile
+    command: [chi-ciq-download-vimeo, --output-dir, /outputs]
+    storage: [persistent-inputs-with-posix-locks-and-atomic-rename]
+    network: public-vimeo-and-cdn-egress
+    handoff: validated-complete-mp4s-to-transcription-dispatch
   pipelines.transcription:
     source: src/pipelines/transcription
     dockerfile: src/pipelines/transcription/Dockerfile
-    command: [chi-ciq-ingest, --input-dir, /inputs, --namespace, recordings]
+    command: [chi-ciq-ingest, --input-file, /inputs/assigned-recording.mp4, --namespace, recordings, --expected-sha256, assigned-content-hash]
+    distribution:
+      submitter: chi-ciq-dispatch
+      granularity: one-complete-recording-per-independent-fuzzball-workflow
+      template: cluster-specific-fuzzfile-json-required-before-submission
+      file-transfer: fuzzball-template-ingestion-from-input-uri-or-shared-read-only-volume
+      local-paths: never-assume-submitter-filesystem-exists-on-workers
+      inference: transcription-diarization-and-embeddings-in-the-same-worker
     dependencies: [databases.meetings]
     inputs: [complete-mp4-files]
     storage: [read-only-inputs, model-cache]
@@ -50,10 +64,10 @@ containers:
 
 workflows:
   initial-meetings-build:
-    stages: [backup-existing-database, migrate-meetings, transcribe-inputs, backup-meetings]
+    stages: [download-public-vimeo-recordings, backup-existing-database, migrate-meetings, dispatch-per-recording-workers, wait-for-all-worker-success, backup-meetings]
   periodic-meetings-update:
     schedule: external-scheduler-to-be-configured
-    stages: [check-meetings-schema, transcribe-inputs, backup-meetings]
+    stages: [download-public-vimeo-recordings, check-meetings-schema, dispatch-per-recording-workers, wait-for-all-worker-success, backup-meetings]
     semantics: skip-unchanged-and-atomically-publish-successful-replacements
   initial-documents-build:
     status: unimplemented

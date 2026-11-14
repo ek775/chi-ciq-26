@@ -29,12 +29,28 @@ def test_pipeline_uses_the_meetings_database_contract():
     assert Meeting is LegacyMeeting is SharedMeeting
 
 
+def test_dispatcher_does_not_load_inference_dependencies():
+    subprocess.run(
+        [
+            sys.executable,
+            "-c",
+            (
+                "import sys; import pipelines.transcription.dispatch; "
+                "assert not {'torch', 'scipy', 'pyannote', 'whisper'} "
+                "& sys.modules.keys()"
+            ),
+        ],
+        check=True,
+    )
+
+
 def test_source_layout_matches_container_boundaries():
     from pathlib import Path
 
     root = Path(__file__).resolve().parents[1] / "src"
     for path in (
         "pipelines/transcription",
+        "pipelines/downloads",
         "pipelines/documents",
         "pipelines/analytics",
         "web",

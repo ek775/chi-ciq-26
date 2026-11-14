@@ -25,6 +25,7 @@ The source tree mirrors the expected container boundaries:
 ```text
 src/
   pipelines/
+    downloads/       public Vimeo acquisition, upstream of transcription
     transcription/   implemented: initial build and periodic updates
     documents/       reserved: not implemented
     analytics/       reserved: not implemented
@@ -103,6 +104,151 @@ available. No Fuzzball deployment or CI/CD pipeline is claimed to be operational
 The draft explicitly keeps database lifetimes independent of finite pipeline
 jobs and replaceable web releases.
 
+### Public Vimeo acquisition
+
+The moved ID list is packaged at `src/pipelines/downloads/vimeo-ids.txt`.
+`chi-ciq-download-vimeo` uses it by default when no positional IDs or explicit
+`--batch-file` are supplied. The moved `download-vimeo.py` path remains a wrapper;
+the importable implementation is `pipelines.downloads.vimeo`.
+
+```sh
+docker compose --profile downloads run --build --rm downloads
+# Once acquisition succeeds, prepare the worker fan-out:
+chi-ciq-dispatch --input-dir data/mp4 --output-dir data/dispatch
+```
+
+The downloads container uses CPU, FFmpeg/ffprobe and `.[downloads]` (yt-dlp),
+without inference models or database access. It shares `data/mp4` with the
+transcription input mount. It downloads only public Vimeo recordings, retaining
+the original 240p-or-lower selection and optional `--best-audio`.
+`--dry-run` contacts Vimeo and reports formats but publishes no recording; it
+is **not** an offline test.
+
+Vimeo titles must contain the actual meeting date and type in the existing
+filename format. Whitespace is normalized to underscores; missing meeting
+metadata is an error, not inferred from the upload date. For titles that do not
+conform, supply `--metadata-file` containing a JSON object such as
+`{"1234158910": "2026-11-10_committee_on_budget.mp4"}`. Mount this file into the
+downloads container and pass its container path. All mappings are validated
+before downloading, and two IDs cannot own the same output filename.
+
+Downloads stay in private scratch subdirectories until yt-dlp succeeds and
+ffprobe confirms both audio and video. Only then is the complete MP4 atomically
+published; the dispatcher ignores scratch subdirectories. A `.vimeo/` receipt
+records each ID's stable filename and SHA-256. Repeated acquisition skips managed
+files matching their receipts. `--refresh` explicitly redownloads managed files
+and atomically replaces them, leaving the previous file intact on download or
+media-validation failure. Unmanaged files and files owned by another ID are
+never overwritten. Invalid receipts fail visibly, rather than treating arbitrary
+nonempty files as completed downloads.
+Locally modified managed files require `--refresh`; they are not silently
+overwritten merely because their checksum differs.
+
+The output filesystem must support POSIX locks and atomic rename. Acquisitions
+sharing this output are serialized; start dispatch only after the acquisition
+command succeeds. Failures are logged with video IDs, the batch continues, and
+the command exits nonzero if any failed. Previously successful files remain.
+No Vimeo network download or Fuzzball cluster execution was tested during the
+hackathon networking restriction.
+
+### Transcription fan-out
+
+`chi-ciq-dispatch` runs on the submitter, not inside a long-running inference
+container. It discovers recordings and prepares **one independent Fuzzball
+workflow per complete file**, all using the same transcription image. Fuzzball
+chooses worker nodes; no local process pool or node list is used.
+
+Each assigned worker runs Whisper, streaming diarization, and embeddings for
+its own recording, then writes directly to the shared meetings database.
+Recording-level distribution preserves local speaker labels and audio offsets;
+it does not split one recording's diarization across nodes.
+
+Build/push the transcription image to a registry reachable by worker nodes when
+networking is available. Configure `TRANSCRIPTION_WORKER_IMAGE` with its immutable
+tag or digest. Prepare a plan now without contacting Fuzzball:
+
+```sh
+chi-ciq-dispatch --input-dir data/mp4 \
+  --image docker://your-registry/chi-ciq-transcription:commit-tag \
+  --output-dir data/dispatch
+```
+
+Every run gets a new private directory containing `plan.json`. Jobs include the
+exact command argv, source identity, SHA-256, and container input path. File
+names with spaces stay single arguments; no shell interpolation is performed.
+The inference image is built from `src/pipelines/transcription/Dockerfile` with
+the repository root as context. The submitter needs the base Python package and
+Fuzzball CLI, not Torch, models, a GPU, or a database connection.
+
+File availability must be provided by the cluster, **not** by assuming the
+submitter's local path exists on every node:
+
+- For already-uploaded inputs, set `TRANSCRIPTION_INPUT_BASE_URI` to an `s3://`
+  or `https://` directory. The dispatcher percent-encodes each filename and
+  provides `${input.uri}` for Fuzzball's input-ingestion configuration.
+- Alternatively, the Fuzzfile template must mount cluster-wide input storage
+  read-only at `/inputs` (override with `--worker-input-dir`).
+- The dispatcher does not upload files, download recordings, or embed storage
+  credentials. Local discovery establishes the expected byte hash; remote or
+  mounted files must match it. Workers reject changed/stale content before
+  inference or publication, including changes while making their snapshot.
+
+Before actual submission, supply a **cluster-specific Fuzzfile JSON template**
+using the supported Fuzzball schema. JSON is valid YAML, and rendered workflows
+are saved as individual `.json` files. The template must use these placeholders
+as entire JSON values, never inside shell strings:
+
+| Placeholder | Rendered value |
+|---|---|
+| `${worker.image}` | Transcription container image |
+| `${worker.command}` | Complete command argument array |
+| `${job.name}` | Per-source/content job name |
+| `${input.path}` | Assigned container filename |
+| `${input.uri}` | Remote input URI, when configured |
+| `${input.filename}` | Original filename |
+| `${input.sha256}` | Expected content digest |
+| `${source.key}` | Stable namespace/filename identity |
+
+For example, use `"${worker.command}"` as the value of the cluster schema's
+command field; rendering replaces it with a JSON array. This is a substitution
+contract, not a guessed Fuzzball schema. Bind GPU/CPU/memory limits, input staging
+or shared-volume mounts, model caches, and `DATABASE_URL`/`HF_TOKEN` cluster
+secret references in that template. Do not include literal credentials.
+`fuzzball.draft.yaml` is not usable as this template.
+
+```sh
+# Render workflows offline after supplying your cluster-specific template:
+chi-ciq-dispatch --input-dir data/mp4 --output-dir data/dispatch \
+  --template /path/to/cluster-worker.json
+
+# When networking and the logged-in Fuzzball context are ready:
+chi-ciq-dispatch --input-dir data/mp4 --output-dir data/dispatch \
+  --template /path/to/cluster-worker.json --submit --max-jobs 32
+```
+
+Submission explicitly invokes `fuzzball workflow validate` for **all** generated
+workflows before starting any with `fuzzball workflow start`; the CLI executable
+can be overridden with `FUZZBALL_BIN` or `--fuzzball`. Default operation only
+prepares files, without invoking the CLI. `--max-jobs` caps jobs submitted by
+one invocation; it is not a cluster-wide concurrency limit. Starts do not wait,
+so Fuzzball can schedule recordings concurrently. Configure actual concurrency
+through cluster quotas/resources.
+
+Per-job CLI receipts and an fsynced `submissions.jsonl` persist accepted and
+failed submission attempts. If a later submission fails, earlier workflows are
+left running, not silently cancelled or automatically resubmitted. Inspect
+receipts and workflow status before retrying: submission is not completion.
+Wait for every workflow to succeed before running the post-batch backup;
+database schema migration and backups are not duplicated in each worker.
+
+Workers invoke `chi-ciq-ingest --input-file <assigned-path> --expected-sha256
+<hash> --namespace recordings`; they never scan and process every file mounted
+on their node. `--force` on the dispatcher propagates to each worker. Same-source
+database locks and atomic publication still protect overlapping/retried jobs;
+different recordings can write concurrently. Both initial builds and periodic
+updates use this fan-out; external scheduling and cluster submission remain
+deferred until networking is available.
+
 ## Ingestion versus updates
 
 After configuring `DATABASE_URL`, initialize or additively migrate the schema:
@@ -143,10 +289,11 @@ they are not silently deleted or automatically published. Run the ingestion
 pipeline on their raw inputs to establish published source identities. Failed
 stages may accumulate and need an explicit retention policy.
 
-Raw document/video acquisition is an upstream handoff, not implemented here.
-Current ingestion accepts complete, filename-validated MP4 files directly inside
+Public Vimeo acquisition is provided by `pipelines.downloads`; other raw
+document/video acquisition remains an upstream handoff, not implemented here.
+Current transcription ingestion accepts complete, filename-validated MP4 files directly inside
 the input directory (non-recursive). It does not claim to ingest arbitrary
-documents or implement a downloader.
+documents. Vimeo downloading is a separate acquisition service.
 
 ## Web browsing and search
 

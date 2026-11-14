@@ -17,30 +17,11 @@ from databases.meetings.models import Meeting, PublishedSource
 from databases.meetings.schema import check_schema, connect_database
 from databases.meetings.store import TranscriptStore
 
+from .inputs import content_digest, discover_recordings
 from .runtime import build_workflow, configure_logging
 from .workflow import TranscriptionWorkflow
 
 logger = logging.getLogger(__name__)
-
-
-def discover_recordings(directory: Path) -> list[Path]:
-    if not directory.is_dir():
-        raise NotADirectoryError(directory)
-    recordings = sorted(
-        path
-        for path in directory.iterdir()
-        if path.is_file() and path.suffix.lower() == ".mp4"
-    )
-    if not recordings:
-        raise ValueError(f"No MP4 files found in {directory}")
-    for recording in recordings:
-        parse_filename(recording)
-    return recordings
-
-
-def content_digest(source: Path) -> str:
-    with source.open("rb") as stream:
-        return hashlib.file_digest(stream, "sha256").hexdigest()
 
 
 @contextmanager
@@ -134,7 +115,12 @@ class IngestionPipeline:
         self.workflow: TranscriptionWorkflow | None = None
 
     def ingest(
-        self, source: Path, *, namespace: str = "recordings", force=False
+        self,
+        source: Path,
+        *,
+        namespace: str = "recordings",
+        force: bool = False,
+        expected_sha256: str | None = None,
     ) -> bool:
         if not namespace.strip():
             raise ValueError("Source namespace must not be empty")
@@ -142,6 +128,8 @@ class IngestionPipeline:
         key = f"{namespace}/{source.name}"
         with source_lock(self.engine, key):
             digest = content_digest(source)
+            if expected_sha256 is not None and digest != expected_sha256:
+                raise ValueError(f"Input content changed since dispatch: {source.name}")
             if not force and self.store.is_unchanged(key, digest):
                 logger.info("Unchanged, skipping %s", key)
                 return False
@@ -149,6 +137,10 @@ class IngestionPipeline:
                 snapshot = Path(directory) / source.name
                 shutil.copyfile(source, snapshot)
                 digest = content_digest(snapshot)
+                if expected_sha256 is not None and digest != expected_sha256:
+                    raise ValueError(
+                        f"Input content changed while staging: {source.name}"
+                    )
                 if not force and self.store.is_unchanged(key, digest):
                     logger.info("Unchanged snapshot, skipping %s", key)
                     return False
@@ -166,23 +158,45 @@ class IngestionPipeline:
                 return True
 
 
-def main() -> None:
+def main(argv: list[str] | None = None) -> None:
     load_dotenv()
     parser = argparse.ArgumentParser(
         description="Ingest or atomically update MP4 inputs"
     )
-    parser.add_argument(
+    inputs = parser.add_mutually_exclusive_group()
+    inputs.add_argument(
         "--input-dir",
         type=Path,
-        default=Path(os.environ.get("TRANSCRIPTION_INPUT_DIR", "data/mp4")),
+    )
+    inputs.add_argument(
+        "--input-file", type=Path, help="Process only this Fuzzball-assigned recording"
+    )
+    parser.add_argument(
+        "--expected-sha256", help="Reject a recording changed since job creation"
     )
     parser.add_argument("--namespace", default="recordings")
     parser.add_argument(
         "--force", action="store_true", help="Reprocess unchanged inputs"
     )
-    args = parser.parse_args()
+    args = parser.parse_args(argv)
+    if args.expected_sha256 is not None:
+        if args.input_file is None:
+            parser.error("--expected-sha256 requires --input-file")
+        if len(args.expected_sha256) != 64 or any(
+            char not in "0123456789abcdef" for char in args.expected_sha256
+        ):
+            parser.error("--expected-sha256 must be 64 lowercase hexadecimal digits")
     configure_logging()
-    recordings = discover_recordings(args.input_dir)
+    if args.input_file is not None:
+        parse_filename(args.input_file)
+        if not args.input_file.is_file():
+            raise FileNotFoundError(args.input_file)
+        recordings = [args.input_file]
+    else:
+        recordings = discover_recordings(
+            args.input_dir
+            or Path(os.environ.get("TRANSCRIPTION_INPUT_DIR", "data/mp4"))
+        )
     engine = connect_database(os.environ["DATABASE_URL"])
     try:
         check_schema(engine)
@@ -190,7 +204,12 @@ def main() -> None:
             engine, lambda store: build_workflow(store, os.environ["HF_TOKEN"])
         )
         for recording in recordings:
-            pipeline.ingest(recording, namespace=args.namespace, force=args.force)
+            pipeline.ingest(
+                recording,
+                namespace=args.namespace,
+                force=args.force,
+                expected_sha256=args.expected_sha256,
+            )
     finally:
         engine.dispose()
 
