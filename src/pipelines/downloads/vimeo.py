@@ -6,11 +6,18 @@ import hashlib
 import json
 import logging
 import os
+import random
 import re
 import shutil
 import subprocess
+import time
+from concurrent.futures import ThreadPoolExecutor, as_completed
+from contextlib import ExitStack
+from datetime import UTC
+from email.utils import parsedate_to_datetime
 from pathlib import Path
 from tempfile import TemporaryDirectory
+from urllib.error import HTTPError, URLError
 from urllib.parse import parse_qs, urlsplit
 from urllib.request import Request, urlopen
 
@@ -21,6 +28,24 @@ from shared.logging import configure_logging
 
 logger = logging.getLogger(__name__)
 DEFAULT_IDS = Path(__file__).with_name("vimeo-ids.txt")
+METADATA_RETRIES = 5
+
+
+def retry_delay(attempt: int, retry_after: str | None) -> float:
+    delay = min(60.0, 2**attempt + random.uniform(0, 2**attempt))
+    if retry_after is not None:
+        try:
+            if retry_after.strip().isdigit():
+                requested = float(retry_after)
+            else:
+                date = parsedate_to_datetime(retry_after)
+                if date.tzinfo is None:
+                    date = date.replace(tzinfo=UTC)
+                requested = date.timestamp() - time.time()
+            delay = max(delay, requested)
+        except (ValueError, TypeError, OverflowError):
+            logger.warning("Invalid Vimeo Retry-After header: %r", retry_after)
+    return delay
 
 
 def vimeo_id(value: str) -> str:
@@ -51,8 +76,34 @@ def public_recording(video: str) -> tuple[str, str]:
         f"https://player.vimeo.com/video/{video}/config",
         headers={"Referer": "https://vimeo.com/", "User-Agent": "Mozilla/5.0"},
     )
-    with urlopen(request, timeout=30) as response:
-        config = json.load(response)
+    for attempt in range(METADATA_RETRIES + 1):
+        retry_after = None
+        try:
+            with urlopen(request, timeout=30) as response:
+                config = json.load(response)
+            break
+        except HTTPError as error:
+            error.close()
+            if error.code not in {408, 429, 500, 502, 503, 504}:
+                raise
+            if attempt == METADATA_RETRIES:
+                raise
+            retry_after = error.headers.get("Retry-After")
+            reason = f"HTTP {error.code}"
+        except (URLError, TimeoutError, ConnectionError) as error:
+            if attempt == METADATA_RETRIES:
+                raise
+            reason = str(error)
+        delay = retry_delay(attempt, retry_after)
+        logger.warning(
+            "%s: Vimeo metadata request failed (%s); retry %d/%d in %.1fs",
+            video,
+            reason,
+            attempt + 1,
+            METADATA_RETRIES,
+            delay,
+        )
+        time.sleep(delay)
     hls = config["request"]["files"]["hls"]
     playlist = hls["cdns"][hls["default_cdn"]]["url"]
     title = config["video"]["title"]
@@ -85,7 +136,7 @@ def digest(path: Path) -> str:
         return hashlib.file_digest(stream, "sha256").hexdigest()
 
 
-def validate_media(path: Path) -> None:
+def validate_media(path: Path, *, audio_only: bool = False) -> None:
     result = subprocess.run(
         [
             "ffprobe",
@@ -102,7 +153,12 @@ def validate_media(path: Path) -> None:
         text=True,
     )
     kinds = {item["codec_type"] for item in json.loads(result.stdout)["streams"]}
-    if not {"audio", "video"} <= kinds:
+    if audio_only:
+        if "audio" not in kinds or "video" in kinds:
+            raise ValueError(
+                "Downloaded audio-only MP4 must contain audio and no video"
+            )
+    elif not {"audio", "video"} <= kinds:
         raise ValueError("Downloaded MP4 must contain both video and audio")
 
 
@@ -113,6 +169,7 @@ def download(
     filename: str | None = None,
     dry_run: bool = False,
     best_audio: bool = False,
+    audio_only: bool = False,
     refresh: bool = False,
 ) -> Path | None:
     output_dir.mkdir(parents=True, exist_ok=True)
@@ -120,7 +177,8 @@ def download(
     state_dir.mkdir(exist_ok=True)
     state_file = state_dir / f"{video}.json"
     # Shared output storage must support POSIX locks and atomic rename.
-    with (state_dir / ".download.lock").open("a") as lock:
+    with ExitStack() as locks:
+        lock = locks.enter_context((state_dir / f".{video}.lock").open("a"))
         fcntl.flock(lock, fcntl.LOCK_EX)
         state = None
         if state_file.exists():
@@ -132,6 +190,14 @@ def download(
                 )
             filename = previous
             target = output_dir / filename
+            if (
+                not refresh
+                and not dry_run
+                and state.get("audio_only", False) != audio_only
+            ):
+                raise ValueError(
+                    f"{video}: changing audio-only mode requires --refresh"
+                )
             if not refresh and not dry_run and target.is_file():
                 if digest(target) != state["sha256"]:
                     raise ValueError(
@@ -143,6 +209,12 @@ def download(
         title, playlist = public_recording(video)
         filename = validate_filename(filename) if filename else title_filename(title)
         target = output_dir / filename
+        # Different IDs may resolve to the same title; serialize that filename too.
+        name_hash = hashlib.sha256(filename.encode("utf-8")).hexdigest()
+        name_lock = locks.enter_context(
+            (state_dir / f".filename-{name_hash}.lock").open("a")
+        )
+        fcntl.flock(name_lock, fcntl.LOCK_EX)
         for other in state_dir.glob("*.json"):
             if other != state_file:
                 owner = json.loads(other.read_text(encoding="utf-8"))
@@ -156,6 +228,8 @@ def download(
                 "bv[height<=240]+ba[format_id^=audio-low]/"
                 "bv[height<=240]+wa/b[height<=240]"
             )
+        if audio_only:
+            formats = "ba" if best_audio else "ba[format_id^=audio-low]/wa"
         with TemporaryDirectory(prefix=".vimeo-", dir=output_dir) as directory:
             temporary = Path(directory) / "recording.mp4"
             command = [
@@ -168,6 +242,12 @@ def download(
                 "5",
                 "--fragment-retries",
                 "8",
+                "--retry-sleep",
+                "http:exp=1:60",
+                "--retry-sleep",
+                "fragment:exp=1:60",
+                "--retry-sleep",
+                "extractor:exp=1:60",
                 "--abort-on-unavailable-fragments",
                 "--merge-output-format",
                 "mp4",
@@ -186,13 +266,20 @@ def download(
                 return None
             if not temporary.is_file() or temporary.stat().st_size == 0:
                 raise RuntimeError(f"{video}: yt-dlp produced no complete MP4")
-            validate_media(temporary)
+            validate_media(temporary, audio_only=audio_only)
             sha256 = digest(temporary)
             with temporary.open("rb") as stream:
                 os.fsync(stream.fileno())
             receipt = Path(directory) / "receipt.json"
             receipt.write_text(
-                json.dumps({"video_id": video, "filename": filename, "sha256": sha256}),
+                json.dumps(
+                    {
+                        "video_id": video,
+                        "filename": filename,
+                        "sha256": sha256,
+                        "audio_only": audio_only,
+                    }
+                ),
                 encoding="utf-8",
             )
             with receipt.open("rb") as stream:
@@ -232,9 +319,19 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--dry-run", action="store_true")
     parser.add_argument("--best-audio", action="store_true")
     parser.add_argument(
+        "--audio-only",
+        action="store_true",
+        help="Download only audio, remuxed into an MP4 for transcription",
+    )
+    parser.add_argument(
+        "--workers", type=int, default=4, help="Concurrent recordings (default: 4)"
+    )
+    parser.add_argument(
         "--refresh", action="store_true", help="Redownload managed recordings"
     )
     args = parser.parse_args(argv)
+    if args.workers < 1:
+        parser.error("--workers must be at least 1")
     configure_logging("downloads")
     videos = list(args.videos)
     batch = args.batch_file or (DEFAULT_IDS if not videos else None)
@@ -270,26 +367,34 @@ def main(argv: list[str] | None = None) -> int:
                 f"{tool} is required; use the downloads container or install it"
             )
     failures = []
-    for video in videos:
-        try:
-            download(
+    with ThreadPoolExecutor(max_workers=args.workers) as executor:
+        futures = {
+            executor.submit(
+                download,
                 video,
                 args.output_dir,
                 filename=names.get(video),
                 dry_run=args.dry_run,
                 best_audio=args.best_audio,
+                audio_only=args.audio_only,
                 refresh=args.refresh,
-            )
-        except (
-            OSError,
-            ValueError,
-            KeyError,
-            TypeError,
-            RuntimeError,
-            subprocess.SubprocessError,
-        ):
-            logger.exception("Vimeo %s acquisition failed", video)
-            failures.append(video)
+            ): video
+            for video in videos
+        }
+        for future in as_completed(futures):
+            video = futures[future]
+            try:
+                future.result()
+            except (
+                OSError,
+                ValueError,
+                KeyError,
+                TypeError,
+                RuntimeError,
+                subprocess.SubprocessError,
+            ):
+                logger.exception("Vimeo %s acquisition failed", video)
+                failures.append(video)
     if failures:
         logger.error("Failed video IDs: %s", ", ".join(failures))
         return 1
