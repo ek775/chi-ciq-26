@@ -41,6 +41,23 @@ services:
       db:
         condition: service_healthy
     command: ["chi-ciq-database", "migrate"]
+  meetings-web-role:
+    image: pgvector/pgvector:pg17
+    profiles: ["web"]
+    environment:
+      PGPASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in .env}
+      WEB_POSTGRES_PASSWORD: ${WEB_POSTGRES_PASSWORD:?Set WEB_POSTGRES_PASSWORD in .env}
+    volumes:
+      - ./src/web/web-role.sql:/web-role.sql:ro
+    depends_on:
+      meetings-migrate:
+        condition: service_completed_successfully
+    command:
+      - psql
+      - --host=db
+      - --username=transcription
+      - --dbname=transcription
+      - --file=/web-role.sql
   transcription:
     profiles: ["pipelines"]
     build:
@@ -87,9 +104,9 @@ services:
     ports:
       - "127.0.0.1:8080:8080"
     environment:
-      DATABASE_URL: postgresql+psycopg://transcription:${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in .env}@db:5432/transcription
+      DATABASE_URL: postgresql+psycopg://web_reader:${WEB_POSTGRES_PASSWORD:?Set WEB_POSTGRES_PASSWORD in .env}@db:5432/transcription
     depends_on:
-      meetings-migrate:
+      meetings-web-role:
         condition: service_completed_successfully
     healthcheck:
       test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8080/ready', timeout=5).close()"]

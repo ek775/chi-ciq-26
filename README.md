@@ -36,7 +36,8 @@ PostgreSQL and vLLM use upstream images; web releases never replace live databas
 Run these commands from the repository root:
 
 1. Copy [.env.example](.env.example) to `.env`, set a Hugging Face read token,
-   and replace the database password in both places. Use a URL-safe password.
+   and set separate passwords for the admin and web database logins. Use
+   URL-safe passwords.
 2. Accept the
    [pyannote model conditions](https://huggingface.co/pyannote/speaker-diarization-community-1).
 3. Put complete, dated MP4s in `data/mp4/`, or run the downloads command below.
