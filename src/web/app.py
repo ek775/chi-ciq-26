@@ -34,8 +34,8 @@ STATIC = Path(__file__).with_name("static")
 class MeetingView(BaseModel):
     id: UUID
     filename: str
-    meeting_date: date
-    meeting_type: str
+    meeting_date: date | None
+    meeting_type: str | None
     recording_duration_seconds: float | None
 
 
@@ -142,10 +142,12 @@ def create_app(
                 .exists()
             )
             query = query.where(
-                Meeting.meeting_type.icontains(q.strip(), autoescape=True) | matching
+                Meeting.meeting_type.icontains(q.strip(), autoescape=True)
+                | Meeting.filename.icontains(q.strip(), autoescape=True)
+                | matching
             )
         rows = database.execute(
-            query.order_by(Meeting.meeting_date.desc(), Meeting.id)
+            query.order_by(Meeting.meeting_date.desc().nulls_last(), Meeting.id)
             .offset(offset)
             .limit(limit)
         ).mappings()

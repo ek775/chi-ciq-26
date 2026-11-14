@@ -255,7 +255,7 @@ def test_worker_only_processes_assigned_file(recordings, monkeypatch):
                 "namespace": "recordings",
                 "force": False,
                 "expected_sha256": digest,
-                "metadata_filename": assigned.name,
+                "metadata_filename": None,
             },
         )
     ]

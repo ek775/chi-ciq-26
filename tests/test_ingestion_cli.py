@@ -70,9 +70,10 @@ def test_vimeo_directory_mapping_is_preflighted_and_passed_to_ingestion(
             ingest=lambda recording, **kwargs: calls.append((recording, kwargs))
         ),
     )
-    with pytest.raises(ValueError, match="Missing meeting metadata"):
-        pipeline.main(["--input-dir", str(tmp_path)])
-    assert calls == []
+    pipeline.main(["--input-dir", str(tmp_path)])
+    assert calls[0][0] == source
+    assert calls[0][1]["metadata_filename"] is None
+    calls.clear()
     metadata_file.write_text(
         json.dumps({"1200176629": "2026-06-11_economic_development.mp4"})
     )
@@ -125,7 +126,7 @@ def test_directory_shards_process_every_recording_once(tmp_path, monkeypatch):
     assert len(processed) == 12
     assert {recording for recording, _, _ in processed} == set(tmp_path.iterdir())
     assert all(
-        namespace == "recordings" and filename == recording.name
+        namespace == "recordings" and filename is None
         for recording, namespace, filename in processed
     )
 

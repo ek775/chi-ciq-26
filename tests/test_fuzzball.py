@@ -1,3 +1,5 @@
+import os
+import subprocess
 from pathlib import Path
 from urllib.parse import urlsplit
 
@@ -16,6 +18,49 @@ def workflow():
 
 def dependencies(job):
     return {dependency["name"] for dependency in job.get("depends-on", [])}
+
+
+def test_transcription_does_not_require_filename_metadata(tmp_path):
+    executable = tmp_path / "chi-ciq-ingest"
+    executable.write_text("#!/bin/sh\nprintf '%s\\n' \"$@\"\n")
+    executable.chmod(0o700)
+    script = workflow()["jobs"]["transcription"]["script"]
+    result = subprocess.run(
+        ["sh", "-c", script],
+        env=os.environ
+        | {
+            "PATH": f"{tmp_path}:{os.environ['PATH']}",
+            "FB_TASK_ID": "1",
+            "SHARD_COUNT": "128",
+        },
+        text=True,
+        capture_output=True,
+        check=True,
+    )
+    arguments = result.stdout.splitlines()
+    assert "--metadata-file" not in arguments
+    assert not result.stderr
+    assert arguments[-4:] == ["--shard-index", "0", "--shard-count", "128"]
+
+
+def test_backups_use_team_storage_separate_from_input_datasets():
+    definition = workflow()
+    assert definition["volumes"]["database-backups"] == {
+        "use": "team8",
+        "name": "database-backups",
+    }
+    for database in ("documents", "analytics"):
+        for phase in ("before", "after"):
+            job = definition["jobs"][f"{database}-backup-{phase}"]
+            assert job["mounts"] == {"/backups": {"volume": "database-backups"}}
+            assert job["command"][-2:] == [
+                "--output-dir",
+                f"/backups/{database}",
+            ]
+    for name in ("documents", "analytics-roster"):
+        assert definition["jobs"][name]["mounts"] == {
+            "/datasets": {"volume": "datasets"}
+        }
 
 
 def test_deployment_dag_is_acyclic_and_fail_closed():
@@ -84,9 +129,10 @@ def test_vllm_is_an_internal_gpu_service():
         "path": "/health",
         "port": 8000,
     }
-    assert "VLLM_BASE_URL=http://vllm:8000/v1" in definition["jobs"][
-        "analytics-stance"
-    ]["env"]
+    assert (
+        "VLLM_BASE_URL=http://vllm:8000/v1"
+        in definition["jobs"]["analytics-stance"]["env"]
+    )
 
 
 def test_ingestion_arrays_have_consistent_disjoint_shards(tmp_path):

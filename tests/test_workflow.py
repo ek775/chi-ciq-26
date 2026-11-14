@@ -133,8 +133,8 @@ def test_iteration_commits_each_chunk_with_relational_metadata(workflow, source,
             )
             meeting = session.get(Meeting, first.meeting_id)
             assert meeting.status == "processing"
-            assert meeting.meeting_type == "committee on budget"
-            assert str(meeting.meeting_date) == "2026-11-10"
+            assert meeting.meeting_type is None
+            assert meeting.meeting_date is None
             assert meeting.text_embedding_model == "fake-text"
             assert meeting.text_embedding_dimensions == 3
             assert meeting.voice_embedding_dimensions == 2
@@ -280,8 +280,8 @@ def test_directory_ingestion_processes_all_recordings(workflow, source, store, e
     for recording in discover_recordings(source.parent):
         assert not pipeline.ingest(recording)
     with store.sessions() as session:
-        meetings = session.scalars(select(Meeting).order_by(Meeting.meeting_date)).all()
-        assert [meeting.filename for meeting in meetings] == [source.name, second.name]
+        meetings = session.scalars(select(Meeting)).all()
+        assert {meeting.filename for meeting in meetings} == {source.name, second.name}
         assert all(meeting.status == "completed" for meeting in meetings)
         assert session.scalar(select(func.count()).select_from(TranscriptSegment)) == 8
 

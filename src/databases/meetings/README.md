@@ -36,8 +36,9 @@ ingestion. An archive is not a substitute for durable live PostgreSQL storage.
 Restore only into a new empty database as described below; no pipeline runs
 `pg_restore --clean` against the live database.
 
-Migrations serialize through a database advisory lock and make additive changes
-only. They preserve legacy data and leave previously unknown recording durations
+Migrations serialize through a database advisory lock, create missing tables,
+and relax meeting date/type nullability for opaque inputs. They preserve legacy
+data and leave previously unknown recording durations
 NULL. Web releases check compatibility rather than mutating the database.
 For multiple independent databases, give each database its own persistent
 volume, connection secret, and backup destination; never share a PostgreSQL data
@@ -60,14 +61,26 @@ client tools. Archives contain transcripts, voice vectors, and source paths;
 treat them as sensitive. Other output directories are not automatically
 gitignored.
 
-## Filename metadata
+## Recording metadata
+
+Filenames identify source recordings only. Transcription does not infer a date
+or meeting type from them, even when they look dated. `meeting_date` and
+`meeting_type` are nullable; unknown values are stored as SQL NULL. Analytics
+derives missing metadata from transcript content in its own database. The web
+transcript browser displays undated recordings using their source filenames.
+
+Run `chi-ciq-database migrate` before deploying these workers to an existing
+database: it drops the old NOT NULL constraints without removing existing values.
+The schema check rejects older constraints with an explicit migration instruction.
+
+The legacy filename parser remains available for explicitly reviewed overrides.
 
 Supported examples:
 
 - `2026_november_10_-_committee_on_budget_and_government_operations (240p).mp4`
 - `2026-11-10_committee_on_budget_and_government_operations.mp4`
 
-Both produce the date `2026-11-10` and meeting type
+When explicitly parsed, both produce the date `2026-11-10` and meeting type
 `committee on budget and government operations`. The original filename and source
 path are also stored. Invalid or missing dates/types raise `ValueError`.
 
@@ -105,7 +118,7 @@ before appending segments and rejects end offsets beyond it. Direct store caller
 must call `set_recording_duration(meeting_id, duration_seconds)` before `append`.
 `created_at` and `updated_at` remain timezone-aware database audit times only;
 they are never used to locate audio.
-The filename supplies a date only; no meeting start time or timezone is invented.
+Explicit overrides supply a date only; no meeting start time or timezone is invented.
 
 For databases created before the duration field was added, apply this schema
 change before using the updated library (`create_database` does not alter tables):

@@ -21,6 +21,9 @@ volumes:
   postgres-data:
     use: team8
     name: postgres-data-v2
+  database-backups:
+    use: team8
+    name: database-backups
   vllm-model-cache:
     use: team8
     name: vllm-model-data
@@ -74,12 +77,12 @@ jobs:
     env: &documents-env
       - DOCUMENTS_DATABASE_URL=postgresql+psycopg://postgres@postgres:5432/documents
     mounts: &archive-mount
-      /datasets:
-        volume: datasets
+      /backups:
+        volume: database-backups
     resource: *small
     depends-on: &database-provisioned
       - {name: postgres-provision, status: FINISHED}
-    command: [chi-ciq-documents-database, backup, --output-dir, /datasets/database/documents]
+    command: [chi-ciq-documents-database, backup, --output-dir, /backups/documents]
 
   analytics-backup-before:
     image: &analytics-db-image
@@ -89,7 +92,7 @@ jobs:
     mounts: *archive-mount
     resource: *small
     depends-on: *database-provisioned
-    command: [chi-ciq-analytics-database, backup, --output-dir, /datasets/database/analytics]
+    command: [chi-ciq-analytics-database, backup, --output-dir, /backups/analytics]
 
   meetings-migrate:
     image:
@@ -120,6 +123,7 @@ jobs:
     image:
       uri: docker://ghcr.io/ek775/chi-ciq-26-transcription:fuzzball
     env:
+      - POSTGRES_PASSWORD=secret://user/chi-ciq-postgres-password
       - DATABASE_URL=postgresql+psycopg://postgres@postgres:5432/meetings
       - HF_TOKEN=secret://user/chi-ciq-hf-token
       - SHARD_COUNT=128
@@ -145,16 +149,18 @@ jobs:
       #!/bin/sh
       set -eu
       exec chi-ciq-ingest --input-dir /volume/audio --namespace recordings \
-        --metadata-file /datasets/analytics/recording-metadata.json \
         --shard-index "$((FB_TASK_ID - 1))" --shard-count "$SHARD_COUNT"
 
   documents:
     image:
       uri: docker://ghcr.io/ek775/chi-ciq-26-documents:fuzzball
     env:
+      - POSTGRES_PASSWORD=secret://user/chi-ciq-postgres-password
       - DOCUMENTS_DATABASE_URL=postgresql+psycopg://postgres@postgres:5432/documents
       - SHARD_COUNT=4
-    mounts: *archive-mount
+    mounts: &datasets-mount
+      /datasets:
+        volume: datasets
     resource: &inference
       cpu:
         cores: 4
@@ -197,7 +203,7 @@ jobs:
   analytics-roster:
     image: *analytics-image
     env: *analytics-env
-    mounts: *archive-mount
+    mounts: *datasets-mount
     resource: *inference
     depends-on:
       - {name: analytics-sync, status: FINISHED}
@@ -305,7 +311,7 @@ jobs:
     resource: *small
     depends-on:
       - {name: documents, status: FINISHED}
-    command: [chi-ciq-documents-database, backup, --output-dir, /datasets/database/documents]
+    command: [chi-ciq-documents-database, backup, --output-dir, /backups/documents]
 
   analytics-backup-after:
     image: *analytics-db-image
@@ -314,7 +320,7 @@ jobs:
     resource: *small
     depends-on:
       - {name: analytics-refresh, status: FINISHED}
-    command: [chi-ciq-analytics-database, backup, --output-dir, /datasets/database/analytics]
+    command: [chi-ciq-analytics-database, backup, --output-dir, /backups/analytics]
 
   web-check:
     image: &web-image

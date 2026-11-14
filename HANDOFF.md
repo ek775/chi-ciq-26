@@ -152,6 +152,11 @@ containers, three independent PostgreSQL databases, a FastAPI web app):
   `.env` into a submittable file. The workflow starts an internal, persistent
   one-GPU vLLM service after both ingestion jobs; it serves
   `openai/gpt-oss-20b` and keeps its model cache on a persistent volume.
+- **Recording metadata contract:** filenames are opaque identifiers, not dates
+  or committee labels. Transcription stores NULL date/type unless supplied as an
+  explicit reviewed override. Analytics infers missing metadata from source
+  content, retaining unknown/conflicting values as unknown. Existing meetings
+  databases require the migration relaxing date/type NOT NULL constraints.
 
 One line: **the code is a per-representative policy-stance-and-sentiment
 dashboard, now packaged to run as one Fuzzball workflow on the cluster.**

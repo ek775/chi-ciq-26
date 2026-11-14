@@ -54,6 +54,7 @@ class StagingStore(TranscriptStore):
         super().__init__(engine)
         self.source: Path | None = None
         self.meeting_id: UUID | None = None
+        self.metadata: MeetingMetadata | None = None
 
     def start(
         self,
@@ -71,7 +72,7 @@ class StagingStore(TranscriptStore):
             raise RuntimeError("Only one run can be staged per input")
         self.meeting_id = super().start(
             self.source,
-            replace(metadata, filename=self.source.name),
+            replace(self.metadata or metadata, filename=self.source.name),
             transcription_model=transcription_model,
             diarization_model=diarization_model,
             text_embedding_model=text_embedding_model,
@@ -87,8 +88,14 @@ class StagingStore(TranscriptStore):
             meeting = session.get(Meeting, source.meeting_id)
             return (
                 meeting is not None
-                and meeting.meeting_date == metadata.meeting_date
-                and meeting.meeting_type == metadata.meeting_type
+                and (
+                    metadata.meeting_date is None
+                    or meeting.meeting_date == metadata.meeting_date
+                )
+                and (
+                    metadata.meeting_type is None
+                    or meeting.meeting_type == metadata.meeting_type
+                )
             )
 
     def publish(self, key: str, digest: str) -> None:
@@ -143,10 +150,12 @@ class IngestionPipeline:
             raise ValueError("Source namespace must not be empty")
         if source.suffix.lower() != ".mp4":
             raise ValueError(f"Expected an MP4 file: {source.name}")
-        filename = validate_meeting_filename(
-            source.name if metadata_filename is None else metadata_filename
+        metadata = (
+            MeetingMetadata(source.name, None, None)
+            if metadata_filename is None
+            else parse_filename(validate_meeting_filename(metadata_filename))
         )
-        metadata = parse_filename(filename)
+        filename = source.name
         key = f"{namespace}/{source.name}"
         with source_lock(self.engine, key):
             digest = content_digest(source)
@@ -168,6 +177,7 @@ class IngestionPipeline:
                     return False
                 self.store.source = source
                 self.store.meeting_id = None
+                self.store.metadata = metadata
                 if self.workflow is None:
                     self.workflow = self.factory(self.store)
                 if self.workflow.store is not self.store:
@@ -234,11 +244,8 @@ def main(argv: list[str] | None = None) -> None:
     if args.input_file is not None:
         if args.input_file.suffix.lower() != ".mp4":
             parser.error("--input-file must be an MP4 file")
-        filename = (
+        if args.meeting_filename is not None:
             validate_meeting_filename(args.meeting_filename)
-            if args.meeting_filename is not None
-            else meeting_filename(args.input_file, metadata)
-        )
         if not args.input_file.is_file():
             raise FileNotFoundError(args.input_file)
         recordings = [args.input_file]
@@ -260,16 +267,17 @@ def main(argv: list[str] | None = None) -> None:
             engine, lambda store: build_workflow(store, os.environ["HF_TOKEN"])
         )
         for recording in recordings:
+            metadata_filename = args.meeting_filename
+            if metadata_filename is None:
+                resolved = meeting_filename(recording, metadata)
+                if resolved != recording.name:
+                    metadata_filename = resolved
             pipeline.ingest(
                 recording,
                 namespace=args.namespace,
                 force=args.force,
                 expected_sha256=args.expected_sha256,
-                metadata_filename=(
-                    filename
-                    if args.input_file is not None
-                    else meeting_filename(recording, metadata)
-                ),
+                metadata_filename=metadata_filename,
             )
     finally:
         engine.dispose()

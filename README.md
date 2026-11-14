@@ -50,7 +50,7 @@ Run these commands from the repository root:
    analytics database). Use URL-safe passwords.
 2. Accept the
    [pyannote model conditions](https://huggingface.co/pyannote/speaker-diarization-community-1).
-3. Put complete, dated MP4s in `data/mp4/`, or run the downloads command below.
+3. Put complete MP4s in `data/mp4/`, or run the downloads command below.
    Credentials and data are gitignored.
 
 ```sh
@@ -69,8 +69,9 @@ Open **http://127.0.0.1:8080/**. Select jobs explicitly: acquisition, migration,
 transcription, and backup are ordered operations, not simultaneous batch services.
 NVIDIA Docker support is required for the current transcription configuration.
 First builds and model downloads need network access and can take time.
-Vimeo titles lacking meeting date/type require an explicit metadata mapping;
-see the [downloads guide](src/pipelines/downloads/README.md).
+Ingestion treats filenames as opaque source identifiers. Meeting date/body are
+inferred conservatively from content by analytics, not from recording filenames.
+See the [downloads guide](src/pipelines/downloads/README.md) for acquisition.
 
 Unchanged transcription inputs are skipped. Changed inputs replace the previous
 published run only after successful processing; failures preserve published
@@ -257,17 +258,28 @@ ingestion run. Worker paths are not submitter-local paths:
 | Volume | Required paths |
 |---|---|
 | `team8/volume_test` mounted at `/volume` | Complete MP4 files directly under `/volume/audio` |
-| `shared/datasets` mounted at `/datasets` | `/datasets/Transcripts`, reviewed `/datasets/analytics/recording-metadata.json`, writable `/datasets/database` |
+| `shared/datasets` mounted at `/datasets` | `/datasets/Transcripts`; optional roster and speaker-label CSVs |
+| `team8/database-backups` mounted at `/backups` in backup jobs | Writable `/backups/documents` and `/backups/analytics` |
 | `team8/vllm-model-cache` mounted at `/root/.cache/huggingface` | Persistent Hugging Face model cache |
 
-The metadata JSON maps Vimeo IDs to dated filenames; use `{}` if all recordings
-already have valid dated names. See the
+Recording filenames need no meeting date or committee name. Transcription stores
+unknown date/type as NULL; analytics derives metadata from explicit statements
+in transcript/document content and leaves unsupported or conflicting details
+unknown. No Vimeo title lookup or recording-metadata JSON is required. Existing
+databases must run the meetings migration to permit NULL metadata before using
+the new worker images. See the
 [transcription guide](src/pipelines/transcription/README.md#fuzzball-batch-input).
 Optional `roster.csv` and `speaker-labels.csv` under `/datasets/analytics` are
 loaded after source sync and roster seeding. VTT and database archives are never
 ingestion inputs. The workers only read inputs; Fuzzball volume mounts themselves
 are not asserted to enforce read-only access. Apply cluster filesystem ACLs to
-protect the input trees while allowing archive jobs to write the backup subtree.
+protect the input trees. Backup jobs write to a separate team-owned volume, not
+the shared dataset. Create it once before submission:
+
+```sh
+fuzzball volume create team8 database-backups --permissions 0700
+```
+
 The NFS backend must support POSIX locking and atomic rename for backups.
 
 Create these **user-scoped value secrets**; their values are never stored in the

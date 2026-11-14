@@ -5,6 +5,9 @@ ingestion replacement cannot split a source across two runs. Readers return
 plain dataclasses; they never write to the source databases.
 """
 
+import hashlib
+import json
+import logging
 from collections.abc import Iterator
 from contextlib import contextmanager
 from dataclasses import dataclass, field
@@ -21,6 +24,7 @@ from databases.meetings.models import (
     TranscriptSegment,
 )
 
+from .metadata import EXTRACTION_VERSION, UNKNOWN_BODY, extract_metadata
 from .units import (
     Segment,
     SpeakerSummary,
@@ -29,12 +33,43 @@ from .units import (
     clean_document_chunk,
     normalize_body,
     normalized,
-    parse_document_title,
     summarize_speakers,
 )
 
 MEETING_PREFIX = "meetings:"
 DOCUMENT_PREFIX = "documents:"
+logger = logging.getLogger(__name__)
+
+
+def _meeting_signature(row) -> str:
+    metadata = json.dumps(
+        [str(row["id"]), str(row["meeting_date"]), row["meeting_type"]]
+    )
+    return f"{EXTRACTION_VERSION};{hashlib.sha256(metadata.encode()).hexdigest()}"
+
+
+def _source_metadata(key, content, *, meeting_date=None, meeting_type=None):
+    inferred = extract_metadata(content)
+    known_body = (
+        normalize_body(meeting_type) if meeting_type and meeting_type.strip() else None
+    )
+    if known_body == UNKNOWN_BODY:
+        known_body = None
+    logger.info(
+        "Source metadata %s: date=%s (%s), body=%s (%s); "
+        "extractor=%s content_date_status=%s content_body_status=%s "
+        "content_evidence=%r",
+        key,
+        meeting_date or inferred.meeting_date,
+        "existing" if meeting_date is not None else inferred.date_status,
+        known_body or inferred.body,
+        "existing" if known_body else inferred.body_status,
+        EXTRACTION_VERSION,
+        inferred.date_status,
+        inferred.body_status,
+        inferred.evidence,
+    )
+    return meeting_date or inferred.meeting_date, known_body or inferred.body
 
 
 @dataclass(frozen=True)
@@ -97,7 +132,7 @@ class MeetingsReader:
     def signatures(self) -> dict[str, str]:
         with snapshot(self.engine) as connection:
             rows = connection.execute(_published_meetings()).mappings()
-            return {self.prefix + row["key"]: str(row["id"]) for row in rows}
+            return {self.prefix + row["key"]: _meeting_signature(row) for row in rows}
 
     def load(self, key: str) -> SourceSnapshot | None:
         published = key.removeprefix(self.prefix)
@@ -139,14 +174,20 @@ class MeetingsReader:
             )
             for row in rows
         ]
+        meeting_date, body = _source_metadata(
+            key,
+            "\n".join(segment.text for segment in segments),
+            meeting_date=meeting["meeting_date"],
+            meeting_type=meeting["meeting_type"],
+        )
         return SourceSnapshot(
             key=key,
             kind=self.kind,
             source_ref=str(meeting["id"]),
-            signature=str(meeting["id"]),
+            signature=_meeting_signature(meeting),
             title=meeting["filename"],
-            body=normalize_body(meeting["meeting_type"]),
-            meeting_date=meeting["meeting_date"],
+            body=body,
+            meeting_date=meeting_date,
             duration_seconds=meeting["recording_duration_seconds"],
             text_embedding_model=meeting["text_embedding_model"],
             voice_embedding_model=meeting["voice_embedding_model"],
@@ -162,7 +203,7 @@ class MeetingsReader:
 def _document_signature(row) -> str:
     return (
         f"{row['content_sha256']};{row['processing_signature']};"
-        f"{row['text_embedding_model']}"
+        f"{row['text_embedding_model']};{EXTRACTION_VERSION}"
     )
 
 
@@ -181,6 +222,7 @@ class DocumentsReader:
             documents.c.content_sha256,
             documents.c.processing_signature,
             documents.c.text_embedding_model,
+            documents.c.text,
             directories.c.table_name,
         ).join(directories, directories.c.key == documents.c.directory_key)
 
@@ -221,7 +263,7 @@ class DocumentsReader:
                     end=end,
                 )
             )
-        meeting_date, body = parse_document_title(row["relative_path"])
+        meeting_date, body = _source_metadata(key, row["text"])
         return SourceSnapshot(
             key=key,
             kind=self.kind,

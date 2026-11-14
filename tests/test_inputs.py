@@ -16,22 +16,20 @@ def test_discovery_is_sorted_case_insensitive_and_nonrecursive(tmp_path):
     ]
 
 
-def test_discovery_rejects_missing_empty_and_invalid_inputs(tmp_path):
+def test_discovery_rejects_missing_empty_but_accepts_opaque_filenames(tmp_path):
     with pytest.raises(NotADirectoryError):
         discover_recordings(tmp_path / "missing")
     with pytest.raises(ValueError, match="No MP4"):
         discover_recordings(tmp_path)
     (tmp_path / "invalid.mp4").touch()
-    with pytest.raises(ValueError, match="Filename"):
-        discover_recordings(tmp_path)
+    assert discover_recordings(tmp_path) == [tmp_path / "invalid.mp4"]
 
 
-def test_vimeo_audio_discovery_requires_complete_valid_mapping(tmp_path):
+def test_vimeo_audio_discovery_accepts_optional_valid_mapping(tmp_path):
     source = tmp_path / "vimeo-1200176629-audio-low.mp4"
     source.touch()
     (tmp_path / "2025-11-12_Budget.mp4").touch()
-    with pytest.raises(ValueError, match="Missing meeting metadata.*1200176629"):
-        discover_recordings(tmp_path)
+    assert len(discover_recordings(tmp_path)) == 2
     metadata_file = tmp_path / "mapping.json"
     metadata_file.write_text(
         json.dumps({"1200176629": "2026-06-11_economic_development.mp4"})
