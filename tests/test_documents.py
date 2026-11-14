@@ -5,6 +5,7 @@ from io import BytesIO
 from uuid import uuid4
 
 import pytest
+from flyway_migrations import apply_migrations
 from sqlalchemy import create_engine, event, inspect, select, text
 from sqlalchemy.engine import make_url
 
@@ -14,7 +15,6 @@ from databases.documents.schema import (
     directories,
     directory_table_name,
     documents,
-    migrate_database,
     source_key,
 )
 from pipelines.documents.extraction import discover_tree, extract_text, split_text
@@ -52,7 +52,7 @@ def documents_engine():
     )
     engine = create_engine(scoped)
     try:
-        migrate_database(engine)
+        apply_migrations(engine, "documents")
         yield engine
     finally:
         engine.dispose()

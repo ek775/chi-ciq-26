@@ -5,7 +5,9 @@ import pytest
 from sqlalchemy import create_engine, text
 from sqlalchemy.engine import make_url
 
-from pipelines.transcription import TranscriptStore, create_database
+from databases.meetings.schema import connect_database
+from flyway_migrations import apply_migrations
+from pipelines.transcription import TranscriptStore
 
 
 @pytest.fixture
@@ -23,8 +25,9 @@ def engine():
     scoped_url = make_url(url).update_query_dict(
         {"options": f"-csearch_path={schema},public"}
     )
-    database = create_database(scoped_url.render_as_string(hide_password=False))
+    database = connect_database(scoped_url.render_as_string(hide_password=False))
     try:
+        apply_migrations(database, "meetings")
         yield database
     finally:
         database.dispose()

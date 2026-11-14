@@ -1,0 +1,9 @@
+# Settings common to the three databases. The connection (FLYWAY_URL,
+# FLYWAY_USER, FLYWAY_PASSWORD) and the migration directory (FLYWAY_LOCATIONS)
+# come from the environment of each migration job.
+[flyway]
+# A database that the earlier Python migration created has tables but no
+# history table. Record it at version 0, so that the idempotent V1 baseline
+# still runs on it.
+baselineOnMigrate = true
+baselineVersion = "0"

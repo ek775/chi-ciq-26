@@ -39,21 +39,22 @@ see a half-refreshed dashboard:
 
 `dash_statements` (a plain view over indexed tables) serves paginated
 drill-downs with stance, evidence, sentiment, emotion, and attribution columns.
-Views are versioned by `DASHBOARD_VIEWS_VERSION`; `migrate` rebuilds them only
-when it changes.
+The views are defined in
+[migrations/R__dashboard_views.sql](migrations/R__dashboard_views.sql), a Flyway
+repeatable migration: Flyway rebuilds them only when that file changes.
 
 ## Reader role
 
 [web-role.sql](web-role.sql) creates `analytics_reader` (password from
 `ANALYTICS_WEB_POSTGRES_PASSWORD`) with SELECT on the dashboard objects only
 (`DASHBOARD_OBJECTS` in [views.py](views.py)). Voice centroids, embeddings,
-manual-label notes, roster candidates, and speaker internals stay private. `migrate` re-applies the
-grants after rebuilding views when the role exists.
+manual-label notes, roster candidates, and speaker internals stay private. The repeatable migration re-applies the
+grants after it rebuilds the views, when the role exists.
 
 ## Maintenance
 
 ```sh
-chi-ciq-analytics-database migrate
+docker compose --profile analytics run --build --rm analytics-migrate
 psql "$ANALYTICS_ADMIN_PSQL_URL" -v ON_ERROR_STOP=1 -f src/databases/analytics/web-role.sql
 chi-ciq-analytics-database check
 chi-ciq-analytics-database backup --output-dir data/analytics-database

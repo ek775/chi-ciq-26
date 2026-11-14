@@ -31,8 +31,8 @@ inputs/
     Committees/             -> Council/Committees table (possibly empty)
 ```
 
-`migrate` creates pgvector and the registry tables additively under a transaction
-lock. The pipeline creates directory tables transactionally as directories are
+Flyway creates pgvector and the registry tables from the SQL files in
+[migrations](migrations). The pipeline creates directory tables transactionally as directories are
 discovered. `check` validates registry and mapped-table columns. Only completed
 per-file transactions become visible; there are no partially published chunks.
 
@@ -40,12 +40,12 @@ per-file transactions become visible; there are no partially published chunks.
 
 ```sh
 docker compose --profile documents run --build --rm documents-migrate
-docker compose --profile documents run --build --rm documents-migrate \
+docker compose --profile documents run --build --rm documents-backup \
   chi-ciq-documents-database check
 docker compose --profile documents run --build --rm documents-backup
 ```
 
-Host equivalents: `chi-ciq-documents-database migrate`, `check`, or
+Host equivalents: `chi-ciq-documents-database check` or
 `backup --output-dir data/documents-database`. Set `DOCUMENTS_DATABASE_URL`
 explicitly; `DATABASE_URL` is only a fallback. The local server is bound to
 `127.0.0.1:5434`, database/user `documents`. No meetings storage is reused.

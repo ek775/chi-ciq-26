@@ -98,29 +98,44 @@ jobs:
     depends-on: *database-provisioned
     command: [chi-ciq-analytics-database, backup, --output-dir, /datasets/database/analytics]
 
+  # Flyway applies the SQL files of src/databases/<name>/migrations, which the
+  # image carries at /flyway/sql/<name>.
   meetings-migrate:
-    image: *meetings-image
-    env: *meetings-env
+    image: &flyway-image
+      uri: docker://ghcr.io/ek775/chi-ciq-26-flyway:fuzzball
+    env:
+      - FLYWAY_URL=jdbc:postgresql://postgres:5432/meetings
+      - FLYWAY_LOCATIONS=filesystem:/flyway/sql/meetings
+      - &flyway-user FLYWAY_USER=postgres
+      - &flyway-password FLYWAY_PASSWORD=secret://user/chi-ciq-postgres-password
     resource: *small
     depends-on:
       - {name: meetings-backup-before, status: FINISHED}
-    command: [chi-ciq-database, migrate]
+    command: &flyway-migrate [flyway, migrate]
 
   documents-migrate:
-    image: *documents-db-image
-    env: *documents-env
+    image: *flyway-image
+    env:
+      - FLYWAY_URL=jdbc:postgresql://postgres:5432/documents
+      - FLYWAY_LOCATIONS=filesystem:/flyway/sql/documents
+      - *flyway-user
+      - *flyway-password
     resource: *small
     depends-on:
       - {name: documents-backup-before, status: FINISHED}
-    command: [chi-ciq-documents-database, migrate]
+    command: *flyway-migrate
 
   analytics-migrate:
-    image: *analytics-db-image
-    env: *analytics-db-env
+    image: *flyway-image
+    env:
+      - FLYWAY_URL=jdbc:postgresql://postgres:5432/analytics
+      - FLYWAY_LOCATIONS=filesystem:/flyway/sql/analytics
+      - *flyway-user
+      - *flyway-password
     resource: *small
     depends-on:
       - {name: analytics-backup-before, status: FINISHED}
-    command: [chi-ciq-analytics-database, migrate]
+    command: *flyway-migrate
 
   transcription:
     image:

@@ -33,16 +33,18 @@ services:
     command: ["sleep", "infinity"]
   meetings-migrate:
     profiles: ["pipelines", "web"]
-    build:
+    build: &flyway-build
       context: .
-      dockerfile: src/databases/meetings/Dockerfile
+      dockerfile: src/databases/flyway/Dockerfile
     environment:
-      LOG_LEVEL: ${LOG_LEVEL:-INFO}
-      DATABASE_URL: postgresql+psycopg://transcription:${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in .env}@db:5432/transcription
+      FLYWAY_URL: jdbc:postgresql://db:5432/transcription
+      FLYWAY_USER: transcription
+      FLYWAY_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in .env}
+      FLYWAY_LOCATIONS: filesystem:/flyway/sql/meetings
     depends_on:
       db:
         condition: service_healthy
-    command: ["chi-ciq-database", "migrate"]
+    command: ["migrate"]
   meetings-web-role:
     image: pgvector/pgvector:pg17
     profiles: ["web"]
@@ -106,16 +108,16 @@ services:
       retries: 10
   documents-migrate:
     profiles: ["documents"]
-    build:
-      context: .
-      dockerfile: src/databases/documents/Dockerfile
+    build: *flyway-build
     environment:
-      LOG_LEVEL: ${LOG_LEVEL:-INFO}
-      DOCUMENTS_DATABASE_URL: postgresql+psycopg://documents:${DOCUMENTS_POSTGRES_PASSWORD:-}@documents-db:5432/documents
+      FLYWAY_URL: jdbc:postgresql://documents-db:5432/documents
+      FLYWAY_USER: documents
+      FLYWAY_PASSWORD: ${DOCUMENTS_POSTGRES_PASSWORD:-}
+      FLYWAY_LOCATIONS: filesystem:/flyway/sql/documents
     depends_on:
       documents-db:
         condition: service_healthy
-    command: ["chi-ciq-documents-database", "migrate"]
+    command: ["migrate"]
   documents:
     profiles: ["documents"]
     build:
@@ -179,16 +181,16 @@ services:
       retries: 10
   analytics-migrate:
     profiles: ["analytics", "web"]
-    build:
-      context: .
-      dockerfile: src/databases/analytics/Dockerfile
+    build: *flyway-build
     environment:
-      LOG_LEVEL: ${LOG_LEVEL:-INFO}
-      ANALYTICS_DATABASE_URL: postgresql+psycopg://analytics:${ANALYTICS_POSTGRES_PASSWORD:-}@analytics-db:5432/analytics
+      FLYWAY_URL: jdbc:postgresql://analytics-db:5432/analytics
+      FLYWAY_USER: analytics
+      FLYWAY_PASSWORD: ${ANALYTICS_POSTGRES_PASSWORD:-}
+      FLYWAY_LOCATIONS: filesystem:/flyway/sql/analytics
     depends_on:
       analytics-db:
         condition: service_healthy
-    command: ["chi-ciq-analytics-database", "migrate"]
+    command: ["migrate"]
   analytics-web-role:
     image: pgvector/pgvector:pg17
     profiles: ["analytics", "web"]

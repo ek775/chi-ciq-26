@@ -28,6 +28,8 @@ jobs:
             dockerfile: src/databases/documents/Dockerfile
           - name: analytics-db
             dockerfile: src/databases/analytics/Dockerfile
+          - name: flyway
+            dockerfile: src/databases/flyway/Dockerfile
           - name: transcription
             dockerfile: src/pipelines/transcription/Dockerfile
           - name: documents

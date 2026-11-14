@@ -215,12 +215,14 @@ fuzzball volume create team8 postgres-data
 ### Build and publish
 
 The [Build and publish Fuzzball images workflow](.github/workflows/build-publish-images.yml)
-builds the seven service images on a native ARM64 GitHub-hosted runner and
+builds the eight service images on a native ARM64 GitHub-hosted runner and
 publishes them to GHCR. It runs on relevant pushes to `main` or can be started
 manually from the Actions tab. Each image gets a `sha-<commit>` tag; builds on
 the default branch also update the `fuzzball` tag used by this Fuzzfile.
-For an immutable deployment, replace the `fuzzball` tag in all seven image
+For an immutable deployment, replace the `fuzzball` tag in all eight image
 definitions with that build's full `sha-<commit>` tag.
+The `flyway` image carries the schema migration files; see
+[Schema migrations](src/databases/README.md#schema-migrations-flyway).
 
 Make the images readable by cluster workers, or add a singular `image.secret`
 registry reference to each image definition (the anchored definitions cover

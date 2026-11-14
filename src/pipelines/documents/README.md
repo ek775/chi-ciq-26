@@ -61,7 +61,7 @@ docker compose --profile documents run --build --rm documents \
 
 # Host installation and execution:
 python -m pip install -e ".[documents]"
-chi-ciq-documents-database migrate
+docker compose --profile documents run --build --rm documents-migrate
 chi-ciq-ingest-documents --input-dir data-reference --namespace documents
 ```
 

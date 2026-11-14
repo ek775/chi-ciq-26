@@ -145,7 +145,7 @@ export ANALYTICS_DATABASE_URL=postgresql+psycopg://analytics:...@localhost:5435/
 export MEETINGS_DATABASE_URL=postgresql+psycopg://web_reader:...@localhost:5433/transcription
 export DOCUMENTS_DATABASE_URL=postgresql+psycopg://documents:...@localhost:5434/documents
 export VLLM_BASE_URL=http://127.0.0.1:8000/v1   # served model name: VLLM_SERVED_MODEL=local-ai
-chi-ciq-analytics-database migrate
+docker compose --profile analytics run --build --rm analytics-migrate
 chi-ciq-analytics roster data/analytics/roster.csv   # optional overrides
 chi-ciq-analytics run --device cpu            # or --device cuda
 chi-ciq-analytics roster-candidates --output candidates.csv

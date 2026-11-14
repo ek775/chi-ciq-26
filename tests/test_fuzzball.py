@@ -149,7 +149,13 @@ def test_analytics_fanout_and_join_cover_every_stage_once():
 def test_database_urls_use_the_workflow_service_and_carry_no_password():
     definition = workflow()
     nodes = definition["jobs"] | definition["services"]
-    credentials = {"PGPASSWORD", "POSTGRES_PASSWORD", "HF_TOKEN", "VLLM_API_KEY"}
+    credentials = {
+        "PGPASSWORD",
+        "POSTGRES_PASSWORD",
+        "FLYWAY_PASSWORD",
+        "HF_TOKEN",
+        "VLLM_API_KEY",
+    }
     for node in nodes.values():
         for value in node.get("env", []):
             key, _, setting = value.partition("=")
@@ -170,6 +176,25 @@ def test_database_urls_use_the_workflow_service_and_carry_no_password():
     }
     assert web_users == {"web_reader", "analytics_reader"}
     assert not (ROOT / "fuzzball.draft.yaml").exists()
+
+
+@pytest.mark.parametrize("database_name", ["meetings", "documents", "analytics"])
+def test_each_migration_job_applies_the_migration_files_of_its_database(
+    database_name,
+):
+    job = workflow()["jobs"][f"{database_name}-migrate"]
+    environment = dict(entry.split("=", 1) for entry in job["env"])
+    assert job["command"] == ["flyway", "migrate"]
+    assert (
+        environment["FLYWAY_URL"] == f"jdbc:postgresql://postgres:5432/{database_name}"
+    )
+    # The image carries each migration directory under /flyway/sql.
+    location = environment["FLYWAY_LOCATIONS"]
+    assert location == f"filesystem:/flyway/sql/{database_name}"
+    dockerfile = (ROOT / "src/databases/flyway/Dockerfile").read_text()
+    source = f"src/databases/{database_name}/migrations"
+    assert f"COPY {source} /flyway/sql/{database_name}" in dockerfile
+    assert any((ROOT / source).glob("V1__*.sql"))
 
 
 def test_workstation_resource_budget_and_bounded_vllm_requests():

@@ -146,13 +146,6 @@ def ensure_directory(
     return table
 
 
-def migrate_database(engine: Engine) -> None:
-    with engine.begin() as connection:
-        lock_key(connection, "documents-schema")
-        connection.execute(text("CREATE EXTENSION IF NOT EXISTS vector"))
-        metadata.create_all(connection)
-
-
 def check_schema(engine: Engine) -> None:
     with engine.connect() as connection:
         inspector = inspect(connection)
@@ -166,7 +159,9 @@ def check_schema(engine: Engine) -> None:
             )
         for table in tables:
             if not inspector.has_table(table.name):
-                raise RuntimeError(f"Missing table {table.name}; run documents migrate")
+                raise RuntimeError(
+                    f"Missing table {table.name}; apply the Flyway migrations"
+                )
             actual = {column["name"] for column in inspector.get_columns(table.name)}
             missing = set(table.columns.keys()) - actual
             if missing:
@@ -182,7 +177,6 @@ def main(argv: list[str] | None = None) -> None:
     configure_logging("documents-database")
     parser = argparse.ArgumentParser(description="Manage the documents database")
     commands = parser.add_subparsers(dest="command", required=True)
-    commands.add_parser("migrate")
     commands.add_parser("check")
     backup = commands.add_parser("backup")
     backup.add_argument("--output-dir", type=Path, required=True)
@@ -197,8 +191,6 @@ def main(argv: list[str] | None = None) -> None:
         return
     engine = connect_database(url)
     try:
-        if args.command == "migrate":
-            migrate_database(engine)
         check_schema(engine)
         logger.info("Documents database %s completed", args.command)
     finally:

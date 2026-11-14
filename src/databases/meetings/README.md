@@ -10,15 +10,17 @@ The server uses the upstream `pgvector/pgvector:pg17` image. This module's
 [Dockerfile](Dockerfile) builds maintenance jobs without inference dependencies.
 
 ```sh
-chi-ciq-database migrate
+docker compose --profile pipelines run --build --rm meetings-migrate
 chi-ciq-database check
 chi-ciq-database backup --output-dir data/database
 ```
 
+Flyway manages the schema: the SQL files are in [migrations](migrations), and
+[../README.md](../README.md#schema-migrations-flyway) describes how to add one.
 Use `DATABASE_URL` for the intended database. Compose supplies container
 connections at `db:5432`; host connections use `127.0.0.1:5433`.
-`create_database` creates missing tables but does not migrate existing ones.
-The migration command serializes additive changes and checks compatibility.
+`create_database` creates missing tables from the models for a scratch database;
+it is not the migration path.
 
 ## Database durability
 

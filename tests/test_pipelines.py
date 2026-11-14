@@ -5,10 +5,11 @@ import sys
 from types import SimpleNamespace
 
 import pytest
+from flyway_migrations import apply_migrations
 from sqlalchemy import func, select, text
 
 from databases.meetings.models import PublishedSource
-from databases.meetings.schema import check_schema, migrate_database
+from databases.meetings.schema import check_schema
 from pipelines.transcription import Meeting, TranscriptSegment, parse_filename
 from pipelines.transcription.pipeline import (
     IngestionPipeline,
@@ -239,8 +240,8 @@ def test_migration_is_additive_and_idempotent(engine, recording):
         )
     with pytest.raises(RuntimeError, match="Missing columns"):
         check_schema(engine)
-    migrate_database(engine)
-    migrate_database(engine)
+    apply_migrations(engine, "meetings")
+    apply_migrations(engine, "meetings")
     check_schema(engine)
     with pipeline.store.sessions() as session:
         meeting = session.get(Meeting, old)

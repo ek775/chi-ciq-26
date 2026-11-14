@@ -88,23 +88,16 @@ def analytics_router() -> APIRouter:
                 AS positions
             """,
         )[0]
-        state = dict(
-            database.execute(
-                text(
-                    "SELECT key, value FROM schema_state "
-                    "WHERE key IN ('dashboard_refreshed_at', "
-                    "'dashboard_views_version')"
-                )
-            ).all()
-        )
+        refreshed_at = database.execute(
+            text("SELECT value FROM schema_state WHERE key = 'dashboard_refreshed_at'")
+        ).scalar()
         last_run = _rows(
             database,
             "SELECT status, started_at, finished_at FROM analysis_runs "
             "ORDER BY started_at DESC LIMIT 1",
         )
         return counts | {
-            "refreshed_at": state.get("dashboard_refreshed_at"),
-            "views_version": state.get("dashboard_views_version"),
+            "refreshed_at": refreshed_at,
             "last_run": last_run[0] if last_run else None,
         }
 

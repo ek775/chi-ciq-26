@@ -76,10 +76,10 @@ worker command; the worker does not need the mapping file. Use
 
 ## Ingestion versus updates
 
-After configuring `DATABASE_URL`, initialize or additively migrate the schema:
+After configuring `DATABASE_URL`, apply the Flyway schema migrations:
 
 ```sh
-chi-ciq-database migrate
+docker compose --profile pipelines run --build --rm meetings-migrate
 chi-ciq-database check
 chi-ciq-ingest --input-dir data/mp4 --namespace recordings
 ```
@@ -133,7 +133,7 @@ documents. Vimeo downloading is a separate acquisition service.
 5. Run:
 
    ```sh
-   docker compose exec app chi-ciq-database migrate
+   docker compose --profile pipelines run --build --rm meetings-migrate
    docker compose exec app chi-ciq-ingest --input-file \
      "data/mp4/2026_november_10_-_committee_on_budget_and_government_operations (240p).mp4"
    ```
@@ -156,7 +156,7 @@ TorchAudio, and TorchCodec combination before production use.
 Use the production CLI for directory processing and a separate backup job:
 
 ```sh
-chi-ciq-database migrate
+docker compose --profile pipelines run --build --rm meetings-migrate
 chi-ciq-ingest --input-dir data/mp4 --namespace recordings
 chi-ciq-database backup --output-dir data/database
 ```

@@ -9,6 +9,7 @@ from io import StringIO
 from uuid import uuid4
 
 import pytest
+from flyway_migrations import apply_migrations
 from sqlalchemy import create_engine, func, select, text
 from sqlalchemy.engine import make_url
 
@@ -26,7 +27,7 @@ from databases.analytics.models import (
     speakers,
     stance_results,
 )
-from databases.analytics.schema import check_schema, migrate_database
+from databases.analytics.schema import check_schema
 from databases.meetings.metadata import parse_filename
 from pipelines.analytics.attribution import (
     SpeakerVoice,
@@ -765,8 +766,8 @@ def _scoped_engine(prefix):
 def analytics_engine():
     admin, schema, engine = _scoped_engine("analytics_test")
     try:
-        migrate_database(engine)
-        migrate_database(engine)
+        apply_migrations(engine, "analytics")
+        apply_migrations(engine, "analytics")
         check_schema(engine)
         yield engine
     finally:
@@ -778,11 +779,9 @@ def analytics_engine():
 
 @pytest.fixture
 def documents_engine():
-    from databases.documents.schema import migrate_database as migrate_documents
-
     admin, schema, engine = _scoped_engine("analytics_documents")
     try:
-        migrate_documents(engine)
+        apply_migrations(engine, "documents")
         yield engine
     finally:
         engine.dispose()
@@ -1298,7 +1297,7 @@ def test_dashboard_api(world, monkeypatch):
 def test_dashboard_role_cannot_read_private_tables(analytics_engine):
     from pathlib import Path
 
-    from databases.analytics.views import DASHBOARD_OBJECTS, grant_dashboard_access
+    from databases.analytics.views import DASHBOARD_OBJECTS
 
     sql = (
         Path(__file__).resolve().parents[1] / "src/databases/analytics/web-role.sql"
@@ -1307,12 +1306,13 @@ def test_dashboard_role_cannot_read_private_tables(analytics_engine):
     assert {name.strip() for name in granted.split(",")} == set(DASHBOARD_OBJECTS)
     role = f"reader_{uuid4().hex[:12]}"
     with analytics_engine.begin() as connection:
-        assert not grant_dashboard_access(connection, role)
         connection.execute(text(f'CREATE ROLE "{role}"'))
         try:
             schema = connection.execute(text("SELECT current_schema()")).scalar()
             connection.execute(text(f'GRANT USAGE ON SCHEMA "{schema}" TO "{role}"'))
-            assert grant_dashboard_access(connection, role)
+            connection.execute(
+                text(f'GRANT SELECT ON {", ".join(DASHBOARD_OBJECTS)} TO "{role}"')
+            )
             connection.execute(text(f'SET LOCAL ROLE "{role}"'))
             for name in DASHBOARD_OBJECTS:
                 connection.execute(text(f"SELECT * FROM {name} LIMIT 1"))
@@ -1440,5 +1440,5 @@ def test_roster_stage_seeds_officials_and_respects_manual_entries(
     reloaded = tmp_path / "exported.csv"
     reloaded.write_text(output.getvalue())
     assert len(read_roster(reloaded)) == 52
-    migrate_database(engine)
+    apply_migrations(engine, "analytics")
     check_schema(engine)
