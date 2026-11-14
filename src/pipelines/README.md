@@ -9,8 +9,9 @@ Run shell examples from the repository root, not this module directory.
 - [Downloads](downloads/README.md) acquires complete MP4 files before dispatch.
 - [Transcription](transcription/README.md) handles initial database building and
   periodic updates through the same per-recording worker image.
-- [Documents](documents/README.md) and [analytics](analytics/README.md) remain
-  unimplemented; their namespaces are not runnable services.
+- [Documents](documents/README.md) mirrors supported document trees into a
+  separate pgvector database using CPU text embeddings by default.
+- [Analytics](analytics/README.md) remains unimplemented.
 
 Python imports use `pipelines.transcription`, `databases.meetings`, and `web`;
 the former `transcription` and `chi_ciq` paths have been removed. Persistence

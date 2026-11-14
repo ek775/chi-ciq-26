@@ -66,6 +66,21 @@ def test_export_requires_pg_dump(tmp_path, monkeypatch):
         archive.export_database("postgresql://localhost/transcription", tmp_path)
 
 
+def test_documents_archive_prefix(tmp_path, monkeypatch):
+    monkeypatch.setattr(archive.shutil, "which", lambda name: "/usr/bin/pg_dump")
+
+    def run(command, **kwargs):
+        kwargs["stdout"].write(b"PGDMP")
+        return SimpleNamespace(returncode=0, stderr="")
+
+    monkeypatch.setattr(archive.subprocess, "run", run)
+    output = archive.export_database(
+        "postgresql://localhost/documents", tmp_path, prefix="documents"
+    )
+    assert output.name.startswith("documents-")
+    assert output.read_bytes() == b"PGDMP"
+
+
 def test_export_never_overwrites_a_completed_archive(tmp_path, monkeypatch):
     class FixedDatetime:
         @staticmethod

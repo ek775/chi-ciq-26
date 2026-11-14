@@ -9,7 +9,9 @@ from uuid import uuid4
 from sqlalchemy.engine import URL, make_url
 
 
-def export_database(database_url: str, output_directory: Path) -> Path:
+def export_database(
+    database_url: str, output_directory: Path, *, prefix: str = "transcription"
+) -> Path:
     """Publish a private, append-only archive only after pg_dump succeeds."""
     executable = shutil.which("pg_dump")
     if executable is None:
@@ -32,9 +34,11 @@ def export_database(database_url: str, output_directory: Path) -> Path:
     ).render_as_string(hide_password=False)
     output_directory.mkdir(parents=True, exist_ok=True)
     timestamp = datetime.now(UTC).strftime("%Y%m%dT%H%M%SZ")
-    destination = output_directory / f"transcription-{timestamp}-{uuid4().hex}.dump"
+    if not prefix.isascii() or not prefix.replace("-", "").isalnum():
+        raise ValueError("Archive prefix must contain only ASCII letters, digits or '-'")
+    destination = output_directory / f"{prefix}-{timestamp}-{uuid4().hex}.dump"
     with NamedTemporaryFile(
-        dir=output_directory, prefix=".transcription-", suffix=".partial", delete=False
+        dir=output_directory, prefix=f".{prefix}-", suffix=".partial", delete=False
     ) as archive:
         temporary = Path(archive.name)
         try:

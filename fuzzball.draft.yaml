@@ -36,8 +36,13 @@ containers:
     resources: gpu
   pipelines.documents:
     source: src/pipelines/documents
-    status: unimplemented
+    dockerfile: src/pipelines/documents/Dockerfile
+    command: [chi-ciq-ingest-documents, --input-dir, /inputs, --namespace, documents]
     dependencies: [databases.documents]
+    inputs: [directory-tree-of-txt-markdown-pdf-docx-html]
+    storage: [read-only-input-tree, documents-model-cache]
+    inference: local-text-embeddings-cpu-default
+    network: model-download-egress-and-private-documents-database
   pipelines.analytics:
     source: src/pipelines/analytics
     status: unimplemented
@@ -67,8 +72,13 @@ containers:
       backup: [chi-ciq-database, backup, --output-dir, /backups]
   databases.documents:
     source: src/databases/documents
-    status: unimplemented
-    storage: [separate-persistent-storage]
+    image: docker://pgvector/pgvector:pg17
+    storage: [dedicated-documents-persistent-pgdata]
+    lifecycle: independent-of-pipelines-and-web-releases
+    maintenance:
+      dockerfile: src/databases/documents/Dockerfile
+      migration: [chi-ciq-documents-database, migrate]
+      backup: [chi-ciq-documents-database, backup, --output-dir, /backups]
 
 workflows:
   initial-meetings-build:
@@ -78,9 +88,11 @@ workflows:
     stages: [download-public-vimeo-recordings, check-meetings-schema, dispatch-per-recording-workers, wait-for-all-worker-success, backup-meetings]
     semantics: skip-unchanged-and-atomically-publish-successful-replacements
   initial-documents-build:
-    status: unimplemented
+    stages: [backup-existing-documents-database, migrate-documents, ingest-document-tree, backup-documents]
   periodic-documents-update:
-    status: unimplemented
+    schedule: external-scheduler-to-be-configured
+    stages: [check-documents-schema, ingest-document-tree, backup-documents]
+    semantics: skip-unchanged-atomically-replace-files-retain-removed-files-and-directories
   web-release:
     stages: [build-immutable-image, check-meetings-schema, start-web, verify-readiness]
     cutover: explicit-after-readiness
