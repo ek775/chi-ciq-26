@@ -1,6 +1,6 @@
 # Architecture notes, not an executable Fuzzfile or validated cluster schema.
 # The Fuzzball CLI reports shared/datasets as external NFS. Its file listing
-# could not be completed because the inspection workflow had no schedulable capacity.
+# was not verified. team8/volume_test was inspected on 2026-11-14.
 status: draft
 
 cluster:
@@ -17,12 +17,12 @@ cluster:
       reference: team8/volume_test
       persistent: true
       metadata-reported-size-bytes: 0
-      purpose: unused-by-these-pipelines
+      purpose: audio-recordings-for-transcription
 
 data:
-  volume-content: not-verified
+  volume-content: shared-datasets-not-verified-team8-audio-inspected
   required-layout:
-    recordings: /datasets/mp4
+    recordings: /volume/audio
     transcripts: /datasets/Transcripts
     database-archives: /datasets/database
     analytics-inputs: /datasets/analytics
@@ -71,16 +71,17 @@ pipelines:
   transcription:
     source: src/pipelines/transcription
     dockerfile: src/pipelines/transcription/Dockerfile
-    command: [chi-ciq-ingest, --input-dir, /datasets/mp4, --namespace, recordings]
+    command: [chi-ciq-ingest, --input-dir, /volume/audio, --namespace, recordings, --metadata-file, /inputs/metadata.json]
     volume:
-      reference: shared/datasets
-      mount-path: /datasets
+      reference: team8/volume_test
+      mount-path: /volume
       access: read-only
+    metadata: separately-mounted-reviewed-id-to-dated-filename-json
     database-secret: DATABASE_URL
     inference-secret: HF_TOKEN
     resources: one-gpu
     execution: one-batch-worker-processes-discovered-recordings-sequentially
-    job-timeout: set-from-measured-runtime-for-current-9h-recording
+    job-timeout: set-from-measured-runtime-for-recordings
     network: model-download-egress-and-private-meetings-database
   documents:
     source: src/pipelines/documents
@@ -135,12 +136,13 @@ databases:
 
 workflows:
   initial-meetings-build:
-    requires: staged-recordings-under-/datasets/mp4
+    requires: completed-recordings-under-/volume/audio-and-reviewed-metadata
     stages: [migrate-meetings, ingest-mounted-recordings, backup-meetings]
   periodic-meetings-update:
     schedule: external-scheduler-to-be-configured
+    requires: completed-recordings-under-/volume/audio-and-reviewed-metadata
     stages:
-      [download-public-vimeo-recordings, migrate-meetings, ingest-mounted-recordings, backup-meetings]
+      [migrate-meetings, ingest-mounted-recordings, backup-meetings]
     semantics: skip-unchanged-and-atomically-publish-successful-replacements
   initial-documents-build:
     requires: staged-transcripts-under-/datasets/Transcripts
@@ -159,8 +161,8 @@ constraints:
   - Stage repository inputs into shared/datasets before starting workers; submitter-local paths are not worker paths.
   - Mount inputs read-only in ingestion jobs; only downloads and backup jobs write to the dataset volume.
   - Confirm shared NFS supports the POSIX locks and atomic rename required by downloads and backups.
-  - Set transcription job timeout from a measured run of the 9h recording; do not assume the default job lifetime is sufficient.
+  - Wait for audio downloads to finish and review Vimeo metadata before transcription.
+  - Set transcription job timeout from measured recording runtimes; do not assume the default job lifetime is sufficient.
   - Never restore database archives or overwrite a live database during pipeline updates.
   - Keep database connection credentials in cluster secrets, not this file.
-  - Do not use team8/volume_test as a pipeline input or output.
   - Do not submit until volume contents, database endpoints, secrets, registry images, and Fuzzball schema are confirmed.

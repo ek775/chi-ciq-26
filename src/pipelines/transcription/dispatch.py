@@ -15,7 +15,12 @@ from dotenv import load_dotenv
 
 from shared.logging import configure_logging
 
-from .inputs import content_digest, discover_recordings
+from .inputs import (
+    content_digest,
+    discover_recordings,
+    load_metadata_file,
+    meeting_filename,
+)
 
 
 def recording_jobs(
@@ -26,6 +31,7 @@ def recording_jobs(
     worker_input_dir: str,
     input_base_uri: str | None = None,
     force: bool = False,
+    metadata: dict[str, str] | None = None,
 ) -> list[dict[str, Any]]:
     if not image.strip() or not namespace.strip():
         raise ValueError("Worker image and source namespace must not be empty")
@@ -41,10 +47,14 @@ def recording_jobs(
                 "Input base URI must not contain credentials/query/fragment"
             )
     jobs = []
-    for recording in discover_recordings(directory):
+    for recording in discover_recordings(directory, metadata):
         digest = content_digest(recording)
         key = f"{namespace}/{recording.name}"
-        job_id = hashlib.sha256(f"{key}\0{digest}".encode()).hexdigest()[:24]
+        filename = meeting_filename(recording, metadata or {})
+        identity = f"{key}\0{digest}"
+        if filename != recording.name:
+            identity += f"\0{filename}"
+        job_id = hashlib.sha256(identity.encode()).hexdigest()[:24]
         worker_path = str(mount / recording.name)
         command = [
             "chi-ciq-ingest",
@@ -55,6 +65,8 @@ def recording_jobs(
             "--expected-sha256",
             digest,
         ]
+        if filename != recording.name:
+            command.extend(["--meeting-filename", filename])
         if force:
             command.append("--force")
         jobs.append(
@@ -177,6 +189,11 @@ def main(argv: list[str] | None = None) -> None:
     )
     parser.add_argument("--image", default=os.environ.get("TRANSCRIPTION_WORKER_IMAGE"))
     parser.add_argument("--namespace", default="recordings")
+    parser.add_argument(
+        "--metadata-file",
+        type=Path,
+        help="JSON mapping Vimeo IDs to dated MP4 filenames",
+    )
     parser.add_argument("--worker-input-dir", default="/inputs")
     parser.add_argument(
         "--input-base-uri",
@@ -210,6 +227,7 @@ def main(argv: list[str] | None = None) -> None:
         worker_input_dir=args.worker_input_dir,
         input_base_uri=args.input_base_uri,
         force=args.force,
+        metadata=load_metadata_file(args.metadata_file),
     )
     if args.submit and len(jobs) > args.max_jobs:
         parser.error(f"Found {len(jobs)} recordings; increase --max-jobs explicitly")

@@ -610,3 +610,32 @@ def test_stream_chunk_validation_rejects_invalid_bounds_and_turns(chunk):
     )
     with pytest.raises(ValueError):
         workflow._validate_chunk(chunk, 0, SAMPLE_RATE, SAMPLE_RATE)
+
+
+def test_vimeo_audio_mp4_ingests_with_resolved_metadata(engine, source, tmp_path):
+    from pipelines.transcription.pipeline import IngestionPipeline
+
+    recording = tmp_path / "vimeo-1200176629-audio-low.mp4"
+    shutil.copyfile(source, recording)
+    pipeline = IngestionPipeline(
+        engine,
+        lambda store: TranscriptionWorkflow(
+            store,
+            FakeDiarizer(),
+            FakeTranscriber(),
+            FakeTextEmbedder(),
+            FakeVoiceEmbedder(),
+            max_chunk_seconds=1,
+        ),
+    )
+    assert pipeline.ingest(
+        recording, metadata_filename="2026-06-11_economic_development.mp4"
+    )
+    with pipeline.store.sessions() as session:
+        meeting = session.get(Meeting, pipeline.store.meeting_id)
+        assert meeting.status == "completed"
+        assert meeting.filename == recording.name
+        assert meeting.meeting_type == "economic development"
+        assert meeting.meeting_date.isoformat() == "2026-06-11"
+        assert meeting.recording_duration_seconds >= 3
+        assert session.scalar(select(func.count()).select_from(TranscriptSegment)) > 0

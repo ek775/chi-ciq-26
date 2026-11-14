@@ -144,13 +144,16 @@ chi-ciq-dispatch --input-dir data/mp4 --output-dir data/dispatch \
 [fuzzball.draft.yaml](fuzzball.draft.yaml) is an architecture draft, **not a
 submittable Fuzzfile**. It reflects the CLI inventory: `shared/datasets` is an
 enabled persistent external NFS volume with reported size 0, and
-`team8/volume_test` is a separate enabled persistent volume, also reporting
-size 0. The local checkout contains 202 UTF-8 transcript files, one 1.7 GB MP4 with H.264 video and AAC
+`team8/volume_test` is a separate enabled persistent volume. Its root `audio`
+directory contains dated and Vimeo-ID MP4 audio files; see the
+[transcription guide](src/pipelines/transcription/README.md#fuzzball-batch-input)
+for metadata mapping and safe ingestion. The local checkout contains 202 UTF-8
+transcript files, one 1.7 GB MP4 with H.264 video and AAC
 audio lasting about 9 hours, one VTT caption file, and two database dumps. The
 VTT and dumps are deliberately not pipeline inputs: the document extractor does
 not support VTT, and database archives must not be restored during ingestion.
-The mounted volume's contents remain unverified, so stage the local input tree
-there before running jobs.
+The contents of `shared/datasets` remain unverified, so stage the local input
+tree there before relying on it.
 See the [Fuzzball pipeline notes](src/pipelines/README.md#fuzzball-pipeline-notes).
 
 ## Logging

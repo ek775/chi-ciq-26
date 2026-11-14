@@ -23,7 +23,7 @@ from urllib.request import Request, urlopen
 
 from dotenv import load_dotenv
 
-from databases.meetings.metadata import parse_filename
+from databases.meetings.metadata import parse_filename, vimeo_audio_id
 from shared.logging import configure_logging
 
 logger = logging.getLogger(__name__)
@@ -129,6 +129,51 @@ def title_filename(title: str) -> str:
             f"Vimeo title is not meeting metadata: {title!r}; "
             "provide --metadata-file mapping this ID to a dated meeting filename"
         ) from error
+
+
+def metadata_main(argv: list[str] | None = None) -> None:
+    parser = argparse.ArgumentParser(
+        description="Generate a meeting filename mapping for Vimeo audio files"
+    )
+    parser.add_argument("--input-dir", required=True, type=Path)
+    parser.add_argument(
+        "--metadata-file", type=Path, help="Existing verified ID-to-filename overrides"
+    )
+    args = parser.parse_args(argv)
+    configure_logging("vimeo-metadata")
+    if not args.input_dir.is_dir():
+        raise NotADirectoryError(args.input_dir)
+    ids = sorted(
+        {
+            video_id
+            for path in args.input_dir.iterdir()
+            if path.is_file() and (video_id := vimeo_audio_id(path)) is not None
+        }
+    )
+    if not ids:
+        raise ValueError(f"No Vimeo audio files found in {args.input_dir}")
+    overrides = {}
+    if args.metadata_file is not None:
+        overrides = json.loads(args.metadata_file.read_text(encoding="utf-8"))
+        if not isinstance(overrides, dict):
+            raise TypeError("Metadata file must be a JSON object")
+        for video_id, filename in overrides.items():
+            if not isinstance(video_id, str) or not re.fullmatch(r"[0-9]+", video_id):
+                raise ValueError(f"Invalid Vimeo ID in metadata file: {video_id!r}")
+            if not isinstance(filename, str):
+                raise TypeError(f"Invalid metadata filename for Vimeo ID {video_id}")
+            validate_filename(filename)
+    names = {}
+    for video_id in ids:
+        if video_id in overrides:
+            names[video_id] = overrides[video_id]
+            continue
+        title, _ = public_recording(video_id)
+        try:
+            names[video_id] = title_filename(title)
+        except ValueError as error:
+            raise ValueError(f"{video_id}: {error}") from error
+    print(json.dumps(names, indent=2))
 
 
 def digest(path: Path) -> str:

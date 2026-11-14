@@ -73,6 +73,18 @@ def test_shared_storage_force_and_content_changed_job_id(recordings):
     assert jobs(recordings)[0]["job.name"] != prepared[0]["job.name"]
 
 
+def test_vimeo_mapping_is_embedded_in_worker_job_and_identity(recordings):
+    source = recordings / "vimeo-1200176629-audio-low.mp4"
+    source.write_bytes(b"audio")
+    mapping = {"1200176629": "2026-06-11_economic_development.mp4"}
+    first = jobs(recordings, metadata=mapping)[-1]
+    assert first["input.filename"] == source.name
+    assert first["source.key"] == f"recordings/{source.name}"
+    assert first["worker.command"][-2:] == ["--meeting-filename", mapping["1200176629"]]
+    mapping["1200176629"] = "2026-06-12_budget.mp4"
+    assert jobs(recordings, metadata=mapping)[-1]["job.name"] != first["job.name"]
+
+
 @pytest.mark.parametrize(
     "overrides",
     [
@@ -239,7 +251,12 @@ def test_worker_only_processes_assigned_file(recordings, monkeypatch):
     assert ingested == [
         (
             assigned,
-            {"namespace": "recordings", "force": False, "expected_sha256": digest},
+            {
+                "namespace": "recordings",
+                "force": False,
+                "expected_sha256": digest,
+                "metadata_filename": assigned.name,
+            },
         )
     ]
     with pytest.raises(SystemExit):

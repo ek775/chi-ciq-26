@@ -32,6 +32,13 @@ class MeetingMetadata:
     meeting_type: str
 
 
+def vimeo_audio_id(source: str | Path) -> str | None:
+    match = re.fullmatch(
+        r"vimeo-([0-9]+)-audio-low\.mp4", Path(source).name, re.IGNORECASE
+    )
+    return match.group(1) if match else None
+
+
 def parse_filename(source: str | Path) -> MeetingMetadata:
     path = Path(source)
     if path.suffix.lower() != ".mp4":

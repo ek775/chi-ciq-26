@@ -40,6 +40,14 @@ conform, supply `--metadata-file` containing a JSON object such as
 downloads container and pass its container path. All mappings are validated
 before downloading, and two IDs cannot own the same output filename.
 
+For already-downloaded `vimeo-<id>-audio-low.mp4` files,
+`chi-ciq-vimeo-metadata --input-dir /volume/audio > metadata.pending.json`
+generates the same ID-to-dated-filename mapping from public Vimeo titles.
+Review the output before passing it to transcription. Unparseable titles fail
+the command without emitting partial JSON; add those entries to a JSON file
+using verified meeting information, then rerun the generator with
+`--metadata-file overrides.json`.
+
 Downloads stay in private scratch subdirectories until yt-dlp succeeds and
 ffprobe confirms both audio and video, or audio without video in `--audio-only`
 mode. Only then is the complete MP4 atomically published; the dispatcher ignores

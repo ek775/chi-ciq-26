@@ -47,20 +47,20 @@ matches the development shell's NVIDIA requirements.
 [fuzzball.draft.yaml](../../fuzzball.draft.yaml) records the mounted-input
 pipeline design, not an executable Fuzzfile or validated cluster schema. The CLI
 reports an enabled persistent `shared/datasets` volume backed by external NFS
-and an enabled persistent `team8/volume_test` volume; both report zero bytes.
-An inspection workflow was submitted to list mounted files, but remained queued
-for capacity, so volume contents are **not verified**. The project checkout
-contains 202 transcript `.txt` files and one MP4; stage these under
-`/datasets/Transcripts` and `/datasets/mp4` before submitting ingestion jobs.
-The separate test volume is not used by the pipelines. The analytics batch reads
+and an enabled persistent `team8/volume_test` volume. An inspection on
+2026-11-14 found dated and Vimeo-ID audio-only MP4s under `audio` at the root of
+`team8/volume_test`; new files appeared during inspection. See the
+[transcription guide](transcription/README.md#fuzzball-batch-input) for metadata
+mapping and the requirement to wait for completed downloads. The checkout
+contains 202 transcript `.txt` files and one MP4; the contents of
+`shared/datasets` remain unverified. The analytics batch reads
 its roster and speaker labels from `/datasets/analytics`, runs after source
 updates, and needs a reachable vLLM endpoint for the stance stage.
 
 The transcription batch mounts the recordings directory read-only and processes
-all discovered MP4 files in that job. The documents batch mounts the transcript
+all validated MP4 files in that job. The documents batch mounts the transcript
 directory read-only and ingests its supported files. Downloads and completed
 database backups are the only pipeline writers to the shared volume.
 Credentials remain cluster secrets. The Fuzzball workflow schema, registry
 images, database endpoints, and secret bindings still need confirmation before
-deployment. The per-recording dispatcher remains available for larger workloads
-but is not part of this current one-recording pipeline setup.
+deployment. The per-recording dispatcher remains available for larger workloads.

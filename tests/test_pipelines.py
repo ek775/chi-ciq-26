@@ -94,6 +94,28 @@ def test_ingestion_skips_unchanged_without_loading_models(engine, recording):
         )
 
 
+def test_vimeo_metadata_change_republishes_with_original_source_identity(
+    engine, tmp_path
+):
+    recording = tmp_path / "vimeo-1200176629-audio-low.mp4"
+    recording.write_text("audio")
+    pipeline = IngestionPipeline(engine, FakeWorkflow)
+    metadata = "2026-06-11_economic_development.mp4"
+    assert pipeline.ingest(recording, metadata_filename=metadata)
+    first = published(engine)[0].meeting_id
+    assert not pipeline.ingest(recording, metadata_filename=metadata)
+    assert pipeline.ingest(recording, metadata_filename="2026-06-12_budget.mp4")
+    current = published(engine)[0]
+    assert current.key == f"recordings/{recording.name}"
+    assert current.meeting_id != first
+    with pipeline.store.sessions() as session:
+        meeting = session.get(Meeting, current.meeting_id)
+        assert meeting.filename == recording.name
+        assert meeting.meeting_date.isoformat() == "2026-06-12"
+        assert meeting.meeting_type == "budget"
+        assert meeting.source_path == str(recording.resolve())
+
+
 def test_changed_input_is_atomically_published_and_old_rows_deleted(engine, recording):
     pipeline = IngestionPipeline(engine, FakeWorkflow)
     pipeline.ingest(recording)

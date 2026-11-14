@@ -655,3 +655,47 @@ def test_real_audio_only_download(tmp_path, monkeypatch, best_audio):
         assert stream.getframerate() == 16000
         assert stream.getnchannels() == 1
         assert stream.getnframes() >= 16000
+
+
+def test_vimeo_metadata_generator_uses_public_titles(tmp_path, monkeypatch, capsys):
+    (tmp_path / "vimeo-1200176629-audio-low.mp4").touch()
+    (tmp_path / "2025-11-12_Budget.mp4").touch()
+    monkeypatch.setattr(
+        vimeo,
+        "public_recording",
+        lambda video: (
+            "2026 June 11 - Committee on Economic, Capital and Technology Development",
+            "https://example.invalid/fixture",
+        ),
+    )
+    vimeo.metadata_main(["--input-dir", str(tmp_path)])
+    mapping = json.loads(capsys.readouterr().out)
+    assert mapping == {
+        "1200176629": (
+            "2026_June_11_-_Committee_on_Economic,_Capital_and_Technology_Development.mp4"
+        )
+    }
+
+
+def test_vimeo_metadata_generator_fails_without_emitting_partial_mapping(
+    tmp_path, monkeypatch, capsys
+):
+    (tmp_path / "vimeo-1-audio-low.mp4").touch()
+    (tmp_path / "vimeo-2-audio-low.mp4").touch()
+    monkeypatch.setattr(
+        vimeo,
+        "public_recording",
+        lambda video: ("2026-06-11_budget" if video == "1" else "Unknown", "url"),
+    )
+    with pytest.raises(ValueError, match="metadata-file"):
+        vimeo.metadata_main(["--input-dir", str(tmp_path)])
+    assert capsys.readouterr().out == ""
+    overrides = tmp_path / "overrides.json"
+    overrides.write_text(json.dumps({"2": "2026-06-12_budget.mp4"}))
+    vimeo.metadata_main(
+        ["--input-dir", str(tmp_path), "--metadata-file", str(overrides)]
+    )
+    assert json.loads(capsys.readouterr().out) == {
+        "1": "2026-06-11_budget.mp4",
+        "2": "2026-06-12_budget.mp4",
+    }

@@ -23,32 +23,45 @@ filename parsing, and backups belong to the
 
 ## Fuzzball batch input
 
-The current dataset contains one MP4 recording, so per-recording workflow
-fan-out adds no useful parallelism. Stage complete recordings on the shared
-Fuzzball volume under `/datasets/mp4` and mount that directory read-only at
-`/inputs` in the transcription job:
+The Fuzzball volume `team8/volume_test` contains an `audio` directory at the
+volume root. Inspection on 2026-11-14 found dated MP4s and a growing set of
+`vimeo-<id>-audio-low.mp4` files; sampled files contain AAC audio without video.
+When the volume is mounted at `/volume`, use `/volume/audio`, not
+`/volume/data/audio`. The ID-only filenames do not identify the meeting date or
+type. Generate a mapping in the downloads environment (with Vimeo network
+access), review the titles and dates, and supply it to the transcription worker:
 
 ```sh
-chi-ciq-ingest --input-dir /inputs --namespace recordings
+chi-ciq-vimeo-metadata --input-dir /volume/audio > metadata.pending.json
+# Review and correct metadata.pending.json; then make it available to the worker.
+chi-ciq-ingest --input-dir /volume/audio --namespace recordings \
+  --metadata-file /path/to/metadata.pending.json
 ```
 
-The batch command discovers and validates every dated MP4 filename, then
-processes the recordings sequentially in one GPU job. Configure the worker's
+The generator queries public Vimeo titles and fails without producing a partial
+JSON mapping if a title cannot be parsed. It never uses an upload date as a
+meeting date. Supply or correct entries manually when titles lack meeting
+metadata, and rerun with `--metadata-file overrides.json` to skip title lookup
+for those IDs. The JSON maps IDs to dated MP4 filenames, for example
+`{"1200176629": "2026-06-11_economic_development.mp4"}`. Dated files need no
+entry. The batch validates the complete mapping before inference and processes
+recordings sequentially in one GPU job. Configure the worker's
 `DATABASE_URL` and `HF_TOKEN` using cluster secrets. The worker must be able to
 reach the private meetings database and download required models; mount a
 persistent model cache if the cluster supports it. Run the schema migration
 before ingestion and back up only after the job succeeds.
 
-The Fuzzball CLI reports `shared/datasets` as enabled persistent external NFS
-with a metadata-reported size of zero. The mounted-file inspection could not run
-because cluster capacity kept it queued, so copy the recording to the volume
-before relying on it. A cluster-specific runnable Fuzzfile still needs the
+Wait for acquisition to finish before generating the mapping or ingesting:
+the observed ID-named files appeared while inspection was in progress, and
+their names alone do not prove that downloads are complete. Mount inputs
+read-only for inference. A cluster-specific runnable Fuzzfile still needs the
 supported schema, image registry reference, database endpoint, and secret
 bindings; `fuzzball.draft.yaml` is an architecture note, not that Fuzzfile.
 
-`chi-ciq-dispatch` and its per-recording submission workflow remain available
-for larger recording batches. They are intentionally not used by the current
-one-recording setup.
+`chi-ciq-dispatch --input-dir /volume/audio --metadata-file mapping.json ...`
+also accepts this mapping and embeds each resolved filename in the individual
+worker command; the worker does not need the mapping file. Use
+`--meeting-filename` with `--input-file` for an individual ID-named recording.
 
 ## Ingestion versus updates
 
@@ -66,7 +79,9 @@ ingestion command handles both initial loading and subsequent updates:
 - Input identity is **namespace + filename**, independent of container mount
   paths. Keep the namespace stable across jobs; different source collections
   should use distinct namespaces. Renaming a file creates another identity.
-- SHA-256 of the input bytes determines whether to skip it. Skipping an unchanged
+- SHA-256 of the input bytes and resolved meeting date and type determine whether
+  to skip it. A corrected mapping reprocesses and atomically replaces the
+  published run. Skipping an unchanged
   input does not load inference models. Models otherwise load once per batch.
 - Changed files are copied to private scratch space; the hash represents exactly
   the snapshot transcribed, even if the acquisition pipeline later modifies the

@@ -5,6 +5,7 @@ import os
 import shutil
 from collections.abc import Callable, Iterator
 from contextlib import closing, contextmanager
+from dataclasses import replace
 from pathlib import Path
 from tempfile import TemporaryDirectory
 from uuid import UUID
@@ -18,7 +19,13 @@ from databases.meetings.schema import check_schema, connect_database
 from databases.meetings.store import TranscriptStore
 from shared.logging import configure_logging
 
-from .inputs import content_digest, discover_recordings
+from .inputs import (
+    content_digest,
+    discover_recordings,
+    load_metadata_file,
+    meeting_filename,
+    validate_meeting_filename,
+)
 from .runtime import build_workflow
 from .workflow import TranscriptionWorkflow
 
@@ -63,7 +70,7 @@ class StagingStore(TranscriptStore):
             raise RuntimeError("Only one run can be staged per input")
         self.meeting_id = super().start(
             self.source,
-            metadata,
+            replace(metadata, filename=self.source.name),
             transcription_model=transcription_model,
             diarization_model=diarization_model,
             text_embedding_model=text_embedding_model,
@@ -71,10 +78,17 @@ class StagingStore(TranscriptStore):
         )
         return self.meeting_id
 
-    def is_unchanged(self, key: str, digest: str) -> bool:
+    def is_unchanged(self, key: str, digest: str, metadata: MeetingMetadata) -> bool:
         with self.sessions() as session:
             source = session.get(PublishedSource, key)
-            return source is not None and source.content_sha256 == digest
+            if source is None or source.content_sha256 != digest:
+                return False
+            meeting = session.get(Meeting, source.meeting_id)
+            return (
+                meeting is not None
+                and meeting.meeting_date == metadata.meeting_date
+                and meeting.meeting_type == metadata.meeting_type
+            )
 
     def publish(self, key: str, digest: str) -> None:
         if self.meeting_id is None:
@@ -122,27 +136,33 @@ class IngestionPipeline:
         namespace: str = "recordings",
         force: bool = False,
         expected_sha256: str | None = None,
+        metadata_filename: str | None = None,
     ) -> bool:
         if not namespace.strip():
             raise ValueError("Source namespace must not be empty")
-        parse_filename(source)
+        if source.suffix.lower() != ".mp4":
+            raise ValueError(f"Expected an MP4 file: {source.name}")
+        filename = validate_meeting_filename(
+            source.name if metadata_filename is None else metadata_filename
+        )
+        metadata = parse_filename(filename)
         key = f"{namespace}/{source.name}"
         with source_lock(self.engine, key):
             digest = content_digest(source)
             if expected_sha256 is not None and digest != expected_sha256:
                 raise ValueError(f"Input content changed since dispatch: {source.name}")
-            if not force and self.store.is_unchanged(key, digest):
+            if not force and self.store.is_unchanged(key, digest, metadata):
                 logger.info("Unchanged, skipping %s", key)
                 return False
             with TemporaryDirectory(prefix="chi-ciq-ingest-") as directory:
-                snapshot = Path(directory) / source.name
+                snapshot = Path(directory) / filename
                 shutil.copyfile(source, snapshot)
                 digest = content_digest(snapshot)
                 if expected_sha256 is not None and digest != expected_sha256:
                     raise ValueError(
                         f"Input content changed while staging: {source.name}"
                     )
-                if not force and self.store.is_unchanged(key, digest):
+                if not force and self.store.is_unchanged(key, digest, metadata):
                     logger.info("Unchanged snapshot, skipping %s", key)
                     return False
                 self.store.source = source
@@ -173,6 +193,15 @@ def main(argv: list[str] | None = None) -> None:
         "--input-file", type=Path, help="Process only this Fuzzball-assigned recording"
     )
     parser.add_argument(
+        "--metadata-file",
+        type=Path,
+        help="JSON mapping Vimeo IDs to dated MP4 filenames",
+    )
+    parser.add_argument(
+        "--meeting-filename",
+        help="Dated meeting filename for a single --input-file",
+    )
+    parser.add_argument(
         "--expected-sha256", help="Reject a recording changed since job creation"
     )
     parser.add_argument("--namespace", default="recordings")
@@ -180,6 +209,10 @@ def main(argv: list[str] | None = None) -> None:
         "--force", action="store_true", help="Reprocess unchanged inputs"
     )
     args = parser.parse_args(argv)
+    if args.meeting_filename is not None and args.input_file is None:
+        parser.error("--meeting-filename requires --input-file")
+    if args.meeting_filename is not None and args.metadata_file is not None:
+        parser.error("--meeting-filename cannot be combined with --metadata-file")
     if args.expected_sha256 is not None:
         if args.input_file is None:
             parser.error("--expected-sha256 requires --input-file")
@@ -188,15 +221,23 @@ def main(argv: list[str] | None = None) -> None:
         ):
             parser.error("--expected-sha256 must be 64 lowercase hexadecimal digits")
     configure_logging("transcription")
+    metadata = load_metadata_file(args.metadata_file)
     if args.input_file is not None:
-        parse_filename(args.input_file)
+        if args.input_file.suffix.lower() != ".mp4":
+            parser.error("--input-file must be an MP4 file")
+        filename = (
+            validate_meeting_filename(args.meeting_filename)
+            if args.meeting_filename is not None
+            else meeting_filename(args.input_file, metadata)
+        )
         if not args.input_file.is_file():
             raise FileNotFoundError(args.input_file)
         recordings = [args.input_file]
     else:
         recordings = discover_recordings(
             args.input_dir
-            or Path(os.environ.get("TRANSCRIPTION_INPUT_DIR", "data/mp4"))
+            or Path(os.environ.get("TRANSCRIPTION_INPUT_DIR", "data/mp4")),
+            metadata,
         )
     engine = connect_database(os.environ["DATABASE_URL"])
     try:
@@ -210,6 +251,11 @@ def main(argv: list[str] | None = None) -> None:
                 namespace=args.namespace,
                 force=args.force,
                 expected_sha256=args.expected_sha256,
+                metadata_filename=(
+                    filename
+                    if args.input_file is not None
+                    else meeting_filename(recording, metadata)
+                ),
             )
     finally:
         engine.dispose()

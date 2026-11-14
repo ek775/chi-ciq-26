@@ -19,6 +19,7 @@ dependencies = [
 chi-ciq-ingest = "pipelines.transcription.pipeline:main"
 chi-ciq-dispatch = "pipelines.transcription.dispatch:main"
 chi-ciq-download-vimeo = "pipelines.downloads.vimeo:main"
+chi-ciq-vimeo-metadata = "pipelines.downloads.vimeo:metadata_main"
 chi-ciq-database = "databases.meetings.schema:main"
 chi-ciq-ingest-documents = "pipelines.documents.pipeline:main"
 chi-ciq-documents-database = "databases.documents.schema:main"
