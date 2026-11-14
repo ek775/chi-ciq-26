@@ -158,9 +158,9 @@ jobs:
       - POSTGRES_PASSWORD=secret://user/chi-ciq-postgres-password
       - DOCUMENTS_DATABASE_URL=postgresql+psycopg://postgres@postgres:5432/documents
       - SHARD_COUNT=4
-    mounts: &datasets-mount
-      /datasets:
-        volume: datasets
+    mounts:
+      /volume:
+        volume: recordings
     resource: &inference
       cpu:
         cores: 4
@@ -175,7 +175,7 @@ jobs:
     script: |
       #!/bin/sh
       set -eu
-      exec chi-ciq-ingest-documents --input-dir /datasets/Transcripts \
+      exec chi-ciq-ingest-documents --input-dir /volume/chicago-city-council-archive/Meetings \
         --namespace transcripts --device cpu \
         --shard-index "$((FB_TASK_ID - 1))" --shard-count "$SHARD_COUNT"
 
@@ -203,7 +203,9 @@ jobs:
   analytics-roster:
     image: *analytics-image
     env: *analytics-env
-    mounts: *datasets-mount
+    mounts:
+      /datasets:
+        volume: datasets
     resource: *inference
     depends-on:
       - {name: analytics-sync, status: FINISHED}

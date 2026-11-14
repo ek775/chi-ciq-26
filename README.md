@@ -257,8 +257,8 @@ ingestion run. Worker paths are not submitter-local paths:
 
 | Volume | Required paths |
 |---|---|
-| `team8/volume_test` mounted at `/volume` | Complete MP4 files directly under `/volume/audio` |
-| `shared/datasets` mounted at `/datasets` | `/datasets/Transcripts`; optional roster and speaker-label CSVs |
+| `team8/volume_test` mounted at `/volume` | Complete MP4 files directly under `/volume/audio`; recursive document tree under `/volume/chicago-city-council-archive/Meetings` |
+| `shared/datasets` mounted at `/datasets` in roster jobs | Optional roster and speaker-label CSVs under `/datasets/analytics` |
 | `team8/database-backups` mounted at `/backups` in backup jobs | Writable `/backups/documents` and `/backups/analytics` |
 | `team8/vllm-model-cache` mounted at `/root/.cache/huggingface` | Persistent Hugging Face model cache |
 

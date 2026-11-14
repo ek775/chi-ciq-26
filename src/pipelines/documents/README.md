@@ -8,18 +8,22 @@ embeddings to a **separate** PostgreSQL/pgvector documents database.
 Acquisition and scheduling remain upstream responsibilities.
 
 The current repository corpus has 202 `.txt` files under
-`data-reference/Transcripts`. For Fuzzball, stage that directory at
-`/datasets/Transcripts` and run:
+`data-reference/Transcripts`. For Fuzzball, the verified archive is on
+`team8/volume_test`, mounted at `/volume`, with documents and transcripts nested
+under each meeting. Run:
 
 ```sh
-chi-ciq-ingest-documents --input-dir /datasets/Transcripts --namespace transcripts
+chi-ciq-ingest-documents --input-dir /volume/chicago-city-council-archive/Meetings --namespace transcripts
 ```
 
 The `.vtt` captions and database dumps elsewhere under `data/` are not inputs:
 VTT is unsupported by the extractor, and database archives are for backup only.
-The shared volume's contents could not be verified through the CLI because the
-inspection workflow remained queued, so stage the transcript tree before
-ingestion. [fuzzball.yaml](../../../fuzzball.yaml) deploys four CPU ingestion
+This recursively ingests supported files from all meeting subdirectories,
+including `Documents`, `Transcripts`, and `Legislation`. The existing namespace
+`transcripts` is retained for stable source identities. macOS `._` resource-fork
+sidecars are ignored, including descendants of sidecar directories.
+There is no top-level `/datasets/Transcripts` directory.
+[fuzzball.yaml](../../../fuzzball.yaml) deploys four CPU ingestion
 tasks alongside transcription, then analytics and the final web service.
 See the [deployment guide](../../../README.md#fuzzball-deployment).
 

@@ -57,10 +57,15 @@ def test_backups_use_team_storage_separate_from_input_datasets():
                 "--output-dir",
                 f"/backups/{database}",
             ]
-    for name in ("documents", "analytics-roster"):
-        assert definition["jobs"][name]["mounts"] == {
-            "/datasets": {"volume": "datasets"}
-        }
+    assert definition["jobs"]["analytics-roster"]["mounts"] == {
+        "/datasets": {"volume": "datasets"}
+    }
+    job = definition["jobs"]["documents"]
+    assert job["mounts"] == {"/volume": {"volume": "recordings"}}
+    assert (
+        "--input-dir /volume/chicago-city-council-archive/Meetings"
+        in job["script"]
+    )
 
 
 def test_deployment_dag_is_acyclic_and_fail_closed():
