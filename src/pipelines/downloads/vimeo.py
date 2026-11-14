@@ -68,7 +68,8 @@ def validate_filename(filename: str) -> str:
 
 
 def title_filename(title: str) -> str:
-    filename = re.sub(r"\s+", "_", title.strip()) + ".mp4"
+    filename = re.sub(r"\s+", "_", title.strip())
+    filename = re.sub(r"_\((\d+p)\)$", r" (\1)", filename) + ".mp4"
     try:
         return validate_filename(filename)
     except ValueError as error:
