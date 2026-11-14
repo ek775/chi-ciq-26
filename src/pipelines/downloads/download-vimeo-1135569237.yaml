@@ -1,0 +1,93 @@
+jobs:
+  download:
+    image:
+      uri: docker://docker.io/library/python:3.12-slim-trixie
+    mounts:
+      /data:
+        volume: team
+    policy:
+      timeout:
+        execute: 25m
+    resource:
+      cpu:
+        cores: 2
+      memory:
+        size: 1GiB
+    script: |
+      #!/bin/sh
+      set -eu
+      mkdir -p /data/audio
+      tmp=$(mktemp -d)
+      trap 'rm -rf "$tmp"' EXIT
+      export PATH="$tmp/venv/bin:$PATH"
+      python -m venv "$tmp/venv"
+      cp -r /data/chi-ciq-26-163dd1c7be39e9b8823a96396b8b31c48dddef81 "$tmp/repo"
+      pip -q install "$tmp/repo[downloads]"
+      # Give Fuzzball short, newline-delimited progress records.
+      export YTDLP_EXECUTABLE="$tmp/venv/bin/yt-dlp"
+      mkdir "$tmp/bin"
+      cat > "$tmp/bin/yt-dlp" <<'SH'
+      #!/bin/sh
+      exec "$YTDLP_EXECUTABLE" --newline --progress-delta 30 "$@"
+      SH
+      chmod +x "$tmp/bin/yt-dlp"
+      export PATH="$tmp/bin:$PATH"
+      case "$(uname -m)" in
+        aarch64) arch=arm64 ;;
+        x86_64) arch=amd64 ;;
+        *) echo "Unsupported FFmpeg architecture: $(uname -m)" >&2; exit 1 ;;
+      esac
+      ffmpeg_bin="/data/tools/ffmpeg/$arch"
+      # Populate the persistent cache once per architecture.
+      python - "$arch" "$ffmpeg_bin" <<'PYTHON'
+      import fcntl
+      import os
+      from pathlib import Path
+      import sys
+      import tarfile
+      from tempfile import TemporaryDirectory
+      from urllib.request import urlretrieve
+
+      arch, destination = sys.argv[1:]
+      cache = Path(destination)
+      cache.mkdir(parents=True, exist_ok=True)
+      tools = ("ffmpeg", "ffprobe")
+      with (cache / ".install.lock").open("a") as lock:
+          fcntl.flock(lock, fcntl.LOCK_EX)
+          if all(os.access(cache / tool, os.X_OK) for tool in tools):
+              print(f"Using cached FFmpeg tools in {cache}", flush=True)
+          else:
+              print(f"Installing FFmpeg tools in {cache}", flush=True)
+              with TemporaryDirectory(dir=cache) as directory:
+                  staging = Path(directory)
+                  archive = staging / "ffmpeg.tar.xz"
+                  urlretrieve(
+                      f"https://johnvansickle.com/ffmpeg/releases/ffmpeg-release-{arch}-static.tar.xz",
+                      archive,
+                  )
+                  with tarfile.open(archive) as bundle:
+                      members = {
+                          Path(member.name).name: member
+                          for member in bundle
+                          if member.isfile() and Path(member.name).name in tools
+                      }
+                      for tool in tools:
+                          member = members[tool]
+                          member.name = tool
+                          bundle.extract(member, staging, filter="data")
+                          (staging / tool).chmod(0o755)
+                  for tool in tools:
+                      (staging / tool).replace(cache / tool)
+      PYTHON
+      export PATH="$ffmpeg_bin:$PATH"
+      cat > "$tmp/metadata.json" <<'JSON'
+      {"1135569237": "2025-11-12_Budget_and_Government_Operations.mp4"}
+      JSON
+      chi-ciq-download-vimeo --audio-only --workers 1 --output-dir /data/audio \
+        --metadata-file "$tmp/metadata.json" 1135569237
+      cat /data/audio/.vimeo/1135569237.json
+version: v4
+volumes:
+  team:
+    name: volume_test
+    use: team8
