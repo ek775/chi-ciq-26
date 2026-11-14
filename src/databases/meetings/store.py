@@ -3,18 +3,16 @@ from collections.abc import Sequence
 from pathlib import Path
 from uuid import UUID
 
-from sqlalchemy import Engine, create_engine, select, text
+from sqlalchemy import Engine, select, text
 from sqlalchemy.orm import sessionmaker
 
 from .metadata import MeetingMetadata
 from .models import Base, Meeting, Speaker, TranscriptSegment
+from .schema import connect_database
 
 
 def create_database(url: str) -> Engine:
-    engine = create_engine(url, pool_pre_ping=True)
-    if engine.dialect.name != "postgresql":
-        engine.dispose()
-        raise ValueError("This library requires PostgreSQL with pgvector")
+    engine = connect_database(url)
     with engine.begin() as connection:
         connection.execute(text("CREATE EXTENSION IF NOT EXISTS vector"))
         Base.metadata.create_all(connection)

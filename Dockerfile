@@ -8,6 +8,6 @@ RUN apt-get update \
 WORKDIR /workspace
 COPY pyproject.toml ./
 COPY src ./src
-RUN python -m pip install --editable ".[dev]"
+RUN python -m pip install --editable ".[dev,ingestion,web]"
 
 CMD ["sleep", "infinity"]

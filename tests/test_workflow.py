@@ -11,7 +11,7 @@ import numpy as np
 import pytest
 from sqlalchemy import func, select
 
-from transcription import (
+from pipelines.transcription import (
     DiarizedChunk,
     Meeting,
     Speaker,
@@ -20,8 +20,8 @@ from transcription import (
     TranscriptionWorkflow,
     TranscriptSegment,
 )
-from transcription.backends import SAMPLE_RATE
-from transcription.workflow import align_words, extract_audio
+from pipelines.transcription.backends import SAMPLE_RATE
+from pipelines.transcription.workflow import align_words, extract_audio
 
 
 class FakeDiarizer:
@@ -464,7 +464,7 @@ def test_long_monologue_has_no_workflow_30_second_limit(
             audio.setframerate(SAMPLE_RATE)
             audio.writeframes(bytes(65 * SAMPLE_RATE * 2))
 
-    monkeypatch.setattr("transcription.workflow.extract_audio", extract)
+    monkeypatch.setattr("pipelines.transcription.workflow.extract_audio", extract)
     store = MemoryStore()
     diarizer = FakeDiarizer()
     diarizer.diarize = lambda path: [SpeakerTurn(0, 65, "A")]

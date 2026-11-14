@@ -2,44 +2,25 @@ import argparse
 import logging
 import os
 import shutil
-import subprocess
 from collections.abc import Sequence
 from contextlib import closing
-from datetime import UTC, datetime
 from pathlib import Path
 from tempfile import NamedTemporaryFile
-from uuid import uuid4
 
 from dotenv import load_dotenv
-from sqlalchemy.engine import URL, make_url
 
-from transcription import (
+from databases.meetings.archive import export_database
+from pipelines.transcription import (
     TranscriptionWorkflow,
     TranscriptStore,
     create_database,
-    parse_filename,
 )
-from transcription.progress import timed_operation
+from pipelines.transcription.pipeline import discover_recordings
+from pipelines.transcription.progress import timed_operation
 
 from .transcribe import build_workflow, configure_logging
 
 logger = logging.getLogger(__name__)
-
-
-def discover_recordings(directory: Path) -> list[Path]:
-    if not directory.is_dir():
-        raise NotADirectoryError(directory)
-    recordings = sorted(
-        path
-        for path in directory.iterdir()
-        if path.is_file() and path.suffix.lower() == ".mp4"
-    )
-    if not recordings:
-        raise ValueError(f"No MP4 files found in {directory}")
-    # Validate the whole batch before committing any meeting rows.
-    for recording in recordings:
-        parse_filename(recording)
-    return recordings
 
 
 def transcribe_recordings(
@@ -60,60 +41,6 @@ def transcribe_recordings(
                     flush=True,
                 )
         print(f"Completed {recording.name}: {count} segments", flush=True)
-
-
-def export_database(database_url: str, output_directory: Path) -> Path:
-    """Write a custom-format pg_dump archive, publishing it only after success."""
-    executable = shutil.which("pg_dump")
-    if executable is None:
-        raise FileNotFoundError(
-            "pg_dump is required; install the PostgreSQL client tools"
-        )
-    url = make_url(database_url)
-    if url.get_backend_name() != "postgresql":
-        raise ValueError("Database export requires a PostgreSQL URL")
-    environment = os.environ.copy()
-    if url.password is not None:
-        environment["PGPASSWORD"] = url.password
-    connection_url = URL.create(
-        "postgresql",
-        username=url.username,
-        host=url.host,
-        port=url.port,
-        database=url.database,
-        query=url.query,
-    ).render_as_string(hide_password=False)
-    output_directory.mkdir(parents=True, exist_ok=True)
-    timestamp = datetime.now(UTC).strftime("%Y%m%dT%H%M%SZ")
-    destination = output_directory / f"transcription-{timestamp}-{uuid4().hex}.dump"
-    with NamedTemporaryFile(
-        dir=output_directory, prefix=".transcription-", suffix=".partial", delete=False
-    ) as archive:
-        temporary = Path(archive.name)
-        try:
-            result = subprocess.run(
-                [
-                    executable,
-                    "--dbname",
-                    connection_url,
-                    "--no-password",
-                    "--format=custom",
-                    "--no-owner",
-                    "--no-acl",
-                ],
-                stdout=archive,
-                stderr=subprocess.PIPE,
-                text=True,
-                env=environment,
-                check=False,
-            )
-            if result.returncode:
-                raise RuntimeError(f"pg_dump failed: {result.stderr.strip()}")
-            archive.close()
-            temporary.replace(destination)
-        finally:
-            temporary.unlink(missing_ok=True)
-    return destination
 
 
 def main(argv: Sequence[str] | None = None) -> None:

@@ -31,6 +31,64 @@ services:
       db:
         condition: service_healthy
     command: ["sleep", "infinity"]
+  meetings-migrate:
+    profiles: ["pipelines", "web"]
+    build:
+      context: .
+      dockerfile: src/databases/meetings/Dockerfile
+    environment:
+      DATABASE_URL: postgresql+psycopg://transcription:${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in .env}@db:5432/transcription
+    depends_on:
+      db:
+        condition: service_healthy
+    command: ["chi-ciq-database", "migrate"]
+  transcription:
+    profiles: ["pipelines"]
+    build:
+      context: .
+      dockerfile: src/pipelines/transcription/Dockerfile
+    gpus: all
+    init: true
+    volumes:
+      - ./data/mp4:/inputs:ro
+      - model-cache:/root/.cache
+    environment:
+      HF_TOKEN: ${HF_TOKEN:-}
+      DATABASE_URL: postgresql+psycopg://transcription:${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in .env}@db:5432/transcription
+    depends_on:
+      meetings-migrate:
+        condition: service_completed_successfully
+  meetings-backup:
+    profiles: ["pipelines"]
+    build:
+      context: .
+      dockerfile: src/databases/meetings/Dockerfile
+    volumes:
+      - ./data/database:/backups
+    environment:
+      DATABASE_URL: postgresql+psycopg://transcription:${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in .env}@db:5432/transcription
+    depends_on:
+      db:
+        condition: service_healthy
+    command: ["chi-ciq-database", "backup", "--output-dir", "/backups"]
+  web:
+    profiles: ["web"]
+    build:
+      context: .
+      dockerfile: src/web/Dockerfile
+    init: true
+    ports:
+      - "127.0.0.1:8080:8080"
+    environment:
+      DATABASE_URL: postgresql+psycopg://transcription:${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in .env}@db:5432/transcription
+    depends_on:
+      meetings-migrate:
+        condition: service_completed_successfully
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8080/ready', timeout=5).close()"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
   vllm:
     image: vllm/vllm-openai:v0.32.0
     profiles: ["ai"]

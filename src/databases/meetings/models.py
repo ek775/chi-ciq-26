@@ -76,6 +76,18 @@ class Speaker(Base):
     )
 
 
+class PublishedSource(Base):
+    __tablename__ = "published_sources"
+    __table_args__ = (CheckConstraint("length(content_sha256) = 64"),)
+
+    key: Mapped[str] = mapped_column(primary_key=True)
+    content_sha256: Mapped[str]
+    meeting_id: Mapped[UUID] = mapped_column(ForeignKey("meetings.id"), unique=True)
+    updated_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True), server_default=func.now(), onupdate=func.now()
+    )
+
+
 class TranscriptSegment(Base):
     __tablename__ = "transcript_segments"
     __table_args__ = (

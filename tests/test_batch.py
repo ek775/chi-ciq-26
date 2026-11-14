@@ -2,6 +2,7 @@ import logging
 import os
 import shutil
 import subprocess
+from datetime import UTC, datetime
 from pathlib import Path
 from types import SimpleNamespace
 from uuid import uuid4
@@ -10,8 +11,9 @@ import pytest
 from sqlalchemy import create_engine, select, text
 from sqlalchemy.engine import URL
 
+from databases.meetings import archive
 from examples import batch_transcribe as batch
-from transcription import Meeting, Speaker, TranscriptSegment, parse_filename
+from pipelines.transcription import Meeting, Speaker, TranscriptSegment, parse_filename
 
 
 def test_discovery_is_sorted_case_insensitive_and_nonrecursive(tmp_path):
@@ -50,7 +52,7 @@ def test_export_is_private_atomic_and_password_not_in_arguments(tmp_path, monkey
         kwargs["stdout"].write(b"PGDMP")
         return SimpleNamespace(returncode=0, stderr="")
 
-    monkeypatch.setattr(batch.subprocess, "run", run)
+    monkeypatch.setattr(archive.subprocess, "run", run)
     url = "postgresql+psycopg://user:secret@localhost/transcription"
     first = batch.export_database(url, tmp_path)
     second = batch.export_database(url, tmp_path)
@@ -71,7 +73,7 @@ def test_failed_export_cleans_partial_file_and_preserves_existing(
         kwargs["stdout"].write(b"incomplete")
         return SimpleNamespace(returncode=1, stderr="connection refused")
 
-    monkeypatch.setattr(batch.subprocess, "run", fail)
+    monkeypatch.setattr(archive.subprocess, "run", fail)
     with pytest.raises(RuntimeError, match="connection refused"):
         batch.export_database("postgresql+psycopg://localhost/transcription", tmp_path)
     assert list(tmp_path.iterdir()) == [existing]
@@ -82,6 +84,28 @@ def test_export_requires_pg_dump(tmp_path, monkeypatch):
     monkeypatch.setattr(batch.shutil, "which", lambda name: None)
     with pytest.raises(FileNotFoundError, match="pg_dump"):
         batch.export_database("postgresql://localhost/transcription", tmp_path)
+
+
+def test_export_never_overwrites_a_completed_archive(tmp_path, monkeypatch):
+    class FixedDatetime:
+        @staticmethod
+        def now(timezone):
+            return datetime(2026, 11, 14, tzinfo=UTC)
+
+    monkeypatch.setattr(archive, "datetime", FixedDatetime)
+    monkeypatch.setattr(archive, "uuid4", lambda: SimpleNamespace(hex="fixed"))
+    monkeypatch.setattr(archive.shutil, "which", lambda name: "/usr/bin/pg_dump")
+
+    def run(command, **kwargs):
+        kwargs["stdout"].write(b"original")
+        return SimpleNamespace(returncode=0, stderr="")
+
+    monkeypatch.setattr(archive.subprocess, "run", run)
+    first = archive.export_database("postgresql://localhost/transcription", tmp_path)
+    with pytest.raises(FileExistsError):
+        archive.export_database("postgresql://localhost/transcription", tmp_path)
+    assert first.read_bytes() == b"original"
+    assert list(tmp_path.iterdir()) == [first]
 
 
 def test_batch_closes_iterator_on_processing_error(caplog):

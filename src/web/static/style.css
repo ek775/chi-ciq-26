@@ -1,0 +1,16 @@
+:root { color-scheme: light dark; font-family: system-ui, sans-serif; }
+body { margin: 0 auto; max-width: 80rem; padding: 2rem; }
+header { border-bottom: 1px solid #888; padding-bottom: 1.5rem; }
+form { display: flex; flex-wrap: wrap; align-items: center; gap: .75rem; }
+input, button { font: inherit; padding: .6rem; }
+input { flex: 1; min-width: 10rem; }
+button { cursor: pointer; }
+button:disabled { cursor: wait; }
+main { display: grid; grid-template-columns: minmax(16rem, 1fr) 2fr; gap: 2rem; }
+ul, ol { list-style: none; padding: 0; }
+li { margin: 1rem 0; }
+#meetings button { text-align: left; width: 100%; }
+#segments li { border-bottom: 1px solid #888; padding: 1rem 0; }
+#segments p { white-space: pre-wrap; overflow-wrap: anywhere; }
+[hidden] { display: none !important; }
+@media (max-width: 50rem) { main { grid-template-columns: 1fr; } body { padding: 1rem; } }

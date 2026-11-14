@@ -1,7 +1,205 @@
-# MP4 transcription
+# Chicago meeting ingestion and web services
 
-A Python library for local Whisper transcription, pyannote speaker diarization,
-and direct PostgreSQL/pgvector persistence. There is no JSON serialization step.
+Database ingestion/update pipelines and a read-only transcript browsing/search
+server, with separate container boundaries and a draft Fuzzball topology. Local Whisper
+transcription, pyannote diarization, and PostgreSQL/pgvector persistence remain
+available as a Python library. Audio inference stays local to the worker.
+
+## Service architecture
+
+```text
+future raw acquisition pipelines
+             |
+      persistent MP4 inputs
+             |
+      ingestion/update worker ----> PostgreSQL + pgvector
+                                         |          |
+                                  database jobs   web API + UI
+                                  migrate/backup   read-only
+                                         |
+                                 append-only archives
+```
+
+The source tree mirrors the expected container boundaries:
+
+```text
+src/
+  pipelines/
+    transcription/   implemented: initial build and periodic updates
+    documents/       reserved: not implemented
+    analytics/       reserved: not implemented
+  web/               implemented: transcript UI/API
+  vllm/              upstream image; deployment boundary only
+  databases/
+    meetings/        PostgreSQL/pgvector contract and maintenance jobs
+    documents/       reserved: not implemented
+```
+
+Source ownership is explicit:
+
+- `src/pipelines/transcription/`: content-based idempotency, staging/publication, and
+  inference model setup, audio adapters, and the streaming inference algorithm.
+  This is the only custom service requiring ML dependencies.
+- `src/databases/meetings/`: the shared relational contract, persistence,
+  additive schema migration, and PostgreSQL archive export.
+- `src/web/`: FastAPI browsing/search endpoints and a small browser UI.
+  It neither imports the inference package nor loads models.
+- `src/databases/meetings/metadata.py`: shared filename metadata parsing.
+
+Python imports now use `pipelines.transcription`, `databases.meetings`, and `web`.
+The former `transcription` and `chi_ciq` package paths have been removed to keep
+the top-level source layout container-oriented; examples, tests, package entry
+points, and image build inputs use the new paths. The pipeline re-exports the
+meetings persistence contract without duplicating its implementation.
+
+The reserved modules contain only namespace placeholders, not invented
+schemas, fake services, or runnable containers. Document initial-build/update
+pipelines and analytics remain out of scope.
+
+PostgreSQL and optional vLLM use upstream images. Ingestion, web, database
+maintenance, and the development shell have separate Dockerfiles. An ingestion
+job never runs a second PostgreSQL process against the live database's data
+directory, and a web release never replaces the database container or volume.
+Each custom service's Dockerfile lives in its source directory and uses the
+repository root as its build context. `src/databases/meetings/Dockerfile` builds
+maintenance jobs; the PostgreSQL server itself uses `pgvector/pgvector:pg17`.
+vLLM uses its upstream image; `src/vllm` is deliberately excluded from Python
+package discovery so it cannot shadow the installed upstream `vllm` package.
+
+The package's base dependencies cover persistence. Install `.[ingestion]` for
+ML inference, `.[web]` for the server, or `.[dev,web]` for lightweight tests.
+`.[database]` explicitly selects the database-maintenance service without ML.
+
+### Local container entry points
+
+The original `app` development shell and `db` service names remain available.
+Additional opt-in services have separate images:
+
+```sh
+docker compose up -d db
+docker compose --profile pipelines run --build --rm meetings-backup
+docker compose --profile pipelines run --build --rm meetings-migrate
+docker compose --profile pipelines run --build --rm transcription
+docker compose --profile pipelines run --build --rm meetings-backup
+docker compose --profile web up --build -d web
+# UI: http://127.0.0.1:8080/
+```
+
+Select these services explicitly rather than starting every pipeline-profile
+service together: backup-before-migration and backup-after-ingestion are ordered
+operations. The transcription job exits after processing its inputs. Repeated
+submissions build initially and update subsequently; no polling daemon or
+schedule is implemented in the worker. Its current local GPU configuration
+matches the development shell's NVIDIA requirements.
+
+### Fuzzball draft and deferred delivery
+
+`fuzzball.draft.yaml` records container ownership, storage boundaries, initial
+build/update sequences, and web release stages. It is an **architecture draft,
+not an executable Fuzzfile or a validated Fuzzball schema**. Do not submit it.
+Registry images, persistent volume bindings, secrets, private ingress, scheduler,
+and cluster-compatible YAML must be resolved when hackathon networking is
+available. No Fuzzball deployment or CI/CD pipeline is claimed to be operational.
+The draft explicitly keeps database lifetimes independent of finite pipeline
+jobs and replaceable web releases.
+
+## Ingestion versus updates
+
+After configuring `DATABASE_URL`, initialize or additively migrate the schema:
+
+```sh
+chi-ciq-database migrate
+chi-ciq-database check
+chi-ciq-ingest --input-dir data/mp4 --namespace recordings
+```
+
+Use these installed commands in the corresponding service containers. The same
+ingestion command handles both initial loading and subsequent updates:
+
+- Input identity is **namespace + filename**, independent of container mount
+  paths. Keep the namespace stable across jobs; different source collections
+  should use distinct namespaces. Renaming a file creates another identity.
+- SHA-256 of the input bytes determines whether to skip it. Skipping an unchanged
+  input does not load inference models. Models otherwise load once per batch.
+- Changed files are copied to private scratch space; the hash represents exactly
+  the snapshot transcribed, even if the acquisition pipeline later modifies the
+  original. Acquisition jobs should publish complete raw files atomically.
+- New segments commit into a staged meeting. The previous published run remains
+  readable during processing. Only successful completion publishes the new run
+  and deletes the previous published run and its dependent rows, in one
+  transaction. Failed/incomplete staged runs remain for diagnostics but are
+  never served by the web API.
+- A PostgreSQL session advisory lock serializes workers for the same identity.
+  A terminated worker releases its lock when its connection closes. A retry
+  reprocesses a failed input; this is not partial-segment resume.
+- `--force` reprocesses unchanged bytes, for example after changing models.
+  It uses the same staging and atomic replacement rules.
+- Missing files do **not** delete database records. Each successful file is its
+  own update transaction, not an all-or-nothing directory transaction.
+
+The legacy examples deliberately retain their append-a-new-run behavior.
+Existing standalone runs and restored archives are preserved by migrations;
+they are not silently deleted or automatically published. Run the ingestion
+pipeline on their raw inputs to establish published source identities. Failed
+stages may accumulate and need an explicit retention policy.
+
+Raw document/video acquisition is an upstream handoff, not implemented here.
+Current ingestion accepts complete, filename-validated MP4 files directly inside
+the input directory (non-recursive). It does not claim to ingest arbitrary
+documents or implement a downloader.
+
+## Web browsing and search
+
+```sh
+chi-ciq-web
+# http://127.0.0.1:8080/
+```
+
+The server binds port 8080 and requires an already migrated database.
+`/health` checks connectivity, `/ready` checks the schema, and `/docs` describes
+the API:
+
+- `GET /api/meetings?q=budget&limit=50&offset=0`
+- `GET /api/meetings/{id}`
+- `GET /api/meetings/{id}/segments?q=comment&limit=100&offset=0`
+- `GET /api/stats`
+
+Search is literal, case-insensitive substring search over meeting types and
+transcript text, not semantic vector search. Vector data remains available for
+separately designed semantic consumers. Only published completed meetings are
+visible; raw paths, credentials, and voice/text embeddings are not returned.
+Responses are paginated (maximum 200 rows). Web transactions are read-only and
+use repeatable-read snapshots so an update cannot split one request across runs.
+The UI renders transcript text as text, not HTML, and reports request failures.
+
+Use a separate database login with SELECT-only grants for the web service.
+Neither the UI nor API implements application authentication; restrict
+production access with Fuzzball's private endpoint/token mechanism or an
+authenticated gateway. Do not expose this transcript/voice dataset publicly by
+default.
+
+## Database durability
+
+The live database must use persistent storage, separate from worker scratch and
+model caches. Backups are separate jobs, not database overwrites:
+
+```sh
+chi-ciq-database backup --output-dir data/database
+```
+
+Each successful `pg_dump` creates a private, uniquely named archive. Completed
+archives are never overwritten, including on a name collision; failed exports
+remove only their own partial file. Back up before migration and after successful
+ingestion. An archive is not a substitute for durable live PostgreSQL storage.
+Restore only into a new empty database as described below; no pipeline runs
+`pg_restore --clean` against the live database.
+
+Migrations serialize through a database advisory lock and make additive changes
+only. They preserve legacy data and leave previously unknown recording durations
+NULL. Web releases check compatibility rather than mutating the database.
+For multiple independent databases, give each database its own persistent
+volume, connection secret, and backup destination; never share a PostgreSQL data
+directory between database containers.
 
 ## Development setup
 
@@ -24,7 +222,7 @@ is local; Hugging Face is used to download models, not to receive meeting audio.
 Review each model's license and conditions before use.
 
 For host development, install FFmpeg, use Python 3.12, run
-`python -m pip install -e ".[dev]"`, and start only the database with
+`python -m pip install -e ".[dev,ingestion,web]"`, and start only the database with
 `docker compose up -d db`. The example loads `.env` automatically.
 PostgreSQL is exposed on `127.0.0.1:5433` for host connections; use port `5433`
 in your local `.env` `DATABASE_URL`. Containers still connect to `db:5432`.
@@ -152,7 +350,7 @@ from contextlib import closing
 
 from dotenv import load_dotenv
 
-from transcription import (
+from pipelines.transcription import (
     PyannoteVoiceEmbedder,
     SentenceTextEmbedder,
     StreamingPyannoteDiarizer,
@@ -322,6 +520,11 @@ path are also stored. Invalid or missing dates/types raise `ValueError`.
 ## Relational schema
 
 ```text
+published_sources
+  key (namespace/filename), content_sha256, meeting_id, updated_at
+    |
+    +-- current completed meeting (one pointer per ingested input)
+
 meetings (one run)
   id, source_path, filename, meeting_date, meeting_type, status, recording_duration_seconds
   transcription_model, diarization_model, text_embedding_model, voice_embedding_model
@@ -335,7 +538,9 @@ meetings (one run)
 ```
 
 Foreign keys enforce speaker ownership within the meeting. Meeting deletion
-cascades to its speakers and segments. Speakers can have many transcript segments.
+cascades to its speakers and segments. A published meeting cannot be deleted
+until its source pointer is updated; the ingestion pipeline does this in the
+same transaction as replacement. Speakers can have many transcript segments.
 `recording_duration_seconds` is the full decoded audio track length, not elapsed
 processing time or the sum of speech segments. `start_seconds` (inclusive) and
 `end_seconds` (exclusive) are offsets from the start of that audio track, not
@@ -370,7 +575,7 @@ Example semantic search (use a query vector from the meeting's text model):
 ```python
 from sqlalchemy import select
 from sqlalchemy.orm import Session
-from transcription import TranscriptSegment
+from pipelines.transcription import TranscriptSegment
 
 with Session(engine) as session:
     matches = session.scalars(

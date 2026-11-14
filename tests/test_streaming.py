@@ -14,15 +14,15 @@ from test_workflow import (
     MemoryStore,
 )
 
-from transcription import (
+from pipelines.transcription import (
     DiarizedChunk,
     SpeakerTurn,
     StreamingPyannoteDiarizer,
     TranscribedWord,
     TranscriptionWorkflow,
 )
-from transcription.backends import SAMPLE_RATE
-from transcription.streaming import OnlineSpeakers
+from pipelines.transcription.backends import SAMPLE_RATE
+from pipelines.transcription.streaming import OnlineSpeakers
 
 
 def test_online_speakers_track_permuted_local_slots_without_merging():
@@ -92,7 +92,7 @@ def source(tmp_path, monkeypatch):
             audio.setframerate(SAMPLE_RATE)
             audio.writeframes(bytes(10 * SAMPLE_RATE * 2))
 
-    monkeypatch.setattr("transcription.workflow.extract_audio", extract)
+    monkeypatch.setattr("pipelines.transcription.workflow.extract_audio", extract)
     return source
 
 

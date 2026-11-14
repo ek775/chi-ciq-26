@@ -4,7 +4,7 @@ from types import SimpleNamespace
 import numpy as np
 import pytest
 
-from transcription import (
+from pipelines.transcription import (
     PyannoteDiarizer,
     PyannoteVoiceEmbedder,
     SentenceTextEmbedder,

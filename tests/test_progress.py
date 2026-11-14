@@ -2,7 +2,7 @@ import logging
 
 import pytest
 
-from transcription import progress
+from pipelines.transcription import progress
 
 
 @pytest.mark.parametrize("fails", [False, True])
