@@ -23,7 +23,7 @@ volumes:
     name: postgres-data
   vllm-model-cache:
     use: team8
-    name: vllm-model-cache
+    name: vllm-model-data
 
 jobs:
   # Idempotent: creates the three databases and the read-only roles. The
