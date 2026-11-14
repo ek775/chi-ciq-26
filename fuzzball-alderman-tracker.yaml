@@ -14,7 +14,7 @@ volumes:
     name: datasets
 
 jobs:
-  restore-meetings:
+  restore-meetings-backup:
     image: &postgres-image
       uri: docker://docker.io/pgvector/pgvector:pg17
     env:
@@ -29,7 +29,7 @@ jobs:
       memory:
         size: 2GiB
     depends-on:
-      - {name: tracker-postgres, status: RUNNING}
+      - {name: tracker-snapshot-db, status: RUNNING}
     script: |
       #!/bin/sh
       set -eu
@@ -38,9 +38,9 @@ jobs:
         exit 1
       }
       pg_restore --exit-on-error --single-transaction --no-owner --no-acl \
-        --no-password --host=tracker-postgres --port=55432 --username=postgres \
+        --no-password --host=tracker-snapshot-db --port=55432 --username=postgres \
         --dbname=meetings "$TRACKER_MEETINGS_DUMP"
-      psql --no-password --host=tracker-postgres --port=55432 --username=postgres \
+      psql --no-password --host=tracker-snapshot-db --port=55432 --username=postgres \
         --dbname=meetings --set=ON_ERROR_STOP=1 <<'SQL'
       \getenv reader_password PGPASSWORD
       CREATE ROLE tracker_reader LOGIN PASSWORD :'reader_password';
@@ -49,17 +49,17 @@ jobs:
       GRANT SELECT ON meetings, published_sources, transcript_segments TO tracker_reader;
       SQL
 
-  tracker:
+  build-alderman-tracker:
     image:
-      uri: docker://ghcr.io/ek775/chi-ciq-26-tracker:fuzzball
+      uri: docker://ghcr.io/ek775/chi-ciq-26-alderman-tracker:fuzzball
     env:
-      - MEETINGS_DATABASE_URL=postgresql+psycopg://tracker_reader@tracker-postgres:55432/meetings
+      - MEETINGS_DATABASE_URL=postgresql+psycopg://tracker_reader@tracker-snapshot-db:55432/meetings
       - TRACKER_INPUT_DIR=/datasets/tracker/input
       - TRACKER_OUTPUT_DIR=/datasets/tracker/output
     mounts: *datasets
     resource: *small
     depends-on:
-      - {name: restore-meetings, status: FINISHED}
+      - {name: restore-meetings-backup, status: FINISHED}
     script: |
       #!/bin/sh
       set -eu
@@ -70,10 +70,10 @@ jobs:
           set -- "$@" --legislation "$path"
         fi
       done
-      exec chi-ciq-tracker build "$@"
+      exec chi-ciq-alderman-tracker build "$@"
 
 services:
-  tracker-postgres:
+  tracker-snapshot-db:
     image: *postgres-image
     env:
       - POSTGRES_PASSWORD=secret://user/chi-ciq-postgres-password

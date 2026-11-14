@@ -10,4 +10,4 @@ COPY src/pipelines/analytics ./src/pipelines/analytics
 COPY src/pipelines/tracker ./src/pipelines/tracker
 RUN python -m pip install .
 
-CMD ["chi-ciq-tracker", "--help"]
+CMD ["chi-ciq-alderman-tracker", "--help"]

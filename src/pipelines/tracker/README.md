@@ -19,7 +19,7 @@ reader connection. Install the project with `python -m pip install -e .`
 to use the CLI outside the container.
 
 ```sh
-chi-ciq-tracker build \
+chi-ciq-alderman-tracker build \
   --candidates /path/to/candidates.json \
   --evidence-dir data-reference/evidence \
   --legislation /path/to/Legislation/SO2025-0021894.json \
@@ -44,7 +44,7 @@ For example, retrieve the official records for the bill's filing sponsor
 using the person ID recorded in the archive:
 
 ```sh
-chi-ciq-tracker query data/tracker/congress-theater/tracker.json \
+chi-ciq-alderman-tracker query data/tracker/congress-theater/tracker.json \
   --person-id 41A0E156-F788-EC11-8D20-001DD804FD38 \
   --from-date 2025-01-01 --through-date 2026-12-31
 ```
@@ -71,7 +71,7 @@ can call the same build and retrieval steps when ready.
 
 ## Run on Fuzzball after the current workflow
 
-The [standalone Fuzzfile](../../../fuzzball-tracker.yaml) restores a completed
+The [standalone Fuzzfile](../../../fuzzball-alderman-tracker.yaml) restores a completed
 `meetings-backup-after` dump into its own disposable PostgreSQL service, then
 runs the tracker with a SELECT-only role. It uses a separate service port and
 never mounts the live PostgreSQL data directory. The original workflow can
@@ -87,14 +87,14 @@ keep serving its dashboard. Both jobs are CPU-only.
    prepared before submission.
 3. Use a fresh `TRACKER_OUTPUT_DIR` for each batch. The Fuzzfile uses the
    existing `chi-ciq-postgres-password` secret for the disposable database.
-   After this PR merges, the ARM64 image workflow publishes the tracker image
-   under the `fuzzball` tag. To run before merge, dispatch the image workflow
+   After this PR merges, the ARM64 image workflow publishes
+   `ghcr.io/ek775/chi-ciq-26-alderman-tracker:fuzzball`. To run before merge, dispatch the image workflow
    on the PR branch and use its `sha-<full-commit>` image tag in your Fuzzfile.
 4. Validate and submit the configured copy:
 
    ```sh
-   fuzzball workflow validate fuzzball-tracker.yaml
-   fuzzball workflow start fuzzball-tracker.yaml
+   fuzzball workflow validate fuzzball-alderman-tracker.yaml
+   fuzzball workflow start fuzzball-alderman-tracker.yaml --name alderman-speech-and-action-tracker
    ```
 
 The tracker job reports counts of accepted statements, rejected candidates,
@@ -126,9 +126,9 @@ handling. The schema owner runs the one-time migration. The publisher runs
 with a dedicated login provisioned by the database owner:
 
 ```sh
-chi-ciq-tracker migrate
+chi-ciq-alderman-tracker migrate
 # Switch TRACKER_ANALYTICS_DATABASE_URL to the publisher connection.
-chi-ciq-tracker publish /path/to/tracker.json --batch-id congress-theater
+chi-ciq-alderman-tracker publish /path/to/tracker.json --batch-id congress-theater
 ```
 
 After the migration, grant the existing publisher and reader roles only the
@@ -147,6 +147,6 @@ command atomically replaces the same batch ID on rerun. It only accesses
 tracker tables. Query via the reader connection:
 
 ```sh
-chi-ciq-tracker query --batch-id congress-theater \
+chi-ciq-alderman-tracker query --batch-id congress-theater \
   --person-id 41A0E156-F788-EC11-8D20-001DD804FD38
 ```
