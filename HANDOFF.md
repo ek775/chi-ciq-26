@@ -149,8 +149,9 @@ containers, three independent PostgreSQL databases, a FastAPI web app):
   a persistent `web` service with a user-scoped endpoint. Work is split into
   shards via `src/shared/sharding.py` and the `--shard-index/--shard-count`
   flags. `chi-ciq-fuzzball-env` renders/validates the secrets and env from a
-  `.env` into a submittable file. vLLM is reached as an **external** server via a
-  secret URL (assumed already running), not started from within the workflow.
+  `.env` into a submittable file. The workflow starts an internal, persistent
+  one-GPU vLLM service after both ingestion jobs; it serves
+  `openai/gpt-oss-20b` and keeps its model cache on a persistent volume.
 
 One line: **the code is a per-representative policy-stance-and-sentiment
 dashboard, now packaged to run as one Fuzzball workflow on the cluster.**
@@ -172,14 +173,15 @@ dashboard, now packaged to run as one Fuzzball workflow on the cluster.**
   is now a real Fuzzfile (validated locally; **not yet run or measured on the live
   cluster**). But its shape differs from the plan's: the plan wanted two phases
   with vLLM started from the catalog *between* them and **autoscaling** to the
-  second machine as the headline demo; the code instead runs one workflow against
-  an external vLLM, with `concurrency: 2` hard-set on transcription. So there is
-  **no exposed 1-node-vs-2-node switch and no autoscaling measurement** — the
-  "real, measured scaling" story the HPC judges want still has to be wired.
-- **Stance model too big by default.** The analytics README still defaults stance
-  to `zai-org/GLM-5.3-Flash` (~306 GB, needs ~8 high-end GPUs) — does **not** fit
-  the two one-GPU machines. The Fuzzfile takes the model from a secret
-  (`VLLM_SERVED_MODEL`), so this is now a config choice: point it at a ~20B model.
+  second machine as the headline demo; the code now runs one persistent,
+  in-workflow vLLM service after ingestion. With `concurrency: 2` hard-set on
+  transcription, there is still **no exposed 1-node-vs-2-node switch and no
+  autoscaling measurement** — the "real, measured scaling" story the HPC judges
+  want still has to be wired.
+- **Local stance model still too big by default.** Compose and the analytics
+  README still default to `zai-org/GLM-5.3-Flash` (~306 GB, needs ~8 high-end
+  GPUs), which does **not** fit the two one-GPU machines. The Fuzzball service is
+  separately pinned to `openai/gpt-oss-20b` with tensor parallelism 1.
 
 What the code got right and is worth keeping: "expensive pass once -> thin views"
 structure; three isolated databases with a read-only web role; incremental /
@@ -203,8 +205,8 @@ output and quote-checking; solid tests, logging, and module boundaries.
    validates; what's left is the HPC story itself: (a) run it on the live cluster;
    (b) expose a 1-node-vs-2-node comparison — either the transcription
    `concurrency` (1 vs 2) or vLLM autoscaling the plan described — and actually
-   **measure** the speedup; (c) point `VLLM_SERVED_MODEL` at a ~20B model that
-   fits one GPU per machine instead of the 306 GB default.
+   **measure** the speedup; (c) keep any deployed vLLM model within one GPU per
+   machine (the current workflow selects `openai/gpt-oss-20b`).
 4. **Before any public release:** human review + the City Clerk's OK; demo locally.
 
 ## 6. The one real open decision

@@ -148,19 +148,19 @@ chi-ciq-dispatch --input-dir data/mp4 --output-dir data/dispatch \
 
 [fuzzball.yaml](fuzzball.yaml) is an executable v4 deployment Fuzzfile, validated
 with CLI v4.3.1. It uses the existing persistent volumes `shared/datasets` and
-`team8/volume_test`, and `team8/postgres-data` for the database. PostgreSQL runs
-as a service of this workflow: see [PostgreSQL service](#postgresql-service).
-The private vLLM service is managed outside this workflow.
+`team8/volume_test`, and `team8/postgres-data` for the database. PostgreSQL and vLLM run as services of this workflow; see
+[PostgreSQL service](#postgresql-service) and [vLLM service](#vllm-service).
 
 The workflow starts PostgreSQL, creates the databases and reader roles, backs up
 and migrates each database independently, queues 128
 transcription shards with two active one-GPU tasks alongside four CPU document
 tasks, then joins both
-ingestion arrays before analytics sync and roster preparation. Attribution,
+ingestion arrays before analytics sync and roster preparation. The vLLM service
+starts only after transcription and document ingestion finish. Attribution,
 mentions, sentiment, emotion, and topics run in parallel. Sentiment and emotion
 each use 32 shards with four active CPU tasks. Stance waits for topics
-and attribution and uses 32 shards with four active tasks, each sending at most
-two vLLM requests (eight across the array). Dashboard
+attribution and the ready vLLM service, and uses 32 shards with four active
+tasks, each sending at most two vLLM requests (eight across the array). Dashboard
 refresh waits for every analysis branch. Completed backups and reader/schema
 checks gate the persistent web service. Failed jobs prevent dependent deployment.
 
@@ -206,11 +206,26 @@ flowchart LR
   the service claims port 5432 on its node. Stop the workflow before you start
   another copy.
 
-One-time setup (already done on the hackathon cluster):
+One-time setup (the PostgreSQL volume already exists on the hackathon cluster;
+create the model-cache volume once):
 
 ```sh
 fuzzball volume create team8 postgres-data
+fuzzball volume create team8 vllm-model-cache
 ```
+
+### vLLM service
+
+The workflow starts a persistent, one-GPU `vllm/vllm-openai:v0.32.0` service
+after both ingestion jobs complete, so it does not compete with transcription
+for a GPU. It serves `openai/gpt-oss-20b` as `local-ai`, and analytics calls it
+at the internal address `http://vllm:8000/v1`. The model cache is kept on the
+persistent NFS volume `team8/vllm-model-cache`; no public endpoint or external
+vLLM URL is needed. The vLLM readiness probe gates only the stance stage.
+
+The service needs model-download egress and the `HF_TOKEN` secret. Its selected
+model and served name are fixed in the Fuzzfile to fit one GPU per workstation;
+the local Compose deployment remains configurable independently.
 
 ### Build and publish
 
@@ -241,6 +256,7 @@ ingestion run. Worker paths are not submitter-local paths:
 |---|---|
 | `team8/volume_test` mounted at `/volume` | Complete MP4 files directly under `/volume/audio` |
 | `shared/datasets` mounted at `/datasets` | `/datasets/Transcripts`, reviewed `/datasets/analytics/recording-metadata.json`, writable `/datasets/database` |
+| `team8/vllm-model-cache` mounted at `/root/.cache/huggingface` | Persistent Hugging Face model cache |
 
 The metadata JSON maps Vimeo IDs to dated filenames; use `{}` if all recordings
 already have valid dated names. See the
@@ -259,9 +275,7 @@ Fuzzfile. URLs must use cluster-reachable hostnames, not submitter `localhost`.
 |---|---|
 | `postgres-password` | Password of the `postgres` superuser and the reader roles (`POSTGRES_PASSWORD` in `.env`) |
 | `hf-token` | Hugging Face read token with accepted pyannote model terms |
-| `vllm-url` | Private OpenAI-compatible base URL ending in `/v1` |
-| `vllm-api-key` | vLLM bearer key (empty value only if the private server has no authentication) |
-| `vllm-served-model`, `vllm-reasoning-effort`, `vllm-reasoning-tokens`, `log-level` | Settings read from the submitter's `.env` |
+| `vllm-reasoning-effort`, `vllm-reasoning-tokens`, `log-level` | Settings read from the submitter's `.env` |
 
 Use the installed helper to pipe your `.env` variables into these secrets:
 
@@ -284,25 +298,24 @@ call stops synchronization; earlier successful uploads are not rolled back.
 The helper writes a gitignored configured Fuzzfile at
 `data/deployment/fuzzball.yaml` (`--output` overrides it). Submit this file when
 using dotenv: Fuzzball rejects empty value secrets and empty environment entries,
-so deliberately empty API keys/reasoning effort are exported inside worker scripts
-instead of secret references. All nonempty credentials remain secret references.
+so deliberately empty reasoning effort is exported inside worker scripts instead
+of a secret reference. All nonempty credentials remain secret references.
 
-The helper forwards `POSTGRES_PASSWORD` and no database URL: the URLs are fixed
-text in the Fuzzfile. A loopback `VLLM_BASE_URL` is rejected because it refers
-to the worker, not your submitter.
+The helper forwards `POSTGRES_PASSWORD` and no service URL: database and vLLM
+addresses are fixed text in the Fuzzfile.
 Local input directories and unrelated variables are not forwarded.
-`LOG_LEVEL`, `VLLM_SERVED_MODEL`, `VLLM_REASONING_EFFORT`,
-`VLLM_REASONING_TOKENS`, and `VLLM_API_KEY` use the application defaults when
-absent. Empty reasoning effort/API key are preserved deliberately.
+`LOG_LEVEL`, `VLLM_REASONING_EFFORT`, and `VLLM_REASONING_TOKENS` use the
+application defaults when absent. Empty reasoning effort is preserved
+deliberately.
 
 The job `postgres-provision` creates the reader roles and their default
 privileges before the migrations run; the workflow's `web-check` verifies SELECT
 privileges before launching the web service. The analytics migration grants the
 dashboard objects to `analytics_reader` when it builds them.
 
-Set `VLLM_SERVED_MODEL` in `.env` to the deployed
-model's served name (default `local-ai`). Workers need model-download egress,
-City of Chicago roster access, and private database/vLLM connectivity.
+Workers need model-download egress, City of Chicago roster access, and private
+database connectivity. The in-workflow vLLM service also needs model-download
+egress.
 ### Two-workstation capacity
 
 The profile targets two 20-core, 128 GB workstations with one GPU each; it does
@@ -315,6 +328,7 @@ not assume GPU slicing or oversubscription.
 | Sentiment | 32 | 4 | 2 cores / 8 GiB |
 | Emotion | 32 | 4 | 2 cores / 8 GiB |
 | Stance client | 32 | 4 | 1 core / 2 GiB |
+| vLLM service | — | 1 | 8 cores / 64 GiB / 1 GPU |
 
 Transcription plus documents request 32 CPU cores and 160 GiB in aggregate.
 Analytics inference branches conservatively total 32 cores and 96 GiB, even
@@ -322,8 +336,8 @@ counting topics and stance together (they actually have an ordering dependency).
 BLAS/OpenMP threads are capped at two per analytics task to prevent each process
 using every CPU. These are scheduling requests, not measured peak usage; reserve
 additional capacity for the OS, unified GPU memory, databases, and inference
-services. vLLM remains external and its memory is **not** included in this budget;
-if it shares these two workstations, lower worker concurrency accordingly.
+services. After ingestion, the analytics branches plus the vLLM service request
+40 CPU cores and 160 GiB total, with the model service using one whole GPU.
 
 Shard count controls queued work and straggler/retry granularity, not the number
 of simultaneous GPU workers. 128 shards keep two GPUs fed with smaller batches

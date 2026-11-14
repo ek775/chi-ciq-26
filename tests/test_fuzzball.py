@@ -30,18 +30,27 @@ def test_deployment_dag_is_acyclic_and_fail_closed():
         assert ready, "Deployment dependencies contain a cycle"
         for name in ready:
             assert dependencies(nodes[name]) <= nodes.keys()
-            # Only the long-running database is awaited as RUNNING; it never finishes.
             assert all(
                 dependency["status"]
-                == ("RUNNING" if dependency["name"] == "postgres" else "FINISHED")
+                == (
+                    "RUNNING"
+                    if dependency["name"] in {"postgres", "vllm"}
+                    else "FINISHED"
+                )
                 for dependency in nodes[name].get("depends-on", [])
             )
         remaining -= ready
     assert dependencies(nodes["postgres-provision"]) == {"postgres"}
+    assert dependencies(nodes["vllm"]) == {"transcription", "documents"}
     for database in ("meetings", "documents", "analytics"):
         assert dependencies(nodes[f"{database}-backup-before"]) == {
             "postgres-provision"
         }
+    assert dependencies(nodes["analytics-stance"]) == {
+        "analytics-topics",
+        "analytics-attribute",
+        "vllm",
+    }
     assert dependencies(nodes["web"]) == {"web-check"}
     assert dependencies(nodes["web-check"]) == {
         "meetings-backup-after",
@@ -51,6 +60,31 @@ def test_deployment_dag_is_acyclic_and_fail_closed():
     assert nodes["web"]["persist"] is True
     assert nodes["web"]["network"]["endpoints"][0]["scope"] == "user"
     assert nodes["web"]["readiness-probe"]["http-get"]["path"] == "/ready"
+
+
+def test_vllm_is_an_internal_gpu_service():
+    definition = workflow()
+    service = definition["services"]["vllm"]
+    command = service["command"]
+    assert service["persist"] is True
+    assert service["resource"]["devices"] == {"nvidia.com/gpu": 1}
+    assert command[command.index("--model") + 1] == "openai/gpt-oss-20b"
+    assert command[command.index("--tensor-parallel-size") + 1] == "1"
+    assert command[command.index("--served-model-name") + 1] == "local-ai"
+    assert service["mounts"]["/root/.cache/huggingface"]["volume"] == (
+        "vllm-model-cache"
+    )
+    assert definition["volumes"]["vllm-model-cache"]["name"] == "vllm-model-cache"
+    assert service["network"]["ports"] == [
+        {"name": "http", "port": 8000, "protocol": "tcp"}
+    ]
+    assert service["readiness-probe"]["http-get"] == {
+        "path": "/health",
+        "port": 8000,
+    }
+    assert "VLLM_BASE_URL=http://vllm:8000/v1" in definition["jobs"][
+        "analytics-stance"
+    ]["env"]
 
 
 def test_ingestion_arrays_have_consistent_disjoint_shards(tmp_path):
@@ -132,6 +166,7 @@ def test_analytics_fanout_and_join_cover_every_stage_once():
     assert dependencies(jobs["analytics-stance"]) == {
         "analytics-topics",
         "analytics-attribute",
+        "vllm",
     }
     assert dependencies(jobs["analytics-refresh"]) == {
         f"analytics-{stage}"

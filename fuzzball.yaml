@@ -21,6 +21,9 @@ volumes:
   postgres-data:
     use: team8
     name: postgres-data
+  vllm-model-cache:
+    use: team8
+    name: vllm-model-cache
 
 jobs:
   # Idempotent: creates the three databases and the read-only roles. The
@@ -186,9 +189,8 @@ jobs:
       - ANALYTICS_DATABASE_URL=postgresql+psycopg://postgres@postgres:5432/analytics
       - MEETINGS_DATABASE_URL=postgresql+psycopg://web_reader@postgres:5432/meetings
       - DOCUMENTS_DATABASE_URL=postgresql+psycopg://documents_reader@postgres:5432/documents
-      - VLLM_BASE_URL=secret://user/chi-ciq-vllm-url
-      - VLLM_API_KEY=secret://user/chi-ciq-vllm-api-key
-      - VLLM_SERVED_MODEL=secret://user/chi-ciq-vllm-served-model
+      - VLLM_BASE_URL=http://vllm:8000/v1
+      - VLLM_SERVED_MODEL=local-ai
       - VLLM_REASONING_EFFORT=secret://user/chi-ciq-vllm-reasoning-effort
       - VLLM_REASONING_TOKENS=secret://user/chi-ciq-vllm-reasoning-tokens
       - OMP_NUM_THREADS=2
@@ -284,6 +286,7 @@ jobs:
     depends-on:
       - {name: analytics-topics, status: FINISHED}
       - {name: analytics-attribute, status: FINISHED}
+      - {name: vllm, status: RUNNING}
     script: |
       #!/bin/sh
       set -eu
@@ -400,6 +403,57 @@ services:
       period-seconds: 10
       timeout-seconds: 5
       failure-threshold: 12
+
+  # Start only after both GPU and CPU ingestion have released their inputs.
+  # The persistent cache avoids downloading model weights on every workflow run.
+  vllm:
+    image:
+      uri: docker://vllm/vllm-openai:v0.32.0
+    env:
+      - HF_TOKEN=secret://user/chi-ciq-hf-token
+      - VLLM_ENGINE_READY_TIMEOUT_S=3600
+    mounts:
+      /root/.cache/huggingface:
+        volume: vllm-model-cache
+    resource:
+      cpu:
+        cores: 8
+      memory:
+        size: 64GiB
+      devices:
+        nvidia.com/gpu: 1
+    depends-on:
+      - {name: transcription, status: FINISHED}
+      - {name: documents, status: FINISHED}
+    command:
+      - --model
+      - openai/gpt-oss-20b
+      - --served-model-name
+      - local-ai
+      - --host
+      - 0.0.0.0
+      - --port
+      - "8000"
+      - --max-model-len
+      - "32768"
+      - --gpu-memory-utilization
+      - "0.9"
+      - --tensor-parallel-size
+      - "1"
+      - --reasoning-parser
+      - openai_gpt-oss
+    persist: true
+    network:
+      ports:
+        - {name: http, port: 8000, protocol: tcp}
+    readiness-probe:
+      http-get:
+        path: /health
+        port: 8000
+      initial-delay-seconds: 60
+      period-seconds: 30
+      timeout-seconds: 10
+      failure-threshold: 120
 
   web:
     image: *web-image

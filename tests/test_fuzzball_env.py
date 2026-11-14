@@ -21,7 +21,7 @@ def test_dotenv_is_parsed_without_shell_execution_or_interpolation(tmp_path):
     assert values["LOG_LEVEL"] == "DEBUG"
     assert values["VLLM_REASONING_EFFORT"] == ""
     assert "WEB_POSTGRES_PASSWORD" not in values
-    assert values["VLLM_API_KEY"] == ""
+    assert "VLLM_BASE_URL" not in values
     assert not (tmp_path / "forbidden").exists()
 
 
@@ -74,7 +74,7 @@ def test_sync_pipes_values_and_updates_only_existing_user_value_secrets(
     monkeypatch.setattr(fuzzball_env.subprocess, "run", run)
     fuzzball_env.sync_values(
         "fuzzball",
-        {"HF_TOKEN": "private\nquoted'\"", "VLLM_API_KEY": "", "LOG_LEVEL": "DEBUG"},
+        {"HF_TOKEN": "private\nquoted'\"", "LOG_LEVEL": "DEBUG"},
     )
     assert calls[1][0] == [
         "fuzzball",
@@ -98,14 +98,13 @@ def test_sync_pipes_values_and_updates_only_existing_user_value_secrets(
 
 
 def test_empty_optional_settings_are_inline_and_credentials_stay_references(tmp_path):
-    values = {"VLLM_API_KEY": "", "VLLM_REASONING_EFFORT": "", "HF_TOKEN": "private"}
+    values = {"VLLM_REASONING_EFFORT": "", "HF_TOKEN": "private"}
     definition = fuzzball_env.configured_workflow(ROOT / "fuzzball.yaml", values)
     output = tmp_path / "workflow.yaml"
     fuzzball_env.write_workflow(output, definition)
     content = output.read_text()
     assert "private" not in content
     assert output.stat().st_mode & 0o777 == 0o600
-    assert "export VLLM_API_KEY=''" in definition["jobs"]["analytics-sync"]["script"]
     assert (
         "export VLLM_REASONING_EFFORT=''"
         in definition["jobs"]["analytics-sync"]["script"]
@@ -115,12 +114,11 @@ def test_empty_optional_settings_are_inline_and_credentials_stay_references(tmp_
     )
     assert "HF_TOKEN=secret://user/chi-ciq-hf-token" in content
     configured = fuzzball_env.configured_workflow(
-        ROOT / "fuzzball.yaml", {"VLLM_API_KEY": "private"}
+        ROOT / "fuzzball.yaml", {"VLLM_REASONING_EFFORT": "high"}
     )
-    assert (
-        "VLLM_API_KEY=secret://user/chi-ciq-vllm-api-key"
-        in configured["jobs"]["analytics-sync"]["env"]
-    )
+    assert "VLLM_BASE_URL=http://vllm:8000/v1" in configured["jobs"][
+        "analytics-sync"
+    ]["env"]
 
 
 def test_cli_failure_does_not_echo_secret_payload(monkeypatch):

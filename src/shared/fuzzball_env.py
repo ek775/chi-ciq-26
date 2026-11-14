@@ -15,21 +15,16 @@ from dotenv import dotenv_values
 VARIABLES = {
     "POSTGRES_PASSWORD": "postgres-password",
     "HF_TOKEN": "hf-token",
-    "VLLM_BASE_URL": "vllm-url",
-    "VLLM_API_KEY": "vllm-api-key",
-    "VLLM_SERVED_MODEL": "vllm-served-model",
     "VLLM_REASONING_EFFORT": "vllm-reasoning-effort",
     "VLLM_REASONING_TOKENS": "vllm-reasoning-tokens",
     "LOG_LEVEL": "log-level",
 }
 DEFAULTS = {
-    "VLLM_API_KEY": "",
-    "VLLM_SERVED_MODEL": "local-ai",
     "VLLM_REASONING_EFFORT": "low",
     "VLLM_REASONING_TOKENS": "4096",
     "LOG_LEVEL": "INFO",
 }
-ALLOW_EMPTY = {"VLLM_API_KEY", "VLLM_REASONING_EFFORT"}
+ALLOW_EMPTY = {"VLLM_REASONING_EFFORT"}
 
 
 def read_values(path: Path) -> dict[str, str]:
