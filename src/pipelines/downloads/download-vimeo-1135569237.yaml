@@ -7,7 +7,7 @@ jobs:
         volume: team
     policy:
       timeout:
-        execute: 8m
+        execute: 25m
     resource:
       cpu:
         cores: 2
@@ -23,6 +23,15 @@ jobs:
       python -m venv "$tmp/venv"
       cp -r /data/chi-ciq-26-163dd1c7be39e9b8823a96396b8b31c48dddef81 "$tmp/repo"
       pip -q install "$tmp/repo[downloads]"
+      # Give Fuzzball short, newline-delimited progress records.
+      export YTDLP_EXECUTABLE="$tmp/venv/bin/yt-dlp"
+      mkdir "$tmp/bin"
+      cat > "$tmp/bin/yt-dlp" <<'SH'
+      #!/bin/sh
+      exec "$YTDLP_EXECUTABLE" --newline --progress-delta 30 "$@"
+      SH
+      chmod +x "$tmp/bin/yt-dlp"
+      export PATH="$tmp/bin:$PATH"
       case "$(uname -m)" in
         aarch64) arch=arm64 ;;
         x86_64) arch=amd64 ;;
@@ -71,7 +80,11 @@ jobs:
                       (staging / tool).replace(cache / tool)
       PYTHON
       export PATH="$ffmpeg_bin:$PATH"
-      chi-ciq-download-vimeo --audio-only --workers 1 --output-dir /data/audio 1135569237
+      cat > "$tmp/metadata.json" <<'JSON'
+      {"1135569237": "2025-11-12_Budget_and_Government_Operations.mp4"}
+      JSON
+      chi-ciq-download-vimeo --audio-only --workers 1 --output-dir /data/audio \
+        --metadata-file "$tmp/metadata.json" 1135569237
       cat /data/audio/.vimeo/1135569237.json
 version: v4
 volumes:
