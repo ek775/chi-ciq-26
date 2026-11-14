@@ -234,14 +234,43 @@ Fuzzfile. URLs must use cluster-reachable hostnames, not submitter `localhost`.
 | `hf-token` | Hugging Face read token with accepted pyannote model terms |
 | `vllm-url` | Private OpenAI-compatible base URL ending in `/v1` |
 | `vllm-api-key` | vLLM bearer key (empty value only if the private server has no authentication) |
+| `vllm-served-model`, `vllm-reasoning-effort`, `vllm-reasoning-tokens`, `log-level` | Settings read from the submitter's `.env` |
 
-For example, provision one value from a protected local file without putting it
-on the command line:
+Use the installed helper to pipe your `.env` variables into these secrets:
 
 ```sh
-fuzzball secret create secret://user/chi-ciq-meetings-writer-url \
-  /protected/meetings-writer-url.txt --from-file --type value
+python -m pip install -e ".[deployment]"
+chi-ciq-fuzzball-env --env-file .env --check
+chi-ciq-fuzzball-env --env-file .env
+fuzzball workflow validate data/deployment/fuzzball.yaml
+fuzzball workflow start data/deployment/fuzzball.yaml --name chi-ciq-web-release
+# Sync a subset without requiring the full deployment configuration:
+chi-ciq-fuzzball-env --env-file .env --only HF_TOKEN LOG_LEVEL
 ```
+
+The helper parses dotenv without executing shell code or interpolating variables.
+It validates the selected values before making any changes, creates missing
+user-scoped value secrets, and updates existing ones. Values travel on stdin,
+not command-line arguments, output, or generated workflow files. A failed CLI
+call stops synchronization; earlier successful uploads are not rolled back.
+`--check` is entirely local. Use `--fuzzball` or `FUZZBALL_BIN` to select the CLI.
+The helper writes a gitignored configured Fuzzfile at
+`data/deployment/fuzzball.yaml` (`--output` overrides it). Submit this file when
+using dotenv: Fuzzball rejects empty value secrets and empty environment entries,
+so deliberately empty API keys/reasoning effort are exported inside worker scripts
+instead of secret references. All nonempty credentials remain secret references.
+
+Database mappings are `DATABASE_URL` (meetings writer),
+`DOCUMENTS_DATABASE_URL`, `ANALYTICS_DATABASE_URL`, `MEETINGS_DATABASE_URL`
+(meetings reader), `DOCUMENTS_READER_DATABASE_URL`, and
+`ANALYTICS_READER_DATABASE_URL`. Reader URLs must be supplied separately; the
+helper never reuses owner credentials for web access or invents database hosts
+from `POSTGRES_PASSWORD`. Loopback URLs are rejected because they refer to the
+worker, not your submitter. Set cluster-reachable URLs in your private `.env`.
+Local input directories and unrelated variables are not forwarded.
+`LOG_LEVEL`, `VLLM_SERVED_MODEL`, `VLLM_REASONING_EFFORT`,
+`VLLM_REASONING_TOKENS`, and `VLLM_API_KEY` use the application defaults when
+absent. Empty reasoning effort/API key are preserved deliberately.
 
 Provision reader roles first using the
 [meetings grants](src/web/web-role.sql) and
@@ -251,7 +280,7 @@ launching the web service. Give the documents reader SELECT on the registry
 and chunk tables, including owner default privileges for newly created tables.
 Existing schema migrations re-grant dashboard views when rebuilding them.
 
-Set `VLLM_SERVED_MODEL` in the analytics environment anchor to the deployed
+Set `VLLM_SERVED_MODEL` in `.env` to the deployed
 model's served name (default `local-ai`). Workers need model-download egress,
 City of Chicago roster access, and private database/vLLM connectivity.
 ### Two-workstation capacity

@@ -26,8 +26,10 @@ chi-ciq-documents-database = "databases.documents.schema:main"
 chi-ciq-analytics = "pipelines.analytics.pipeline:main"
 chi-ciq-analytics-database = "databases.analytics.schema:main"
 chi-ciq-web = "web.app:main"
+chi-ciq-fuzzball-env = "shared.fuzzball_env:main"
 
 [project.optional-dependencies]
+deployment = ["PyYAML"]
 database = []
 downloads = ["yt-dlp"]
 web = [

@@ -3,7 +3,7 @@ version: v4
 defaults:
   job:
     env:
-      - LOG_LEVEL=INFO
+      - LOG_LEVEL=secret://user/chi-ciq-log-level
       - HOME=/tmp
     policy:
       timeout:
@@ -141,7 +141,9 @@ jobs:
       - DOCUMENTS_DATABASE_URL=secret://user/chi-ciq-documents-reader-url
       - VLLM_BASE_URL=secret://user/chi-ciq-vllm-url
       - VLLM_API_KEY=secret://user/chi-ciq-vllm-api-key
-      - VLLM_SERVED_MODEL=local-ai
+      - VLLM_SERVED_MODEL=secret://user/chi-ciq-vllm-served-model
+      - VLLM_REASONING_EFFORT=secret://user/chi-ciq-vllm-reasoning-effort
+      - VLLM_REASONING_TOKENS=secret://user/chi-ciq-vllm-reasoning-tokens
       - OMP_NUM_THREADS=2
       - MKL_NUM_THREADS=2
       - OPENBLAS_NUM_THREADS=2
@@ -288,7 +290,7 @@ jobs:
     env: &web-env
       - DATABASE_URL=secret://user/chi-ciq-meetings-reader-url
       - ANALYTICS_DATABASE_URL=secret://user/chi-ciq-analytics-reader-url
-      - LOG_LEVEL=INFO
+      - LOG_LEVEL=secret://user/chi-ciq-log-level
       - HOME=/tmp
     resource: *small
     depends-on:
