@@ -25,5 +25,6 @@ Non-negotiables to respect while coding:
 - **Size any GPU model to fit one GPU per machine** (~20B, e.g. gpt-oss-20b), not
   the ~306 GB default currently in the analytics config.
 
-The fuller originals of the plan live in the claude.ai project "govbotgo"
-(not on disk); HANDOFF.md copies the parts that matter for coding.
+HANDOFF.md copies the parts that matter for coding. The fuller original plan
+docs are in `docs/plan/` (copied from the claude.ai project "govbotgo"); see
+`docs/plan/00-INDEX.md`.

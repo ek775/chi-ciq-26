@@ -1,18 +1,27 @@
 # Handoff: plan, current code, and path forward
 
-Context pack for coding this repo with Claude Code. Written 2026-11-14.
+Context pack for coding this repo with Claude Code. Written 2026-11-14;
+updated 2026-11-14 for the `chi-ciq-26-clean3` code.
 
-This file is self-contained on purpose: the original plan docs live in the
-claude.ai project "govbotgo" (not on disk), so the parts that matter for coding
-are copied here. Doc names in **quotes** below refer to those project docs if you
-want the fuller original.
+This file is self-contained on purpose: the parts that matter for coding are
+copied here. Doc names in **quotes** below refer to the fuller original plan
+docs, which are now in **`docs/plan/`** (copied from the claude.ai project
+"govbotgo"); start with `docs/plan/00-INDEX.md` for the reading order.
+
+**What changed in this update:** the cluster is no longer a non-executable
+draft — there is now a real, locally-validated `fuzzball.yaml` plus an
+env-rendering tool (`chi-ciq-fuzzball-env`) and sharding helpers. The product
+itself is unchanged (still the stance + sentiment dashboard; still voiceprint
+attribution; no promise tracker / digests / `statements.jsonl` yet), so §2, §4
+(product differences), §5 steps 1-2, and §6 still stand. §3, the cluster bullet
+in §4, and §5 step 3 are updated below.
 
 ---
 
 ## 1. What this project is
 
-- A govbot-based application for Chicago City Council meetings, built for a
-  2-day HPC/AI hackathon judged on **real cluster scaling**.
+- An application for Chicago City Council meetings, built for a
+  1-day HPC/AI hackathon judged on **real cluster scaling**.
 - Hardware: **two Lenovo ThinkStation PGX machines, one GPU each** (Arm / GB10
   chip, so container images must be **arm64**; the GPU shares memory with the
   system). A GPU **cannot be shared** between two jobs.
@@ -133,9 +142,18 @@ containers, three independent PostgreSQL databases, a FastAPI web app):
   (materialized views = pre-computed query results for the dashboard).
 - **web** — transcript browse/search + a dashboard of per-person positions,
   per-topic stance trends, sentiment, and emotion.
+- **cluster deployment** (new in this version) — `fuzzball.yaml` is now a real,
+  locally-validated v4 Fuzzfile that runs the whole thing on the cluster: DB
+  backup/migrate -> transcription (GPU task array, `concurrency: 2`) and document
+  ingest in parallel -> the analytics stages as separate jobs -> backups ->
+  a persistent `web` service with a user-scoped endpoint. Work is split into
+  shards via `src/shared/sharding.py` and the `--shard-index/--shard-count`
+  flags. `chi-ciq-fuzzball-env` renders/validates the secrets and env from a
+  `.env` into a submittable file. vLLM is reached as an **external** server via a
+  secret URL (assumed already running), not started from within the workflow.
 
 One line: **the code is a per-representative policy-stance-and-sentiment
-dashboard.**
+dashboard, now packaged to run as one Fuzzball workflow on the cluster.**
 
 ## 4. How the code differs from the plan
 
@@ -150,10 +168,18 @@ dashboard.**
 - **Adds scores the plan avoided.** Sentiment/emotion/stance scores are exactly
   the "scores or labels" the plan said to leave out; the sentiment/emotion models
   are trained on social-media tone, not policy.
-- **Cluster not wired.** `fuzzball.draft.yaml` is explicitly "architecture notes,
-  not an executable Fuzzfile"; README says cluster deployment is unverified.
-  Stance defaults to a ~306 GB model (needs ~8 high-end GPUs) — does **not** fit
-  the two one-GPU machines.
+- **Cluster: executable, but not yet the planned scaling demo.** `fuzzball.yaml`
+  is now a real Fuzzfile (validated locally; **not yet run or measured on the live
+  cluster**). But its shape differs from the plan's: the plan wanted two phases
+  with vLLM started from the catalog *between* them and **autoscaling** to the
+  second machine as the headline demo; the code instead runs one workflow against
+  an external vLLM, with `concurrency: 2` hard-set on transcription. So there is
+  **no exposed 1-node-vs-2-node switch and no autoscaling measurement** — the
+  "real, measured scaling" story the HPC judges want still has to be wired.
+- **Stance model too big by default.** The analytics README still defaults stance
+  to `zai-org/GLM-5.3-Flash` (~306 GB, needs ~8 high-end GPUs) — does **not** fit
+  the two one-GPU machines. The Fuzzfile takes the model from a secret
+  (`VLLM_SERVED_MODEL`), so this is now a config choice: point it at a ~20B model.
 
 What the code got right and is worth keeping: "expensive pass once -> thin views"
 structure; three isolated databases with a read-only web role; incremental /
@@ -173,10 +199,12 @@ output and quote-checking; solid tests, logging, and module boundaries.
    **per-meeting digest**. Recommended: do a thin version of both — keep the
    dashboard as the heavy HPC demo, add the commitment tracker as the distinctive
    public value.
-3. **Make the cluster run real.** Turn transcription into Phase 1 (GPU task array,
-   concurrency switch for the 1-vs-2-node measurement) and the vLLM step into
-   Phase 2; right-size the model to ~20B so it fits one GPU per machine. Convert
-   `fuzzball.draft.yaml` into actual Phase-1/Phase-2 Fuzzfiles.
+3. **Turn the Fuzzfile into the measured scaling demo.** The Fuzzfile exists and
+   validates; what's left is the HPC story itself: (a) run it on the live cluster;
+   (b) expose a 1-node-vs-2-node comparison — either the transcription
+   `concurrency` (1 vs 2) or vLLM autoscaling the plan described — and actually
+   **measure** the speedup; (c) point `VLLM_SERVED_MODEL` at a ~20B model that
+   fits one GPU per machine instead of the 306 GB default.
 4. **Before any public release:** human review + the City Clerk's OK; demo locally.
 
 ## 6. The one real open decision
