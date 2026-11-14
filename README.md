@@ -173,8 +173,12 @@ so the databases survive a stop, a failure, or a move to a different node.
 ```sh
 # Start (the service runs until you stop the workflow):
 fuzzball workflow start fuzzball-postgres.yaml --name chi-ciq-postgres
-# Find the node the service runs on (the `Host` of the postgres stage):
-fuzzball workflow describe <workflow-id>
+# Find the address: the workflow ID (name chi-ciq-postgres, status Started)
+# and the account ID (`Group ID`) make the DNS name shown below.
+fuzzball workflow list
+fuzzball context show
+# Optional, the node address: `Host` of the postgres stage (YAML output only).
+fuzzball workflow describe <workflow-id> --output yaml
 # Stop. PostgreSQL shuts down cleanly and the data stays on the volume:
 fuzzball workflow stop <workflow-id>
 ```
