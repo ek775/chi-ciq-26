@@ -9,9 +9,12 @@ def test_database_and_web_do_not_import_inference():
             "-c",
             (
                 "import sys; import databases.meetings.schema; "
-                "import databases.documents.schema; import web.app; "
+                "import databases.documents.schema; "
+                "import databases.analytics.schema; import web.app; "
+                "import pipelines.analytics.pipeline; "
                 "assert not {'pipelines.transcription', 'torch', 'scipy', "
-                "'pyannote', 'whisper', 'sentence_transformers'} "
+                "'pyannote', 'whisper', 'sentence_transformers', "
+                "'transformers'} "
                 "& sys.modules.keys()"
             ),
         ],
@@ -58,6 +61,7 @@ def test_source_layout_matches_container_boundaries():
         "vllm",
         "databases/meetings",
         "databases/documents",
+        "databases/analytics",
     ):
         assert (root / path / "__init__.py").is_file()
     assert not (root / "chi_ciq").exists()

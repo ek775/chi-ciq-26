@@ -160,6 +160,91 @@ services:
       db:
         condition: service_healthy
     command: ["chi-ciq-database", "backup", "--output-dir", "/backups"]
+  analytics-db:
+    profiles: ["analytics", "web"]
+    image: pgvector/pgvector:pg17
+    environment:
+      POSTGRES_USER: analytics
+      POSTGRES_DB: analytics
+      # The server rejects an empty password when an analytics profile runs.
+      POSTGRES_PASSWORD: ${ANALYTICS_POSTGRES_PASSWORD:-}
+    ports:
+      - "127.0.0.1:5435:5432"
+    volumes:
+      - analytics-postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U analytics -d analytics"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+  analytics-migrate:
+    profiles: ["analytics", "web"]
+    build:
+      context: .
+      dockerfile: src/databases/analytics/Dockerfile
+    environment:
+      LOG_LEVEL: ${LOG_LEVEL:-INFO}
+      ANALYTICS_DATABASE_URL: postgresql+psycopg://analytics:${ANALYTICS_POSTGRES_PASSWORD:-}@analytics-db:5432/analytics
+    depends_on:
+      analytics-db:
+        condition: service_healthy
+    command: ["chi-ciq-analytics-database", "migrate"]
+  analytics-web-role:
+    image: pgvector/pgvector:pg17
+    profiles: ["analytics", "web"]
+    environment:
+      PGPASSWORD: ${ANALYTICS_POSTGRES_PASSWORD:-}
+      ANALYTICS_WEB_POSTGRES_PASSWORD: ${ANALYTICS_WEB_POSTGRES_PASSWORD:-}
+    volumes:
+      - ./src/databases/analytics/web-role.sql:/web-role.sql:ro
+    depends_on:
+      analytics-migrate:
+        condition: service_completed_successfully
+    command:
+      - psql
+      - --host=analytics-db
+      - --username=analytics
+      - --dbname=analytics
+      - --set=ON_ERROR_STOP=1
+      - --file=/web-role.sql
+  analytics:
+    profiles: ["analytics"]
+    build:
+      context: .
+      dockerfile: src/pipelines/analytics/Dockerfile
+    init: true
+    volumes:
+      - ${ANALYTICS_INPUT_DIR:-./data/analytics}:/inputs:ro
+      - analytics-model-cache:/root/.cache
+    environment:
+      LOG_LEVEL: ${LOG_LEVEL:-INFO}
+      HF_TOKEN: ${HF_TOKEN:-}
+      ANALYTICS_DATABASE_URL: postgresql+psycopg://analytics:${ANALYTICS_POSTGRES_PASSWORD:-}@analytics-db:5432/analytics
+      # Sources are read-only inputs; meetings use the SELECT-only web role.
+      MEETINGS_DATABASE_URL: postgresql+psycopg://web_reader:${WEB_POSTGRES_PASSWORD:-}@db:5432/transcription
+      DOCUMENTS_DATABASE_URL: postgresql+psycopg://documents:${DOCUMENTS_POSTGRES_PASSWORD:-}@documents-db:5432/documents
+      VLLM_BASE_URL: ${ANALYTICS_VLLM_BASE_URL:-http://vllm:8000/v1}
+      VLLM_SERVED_MODEL: local-ai
+      VLLM_REASONING_EFFORT: ${VLLM_REASONING_EFFORT-low}
+      VLLM_REASONING_TOKENS: ${VLLM_REASONING_TOKENS:-4096}
+    depends_on:
+      analytics-web-role:
+        condition: service_completed_successfully
+    command: ["chi-ciq-analytics", "run"]
+  analytics-backup:
+    profiles: ["analytics"]
+    build:
+      context: .
+      dockerfile: src/databases/analytics/Dockerfile
+    volumes:
+      - ./data/analytics-database:/backups
+    environment:
+      LOG_LEVEL: ${LOG_LEVEL:-INFO}
+      ANALYTICS_DATABASE_URL: postgresql+psycopg://analytics:${ANALYTICS_POSTGRES_PASSWORD:-}@analytics-db:5432/analytics
+    depends_on:
+      analytics-db:
+        condition: service_healthy
+    command: ["chi-ciq-analytics-database", "backup", "--output-dir", "/backups"]
   web:
     profiles: ["web"]
     build:
@@ -171,8 +256,12 @@ services:
     environment:
       LOG_LEVEL: ${LOG_LEVEL:-INFO}
       DATABASE_URL: postgresql+psycopg://web_reader:${WEB_POSTGRES_PASSWORD:?Set WEB_POSTGRES_PASSWORD in .env}@db:5432/transcription
+      # Dashboard reads only the granted analytics views and summary tables.
+      ANALYTICS_DATABASE_URL: postgresql+psycopg://analytics_reader:${ANALYTICS_WEB_POSTGRES_PASSWORD:-}@analytics-db:5432/analytics
     depends_on:
       meetings-web-role:
+        condition: service_completed_successfully
+      analytics-web-role:
         condition: service_completed_successfully
     healthcheck:
       test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8080/ready', timeout=5).close()"]
@@ -184,26 +273,26 @@ services:
     profiles: ["ai"]
     gpus: all
     init: true
-    shm_size: "1gb"
+    ipc: host
     ports:
       - "127.0.0.1:8000:8000"
     volumes:
       - vllm-model-cache:/root/.cache/huggingface
     environment:
       HF_TOKEN: ${HF_TOKEN:-}
-    command:
-      - --model
-      - ${VLLM_MODEL:-Qwen/Qwen2.5-0.5B-Instruct}
-      - --served-model-name
-      - local-ai
-      - --host
-      - "0.0.0.0"
-      - --port
-      - "8000"
-      - --max-model-len
-      - ${VLLM_MAX_MODEL_LEN:-4096}
-      - --gpu-memory-utilization
-      - ${VLLM_GPU_MEMORY_UTILIZATION:-0.5}
+      # First start downloads ~306 GiB of FP8 weights and compiles kernels.
+      VLLM_ENGINE_READY_TIMEOUT_S: "3600"
+    # String form so VLLM_EXTRA_ARGS can expand to several arguments; set it
+    # empty for models without a GLM reasoning parser.
+    command: >-
+      --model ${VLLM_MODEL:-zai-org/GLM-5.3-Flash}
+      --served-model-name local-ai
+      --host 0.0.0.0
+      --port 8000
+      --max-model-len ${VLLM_MAX_MODEL_LEN:-32768}
+      --gpu-memory-utilization ${VLLM_GPU_MEMORY_UTILIZATION:-0.9}
+      --tensor-parallel-size ${VLLM_TENSOR_PARALLEL_SIZE:-8}
+      ${VLLM_EXTRA_ARGS---reasoning-parser glm47}
     healthcheck:
       test:
         - CMD
@@ -212,12 +301,14 @@ services:
         - "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/health', timeout=5).close()"
       interval: 30s
       timeout: 10s
-      start_period: 10m
+      start_period: 60m
       retries: 5
 
 volumes:
   postgres-data:
   documents-postgres-data:
   documents-model-cache:
+  analytics-postgres-data:
+  analytics-model-cache:
   model-cache:
   vllm-model-cache:

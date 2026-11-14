@@ -15,6 +15,8 @@ Vimeo acquisition -> shared dataset volume -> transcription batch
                                                |
                                         database backups
 transcript tree -> shared dataset volume -> document batch
+meetings + documents (read-only) -> analytics batch -> analytics DB -> dashboard
+                                         \-> vLLM stance service
 ```
 
 | Module | Responsibility and detailed documentation |
@@ -23,12 +25,13 @@ transcript tree -> shared dataset volume -> document batch
 | [Downloads](src/pipelines/downloads/README.md) | Public Vimeo IDs, filename metadata, safe acquisition |
 | [Transcription](src/pipelines/transcription/README.md) | Mounted-input batch ingestion, updates, inference API, GPU setup, tests |
 | [Document pipeline](src/pipelines/documents/README.md) | Directory-tree ingestion, extraction, and text embeddings |
-| [Analytics](src/pipelines/analytics/README.md) | Reserved; not implemented |
+| [Analytics](src/pipelines/analytics/README.md) | Representative attribution, topic relevance, sentiment/emotion, vLLM stance |
 | [Databases](src/databases/README.md) | Independent persistent database boundaries |
 | [Meetings database](src/databases/meetings/README.md) | Schema, vectors, recording metadata, migrations, backups |
 | [Documents database](src/databases/documents/README.md) | Per-directory pgvector tables, full text, migrations, backups |
-| [Web](src/web/README.md) | Transcript browsing/search API and access controls |
-| [vLLM](src/vllm/README.md) | Optional upstream text-inference service |
+| [Analytics database](src/databases/analytics/README.md) | Dashboard-oriented results, materialized views, reader role |
+| [Web](src/web/README.md) | Transcript browsing/search, analytics dashboard API, access controls |
+| [vLLM](src/vllm/README.md) | Upstream text-inference service used for stance analysis |
 
 Each module guide lives beside its `__init__.py`. Custom service Dockerfiles
 live in their source directories and use the repository root as build context.
@@ -39,8 +42,9 @@ PostgreSQL and vLLM use upstream images; web releases never replace live databas
 Run these commands from the repository root:
 
 1. Copy [.env.example](.env.example) to `.env`, set a Hugging Face read token,
-   and set separate passwords for the admin and web database logins. Use
-   URL-safe passwords.
+   and set separate passwords for the admin and web database logins, including
+   the analytics owner and dashboard reader (the `web` profile starts the
+   analytics database). Use URL-safe passwords.
 2. Accept the
    [pyannote model conditions](https://huggingface.co/pyannote/speaker-diarization-community-1).
 3. Put complete, dated MP4s in `data/mp4/`, or run the downloads command below.
@@ -90,6 +94,40 @@ replaces updated files; removed files are retained. See the
 [document pipeline guide](src/pipelines/documents/README.md) for extraction
 limits, settings, and the [database guide](src/databases/documents/README.md)
 for table mappings and vector search.
+
+## Analytics dashboard
+
+The analytics batch reads the meetings and documents databases read-only and
+writes to a third database designed for the dashboard at
+**http://127.0.0.1:8080/dashboard**. It attributes speakers to city
+representatives, scores policy-topic relevance with pgvector, predicts
+sentiment and emotion locally, and asks vLLM for schema-constrained stances.
+Each run builds the representative roster automatically: all 50 alderpersons
+come from the City of Chicago Data Portal (the mayor and clerk, and an offline
+fallback, from a bundled snapshot), and misspellings found in transcripts
+("Alderman Riley") become aliases. Optionally put corrections in `roster.csv`
+and labels in `speaker-labels.csv` under `data/analytics/`; see the
+[analytics guide](src/pipelines/analytics/README.md) for formats.
+
+```sh
+docker compose --profile web run --rm meetings-web-role
+docker compose --profile ai up -d vllm
+docker compose --profile analytics run --build --rm analytics-backup
+docker compose --profile analytics run --build --rm analytics-web-role
+docker compose --profile analytics run --build --rm analytics \
+  chi-ciq-analytics roster /inputs/roster.csv
+docker compose --profile analytics run --build --rm analytics \
+  chi-ciq-analytics label-speakers /inputs/speaker-labels.csv
+docker compose --profile documents up -d db documents-db
+docker compose --profile analytics run --build --rm analytics
+docker compose --profile analytics run --build --rm analytics-backup
+```
+
+Append `chi-ciq-analytics run --sources meetings` to the analytics job when the
+documents database is not running. The job reads meetings as `web_reader`. Voice-based attributions are inferred, not verified; the dashboard
+shows each attribution method and confidence. Stances default to
+`zai-org/GLM-5.3-Flash`, which needs about 306 GiB of GPU memory (for example
+8× H100/H200); see [vLLM](src/vllm/README.md) for smaller alternatives.
 
 ## Quick ingestion commands
 
@@ -178,7 +216,7 @@ docker compose exec app sh -c \
 For host development, use Python 3.12+, install FFmpeg and the needed extras:
 
 ```sh
-python -m pip install -e ".[dev,ingestion,web,downloads]"
+python -m pip install -e ".[dev,ingestion,web,downloads,documents,analytics]"
 python -m pytest -q
 python -m ruff check src tests
 ```

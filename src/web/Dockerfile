@@ -7,6 +7,7 @@ COPY src/shared ./src/shared
 COPY src/web ./src/web
 COPY src/databases/__init__.py ./src/databases/__init__.py
 COPY src/databases/meetings ./src/databases/meetings
+COPY src/databases/analytics ./src/databases/analytics
 RUN python -m pip install ".[web]"
 
 EXPOSE 8080

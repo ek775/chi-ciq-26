@@ -24,6 +24,8 @@ from databases.meetings.models import (
 from databases.meetings.schema import check_schema, connect_database
 from shared.logging import configure_logging
 
+from .analytics import analytics_router
+
 logger = logging.getLogger(__name__)
 STATIC = Path(__file__).with_name("static")
 
@@ -60,17 +62,27 @@ def published_meetings():
     )
 
 
-def create_app(engine: Engine | None = None) -> FastAPI:
+def create_app(
+    engine: Engine | None = None, analytics_engine: Engine | None = None
+) -> FastAPI:
     @asynccontextmanager
     async def lifespan(app: FastAPI):
         database = engine or connect_database(os.environ["DATABASE_URL"])
         app.state.database = database
+        # The dashboard is optional; its API returns 503 when unconfigured.
+        analytics_url = os.environ.get("ANALYTICS_DATABASE_URL")
+        analytics = analytics_engine or (
+            connect_database(analytics_url) if analytics_url else None
+        )
+        app.state.analytics = analytics
         try:
             check_schema(database)
             yield
         finally:
             if engine is None:
                 database.dispose()
+            if analytics_engine is None and analytics is not None:
+                analytics.dispose()
 
     app = FastAPI(title="Chicago meeting transcripts", lifespan=lifespan)
 
@@ -192,9 +204,15 @@ def create_app(engine: Engine | None = None) -> FastAPI:
         )
         return {"meetings": total}
 
+    app.include_router(analytics_router())
+
     @app.get("/", include_in_schema=False)
     def index():
         return FileResponse(STATIC / "index.html")
+
+    @app.get("/dashboard", include_in_schema=False)
+    def dashboard():
+        return FileResponse(STATIC / "dashboard.html")
 
     app.mount("/static", StaticFiles(directory=STATIC), name="static")
     return app

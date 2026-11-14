@@ -25,6 +25,7 @@ data:
     recordings: /datasets/mp4
     transcripts: /datasets/Transcripts
     database-archives: /datasets/database
+    analytics-inputs: /datasets/analytics
   repository-snapshot:
     transcripts:
       source: data-reference/Transcripts
@@ -94,6 +95,23 @@ pipelines:
     input-format: utf8-txt-only-for-current-corpus
     inference: local-text-embeddings-cpu-default
     network: model-download-egress-and-private-documents-database
+  analytics:
+    source: src/pipelines/analytics
+    dockerfile: src/pipelines/analytics/Dockerfile
+    command: [chi-ciq-analytics, run]
+    setup-commands:
+      # Optional overrides; the run's roster stage seeds current officials.
+      - [chi-ciq-analytics, roster, /datasets/analytics/roster.csv]
+      - [chi-ciq-analytics, label-speakers, /datasets/analytics/speaker-labels.csv]
+    volume:
+      reference: shared/datasets
+      mount-path: /datasets
+      access: read-only
+    database-secrets: [ANALYTICS_DATABASE_URL, MEETINGS_DATABASE_URL, DOCUMENTS_DATABASE_URL]
+    source-access: read-only-select-on-meetings-and-documents
+    inference: local-sentiment-emotion-and-text-embeddings-cpu-default
+    stance-endpoint: VLLM_BASE_URL-openai-compatible-structured-output
+    network: model-download-and-data.cityofchicago.org-egress-private-databases-and-vllm
 
 databases:
   meetings:
@@ -107,6 +125,13 @@ databases:
     migration: [chi-ciq-documents-database, migrate]
     backup:
       [chi-ciq-documents-database, backup, --output-dir, /datasets/database/documents]
+  analytics:
+    management: external-to-these-pipelines
+    connection-secret: ANALYTICS_DATABASE_URL
+    migration: [chi-ciq-analytics-database, migrate]
+    dashboard-role: analytics_reader-via-src/databases/analytics/web-role.sql
+    backup:
+      [chi-ciq-analytics-database, backup, --output-dir, /datasets/database/analytics]
 
 workflows:
   initial-meetings-build:
@@ -124,6 +149,11 @@ workflows:
     schedule: external-scheduler-to-be-configured
     stages: [ingest-transcript-tree, backup-documents]
     semantics: skip-unchanged-atomically-replace-files-retain-removed-files-and-directories
+  periodic-analytics-update:
+    schedule: after-meetings-and-documents-updates
+    requires: speaker-labels-under-/datasets/analytics-and-reachable-vllm
+    stages: [migrate-analytics, run-analytics, backup-analytics]
+    semantics: resync-changed-sources-skip-current-model-results-refresh-dashboard-views
 
 constraints:
   - Stage repository inputs into shared/datasets before starting workers; submitter-local paths are not worker paths.

@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Chicago policy positions dashboard</title>
+  <link rel="stylesheet" href="/static/style.css">
+  <script src="/static/dashboard.js" defer></script>
+</head>
+<body class="dashboard">
+  <header>
+    <nav><a href="/">Transcripts</a> · <a href="/dashboard" aria-current="page">Policy dashboard</a></nav>
+    <h1>Policy positions dashboard</h1>
+    <p class="caveat">
+      Positions, sentiment, and emotion are machine estimates from meeting
+      transcripts. Speakers marked <strong>voice match</strong> were attributed
+      automatically and may be wrong; only <strong>manual</strong> attributions
+      were checked by a person. Review the quoted evidence before relying on a result.
+    </p>
+    <dl id="summary" class="cards"></dl>
+  </header>
+  <p id="status" role="status" aria-live="polite"></p>
+  <main class="dashboard-grid">
+    <section aria-labelledby="topics-heading">
+      <h2 id="topics-heading">Policy topics</h2>
+      <label for="topic-sort">Sort by</label>
+      <select id="topic-sort">
+        <option value="statements">Most discussed</option>
+        <option value="support">Most support</option>
+        <option value="opposition">Most opposition</option>
+        <option value="area">Policy area</option>
+      </select>
+      <table>
+        <thead><tr><th scope="col">Topic</th><th scope="col">Statements</th><th scope="col">Support / oppose</th><th scope="col">Score</th></tr></thead>
+        <tbody id="topics"></tbody>
+      </table>
+    </section>
+    <section aria-labelledby="representatives-heading">
+      <h2 id="representatives-heading">Representatives</h2>
+      <label for="representative-sort">Sort by</label>
+      <select id="representative-sort">
+        <option value="statements">Most statements</option>
+        <option value="positions">Most positions</option>
+        <option value="ward">Ward</option>
+        <option value="name">Name</option>
+        <option value="sentiment">Sentiment</option>
+        <option value="mentions">Mentions</option>
+      </select>
+      <table>
+        <thead><tr><th scope="col">Name</th><th scope="col">Ward</th><th scope="col">Statements</th><th scope="col">Sentiment</th><th scope="col">Emotion</th></tr></thead>
+        <tbody id="representatives"></tbody>
+      </table>
+    </section>
+    <section id="detail" aria-labelledby="detail-heading" class="wide">
+      <h2 id="detail-heading">Select a topic or representative</h2>
+      <p id="detail-description"></p>
+      <div id="detail-trend" class="bars"></div>
+      <table id="detail-table" hidden>
+        <thead><tr id="detail-columns"></tr></thead>
+        <tbody id="detail-rows"></tbody>
+      </table>
+    </section>
+    <section aria-labelledby="statements-heading" class="wide">
+      <h2 id="statements-heading">Statements</h2>
+      <form id="statement-filters">
+        <label>Stance
+          <select name="stance">
+            <option value="">Any</option>
+            <option value="support">Support</option>
+            <option value="oppose">Oppose</option>
+            <option value="mixed">Mixed</option>
+            <option value="neutral">Neutral</option>
+          </select>
+        </label>
+        <label>Source
+          <select name="kind">
+            <option value="">Any</option>
+            <option value="meeting">Meeting recordings</option>
+            <option value="document">Transcript documents</option>
+          </select>
+        </label>
+        <label>Speaker
+          <select name="method">
+            <option value="">Any attribution</option>
+            <option value="manual">Manually labeled</option>
+            <option value="voice">Voice match</option>
+          </select>
+        </label>
+        <label><input type="checkbox" name="verified_evidence" value="true"> Quote verified</label>
+        <button type="submit">Apply</button>
+        <button type="button" id="clear-filters">Clear selection</button>
+      </form>
+      <p id="statement-scope"></p>
+      <ol id="statements"></ol>
+      <button id="more-statements" type="button" hidden>More statements</button>
+    </section>
+  </main>
+</body>
+</html>

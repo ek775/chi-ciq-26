@@ -1,6 +1,6 @@
 # Pipeline containers
 
-[Project overview](../../README.md) | [Downloads](downloads/README.md) | [Transcription](transcription/README.md) | [Documents](documents/README.md)
+[Project overview](../../README.md) | [Downloads](downloads/README.md) | [Transcription](transcription/README.md) | [Documents](documents/README.md) | [Analytics](analytics/README.md)
 
 Run shell examples from the repository root, not this module directory.
 
@@ -11,6 +11,9 @@ Run shell examples from the repository root, not this module directory.
   periodic updates by processing the mounted recordings directory in one batch.
 - [Documents](documents/README.md) mirrors supported document trees into a
   separate pgvector database using CPU text embeddings by default.
+- [Analytics](analytics/README.md) reads the meetings and documents databases
+  read-only and publishes representative, topic, sentiment, emotion, and vLLM
+  stance results to the analytics database that backs the web dashboard.
 
 Python imports use `pipelines.transcription`, `databases.meetings`, and `web`;
 the former `transcription` and `chi_ciq` paths have been removed. Persistence
@@ -49,7 +52,9 @@ An inspection workflow was submitted to list mounted files, but remained queued
 for capacity, so volume contents are **not verified**. The project checkout
 contains 202 transcript `.txt` files and one MP4; stage these under
 `/datasets/Transcripts` and `/datasets/mp4` before submitting ingestion jobs.
-The separate test volume is not used by the pipelines.
+The separate test volume is not used by the pipelines. The analytics batch reads
+its roster and speaker labels from `/datasets/analytics`, runs after source
+updates, and needs a reachable vLLM endpoint for the stance stage.
 
 The transcription batch mounts the recordings directory read-only and processes
 all discovered MP4 files in that job. The documents batch mounts the transcript

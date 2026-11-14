@@ -1,0 +1,132 @@
+{
+  "version": 1,
+  "notes": "Editable starting taxonomy. Each proposition is a directional policy statement; stance is support/oppose relative to it. Changing a topic's text re-runs only that topic's stance analysis.",
+  "topics": [
+    {
+      "key": "property-tax-increase",
+      "area": "budget-and-revenue",
+      "label": "Property tax increase",
+      "proposition": "The city should raise property taxes to fund its budget.",
+      "description": "Property tax levy, tax hikes, revenue to close the budget deficit, homeowner tax burden."
+    },
+    {
+      "key": "new-revenue-sources",
+      "area": "budget-and-revenue",
+      "label": "New taxes and fees",
+      "proposition": "The city should adopt new taxes or fees (beyond property tax) to raise revenue.",
+      "description": "Head tax, employer tax, amusement tax, grocery tax, cloud tax, fines and fees, progressive revenue."
+    },
+    {
+      "key": "spending-cuts",
+      "area": "budget-and-revenue",
+      "label": "Spending cuts and efficiencies",
+      "proposition": "The city should cut spending or headcount to balance its budget.",
+      "description": "Austerity, layoffs, vacant positions, department cuts, efficiencies, structural deficit, borrowing."
+    },
+    {
+      "key": "police-funding",
+      "area": "public-safety",
+      "label": "Police funding and staffing",
+      "proposition": "The city should increase funding or staffing for the Chicago Police Department.",
+      "description": "CPD budget, officer hiring, overtime, police districts, sworn officers, public safety spending."
+    },
+    {
+      "key": "non-police-response",
+      "area": "public-safety",
+      "label": "Non-police crisis response and violence prevention",
+      "proposition": "The city should expand non-police crisis response and community violence prevention programs.",
+      "description": "Mental health responders, community violence intervention, peacekeepers, treatment not trauma, ShotSpotter alternatives."
+    },
+    {
+      "key": "police-accountability",
+      "area": "public-safety",
+      "label": "Police oversight and accountability",
+      "proposition": "The city should strengthen civilian oversight and accountability of police.",
+      "description": "COPA, consent decree, misconduct settlements, community commission for public safety and accountability."
+    },
+    {
+      "key": "affordable-housing",
+      "area": "housing",
+      "label": "Affordable housing",
+      "proposition": "The city should expand affordable housing requirements or funding.",
+      "description": "Affordable requirements ordinance, housing bonds, rent burden, displacement, homelessness, CHA."
+    },
+    {
+      "key": "tenant-protections",
+      "area": "housing",
+      "label": "Tenant protections",
+      "proposition": "The city should strengthen protections for renters.",
+      "description": "Evictions, just cause, landlord regulation, rent stabilization, tenant rights, right to counsel."
+    },
+    {
+      "key": "development-incentives",
+      "area": "economic-development",
+      "label": "TIF and development incentives",
+      "proposition": "The city should use TIF districts or tax incentives to subsidize private development.",
+      "description": "Tax increment financing, TIF surplus, subsidies, megadevelopments, stadium financing, corporate incentives."
+    },
+    {
+      "key": "small-business-support",
+      "area": "economic-development",
+      "label": "Small business deregulation and support",
+      "proposition": "The city should loosen licensing and regulatory requirements on local businesses.",
+      "description": "Business licenses, permits, red tape, small business grants, outdoor dining, consumer protection rules."
+    },
+    {
+      "key": "transit-investment",
+      "area": "transportation",
+      "label": "Transit and safe streets investment",
+      "proposition": "The city should increase investment in public transit, biking, and pedestrian safety.",
+      "description": "CTA service, buses, bike lanes, traffic calming, speed cameras, Vision Zero, transit fiscal cliff."
+    },
+    {
+      "key": "aldermanic-prerogative",
+      "area": "governance",
+      "label": "Aldermanic prerogative",
+      "proposition": "Alderpersons should retain control over zoning, permits, and land use decisions in their wards.",
+      "description": "Aldermanic privilege, ward zoning control, upzoning, by-right development, permit approvals."
+    },
+    {
+      "key": "ethics-transparency",
+      "area": "governance",
+      "label": "Ethics and transparency",
+      "proposition": "The city should strengthen ethics rules, oversight, and transparency.",
+      "description": "Inspector general, board of ethics, lobbying, conflicts of interest, open records, campaign finance."
+    },
+    {
+      "key": "migrant-services",
+      "area": "social-services",
+      "label": "Migrant shelter and services",
+      "proposition": "The city should spend city funds on shelter and services for new arrivals and migrants.",
+      "description": "Asylum seekers, new arrivals, shelters, welcoming city ordinance, sanctuary city, federal immigration enforcement."
+    },
+    {
+      "key": "public-health-services",
+      "area": "social-services",
+      "label": "Public health and mental health services",
+      "proposition": "The city should expand public health and mental health services.",
+      "description": "Mental health clinics, department of public health, overdose prevention, behavioral health, hospitals."
+    },
+    {
+      "key": "school-funding",
+      "area": "education",
+      "label": "Chicago Public Schools funding",
+      "proposition": "The city should increase financial support or borrowing for Chicago Public Schools.",
+      "description": "CPS budget, school board, pension payments, teacher contracts, school closures, education funding."
+    },
+    {
+      "key": "climate-environment",
+      "area": "environment",
+      "label": "Climate and environmental regulation",
+      "proposition": "The city should adopt stronger climate and environmental protections.",
+      "description": "Clean energy, building decarbonization, pollution, environmental justice, lead service lines, water."
+    },
+    {
+      "key": "worker-protections",
+      "area": "labor",
+      "label": "Wages and worker protections",
+      "proposition": "The city should raise wages or strengthen worker protections.",
+      "description": "Minimum wage, tipped wage, paid leave, unions, collective bargaining, city workforce contracts."
+    }
+  ]
+}

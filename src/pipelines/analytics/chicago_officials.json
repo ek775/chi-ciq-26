@@ -1,0 +1,220 @@
+{
+  "as_of": "2026-11-14",
+  "alderpersons_source": "https://data.cityofchicago.org/resource/htai-wnw4.json",
+  "alderpersons": [
+    {
+      "ward": 1,
+      "alderman": "La Spata, Daniel"
+    },
+    {
+      "ward": 2,
+      "alderman": "Hopkins, Brian"
+    },
+    {
+      "ward": 3,
+      "alderman": "Dowell, Pat"
+    },
+    {
+      "ward": 4,
+      "alderman": "Robinson, Lamont J."
+    },
+    {
+      "ward": 5,
+      "alderman": "Yancy, Desmon C."
+    },
+    {
+      "ward": 6,
+      "alderman": "Hall, William E."
+    },
+    {
+      "ward": 7,
+      "alderman": "Mitchell, Gregory I."
+    },
+    {
+      "ward": 8,
+      "alderman": "Harris, Michelle A."
+    },
+    {
+      "ward": 9,
+      "alderman": "Beale, Anthony"
+    },
+    {
+      "ward": 10,
+      "alderman": "Chico, Peter"
+    },
+    {
+      "ward": 11,
+      "alderman": "Lee, Nicole T."
+    },
+    {
+      "ward": 12,
+      "alderman": "Ramirez, Julia M."
+    },
+    {
+      "ward": 13,
+      "alderman": "Quinn, Marty"
+    },
+    {
+      "ward": 14,
+      "alderman": "Gutierrez, Jeylu B."
+    },
+    {
+      "ward": 15,
+      "alderman": "Lopez, Raymond A."
+    },
+    {
+      "ward": 16,
+      "alderman": "Coleman, Stephanie D."
+    },
+    {
+      "ward": 17,
+      "alderman": "Moore, David H."
+    },
+    {
+      "ward": 18,
+      "alderman": "Curtis, Derrick G."
+    },
+    {
+      "ward": 19,
+      "alderman": "O'Shea, Matthew J."
+    },
+    {
+      "ward": 20,
+      "alderman": "Taylor, Jeanette B."
+    },
+    {
+      "ward": 21,
+      "alderman": "Mosley, Ronnie L."
+    },
+    {
+      "ward": 22,
+      "alderman": "Rodriguez, Michael D."
+    },
+    {
+      "ward": 23,
+      "alderman": "Tabares, Silvana"
+    },
+    {
+      "ward": 24,
+      "alderman": "Scott, Monique L."
+    },
+    {
+      "ward": 25,
+      "alderman": "Sigcho-Lopez, Byron"
+    },
+    {
+      "ward": 26,
+      "alderman": "Fuentes, Jessica L."
+    },
+    {
+      "ward": 27,
+      "alderman": "Burnett, Walter R."
+    },
+    {
+      "ward": 28,
+      "alderman": "Ervin, Jason C."
+    },
+    {
+      "ward": 29,
+      "alderman": "Taliaferro, Chris"
+    },
+    {
+      "ward": 30,
+      "alderman": "Cruz, Ruth"
+    },
+    {
+      "ward": 31,
+      "alderman": "Cardona, Jr., Felix"
+    },
+    {
+      "ward": 32,
+      "alderman": "Waguespack, Scott"
+    },
+    {
+      "ward": 33,
+      "alderman": "Rodriguez Sanchez, Rossana"
+    },
+    {
+      "ward": 34,
+      "alderman": "Conway, William"
+    },
+    {
+      "ward": 35,
+      "alderman": "Quezada, Anthony J."
+    },
+    {
+      "ward": 36,
+      "alderman": "Villegas, Gilbert"
+    },
+    {
+      "ward": 37,
+      "alderman": "Mitts, Emma"
+    },
+    {
+      "ward": 38,
+      "alderman": "Sposato, Nicholas"
+    },
+    {
+      "ward": 39,
+      "alderman": "Nugent, Samantha"
+    },
+    {
+      "ward": 40,
+      "alderman": "Vasquez, Jr., Andre"
+    },
+    {
+      "ward": 41,
+      "alderman": "Napolitano, Anthony V."
+    },
+    {
+      "ward": 42,
+      "alderman": "Reilly, Brendan"
+    },
+    {
+      "ward": 43,
+      "alderman": "Knudsen, Timothy R."
+    },
+    {
+      "ward": 44,
+      "alderman": "Lawson, Bennett R."
+    },
+    {
+      "ward": 45,
+      "alderman": "Gardiner, James M."
+    },
+    {
+      "ward": 46,
+      "alderman": "Clay, Angela"
+    },
+    {
+      "ward": 47,
+      "alderman": "Martin, Matthew J."
+    },
+    {
+      "ward": 48,
+      "alderman": "Manaa-Hoppenworth, Leni"
+    },
+    {
+      "ward": 49,
+      "alderman": "Hadden, Maria E."
+    },
+    {
+      "ward": 50,
+      "alderman": "Silverstein, Debra L."
+    }
+  ],
+  "citywide": [
+    {
+      "role": "mayor",
+      "given": "Brandon",
+      "surname": "Johnson",
+      "source": "https://www.chicago.gov/city/en/depts/mayor.html"
+    },
+    {
+      "role": "clerk",
+      "given": "Anna M.",
+      "surname": "Valencia",
+      "source": "https://www.chicityclerk.com/"
+    }
+  ]
+}

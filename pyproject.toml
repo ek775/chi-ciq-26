@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "chi-ciq-transcription"
 version = "0.1.0"
-description = "Transcript and document ingestion, PostgreSQL persistence, and web services."
+description = "Transcript and document ingestion, analytics, PostgreSQL persistence, and web services."
 requires-python = ">=3.12"
 dependencies = [
     "numpy",
@@ -22,6 +22,8 @@ chi-ciq-download-vimeo = "pipelines.downloads.vimeo:main"
 chi-ciq-database = "databases.meetings.schema:main"
 chi-ciq-ingest-documents = "pipelines.documents.pipeline:main"
 chi-ciq-documents-database = "databases.documents.schema:main"
+chi-ciq-analytics = "pipelines.analytics.pipeline:main"
+chi-ciq-analytics-database = "databases.analytics.schema:main"
 chi-ciq-web = "web.app:main"
 
 [project.optional-dependencies]
@@ -36,6 +38,12 @@ documents = [
     "pypdf",
     "python-docx>=1.2",
     "beautifulsoup4",
+]
+analytics = [
+    # Install CPU or CUDA torch first; stance analysis calls a separate vLLM server.
+    "torch",
+    "transformers",
+    "sentence-transformers",
 ]
 ingestion = [
     "scipy",
@@ -65,6 +73,8 @@ dev = [
 [tool.setuptools.package-data]
 web = ["static/*"]
 "pipelines.downloads" = ["vimeo-ids.txt"]
+"pipelines.analytics" = ["taxonomy.json", "chicago_officials.json"]
+"databases.analytics" = ["web-role.sql"]
 
 [tool.setuptools.packages.find]
 where = ["src"]

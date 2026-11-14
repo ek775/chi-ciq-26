@@ -1,7 +1,7 @@
 # Database containers
 
 [Project overview](../../README.md) | [Meetings](meetings/README.md) |
-[Documents](documents/README.md)
+[Documents](documents/README.md) | [Analytics](analytics/README.md)
 
 Database lifetimes are independent of finite ingestion jobs and replaceable web
 deployments. Each database needs its own persistent storage, connection secret,
@@ -14,6 +14,9 @@ server containers.
 - [Documents](documents/README.md): implemented PostgreSQL/pgvector registry and
   per-directory chunk tables, with independent migration/check/backup jobs.
   The `documents` Compose profile uses separate storage and credentials.
+- [Analytics](analytics/README.md): derived, dashboard-oriented results written
+  only by the analytics pipeline. Its `analytics_reader` role can select the
+  dashboard views but not voice centroids, embeddings, or labeling notes.
 
 Run backup before migration and after successful ingestion. Never restore with
 `--clean` into the live database; restore into a new empty database. Detailed
