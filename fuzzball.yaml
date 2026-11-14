@@ -5,6 +5,8 @@ defaults:
     env:
       - LOG_LEVEL=secret://user/chi-ciq-log-level
       - HOME=/tmp
+      # The database URLs carry no password: libpq reads it from PGPASSWORD.
+      - PGPASSWORD=secret://user/chi-ciq-postgres-password
     policy:
       timeout:
         execute: 48h
@@ -16,39 +18,84 @@ volumes:
   recordings:
     use: team8
     name: volume_test
+  postgres-data:
+    use: team8
+    name: postgres-data
 
 jobs:
-  meetings-backup-before:
-    image: &meetings-image
-      uri: docker://ghcr.io/ek775/chi-ciq-26-meetings:fuzzball
-    env: &meetings-env
-      - DATABASE_URL=secret://user/chi-ciq-meetings-writer-url
-    mounts: &archive-mount
-      /datasets:
-        volume: datasets
+  # Idempotent: creates the three databases and the read-only roles. The
+  # default privileges give each reader SELECT on tables that the migrations
+  # create later. analytics_reader gets its grants from the analytics migration.
+  postgres-provision:
+    image: &postgres-image
+      uri: docker://docker.io/pgvector/pgvector:pg17
     resource: &small
       cpu:
         cores: 1
       memory:
         size: 1GiB
+    depends-on:
+      - {name: postgres, status: RUNNING}
+    script: |
+      #!/bin/sh
+      set -eu
+      psql --host=postgres --port=5432 --username=postgres --dbname=postgres \
+        --no-password --set=ON_ERROR_STOP=1 <<'SQL'
+      \getenv reader_password PGPASSWORD
+      SELECT format('CREATE DATABASE %I', name)
+      FROM unnest(ARRAY['meetings', 'documents', 'analytics']) AS name
+      WHERE NOT EXISTS (SELECT FROM pg_database WHERE datname = name)
+      \gexec
+      SELECT format('CREATE ROLE %I', name)
+      FROM unnest(ARRAY['web_reader', 'documents_reader', 'analytics_reader']) AS name
+      WHERE NOT EXISTS (SELECT FROM pg_roles WHERE rolname = name)
+      \gexec
+      SELECT format(
+        'ALTER ROLE %I WITH LOGIN PASSWORD %L NOSUPERUSER NOCREATEDB NOCREATEROLE NOREPLICATION NOBYPASSRLS',
+        name, :'reader_password')
+      FROM unnest(ARRAY['web_reader', 'documents_reader', 'analytics_reader']) AS name
+      \gexec
+      \connect meetings
+      GRANT SELECT ON ALL TABLES IN SCHEMA public TO web_reader;
+      ALTER DEFAULT PRIVILEGES FOR ROLE postgres IN SCHEMA public
+        GRANT SELECT ON TABLES TO web_reader;
+      \connect documents
+      GRANT SELECT ON ALL TABLES IN SCHEMA public TO documents_reader;
+      ALTER DEFAULT PRIVILEGES FOR ROLE postgres IN SCHEMA public
+        GRANT SELECT ON TABLES TO documents_reader;
+      SQL
+
+  meetings-backup-before:
+    image: &meetings-image
+      uri: docker://ghcr.io/ek775/chi-ciq-26-meetings:fuzzball
+    env: &meetings-env
+      - DATABASE_URL=postgresql+psycopg://postgres@postgres:5432/meetings
+    mounts: &archive-mount
+      /datasets:
+        volume: datasets
+    resource: *small
+    depends-on: &database-provisioned
+      - {name: postgres-provision, status: FINISHED}
     command: [chi-ciq-database, backup, --output-dir, /datasets/database/meetings]
 
   documents-backup-before:
     image: &documents-db-image
       uri: docker://ghcr.io/ek775/chi-ciq-26-documents-db:fuzzball
     env: &documents-env
-      - DOCUMENTS_DATABASE_URL=secret://user/chi-ciq-documents-writer-url
+      - DOCUMENTS_DATABASE_URL=postgresql+psycopg://postgres@postgres:5432/documents
     mounts: *archive-mount
     resource: *small
+    depends-on: *database-provisioned
     command: [chi-ciq-documents-database, backup, --output-dir, /datasets/database/documents]
 
   analytics-backup-before:
     image: &analytics-db-image
       uri: docker://ghcr.io/ek775/chi-ciq-26-analytics-db:fuzzball
     env: &analytics-db-env
-      - ANALYTICS_DATABASE_URL=secret://user/chi-ciq-analytics-writer-url
+      - ANALYTICS_DATABASE_URL=postgresql+psycopg://postgres@postgres:5432/analytics
     mounts: *archive-mount
     resource: *small
+    depends-on: *database-provisioned
     command: [chi-ciq-analytics-database, backup, --output-dir, /datasets/database/analytics]
 
   meetings-migrate:
@@ -79,7 +126,7 @@ jobs:
     image:
       uri: docker://ghcr.io/ek775/chi-ciq-26-transcription:fuzzball
     env:
-      - DATABASE_URL=secret://user/chi-ciq-meetings-writer-url
+      - DATABASE_URL=postgresql+psycopg://postgres@postgres:5432/meetings
       - HF_TOKEN=secret://user/chi-ciq-hf-token
       - SHARD_COUNT=128
     mounts:
@@ -111,7 +158,7 @@ jobs:
     image:
       uri: docker://ghcr.io/ek775/chi-ciq-26-documents:fuzzball
     env:
-      - DOCUMENTS_DATABASE_URL=secret://user/chi-ciq-documents-writer-url
+      - DOCUMENTS_DATABASE_URL=postgresql+psycopg://postgres@postgres:5432/documents
       - SHARD_COUNT=4
     mounts: *archive-mount
     resource: &inference
@@ -136,9 +183,9 @@ jobs:
     image: &analytics-image
       uri: docker://ghcr.io/ek775/chi-ciq-26-analytics:fuzzball
     env: &analytics-env
-      - ANALYTICS_DATABASE_URL=secret://user/chi-ciq-analytics-writer-url
-      - MEETINGS_DATABASE_URL=secret://user/chi-ciq-meetings-reader-url
-      - DOCUMENTS_DATABASE_URL=secret://user/chi-ciq-documents-reader-url
+      - ANALYTICS_DATABASE_URL=postgresql+psycopg://postgres@postgres:5432/analytics
+      - MEETINGS_DATABASE_URL=postgresql+psycopg://web_reader@postgres:5432/meetings
+      - DOCUMENTS_DATABASE_URL=postgresql+psycopg://documents_reader@postgres:5432/documents
       - VLLM_BASE_URL=secret://user/chi-ciq-vllm-url
       - VLLM_API_KEY=secret://user/chi-ciq-vllm-api-key
       - VLLM_SERVED_MODEL=secret://user/chi-ciq-vllm-served-model
@@ -288,8 +335,9 @@ jobs:
     image: &web-image
       uri: docker://ghcr.io/ek775/chi-ciq-26-web:fuzzball
     env: &web-env
-      - DATABASE_URL=secret://user/chi-ciq-meetings-reader-url
-      - ANALYTICS_DATABASE_URL=secret://user/chi-ciq-analytics-reader-url
+      - DATABASE_URL=postgresql+psycopg://web_reader@postgres:5432/meetings
+      - ANALYTICS_DATABASE_URL=postgresql+psycopg://analytics_reader@postgres:5432/analytics
+      - PGPASSWORD=secret://user/chi-ciq-postgres-password
       - LOG_LEVEL=secret://user/chi-ciq-log-level
       - HOME=/tmp
     resource: *small
@@ -322,6 +370,37 @@ jobs:
       PY
 
 services:
+  # Jobs reach the database as postgres:5432. The data directory is on the
+  # persistent volume team8/postgres-data and survives workflow teardown.
+  postgres:
+    image: *postgres-image
+    env:
+      - POSTGRES_PASSWORD=secret://user/chi-ciq-postgres-password
+      # initdb needs a directory it owns, so use a subdirectory of the mount.
+      - PGDATA=/var/lib/postgresql/data/pgdata
+    mounts:
+      /var/lib/postgresql/data:
+        volume: postgres-data
+    resource:
+      cpu:
+        cores: 4
+      memory:
+        size: 8GiB
+    command: [docker-entrypoint.sh, postgres]
+    persist: true
+    network:
+      ports:
+        - {name: postgres, port: 5432, protocol: tcp}
+    readiness-probe:
+      # TCP, not the socket: the temporary server of the first-run
+      # initialization listens on the socket only, and must not count as ready.
+      exec:
+        command: [pg_isready, --host, 127.0.0.1, --port, "5432", --username, postgres]
+      initial-delay-seconds: 5
+      period-seconds: 10
+      timeout-seconds: 5
+      failure-threshold: 12
+
   web:
     image: *web-image
     env: *web-env

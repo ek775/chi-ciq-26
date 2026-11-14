@@ -13,12 +13,7 @@ import yaml
 from dotenv import dotenv_values
 
 VARIABLES = {
-    "DATABASE_URL": "meetings-writer-url",
-    "DOCUMENTS_DATABASE_URL": "documents-writer-url",
-    "ANALYTICS_DATABASE_URL": "analytics-writer-url",
-    "MEETINGS_DATABASE_URL": "meetings-reader-url",
-    "DOCUMENTS_READER_DATABASE_URL": "documents-reader-url",
-    "ANALYTICS_READER_DATABASE_URL": "analytics-reader-url",
+    "POSTGRES_PASSWORD": "postgres-password",
     "HF_TOKEN": "hf-token",
     "VLLM_BASE_URL": "vllm-url",
     "VLLM_API_KEY": "vllm-api-key",
@@ -52,23 +47,14 @@ def read_values(path: Path) -> dict[str, str]:
 def validate_value(name: str, value: str) -> None:
     if not value.strip() and name not in ALLOW_EMPTY:
         raise ValueError(f"{name} must not be empty")
-    if (
-        name.endswith("DATABASE_URL")
-        or name == "DATABASE_URL"
-        or name == "VLLM_BASE_URL"
-    ):
+    if name == "VLLM_BASE_URL":
         try:
             url = urlsplit(value)
             host = url.hostname
             port = url.port
         except ValueError:
             raise ValueError(f"{name} is not a valid service URL") from None
-        expected = (
-            {"http", "https"}
-            if name == "VLLM_BASE_URL"
-            else {"postgresql", "postgresql+psycopg"}
-        )
-        if url.scheme not in expected or not host or not url.path.strip("/"):
+        if url.scheme not in {"http", "https"} or not host or not url.path.strip("/"):
             raise ValueError(f"{name} must be a complete service URL")
         if port is not None and port < 1:
             raise ValueError(f"{name} has an invalid port")

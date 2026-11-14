@@ -7,7 +7,7 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 def load_postgres_workflow() -> dict[str, Any]:
-    return yaml.safe_load((ROOT / "fuzzball-postgres.yaml").read_text())
+    return yaml.safe_load((ROOT / "fuzzball.yaml").read_text())
 
 
 def test_data_directory_is_on_a_persistent_volume() -> None:

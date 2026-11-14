@@ -1,4 +1,5 @@
 from pathlib import Path
+from urllib.parse import urlsplit
 
 import pytest
 import yaml
@@ -29,11 +30,18 @@ def test_deployment_dag_is_acyclic_and_fail_closed():
         assert ready, "Deployment dependencies contain a cycle"
         for name in ready:
             assert dependencies(nodes[name]) <= nodes.keys()
+            # Only the long-running database is awaited as RUNNING; it never finishes.
             assert all(
-                dependency["status"] == "FINISHED"
+                dependency["status"]
+                == ("RUNNING" if dependency["name"] == "postgres" else "FINISHED")
                 for dependency in nodes[name].get("depends-on", [])
             )
         remaining -= ready
+    assert dependencies(nodes["postgres-provision"]) == {"postgres"}
+    for database in ("meetings", "documents", "analytics"):
+        assert dependencies(nodes[f"{database}-backup-before"]) == {
+            "postgres-provision"
+        }
     assert dependencies(nodes["web"]) == {"web-check"}
     assert dependencies(nodes["web-check"]) == {
         "meetings-backup-after",
@@ -138,15 +146,29 @@ def test_analytics_fanout_and_join_cover_every_stage_once():
     }
 
 
-def test_database_credentials_are_separate_secret_references():
-    nodes = workflow()["jobs"] | workflow()["services"]
+def test_database_urls_use_the_workflow_service_and_carry_no_password():
+    definition = workflow()
+    nodes = definition["jobs"] | definition["services"]
+    credentials = {"PGPASSWORD", "POSTGRES_PASSWORD", "HF_TOKEN", "VLLM_API_KEY"}
     for node in nodes.values():
         for value in node.get("env", []):
-            key, _, secret = value.partition("=")
-            if key.endswith("DATABASE_URL") or key in {"HF_TOKEN", "VLLM_API_KEY"}:
-                assert secret.startswith("secret://user/chi-ciq-")
+            key, _, setting = value.partition("=")
+            if key.endswith("DATABASE_URL"):
+                url = urlsplit(setting)
+                assert (url.hostname, url.port) == ("postgres", 5432)
+                assert url.password is None
+            if key in credentials:
+                assert setting.startswith("secret://user/chi-ciq-")
+    password = "PGPASSWORD=secret://user/chi-ciq-postgres-password"
+    assert password in definition["defaults"]["job"]["env"]
+    assert password in nodes["web"]["env"]
     assert not nodes["web"].get("mounts")
-    assert "writer" not in "\n".join(nodes["web"]["env"])
+    web_users = {
+        urlsplit(value.partition("=")[2]).username
+        for value in nodes["web"]["env"]
+        if value.partition("=")[0].endswith("DATABASE_URL")
+    }
+    assert web_users == {"web_reader", "analytics_reader"}
     assert not (ROOT / "fuzzball.draft.yaml").exists()
 
 

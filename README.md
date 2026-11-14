@@ -148,11 +148,12 @@ chi-ciq-dispatch --input-dir data/mp4 --output-dir data/dispatch \
 
 [fuzzball.yaml](fuzzball.yaml) is an executable v4 deployment Fuzzfile, validated
 with CLI v4.3.1. It uses the existing persistent volumes `shared/datasets` and
-`team8/volume_test`. PostgreSQL databases and the private vLLM service are
-managed outside this workflow; deploying the web image never replaces them.
-PostgreSQL runs in its own workflow: see [PostgreSQL service](#postgresql-service).
+`team8/volume_test`, and `team8/postgres-data` for the database. PostgreSQL runs
+as a service of this workflow: see [PostgreSQL service](#postgresql-service).
+The private vLLM service is managed outside this workflow.
 
-The workflow backs up and migrates each database independently, queues 128
+The workflow starts PostgreSQL, creates the databases and reader roles, backs up
+and migrates each database independently, queues 128
 transcription shards with two active one-GPU tasks alongside four CPU document
 tasks, then joins both
 ingestion arrays before analytics sync and roster preparation. Attribution,
@@ -165,55 +166,50 @@ checks gate the persistent web service. Failed jobs prevent dependent deployment
 
 ### PostgreSQL service
 
-[fuzzball-postgres.yaml](fuzzball-postgres.yaml) is a separate workflow with one
-long-running service: PostgreSQL 17 with pgvector (`pgvector/pgvector:pg17`,
-arm64). Its data directory is on the persistent NFS volume `team8/postgres-data`,
-so the databases survive a stop, a failure, or a move to a different node.
-
-```sh
-# Start (the service runs until you stop the workflow):
-fuzzball workflow start fuzzball-postgres.yaml --name chi-ciq-postgres
-# Find the address: the workflow ID (name chi-ciq-postgres, status Started)
-# and the account ID (`Group ID`) make the DNS name shown below.
-fuzzball workflow list
-fuzzball context show
-# Optional, the node address: `Host` of the postgres stage (YAML output only).
-fuzzball workflow describe <workflow-id> --output yaml
-# Stop. PostgreSQL shuts down cleanly and the data stays on the volume:
-fuzzball workflow stop <workflow-id>
-```
+The `postgres` service of [fuzzball.yaml](fuzzball.yaml) is PostgreSQL 17 with
+pgvector (`pgvector/pgvector:pg17`, arm64). Its data directory is on the
+persistent NFS volume `team8/postgres-data`, so the databases survive a stop, a
+failure, or a move to a different node. The service has `persist: true`: it runs
+until you stop the workflow.
 
 ```mermaid
 flowchart LR
-  subgraph postgres_workflow["Workflow chi-ciq-postgres"]
-    postgres_service["Service postgres<br/>port 5432, persist: true"]
-  end
   subgraph deployment_workflow["Workflow fuzzball.yaml"]
-    pipeline_jobs["Migration, ingestion,<br/>analytics jobs and web"]
+    postgres_service["Service postgres<br/>port 5432, persist: true"]
+    provision_job["Job postgres-provision"]
+    pipeline_jobs["Backup, migration, ingestion<br/>and analytics jobs"]
+    web_service["Service web"]
   end
   data_volume[("Volume team8/postgres-data<br/>NFS, persistent")]
   password_secret["Secret chi-ciq-postgres-password"]
-  pipeline_jobs -->|"postgres.svc.WORKFLOW_ID.ACCOUNT_ID.fuzzball:5432"| postgres_service
+  provision_job -->|"creates databases and reader roles"| postgres_service
+  pipeline_jobs -->|"postgres:5432 as postgres"| postgres_service
+  web_service -->|"postgres:5432 as web_reader, analytics_reader"| postgres_service
   postgres_service -->|"PGDATA"| data_volume
   password_secret -->|"POSTGRES_PASSWORD"| postgres_service
+  password_secret -->|"PGPASSWORD"| pipeline_jobs
+  password_secret -->|"PGPASSWORD"| web_service
 ```
 
-Other workflows connect as user `postgres` to
-`postgres.svc.<workflow-id>.<account-id>.fuzzball:5432`, or to the node address
-on port 5432. Connections from other hosts must give the password
-(`scram-sha-256`). **The workflow ID and the node change on each start**, so
-update the `*-url` secrets below after you start the service again.
-The password applies only when the data directory is first initialized; a
-later change to the secret does not change the password of an existing database.
-Do not start a second copy of this workflow while one runs: two servers must
-not share one data directory.
+- **Address:** jobs and the web service use the short name `postgres:5432`. The
+  name is the same on each start, so the database URLs are fixed text in the
+  Fuzzfile and not secrets.
+- **Password:** the URLs carry no password. Each container gets `PGPASSWORD`
+  from the secret `chi-ciq-postgres-password`, and libpq reads it from there.
+  The password applies only when the data directory is first initialized; a
+  later change to the secret does not change the password of an existing database.
+- **Databases and roles:** the job `postgres-provision` creates the databases
+  `meetings`, `documents` and `analytics`, and the read-only roles `web_reader`,
+  `documents_reader` and `analytics_reader`. It is safe to run again. Pipeline
+  jobs connect as the superuser `postgres`. All roles use the same password.
+- **One workflow at a time:** two servers must not share one data directory, and
+  the service claims port 5432 on its node. Stop the workflow before you start
+  another copy.
 
 One-time setup (already done on the hackathon cluster):
 
 ```sh
 fuzzball volume create team8 postgres-data
-# password.json contains {"type": "value", "secret": {"value": "<password>"}}
-fuzzball secret create secret://user/chi-ciq-postgres-password password.json --from-file
 ```
 
 ### Build and publish
@@ -261,12 +257,7 @@ Fuzzfile. URLs must use cluster-reachable hostnames, not submitter `localhost`.
 
 | Secret name (prefix `chi-ciq-`) | Value / privileges |
 |---|---|
-| `meetings-writer-url` | SQLAlchemy PostgreSQL URL for the meetings owner |
-| `documents-writer-url` | SQLAlchemy PostgreSQL URL for the documents owner |
-| `analytics-writer-url` | SQLAlchemy PostgreSQL URL for the analytics owner |
-| `meetings-reader-url` | Meetings SELECT-only login, also used by web |
-| `documents-reader-url` | Documents SELECT-only login, including directory chunk tables |
-| `analytics-reader-url` | Dashboard `analytics_reader` login |
+| `postgres-password` | Password of the `postgres` superuser and the reader roles (`POSTGRES_PASSWORD` in `.env`) |
 | `hf-token` | Hugging Face read token with accepted pyannote model terms |
 | `vllm-url` | Private OpenAI-compatible base URL ending in `/v1` |
 | `vllm-api-key` | vLLM bearer key (empty value only if the private server has no authentication) |
@@ -296,25 +287,18 @@ using dotenv: Fuzzball rejects empty value secrets and empty environment entries
 so deliberately empty API keys/reasoning effort are exported inside worker scripts
 instead of secret references. All nonempty credentials remain secret references.
 
-Database mappings are `DATABASE_URL` (meetings writer),
-`DOCUMENTS_DATABASE_URL`, `ANALYTICS_DATABASE_URL`, `MEETINGS_DATABASE_URL`
-(meetings reader), `DOCUMENTS_READER_DATABASE_URL`, and
-`ANALYTICS_READER_DATABASE_URL`. Reader URLs must be supplied separately; the
-helper never reuses owner credentials for web access or invents database hosts
-from `POSTGRES_PASSWORD`. Loopback URLs are rejected because they refer to the
-worker, not your submitter. Set cluster-reachable URLs in your private `.env`.
+The helper forwards `POSTGRES_PASSWORD` and no database URL: the URLs are fixed
+text in the Fuzzfile. A loopback `VLLM_BASE_URL` is rejected because it refers
+to the worker, not your submitter.
 Local input directories and unrelated variables are not forwarded.
 `LOG_LEVEL`, `VLLM_SERVED_MODEL`, `VLLM_REASONING_EFFORT`,
 `VLLM_REASONING_TOKENS`, and `VLLM_API_KEY` use the application defaults when
 absent. Empty reasoning effort/API key are preserved deliberately.
 
-Provision reader roles first using the
-[meetings grants](src/web/web-role.sql) and
-[analytics grants](src/databases/analytics/web-role.sql), after the corresponding
-schemas exist; the workflow's `web-check` verifies SELECT privileges before
-launching the web service. Give the documents reader SELECT on the registry
-and chunk tables, including owner default privileges for newly created tables.
-Existing schema migrations re-grant dashboard views when rebuilding them.
+The job `postgres-provision` creates the reader roles and their default
+privileges before the migrations run; the workflow's `web-check` verifies SELECT
+privileges before launching the web service. The analytics migration grants the
+dashboard objects to `analytics_reader` when it builds them.
 
 Set `VLLM_SERVED_MODEL` in `.env` to the deployed
 model's served name (default `local-ai`). Workers need model-download egress,

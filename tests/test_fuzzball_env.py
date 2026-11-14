@@ -12,7 +12,7 @@ def test_dotenv_is_parsed_without_shell_execution_or_interpolation(tmp_path):
     path = tmp_path / ".env"
     path.write_text(
         "HF_TOKEN='literal $TOKEN $(touch forbidden)'\n"
-        "POSTGRES_PASSWORD=not-forwarded\n"
+        "WEB_POSTGRES_PASSWORD=not-forwarded\n"
         "LOG_LEVEL=DEBUG\n"
         "VLLM_REASONING_EFFORT=\n"
     )
@@ -20,7 +20,7 @@ def test_dotenv_is_parsed_without_shell_execution_or_interpolation(tmp_path):
     assert values["HF_TOKEN"] == "literal $TOKEN $(touch forbidden)"
     assert values["LOG_LEVEL"] == "DEBUG"
     assert values["VLLM_REASONING_EFFORT"] == ""
-    assert "POSTGRES_PASSWORD" not in values
+    assert "WEB_POSTGRES_PASSWORD" not in values
     assert values["VLLM_API_KEY"] == ""
     assert not (tmp_path / "forbidden").exists()
 
@@ -28,12 +28,13 @@ def test_dotenv_is_parsed_without_shell_execution_or_interpolation(tmp_path):
 @pytest.mark.parametrize(
     ("name", "value"),
     [
-        ("DATABASE_URL", "postgresql+psycopg://owner:private@localhost/db"),
-        ("DATABASE_URL", "postgresql://owner:private@127.0.0.2/db"),
+        ("VLLM_BASE_URL", "http://owner:private@localhost/v1"),
         ("VLLM_BASE_URL", "http://[::1]:8000/v1"),
         ("VLLM_BASE_URL", "http://0.0.0.0/v1"),
-        ("DATABASE_URL", "postgresql://owner:private@db:not-port/db"),
+        ("VLLM_BASE_URL", "http://owner:private@vllm:not-port/v1"),
+        ("VLLM_BASE_URL", "postgresql://owner:private@vllm/v1"),
         ("HF_TOKEN", ""),
+        ("POSTGRES_PASSWORD", ""),
         ("LOG_LEVEL", "broken"),
         ("VLLM_REASONING_TOKENS", "-1"),
     ],
@@ -43,14 +44,6 @@ def test_invalid_values_fail_without_disclosing_credentials(name, value):
         fuzzball_env.validate_value(name, value)
     assert "private" not in str(caught.value)
     assert value not in str(caught.value) or not value
-
-
-def test_full_preflight_requires_separate_readers():
-    with pytest.raises(ValueError, match="Missing DOCUMENTS_READER_DATABASE_URL"):
-        fuzzball_env.selected_values(
-            fuzzball_env.DEFAULTS | {"HF_TOKEN": "private"},
-            list(fuzzball_env.VARIABLES),
-        )
 
 
 def test_sync_pipes_values_and_updates_only_existing_user_value_secrets(
@@ -168,7 +161,7 @@ def test_incomplete_configuration_does_not_upload_partial_secrets(
     with pytest.raises(SystemExit) as caught:
         fuzzball_env.main(["--env-file", str(path)])
     assert caught.value.code == 1
-    assert "Missing DATABASE_URL" in capsys.readouterr().err
+    assert "Missing POSTGRES_PASSWORD" in capsys.readouterr().err
 
 
 def test_dotenv_mapping_covers_every_workflow_secret():
