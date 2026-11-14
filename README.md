@@ -161,8 +161,10 @@ mentions, sentiment, emotion, and topics run in parallel. Sentiment and emotion
 each use 32 shards with four active CPU tasks. Stance waits for topics
 attribution and the ready vLLM service, and uses 32 shards with four active
 tasks, each sending at most two vLLM requests (eight across the array). Dashboard
-refresh waits for every analysis branch. Completed backups and reader/schema
-checks gate the persistent web service. Failed jobs prevent dependent deployment.
+refresh waits for every analysis branch. Completed document and analytics backups
+and reader/schema checks gate the persistent web service. The meetings database
+is not dumped by this workflow; its data remains on the persistent PostgreSQL
+volume. Failed jobs prevent dependent deployment.
 
 ### PostgreSQL service
 

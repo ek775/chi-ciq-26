@@ -42,7 +42,9 @@ def test_deployment_dag_is_acyclic_and_fail_closed():
         remaining -= ready
     assert dependencies(nodes["postgres-provision"]) == {"postgres"}
     assert dependencies(nodes["vllm"]) == {"transcription", "documents"}
-    for database in ("meetings", "documents", "analytics"):
+    assert dependencies(nodes["meetings-migrate"]) == {"postgres-provision"}
+    assert not any(name.startswith("meetings-backup") for name in nodes)
+    for database in ("documents", "analytics"):
         assert dependencies(nodes[f"{database}-backup-before"]) == {
             "postgres-provision"
         }
@@ -53,7 +55,7 @@ def test_deployment_dag_is_acyclic_and_fail_closed():
     }
     assert dependencies(nodes["web"]) == {"web-check"}
     assert dependencies(nodes["web-check"]) == {
-        "meetings-backup-after",
+        "transcription",
         "documents-backup-after",
         "analytics-backup-after",
     }
