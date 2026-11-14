@@ -150,6 +150,7 @@ chi-ciq-dispatch --input-dir data/mp4 --output-dir data/dispatch \
 with CLI v4.3.1. It uses the existing persistent volumes `shared/datasets` and
 `team8/volume_test`. PostgreSQL databases and the private vLLM service are
 managed outside this workflow; deploying the web image never replaces them.
+PostgreSQL runs in its own workflow: see [PostgreSQL service](#postgresql-service).
 
 The workflow backs up and migrates each database independently, queues 128
 transcription shards with two active one-GPU tasks alongside four CPU document
@@ -161,6 +162,59 @@ and attribution and uses 32 shards with four active tasks, each sending at most
 two vLLM requests (eight across the array). Dashboard
 refresh waits for every analysis branch. Completed backups and reader/schema
 checks gate the persistent web service. Failed jobs prevent dependent deployment.
+
+### PostgreSQL service
+
+[fuzzball-postgres.yaml](fuzzball-postgres.yaml) is a separate workflow with one
+long-running service: PostgreSQL 17 with pgvector (`pgvector/pgvector:pg17`,
+arm64). Its data directory is on the persistent NFS volume `team8/postgres-data`,
+so the databases survive a stop, a failure, or a move to a different node.
+
+```sh
+# Start (the service runs until you stop the workflow):
+fuzzball workflow start fuzzball-postgres.yaml --name chi-ciq-postgres
+# Find the address: the workflow ID (name chi-ciq-postgres, status Started)
+# and the account ID (`Group ID`) make the DNS name shown below.
+fuzzball workflow list
+fuzzball context show
+# Optional, the node address: `Host` of the postgres stage (YAML output only).
+fuzzball workflow describe <workflow-id> --output yaml
+# Stop. PostgreSQL shuts down cleanly and the data stays on the volume:
+fuzzball workflow stop <workflow-id>
+```
+
+```mermaid
+flowchart LR
+  subgraph postgres_workflow["Workflow chi-ciq-postgres"]
+    postgres_service["Service postgres<br/>port 5432, persist: true"]
+  end
+  subgraph deployment_workflow["Workflow fuzzball.yaml"]
+    pipeline_jobs["Migration, ingestion,<br/>analytics jobs and web"]
+  end
+  data_volume[("Volume team8/postgres-data<br/>NFS, persistent")]
+  password_secret["Secret chi-ciq-postgres-password"]
+  pipeline_jobs -->|"postgres.svc.WORKFLOW_ID.ACCOUNT_ID.fuzzball:5432"| postgres_service
+  postgres_service -->|"PGDATA"| data_volume
+  password_secret -->|"POSTGRES_PASSWORD"| postgres_service
+```
+
+Other workflows connect as user `postgres` to
+`postgres.svc.<workflow-id>.<account-id>.fuzzball:5432`, or to the node address
+on port 5432. Connections from other hosts must give the password
+(`scram-sha-256`). **The workflow ID and the node change on each start**, so
+update the `*-url` secrets below after you start the service again.
+The password applies only when the data directory is first initialized; a
+later change to the secret does not change the password of an existing database.
+Do not start a second copy of this workflow while one runs: two servers must
+not share one data directory.
+
+One-time setup (already done on the hackathon cluster):
+
+```sh
+fuzzball volume create team8 postgres-data
+# password.json contains {"type": "value", "secret": {"value": "<password>"}}
+fuzzball secret create secret://user/chi-ciq-postgres-password password.json --from-file
+```
 
 ### Build and publish
 
