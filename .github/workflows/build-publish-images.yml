@@ -32,6 +32,8 @@ jobs:
             dockerfile: src/pipelines/transcription/Dockerfile
           - name: documents
             dockerfile: src/pipelines/documents/Dockerfile
+          - name: tracker
+            dockerfile: src/pipelines/tracker/Dockerfile
           - name: analytics
             dockerfile: src/pipelines/analytics/Dockerfile
           - name: web
