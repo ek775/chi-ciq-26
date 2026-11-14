@@ -22,6 +22,7 @@ from databases.meetings.models import (
     TranscriptSegment,
 )
 from databases.meetings.schema import check_schema, connect_database
+from shared.logging import configure_logging
 
 logger = logging.getLogger(__name__)
 STATIC = Path(__file__).with_name("static")
@@ -204,4 +205,5 @@ def main() -> None:
     from dotenv import load_dotenv
 
     load_dotenv()
-    uvicorn.run(create_app(), host="0.0.0.0", port=8080)
+    configure_logging("web")
+    uvicorn.run(create_app(), host="0.0.0.0", port=8080, log_config=None)

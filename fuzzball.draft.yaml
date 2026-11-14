@@ -3,6 +3,14 @@
 # No cluster IDs, secrets, storage bindings, endpoint routing, or registry chosen.
 status: draft
 
+logging:
+  python: json-on-stderr-via-shared.logging
+  environment: [LOG_LEVEL, LOG_SERVICE_NAME]
+  collection: host-runs-bash-scripts/logs.sh-WORKFLOW-JOB
+  destination: data/logs/WORKFLOW/JOB.log-on-submitter
+  upstream-containers: native-stdout-stderr-via-fuzzball-workflow-log
+  lifecycle: collect-before-workflow-deletion-or-cluster-log-expiry
+
 containers:
   pipelines.downloads:
     source: src/pipelines/downloads

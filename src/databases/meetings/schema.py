@@ -1,9 +1,12 @@
 import argparse
+import logging
 import os
 from pathlib import Path
 
 from dotenv import load_dotenv
 from sqlalchemy import Engine, create_engine, inspect, text
+
+from shared.logging import configure_logging
 
 from .models import Base
 
@@ -51,6 +54,7 @@ def main() -> None:
     from .archive import export_database
 
     load_dotenv()
+    configure_logging("meetings-database")
     parser = argparse.ArgumentParser(description="Manage the transcript database")
     commands = parser.add_subparsers(dest="command", required=True)
     commands.add_parser("migrate")
@@ -59,14 +63,19 @@ def main() -> None:
     backup.add_argument("--output-dir", type=Path, required=True)
     args = parser.parse_args()
     url = os.environ["DATABASE_URL"]
+    logger = logging.getLogger(__name__)
+    logger.info("Database %s started", args.command)
     if args.command == "backup":
-        print(export_database(url, args.output_dir), flush=True)
+        archive = export_database(url, args.output_dir)
+        logger.info("Database backup completed: %s", archive)
+        print(archive, flush=True)
         return
     engine = connect_database(url)
     try:
         if args.command == "migrate":
             migrate_database(engine)
         check_schema(engine)
+        logger.info("Database %s completed", args.command)
     finally:
         engine.dispose()
 

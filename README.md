@@ -83,6 +83,58 @@ submittable Fuzzfile**. Actual submission needs a logged-in context and a
 cluster-specific template for storage, secrets, resources, and networking.
 See the [fan-out guide](src/pipelines/transcription/README.md#transcription-fan-out).
 
+## Logging
+
+No logging server, extra container, or shared worker filesystem is needed.
+From your logged-in **Fuzzball submitter**, collect a job's logs locally:
+
+```sh
+fuzzball workflow describe WORKFLOW
+bash scripts/logs.sh WORKFLOW JOB
+# In another terminal (substitute the actual workflow ID and job name):
+tail -f data/logs/WORKFLOW/JOB.log
+grep '"level": "ERROR"' data/logs/WORKFLOW/JOB.log
+```
+
+The helper runs `fuzzball workflow log WORKFLOW JOB --follow` and appends to
+gitignored `data/logs/WORKFLOW/JOB.log`, while also showing output in the terminal.
+Run it for each container/job you want to collect: downloads, transcription
+workers, migrations, backups, web, PostgreSQL, and vLLM, using the job names in
+your cluster template. Workflow IDs are in the dispatch CLI receipts; job names
+are the **template's job keys**, not necessarily the dispatch workflow name.
+Collection is explicit, not automatic discovery of every submitted workflow.
+Run several collectors in separate terminals; they write separate files.
+
+```sh
+# Download retained logs and exit, including completed/failed jobs:
+bash scripts/logs.sh WORKFLOW JOB --lines -1
+# Follow only new output, without re-appending history:
+bash scripts/logs.sh WORKFLOW JOB --follow --lines 0
+# Inspect all collected jobs together:
+tail -f data/logs/*/*.log
+```
+
+Set `LOG_DIR` to change the host directory, or `FUZZBALL_BIN` to select the CLI.
+Ctrl-C stops collection, not the remote job. CLI failures remain visible and
+return a nonzero exit code. Re-running collection with history enabled appends
+duplicates; there is no automatic reconnect, deduplication, or rotation.
+Archive the directory between hackathon runs. Fetch logs before deleting
+workflows or the cluster's log retention expires.
+
+Python services use shared JSON logging on stderr: UTC `timestamp`, `level`,
+`service`, `logger`, `message`, and `exception` when present. Uvicorn access/error
+logs and Python warnings use the same format. Set `LOG_LEVEL` (default `INFO`)
+and optionally `LOG_SERVICE_NAME` in each Fuzzball job's environment.
+Machine-readable CLI results remain on stdout. PostgreSQL, vLLM, subprocesses,
+and CLI output keep their native format, so collected files are mixed text,
+not guaranteed JSONL. Add `--timestamp` to collection for server timestamps on
+native output. Keep logs private: URLs, paths, and exception details may be sensitive.
+
+The Fuzzball CLI flags above were checked locally; cluster connectivity and
+deployment remain unverified. For placeholder Compose development, use
+`docker compose --profile '*' logs --follow --timestamps --no-color`;
+this does not collect remote Fuzzball jobs.
+
 ## Development and quick checks
 
 ```sh

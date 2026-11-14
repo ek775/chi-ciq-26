@@ -16,9 +16,10 @@ from databases.meetings.metadata import MeetingMetadata, parse_filename
 from databases.meetings.models import Meeting, PublishedSource
 from databases.meetings.schema import check_schema, connect_database
 from databases.meetings.store import TranscriptStore
+from shared.logging import configure_logging
 
 from .inputs import content_digest, discover_recordings
-from .runtime import build_workflow, configure_logging
+from .runtime import build_workflow
 from .workflow import TranscriptionWorkflow
 
 logger = logging.getLogger(__name__)
@@ -186,7 +187,7 @@ def main(argv: list[str] | None = None) -> None:
             char not in "0123456789abcdef" for char in args.expected_sha256
         ):
             parser.error("--expected-sha256 must be 64 lowercase hexadecimal digits")
-    configure_logging()
+    configure_logging("transcription")
     if args.input_file is not None:
         parse_filename(args.input_file)
         if not args.input_file.is_file():

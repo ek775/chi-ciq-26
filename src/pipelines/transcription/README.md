@@ -213,6 +213,10 @@ published results and propagate to the caller.
 Progress logs report model loading, extraction, diarization, inference, embedding,
 and database stages. Timers use monotonic wall time, not recording timestamps.
 Empty Whisper output warns and skips a window; malformed output/model errors fail.
+CLI logs are JSON on stderr. Set `LOG_LEVEL` and optionally `LOG_SERVICE_NAME`
+in the cluster worker template; no writable shared log mount is required.
+Use the submitter-side [log helper](../../../README.md#logging) to save each
+Fuzzball job's output locally, including completed or failed workers.
 
 For backup scope, client compatibility, and archive handling, see the
 [meetings database guide](../../databases/meetings/README.md).

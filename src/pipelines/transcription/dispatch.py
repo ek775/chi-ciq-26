@@ -3,6 +3,7 @@
 import argparse
 import hashlib
 import json
+import logging
 import os
 import subprocess
 from pathlib import Path, PurePosixPath
@@ -11,6 +12,8 @@ from urllib.parse import quote, urlsplit
 from uuid import uuid4
 
 from dotenv import load_dotenv
+
+from shared.logging import configure_logging
 
 from .inputs import content_digest, discover_recordings
 
@@ -163,6 +166,7 @@ def submit_run(run: Path, paths: list[Path], *, fuzzball: str, max_jobs: int) ->
 
 def main(argv: list[str] | None = None) -> None:
     load_dotenv()
+    configure_logging("dispatch")
     parser = argparse.ArgumentParser(
         description="Prepare one Fuzzball transcription/diarization job per MP4"
     )
@@ -215,9 +219,11 @@ def main(argv: list[str] | None = None) -> None:
         if not isinstance(template, dict):
             parser.error("Fuzzfile template must be a JSON object")
     run, paths = prepare_run(args.output_dir, jobs, template)
+    logging.getLogger(__name__).info("Prepared %s worker jobs in %s", len(jobs), run)
     print(f"Prepared {len(jobs)} independent worker jobs in {run}", flush=True)
     if args.submit:
         submit_run(run, paths, fuzzball=args.fuzzball, max_jobs=args.max_jobs)
+        logging.getLogger(__name__).info("Submitted worker jobs")
         print("Submitted jobs; inspect CLI receipts and workflow status", flush=True)
     else:
         print("Not submitted (offline preparation only)", flush=True)

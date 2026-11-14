@@ -17,6 +17,7 @@ from urllib.request import Request, urlopen
 from dotenv import load_dotenv
 
 from databases.meetings.metadata import parse_filename
+from shared.logging import configure_logging
 
 logger = logging.getLogger(__name__)
 DEFAULT_IDS = Path(__file__).with_name("vimeo-ids.txt")
@@ -234,9 +235,7 @@ def main(argv: list[str] | None = None) -> int:
         "--refresh", action="store_true", help="Redownload managed recordings"
     )
     args = parser.parse_args(argv)
-    logging.basicConfig(
-        level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s"
-    )
+    configure_logging("downloads")
     videos = list(args.videos)
     batch = args.batch_file or (DEFAULT_IDS if not videos else None)
     if batch is not None:

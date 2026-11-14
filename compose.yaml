@@ -23,6 +23,7 @@ services:
       - .:/workspace
       - model-cache:/root/.cache
     environment:
+      LOG_LEVEL: ${LOG_LEVEL:-INFO}
       HF_TOKEN: ${HF_TOKEN:-}
       TRANSCRIPTION_INPUT_DIR: ${TRANSCRIPTION_INPUT_DIR:-data/mp4}
       DATABASE_URL: postgresql+psycopg://transcription:${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in .env}@db:5432/transcription
@@ -36,6 +37,7 @@ services:
       context: .
       dockerfile: src/databases/meetings/Dockerfile
     environment:
+      LOG_LEVEL: ${LOG_LEVEL:-INFO}
       DATABASE_URL: postgresql+psycopg://transcription:${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in .env}@db:5432/transcription
     depends_on:
       db:
@@ -69,6 +71,7 @@ services:
       - ./data/mp4:/inputs:ro
       - model-cache:/root/.cache
     environment:
+      LOG_LEVEL: ${LOG_LEVEL:-INFO}
       HF_TOKEN: ${HF_TOKEN:-}
       DATABASE_URL: postgresql+psycopg://transcription:${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in .env}@db:5432/transcription
     depends_on:
@@ -80,6 +83,8 @@ services:
       context: .
       dockerfile: src/pipelines/downloads/Dockerfile
     init: true
+    environment:
+      LOG_LEVEL: ${LOG_LEVEL:-INFO}
     volumes:
       - ./data/mp4:/outputs
   meetings-backup:
@@ -90,6 +95,7 @@ services:
     volumes:
       - ./data/database:/backups
     environment:
+      LOG_LEVEL: ${LOG_LEVEL:-INFO}
       DATABASE_URL: postgresql+psycopg://transcription:${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in .env}@db:5432/transcription
     depends_on:
       db:
@@ -104,6 +110,7 @@ services:
     ports:
       - "127.0.0.1:8080:8080"
     environment:
+      LOG_LEVEL: ${LOG_LEVEL:-INFO}
       DATABASE_URL: postgresql+psycopg://web_reader:${WEB_POSTGRES_PASSWORD:?Set WEB_POSTGRES_PASSWORD in .env}@db:5432/transcription
     depends_on:
       meetings-web-role:

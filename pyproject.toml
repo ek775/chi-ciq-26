@@ -60,7 +60,7 @@ web = ["static/*"]
 
 [tool.setuptools.packages.find]
 where = ["src"]
-include = ["pipelines*", "databases*", "web*"]
+include = ["pipelines*", "databases*", "web*", "shared*"]
 
 [tool.ruff]
 target-version = "py312"

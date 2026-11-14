@@ -7,6 +7,7 @@ RUN apt-get update \
 
 WORKDIR /app
 COPY pyproject.toml ./
+COPY src/shared ./src/shared
 COPY src/databases/__init__.py ./src/databases/__init__.py
 COPY src/databases/meetings ./src/databases/meetings
 RUN python -m pip install ".[database]"

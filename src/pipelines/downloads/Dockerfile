@@ -6,6 +6,7 @@ RUN apt-get update \
     && rm -rf /var/lib/apt/lists/*
 WORKDIR /app
 COPY pyproject.toml ./
+COPY src/shared ./src/shared
 COPY src/pipelines/__init__.py ./src/pipelines/__init__.py
 COPY src/pipelines/downloads ./src/pipelines/downloads
 COPY src/databases/__init__.py ./src/databases/__init__.py

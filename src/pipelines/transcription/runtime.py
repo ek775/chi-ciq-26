@@ -11,21 +11,13 @@ from . import (
 from .progress import timed_operation
 
 
-def configure_logging() -> None:
-    logging.basicConfig(
-        level=logging.INFO,
-        format="%(asctime)s %(levelname)s %(name)s: %(message)s",
-        datefmt="%Y-%m-%d %H:%M:%S",
-    )
-
-
 def build_workflow(store: TranscriptStore, token: str) -> TranscriptionWorkflow:
     if not token.strip() or token == "your-hugging-face-token":
         raise ValueError("HF_TOKEN must be set for gated pyannote models")
     import torch
 
     device = "cuda" if torch.cuda.is_available() else "cpu"
-    print(f"Inference device: {device}", flush=True)
+    logging.getLogger(__name__).info("Inference device: %s", device)
     with timed_operation("Loading diarization model"):
         diarizer = StreamingPyannoteDiarizer(token, device=device)
     with timed_operation("Loading Whisper model"):
