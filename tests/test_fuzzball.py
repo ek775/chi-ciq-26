@@ -300,3 +300,20 @@ def test_workstation_resource_budget_and_bounded_vllm_requests():
     assert stance["task-array"]["concurrency"] * 2 == 8
     for stage in ("sentiment", "emotion"):
         assert "OMP_NUM_THREADS=2" in jobs[f"analytics-{stage}"]["env"]
+
+
+def test_postgres_shell_workflow_uses_the_deployment_database_volume():
+    deployment = workflow()
+    shell_workflow = yaml.safe_load((ROOT / "fuzzball-postgres-shell.yaml").read_text())
+    assert (
+        shell_workflow["volumes"]["postgres-data"]
+        == deployment["volumes"]["postgres-data"]
+    )
+    deployment_service = deployment["services"]["postgres"]
+    shell_service = shell_workflow["services"]["postgres"]
+    for field in ("image", "env", "mounts", "command"):
+        assert shell_service[field] == deployment_service[field]
+    shell_job = shell_workflow["jobs"]["postgres-shell"]
+    assert shell_job["mounts"] == deployment_service["mounts"]
+    assert shell_job["image"] == deployment_service["image"]
+    assert dependencies(shell_job) == {"postgres"}

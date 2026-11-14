@@ -217,6 +217,29 @@ fuzzball volume create team8 postgres-data
 fuzzball volume create team8 vllm-model-cache
 ```
 
+#### psql shell on the database volume
+
+[fuzzball-postgres-shell.yaml](fuzzball-postgres-shell.yaml) is a maintenance
+workflow. It starts the same `postgres` service on the same volume as
+[fuzzball.yaml](fuzzball.yaml), and one idle job `postgres-shell` that has
+`psql` and the volume at `/var/lib/postgresql/data`. The job stays up for 48
+hours or until you stop the workflow.
+
+```sh
+fuzzball workflow start fuzzball-postgres-shell.yaml --name postgres-shell
+# Use the returned workflow ID:
+fuzzball workflow exec --tty WORKFLOW postgres-shell -- /bin/bash
+# In the shell, psql connects to the service as postgres with no arguments:
+psql
+psql --dbname=analytics
+# One command without a shell:
+fuzzball workflow exec WORKFLOW postgres-shell -- psql --list
+fuzzball workflow stop WORKFLOW
+```
+
+Do not run this workflow while the deployment workflow runs: the two `postgres`
+services would share one data directory.
+
 ### vLLM service
 
 The workflow starts a persistent, one-GPU `vllm/vllm-openai:v0.32.0` service
