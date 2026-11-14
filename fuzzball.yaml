@@ -20,7 +20,7 @@ volumes:
     name: volume_test
   postgres-data:
     use: team8
-    name: postgres-data
+    name: postgres-data-v2
   vllm-model-cache:
     use: team8
     name: vllm-model-data
@@ -378,6 +378,7 @@ services:
   postgres:
     image: *postgres-image
     env:
+      - POSTGRES_PASSWORD=secret://user/chi-ciq-postgres-password
       # initdb needs a directory it owns, so use a subdirectory of the mount.
       - PGDATA=/var/lib/postgresql/data/pgdata
     mounts:
@@ -397,7 +398,7 @@ services:
       # TCP, not the socket: the temporary server of the first-run
       # initialization listens on the socket only, and must not count as ready.
       exec:
-        command: [pg_isready, --host, 127.0.0.1, --port, "5432", --username, postgres, --no-password]
+        command: [pg_isready, --host, 127.0.0.1, --port, "5432", --username, postgres]
       initial-delay-seconds: 5
       period-seconds: 10
       timeout-seconds: 5
