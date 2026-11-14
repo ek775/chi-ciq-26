@@ -189,7 +189,6 @@ def download(
             sha256 = digest(temporary)
             with temporary.open("rb") as stream:
                 os.fsync(stream.fileno())
-            temporary.replace(target)
             receipt = Path(directory) / "receipt.json"
             receipt.write_text(
                 json.dumps({"video_id": video, "filename": filename, "sha256": sha256}),
@@ -197,7 +196,21 @@ def download(
             )
             with receipt.open("rb") as stream:
                 os.fsync(stream.fileno())
-            receipt.replace(state_file)
+            backup = Path(directory) / "previous.mp4"
+            had_target = target.is_file()
+            if had_target:
+                shutil.copyfile(target, backup)
+                with backup.open("rb") as stream:
+                    os.fsync(stream.fileno())
+            temporary.replace(target)
+            try:
+                receipt.replace(state_file)
+            except Exception:
+                if had_target:
+                    backup.replace(target)
+                else:
+                    target.unlink(missing_ok=True)
+                raise
             logger.info("%s: published %s", video, filename)
             return target
 

@@ -104,6 +104,61 @@ def test_refresh_failure_preserves_last_completed_file(
     assert not list(tmp_path.glob(".vimeo-*"))
 
 
+@pytest.mark.parametrize("failure", ["write", "fsync", "replace"])
+@pytest.mark.parametrize("existing", [False, True])
+def test_receipt_failure_does_not_strand_recording(
+    tmp_path, downloader, monkeypatch, failure, existing
+):
+    target = vimeo.download("123", tmp_path) if existing else (
+        tmp_path / vimeo.title_filename("2026_november_10_-_committee_on_budget (240p)")
+    )
+    state_file = tmp_path / ".vimeo/123.json"
+    original = target.read_bytes() if existing else None
+    state = state_file.read_bytes() if existing else None
+
+    if failure == "write":
+        write_text = type(target).write_text
+
+        def fail_write(path, *args, **kwargs):
+            if path.name == "receipt.json":
+                raise OSError("receipt write failed")
+            return write_text(path, *args, **kwargs)
+
+        monkeypatch.setattr(type(target), "write_text", fail_write)
+    elif failure == "fsync":
+        fsync = vimeo.os.fsync
+        calls = 0
+
+        def fail_receipt_fsync(descriptor):
+            nonlocal calls
+            calls += 1
+            if calls == 2:
+                raise OSError("receipt fsync failed")
+            return fsync(descriptor)
+
+        monkeypatch.setattr(vimeo.os, "fsync", fail_receipt_fsync)
+    else:
+        replace = type(target).replace
+
+        def fail_receipt_replace(path, destination):
+            if path.name == "receipt.json":
+                raise OSError("receipt replace failed")
+            return replace(path, destination)
+
+        monkeypatch.setattr(type(target), "replace", fail_receipt_replace)
+
+    with pytest.raises(OSError, match="receipt"):
+        vimeo.download("123", tmp_path, refresh=existing)
+
+    if existing:
+        assert target.read_bytes() == original
+        assert state_file.read_bytes() == state
+    else:
+        assert not target.exists()
+        assert not state_file.exists()
+    assert not list(tmp_path.glob(".vimeo-*"))
+
+
 def test_no_inference_ready_partial_file_visible_during_download(
     tmp_path, downloader, monkeypatch
 ):
