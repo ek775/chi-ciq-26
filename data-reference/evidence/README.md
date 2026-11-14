@@ -23,8 +23,27 @@ supports.
 
 ## Using it in analytics
 
-Load the index once and resolve each quote span after checking its text
-against the published transcript:
+The resolver is available as a Python library and CLI. The statement
+extraction stage still needs to call it. The intended flow is:
+
+1. Read the published transcript and its timestamped, diarized segments.
+   Carry the original recording ID alongside the segments. Diarization
+   groups speech under anonymous labels.
+2. Ask the LLM to propose statements with quotes and source segment
+   references. Treat its output as candidates.
+3. Verify each quote against the referenced transcript text. Drop quotes
+   that fail verification. Derive the verified span from the transcript
+   timestamps and add the original recording offset for clipped inputs.
+4. Load the evidence index once per run. For each verified span, call
+   `resolve` with the recording ID and original timestamp range. This
+   deterministic Python step controls the speaker name. The pipeline
+   takes the name from the resolver, even when the result is null.
+5. Save the resolved fields and evidence IDs in the verified statement.
+   The commitment tracker and digest use those saved fields and cite the
+   original recording at the verified start time.
+
+For example, the Finance Committee quote resolves to the role `chair`
+and ordinance `SO2025-0021894`, with an unconfirmed speaker name:
 
 ```python
 from pathlib import Path
