@@ -30,3 +30,15 @@ def test_service_outlives_its_dependents_and_keeps_its_password_secret() -> None
     environment = dict(entry.split("=", 1) for entry in service["env"])
     assert service["persist"] is True
     assert environment["POSTGRES_PASSWORD"].startswith("secret://")
+
+
+def test_existing_database_takes_its_password_from_the_secret_before_start() -> None:
+    # PostgreSQL ignores POSTGRES_PASSWORD for an existing data directory. If the
+    # start script did not set the password again, a changed secret would lock
+    # every job out ("password authentication failed for user postgres").
+    script = load_postgres_workflow()["services"]["postgres"]["script"]
+    set_password = script.index("ALTER ROLE postgres PASSWORD")
+    start_server = script.index("exec docker-entrypoint.sh postgres")
+    assert '[ -s "$PGDATA/PG_VERSION" ]' in script[:set_password]
+    assert "postgres --single" in script[set_password:start_server]
+    assert set_password < start_server

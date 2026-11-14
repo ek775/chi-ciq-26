@@ -196,8 +196,10 @@ flowchart LR
   Fuzzfile and not secrets.
 - **Password:** the URLs carry no password. Each container gets `PGPASSWORD`
   from the secret `chi-ciq-postgres-password`, and libpq reads it from there.
-  The password applies only when the data directory is first initialized; a
-  later change to the secret does not change the password of an existing database.
+  PostgreSQL itself applies a password only when it first creates the data
+  directory. The start script of the service therefore sets the password of an
+  existing database from the secret before each start, so a change to the
+  secret takes effect at the next start of the workflow.
 - **Databases and roles:** the job `postgres-provision` creates the databases
   `meetings`, `documents` and `analytics`, and the read-only roles `web_reader`,
   `documents_reader` and `analytics_reader`. It is safe to run again. Pipeline

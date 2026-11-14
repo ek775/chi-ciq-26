@@ -389,7 +389,20 @@ services:
         cores: 4
       memory:
         size: 8GiB
-    command: [docker-entrypoint.sh, postgres]
+    # PostgreSQL uses POSTGRES_PASSWORD only when it first creates the data
+    # directory. For an existing database, set the password of the superuser
+    # from the secret before each start (single-user mode needs no login), so
+    # that the secret is always the password in use. postgres-provision does
+    # the same for the reader roles.
+    script: |
+      #!/bin/sh
+      set -eu
+      if [ -s "$PGDATA/PG_VERSION" ]; then
+        escaped_password=$(printf '%s' "$POSTGRES_PASSWORD" | sed "s/'/''/g")
+        printf "ALTER ROLE postgres PASSWORD '%s';\n" "$escaped_password" \
+          | postgres --single -D "$PGDATA" postgres > /dev/null
+      fi
+      exec docker-entrypoint.sh postgres
     persist: true
     network:
       ports:
