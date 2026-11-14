@@ -164,41 +164,23 @@ checks gate the persistent web service. Failed jobs prevent dependent deployment
 
 ### Build and publish
 
-Build from the repository root and push the seven service images. The image
-names below match the Fuzzfile; GHCR requires your normal registry login. For an
-immutable release, replace the `fuzzball` tag in the seven image definitions in
-the Fuzzfile and in these commands with the same unique release tag. Do not
-overwrite a tag used by an active deployment.
-
-```sh
-set -eu
-for spec in \
-  meetings:src/databases/meetings/Dockerfile \
-  documents-db:src/databases/documents/Dockerfile \
-  analytics-db:src/databases/analytics/Dockerfile \
-  transcription:src/pipelines/transcription/Dockerfile \
-  documents:src/pipelines/documents/Dockerfile \
-  analytics:src/pipelines/analytics/Dockerfile \
-  web:src/web/Dockerfile
-do
-  name=${spec%%:*}
-  dockerfile=${spec#*:}
-  image="ghcr.io/ek775/chi-ciq-26-${name}:fuzzball"
-  docker build --platform linux/arm64 -f "$dockerfile" -t "$image" .
-  docker push "$image"
-done
-```
+The [Build and publish Fuzzball images workflow](.github/workflows/build-publish-images.yml)
+builds the seven service images on a native ARM64 GitHub-hosted runner and
+publishes them to GHCR. It runs on relevant pushes to `main` or can be started
+manually from the Actions tab. Each image gets a `sha-<commit>` tag; builds on
+the default branch also update the `fuzzball` tag used by this Fuzzfile.
+For an immutable deployment, replace the `fuzzball` tag in all seven image
+definitions with that build's full `sha-<commit>` tag.
 
 Make the images readable by cluster workers, or add a singular `image.secret`
 registry reference to each image definition (the anchored definitions cover
 repeated uses). Rebuild the workers for this release: older images do not
 support the new sharding and parallel-stage flags.
-The PGX/GB10 workstation nodes report ARM64 CPUs: build native ARM64 images on
-the workstations, or use a configured cross-platform builder. Before a GPU
-release, check that its ARM64 PyTorch build is CUDA-enabled and supports the
-installed GPU/driver; an ARM64 image alone does not guarantee GPU inference.
-Run `python -c 'import torch; assert torch.cuda.is_available()'` inside the
-transcription image on a GPU worker before bulk submission.
+The images are ARM64; the workflow does not verify GPU runtime support. Before
+a GPU release, check that the transcription image's ARM64 PyTorch build is
+CUDA-enabled and supports the installed GPU/driver. Run
+`python -c 'import torch; assert torch.cuda.is_available()'` inside that image
+on a GPU worker before bulk submission.
 
 ### Inputs and credentials
 
