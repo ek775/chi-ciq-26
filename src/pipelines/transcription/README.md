@@ -6,7 +6,7 @@ Run shell examples from the repository root, not this module directory.
 
 ## Navigation
 
-- [Distributed worker fan-out](#transcription-fan-out)
+- [Fuzzball batch input](#fuzzball-batch-input)
 - [Initial ingestion and updates](#ingestion-versus-updates)
 - [Development setup](#development-setup)
 - [Directory ingestion and backup](#directory-ingestion-and-database-archive)
@@ -21,103 +21,34 @@ This module owns the [worker image](Dockerfile), [dispatcher](dispatch.py),
 filename parsing, and backups belong to the
 [meetings module](../../databases/meetings/README.md).
 
-## Transcription fan-out
+## Fuzzball batch input
 
-`chi-ciq-dispatch` runs on the submitter, not inside a long-running inference
-container. It discovers recordings and prepares **one independent Fuzzball
-workflow per complete file**, all using the same transcription image. Fuzzball
-chooses worker nodes; no local process pool or node list is used.
-
-Each assigned worker runs Whisper, streaming diarization, and embeddings for
-its own recording, then writes directly to the shared meetings database.
-Recording-level distribution preserves local speaker labels and audio offsets;
-it does not split one recording's diarization across nodes.
-
-Build/push the transcription image to a registry reachable by worker nodes when
-networking is available. Configure `TRANSCRIPTION_WORKER_IMAGE` with its immutable
-tag or digest. Prepare a plan now without contacting Fuzzball:
+The current dataset contains one MP4 recording, so per-recording workflow
+fan-out adds no useful parallelism. Stage complete recordings on the shared
+Fuzzball volume under `/datasets/mp4` and mount that directory read-only at
+`/inputs` in the transcription job:
 
 ```sh
-chi-ciq-dispatch --input-dir data/mp4 \
-  --image docker://your-registry/chi-ciq-transcription:commit-tag \
-  --output-dir data/dispatch
+chi-ciq-ingest --input-dir /inputs --namespace recordings
 ```
 
-Every run gets a new private directory containing `plan.json`. Jobs include the
-exact command argv, source identity, SHA-256, and container input path. File
-names with spaces stay single arguments; no shell interpolation is performed.
-The inference image is built from `src/pipelines/transcription/Dockerfile` with
-the repository root as context. The submitter needs the base Python package and
-Fuzzball CLI, not Torch, models, a GPU, or a database connection.
+The batch command discovers and validates every dated MP4 filename, then
+processes the recordings sequentially in one GPU job. Configure the worker's
+`DATABASE_URL` and `HF_TOKEN` using cluster secrets. The worker must be able to
+reach the private meetings database and download required models; mount a
+persistent model cache if the cluster supports it. Run the schema migration
+before ingestion and back up only after the job succeeds.
 
-File availability must be provided by the cluster, **not** by assuming the
-submitter's local path exists on every node:
+The Fuzzball CLI reports `shared/datasets` as enabled persistent external NFS
+with a metadata-reported size of zero. The mounted-file inspection could not run
+because cluster capacity kept it queued, so copy the recording to the volume
+before relying on it. A cluster-specific runnable Fuzzfile still needs the
+supported schema, image registry reference, database endpoint, and secret
+bindings; `fuzzball.draft.yaml` is an architecture note, not that Fuzzfile.
 
-- For already-uploaded inputs, set `TRANSCRIPTION_INPUT_BASE_URI` to an `s3://`
-  or `https://` directory. The dispatcher percent-encodes each filename and
-  provides `${input.uri}` for Fuzzball's input-ingestion configuration.
-- Alternatively, the Fuzzfile template must mount cluster-wide input storage
-  read-only at `/inputs` (override with `--worker-input-dir`).
-- The dispatcher does not upload files, download recordings, or embed storage
-  credentials. Local discovery establishes the expected byte hash; remote or
-  mounted files must match it. Workers reject changed/stale content before
-  inference or publication, including changes while making their snapshot.
-
-Before actual submission, supply a **cluster-specific Fuzzfile JSON template**
-using the supported Fuzzball schema. JSON is valid YAML, and rendered workflows
-are saved as individual `.json` files. The template must use these placeholders
-as entire JSON values, never inside shell strings:
-
-| Placeholder | Rendered value |
-|---|---|
-| `${worker.image}` | Transcription container image |
-| `${worker.command}` | Complete command argument array |
-| `${job.name}` | Per-source/content job name |
-| `${input.path}` | Assigned container filename |
-| `${input.uri}` | Remote input URI, when configured |
-| `${input.filename}` | Original filename |
-| `${input.sha256}` | Expected content digest |
-| `${source.key}` | Stable namespace/filename identity |
-
-For example, use `"${worker.command}"` as the value of the cluster schema's
-command field; rendering replaces it with a JSON array. This is a substitution
-contract, not a guessed Fuzzball schema. Bind GPU/CPU/memory limits, input staging
-or shared-volume mounts, model caches, and `DATABASE_URL`/`HF_TOKEN` cluster
-secret references in that template. Do not include literal credentials.
-`fuzzball.draft.yaml` is not usable as this template.
-
-```sh
-# Render workflows offline after supplying your cluster-specific template:
-chi-ciq-dispatch --input-dir data/mp4 --output-dir data/dispatch \
-  --template /path/to/cluster-worker.json
-
-# When networking and the logged-in Fuzzball context are ready:
-chi-ciq-dispatch --input-dir data/mp4 --output-dir data/dispatch \
-  --template /path/to/cluster-worker.json --submit --max-jobs 32
-```
-
-Submission explicitly invokes `fuzzball workflow validate` for **all** generated
-workflows before starting any with `fuzzball workflow start`; the CLI executable
-can be overridden with `FUZZBALL_BIN` or `--fuzzball`. Default operation only
-prepares files, without invoking the CLI. `--max-jobs` caps jobs submitted by
-one invocation; it is not a cluster-wide concurrency limit. Starts do not wait,
-so Fuzzball can schedule recordings concurrently. Configure actual concurrency
-through cluster quotas/resources.
-
-Per-job CLI receipts and an fsynced `submissions.jsonl` persist accepted and
-failed submission attempts. If a later submission fails, earlier workflows are
-left running, not silently cancelled or automatically resubmitted. Inspect
-receipts and workflow status before retrying: submission is not completion.
-Wait for every workflow to succeed before running the post-batch backup;
-database schema migration and backups are not duplicated in each worker.
-
-Workers invoke `chi-ciq-ingest --input-file <assigned-path> --expected-sha256
-<hash> --namespace recordings`; they never scan and process every file mounted
-on their node. `--force` on the dispatcher propagates to each worker. Same-source
-database locks and atomic publication still protect overlapping/retried jobs;
-different recordings can write concurrently. Both initial builds and periodic
-updates use this fan-out; external scheduling and cluster submission remain
-deferred until networking is available.
+`chi-ciq-dispatch` and its per-recording submission workflow remain available
+for larger recording batches. They are intentionally not used by the current
+one-recording setup.
 
 ## Ingestion versus updates
 

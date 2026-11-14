@@ -1,17 +1,16 @@
 # Pipeline containers
 
-[Project overview](../../README.md) | [Downloads](downloads/README.md) | [Transcription](transcription/README.md) | [Documents](documents/README.md) | [Analytics](analytics/README.md)
+[Project overview](../../README.md) | [Downloads](downloads/README.md) | [Transcription](transcription/README.md) | [Documents](documents/README.md)
 
 Run shell examples from the repository root, not this module directory.
 
 ## Module ownership
 
-- [Downloads](downloads/README.md) acquires complete MP4 files before dispatch.
+- [Downloads](downloads/README.md) acquires complete MP4 files onto shared input storage.
 - [Transcription](transcription/README.md) handles initial database building and
-  periodic updates through the same per-recording worker image.
+  periodic updates by processing the mounted recordings directory in one batch.
 - [Documents](documents/README.md) mirrors supported document trees into a
   separate pgvector database using CPU text embeddings by default.
-- [Analytics](analytics/README.md) remains unimplemented.
 
 Python imports use `pipelines.transcription`, `databases.meetings`, and `web`;
 the former `transcription` and `chi_ciq` paths have been removed. Persistence
@@ -40,13 +39,23 @@ submissions build initially and update subsequently; no polling daemon or
 schedule is implemented in the worker. Its current local GPU configuration
 matches the development shell's NVIDIA requirements.
 
-## Fuzzball draft and deferred delivery
+## Fuzzball pipeline notes
 
-[fuzzball.draft.yaml](../../fuzzball.draft.yaml) records container ownership, storage boundaries, initial
-build/update sequences, and web release stages. It is an **architecture draft,
-not an executable Fuzzfile or a validated Fuzzball schema**. Do not submit it.
-Registry images, persistent volume bindings, secrets, private ingress, scheduler,
-and cluster-compatible YAML must be resolved when hackathon networking is
-available. No Fuzzball deployment or CI/CD pipeline is claimed to be operational.
-The draft explicitly keeps database lifetimes independent of finite pipeline
-jobs and replaceable web releases.
+[fuzzball.draft.yaml](../../fuzzball.draft.yaml) records the mounted-input
+pipeline design, not an executable Fuzzfile or validated cluster schema. The CLI
+reports an enabled persistent `shared/datasets` volume backed by external NFS
+and an enabled persistent `team8/volume_test` volume; both report zero bytes.
+An inspection workflow was submitted to list mounted files, but remained queued
+for capacity, so volume contents are **not verified**. The project checkout
+contains 202 transcript `.txt` files and one MP4; stage these under
+`/datasets/Transcripts` and `/datasets/mp4` before submitting ingestion jobs.
+The separate test volume is not used by the pipelines.
+
+The transcription batch mounts the recordings directory read-only and processes
+all discovered MP4 files in that job. The documents batch mounts the transcript
+directory read-only and ingests its supported files. Downloads and completed
+database backups are the only pipeline writers to the shared volume.
+Credentials remain cluster secrets. The Fuzzball workflow schema, registry
+images, database endpoints, and secret bindings still need confirmation before
+deployment. The per-recording dispatcher remains available for larger workloads
+but is not part of this current one-recording pipeline setup.

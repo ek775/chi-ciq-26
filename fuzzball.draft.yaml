@@ -1,7 +1,51 @@
-# Architecture draft, NOT a runnable Fuzzfile or a validated Fuzzball schema.
-# Translate to the cluster's supported schema after networking is available.
-# No cluster IDs, secrets, storage bindings, endpoint routing, or registry chosen.
+# Architecture notes, not an executable Fuzzfile or validated cluster schema.
+# The Fuzzball CLI reports shared/datasets as external NFS. Its file listing
+# could not be completed because the inspection workflow had no schedulable capacity.
 status: draft
+
+cluster:
+  volumes:
+    datasets:
+      reference: shared/datasets
+      provisioner: shared
+      backend: nfs
+      persistent: true
+      metadata-reported-size-bytes: 0
+      mount-path: /datasets
+      purpose: staged-inputs-and-append-only-database-archives
+    volume-test:
+      reference: team8/volume_test
+      persistent: true
+      metadata-reported-size-bytes: 0
+      purpose: unused-by-these-pipelines
+
+data:
+  volume-content: not-verified
+  required-layout:
+    recordings: /datasets/mp4
+    transcripts: /datasets/Transcripts
+    database-archives: /datasets/database
+  repository-snapshot:
+    transcripts:
+      source: data-reference/Transcripts
+      files: 202
+      unique-content-hashes: 193
+      ingest: documents
+    recordings:
+      source: data/mp4
+      files: 1
+      size-bytes: 1723634501
+      duration-seconds: 32949.4
+      streams: [h264-video-426x240, aac-audio-48000hz]
+      ingest: transcription
+    captions:
+      source: data/vtt
+      files: 1
+      ingest: excluded-webvtt-is-not-supported-by-the-document-extractor
+    database-archives:
+      source: data/database
+      files: 2
+      ingest: excluded-backups-are-not-restored-or-used-as-live-inputs
 
 logging:
   python: json-on-stderr-via-shared.logging
@@ -11,96 +55,82 @@ logging:
   upstream-containers: native-stdout-stderr-via-fuzzball-workflow-log
   lifecycle: collect-before-workflow-deletion-or-cluster-log-expiry
 
-containers:
-  pipelines.downloads:
+pipelines:
+  downloads:
     source: src/pipelines/downloads
     dockerfile: src/pipelines/downloads/Dockerfile
-    command: [chi-ciq-download-vimeo, --output-dir, /outputs]
-    storage: [persistent-inputs-with-posix-locks-and-atomic-rename]
+    command: [chi-ciq-download-vimeo, --output-dir, /datasets/mp4]
+    volume:
+      reference: shared/datasets
+      mount-path: /datasets
+      access: read-write
     network: public-vimeo-and-cdn-egress
-    handoff: validated-complete-mp4s-to-transcription-dispatch
-  pipelines.transcription:
+    concurrency: one-downloader-writer-per-dataset-volume
+    handoff: validated-complete-mp4s-in-/datasets/mp4
+  transcription:
     source: src/pipelines/transcription
     dockerfile: src/pipelines/transcription/Dockerfile
-    command: [chi-ciq-ingest, --input-file, /inputs/assigned-recording.mp4, --namespace, recordings, --expected-sha256, assigned-content-hash]
-    distribution:
-      submitter: chi-ciq-dispatch
-      granularity: one-complete-recording-per-independent-fuzzball-workflow
-      template: cluster-specific-fuzzfile-json-required-before-submission
-      file-transfer: fuzzball-template-ingestion-from-input-uri-or-shared-read-only-volume
-      local-paths: never-assume-submitter-filesystem-exists-on-workers
-      inference: transcription-diarization-and-embeddings-in-the-same-worker
-    dependencies: [databases.meetings]
-    inputs: [complete-mp4-files]
-    storage: [read-only-inputs, model-cache]
-    resources: gpu
-  pipelines.documents:
+    command: [chi-ciq-ingest, --input-dir, /datasets/mp4, --namespace, recordings]
+    volume:
+      reference: shared/datasets
+      mount-path: /datasets
+      access: read-only
+    database-secret: DATABASE_URL
+    inference-secret: HF_TOKEN
+    resources: one-gpu
+    execution: one-batch-worker-processes-discovered-recordings-sequentially
+    job-timeout: set-from-measured-runtime-for-current-9h-recording
+    network: model-download-egress-and-private-meetings-database
+  documents:
     source: src/pipelines/documents
     dockerfile: src/pipelines/documents/Dockerfile
-    command: [chi-ciq-ingest-documents, --input-dir, /inputs, --namespace, documents]
-    dependencies: [databases.documents]
-    inputs: [directory-tree-of-txt-markdown-pdf-docx-html]
-    storage: [read-only-input-tree, documents-model-cache]
+    command:
+      [chi-ciq-ingest-documents, --input-dir, /datasets/Transcripts, --namespace, transcripts]
+    volume:
+      reference: shared/datasets
+      mount-path: /datasets
+      access: read-only
+    database-secret: DOCUMENTS_DATABASE_URL
+    input-format: utf8-txt-only-for-current-corpus
     inference: local-text-embeddings-cpu-default
     network: model-download-egress-and-private-documents-database
-  pipelines.analytics:
-    source: src/pipelines/analytics
-    status: unimplemented
-    dependencies: [databases.meetings, databases.documents]
-  web:
-    source: src/web
-    dockerfile: src/web/Dockerfile
-    command: [chi-ciq-web]
-    dependencies: [databases.meetings]
-    readiness: /ready
-    port: 8080
-    access: private
-  vllm:
-    source: src/vllm
-    image: docker://vllm/vllm-openai:v0.32.0
-    resources: gpu
-    storage: [vllm-model-cache]
-    access: private
-  databases.meetings:
-    source: src/databases/meetings
-    image: docker://pgvector/pgvector:pg17
-    storage: [dedicated-persistent-pgdata]
-    lifecycle: independent-of-pipelines-and-web-releases
-    maintenance:
-      dockerfile: src/databases/meetings/Dockerfile
-      migration: [chi-ciq-database, migrate]
-      backup: [chi-ciq-database, backup, --output-dir, /backups]
-  databases.documents:
-    source: src/databases/documents
-    image: docker://pgvector/pgvector:pg17
-    storage: [dedicated-documents-persistent-pgdata]
-    lifecycle: independent-of-pipelines-and-web-releases
-    maintenance:
-      dockerfile: src/databases/documents/Dockerfile
-      migration: [chi-ciq-documents-database, migrate]
-      backup: [chi-ciq-documents-database, backup, --output-dir, /backups]
+
+databases:
+  meetings:
+    management: external-to-these-pipelines
+    connection-secret: DATABASE_URL
+    migration: [chi-ciq-database, migrate]
+    backup: [chi-ciq-database, backup, --output-dir, /datasets/database/meetings]
+  documents:
+    management: external-to-these-pipelines
+    connection-secret: DOCUMENTS_DATABASE_URL
+    migration: [chi-ciq-documents-database, migrate]
+    backup:
+      [chi-ciq-documents-database, backup, --output-dir, /datasets/database/documents]
 
 workflows:
   initial-meetings-build:
-    stages: [download-public-vimeo-recordings, backup-existing-database, migrate-meetings, dispatch-per-recording-workers, wait-for-all-worker-success, backup-meetings]
+    requires: staged-recordings-under-/datasets/mp4
+    stages: [migrate-meetings, ingest-mounted-recordings, backup-meetings]
   periodic-meetings-update:
     schedule: external-scheduler-to-be-configured
-    stages: [download-public-vimeo-recordings, check-meetings-schema, dispatch-per-recording-workers, wait-for-all-worker-success, backup-meetings]
+    stages:
+      [download-public-vimeo-recordings, migrate-meetings, ingest-mounted-recordings, backup-meetings]
     semantics: skip-unchanged-and-atomically-publish-successful-replacements
   initial-documents-build:
-    stages: [backup-existing-documents-database, migrate-documents, ingest-document-tree, backup-documents]
+    requires: staged-transcripts-under-/datasets/Transcripts
+    stages: [migrate-documents, ingest-transcript-tree, backup-documents]
   periodic-documents-update:
     schedule: external-scheduler-to-be-configured
-    stages: [check-documents-schema, ingest-document-tree, backup-documents]
+    stages: [ingest-transcript-tree, backup-documents]
     semantics: skip-unchanged-atomically-replace-files-retain-removed-files-and-directories
-  web-release:
-    stages: [build-immutable-image, check-meetings-schema, start-web, verify-readiness]
-    cutover: explicit-after-readiness
-    preserve: [live-databases, previous-web-release-until-cutover]
 
 constraints:
-  - Never mount one PostgreSQL data directory into concurrent database containers.
-  - Never restore or overwrite the live database during pipeline updates.
-  - Store connection credentials in cluster secrets, not this file.
-  - Completed database archives are append-only.
-  - Do not submit until registry, secrets, storage, networking and schema are confirmed.
+  - Stage repository inputs into shared/datasets before starting workers; submitter-local paths are not worker paths.
+  - Mount inputs read-only in ingestion jobs; only downloads and backup jobs write to the dataset volume.
+  - Confirm shared NFS supports the POSIX locks and atomic rename required by downloads and backups.
+  - Set transcription job timeout from a measured run of the 9h recording; do not assume the default job lifetime is sufficient.
+  - Never restore database archives or overwrite a live database during pipeline updates.
+  - Keep database connection credentials in cluster secrets, not this file.
+  - Do not use team8/volume_test as a pipeline input or output.
+  - Do not submit until volume contents, database endpoints, secrets, registry images, and Fuzzball schema are confirmed.

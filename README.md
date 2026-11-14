@@ -1,24 +1,27 @@
 # Chicago meeting ingestion and web services
 
 Container-oriented pipelines acquire public recordings, transcribe and diarize
-them locally, and publish results to PostgreSQL/pgvector for a read-only web UI.
-Fuzzball distribution is prepared but cluster deployment remains unverified.
+them, and publish results to PostgreSQL/pgvector for a read-only web UI. The
+Fuzzball draft stages inputs from the cluster's shared dataset volume and runs
+batch ingestion; the volume's file listing could not be verified because the
+inspection job remained unscheduled.
 
 ## Architecture and module guides
 
 ```text
-Vimeo acquisition -> complete MP4 inputs -> transcription workers
+Vimeo acquisition -> shared dataset volume -> transcription batch
                                                |
                                       PostgreSQL/pgvector -> web UI/API
                                                |
                                         database backups
+transcript tree -> shared dataset volume -> document batch
 ```
 
 | Module | Responsibility and detailed documentation |
 |---|---|
 | [Pipelines](src/pipelines/README.md) | Container orchestration and Fuzzball handoff |
 | [Downloads](src/pipelines/downloads/README.md) | Public Vimeo IDs, filename metadata, safe acquisition |
-| [Transcription](src/pipelines/transcription/README.md) | Per-file workers, updates, inference API, GPU setup, tests |
+| [Transcription](src/pipelines/transcription/README.md) | Mounted-input batch ingestion, updates, inference API, GPU setup, tests |
 | [Document pipeline](src/pipelines/documents/README.md) | Directory-tree ingestion, extraction, and text embeddings |
 | [Analytics](src/pipelines/analytics/README.md) | Reserved; not implemented |
 | [Databases](src/databases/README.md) | Independent persistent database boundaries |
@@ -88,22 +91,29 @@ replaces updated files; removed files are retained. See the
 limits, settings, and the [database guide](src/databases/documents/README.md)
 for table mappings and vector search.
 
-## Quick worker and distribution commands
+## Quick ingestion commands
 
 ```sh
-# One recording using the transcription container:
+# Process the current recordings batch using the transcription container:
 docker compose --profile pipelines run --build --rm transcription \
-  chi-ciq-ingest --input-file /inputs/2026-11-10_budget.mp4
+  chi-ciq-ingest --input-dir /inputs --namespace recordings
 
-# With the Python package installed, prepare per-file Fuzzball jobs offline:
+# Optional per-recording fan-out for larger inputs:
 chi-ciq-dispatch --input-dir data/mp4 --output-dir data/dispatch \
   --image docker://your-registry/chi-ciq-transcription:commit-tag
 ```
 
 [fuzzball.draft.yaml](fuzzball.draft.yaml) is an architecture draft, **not a
-submittable Fuzzfile**. Actual submission needs a logged-in context and a
-cluster-specific template for storage, secrets, resources, and networking.
-See the [fan-out guide](src/pipelines/transcription/README.md#transcription-fan-out).
+submittable Fuzzfile**. It reflects the CLI inventory: `shared/datasets` is an
+enabled persistent external NFS volume with reported size 0, and
+`team8/volume_test` is a separate enabled persistent volume, also reporting
+size 0. The local checkout contains 202 UTF-8 transcript files, one 1.7 GB MP4 with H.264 video and AAC
+audio lasting about 9 hours, one VTT caption file, and two database dumps. The
+VTT and dumps are deliberately not pipeline inputs: the document extractor does
+not support VTT, and database archives must not be restored during ingestion.
+The mounted volume's contents remain unverified, so stage the local input tree
+there before running jobs.
+See the [Fuzzball pipeline notes](src/pipelines/README.md#fuzzball-pipeline-notes).
 
 ## Logging
 

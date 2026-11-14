@@ -7,6 +7,21 @@ directory tree and publishes extracted text plus local sentence-transformer
 embeddings to a **separate** PostgreSQL/pgvector documents database.
 Acquisition and scheduling remain upstream responsibilities.
 
+The current repository corpus has 202 `.txt` files under
+`data-reference/Transcripts`. For Fuzzball, stage that directory at
+`/datasets/Transcripts`, mount it read-only at `/inputs`, and run:
+
+```sh
+chi-ciq-ingest-documents --input-dir /inputs --namespace transcripts
+```
+
+The `.vtt` captions and database dumps elsewhere under `data/` are not inputs:
+VTT is unsupported by the extractor, and database archives are for backup only.
+The shared volume's contents could not be verified through the CLI because the
+inspection workflow remained queued, so stage the transcript tree before
+ingestion. `fuzzball.draft.yaml` describes this input contract but is not a
+submittable Fuzzball workflow.
+
 ## Local run
 
 Set `DOCUMENTS_POSTGRES_PASSWORD` and `DOCUMENTS_INPUT_DIR` in the root `.env`
@@ -87,8 +102,7 @@ via unchanged-file checks. Removed files/directories are retained by design;
 renaming creates a new source without deleting the old one. Namespace identifies
 an input tree independently of its mount location. Use distinct namespaces for
 distinct roots. No polling daemon, scheduler, document web API, or Fuzzball
-dispatcher is included. [The topology draft](../../../fuzzball.draft.yaml)
-describes the worker but is not a runnable Fuzzfile.
+dispatcher is included.
 
 ## Validation
 
