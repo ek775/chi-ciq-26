@@ -8,9 +8,10 @@ def test_database_and_web_do_not_import_inference():
             sys.executable,
             "-c",
             (
-                "import sys; import databases.meetings.schema; import web.app; "
+                "import sys; import databases.meetings.schema; "
+                "import databases.documents.schema; import web.app; "
                 "assert not {'pipelines.transcription', 'torch', 'scipy', "
-                "'pyannote', 'whisper'} "
+                "'pyannote', 'whisper', 'sentence_transformers'} "
                 "& sys.modules.keys()"
             ),
         ],

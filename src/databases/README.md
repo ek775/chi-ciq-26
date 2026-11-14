@@ -11,8 +11,9 @@ server containers.
 - [Meetings](meetings/README.md): implemented PostgreSQL/pgvector schema and
   maintenance commands. The server uses the upstream `pgvector/pgvector:pg17`
   image; the module Dockerfile builds migration/check/backup jobs, not the server.
-- [Documents](documents/README.md): reserved namespace only; no schema, database
-  image, migrations, or service is implemented.
+- [Documents](documents/README.md): implemented PostgreSQL/pgvector registry and
+  per-directory chunk tables, with independent migration/check/backup jobs.
+  The `documents` Compose profile uses separate storage and credentials.
 
 Run backup before migration and after successful ingestion. Never restore with
 `--clean` into the live database; restore into a new empty database. Detailed

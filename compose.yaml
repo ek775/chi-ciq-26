@@ -87,6 +87,65 @@ services:
       LOG_LEVEL: ${LOG_LEVEL:-INFO}
     volumes:
       - ./data/mp4:/outputs
+  documents-db:
+    profiles: ["documents"]
+    image: pgvector/pgvector:pg17
+    environment:
+      POSTGRES_USER: documents
+      POSTGRES_DB: documents
+      # The server rejects an empty password when this opt-in profile runs.
+      POSTGRES_PASSWORD: ${DOCUMENTS_POSTGRES_PASSWORD:-}
+    ports:
+      - "127.0.0.1:5434:5432"
+    volumes:
+      - documents-postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U documents -d documents"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+  documents-migrate:
+    profiles: ["documents"]
+    build:
+      context: .
+      dockerfile: src/databases/documents/Dockerfile
+    environment:
+      LOG_LEVEL: ${LOG_LEVEL:-INFO}
+      DOCUMENTS_DATABASE_URL: postgresql+psycopg://documents:${DOCUMENTS_POSTGRES_PASSWORD:-}@documents-db:5432/documents
+    depends_on:
+      documents-db:
+        condition: service_healthy
+    command: ["chi-ciq-documents-database", "migrate"]
+  documents:
+    profiles: ["documents"]
+    build:
+      context: .
+      dockerfile: src/pipelines/documents/Dockerfile
+    init: true
+    volumes:
+      - ${DOCUMENTS_INPUT_DIR:-./data-reference}:/inputs:ro
+      - documents-model-cache:/root/.cache
+    environment:
+      LOG_LEVEL: ${LOG_LEVEL:-INFO}
+      HF_TOKEN: ${HF_TOKEN:-}
+      DOCUMENTS_DATABASE_URL: postgresql+psycopg://documents:${DOCUMENTS_POSTGRES_PASSWORD:-}@documents-db:5432/documents
+    depends_on:
+      documents-migrate:
+        condition: service_completed_successfully
+  documents-backup:
+    profiles: ["documents"]
+    build:
+      context: .
+      dockerfile: src/databases/documents/Dockerfile
+    volumes:
+      - ./data/documents-database:/backups
+    environment:
+      LOG_LEVEL: ${LOG_LEVEL:-INFO}
+      DOCUMENTS_DATABASE_URL: postgresql+psycopg://documents:${DOCUMENTS_POSTGRES_PASSWORD:-}@documents-db:5432/documents
+    depends_on:
+      documents-db:
+        condition: service_healthy
+    command: ["chi-ciq-documents-database", "backup", "--output-dir", "/backups"]
   meetings-backup:
     profiles: ["pipelines"]
     build:
@@ -158,5 +217,7 @@ services:
 
 volumes:
   postgres-data:
+  documents-postgres-data:
+  documents-model-cache:
   model-cache:
   vllm-model-cache:

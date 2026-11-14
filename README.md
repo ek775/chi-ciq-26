@@ -19,11 +19,11 @@ Vimeo acquisition -> complete MP4 inputs -> transcription workers
 | [Pipelines](src/pipelines/README.md) | Container orchestration and Fuzzball handoff |
 | [Downloads](src/pipelines/downloads/README.md) | Public Vimeo IDs, filename metadata, safe acquisition |
 | [Transcription](src/pipelines/transcription/README.md) | Per-file workers, updates, inference API, GPU setup, tests |
-| [Document pipeline](src/pipelines/documents/README.md) | Reserved; not implemented |
+| [Document pipeline](src/pipelines/documents/README.md) | Directory-tree ingestion, extraction, and text embeddings |
 | [Analytics](src/pipelines/analytics/README.md) | Reserved; not implemented |
 | [Databases](src/databases/README.md) | Independent persistent database boundaries |
 | [Meetings database](src/databases/meetings/README.md) | Schema, vectors, recording metadata, migrations, backups |
-| [Documents database](src/databases/documents/README.md) | Reserved; not implemented |
+| [Documents database](src/databases/documents/README.md) | Per-directory pgvector tables, full text, migrations, backups |
 | [Web](src/web/README.md) | Transcript browsing/search API and access controls |
 | [vLLM](src/vllm/README.md) | Optional upstream text-inference service |
 
@@ -65,6 +65,28 @@ see the [downloads guide](src/pipelines/downloads/README.md).
 Unchanged transcription inputs are skipped. Changed inputs replace the previous
 published run only after successful processing; failures preserve published
 results. Backups are append-only. See the [update contract](src/pipelines/transcription/README.md#ingestion-versus-updates).
+
+## Documents to database
+
+The independent documents container mirrors directories as chunk tables and
+preserves each file's full extracted text and relative path. TXT/Markdown, PDF,
+DOCX, and HTML are supported with local embeddings shared with transcription.
+Set `DOCUMENTS_POSTGRES_PASSWORD` and `DOCUMENTS_INPUT_DIR` in `.env`
+(default input: `data-reference`).
+
+```sh
+docker compose --profile documents up -d documents-db
+docker compose --profile documents run --build --rm documents-backup
+docker compose --profile documents run --build --rm documents-migrate
+docker compose --profile documents run --build --rm documents
+docker compose --profile documents run --build --rm documents-backup
+```
+
+CPU inference is the default. Re-running skips unchanged files and atomically
+replaces updated files; removed files are retained. See the
+[document pipeline guide](src/pipelines/documents/README.md) for extraction
+limits, settings, and the [database guide](src/databases/documents/README.md)
+for table mappings and vector search.
 
 ## Quick worker and distribution commands
 

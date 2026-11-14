@@ -6,6 +6,8 @@ from uuid import UUID
 from sqlalchemy import Engine, select, text
 from sqlalchemy.orm import sessionmaker
 
+from shared.embeddings import validate_vector
+
 from .metadata import MeetingMetadata
 from .models import Base, Meeting, Speaker, TranscriptSegment
 from .schema import connect_database
@@ -17,15 +19,6 @@ def create_database(url: str) -> Engine:
         connection.execute(text("CREATE EXTENSION IF NOT EXISTS vector"))
         Base.metadata.create_all(connection)
     return engine
-
-
-def validate_vector(values: Sequence[float]) -> list[float]:
-    vector = [float(value) for value in values]
-    if not vector or not all(math.isfinite(value) for value in vector):
-        raise ValueError("Embeddings must be nonempty and contain only finite numbers")
-    if not any(vector):
-        raise ValueError("Embeddings must not be zero vectors")
-    return vector
 
 
 class TranscriptStore:
