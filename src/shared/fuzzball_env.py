@@ -129,15 +129,14 @@ def sync_values(fuzzball: str, values: dict[str, str]) -> None:
             continue
         ref = f"secret://user/chi-ciq-{VARIABLES[name]}"
         action = "update" if ref in refs else "create"
-        arguments = ["secret", action, ref]
-        if action == "create":
-            arguments.extend(["--type", "value"])
-        # JSON handles quotes and multiline values without
-        # putting credentials in argv or temporary files.
+        # The CLI stores the text it reads on stdin as the secret value itself.
+        # A JSON wrapper here becomes the value: LOG_LEVEL then reads
+        # '{"type": "value", "secret": {"value": "INFO"}}'. Stdin also keeps
+        # credentials out of argv and temporary files.
         run_cli(
             fuzzball,
-            arguments,
-            payload=json.dumps({"type": "value", "secret": {"value": value}}),
+            ["secret", action, ref],
+            payload=value,
         )
         print(f"{action}: {name} -> {ref}")
 

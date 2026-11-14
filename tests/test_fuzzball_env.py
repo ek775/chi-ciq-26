@@ -82,16 +82,16 @@ def test_sync_pipes_values_and_updates_only_existing_user_value_secrets(
         "update",
         "secret://user/chi-ciq-hf-token",
     ]
-    assert json.loads(calls[1][1]["input"]) == {
-        "type": "value",
-        "secret": {"value": "private\nquoted'\""},
-    }
-    assert calls[2][0][-2:] == ["--type", "value"]
-    assert json.loads(calls[2][1]["input"]) == {
-        "type": "value",
-        "secret": {"value": "DEBUG"},
-    }
-    assert calls[2][0][2] == "create"
+    # The CLI stores stdin as the value itself, so stdin must be the bare value.
+    # A JSON wrapper made every job fail with "Invalid LOG_LEVEL: '{...}'".
+    assert calls[1][1]["input"] == "private\nquoted'\""
+    assert calls[2][0] == [
+        "fuzzball",
+        "secret",
+        "create",
+        "secret://user/chi-ciq-log-level",
+    ]
+    assert calls[2][1]["input"] == "DEBUG"
     assert "private" not in capsys.readouterr().out
     assert "private" not in repr([command for command, _ in calls])
     assert all(kwargs["capture_output"] for _, kwargs in calls)
