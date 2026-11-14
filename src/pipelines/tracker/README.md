@@ -12,18 +12,15 @@ reviewed follow-up and digest citation is resolved to a verified statement ID.
 An invalid quote is rejected. If a digest or follow-up references a rejected
 quote, the build fails so that it cannot publish a broken citation.
 
-## Run the demo
+## Build and query
 
-Load the seed into a development database using the
-[commitment demo instructions](../../../data-reference/commitment-demo/README.md).
-Install the project with `python -m pip install -e .` to expose the CLI.
-Use the reader connection URL in `MEETINGS_DATABASE_URL`. To include official
-actions, extract the relevant `Legislation/SO2025-0021894.json` from the
-January 21 City Council directory in the archive. Run from the repo root:
+Point `MEETINGS_DATABASE_URL` at the current meetings database using a
+reader connection. Install the project with `python -m pip install -e .`
+to use the CLI outside the container.
 
 ```sh
 chi-ciq-tracker build \
-  --candidates data-reference/commitment-demo/candidates.json \
+  --candidates /path/to/candidates.json \
   --evidence-dir data-reference/evidence \
   --legislation /path/to/Legislation/SO2025-0021894.json \
   --output-dir data/tracker/congress-theater
@@ -54,12 +51,12 @@ chi-ciq-tracker query data/tracker/congress-theater/tracker.json \
 
 This returns cited data for a later answer layer. Person queries include
 speech only when the evidence resolves a person ID. Unknown speakers are
-still available in the full dataset. The demo speech covers selected
-excerpts about one agenda item.
+still available in the full dataset.
 
 ## Point it at real transcripts
 
-Use the candidate manifest in the demo as a template. Set each
+Use the [candidate fixture](../../../tests/fixtures/tracker/candidates.json)
+as a schema example. Set each
 `published_source_key` to the existing key in `published_sources` and
 `segment_sequence` to the referenced transcript segment. Supply the
 original recording ID and URL from a reviewed recording mapping. For clips,
@@ -85,9 +82,8 @@ keep serving its dashboard. Both jobs are CPU-only.
    The dump must be readable by the restore job on the shared datasets volume.
 2. In `TRACKER_INPUT_DIR` on that volume, stage `candidates.json` for the
    transcripts in the dump, an `evidence/` directory of JSONL records, and
-   optionally `Legislation/*.json` from the archive. The demo manifest refers
-   to seed-only source keys. For production transcripts, use their published
-   source keys and segment sequences. Quote candidates still need to be
+   optionally `Legislation/*.json` from the archive. Use the published
+   source keys and segment sequences from the backup. Quote candidates still need to be
    prepared before submission.
 3. Use a fresh `TRACKER_OUTPUT_DIR` for each batch. The Fuzzfile uses the
    existing `chi-ciq-postgres-password` secret for the disposable database.

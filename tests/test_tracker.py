@@ -11,7 +11,7 @@ ROOT = Path(__file__).resolve().parents[1]
 
 def demo_inputs():
     manifest = json.loads(
-        (ROOT / "data-reference/commitment-demo/candidates.json").read_text()
+        (ROOT / "tests/fixtures/tracker/candidates.json").read_text()
     )
     segments = {}
     for candidate in manifest["candidates"].values():

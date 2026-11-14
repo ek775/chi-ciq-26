@@ -58,7 +58,7 @@ record number, agenda item, and evidence IDs. Use the result when writing
 verified statements and preserve the evidence IDs for audit. The tracker
 and digest can read those enriched statements without looking up evidence
 themselves. Keep this resolver on the statement path, separate from legacy
-voiceprint-based analytics. The commitment demo's candidates carry the
+voiceprint-based analytics. The tracker candidate manifest carries the
 explicit recording IDs needed for the lookup.
 
 An evidence row must cover the quote span to supply a value. Conflicting
