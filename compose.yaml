@@ -31,7 +31,43 @@ services:
       db:
         condition: service_healthy
     command: ["sleep", "infinity"]
+  vllm:
+    image: vllm/vllm-openai:v0.32.0
+    profiles: ["ai"]
+    gpus: all
+    init: true
+    shm_size: "1gb"
+    ports:
+      - "127.0.0.1:8000:8000"
+    volumes:
+      - vllm-model-cache:/root/.cache/huggingface
+    environment:
+      HF_TOKEN: ${HF_TOKEN:-}
+    command:
+      - --model
+      - ${VLLM_MODEL:-Qwen/Qwen2.5-0.5B-Instruct}
+      - --served-model-name
+      - local-ai
+      - --host
+      - "0.0.0.0"
+      - --port
+      - "8000"
+      - --max-model-len
+      - ${VLLM_MAX_MODEL_LEN:-4096}
+      - --gpu-memory-utilization
+      - ${VLLM_GPU_MEMORY_UTILIZATION:-0.5}
+    healthcheck:
+      test:
+        - CMD
+        - python3
+        - -c
+        - "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/health', timeout=5).close()"
+      interval: 30s
+      timeout: 10s
+      start_period: 10m
+      retries: 5
 
 volumes:
   postgres-data:
   model-cache:
+  vllm-model-cache:
