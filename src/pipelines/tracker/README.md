@@ -105,3 +105,52 @@ The tracker job reports counts of accepted statements, rejected candidates,
 and imported actions. Read `tracker.json` from the output directory. The
 temporary PostgreSQL service needs enough local disk space to restore the
 meetings database, including its indexes.
+
+## Publish a completed batch to the analytics database
+
+Publishing is a separate step from the CPU build. It preserves the generated
+files for inspection and stores the same batch in the live `analytics`
+database under its own `tracker` schema:
+
+- `tracker.batches` stores coverage, digest, follow-up, and rejection details.
+- `tracker.statements` stores verified speech and its citations.
+- `tracker.actions` stores votes and sponsorships with source references.
+
+Run these commands from a machine that can reach the live analytics database.
+If it is only reachable inside the existing Fuzzball workflow, an authorized
+operator can forward the PostgreSQL service port from another terminal:
+
+```sh
+fuzzball workflow port-forward WORKFLOW_ID postgres 15432:5432
+```
+
+Use a database URL ending in `/analytics`, with host `127.0.0.1:15432` for
+that tunnel. Set `TRACKER_ANALYTICS_DATABASE_URL` using your usual secret
+handling. The schema owner runs the one-time migration. The publisher runs
+with a dedicated login provisioned by the database owner:
+
+```sh
+chi-ciq-tracker migrate
+# Switch TRACKER_ANALYTICS_DATABASE_URL to the publisher connection.
+chi-ciq-tracker publish /path/to/tracker.json --batch-id congress-theater
+```
+
+After the migration, grant the existing publisher and reader roles only the
+tracker permissions they need. For example, with roles already provisioned:
+
+```sql
+GRANT CONNECT ON DATABASE analytics TO tracker_publisher, analytics_reader;
+GRANT USAGE ON SCHEMA tracker TO tracker_publisher, analytics_reader;
+GRANT SELECT, INSERT, UPDATE ON tracker.batches TO tracker_publisher;
+GRANT SELECT, INSERT, DELETE ON tracker.statements, tracker.actions TO tracker_publisher;
+GRANT SELECT ON tracker.batches, tracker.statements, tracker.actions TO analytics_reader;
+```
+
+Run the migration and grants while connected to `analytics`. The publish
+command atomically replaces the same batch ID on rerun. It only accesses
+tracker tables. Query via the reader connection:
+
+```sh
+chi-ciq-tracker query --batch-id congress-theater \
+  --person-id 41A0E156-F788-EC11-8D20-001DD804FD38
+```

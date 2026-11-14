@@ -75,15 +75,40 @@ def main():
     build.add_argument("--legislation", type=Path, action="append", default=[])
     build.add_argument("--output-dir", type=Path, required=True)
     query = commands.add_parser("query")
-    query.add_argument("dataset", type=Path)
+    source = query.add_mutually_exclusive_group(required=True)
+    source.add_argument("dataset", type=Path, nargs="?")
+    source.add_argument("--batch-id", help="Read a published batch from PostgreSQL")
+    commands.add_parser("migrate", help="Create the tracker schema in analytics")
+    publish = commands.add_parser("publish", help="Publish a tracker.json batch to analytics")
+    publish.add_argument("dataset", type=Path)
+    publish.add_argument("--batch-id", required=True)
     query.add_argument("--person-id", required=True)
     query.add_argument("--from-date")
     query.add_argument("--through-date")
     args = parser.parse_args()
 
     try:
-        if args.command == "query":
+        if args.command in {"migrate", "publish"} or (
+            args.command == "query" and args.batch_id is not None
+        ):
+            from pipelines.tracker import database
+
+            analytics_url = os.environ.get("TRACKER_ANALYTICS_DATABASE_URL")
+            if not analytics_url:
+                parser.error("Set TRACKER_ANALYTICS_DATABASE_URL to an analytics database URL")
+            if args.command == "migrate":
+                database.migrate(analytics_url)
+                return
+            if args.command == "publish":
+                dataset = json.loads(args.dataset.read_text(encoding="utf-8"))
+                database.publish(analytics_url, args.batch_id, dataset)
+                print(f"Published tracker batch {args.batch_id}")
+                return
+            dataset = database.load_batch(analytics_url, args.batch_id)
+        elif args.command == "query":
             dataset = json.loads(args.dataset.read_text(encoding="utf-8"))
+
+        if args.command == "query":
             print(json.dumps(
                 retrieve(dataset, args.person_id, args.from_date, args.through_date),
                 indent=2, ensure_ascii=False,
