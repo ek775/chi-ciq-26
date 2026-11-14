@@ -5,9 +5,32 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "chi-ciq-transcription"
 version = "0.1.0"
-description = "Local MP4 transcription and speaker diarization workflow."
+description = "Transcript ingestion, PostgreSQL persistence, and web delivery services."
 requires-python = ">=3.12"
 dependencies = [
+    "numpy",
+    "python-dotenv",
+    "sqlalchemy",
+    "psycopg[binary]",
+    "pgvector",
+]
+
+[project.scripts]
+chi-ciq-ingest = "pipelines.transcription.pipeline:main"
+chi-ciq-dispatch = "pipelines.transcription.dispatch:main"
+chi-ciq-download-vimeo = "pipelines.downloads.vimeo:main"
+chi-ciq-database = "databases.meetings.schema:main"
+chi-ciq-web = "web.app:main"
+
+[project.optional-dependencies]
+database = []
+downloads = ["yt-dlp"]
+web = [
+    "fastapi",
+    "uvicorn",
+]
+ingestion = [
+    "scipy",
     # Hugging Face model loading and inference.
     "huggingface-hub",
     "transformers",
@@ -18,27 +41,26 @@ dependencies = [
     "torch",
     "torchaudio",
     "torchcodec",
-    "numpy",
-    "scipy",
     # Requires system FFmpeg with shared libraries (e.g. apt install ffmpeg).
     "ffmpeg-python",
     # Load HF_TOKEN from .env; gated pyannote models also require accepting terms.
-    "python-dotenv",
     "sentence-transformers",
-    "sqlalchemy",
-    "psycopg[binary]",
-    "pgvector",
     "tqdm",
 ]
-
-[project.optional-dependencies]
 dev = [
+    "scipy",
     "pytest",
     "ruff",
+    "httpx",
 ]
+
+[tool.setuptools.package-data]
+web = ["static/*"]
+"pipelines.downloads" = ["vimeo-ids.txt"]
 
 [tool.setuptools.packages.find]
 where = ["src"]
+include = ["pipelines*", "databases*", "web*", "shared*"]
 
 [tool.ruff]
 target-version = "py312"

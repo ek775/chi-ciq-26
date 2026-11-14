@@ -23,15 +23,140 @@ services:
       - .:/workspace
       - model-cache:/root/.cache
     environment:
+      LOG_LEVEL: ${LOG_LEVEL:-INFO}
       HF_TOKEN: ${HF_TOKEN:-}
       TRANSCRIPTION_INPUT_DIR: ${TRANSCRIPTION_INPUT_DIR:-data/mp4}
-      TRANSCRIPTION_OUTPUT_DIR: ${TRANSCRIPTION_OUTPUT_DIR:-data/database}
       DATABASE_URL: postgresql+psycopg://transcription:${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in .env}@db:5432/transcription
     depends_on:
       db:
         condition: service_healthy
     command: ["sleep", "infinity"]
+  meetings-migrate:
+    profiles: ["pipelines", "web"]
+    build:
+      context: .
+      dockerfile: src/databases/meetings/Dockerfile
+    environment:
+      LOG_LEVEL: ${LOG_LEVEL:-INFO}
+      DATABASE_URL: postgresql+psycopg://transcription:${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in .env}@db:5432/transcription
+    depends_on:
+      db:
+        condition: service_healthy
+    command: ["chi-ciq-database", "migrate"]
+  meetings-web-role:
+    image: pgvector/pgvector:pg17
+    profiles: ["web"]
+    environment:
+      PGPASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in .env}
+      WEB_POSTGRES_PASSWORD: ${WEB_POSTGRES_PASSWORD:?Set WEB_POSTGRES_PASSWORD in .env}
+    volumes:
+      - ./src/web/web-role.sql:/web-role.sql:ro
+    depends_on:
+      meetings-migrate:
+        condition: service_completed_successfully
+    command:
+      - psql
+      - --host=db
+      - --username=transcription
+      - --dbname=transcription
+      - --file=/web-role.sql
+  transcription:
+    profiles: ["pipelines"]
+    build:
+      context: .
+      dockerfile: src/pipelines/transcription/Dockerfile
+    gpus: all
+    init: true
+    volumes:
+      - ./data/mp4:/inputs:ro
+      - model-cache:/root/.cache
+    environment:
+      LOG_LEVEL: ${LOG_LEVEL:-INFO}
+      HF_TOKEN: ${HF_TOKEN:-}
+      DATABASE_URL: postgresql+psycopg://transcription:${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in .env}@db:5432/transcription
+    depends_on:
+      meetings-migrate:
+        condition: service_completed_successfully
+  downloads:
+    profiles: ["downloads"]
+    build:
+      context: .
+      dockerfile: src/pipelines/downloads/Dockerfile
+    init: true
+    environment:
+      LOG_LEVEL: ${LOG_LEVEL:-INFO}
+    volumes:
+      - ./data/mp4:/outputs
+  meetings-backup:
+    profiles: ["pipelines"]
+    build:
+      context: .
+      dockerfile: src/databases/meetings/Dockerfile
+    volumes:
+      - ./data/database:/backups
+    environment:
+      LOG_LEVEL: ${LOG_LEVEL:-INFO}
+      DATABASE_URL: postgresql+psycopg://transcription:${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in .env}@db:5432/transcription
+    depends_on:
+      db:
+        condition: service_healthy
+    command: ["chi-ciq-database", "backup", "--output-dir", "/backups"]
+  web:
+    profiles: ["web"]
+    build:
+      context: .
+      dockerfile: src/web/Dockerfile
+    init: true
+    ports:
+      - "127.0.0.1:8080:8080"
+    environment:
+      LOG_LEVEL: ${LOG_LEVEL:-INFO}
+      DATABASE_URL: postgresql+psycopg://web_reader:${WEB_POSTGRES_PASSWORD:?Set WEB_POSTGRES_PASSWORD in .env}@db:5432/transcription
+    depends_on:
+      meetings-web-role:
+        condition: service_completed_successfully
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8080/ready', timeout=5).close()"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+  vllm:
+    image: vllm/vllm-openai:v0.32.0
+    profiles: ["ai"]
+    gpus: all
+    init: true
+    shm_size: "1gb"
+    ports:
+      - "127.0.0.1:8000:8000"
+    volumes:
+      - vllm-model-cache:/root/.cache/huggingface
+    environment:
+      HF_TOKEN: ${HF_TOKEN:-}
+    command:
+      - --model
+      - ${VLLM_MODEL:-Qwen/Qwen2.5-0.5B-Instruct}
+      - --served-model-name
+      - local-ai
+      - --host
+      - "0.0.0.0"
+      - --port
+      - "8000"
+      - --max-model-len
+      - ${VLLM_MAX_MODEL_LEN:-4096}
+      - --gpu-memory-utilization
+      - ${VLLM_GPU_MEMORY_UTILIZATION:-0.5}
+    healthcheck:
+      test:
+        - CMD
+        - python3
+        - -c
+        - "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/health', timeout=5).close()"
+      interval: 30s
+      timeout: 10s
+      start_period: 10m
+      retries: 5
 
 volumes:
   postgres-data:
   model-cache:
+  vllm-model-cache:

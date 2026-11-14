@@ -5,7 +5,7 @@ import pytest
 from sqlalchemy import create_engine, text
 from sqlalchemy.engine import make_url
 
-from transcription import TranscriptStore, create_database
+from pipelines.transcription import TranscriptStore, create_database
 
 
 @pytest.fixture

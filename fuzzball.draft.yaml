@@ -1,0 +1,94 @@
+# Architecture draft, NOT a runnable Fuzzfile or a validated Fuzzball schema.
+# Translate to the cluster's supported schema after networking is available.
+# No cluster IDs, secrets, storage bindings, endpoint routing, or registry chosen.
+status: draft
+
+logging:
+  python: json-on-stderr-via-shared.logging
+  environment: [LOG_LEVEL, LOG_SERVICE_NAME]
+  collection: host-runs-bash-scripts/logs.sh-WORKFLOW-JOB
+  destination: data/logs/WORKFLOW/JOB.log-on-submitter
+  upstream-containers: native-stdout-stderr-via-fuzzball-workflow-log
+  lifecycle: collect-before-workflow-deletion-or-cluster-log-expiry
+
+containers:
+  pipelines.downloads:
+    source: src/pipelines/downloads
+    dockerfile: src/pipelines/downloads/Dockerfile
+    command: [chi-ciq-download-vimeo, --output-dir, /outputs]
+    storage: [persistent-inputs-with-posix-locks-and-atomic-rename]
+    network: public-vimeo-and-cdn-egress
+    handoff: validated-complete-mp4s-to-transcription-dispatch
+  pipelines.transcription:
+    source: src/pipelines/transcription
+    dockerfile: src/pipelines/transcription/Dockerfile
+    command: [chi-ciq-ingest, --input-file, /inputs/assigned-recording.mp4, --namespace, recordings, --expected-sha256, assigned-content-hash]
+    distribution:
+      submitter: chi-ciq-dispatch
+      granularity: one-complete-recording-per-independent-fuzzball-workflow
+      template: cluster-specific-fuzzfile-json-required-before-submission
+      file-transfer: fuzzball-template-ingestion-from-input-uri-or-shared-read-only-volume
+      local-paths: never-assume-submitter-filesystem-exists-on-workers
+      inference: transcription-diarization-and-embeddings-in-the-same-worker
+    dependencies: [databases.meetings]
+    inputs: [complete-mp4-files]
+    storage: [read-only-inputs, model-cache]
+    resources: gpu
+  pipelines.documents:
+    source: src/pipelines/documents
+    status: unimplemented
+    dependencies: [databases.documents]
+  pipelines.analytics:
+    source: src/pipelines/analytics
+    status: unimplemented
+    dependencies: [databases.meetings, databases.documents]
+  web:
+    source: src/web
+    dockerfile: src/web/Dockerfile
+    command: [chi-ciq-web]
+    dependencies: [databases.meetings]
+    readiness: /ready
+    port: 8080
+    access: private
+  vllm:
+    source: src/vllm
+    image: docker://vllm/vllm-openai:v0.32.0
+    resources: gpu
+    storage: [vllm-model-cache]
+    access: private
+  databases.meetings:
+    source: src/databases/meetings
+    image: docker://pgvector/pgvector:pg17
+    storage: [dedicated-persistent-pgdata]
+    lifecycle: independent-of-pipelines-and-web-releases
+    maintenance:
+      dockerfile: src/databases/meetings/Dockerfile
+      migration: [chi-ciq-database, migrate]
+      backup: [chi-ciq-database, backup, --output-dir, /backups]
+  databases.documents:
+    source: src/databases/documents
+    status: unimplemented
+    storage: [separate-persistent-storage]
+
+workflows:
+  initial-meetings-build:
+    stages: [download-public-vimeo-recordings, backup-existing-database, migrate-meetings, dispatch-per-recording-workers, wait-for-all-worker-success, backup-meetings]
+  periodic-meetings-update:
+    schedule: external-scheduler-to-be-configured
+    stages: [download-public-vimeo-recordings, check-meetings-schema, dispatch-per-recording-workers, wait-for-all-worker-success, backup-meetings]
+    semantics: skip-unchanged-and-atomically-publish-successful-replacements
+  initial-documents-build:
+    status: unimplemented
+  periodic-documents-update:
+    status: unimplemented
+  web-release:
+    stages: [build-immutable-image, check-meetings-schema, start-web, verify-readiness]
+    cutover: explicit-after-readiness
+    preserve: [live-databases, previous-web-release-until-cutover]
+
+constraints:
+  - Never mount one PostgreSQL data directory into concurrent database containers.
+  - Never restore or overwrite the live database during pipeline updates.
+  - Store connection credentials in cluster secrets, not this file.
+  - Completed database archives are append-only.
+  - Do not submit until registry, secrets, storage, networking and schema are confirmed.

@@ -1,7 +1,7 @@
-import logging
 import os
 import shutil
 import subprocess
+from datetime import UTC, datetime
 from pathlib import Path
 from types import SimpleNamespace
 from uuid import uuid4
@@ -10,33 +10,13 @@ import pytest
 from sqlalchemy import create_engine, select, text
 from sqlalchemy.engine import URL
 
-from examples import batch_transcribe as batch
-from transcription import Meeting, Speaker, TranscriptSegment, parse_filename
-
-
-def test_discovery_is_sorted_case_insensitive_and_nonrecursive(tmp_path):
-    for name in ("2026-11-11_budget.mp4", "2026-11-10_budget.MP4", "notes.txt"):
-        (tmp_path / name).touch()
-    (tmp_path / "nested").mkdir()
-    (tmp_path / "nested/invalid.mp4").touch()
-    assert [p.name for p in batch.discover_recordings(tmp_path)] == [
-        "2026-11-10_budget.MP4",
-        "2026-11-11_budget.mp4",
-    ]
-
-
-def test_discovery_rejects_missing_empty_and_invalid_inputs(tmp_path):
-    with pytest.raises(NotADirectoryError):
-        batch.discover_recordings(tmp_path / "missing")
-    with pytest.raises(ValueError, match="No MP4"):
-        batch.discover_recordings(tmp_path)
-    (tmp_path / "invalid.mp4").touch()
-    with pytest.raises(ValueError, match="Filename"):
-        batch.discover_recordings(tmp_path)
+from databases.meetings import archive
+from databases.meetings.metadata import parse_filename
+from databases.meetings.models import Meeting, Speaker, TranscriptSegment
 
 
 def test_export_is_private_atomic_and_password_not_in_arguments(tmp_path, monkeypatch):
-    monkeypatch.setattr(batch.shutil, "which", lambda name: "/usr/bin/pg_dump")
+    monkeypatch.setattr(archive.shutil, "which", lambda name: "/usr/bin/pg_dump")
     calls = []
 
     def run(command, **kwargs):
@@ -50,10 +30,10 @@ def test_export_is_private_atomic_and_password_not_in_arguments(tmp_path, monkey
         kwargs["stdout"].write(b"PGDMP")
         return SimpleNamespace(returncode=0, stderr="")
 
-    monkeypatch.setattr(batch.subprocess, "run", run)
+    monkeypatch.setattr(archive.subprocess, "run", run)
     url = "postgresql+psycopg://user:secret@localhost/transcription"
-    first = batch.export_database(url, tmp_path)
-    second = batch.export_database(url, tmp_path)
+    first = archive.export_database(url, tmp_path)
+    second = archive.export_database(url, tmp_path)
     assert first != second
     assert first.read_bytes() == second.read_bytes() == b"PGDMP"
     assert first.stat().st_mode & 0o777 == 0o600
@@ -63,7 +43,7 @@ def test_export_is_private_atomic_and_password_not_in_arguments(tmp_path, monkey
 def test_failed_export_cleans_partial_file_and_preserves_existing(
     tmp_path, monkeypatch
 ):
-    monkeypatch.setattr(batch.shutil, "which", lambda name: "/usr/bin/pg_dump")
+    monkeypatch.setattr(archive.shutil, "which", lambda name: "/usr/bin/pg_dump")
     existing = tmp_path / "existing.dump"
     existing.write_bytes(b"keep")
 
@@ -71,92 +51,41 @@ def test_failed_export_cleans_partial_file_and_preserves_existing(
         kwargs["stdout"].write(b"incomplete")
         return SimpleNamespace(returncode=1, stderr="connection refused")
 
-    monkeypatch.setattr(batch.subprocess, "run", fail)
+    monkeypatch.setattr(archive.subprocess, "run", fail)
     with pytest.raises(RuntimeError, match="connection refused"):
-        batch.export_database("postgresql+psycopg://localhost/transcription", tmp_path)
+        archive.export_database(
+            "postgresql+psycopg://localhost/transcription", tmp_path
+        )
     assert list(tmp_path.iterdir()) == [existing]
     assert existing.read_bytes() == b"keep"
 
 
 def test_export_requires_pg_dump(tmp_path, monkeypatch):
-    monkeypatch.setattr(batch.shutil, "which", lambda name: None)
+    monkeypatch.setattr(archive.shutil, "which", lambda name: None)
     with pytest.raises(FileNotFoundError, match="pg_dump"):
-        batch.export_database("postgresql://localhost/transcription", tmp_path)
+        archive.export_database("postgresql://localhost/transcription", tmp_path)
 
 
-def test_batch_closes_iterator_on_processing_error(caplog):
-    caplog.set_level(logging.INFO)
-    closed = []
+def test_export_never_overwrites_a_completed_archive(tmp_path, monkeypatch):
+    class FixedDatetime:
+        @staticmethod
+        def now(timezone):
+            return datetime(2026, 11, 14, tzinfo=UTC)
 
-    def transcribe(path):
-        try:
-            yield SimpleNamespace(
-                meeting_id="meeting",
-                speaker_id="speaker",
-                start_seconds=0,
-                end_seconds=1,
-            )
-            raise RuntimeError("model failed")
-        finally:
-            closed.append(path)
+    monkeypatch.setattr(archive, "datetime", FixedDatetime)
+    monkeypatch.setattr(archive, "uuid4", lambda: SimpleNamespace(hex="fixed"))
+    monkeypatch.setattr(archive.shutil, "which", lambda name: "/usr/bin/pg_dump")
 
-    workflow = SimpleNamespace(transcribe=transcribe)
-    with pytest.raises(RuntimeError, match="model failed"):
-        batch.transcribe_recordings(workflow, [Path("first.mp4"), Path("second.mp4")])
-    assert closed == [Path("first.mp4")]
-    assert "Video 1/2: first.mp4" in caplog.text
-    assert "Video first.mp4: failed or interrupted in" in caplog.text
-    assert "Video 2/2" not in caplog.text
+    def run(command, **kwargs):
+        kwargs["stdout"].write(b"original")
+        return SimpleNamespace(returncode=0, stderr="")
 
-
-def test_cli_env_defaults_and_overrides(tmp_path, monkeypatch):
-    inputs = tmp_path / "inputs"
-    inputs.mkdir()
-    (inputs / "2026-11-10_budget.mp4").touch()
-    output = tmp_path / "output"
-    monkeypatch.setattr(batch, "load_dotenv", lambda: None)
-    monkeypatch.setenv("TRANSCRIPTION_INPUT_DIR", str(inputs))
-    monkeypatch.setenv("TRANSCRIPTION_OUTPUT_DIR", str(output))
-    monkeypatch.setenv("DATABASE_URL", "postgresql://localhost/transcription")
-    monkeypatch.setenv("HF_TOKEN", "test-token")
-    monkeypatch.setattr(batch.shutil, "which", lambda name: "/usr/bin/pg_dump")
-    disposed = []
-    monkeypatch.setattr(
-        batch,
-        "create_database",
-        lambda url: SimpleNamespace(dispose=lambda: disposed.append(True)),
-    )
-    monkeypatch.setattr(batch, "TranscriptStore", lambda engine: engine)
-    builds = []
-    monkeypatch.setattr(
-        batch, "build_workflow", lambda store, token: builds.append(token) or object()
-    )
-    processed = []
-    monkeypatch.setattr(
-        batch, "transcribe_recordings", lambda workflow, files: processed.append(files)
-    )
-    exports = []
-    monkeypatch.setattr(
-        batch,
-        "export_database",
-        lambda url, directory: exports.append(directory) or directory / "test.dump",
-    )
-    batch.main([])
-    override = tmp_path / "override"
-    batch.main(["--input-dir", str(inputs), "--output-dir", str(override)])
-    assert builds == ["test-token", "test-token"]
-    assert processed == [[inputs / "2026-11-10_budget.mp4"]] * 2
-    assert exports == [output, override]
-    assert disposed == [True, True]
-
-    def fail(workflow, files):
-        raise RuntimeError("model failed")
-
-    monkeypatch.setattr(batch, "transcribe_recordings", fail)
-    with pytest.raises(RuntimeError, match="model failed"):
-        batch.main([])
-    assert exports == [output, override]
-    assert disposed == [True, True, True]
+    monkeypatch.setattr(archive.subprocess, "run", run)
+    first = archive.export_database("postgresql://localhost/transcription", tmp_path)
+    with pytest.raises(FileExistsError):
+        archive.export_database("postgresql://localhost/transcription", tmp_path)
+    assert first.read_bytes() == b"original"
+    assert list(tmp_path.iterdir()) == [first]
 
 
 def test_dump_restores_to_new_database(engine, store, tmp_path):
@@ -184,7 +113,7 @@ def test_dump_restores_to_new_database(engine, store, tmp_path):
         voice_embedding=[4, 5],
     )
     store.finish(meeting_id, completed=True)
-    archive = batch.export_database(
+    dump_path = archive.export_database(
         engine.url.render_as_string(hide_password=False), tmp_path
     )
     database_name = f"restore_test_{uuid4().hex}"
@@ -213,7 +142,7 @@ def test_dump_restores_to_new_database(engine, store, tmp_path):
                 "--no-owner",
                 "--no-acl",
                 "--exit-on-error",
-                str(archive),
+                str(dump_path),
             ],
             env=environment,
             check=True,

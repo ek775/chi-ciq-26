@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Chicago meeting transcripts</title>
+  <link rel="stylesheet" href="/static/style.css">
+  <script src="/static/app.js" defer></script>
+</head>
+<body>
+  <header>
+    <h1>Chicago meeting transcripts</h1>
+    <p>Browse published meetings and search transcript text.</p>
+    <form id="search">
+      <label for="query">Meeting type or transcript words</label>
+      <input id="query" type="search" maxlength="500" placeholder="Budget, public comment...">
+      <button type="submit">Search</button>
+    </form>
+  </header>
+  <p id="status" role="status" aria-live="polite"></p>
+  <main>
+    <section aria-label="Meetings">
+      <h2>Meetings</h2>
+      <ul id="meetings"></ul>
+      <button id="more-meetings" type="button" hidden>More meetings</button>
+    </section>
+    <section aria-label="Transcript">
+      <h2 id="title">Select a meeting</h2>
+      <form id="segment-search" hidden>
+        <label for="segment-query">Search within this meeting</label>
+        <input id="segment-query" type="search" maxlength="500">
+        <button type="submit">Filter transcript</button>
+      </form>
+      <ol id="segments"></ol>
+      <button id="more-segments" type="button" hidden>More transcript</button>
+    </section>
+  </main>
+</body>
+</html>

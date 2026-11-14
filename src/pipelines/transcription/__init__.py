@@ -10,8 +10,16 @@ from .backends import (
 from .database import TranscriptStore, create_database
 from .metadata import MeetingMetadata, parse_filename
 from .models import Meeting, Speaker, TranscriptSegment
-from .streaming import StreamingPyannoteDiarizer
 from .workflow import TranscriptionWorkflow
+
+
+def __getattr__(name: str):
+    if name == "StreamingPyannoteDiarizer":
+        from .streaming import StreamingPyannoteDiarizer
+
+        return StreamingPyannoteDiarizer
+    raise AttributeError(f"module {__name__!r} has no attribute {name!r}")
+
 
 __all__ = [
     "DiarizedChunk",

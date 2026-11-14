@@ -2,7 +2,7 @@ from datetime import date
 
 import pytest
 
-from transcription import parse_filename
+from pipelines.transcription import parse_filename
 
 
 @pytest.mark.parametrize(

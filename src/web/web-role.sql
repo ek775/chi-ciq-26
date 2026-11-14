@@ -1,0 +1,15 @@
+\getenv web_password WEB_POSTGRES_PASSWORD
+
+SELECT 'CREATE ROLE web_reader'
+WHERE NOT EXISTS (SELECT FROM pg_roles WHERE rolname = 'web_reader')
+\gexec
+
+ALTER ROLE web_reader
+  WITH LOGIN PASSWORD :'web_password'
+  NOSUPERUSER NOCREATEDB NOCREATEROLE NOREPLICATION NOBYPASSRLS;
+
+GRANT CONNECT ON DATABASE transcription TO web_reader;
+GRANT USAGE ON SCHEMA public TO web_reader;
+GRANT SELECT ON ALL TABLES IN SCHEMA public TO web_reader;
+ALTER DEFAULT PRIVILEGES FOR ROLE transcription IN SCHEMA public
+  GRANT SELECT ON TABLES TO web_reader;

@@ -3,7 +3,7 @@ from types import SimpleNamespace
 
 import pytest
 
-from examples import transcribe
+from pipelines.transcription import runtime as transcribe
 
 
 @pytest.mark.parametrize("available, expected", [(True, "cuda"), (False, "cpu")])
