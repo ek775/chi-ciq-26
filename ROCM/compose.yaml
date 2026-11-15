@@ -1,0 +1,324 @@
+name: chi-ciq-rocm-local
+
+x-environment: &environment
+  LOG_LEVEL: ${LOG_LEVEL:-INFO}
+  HF_TOKEN: ${HF_TOKEN:?Set HF_TOKEN in ROCM/.env and accept the pyannote model terms}
+
+x-meetings: &meetings
+  <<: *environment
+  DATABASE_URL: postgresql+psycopg://transcription:${ROCM_POSTGRES_PASSWORD:?Set ROCM_POSTGRES_PASSWORD}@meetings-db:5432/transcription
+  MEETINGS_DATABASE_URL: postgresql+psycopg://web_reader:${ROCM_POSTGRES_PASSWORD}@meetings-db:5432/transcription
+
+x-documents: &documents
+  <<: *environment
+  DOCUMENTS_DATABASE_URL: postgresql+psycopg://documents:${ROCM_POSTGRES_PASSWORD}@documents-db:5432/documents
+
+x-analytics: &analytics
+  <<: *environment
+  ANALYTICS_DATABASE_URL: postgresql+psycopg://analytics:${ROCM_POSTGRES_PASSWORD}@analytics-db:5432/analytics
+  MEETINGS_DATABASE_URL: postgresql+psycopg://web_reader:${ROCM_POSTGRES_PASSWORD}@meetings-db:5432/transcription
+  DOCUMENTS_DATABASE_URL: postgresql+psycopg://documents_reader:${ROCM_POSTGRES_PASSWORD}@documents-db:5432/documents
+  TRACKER_ANALYTICS_DATABASE_URL: postgresql+psycopg://analytics:${ROCM_POSTGRES_PASSWORD}@analytics-db:5432/analytics
+  VLLM_BASE_URL: http://vllm:8000/v1
+  VLLM_SERVED_MODEL: local-ai
+  VLLM_REASONING_EFFORT: ""
+  VLLM_REASONING_TOKENS: "0"
+  OMP_NUM_THREADS: "2"
+  MKL_NUM_THREADS: "2"
+  OPENBLAS_NUM_THREADS: "2"
+
+x-gpu: &gpu
+  devices:
+    - /dev/kfd:/dev/kfd
+    - ${ROCM_RENDER_DEVICE:-/dev/dri/renderD128}:${ROCM_RENDER_DEVICE:-/dev/dri/renderD128}
+  group_add:
+    - ${ROCM_RENDER_GID:?Set ROCM_RENDER_GID to the host render device group ID}
+  shm_size: 8gb
+  environment: &gpu-environment
+    <<: *environment
+    HIP_VISIBLE_DEVICES: ${ROCM_VISIBLE_DEVICE:-0}
+
+x-job: &job
+  profiles: [jobs]
+  init: true
+  volumes:
+    - work:/work
+    - ./scripts:/rocm:ro
+
+x-health: &db-health
+  interval: 5s
+  timeout: 5s
+  retries: 30
+
+services:
+  meetings-db:
+    image: pgvector/pgvector:pg17
+    environment:
+      POSTGRES_USER: transcription
+      POSTGRES_DB: transcription
+      POSTGRES_PASSWORD: ${ROCM_POSTGRES_PASSWORD}
+    volumes:
+      - meetings-data:/var/lib/postgresql/data
+    healthcheck:
+      <<: *db-health
+      test: [CMD-SHELL, "pg_isready -U transcription -d transcription"]
+
+  documents-db:
+    image: pgvector/pgvector:pg17
+    environment:
+      POSTGRES_USER: documents
+      POSTGRES_DB: documents
+      POSTGRES_PASSWORD: ${ROCM_POSTGRES_PASSWORD}
+    volumes:
+      - documents-data:/var/lib/postgresql/data
+    healthcheck:
+      <<: *db-health
+      test: [CMD-SHELL, "pg_isready -U documents -d documents"]
+
+  analytics-db:
+    image: pgvector/pgvector:pg17
+    environment:
+      POSTGRES_USER: analytics
+      POSTGRES_DB: analytics
+      POSTGRES_PASSWORD: ${ROCM_POSTGRES_PASSWORD}
+    volumes:
+      - analytics-data:/var/lib/postgresql/data
+    healthcheck:
+      <<: *db-health
+      test: [CMD-SHELL, "pg_isready -U analytics -d analytics"]
+
+  meetings-role:
+    <<: *job
+    image: pgvector/pgvector:pg17
+    environment:
+      PGPASSWORD: ${ROCM_POSTGRES_PASSWORD}
+      READER_PASSWORD: ${ROCM_POSTGRES_PASSWORD}
+      READER_ROLE: web_reader
+      GRANT_SOURCE_TABLES: "true"
+    command: [psql, --host=meetings-db, --username=transcription, --dbname=transcription, --no-password, --set=ON_ERROR_STOP=1, --file=/rocm/reader-role.sql]
+
+  documents-role:
+    <<: *job
+    image: pgvector/pgvector:pg17
+    environment:
+      PGPASSWORD: ${ROCM_POSTGRES_PASSWORD}
+      READER_PASSWORD: ${ROCM_POSTGRES_PASSWORD}
+      READER_ROLE: documents_reader
+      GRANT_SOURCE_TABLES: "true"
+    command: [psql, --host=documents-db, --username=documents, --dbname=documents, --no-password, --set=ON_ERROR_STOP=1, --file=/rocm/reader-role.sql]
+
+  analytics-role:
+    <<: *job
+    image: pgvector/pgvector:pg17
+    environment:
+      PGPASSWORD: ${ROCM_POSTGRES_PASSWORD}
+      READER_PASSWORD: ${ROCM_POSTGRES_PASSWORD}
+      READER_ROLE: analytics_reader
+      GRANT_SOURCE_TABLES: "false"
+    command: [psql, --host=analytics-db, --username=analytics, --dbname=analytics, --no-password, --set=ON_ERROR_STOP=1, --file=/rocm/reader-role.sql]
+
+  meetings:
+    <<: *job
+    image: chi-ciq-rocm-meetings:local
+    build:
+      context: ..
+      dockerfile: ROCM/src/databases/meetings/Dockerfile
+    environment: *meetings
+    command: [chi-ciq-database, migrate]
+
+  documents-schema:
+    <<: *job
+    image: chi-ciq-rocm-documents-db:local
+    build:
+      context: ..
+      dockerfile: ROCM/src/databases/documents/Dockerfile
+    environment: *documents
+    command: [chi-ciq-documents-database, migrate]
+
+  analytics-schema:
+    <<: *job
+    image: chi-ciq-rocm-analytics-db:local
+    build:
+      context: ..
+      dockerfile: ROCM/src/databases/analytics/Dockerfile
+    environment: *analytics
+    command: [chi-ciq-analytics-database, migrate]
+
+  analytics-export:
+    <<: *job
+    image: chi-ciq-rocm-analytics-db:local
+    environment: *analytics
+    volumes:
+      - ../data/rocm/analytics-backups:/exports
+      - ./scripts:/rocm:ro
+    command: [python, /rocm/smoke.py, export]
+
+  downloads:
+    <<: *job
+    image: chi-ciq-rocm-downloads:local
+    build:
+      context: ..
+      dockerfile: ROCM/src/pipelines/downloads/Dockerfile
+    entrypoint: [python, /rocm/smoke.py]
+    environment:
+      <<: *environment
+      ROCM_AUDIO_COUNT: ${ROCM_AUDIO_COUNT:-10}
+      ROCM_DOWNLOAD_WORKERS: ${ROCM_DOWNLOAD_WORKERS:-2}
+      ROCM_DOCUMENT_COUNT: ${ROCM_DOCUMENT_COUNT:-3}
+    volumes:
+      - work:/work
+      - ./scripts:/rocm:ro
+      - ../data-reference/Transcripts:/archive:ro
+    command: [prepare]
+
+  transcription:
+    <<: [*job, *gpu]
+    image: chi-ciq-rocm-transcription:local
+    build:
+      context: ..
+      dockerfile: ROCM/src/pipelines/transcription/Dockerfile
+    environment:
+      <<: [*meetings, *gpu-environment]
+    volumes:
+      - work:/work
+      - ./scripts:/rocm:ro
+      - torch-cache:/root/.cache
+    command: [chi-ciq-ingest, --input-dir, /work/raw, --namespace, rocm-smoke]
+
+  documents:
+    <<: *job
+    image: chi-ciq-rocm-documents:local
+    build:
+      context: ..
+      dockerfile: ROCM/src/pipelines/documents/Dockerfile
+    environment: *documents
+    volumes:
+      - work:/work
+      - ./scripts:/rocm:ro
+      - cpu-cache:/root/.cache
+    command: [chi-ciq-ingest-documents, --input-dir, /work/documents, --namespace, rocm-smoke-documents, --device, cpu]
+
+  analytics:
+    <<: *job
+    image: chi-ciq-rocm-analytics:local
+    build:
+      context: ..
+      dockerfile: ROCM/src/pipelines/analytics/Dockerfile
+    environment: *analytics
+    volumes:
+      - work:/work
+      - ./scripts:/rocm:ro
+      - cpu-cache:/root/.cache
+    command:
+      - chi-ciq-analytics
+      - run
+      - --device
+      - cpu
+      - --roster-source
+      - snapshot
+      - --stance-scope
+      - all
+      - --stance-min-words
+      - "1"
+      - --stance-limit
+      - ${ROCM_STANCE_LIMIT:-20}
+      - --stance-concurrency
+      - "1"
+      - --relevance-threshold
+      - "-1"
+      - --relevance-top-k
+      - "1"
+
+  tracker:
+    <<: *job
+    image: chi-ciq-rocm-tracker:local
+    build:
+      context: ..
+      dockerfile: ROCM/src/pipelines/tracker/Dockerfile
+    environment:
+      <<: *analytics
+    command: [python, /rocm/smoke.py, tracker]
+
+  app:
+    <<: [*job, *gpu]
+    image: chi-ciq-rocm-app:local
+    build:
+      context: ..
+      dockerfile: ROCM/Dockerfile
+    environment:
+      <<: [*meetings, *gpu-environment]
+    command: [python, /rocm/smoke.py, gpu]
+
+  vllm:
+    <<: *gpu
+    profiles: [ai]
+    image: chi-ciq-rocm-vllm:local
+    build:
+      context: ..
+      dockerfile: ROCM/src/vllm/Dockerfile
+    init: true
+    environment:
+      <<: *gpu-environment
+      VLLM_ENGINE_READY_TIMEOUT_S: "1800"
+    volumes:
+      - vllm-cache:/root/.cache/huggingface
+    command:
+      - --model
+      - ${ROCM_VLLM_MODEL:-Qwen/Qwen2.5-0.5B-Instruct}
+      - --served-model-name
+      - local-ai
+      - --host
+      - 0.0.0.0
+      - --port
+      - "8000"
+      - --max-model-len
+      - "4096"
+      - --tensor-parallel-size
+      - "1"
+      - --gpu-memory-utilization
+      - "0.8"
+      - --dtype
+      - half
+      - --enforce-eager
+    healthcheck:
+      test: [CMD, python3, -c, "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/health', timeout=5).close()"]
+      interval: 10s
+      timeout: 5s
+      start_period: 30m
+      retries: 6
+
+  web:
+    profiles: [web]
+    image: chi-ciq-rocm-web:local
+    build:
+      context: ..
+      dockerfile: ROCM/src/web/Dockerfile
+    init: true
+    ports:
+      - "127.0.0.1:${ROCM_WEB_PORT:-18080}:8080"
+    environment:
+      <<: *environment
+      DATABASE_URL: postgresql+psycopg://web_reader:${ROCM_POSTGRES_PASSWORD}@meetings-db:5432/transcription
+      ANALYTICS_DATABASE_URL: postgresql+psycopg://analytics_reader:${ROCM_POSTGRES_PASSWORD}@analytics-db:5432/analytics
+    healthcheck:
+      test: [CMD, python, -c, "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8080/ready', timeout=5).close()"]
+      interval: 5s
+      timeout: 5s
+      retries: 12
+
+  verify:
+    <<: *job
+    image: chi-ciq-rocm-tracker:local
+    environment:
+      <<: *analytics
+      DATABASE_URL: postgresql+psycopg://web_reader:${ROCM_POSTGRES_PASSWORD}@meetings-db:5432/transcription
+    command: [python, /rocm/smoke.py, verify]
+
+volumes:
+  meetings-data:
+  documents-data:
+  analytics-data:
+  work:
+  torch-cache:
+  cpu-cache:
+  vllm-cache:
