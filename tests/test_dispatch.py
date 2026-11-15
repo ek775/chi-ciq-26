@@ -85,6 +85,14 @@ def test_vimeo_mapping_is_embedded_in_worker_job_and_identity(recordings):
     assert jobs(recordings, metadata=mapping)[-1]["job.name"] != first["job.name"]
 
 
+def test_audio_meeting_map_is_forwarded_to_worker(recordings):
+    prepared = jobs(recordings, audio_meeting_map="/datasets/audio-meeting-map.json")
+    assert prepared[0]["worker.command"][-2:] == [
+        "--audio-meeting-map",
+        "/datasets/audio-meeting-map.json",
+    ]
+
+
 @pytest.mark.parametrize(
     "overrides",
     [
@@ -92,6 +100,8 @@ def test_vimeo_mapping_is_embedded_in_worker_job_and_identity(recordings):
         {"namespace": " "},
         {"worker_input_dir": "relative"},
         {"worker_input_dir": "/inputs/../secret"},
+        {"audio_meeting_map": "relative/map.json"},
+        {"audio_meeting_map": "/datasets/../secret.json"},
         {"input_base_uri": "file:///submitter/only"},
         {"input_base_uri": "https://server/files?token=secret"},
         {"input_base_uri": "https://user:password@server/files"},
@@ -256,6 +266,7 @@ def test_worker_only_processes_assigned_file(recordings, monkeypatch):
                 "force": False,
                 "expected_sha256": digest,
                 "metadata_filename": None,
+                "meeting_metadata": None,
             },
         )
     ]

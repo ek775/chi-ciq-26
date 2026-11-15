@@ -124,9 +124,35 @@ def test_migration_relaxes_legacy_meeting_metadata_constraints(engine):
         connection.execute(
             text("ALTER TABLE meetings ALTER COLUMN meeting_type SET NOT NULL")
         )
-    with pytest.raises(RuntimeError, match="metadata must allow NULL"):
+        connection.execute(
+            text(
+                "ALTER TABLE meetings ALTER COLUMN "
+                "recording_duration_seconds SET NOT NULL"
+            )
+        )
+        connection.execute(
+            text(
+                "ALTER TABLE meetings DROP CONSTRAINT "
+                "meetings_recording_duration_seconds_check"
+            )
+        )
+    with pytest.raises(RuntimeError, match="metadata and recording duration"):
         check_schema(engine)
     migrate_database(engine)
+    migrate_database(engine)
+    check_schema(engine)
+
+
+def test_migration_restores_missing_recording_duration_constraint(engine):
+    with engine.begin() as connection:
+        connection.execute(
+            text(
+                "ALTER TABLE meetings DROP CONSTRAINT "
+                "meetings_recording_duration_seconds_check"
+            )
+        )
+    with pytest.raises(RuntimeError, match="Missing recording duration constraint"):
+        check_schema(engine)
     migrate_database(engine)
     check_schema(engine)
 

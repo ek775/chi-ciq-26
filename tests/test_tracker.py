@@ -73,3 +73,31 @@ class TrackerTests(unittest.TestCase):
         self.assertEqual(result["statements"][0]["speaker"], "Confirmed name")
         self.assertEqual(result["statements"][0]["evidence_ids"], ["test-name"])
         self.assertEqual(retrieve(dataset, "person-a", "2026-01-15", None)["statements"], [])
+
+    def test_unknown_meeting_date_remains_null_and_is_excluded_from_date_ranges(self):
+        manifest, segments = demo_inputs()
+        candidate = manifest["candidates"]["report-out"]
+        segment = segments[
+            candidate["published_source_key"], candidate["segment_sequence"]
+        ]
+        segment["meeting_date"] = None
+        segment["meeting_type"] = None
+        evidence = EvidenceIndex([
+            Evidence(
+                "test-name", candidate["recording_id"],
+                candidate["start_s"], candidate["end_s"],
+                "reviewed_recording", "test recording",
+                speaker="Confirmed name", person_id="PERSON-A",
+            )
+        ])
+
+        dataset, statements = make_dataset(manifest, segments, evidence, [])
+        statement = statements["report-out"]
+        self.assertIsNone(statement["date"])
+        self.assertIsNone(statement["body"])
+        self.assertEqual(
+            len(retrieve(dataset, "person-a", None, None)["statements"]), 1
+        )
+        self.assertEqual(
+            retrieve(dataset, "person-a", "2026-01-01", None)["statements"], []
+        )

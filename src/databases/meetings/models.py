@@ -25,7 +25,8 @@ class Meeting(Base):
         CheckConstraint("status IN ('processing', 'completed', 'incomplete')"),
         CheckConstraint(
             "recording_duration_seconds >= 0 "
-            "AND recording_duration_seconds < 'Infinity'::double precision"
+            "AND recording_duration_seconds < 'Infinity'::double precision",
+            name="meetings_recording_duration_seconds_check",
         ),
     )
 

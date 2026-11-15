@@ -15,8 +15,9 @@ chi-ciq-database check
 chi-ciq-database backup --output-dir data/database
 ```
 
-Use `DATABASE_URL` for the intended database. Compose supplies container
-connections at `db:5432`; host connections use `127.0.0.1:5433`.
+Use `DATABASE_URL` and `PGPASSWORD` for the intended database in host commands.
+Compose supplies container connections at `db:5432`; host connections use
+`127.0.0.1:5433`.
 `create_database` creates missing tables but does not migrate existing ones.
 The migration command serializes additive changes and checks compatibility.
 
@@ -120,13 +121,14 @@ must call `set_recording_duration(meeting_id, duration_seconds)` before `append`
 they are never used to locate audio.
 Explicit overrides supply a date only; no meeting start time or timezone is invented.
 
-For databases created before the duration field was added, apply this schema
-change before using the updated library (`create_database` does not alter tables):
+For an existing database, run the migration before using the updated library.
+It preserves existing rows, makes meeting date/type nullable for opaque recording
+filenames, and adds the nullable duration field with its finite, nonnegative
+constraint. `create_database` only creates missing tables; it does not migrate
+existing ones.
 
-```sql
-ALTER TABLE meetings ADD COLUMN recording_duration_seconds double precision
-    CHECK (recording_duration_seconds >= 0
-           AND recording_duration_seconds < 'Infinity'::double precision);
+```sh
+chi-ciq-database migrate
 ```
 
 Existing rows remain `NULL`; backfill their duration from the original audio,

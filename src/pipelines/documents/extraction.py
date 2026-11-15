@@ -1,24 +1,108 @@
+import json
+import re
 from dataclasses import dataclass
 from io import BytesIO
-from pathlib import Path
+from pathlib import Path, PurePosixPath
 
 SUPPORTED_SUFFIXES = {".txt", ".md", ".markdown", ".pdf", ".docx", ".html", ".htm"}
-EXTRACTION_VERSION = "1"
+EXTRACTION_VERSION = "2"
+PDF_PAGE_LABEL = re.compile(r"(?m)^--- Page \d+(?: \(OCR\))? ---\s*$")
 
 
-def extract_text(content: bytes, suffix: str) -> str:
+@dataclass(frozen=True)
+class ArchivePdfSource:
+    sha256: str
+    size: int
+    text_path: Path | None
+
+
+def _archive_path(root: Path, manifest: Path, value: str, field: str) -> Path:
+    relative = PurePosixPath(value)
+    if (
+        not value
+        or "\\" in value
+        or relative.is_absolute()
+        or any(part in {"", ".", ".."} for part in relative.parts)
+    ):
+        raise ValueError(f"Invalid {field} in archive manifest {manifest}")
+    path = manifest.parent.joinpath(*relative.parts)
+    if path.is_symlink() or not path.resolve().is_relative_to(root.resolve()):
+        raise ValueError(f"{field} escapes the archive tree: {path}")
+    return path
+
+
+def discover_archive_pdf_sources(root: Path) -> dict[Path, ArchivePdfSource]:
+    sources = {}
+    for manifest in sorted(root.rglob("manifest.json")):
+        if manifest.is_symlink():
+            raise ValueError(f"Input tree contains a symlink: {manifest}")
+        data = json.loads(manifest.read_text(encoding="utf-8"))
+        if not isinstance(data, dict) or not isinstance(data.get("files"), list):
+            raise TypeError(f"Invalid archive manifest: {manifest}")
+        for item in data["files"]:
+            if not isinstance(item, dict):
+                raise TypeError(f"Invalid file record in archive manifest: {manifest}")
+            relative_path = item.get("path")
+            if not isinstance(relative_path, str) or Path(relative_path).suffix.lower() != ".pdf":
+                continue
+            source = _archive_path(root, manifest, relative_path, "path")
+            digest = item.get("sha256")
+            size = item.get("bytes")
+            if (
+                not isinstance(digest, str)
+                or not re.fullmatch(r"[0-9a-f]{64}", digest)
+                or type(size) is not int
+                or size < 0
+            ):
+                raise ValueError(f"Invalid PDF integrity metadata in {manifest}")
+            text_value = item.get("text_path")
+            if text_value is not None and not isinstance(text_value, str):
+                raise ValueError(f"Invalid PDF text_path in {manifest}")
+            text_path = (
+                _archive_path(root, manifest, text_value, "text_path")
+                if text_value
+                else None
+            )
+            if text_path is not None and text_path.suffix.lower() != ".txt":
+                raise ValueError(f"PDF text_path must end in .txt in {manifest}")
+            entry = ArchivePdfSource(digest, size, text_path)
+            if source in sources and sources[source] != entry:
+                raise ValueError(f"Conflicting PDF records in archive manifests: {source}")
+            sources[source] = entry
+    return sources
+
+
+def discover_document_sources(
+    root: Path,
+) -> tuple[list[Path], list[Path], dict[Path, ArchivePdfSource]]:
+    directories, files = discover_tree(root)
+    pdf_sources = discover_archive_pdf_sources(root)
+    sidecars = {
+        source.text_path
+        for source in pdf_sources.values()
+        if source.text_path is not None and source.text_path.is_file()
+    }
+    return directories, [path for path in files if path not in sidecars], pdf_sources
+
+
+def extract_text(content: bytes, suffix: str, *, pdf_text: bytes | None = None) -> str:
     suffix = suffix.lower()
     if suffix in {".txt", ".md", ".markdown"}:
         result = content.decode("utf-8-sig")
     elif suffix == ".pdf":
-        from pypdf import PdfReader
+        if pdf_text is not None:
+            result = pdf_text.decode("utf-8-sig")
+            if not PDF_PAGE_LABEL.sub("", result).strip():
+                result = ""
+        else:
+            from pypdf import PdfReader
 
-        reader = PdfReader(BytesIO(content), strict=True)
-        if reader.is_encrypted:
-            raise ValueError("Encrypted PDFs are not supported")
-        result = "\n\n".join(page.extract_text() or "" for page in reader.pages)
-        if reader.pages and not result.strip():
-            raise ValueError("PDF has no extractable text; OCR is required")
+            reader = PdfReader(BytesIO(content), strict=True)
+            if reader.is_encrypted:
+                raise ValueError("Encrypted PDFs are not supported")
+            result = "\n\n".join(page.extract_text() or "" for page in reader.pages)
+            if reader.pages and not result.strip():
+                raise ValueError("PDF has no extractable text; OCR is required")
     elif suffix == ".docx":
         from docx import Document
         from docx.table import Table

@@ -183,10 +183,9 @@ dashboard, now packaged to run as one Fuzzball workflow on the cluster.**
   transcription, there is still **no exposed 1-node-vs-2-node switch and no
   autoscaling measurement** — the "real, measured scaling" story the HPC judges
   want still has to be wired.
-- **Local stance model still too big by default.** Compose and the analytics
-  README still default to `zai-org/GLM-5.3-Flash` (~306 GB, needs ~8 high-end
-  GPUs), which does **not** fit the two one-GPU machines. The Fuzzball service is
-  separately pinned to `openai/gpt-oss-20b` with tensor parallelism 1.
+- **Stance model is now sized for one GPU.** Compose and Fuzzball both use
+  `openai/gpt-oss-20b` with tensor parallelism 1, replacing the former
+  `zai-org/GLM-5.3-Flash` default that required multiple high-end GPUs.
 
 What the code got right and is worth keeping: "expensive pass once -> thin views"
 structure; three isolated databases with a read-only web role; incremental /

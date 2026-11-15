@@ -1,4 +1,5 @@
 import hashlib
+import json
 import os
 from concurrent.futures import ThreadPoolExecutor
 from io import BytesIO
@@ -17,7 +18,12 @@ from databases.documents.schema import (
     migrate_database,
     source_key,
 )
-from pipelines.documents.extraction import discover_tree, extract_text, split_text
+from pipelines.documents.extraction import (
+    discover_document_sources,
+    discover_tree,
+    extract_text,
+    split_text,
+)
 from pipelines.documents.pipeline import DocumentPipeline, main
 from shared.embeddings import SentenceTextEmbedder
 
@@ -144,6 +150,20 @@ def test_pdf_extraction():
     assert extract_text(pdf_bytes(), ".pdf") == "PDF text"
 
 
+def test_archive_pdf_text_sidecar_supplies_ocr():
+    assert (
+        extract_text(
+            b"not a PDF",
+            ".pdf",
+            pdf_text=b"--- Page 1 (OCR) ---\nRecognized agenda text",
+        )
+        == "--- Page 1 (OCR) ---\nRecognized agenda text"
+    )
+    assert extract_text(
+        b"not a PDF", ".pdf", pdf_text=b"--- Page 1 ---\n\n"
+    ) == ""
+
+
 def test_pdf_missing_text_requires_ocr():
     with pytest.raises(ValueError, match="OCR"):
         extract_text(pdf_bytes(blank=True), ".pdf")
@@ -195,6 +215,39 @@ def test_discovery_preserves_empty_directories_and_ignores_other_files(tmp_path)
     dirs, files = discover_tree(tmp_path)
     assert dirs == [tmp_path, tmp_path / "empty"]
     assert files == [tmp_path / "UPPER.TXT"]
+
+
+def test_archive_manifests_pair_pdf_and_omit_text_sidecar(tmp_path):
+    meeting = tmp_path / "2026-11" / "2026-11-04 Committee [id]"
+    documents_dir = meeting / "Documents"
+    documents_dir.mkdir(parents=True)
+    pdf = documents_dir / "001 Agenda.pdf"
+    text = documents_dir / "001 Agenda.txt"
+    pdf_content = b"archive PDF"
+    pdf.write_bytes(pdf_content)
+    text.write_text("--- Page 1 (OCR) ---\nMeeting agenda", encoding="utf-8")
+    (meeting / "manifest.json").write_text(
+        json.dumps(
+            {
+                "files": [
+                    {
+                        "path": "Documents/001 Agenda.pdf",
+                        "text_path": "Documents/001 Agenda.txt",
+                        "bytes": len(pdf_content),
+                        "sha256": hashlib.sha256(pdf_content).hexdigest(),
+                    }
+                ]
+            }
+        ),
+        encoding="utf-8",
+    )
+
+    _, files, pdf_sources = discover_document_sources(tmp_path)
+
+    assert pdf in files
+    assert text not in files
+    assert pdf_sources[pdf].text_path == text
+    assert pdf_sources[pdf].sha256 == hashlib.sha256(pdf_content).hexdigest()
 
 
 def test_discovery_rejects_links_and_missing_root(tmp_path):
@@ -324,6 +377,46 @@ def test_updates_skip_replace_and_retain_removed(pipeline, documents_engine, tmp
     assert pipeline.ingest_tree(tmp_path) == 0
     with documents_engine.connect() as connection:
         assert connection.execute(select(documents.c.text)).scalar_one() == "New text"
+
+
+def test_archive_pdf_ingests_ocr_sidecar_once_and_tracks_sidecar_changes(
+    pipeline, documents_engine, tmp_path
+):
+    meeting = tmp_path / "Meeting"
+    documents_dir = meeting / "Documents"
+    documents_dir.mkdir(parents=True)
+    pdf = documents_dir / "001 Agenda.pdf"
+    text = documents_dir / "001 Agenda.txt"
+    pdf_content = pdf_bytes()
+    pdf.write_bytes(pdf_content)
+    text.write_text("--- Page 1 (OCR) ---\nInitial agenda", encoding="utf-8")
+    assert pipeline.ingest_tree(tmp_path, namespace="clerk") == 2
+    (meeting / "manifest.json").write_text(
+        json.dumps(
+            {
+                "files": [
+                    {
+                        "path": "Documents/001 Agenda.pdf",
+                        "text_path": "Documents/001 Agenda.txt",
+                        "bytes": len(pdf_content),
+                        "sha256": hashlib.sha256(pdf_content).hexdigest(),
+                    }
+                ]
+            }
+        ),
+        encoding="utf-8",
+    )
+
+    assert pipeline.ingest_tree(tmp_path, namespace="clerk") == 1
+    with documents_engine.connect() as connection:
+        rows = connection.execute(select(documents.c.filename, documents.c.text)).all()
+    assert rows == [("001 Agenda.pdf", "--- Page 1 (OCR) ---\nInitial agenda")]
+
+    text.write_text("--- Page 1 (OCR) ---\nRevised agenda", encoding="utf-8")
+    assert pipeline.ingest_tree(tmp_path, namespace="clerk") == 1
+    with documents_engine.connect() as connection:
+        rows = connection.execute(select(documents.c.filename, documents.c.text)).all()
+    assert rows == [("001 Agenda.pdf", "--- Page 1 (OCR) ---\nRevised agenda")]
 
 
 def test_embedding_failure_preserves_previous_content(
