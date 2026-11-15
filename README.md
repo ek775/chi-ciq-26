@@ -160,9 +160,14 @@ chi-ciq-dispatch --input-dir data/mp4 --output-dir data/dispatch \
 
 ## Fuzzball deployment
 
-[fuzzball.yaml](fuzzball.yaml) is an executable v4 deployment Fuzzfile, validated
-with CLI v4.3.1. It uses the existing persistent volumes `shared/datasets` and
-`team8/volume_test`, and `team8/postgres-data` for the database. PostgreSQL and vLLM run as services of this workflow; see
+[fuzzball.yaml](fuzzball.yaml) is a v4 deployment Fuzzfile. Local tests cover its
+YAML structure, job dependencies, and embedded scripts; run
+`fuzzball workflow validate fuzzball.yaml` against the target cluster before
+starting it. It uses the cluster volumes `shared/datasets` and
+`team8/volume_test`, and expects `team8/postgres-data-v2` for the database.
+Verify that this is the intended existing database volume before launch; using
+an empty or incorrect volume could initialize a new database. PostgreSQL and
+vLLM run as services of this workflow; see
 [PostgreSQL service](#postgresql-service) and [vLLM service](#vllm-service).
 
 The workflow starts PostgreSQL, creates the databases and reader roles, backs up
@@ -175,18 +180,19 @@ mentions, sentiment, emotion, and topics run in parallel. Sentiment and emotion
 each use 32 shards with four active CPU tasks. Stance waits for topics
 attribution and the ready vLLM service, and uses 32 shards with four active
 tasks, each sending at most two vLLM requests (eight across the array). Dashboard
-refresh waits for every analysis branch. Completed document and analytics backups
-and reader/schema checks gate the persistent web service. The meetings database
-is not dumped by this workflow; its data remains on the persistent PostgreSQL
-volume. Failed jobs prevent dependent deployment.
+refresh waits for every analysis branch. The meetings database is backed up
+after transcription; documents and analytics are backed up after their
+respective ingestion and refresh jobs. Reader/schema checks gate the persistent
+web service. Failed jobs prevent dependent deployment.
 
 ### PostgreSQL service
 
 The `postgres` service of [fuzzball.yaml](fuzzball.yaml) is PostgreSQL 17 with
-pgvector (`pgvector/pgvector:pg17`, arm64). Its data directory is on the
-persistent NFS volume `team8/postgres-data`, so the databases survive a stop, a
-failure, or a move to a different node. The service has `persist: true`: it runs
-until you stop the workflow.
+pgvector (`pgvector/pgvector:pg17`, arm64). Its data directory is configured on
+the persistent NFS volume `team8/postgres-data-v2`, so the databases survive a
+stop, a failure, or a move to a different node. Confirm that this is the
+intended existing volume before launch. The service has `persist: true`: it
+runs until you stop the workflow.
 
 ```mermaid
 flowchart LR
@@ -196,7 +202,7 @@ flowchart LR
     pipeline_jobs["Backup, migration, ingestion<br/>and analytics jobs"]
     web_service["Service web"]
   end
-  data_volume[("Volume team8/postgres-data<br/>NFS, persistent")]
+  data_volume[("Volume team8/postgres-data-v2<br/>NFS, persistent")]
   password_secret["Secret chi-ciq-postgres-password"]
   provision_job -->|"creates databases and reader roles"| postgres_service
   pipeline_jobs -->|"postgres:5432 as postgres"| postgres_service
@@ -222,11 +228,10 @@ flowchart LR
   the service claims port 5432 on its node. Stop the workflow before you start
   another copy.
 
-One-time setup (the PostgreSQL volume already exists on the hackathon cluster;
-create the model-cache volume once):
+One-time setup (create the model-cache volume once; do not create a replacement
+PostgreSQL volume if the configured existing volume is missing):
 
 ```sh
-fuzzball volume create team8 postgres-data
 fuzzball volume create team8 vllm-model-data
 ```
 
@@ -280,12 +285,12 @@ the local Compose deployment remains configurable independently.
 ### Build and publish
 
 The [Build and publish Fuzzball images workflow](.github/workflows/build-publish-images.yml)
-builds the seven service images on a native ARM64 GitHub-hosted runner and
+builds the eight application images on a native ARM64 GitHub-hosted runner and
 publishes them to GHCR. It runs on relevant pushes to `main` or can be started
 manually from the Actions tab. Each image gets a `sha-<commit>` tag; builds on
 the default branch also update the `fuzzball` tag used by this Fuzzfile.
-For an immutable deployment, replace the `fuzzball` tag in all seven image
-definitions with that build's full `sha-<commit>` tag.
+For an immutable deployment, replace the `fuzzball` tag in all eight application
+image references with that build's full `sha-<commit>` tag.
 
 Make the images readable by cluster workers, or add a singular `image.secret`
 registry reference to each image definition (the anchored definitions cover
@@ -306,7 +311,7 @@ ingestion run. Worker paths are not submitter-local paths:
 |---|---|
 | `team8/volume_test` mounted at `/volume` | Complete MP4 files directly under `/volume/audio`; recursive document tree under `/volume/chicago-city-council-archive/Meetings` |
 | `shared/datasets` mounted at `/datasets` | Required `/datasets/audio-meeting-map.json` for transcription; optional roster and speaker-label CSVs under `/datasets/analytics` |
-| `team8/database-backups` mounted at `/backups` in backup jobs | Writable `/backups/documents` and `/backups/analytics` |
+| `team8/database-backups` mounted at `/backups` in backup jobs | Writable `/backups/meetings`, `/backups/documents`, and `/backups/analytics` |
 | `team8/vllm-model-data` mounted at `/root/.cache/huggingface` | Persistent Hugging Face model cache |
 
 `/volume/audio` is the flat audio inventory; the nested

@@ -496,7 +496,7 @@ jobs:
 
 services:
   # Jobs reach the database as postgres:5432. The data directory is on the
-  # persistent volume team8/postgres-data and survives workflow teardown.
+  # persistent volume team8/postgres-data-v2 and survives workflow teardown.
   postgres:
     image: *postgres-image
     env:
