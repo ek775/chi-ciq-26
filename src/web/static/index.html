@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#f5f4ed">
-  <title>Alder Audit | Chicago, on the record</title>
+  <meta name="theme-color" content="#f7fbff">
+  <title>Alder Audit | Chicago City Council</title>
   <link rel="stylesheet" href="/static/style.css">
   <script src="/static/app.js" defer></script>
   <script src="/static/tracker.js" defer></script>
@@ -12,62 +12,93 @@
 <body>
   <div class="site-shell">
     <header class="site-header">
-      <a class="brand" href="/" aria-label="Alder Audit home"><span class="brand-mark" aria-hidden="true">✳</span><span>Alder <strong>Audit</strong><small>CHICAGO, ON THE RECORD</small></span></a>
+      <a class="brand" href="/" aria-label="Alder Audit home"><span class="brand-mark" aria-hidden="true"></span>Alder Audit</a>
       <nav aria-label="Main navigation">
-        <a href="#tracker">Commitments</a><a href="#meetings-section">Transcripts</a><a href="/dashboard">Policy analytics <span aria-hidden="true">↗</span></a>
+        <a href="#tracker">Commitments</a>
+        <a href="#meetings-section">Transcripts</a>
+        <a href="/dashboard">Policy analytics</a>
+        <a href="#find-your-alder">Find your alder</a>
       </nav>
-      <a class="nav-cta" href="#find-your-alder">Find your alder <span aria-hidden="true">↗</span></a>
     </header>
-    <main class="home-main">
-      <section class="hero">
+    <main>
+      <section class="hero" aria-labelledby="hero-title">
         <div class="hero-copy">
-          <p class="eyebrow"><span class="live-dot"></span> A CLEARER VIEW OF CITY HALL</p>
-          <h1>Democracy<br>is in the <em>details.</em></h1>
-          <p class="hero-description">What was said, what was promised, and what happened next. Explore Chicago City Council, one meeting at a time.</p>
-          <div class="hero-actions"><a class="button button-dark" href="#tracker">Explore the record <span aria-hidden="true">↗</span></a><a class="text-link" href="#find-your-alder">Find your alder <span aria-hidden="true">→</span></a></div>
+          <p class="eyebrow">Chicago City Council</p>
+          <h1 id="hero-title">From promise<br> to follow-up.</h1>
+          <p class="hero-description">See what City Council committed to, what happened next, and the transcript evidence behind it.</p>
+          <a class="button" href="#tracker">Explore commitments <span aria-hidden="true">↓</span></a>
         </div>
-        <div class="hero-art" aria-hidden="true">
-          <div class="art-orbit orbit-one"></div><div class="art-orbit orbit-two"></div>
-          <div class="art-card"><span class="art-label">THE PUBLIC RECORD</span><span class="art-star">✳</span><span class="art-number">01<span> / 50</span></span><span class="art-caption">A closer look at<br>your city council.</span></div>
-          <span class="art-note">MADE FOR CHICAGO<br>BY CURIOUS PEOPLE</span>
-        </div>
-      </section>
-
-      <section class="intro-strip" aria-label="About Alder Audit">
-        <p><span class="strip-number">01 /</span> THE RECORD, MADE READABLE</p>
-        <p>Less searching. More understanding.</p>
-        <a href="/dashboard">Explore the analytics <span aria-hidden="true">↗</span></a>
-      </section>
-
-      <section id="tracker" class="section-block">
-        <div class="section-heading"><div><p class="eyebrow">THE FOLLOW-THROUGH</p><h2>Words worth<br><em>following.</em></h2></div><p>Reviewed commitments and meeting digests, connected to transcript-verified evidence. Coverage depends on the batches published so far.</p></div>
-        <div class="tracker-panel">
-          <div class="panel-top"><div><span class="pill">REVIEWED RECORDS</span><h3>Commitments &amp; digests</h3></div><label for="tracker-batch">Published batch <select id="tracker-batch" disabled><option>Loading…</option></select></label></div>
-          <p id="tracker-status" class="muted" role="status" aria-live="polite">Loading published tracker records…</p>
-          <div id="tracker-content"></div>
+        <div class="skyline" role="img" aria-label="Stylized Chicago skyline with Willis Tower and the three rising volumes of the St. Regis">
+          <div class="skyline-buildings">
+            <span class="willis-tower"></span>
+            <span class="st-regis"><span></span><span></span><span></span></span>
+          </div>
         </div>
       </section>
 
-      <section id="find-your-alder" class="finder-section">
-        <div><p class="eyebrow">YOUR NEIGHBORHOOD, YOUR VOICE</p><h2>Find your<br><em>alder.</em></h2><p>Enter your full Chicago address in the City of Chicago’s official ward lookup to find your ward and alderperson.</p><p class="finder-note">The lookup is provided by the City of Chicago. Your address is entered directly into its service, not Alder Audit.</p><a class="text-link" href="https://gisapps.chicago.gov/WardGeocode/" target="_blank" rel="noopener noreferrer">Open the city lookup in a new tab ↗</a></div>
-        <div class="finder-frame"><iframe title="City of Chicago ward and alderperson lookup" src="https://gisapps.chicago.gov/WardGeocode/?embed=true" loading="lazy" referrerpolicy="no-referrer"></iframe></div>
+      <section id="tracker" class="section-block" aria-labelledby="tracker-heading">
+        <div class="section-heading">
+          <div>
+            <h2 id="tracker-heading">Commitments &amp; digests</h2>
+            <p>Trace a promise to its follow-up and open the transcript evidence behind it.</p>
+          </div>
+          <label class="batch-picker" for="tracker-batch">
+            Published batch
+            <select id="tracker-batch" disabled><option>Loading…</option></select>
+          </label>
+        </div>
+        <p id="tracker-status" class="muted" role="status" aria-live="polite">Loading published tracker records…</p>
+        <div id="tracker-content"></div>
       </section>
 
-      <section id="meetings-section" class="section-block">
-        <div class="section-heading"><div><p class="eyebrow">GO TO THE SOURCE</p><h2>In their<br><em>own words.</em></h2></div><p>Browse published meeting transcripts and search for the conversations that matter to you. Speaker labels are anonymous.</p></div>
+      <section id="meetings-section" class="section-block" aria-labelledby="meetings-heading">
+        <div class="section-heading">
+          <div>
+            <h2 id="meetings-heading">Meeting transcripts</h2>
+            <p>Find the original discussion by meeting or keyword. Speaker labels are anonymous.</p>
+          </div>
+        </div>
         <form id="search" class="search-form">
           <label class="sr-only" for="query">Search meetings or transcript words</label>
           <input id="query" type="search" maxlength="500" placeholder="Search meetings or transcript words">
-          <button type="submit">Search <span aria-hidden="true">↗</span></button>
+          <button type="submit">Search</button>
         </form>
         <p id="status" class="muted" role="status" aria-live="polite"></p>
         <div class="transcript-grid">
-          <section class="content-card" aria-label="Meetings"><p class="eyebrow">THE ARCHIVE</p><h3>Meetings</h3><ul id="meetings"></ul><button id="more-meetings" type="button" hidden>More meetings</button></section>
-          <section class="content-card" aria-label="Transcript"><p class="eyebrow">THE TRANSCRIPT</p><h3 id="title">Select a meeting</h3><form id="segment-search" hidden><label for="segment-query">Search within this meeting</label><input id="segment-query" type="search" maxlength="500"><button type="submit">Filter</button></form><ol id="segments"></ol><button id="more-segments" type="button" hidden>More transcript</button></section>
+          <section class="content-card" aria-label="Meetings">
+            <h3>Meetings</h3>
+            <ul id="meetings"></ul>
+            <button id="more-meetings" type="button" hidden>More meetings</button>
+          </section>
+          <section class="content-card" aria-label="Transcript">
+            <h3 id="title">Select a meeting</h3>
+            <form id="segment-search" hidden>
+              <label for="segment-query">Search within this meeting</label>
+              <input id="segment-query" type="search" maxlength="500">
+              <button type="submit">Filter</button>
+            </form>
+            <ol id="segments"></ol>
+            <button id="more-segments" type="button" hidden>More transcript</button>
+          </section>
+        </div>
+      </section>
+
+      <section id="find-your-alder" class="finder-section" aria-labelledby="finder-heading">
+        <div>
+          <h2 id="finder-heading">Find your alder</h2>
+          <p>Look up your ward and alderperson by address using the City of Chicago’s official tool.</p>
+          <p class="muted">Your address goes directly to the City’s lookup service.</p>
+          <a class="text-link" href="https://gisapps.chicago.gov/WardGeocode/" target="_blank" rel="noopener noreferrer">Open city lookup <span aria-hidden="true">↗</span></a>
+        </div>
+        <div class="finder-frame">
+          <iframe title="City of Chicago ward and alderperson lookup" src="https://gisapps.chicago.gov/WardGeocode/?embed=true" loading="lazy" referrerpolicy="no-referrer"></iframe>
         </div>
       </section>
     </main>
-    <footer><span class="brand-mark" aria-hidden="true">✳</span><strong>Alder Audit</strong><span>Chicago, on the record.</span><a href="/dashboard">Policy analytics ↗</a></footer>
+    <footer>
+      <a class="brand" href="/"><span class="brand-mark" aria-hidden="true"></span>Alder Audit</a>
+      <a class="text-link" href="/dashboard">Policy analytics <span aria-hidden="true">↗</span></a>
+    </footer>
   </div>
 </body>
 </html>
