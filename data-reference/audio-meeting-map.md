@@ -4,7 +4,7 @@ Source: local `chicago-city-council-archive/Meetings/**/manifest.json` and `fuzz
 
 Vimeo matches use the recording ID in the filename and the archive video URL. Filename matches use date and committee name only; audio contents have not been verified. Multiple Clerk records are retained rather than choosing one arbitrarily.
 
-Audio files: 204. Status counts: {"matched": 194, "multiple_clerk_records": 8, "unmatched": 2}.
+Audio files: 204. Status counts: {"matched": 196, "multiple_clerk_records": 8}.
 
 Regenerate: `python3 scripts/build_audio_meeting_map.py /path/to/chicago-city-council-archive`.
 
@@ -12,8 +12,8 @@ Regenerate: `python3 scripts/build_audio_meeting_map.py /path/to/chicago-city-co
 | --- | --- | --- | --- | --- |
 | `2025-11-12_Budget_and_Government_Operations.mp4` | 2025-11-12 | Committee on Budget and Government Operations | [87415BD7-C89F-F011-B4CB-001DD8001AAF](https://chicityclerkelms.chicago.gov/Meeting/?meetingId=87415BD7-C89F-F011-B4CB-001DD8001AAF)<br>[C6CEC3EA-B6B9-F011-BBD2-001DD80025BF](https://chicityclerkelms.chicago.gov/Meeting/?meetingId=C6CEC3EA-B6B9-F011-BBD2-001DD80025BF) | Filename date + committee (unverified contents); 2 Clerk records |
 | `2025-11-13_Budget_and_Government_Operations.mp4` | 2025-11-13 | Committee on Budget and Government Operations | [41B45E25-C99F-F011-B4CB-001DD8001AAF](https://chicityclerkelms.chicago.gov/Meeting/?meetingId=41B45E25-C99F-F011-B4CB-001DD8001AAF) | Filename date + committee (unverified contents) |
-| `2025-11-13_Committee_on_Housing_and_Real_Estate.mp4` | — | — | Unmatched | Filename date + committee (unverified contents) |
-| `2025-12-09_committee_on_transportation_and_public_way.mp4` | — | — | Unmatched | Filename date + committee (unverified contents) |
+| `2025-11-13_Committee_on_Housing_and_Real_Estate.mp4` | 2025-11-13 | Committee on Housing and Real Estate | [48B2C4EE-08BC-F011-BBD2-001DD8003CAD](https://chicityclerkelms.chicago.gov/Meeting/?meetingId=48B2C4EE-08BC-F011-BBD2-001DD8003CAD) | Filename date + committee (unverified contents) |
+| `2025-12-09_committee_on_transportation_and_public_way.mp4` | 2025-12-09 | Committee on Transportation and Public Way | [C6AD4125-B0C4-F011-BBD2-001DD8011743](https://chicityclerkelms.chicago.gov/Meeting/?meetingId=C6AD4125-B0C4-F011-BBD2-001DD8011743) | Filename date + committee (unverified contents) |
 | `vimeo-1135462361-audio-low.mp4` | 2025-11-12 | Committee on Economic, Capital and Technology Development | [E7F6F5F9-70BE-F011-BBD2-001DD80C6CBA](https://chicityclerkelms.chicago.gov/Meeting/?meetingId=E7F6F5F9-70BE-F011-BBD2-001DD80C6CBA) | Vimeo 1135462361 |
 | `vimeo-1135569237-audio-low.mp4` | 2025-11-12 | Committee on Budget and Government Operations | [87415BD7-C89F-F011-B4CB-001DD8001AAF](https://chicityclerkelms.chicago.gov/Meeting/?meetingId=87415BD7-C89F-F011-B4CB-001DD8001AAF)<br>[C6CEC3EA-B6B9-F011-BBD2-001DD80025BF](https://chicityclerkelms.chicago.gov/Meeting/?meetingId=C6CEC3EA-B6B9-F011-BBD2-001DD80025BF) | Vimeo 1135569237; 2 Clerk records |
 | `vimeo-1136559499-audio-low.mp4` | 2025-12-03 | Committee on Housing and Real Estate | [3D4AD79C-50BA-F011-BBD2-001DD80025BF](https://chicityclerkelms.chicago.gov/Meeting/?meetingId=3D4AD79C-50BA-F011-BBD2-001DD80025BF) | Vimeo 1136559499 |

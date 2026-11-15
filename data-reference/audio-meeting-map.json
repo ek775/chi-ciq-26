@@ -4,8 +4,7 @@
   "notes": "Matches reflect archived metadata, not verification of audio contents. Preserve all Clerk records sharing a recording; filename-based matches need content verification.",
   "counts": {
     "multiple_clerk_records": 8,
-    "matched": 194,
-    "unmatched": 2
+    "matched": 196
   },
   "audio_files": [
     {
@@ -58,15 +57,37 @@
       "audio_filename": "2025-11-13_Committee_on_Housing_and_Real_Estate.mp4",
       "vimeo_id_from_filename": null,
       "match_method": "filename_date_and_body",
-      "status": "unmatched",
-      "meetings": []
+      "status": "matched",
+      "meetings": [
+        {
+          "meeting_id": "48B2C4EE-08BC-F011-BBD2-001DD8003CAD",
+          "date": "2025-11-13",
+          "body": "Committee on Housing and Real Estate",
+          "meeting_url": "https://chicityclerkelms.chicago.gov/Meeting/?meetingId=48B2C4EE-08BC-F011-BBD2-001DD8003CAD",
+          "video_urls": [
+            "https://vimeo.com/showcase/8928563?video=1136197674"
+          ],
+          "archive_manifest": "Meetings/2025-11/2025-11-13 Committee on Housing and Real Estate [48B2C4EE-08BC-F011-BBD2-001DD8003CAD]/manifest.json"
+        }
+      ]
     },
     {
       "audio_filename": "2025-12-09_committee_on_transportation_and_public_way.mp4",
       "vimeo_id_from_filename": null,
       "match_method": "filename_date_and_body",
-      "status": "unmatched",
-      "meetings": []
+      "status": "matched",
+      "meetings": [
+        {
+          "meeting_id": "C6AD4125-B0C4-F011-BBD2-001DD8011743",
+          "date": "2025-12-09",
+          "body": "Committee on Transportation and Public Way",
+          "meeting_url": "https://chicityclerkelms.chicago.gov/Meeting/?meetingId=C6AD4125-B0C4-F011-BBD2-001DD8011743",
+          "video_urls": [
+            "https://vimeo.com/showcase/8928551?video=1143223346"
+          ],
+          "archive_manifest": "Meetings/2025-12/2025-12-09 Committee on Transportation and Public Way [C6AD4125-B0C4-F011-BBD2-001DD8011743]/manifest.json"
+        }
+      ]
     },
     {
       "audio_filename": "vimeo-1135462361-audio-low.mp4",

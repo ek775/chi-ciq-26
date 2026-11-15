@@ -11,7 +11,7 @@ def video_ids(links):
 
 
 def normalize(body):
-    return re.sub(r"[^a-z0-9]", "", body.lower().removeprefix("Committee on ".lower()))
+    return re.sub(r"[^a-z0-9]", "", body.lower()).removeprefix("committeeon")
 
 
 def main():
