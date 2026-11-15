@@ -293,11 +293,13 @@ def analytics_router() -> APIRouter:
             if value is not None:
                 conditions.append(f"{name} = :{name}")
                 parameters[name] = value
+        if representative_id:
+            conditions.append("attribution_method = 'manual'")
         if attributed is not None:
             conditions.append(
-                "representative_id IS NOT NULL"
+                "(representative_id IS NOT NULL AND attribution_method = 'manual')"
                 if attributed
-                else "representative_id IS NULL"
+                else "(representative_id IS NULL OR attribution_method IS DISTINCT FROM 'manual')"
             )
         if verified_evidence:
             conditions.append("evidence_verified")
@@ -311,9 +313,13 @@ def analytics_router() -> APIRouter:
             database,
             f"""
             SELECT unit_id, topic_key, stance, score, confidence, summary,
-                   evidence, evidence_verified, model, text, start_seconds,
+                   CASE WHEN evidence_verified THEN evidence END AS evidence,
+                   evidence_verified, model, text, start_seconds,
                    end_seconds, source_key, kind, title, body, meeting_date,
-                   speaker_label, representative_id, attribution_method,
+                   speaker_label,
+                   CASE WHEN attribution_method = 'manual'
+                        THEN representative_id END AS representative_id,
+                   attribution_method,
                    attribution_confidence, sentiment, emotion
             FROM dash_statements {_where(conditions)}
             ORDER BY meeting_date DESC NULLS LAST, source_key, start_seconds,

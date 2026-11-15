@@ -1258,8 +1258,10 @@ def test_dashboard_api(world, monkeypatch):
         statements = client.get(
             "/api/analytics/statements?representative_id=ald-smith"
         ).json()
-        assert [item["stance"] for item in statements] == ["oppose", "support"]
-        assert statements[0]["attribution_method"] == "voice"
+        assert [item["stance"] for item in statements] == ["support"]
+        assert statements[0]["attribution_method"] == "manual"
+        unconfirmed = client.get("/api/analytics/statements?method=voice").json()
+        assert unconfirmed and unconfirmed[0]["representative_id"] is None
         assert (
             client.get("/api/analytics/statements?method=manual&stance=support").json()[
                 0
@@ -1272,7 +1274,7 @@ def test_dashboard_api(world, monkeypatch):
             ]
             == "oppose"
         )
-        assert client.get("/api/analytics/statements?attributed=false").json() == []
+        assert client.get("/api/analytics/statements?attributed=false").json() == unconfirmed
         assert client.get("/api/analytics/statements?offset=2").json() == []
         sources_page = client.get("/api/analytics/sources?kind=document").json()
         assert [item["kind"] for item in sources_page] == ["document"]
@@ -1290,7 +1292,7 @@ def test_dashboard_api(world, monkeypatch):
         ):
             assert client.get(path).status_code == 422, path
         response = client.get("/dashboard")
-        assert response.status_code == 200 and "Policy positions" in response.text
+        assert response.status_code == 200 and "Alder Audit" in response.text
         assert "textContent" in client.get("/static/dashboard.js").text
         assert "innerHTML" not in client.get("/static/dashboard.js").text
         assert client.get("/api/analytics/topics").headers["cache-control"] == (
