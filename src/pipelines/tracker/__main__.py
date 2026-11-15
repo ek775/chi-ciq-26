@@ -52,16 +52,19 @@ def make_dataset(manifest, segments, evidence, actions):
 
 def retrieve(dataset, person_id, start, end):
     def matches(row):
-        return (
-            (row.get("person_id") or "").casefold() == person_id.casefold()
-            and (start is None or row["date"] >= start)
-            and (end is None or row["date"] <= end)
+        date = row.get("date")
+        if date is None and (start is not None or end is not None):
+            return False
+        return (row.get("person_id") or "").casefold() == person_id.casefold() and (
+            (start is None or date >= start) and (end is None or date <= end)
         )
 
     return {
         "coverage": dataset["coverage"],
         "source_keys": dataset["source_keys"],
-        "statements": sorted(filter(matches, dataset["statements"]), key=lambda r: r["date"]),
+        "statements": sorted(
+            filter(matches, dataset["statements"]), key=lambda row: row["date"] or ""
+        ),
         "actions": sorted(filter(matches, dataset["actions"]), key=lambda r: r["date"]),
     }
 

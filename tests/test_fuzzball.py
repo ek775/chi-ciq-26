@@ -21,6 +21,8 @@ def dependencies(job):
 
 
 def test_transcription_does_not_require_filename_metadata(tmp_path):
+    audio_map = tmp_path / "audio-meeting-map.json"
+    audio_map.touch()
     executable = tmp_path / "chi-ciq-ingest"
     executable.write_text("#!/bin/sh\nprintf '%s\\n' \"$@\"\n")
     executable.chmod(0o700)
@@ -32,13 +34,16 @@ def test_transcription_does_not_require_filename_metadata(tmp_path):
             "PATH": f"{tmp_path}:{os.environ['PATH']}",
             "FB_TASK_ID": "1",
             "SHARD_COUNT": "128",
+            "AUDIO_MEETING_MAP": str(audio_map),
         },
         text=True,
         capture_output=True,
         check=True,
     )
     arguments = result.stdout.splitlines()
-    assert "--metadata-file" not in arguments
+    assert "--audio-meeting-map" in arguments
+    assert str(audio_map) in arguments
+    assert "--meeting-filename" not in arguments
     assert not result.stderr
     assert arguments[-4:] == ["--shard-index", "0", "--shard-count", "128"]
 
@@ -126,7 +131,7 @@ def test_vllm_is_an_internal_gpu_service():
     assert service["mounts"]["/root/.cache/huggingface"]["volume"] == (
         "vllm-model-cache"
     )
-    assert definition["volumes"]["vllm-model-cache"]["name"] == "vllm-model-cache"
+    assert definition["volumes"]["vllm-model-cache"]["name"] == "vllm-model-data"
     assert service["network"]["ports"] == [
         {"name": "http", "port": 8000, "protocol": "tcp"}
     ]

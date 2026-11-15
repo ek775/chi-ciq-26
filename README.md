@@ -221,7 +221,7 @@ create the model-cache volume once):
 
 ```sh
 fuzzball volume create team8 postgres-data
-fuzzball volume create team8 vllm-model-cache
+fuzzball volume create team8 vllm-model-data
 ```
 
 #### psql shell on the database volume
@@ -253,7 +253,7 @@ The workflow starts a persistent, one-GPU `vllm/vllm-openai:v0.32.0` service
 after both ingestion jobs complete, so it does not compete with transcription
 for a GPU. It serves `openai/gpt-oss-20b` as `local-ai`, and analytics calls it
 at the internal address `http://vllm:8000/v1`. The model cache is kept on the
-persistent NFS volume `team8/vllm-model-cache`; no public endpoint or external
+persistent NFS volume `team8/vllm-model-data`; no public endpoint or external
 vLLM URL is needed. The vLLM readiness probe gates only the stance stage.
 
 The service needs model-download egress and the `HF_TOKEN` secret. Its selected
@@ -288,14 +288,20 @@ ingestion run. Worker paths are not submitter-local paths:
 | Volume | Required paths |
 |---|---|
 | `team8/volume_test` mounted at `/volume` | Complete MP4 files directly under `/volume/audio`; recursive document tree under `/volume/chicago-city-council-archive/Meetings` |
-| `shared/datasets` mounted at `/datasets` in roster jobs | Optional roster and speaker-label CSVs under `/datasets/analytics` |
+| `shared/datasets` mounted at `/datasets` | Required `/datasets/audio-meeting-map.json` for transcription; optional roster and speaker-label CSVs under `/datasets/analytics` |
 | `team8/database-backups` mounted at `/backups` in backup jobs | Writable `/backups/documents` and `/backups/analytics` |
-| `team8/vllm-model-cache` mounted at `/root/.cache/huggingface` | Persistent Hugging Face model cache |
+| `team8/vllm-model-data` mounted at `/root/.cache/huggingface` | Persistent Hugging Face model cache |
 
-Recording filenames need no meeting date or committee name. Transcription stores
-unknown date/type as NULL; analytics derives metadata from explicit statements
-in transcript/document content and leaves unsupported or conflicting details
-unknown. No Vimeo title lookup or recording-metadata JSON is required. Existing
+`/volume/audio` is the flat audio inventory; the nested
+`/volume/chicago-city-council-archive/Meetings/<YYYY-MM>/<meeting>/` archive
+contains per-meeting `Documents/`, `Transcripts/`, `manifest.json`, and
+`meeting.json`. The generated
+[audio meeting map](data-reference/audio-meeting-map.json) maps those MP4
+basenames to schema-ready meeting dates/types and preserves all matched Clerk
+IDs. Stage it as `/datasets/audio-meeting-map.json` before Fuzzball submission.
+Fields with unmatched or conflicting archive metadata remain NULL; archive
+matches do not verify the audio contents. Analytics may infer unknown date/type
+from transcript/document content. No Vimeo title lookup is required. Existing
 databases must run the meetings migration to permit NULL metadata before using
 the new worker images. See the
 [transcription guide](src/pipelines/transcription/README.md#fuzzball-batch-input).

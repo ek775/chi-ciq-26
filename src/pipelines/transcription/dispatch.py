@@ -32,12 +32,19 @@ def recording_jobs(
     input_base_uri: str | None = None,
     force: bool = False,
     metadata: dict[str, str] | None = None,
+    audio_meeting_map: str | None = None,
 ) -> list[dict[str, Any]]:
     if not image.strip() or not namespace.strip():
         raise ValueError("Worker image and source namespace must not be empty")
     mount = PurePosixPath(worker_input_dir)
     if not mount.is_absolute() or ".." in mount.parts:
         raise ValueError("Worker input directory must be an absolute container path")
+    if audio_meeting_map is not None:
+        map_path = PurePosixPath(audio_meeting_map)
+        if not map_path.is_absolute() or ".." in map_path.parts:
+            raise ValueError(
+                "Worker audio meeting map must be an absolute container path"
+            )
     if input_base_uri is not None:
         uri = urlsplit(input_base_uri)
         if uri.scheme not in {"s3", "https"} or not uri.netloc:
@@ -67,6 +74,8 @@ def recording_jobs(
         ]
         if filename != recording.name:
             command.extend(["--meeting-filename", filename])
+        if audio_meeting_map is not None:
+            command.extend(["--audio-meeting-map", audio_meeting_map])
         if force:
             command.append("--force")
         jobs.append(
@@ -194,6 +203,10 @@ def main(argv: list[str] | None = None) -> None:
         type=Path,
         help="JSON mapping Vimeo IDs to dated MP4 filenames",
     )
+    parser.add_argument(
+        "--audio-meeting-map",
+        help="Worker-visible path to the archive metadata map",
+    )
     parser.add_argument("--worker-input-dir", default="/inputs")
     parser.add_argument(
         "--input-base-uri",
@@ -228,6 +241,7 @@ def main(argv: list[str] | None = None) -> None:
         input_base_uri=args.input_base_uri,
         force=args.force,
         metadata=load_metadata_file(args.metadata_file),
+        audio_meeting_map=args.audio_meeting_map,
     )
     if args.submit and len(jobs) > args.max_jobs:
         parser.error(f"Found {len(jobs)} recordings; increase --max-jobs explicitly")

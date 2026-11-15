@@ -127,6 +127,7 @@ jobs:
       - DATABASE_URL=postgresql+psycopg://postgres@postgres:5432/meetings
       - HF_TOKEN=secret://user/chi-ciq-hf-token
       - SHARD_COUNT=128
+      - AUDIO_MEETING_MAP=/datasets/audio-meeting-map.json
     mounts:
       /volume:
         volume: recordings
@@ -148,7 +149,9 @@ jobs:
     script: |
       #!/bin/sh
       set -eu
-      exec chi-ciq-ingest --input-dir /volume/audio --namespace recordings \
+      test -f "$AUDIO_MEETING_MAP"
+      exec chi-ciq-ingest --input-dir /volume/audio \
+        --audio-meeting-map "$AUDIO_MEETING_MAP" --namespace recordings \
         --shard-index "$((FB_TASK_ID - 1))" --shard-count "$SHARD_COUNT"
 
   documents:

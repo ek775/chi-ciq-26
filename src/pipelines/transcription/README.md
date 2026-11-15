@@ -23,21 +23,38 @@ filename parsing, and backups belong to the
 
 ## Fuzzball batch input
 
-The Fuzzball volume `team8/volume_test` contains an `audio` directory at the
-volume root. Inspection on 2026-11-14 found dated MP4s and a growing set of
-`vimeo-<id>-audio-low.mp4` files; sampled files contain AAC audio without video.
-When the volume is mounted at `/volume`, use `/volume/audio`, not
-`/volume/data/audio`. Filenames are opaque identifiers; neither dated names nor
-metadata mappings are required. Transcription leaves meeting date/type NULL.
-Analytics derives missing meeting metadata from transcript content, not filenames:
+The Fuzzball volume `team8/volume_test` has two distinct input trees:
+
+- `/volume/audio` contains the flat MP4 inventory listed in
+  `fuzzball-audio-filenames.txt`, including both date/body names and
+  `vimeo-<id>-low.mp4` names.
+- `/volume/chicago-city-council-archive/Meetings/<YYYY-MM>/<meeting>/` contains
+  Clerk archive records, each with `Documents/`, `Transcripts/`, `manifest.json`,
+  and `meeting.json`. The meeting archive is for document ingestion and metadata
+  evidence; transcription reads audio files from `/volume/audio`, not from the
+  nested archive tree.
+
+Use the generated
+[audio meeting map](../../../data-reference/audio-meeting-map.json) to map audio
+basenames to the existing `meetings.meeting_date` and `meetings.meeting_type`
+columns. Stage the map at `/datasets/audio-meeting-map.json` on
+`shared/datasets`; the Fuzzball task-array requires it:
 
 ```sh
-chi-ciq-ingest --input-dir /volume/audio --namespace recordings
+chi-ciq-ingest --input-dir /volume/audio \
+  --audio-meeting-map /datasets/audio-meeting-map.json \
+  --namespace recordings
 ```
 
-Legacy `--metadata-file` and `--meeting-filename` options remain available only
-for explicitly reviewed overrides; they are not required and filenames are never
-parsed implicitly. Unknown or conflicting content metadata remains unknown.
+Each map entry carries the schema-ready date and body plus the Clerk match
+method/status and all associated meeting IDs. A field is set only when all
+matched Clerk records agree; unmatched or conflicting values remain NULL.
+Multiple Clerk records are preserved, not collapsed to an arbitrary meeting.
+The map documents that matches identify archive metadata, not verified audio
+contents (especially for filename-derived matches). Unknown metadata can still
+be inferred by analytics from transcript content. Legacy `--metadata-file` and
+`--meeting-filename` options remain available for explicit dated-filename
+overrides; filenames are never parsed implicitly.
 Each worker processes its assigned recordings sequentially. Configure the worker's
 `DATABASE_URL` and `HF_TOKEN` using cluster secrets. The worker must be able to
 reach the private meetings database and download required models; mount a
@@ -62,9 +79,10 @@ not allow 128 simultaneous GPU jobs. Model startup repeats per shard, so measure
 that cost before increasing the count further. Whole-GPU concurrency remains
 two unless the cluster explicitly supports and has tested GPU sharing.
 
-`chi-ciq-dispatch --input-dir /volume/audio ...` likewise accepts opaque names.
-An optional reviewed metadata mapping is embedded in individual worker commands
-for backward compatibility.
+`chi-ciq-dispatch --input-dir /volume/audio ...` likewise accepts the flat
+inventory. Pass `--audio-meeting-map /datasets/audio-meeting-map.json` to
+forward that worker-visible path to every job, and mount the map at that path in
+the cluster template. The map path is optional for general-purpose dispatches.
 
 ## Ingestion versus updates
 

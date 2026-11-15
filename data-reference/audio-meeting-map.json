@@ -1,7 +1,17 @@
 {
+  "format_version": 2,
   "audio_inventory": "fuzzball-audio-filenames.txt",
   "archive_root": "chicago-city-council-archive",
   "notes": "Matches reflect archived metadata, not verification of audio contents. Preserve all Clerk records sharing a recording; filename-based matches need content verification.",
+  "schema_mapping": {
+    "target": "databases.meetings.models.Meeting",
+    "fields": {
+      "meeting_date": "audio_files[].database_metadata.meeting_date",
+      "meeting_type": "audio_files[].database_metadata.meeting_type"
+    },
+    "unknown_value": null,
+    "policy": "A field is populated only when every matched Clerk record agrees; unmatched or conflicting values remain null."
+  },
   "counts": {
     "multiple_clerk_records": 8,
     "matched": 196
@@ -33,7 +43,20 @@
           ],
           "archive_manifest": "Meetings/2025-11/2025-11-12 Committee on Budget and Government Operations [C6CEC3EA-B6B9-F011-BBD2-001DD80025BF]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2025-11-12",
+        "meeting_type": "Committee on Budget and Government Operations"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "filename_date_and_body",
+        "status": "multiple_clerk_records",
+        "meeting_ids": [
+          "87415BD7-C89F-F011-B4CB-001DD8001AAF",
+          "C6CEC3EA-B6B9-F011-BBD2-001DD80025BF"
+        ]
+      }
     },
     {
       "audio_filename": "2025-11-13_Budget_and_Government_Operations.mp4",
@@ -51,7 +74,19 @@
           ],
           "archive_manifest": "Meetings/2025-11/2025-11-13 Committee on Budget and Government Operations [41B45E25-C99F-F011-B4CB-001DD8001AAF]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2025-11-13",
+        "meeting_type": "Committee on Budget and Government Operations"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "filename_date_and_body",
+        "status": "matched",
+        "meeting_ids": [
+          "41B45E25-C99F-F011-B4CB-001DD8001AAF"
+        ]
+      }
     },
     {
       "audio_filename": "2025-11-13_Committee_on_Housing_and_Real_Estate.mp4",
@@ -69,7 +104,19 @@
           ],
           "archive_manifest": "Meetings/2025-11/2025-11-13 Committee on Housing and Real Estate [48B2C4EE-08BC-F011-BBD2-001DD8003CAD]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2025-11-13",
+        "meeting_type": "Committee on Housing and Real Estate"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "filename_date_and_body",
+        "status": "matched",
+        "meeting_ids": [
+          "48B2C4EE-08BC-F011-BBD2-001DD8003CAD"
+        ]
+      }
     },
     {
       "audio_filename": "2025-12-09_committee_on_transportation_and_public_way.mp4",
@@ -87,7 +134,19 @@
           ],
           "archive_manifest": "Meetings/2025-12/2025-12-09 Committee on Transportation and Public Way [C6AD4125-B0C4-F011-BBD2-001DD8011743]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2025-12-09",
+        "meeting_type": "Committee on Transportation and Public Way"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "filename_date_and_body",
+        "status": "matched",
+        "meeting_ids": [
+          "C6AD4125-B0C4-F011-BBD2-001DD8011743"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1135462361-audio-low.mp4",
@@ -105,7 +164,19 @@
           ],
           "archive_manifest": "Meetings/2025-11/2025-11-12 Committee on Economic, Capital and Technology Development [E7F6F5F9-70BE-F011-BBD2-001DD80C6CBA]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2025-11-12",
+        "meeting_type": "Committee on Economic, Capital and Technology Development"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "E7F6F5F9-70BE-F011-BBD2-001DD80C6CBA"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1135569237-audio-low.mp4",
@@ -133,7 +204,20 @@
           ],
           "archive_manifest": "Meetings/2025-11/2025-11-12 Committee on Budget and Government Operations [C6CEC3EA-B6B9-F011-BBD2-001DD80025BF]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2025-11-12",
+        "meeting_type": "Committee on Budget and Government Operations"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "multiple_clerk_records",
+        "meeting_ids": [
+          "87415BD7-C89F-F011-B4CB-001DD8001AAF",
+          "C6CEC3EA-B6B9-F011-BBD2-001DD80025BF"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1136559499-audio-low.mp4",
@@ -151,7 +235,19 @@
           ],
           "archive_manifest": "Meetings/2025-12/2025-12-03 Committee on Housing and Real Estate [3D4AD79C-50BA-F011-BBD2-001DD80025BF]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2025-12-03",
+        "meeting_type": "Committee on Housing and Real Estate"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "3D4AD79C-50BA-F011-BBD2-001DD80025BF"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1136745770-audio-low.mp4",
@@ -169,7 +265,19 @@
           ],
           "archive_manifest": "Meetings/2025-11/2025-11-14 City Council [079641F0-9BAB-F011-BBD2-001DD80B7FF7]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2025-11-14",
+        "meeting_type": "City Council"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "079641F0-9BAB-F011-BBD2-001DD80B7FF7"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1137016421-audio-low.mp4",
@@ -187,7 +295,19 @@
           ],
           "archive_manifest": "Meetings/2025-11/2025-11-17 Committee on Finance [97958912-D7AD-F011-BBD2-001DD80C6DBC]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2025-11-17",
+        "meeting_type": "Committee on Finance"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "97958912-D7AD-F011-BBD2-001DD80C6DBC"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1137802473-audio-low.mp4",
@@ -205,7 +325,19 @@
           ],
           "archive_manifest": "Meetings/2025-11/2025-11-18 City Council [B614BB2E-A9C0-F011-BBD2-001DD80C6CBA]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2025-11-18",
+        "meeting_type": "City Council"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "B614BB2E-A9C0-F011-BBD2-001DD80C6CBA"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1138170250-audio-low.mp4",
@@ -223,7 +355,19 @@
           ],
           "archive_manifest": "Meetings/2025-12/2025-12-01 Joint Committee- Public Safety; Police and Fire [71CAEB7D-4BC6-F011-BBD2-001DD8020E93]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2025-12-01",
+        "meeting_type": "Joint Committee: Public Safety; Police and Fire"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "71CAEB7D-4BC6-F011-BBD2-001DD8020E93"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1142138848-audio-low.mp4",
@@ -241,7 +385,19 @@
           ],
           "archive_manifest": "Meetings/2025-12/2025-12-02 Committee on Finance [DCD69BB1-66C9-F011-BBD2-001DD8016C9C]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2025-12-02",
+        "meeting_type": "Committee on Finance"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "DCD69BB1-66C9-F011-BBD2-001DD8016C9C"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1142593242-audio-low.mp4",
@@ -259,7 +415,19 @@
           ],
           "archive_manifest": "Meetings/2025-12/2025-12-03 Committee on Pedestrian and Traffic Safety [F9561135-ADB5-F011-BBD2-001DD8089C14]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2025-12-03",
+        "meeting_type": "Committee on Pedestrian and Traffic Safety"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "F9561135-ADB5-F011-BBD2-001DD8089C14"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1143153265-audio-low.mp4",
@@ -277,7 +445,19 @@
           ],
           "archive_manifest": "Meetings/2025-12/2025-12-03 Committee on License and Consumer Protection [7CC5531D-C6C4-F011-BBD2-001DD8022C4F]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2025-12-03",
+        "meeting_type": "Committee on License and Consumer Protection"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "7CC5531D-C6C4-F011-BBD2-001DD8022C4F"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1143223114-audio-low.mp4",
@@ -295,7 +475,19 @@
           ],
           "archive_manifest": "Meetings/2025-12/2025-12-04 Committee on Finance [E94B026B-AEC4-F011-BBD2-001DD81024B7]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2025-12-04",
+        "meeting_type": "Committee on Finance"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "E94B026B-AEC4-F011-BBD2-001DD81024B7"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1143223346-audio-low.mp4",
@@ -313,7 +505,19 @@
           ],
           "archive_manifest": "Meetings/2025-12/2025-12-09 Committee on Transportation and Public Way [C6AD4125-B0C4-F011-BBD2-001DD8011743]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2025-12-09",
+        "meeting_type": "Committee on Transportation and Public Way"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "C6AD4125-B0C4-F011-BBD2-001DD8011743"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1143545294-audio-low.mp4",
@@ -331,7 +535,19 @@
           ],
           "archive_manifest": "Meetings/2025-12/2025-12-09 Committee on Zoning, Landmarks and Building Standards [C4E209CC-B3C4-F011-BBD2-001DD8020E93]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2025-12-09",
+        "meeting_type": "Committee on Zoning, Landmarks and Building Standards"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "C4E209CC-B3C4-F011-BBD2-001DD8020E93"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1144934697-audio-low.mp4",
@@ -349,7 +565,19 @@
           ],
           "archive_manifest": "Meetings/2025-12/2025-12-09 Committee on Economic, Capital and Technology Development [5E4F4112-CEC4-F011-BBD2-001DD8020E93]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2025-12-09",
+        "meeting_type": "Committee on Economic, Capital and Technology Development"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "5E4F4112-CEC4-F011-BBD2-001DD8020E93"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1144986653-audio-low.mp4",
@@ -367,7 +595,19 @@
           ],
           "archive_manifest": "Meetings/2025-12/2025-12-16 Committee on Finance [DCEC1C7C-68D7-F011-8543-001DD8018EAF]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2025-12-16",
+        "meeting_type": "Committee on Finance"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "DCEC1C7C-68D7-F011-8543-001DD8018EAF"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1144987889-audio-low.mp4",
@@ -385,7 +625,19 @@
           ],
           "archive_manifest": "Meetings/2025-12/2025-12-10 City Council [D126676D-A1C4-F011-BBD2-001DD8020E93]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2025-12-10",
+        "meeting_type": "City Council"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "D126676D-A1C4-F011-BBD2-001DD8020E93"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1145351061-audio-low.mp4",
@@ -403,7 +655,19 @@
           ],
           "archive_manifest": "Meetings/2025-12/2025-12-11 Committee on Police and Fire [651E9537-5BD4-F011-8543-001DD8041B30]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2025-12-11",
+        "meeting_type": "Committee on Police and Fire"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "651E9537-5BD4-F011-8543-001DD8041B30"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1145705849-audio-low.mp4",
@@ -421,7 +685,19 @@
           ],
           "archive_manifest": "Meetings/2025-12/2025-12-15 City Council [ADDBA19C-F4D5-F011-8543-001DD8066465]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2025-12-15",
+        "meeting_type": "City Council"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "ADDBA19C-F4D5-F011-8543-001DD8066465"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1146638281-audio-low.mp4",
@@ -439,7 +715,19 @@
           ],
           "archive_manifest": "Meetings/2025-12/2025-12-16 City Council [48A8ADC6-F4D5-F011-8543-001DD8066465]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2025-12-16",
+        "meeting_type": "City Council"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "48A8ADC6-F4D5-F011-8543-001DD8066465"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1147046803-audio-low.mp4",
@@ -457,7 +745,19 @@
           ],
           "archive_manifest": "Meetings/2025-12/2025-12-18 City Council [8E55370F-F5D5-F011-8543-001DD8066465]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2025-12-18",
+        "meeting_type": "City Council"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "8E55370F-F5D5-F011-8543-001DD8066465"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1147756540-audio-low.mp4",
@@ -475,7 +775,19 @@
           ],
           "archive_manifest": "Meetings/2025-12/2025-12-19 City Council [FFD2DC30-AFDA-F011-8543-001DD80C6DA5]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2025-12-19",
+        "meeting_type": "City Council"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "FFD2DC30-AFDA-F011-8543-001DD80C6DA5"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1147777779-audio-low.mp4",
@@ -493,7 +805,19 @@
           ],
           "archive_manifest": "Meetings/2025-12/2025-12-17 Committee on Budget and Government Operations [4C34E733-94D7-F011-8543-001DD8018EAF]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2025-12-17",
+        "meeting_type": "Committee on Budget and Government Operations"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "4C34E733-94D7-F011-8543-001DD8018EAF"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1148129733-audio-low.mp4",
@@ -511,7 +835,19 @@
           ],
           "archive_manifest": "Meetings/2025-12/2025-12-20 City Council [E6535C21-B0DA-F011-8543-001DD80C6DA5]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2025-12-20",
+        "meeting_type": "City Council"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "E6535C21-B0DA-F011-8543-001DD80C6DA5"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1148313259-audio-low.mp4",
@@ -529,7 +865,19 @@
           ],
           "archive_manifest": "Meetings/2025-12/2025-12-22 Committee on Budget and Government Operations [1C3070BF-74DB-F011-8543-001DD802FB0D]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2025-12-22",
+        "meeting_type": "Committee on Budget and Government Operations"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "1C3070BF-74DB-F011-8543-001DD802FB0D"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1148341931-audio-low.mp4",
@@ -547,7 +895,19 @@
           ],
           "archive_manifest": "Meetings/2025-12/2025-12-29 City Council [C304F269-EBDD-F011-8543-001DD80AF606]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2025-12-29",
+        "meeting_type": "City Council"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "C304F269-EBDD-F011-8543-001DD80AF606"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1148736982-audio-low.mp4",
@@ -565,7 +925,19 @@
           ],
           "archive_manifest": "Meetings/2025-12/2025-12-29 Committee on Budget and Government Operations [7E609E74-D9E0-F011-8543-001DD8029F6B]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2025-12-29",
+        "meeting_type": "Committee on Budget and Government Operations"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "7E609E74-D9E0-F011-8543-001DD8029F6B"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1150146920-audio-low.mp4",
@@ -583,7 +955,19 @@
           ],
           "archive_manifest": "Meetings/2026-01/2026-01-07 Committee on Public Safety [4832ACBD-3DDC-F011-8543-001DD802FB0D]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2026-01-07",
+        "meeting_type": "Committee on Public Safety"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "4832ACBD-3DDC-F011-8543-001DD802FB0D"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1152305857-audio-low.mp4",
@@ -601,7 +985,19 @@
           ],
           "archive_manifest": "Meetings/2026-01/2026-01-13 Committee on Economic, Capital and Technology Development [7345CB2B-C7DA-F011-8543-001DD8088ED0]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2026-01-13",
+        "meeting_type": "Committee on Economic, Capital and Technology Development"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "7345CB2B-C7DA-F011-8543-001DD8088ED0"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1154042172-audio-low.mp4",
@@ -619,7 +1015,19 @@
           ],
           "archive_manifest": "Meetings/2026-01/2026-01-13 Committee on License and Consumer Protection [658C3C25-51DF-F011-8543-001DD80F7434]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2026-01-13",
+        "meeting_type": "Committee on License and Consumer Protection"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "658C3C25-51DF-F011-8543-001DD80F7434"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1154075261-audio-low.mp4",
@@ -637,7 +1045,19 @@
           ],
           "archive_manifest": "Meetings/2026-01/2026-01-14 Committee on Pedestrian and Traffic Safety [231D7319-4FEA-F011-8543-001DD80AF606]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2026-01-14",
+        "meeting_type": "Committee on Pedestrian and Traffic Safety"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "231D7319-4FEA-F011-8543-001DD80AF606"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1154082574-audio-low.mp4",
@@ -655,7 +1075,19 @@
           ],
           "archive_manifest": "Meetings/2026-01/2026-01-14 Committee on Finance [7E187841-20E0-F011-8543-001DD80F73A3]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2026-01-14",
+        "meeting_type": "Committee on Finance"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "7E187841-20E0-F011-8543-001DD80F73A3"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1154385301-audio-low.mp4",
@@ -673,7 +1105,19 @@
           ],
           "archive_manifest": "Meetings/2026-01/2026-01-14 Committee on Housing and Real Estate [6BF50847-00E5-F011-8543-001DD80F73A3]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2026-01-14",
+        "meeting_type": "Committee on Housing and Real Estate"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "6BF50847-00E5-F011-8543-001DD80F73A3"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1154428727-audio-low.mp4",
@@ -691,7 +1135,19 @@
           ],
           "archive_manifest": "Meetings/2026-01/2026-01-15 Committee on Budget and Government Operations [1724C105-C6EC-F011-8543-001DD80F73A3]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2026-01-15",
+        "meeting_type": "Committee on Budget and Government Operations"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "1724C105-C6EC-F011-8543-001DD80F73A3"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1154467199-audio-low.mp4",
@@ -709,7 +1165,19 @@
           ],
           "archive_manifest": "Meetings/2026-01/2026-01-20 Committee on Transportation and Public Way [6930A0B8-38EB-F011-8543-001DD8029F6B]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2026-01-20",
+        "meeting_type": "Committee on Transportation and Public Way"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "6930A0B8-38EB-F011-8543-001DD8029F6B"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1156547113-audio-low.mp4",
@@ -727,7 +1195,19 @@
           ],
           "archive_manifest": "Meetings/2026-01/2026-01-21 City Council [50866F51-63DF-F011-8543-001DD80E9311]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2026-01-21",
+        "meeting_type": "City Council"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "50866F51-63DF-F011-8543-001DD80E9311"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1156548262-audio-low.mp4",
@@ -745,7 +1225,19 @@
           ],
           "archive_manifest": "Meetings/2026-01/2026-01-20 Committee on Aviation [8B76E1EC-2DF2-F011-8406-001DD80E69F9]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2026-01-20",
+        "meeting_type": "Committee on Aviation"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "8B76E1EC-2DF2-F011-8406-001DD80E69F9"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1156605301-audio-low.mp4",
@@ -763,7 +1255,19 @@
           ],
           "archive_manifest": "Meetings/2026-01/2026-01-27 Joint Committee- Police and Fire; Immigrant and Refugee Rights [80E7988D-89F0-F011-8406-001DD8080B41]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2026-01-27",
+        "meeting_type": "Joint Committee: Police and Fire; Immigrant and Refugee Rights"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "80E7988D-89F0-F011-8406-001DD8080B41"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1156952041-audio-low.mp4",
@@ -781,7 +1285,19 @@
           ],
           "archive_manifest": "Meetings/2026-01/2026-01-22 Committee on Contracting Oversight and Equity [AF1AB75E-90F1-F011-8406-001DD808A8BA]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2026-01-22",
+        "meeting_type": "Committee on Contracting Oversight and Equity"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "AF1AB75E-90F1-F011-8406-001DD808A8BA"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1157294526-audio-low.mp4",
@@ -799,7 +1315,19 @@
           ],
           "archive_manifest": "Meetings/2026-01/2026-01-27 Committee on Health and Human Relations [BB0CE7C7-FFEF-F011-8406-001DD80ACDDF]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2026-01-27",
+        "meeting_type": "Committee on Health and Human Relations"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "BB0CE7C7-FFEF-F011-8406-001DD80ACDDF"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1158916571-audio-low.mp4",
@@ -817,7 +1345,19 @@
           ],
           "archive_manifest": "Meetings/2026-02/2026-02-03 Committee on Environmental Protection and Energy [B7DA1B04-62F1-F011-8406-001DD808A8BA]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2026-02-03",
+        "meeting_type": "Committee on Environmental Protection and Energy"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "B7DA1B04-62F1-F011-8406-001DD808A8BA"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1158973621-audio-low.mp4",
@@ -835,7 +1375,19 @@
           ],
           "archive_manifest": "Meetings/2026-02/2026-02-03 Committee on Public Safety [1B2D4784-14F7-F011-8406-001DD8080DE8]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2026-02-03",
+        "meeting_type": "Committee on Public Safety"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "1B2D4784-14F7-F011-8406-001DD8080DE8"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1161514473-audio-low.mp4",
@@ -853,7 +1405,19 @@
           ],
           "archive_manifest": "Meetings/2026-02/2026-02-09 Committee on Finance [40B243BF-FDF6-F011-8406-001DD8080DE8]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2026-02-09",
+        "meeting_type": "Committee on Finance"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "40B243BF-FDF6-F011-8406-001DD8080DE8"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1161566002-audio-low.mp4",
@@ -871,7 +1435,19 @@
           ],
           "archive_manifest": "Meetings/2026-02/2026-02-09 Committee on Pedestrian and Traffic Safety [7C4F9458-C1F7-F011-8406-001DD8071B7F]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2026-02-09",
+        "meeting_type": "Committee on Pedestrian and Traffic Safety"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "7C4F9458-C1F7-F011-8406-001DD8071B7F"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1163382552-audio-low.mp4",
@@ -889,7 +1465,19 @@
           ],
           "archive_manifest": "Meetings/2026-02/2026-02-10 Committee on Economic, Capital and Technology Development [C3D0B4DA-67F1-F011-8406-001DD80E69F9]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2026-02-10",
+        "meeting_type": "Committee on Economic, Capital and Technology Development"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "C3D0B4DA-67F1-F011-8406-001DD80E69F9"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1163419425-audio-low.mp4",
@@ -907,7 +1495,19 @@
           ],
           "archive_manifest": "Meetings/2026-02/2026-02-10 Committee on Budget and Government Operations [AA00C9FE-0F02-F111-8406-001DD80D6961]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2026-02-10",
+        "meeting_type": "Committee on Budget and Government Operations"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "AA00C9FE-0F02-F111-8406-001DD80D6961"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1163693981-audio-low.mp4",
@@ -925,7 +1525,19 @@
           ],
           "archive_manifest": "Meetings/2026-02/2026-02-10 Committee on License and Consumer Protection [596C0876-23F6-F011-8406-001DD8080DE8]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2026-02-10",
+        "meeting_type": "Committee on License and Consumer Protection"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "596C0876-23F6-F011-8406-001DD8080DE8"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1163709847-audio-low.mp4",
@@ -943,7 +1555,19 @@
           ],
           "archive_manifest": "Meetings/2026-02/2026-02-11 Committee on Transportation and Public Way [7BC74AA7-97FB-F011-8406-001DD80659B2]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2026-02-11",
+        "meeting_type": "Committee on Transportation and Public Way"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "7BC74AA7-97FB-F011-8406-001DD80659B2"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1163741392-audio-low.mp4",
@@ -961,7 +1585,19 @@
           ],
           "archive_manifest": "Meetings/2026-02/2026-02-11 Committee on Finance [28A92C38-FEF6-F011-8406-001DD8080DE8]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2026-02-11",
+        "meeting_type": "Committee on Finance"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "28A92C38-FEF6-F011-8406-001DD8080DE8"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1164068956-audio-low.mp4",
@@ -979,7 +1615,19 @@
           ],
           "archive_manifest": "Meetings/2026-02/2026-02-11 Committee on Housing and Real Estate [E95A75BD-7FFC-F011-8406-001DD802EB92]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2026-02-11",
+        "meeting_type": "Committee on Housing and Real Estate"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "E95A75BD-7FFC-F011-8406-001DD802EB92"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1164087404-audio-low.mp4",
@@ -1007,7 +1655,20 @@
           ],
           "archive_manifest": "Meetings/2026-02/2026-02-17 Committee on Zoning, Landmarks and Building Standards [EC540330-6007-F111-8406-001DD80D6961]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2026-02-17",
+        "meeting_type": "Committee on Zoning, Landmarks and Building Standards"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "multiple_clerk_records",
+        "meeting_ids": [
+          "8FE7FA9B-6307-F111-8406-001DD80D6961",
+          "EC540330-6007-F111-8406-001DD80D6961"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1164094779-audio-low.mp4",
@@ -1025,7 +1686,19 @@
           ],
           "archive_manifest": "Meetings/2026-03/2026-03-03 Committee on Environmental Protection and Energy [00AA57A8-690E-F111-8406-001DD812D049]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2026-03-03",
+        "meeting_type": "Committee on Environmental Protection and Energy"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "00AA57A8-690E-F111-8406-001DD812D049"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1165773679-audio-low.mp4",
@@ -1043,7 +1716,19 @@
           ],
           "archive_manifest": "Meetings/2026-02/2026-02-18 City Council [AADBA854-DDF6-F011-8406-001DD8080DE8]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2026-02-18",
+        "meeting_type": "City Council"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "AADBA854-DDF6-F011-8406-001DD8080DE8"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1166129365-audio-low.mp4",
@@ -1071,7 +1756,20 @@
           ],
           "archive_manifest": "Meetings/2026-02/2026-02-27 Committee on Finance [BBFFE686-FEF6-F011-8406-001DD8080DE8]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2026-02-27",
+        "meeting_type": "Committee on Finance"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "multiple_clerk_records",
+        "meeting_ids": [
+          "4C319AF6-F3FA-F011-8406-001DD8065D06",
+          "BBFFE686-FEF6-F011-8406-001DD8080DE8"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1168928919-audio-low.mp4",
@@ -1089,7 +1787,19 @@
           ],
           "archive_manifest": "Meetings/2026-03/2026-03-03 Committee on Public Safety [EE995EFA-D30D-F111-8406-001DD812D113]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2026-03-03",
+        "meeting_type": "Committee on Public Safety"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "EE995EFA-D30D-F111-8406-001DD812D113"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1170056165-audio-low.mp4",
@@ -1107,7 +1817,19 @@
           ],
           "archive_manifest": "Meetings/2026-03/2026-03-10 Committee on Pedestrian and Traffic Safety [617A6F21-CF0D-F111-8406-001DD80AE07E]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2026-03-10",
+        "meeting_type": "Committee on Pedestrian and Traffic Safety"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "617A6F21-CF0D-F111-8406-001DD80AE07E"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1170724330-audio-low.mp4",
@@ -1125,7 +1847,19 @@
           ],
           "archive_manifest": "Meetings/2026-03/2026-03-10 Committee on Health and Human Relations [2C51C80B-01F0-F011-8406-001DD80ACDDF]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2026-03-10",
+        "meeting_type": "Committee on Health and Human Relations"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "2C51C80B-01F0-F011-8406-001DD80ACDDF"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1172257730-audio-low.mp4",
@@ -1143,7 +1877,19 @@
           ],
           "archive_manifest": "Meetings/2026-03/2026-03-12 Committee on Housing and Real Estate [0C8CDB34-CD18-F111-8406-001DD803E075]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2026-03-12",
+        "meeting_type": "Committee on Housing and Real Estate"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "0C8CDB34-CD18-F111-8406-001DD803E075"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1172267409-audio-low.mp4",
@@ -1161,7 +1907,19 @@
           ],
           "archive_manifest": "Meetings/2026-03/2026-03-11 Committee on Budget and Government Operations [D321DF7B-AB18-F111-8406-001DD8131156]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2026-03-11",
+        "meeting_type": "Committee on Budget and Government Operations"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "D321DF7B-AB18-F111-8406-001DD8131156"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1172608190-audio-low.mp4",
@@ -1179,7 +1937,19 @@
           ],
           "archive_manifest": "Meetings/2026-03/2026-03-12 Committee on Economic, Capital and Technology Development [AC27D13B-DD0D-F111-8406-001DD812D049]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2026-03-12",
+        "meeting_type": "Committee on Economic, Capital and Technology Development"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "AC27D13B-DD0D-F111-8406-001DD812D049"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1172985739-audio-low.mp4",
@@ -1197,7 +1967,19 @@
           ],
           "archive_manifest": "Meetings/2026-03/2026-03-12 Committee on License and Consumer Protection [51821342-F613-F111-8406-001DD80A7EA1]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2026-03-12",
+        "meeting_type": "Committee on License and Consumer Protection"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "51821342-F613-F111-8406-001DD80A7EA1"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1173020710-audio-low.mp4",
@@ -1215,7 +1997,19 @@
           ],
           "archive_manifest": "Meetings/2026-03/2026-03-13 Committee on Special Events, Cultural Affairs and Recreation [16C7D67F-DA10-F111-8406-001DD812D049]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2026-03-13",
+        "meeting_type": "Committee on Special Events, Cultural Affairs and Recreation"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "16C7D67F-DA10-F111-8406-001DD812D049"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1173327690-audio-low.mp4",
@@ -1233,7 +2027,19 @@
           ],
           "archive_manifest": "Meetings/2026-03/2026-03-16 Committee on Ethics and Government Oversight [70676AD8-2C17-F111-8406-001DD8131156]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2026-03-16",
+        "meeting_type": "Committee on Ethics and Government Oversight"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "70676AD8-2C17-F111-8406-001DD8131156"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1173329934-audio-low.mp4",
@@ -1251,7 +2057,19 @@
           ],
           "archive_manifest": "Meetings/2026-03/2026-03-13 Committee on Finance [E9AEA222-150D-F111-8406-001DD802B467]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2026-03-13",
+        "meeting_type": "Committee on Finance"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "E9AEA222-150D-F111-8406-001DD802B467"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1173343297-audio-low.mp4",
@@ -1269,7 +2087,19 @@
           ],
           "archive_manifest": "Meetings/2026-03/2026-03-13 Committee on Transportation and Public Way [878867BD-7719-F111-8406-001DD8131156]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2026-03-13",
+        "meeting_type": "Committee on Transportation and Public Way"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "878867BD-7719-F111-8406-001DD8131156"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1173376218-audio-low.mp4",
@@ -1287,7 +2117,19 @@
           ],
           "archive_manifest": "Meetings/2026-03/2026-03-13 Committee on Police and Fire [181D2049-A90E-F111-8406-001DD812D049]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2026-03-13",
+        "meeting_type": "Committee on Police and Fire"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "181D2049-A90E-F111-8406-001DD812D049"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1173389738-audio-low.mp4",
@@ -1305,7 +2147,19 @@
           ],
           "archive_manifest": "Meetings/2026-04/2026-04-08 Committee on Housing and Real Estate [1C0D3484-6828-F111-8341-001DD80A85F4]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2026-04-08",
+        "meeting_type": "Committee on Housing and Real Estate"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "1C0D3484-6828-F111-8341-001DD80A85F4"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1174131349-audio-low.mp4",
@@ -1323,7 +2177,19 @@
           ],
           "archive_manifest": "Meetings/2026-03/2026-03-18 City Council [D73FA92F-100D-F111-8406-001DD80F9592]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2026-03-18",
+        "meeting_type": "City Council"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "D73FA92F-100D-F111-8406-001DD80F9592"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1174906702-audio-low.mp4",
@@ -1341,7 +2207,19 @@
           ],
           "archive_manifest": "Meetings/2026-03/2026-03-25 Committee on Immigrant and Refugee Rights [B6419F1C-5321-F111-8341-001DD8064EE3]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2026-03-25",
+        "meeting_type": "Committee on Immigrant and Refugee Rights"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "B6419F1C-5321-F111-8341-001DD8064EE3"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1177009067-audio-low.mp4",
@@ -1359,7 +2237,19 @@
           ],
           "archive_manifest": "Meetings/2026-03/2026-03-26 Committee on Transportation and Public Way [399FDDD0-930E-F111-8406-001DD80AE07E]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2026-03-26",
+        "meeting_type": "Committee on Transportation and Public Way"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "399FDDD0-930E-F111-8406-001DD80AE07E"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1177376041-audio-low.mp4",
@@ -1377,7 +2267,19 @@
           ],
           "archive_manifest": "Meetings/2026-03/2026-03-30 Committee on Education and Child Development [9EA90F80-D417-F111-8406-001DD80A7EA1]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2026-03-30",
+        "meeting_type": "Committee on Education and Child Development"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "9EA90F80-D417-F111-8406-001DD80A7EA1"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1178507165-audio-low.mp4",
@@ -1395,7 +2297,19 @@
           ],
           "archive_manifest": "Meetings/2026-04/2026-04-02 Committee on Budget and Government Operations [3A6EB792-F329-F111-8341-001DD80A85F4]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2026-04-02",
+        "meeting_type": "Committee on Budget and Government Operations"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "3A6EB792-F329-F111-8341-001DD80A85F4"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1179635813-audio-low.mp4",
@@ -1413,7 +2327,19 @@
           ],
           "archive_manifest": "Meetings/2026-04/2026-04-07 Committee on Pedestrian and Traffic Safety [D5C510E9-7A24-F111-8341-001DD80B1275]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2026-04-07",
+        "meeting_type": "Committee on Pedestrian and Traffic Safety"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "D5C510E9-7A24-F111-8341-001DD80B1275"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1180915184-audio-low.mp4",
@@ -1431,7 +2357,19 @@
           ],
           "archive_manifest": "Meetings/2026-04/2026-04-08 Committee on Transportation and Public Way [5219473A-452D-F111-8341-001DD80A9E34]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2026-04-08",
+        "meeting_type": "Committee on Transportation and Public Way"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "5219473A-452D-F111-8341-001DD80A9E34"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1181263448-audio-low.mp4",
@@ -1449,7 +2387,19 @@
           ],
           "archive_manifest": "Meetings/2026-04/2026-04-09 Committee on Economic, Capital and Technology Development [A2CA6694-E426-F111-8341-001DD803F9B1]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2026-04-09",
+        "meeting_type": "Committee on Economic, Capital and Technology Development"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "A2CA6694-E426-F111-8341-001DD803F9B1"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1181325977-audio-low.mp4",
@@ -1467,7 +2417,19 @@
           ],
           "archive_manifest": "Meetings/2026-04/2026-04-09 Committee on Public Safety [D87F5ACB-B627-F111-8341-001DD80E2B47]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2026-04-09",
+        "meeting_type": "Committee on Public Safety"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "D87F5ACB-B627-F111-8341-001DD80E2B47"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1181636251-audio-low.mp4",
@@ -1495,7 +2457,20 @@
           ],
           "archive_manifest": "Meetings/2026-04/2026-04-13 Committee on Finance [BC409AB5-6C21-F111-8341-001DD8064EE3]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2026-04-13",
+        "meeting_type": "Committee on Finance"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "multiple_clerk_records",
+        "meeting_ids": [
+          "33C733F6-882F-F111-8341-001DD80A9E34",
+          "BC409AB5-6C21-F111-8341-001DD8064EE3"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1181642367-audio-low.mp4",
@@ -1513,7 +2488,19 @@
           ],
           "archive_manifest": "Meetings/2026-04/2026-04-09 Committee on Special Events, Cultural Affairs and Recreation [0B12984B-3D2C-F111-8341-001DD813304E]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2026-04-09",
+        "meeting_type": "Committee on Special Events, Cultural Affairs and Recreation"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "0B12984B-3D2C-F111-8341-001DD813304E"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1181716259-audio-low.mp4",
@@ -1531,7 +2518,19 @@
           ],
           "archive_manifest": "Meetings/2026-04/2026-04-13 Committee on Workforce Development [1B50A637-AA27-F111-8341-001DD80FB78D]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2026-04-13",
+        "meeting_type": "Committee on Workforce Development"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "1B50A637-AA27-F111-8341-001DD80FB78D"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1182706655-audio-low.mp4",
@@ -1549,7 +2548,19 @@
           ],
           "archive_manifest": "Meetings/2026-04/2026-04-13 Committee on License and Consumer Protection [2328D8AA-B027-F111-8341-001DD80F4002]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2026-04-13",
+        "meeting_type": "Committee on License and Consumer Protection"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "2328D8AA-B027-F111-8341-001DD80F4002"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1183092749-audio-low.mp4",
@@ -1567,7 +2578,19 @@
           ],
           "archive_manifest": "Meetings/2026-05/2026-05-05 Committee on License and Consumer Protection [F6EA9CCA-4B42-F111-88B4-001DD8033B18]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2026-05-05",
+        "meeting_type": "Committee on License and Consumer Protection"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "F6EA9CCA-4B42-F111-88B4-001DD8033B18"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1183109138-audio-low.mp4",
@@ -1585,7 +2608,19 @@
           ],
           "archive_manifest": "Meetings/2026-04/2026-04-15 City Council [2EA74F29-8923-F111-8341-001DD80B1275]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2026-04-15",
+        "meeting_type": "City Council"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "2EA74F29-8923-F111-8341-001DD80B1275"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1183165801-audio-low.mp4",
@@ -1603,7 +2638,19 @@
           ],
           "archive_manifest": "Meetings/2026-04/2026-04-14 Committee on Immigrant and Refugee Rights [6FC52705-CF32-F111-88B3-001DD8033B18]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2026-04-14",
+        "meeting_type": "Committee on Immigrant and Refugee Rights"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "6FC52705-CF32-F111-88B3-001DD8033B18"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1183778059-audio-low.mp4",
@@ -1621,7 +2668,19 @@
           ],
           "archive_manifest": "Meetings/2026-04/2026-04-16 Committee on Ethics and Government Oversight [3F7FC8A4-5C33-F111-88B3-001DD8065E1D]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2026-04-16",
+        "meeting_type": "Committee on Ethics and Government Oversight"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "3F7FC8A4-5C33-F111-88B3-001DD8065E1D"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1183827336-audio-low.mp4",
@@ -1639,7 +2698,19 @@
           ],
           "archive_manifest": "Meetings/2026-04/2026-04-27 Committee on Budget and Government Operations [702A4EF9-C43D-F111-88B3-001DD80B0E39]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2026-04-27",
+        "meeting_type": "Committee on Budget and Government Operations"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "702A4EF9-C43D-F111-88B3-001DD80B0E39"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1187052202-audio-low.mp4",
@@ -1657,7 +2728,19 @@
           ],
           "archive_manifest": "Meetings/2026-05/2026-05-04 Committee on Housing and Real Estate [1827BD4C-0C40-F111-88B3-001DD80B0E39]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2026-05-04",
+        "meeting_type": "Committee on Housing and Real Estate"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "1827BD4C-0C40-F111-88B3-001DD80B0E39"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1189151784-audio-low.mp4",
@@ -1675,7 +2758,19 @@
           ],
           "archive_manifest": "Meetings/2026-05/2026-05-05 Joint Committee- Budget; Police and Fire [07E23CA8-1E40-F111-88B3-001DD80B0E39]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2026-05-05",
+        "meeting_type": "Joint Committee: Budget; Police and Fire"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "07E23CA8-1E40-F111-88B3-001DD80B0E39"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1189477310-audio-low.mp4",
@@ -1693,7 +2788,19 @@
           ],
           "archive_manifest": "Meetings/2026-05/2026-05-06 Committee on Zoning, Landmarks and Building Standards [157D679C-BC39-F111-88B3-001DD80B0E39]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2026-05-06",
+        "meeting_type": "Committee on Zoning, Landmarks and Building Standards"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "157D679C-BC39-F111-88B3-001DD80B0E39"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1189492760-audio-low.mp4",
@@ -1711,7 +2818,19 @@
           ],
           "archive_manifest": "Meetings/2026-05/2026-05-06 Committee on Police and Fire [EA91B723-7342-F111-88B4-001DD8033B18]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2026-05-06",
+        "meeting_type": "Committee on Police and Fire"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "EA91B723-7342-F111-88B4-001DD8033B18"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1189860695-audio-low.mp4",
@@ -1729,7 +2848,19 @@
           ],
           "archive_manifest": "Meetings/2026-05/2026-05-07 Committee on Health and Human Relations [86A6BC6F-4B42-F111-88B4-001DD80B0E39]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2026-05-07",
+        "meeting_type": "Committee on Health and Human Relations"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "86A6BC6F-4B42-F111-88B4-001DD80B0E39"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1189863897-audio-low.mp4",
@@ -1747,7 +2878,19 @@
           ],
           "archive_manifest": "Meetings/2026-05/2026-05-11 Committee on Economic, Capital and Technology Development [5E9E0EC9-F443-F111-88B4-001DD8033B18]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2026-05-11",
+        "meeting_type": "Committee on Economic, Capital and Technology Development"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "5E9E0EC9-F443-F111-88B4-001DD8033B18"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1190194414-audio-low.mp4",
@@ -1765,7 +2908,19 @@
           ],
           "archive_manifest": "Meetings/2026-05/2026-05-11 Committee on Environmental Protection and Energy [B5EBAC78-DB39-F111-88B3-001DD8065E1D]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2026-05-11",
+        "meeting_type": "Committee on Environmental Protection and Energy"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "B5EBAC78-DB39-F111-88B3-001DD8065E1D"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1191246964-audio-low.mp4",
@@ -1783,7 +2938,19 @@
           ],
           "archive_manifest": "Meetings/2026-05/2026-05-12 Committee on Pedestrian and Traffic Safety [FD4064C3-773A-F111-88B3-001DD8065E1D]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2026-05-12",
+        "meeting_type": "Committee on Pedestrian and Traffic Safety"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "FD4064C3-773A-F111-88B3-001DD8065E1D"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1191281076-audio-low.mp4",
@@ -1801,7 +2968,19 @@
           ],
           "archive_manifest": "Meetings/2026-05/2026-05-12 Committee on Public Safety [60560776-863E-F111-88B3-001DD80B0E39]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2026-05-12",
+        "meeting_type": "Committee on Public Safety"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "60560776-863E-F111-88B3-001DD80B0E39"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1191586511-audio-low.mp4",
@@ -1819,7 +2998,19 @@
           ],
           "archive_manifest": "Meetings/2026-05/2026-05-12 Committee on Workforce Development [ACA9D03D-364A-F111-88B4-001DD8033B18]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2026-05-12",
+        "meeting_type": "Committee on Workforce Development"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "ACA9D03D-364A-F111-88B4-001DD8033B18"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1191621840-audio-low.mp4",
@@ -1837,7 +3028,19 @@
           ],
           "archive_manifest": "Meetings/2026-05/2026-05-13 Committee on Transportation and Public Way [82BEA782-A939-F111-88B3-001DD8033B18]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2026-05-13",
+        "meeting_type": "Committee on Transportation and Public Way"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "82BEA782-A939-F111-88B3-001DD8033B18"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1191645867-audio-low.mp4",
@@ -1855,7 +3058,19 @@
           ],
           "archive_manifest": "Meetings/2026-05/2026-05-13 Committee on Budget and Government Operations [6CF0C894-9245-F111-88B4-001DD80B0E39]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2026-05-13",
+        "meeting_type": "Committee on Budget and Government Operations"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "6CF0C894-9245-F111-88B4-001DD80B0E39"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1191962913-audio-low.mp4",
@@ -1873,7 +3088,19 @@
           ],
           "archive_manifest": "Meetings/2026-05/2026-05-13 Joint Committee-  Budget and Government Operations; Economic, Capital and Technology Development [C697D77E-7D49-F111-88B4-001DD80B0E39]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2026-05-13",
+        "meeting_type": "Joint Committee:  Budget and Government Operations; Economic, Capital and Technology Development"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "C697D77E-7D49-F111-88B4-001DD80B0E39"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1191989016-audio-low.mp4",
@@ -1891,7 +3118,19 @@
           ],
           "archive_manifest": "Meetings/2026-05/2026-05-13 Committee on Housing and Real Estate [74067F41-E043-F111-88B4-001DD8033B18]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2026-05-13",
+        "meeting_type": "Committee on Housing and Real Estate"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "74067F41-E043-F111-88B4-001DD8033B18"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1192012038-audio-low.mp4",
@@ -1909,7 +3148,19 @@
           ],
           "archive_manifest": "Meetings/2026-05/2026-05-18 Committee on Finance [445A64C7-1039-F111-88B3-001DD8033B18]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2026-05-18",
+        "meeting_type": "Committee on Finance"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "445A64C7-1039-F111-88B3-001DD8033B18"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1192049290-audio-low.mp4",
@@ -1927,7 +3178,19 @@
           ],
           "archive_manifest": "Meetings/2026-05/2026-05-18 Committee on Immigrant and Refugee Rights [E817A17D-A148-F111-BEC5-001DD812C292]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2026-05-18",
+        "meeting_type": "Committee on Immigrant and Refugee Rights"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "E817A17D-A148-F111-BEC5-001DD812C292"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1193324942-audio-low.mp4",
@@ -1945,7 +3208,19 @@
           ],
           "archive_manifest": "Meetings/2026-05/2026-05-18 Committee on Contracting Oversight and Equity [F43BB2B1-4242-F111-88B4-001DD80B0E39]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2026-05-18",
+        "meeting_type": "Committee on Contracting Oversight and Equity"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "F43BB2B1-4242-F111-88B4-001DD80B0E39"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1193355557-audio-low.mp4",
@@ -1963,7 +3238,19 @@
           ],
           "archive_manifest": "Meetings/2026-05/2026-05-19 Committee on Zoning, Landmarks and Building Standards [DD545403-E53C-F111-88B3-001DD80B0E39]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2026-05-19",
+        "meeting_type": "Committee on Zoning, Landmarks and Building Standards"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "DD545403-E53C-F111-88B3-001DD80B0E39"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1193363043-audio-low.mp4",
@@ -1981,7 +3268,19 @@
           ],
           "archive_manifest": "Meetings/2026-05/2026-05-19 Committee on Ethics and Government Oversight [D813F1C4-DF43-F111-88B3-001DD808A02C]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2026-05-19",
+        "meeting_type": "Committee on Ethics and Government Oversight"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "D813F1C4-DF43-F111-88B3-001DD808A02C"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1193687635-audio-low.mp4",
@@ -1999,7 +3298,19 @@
           ],
           "archive_manifest": "Meetings/2026-05/2026-05-19 Committee on Health and Human Relations [986F79DF-6850-F111-BEC6-001DD8033B18]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2026-05-19",
+        "meeting_type": "Committee on Health and Human Relations"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "986F79DF-6850-F111-BEC6-001DD8033B18"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1193694170-audio-low.mp4",
@@ -2017,7 +3328,19 @@
           ],
           "archive_manifest": "Meetings/2026-05/2026-05-20 City Council [CE41BA5E-FF38-F111-88B3-001DD8033B18]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2026-05-20",
+        "meeting_type": "City Council"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "CE41BA5E-FF38-F111-88B3-001DD8033B18"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1193697138-audio-low.mp4",
@@ -2035,7 +3358,19 @@
           ],
           "archive_manifest": "Meetings/2026-05/2026-05-26 Joint Committee- Police and Fire; Ethics and Government Oversight [0DD3E244-044E-F111-BEC6-001DD80B0E39]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2026-05-26",
+        "meeting_type": "Joint Committee: Police and Fire; Ethics and Government Oversight"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "0DD3E244-044E-F111-BEC6-001DD80B0E39"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1194181121-audio-low.mp4",
@@ -2053,7 +3388,19 @@
           ],
           "archive_manifest": "Meetings/2026-05/2026-05-26 Committee on Education and Child Development [FF74B2CD-EF4E-F111-BEC6-001DD80B0E39]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2026-05-26",
+        "meeting_type": "Committee on Education and Child Development"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "FF74B2CD-EF4E-F111-BEC6-001DD80B0E39"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1195715133-audio-low.mp4",
@@ -2081,7 +3428,20 @@
           ],
           "archive_manifest": "Meetings/2026-06/2026-06-09 Committee on Public Safety [5C8E2964-AF5A-F111-BEC5-001DD80C4FA2]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2026-06-09",
+        "meeting_type": "Committee on Public Safety"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "multiple_clerk_records",
+        "meeting_ids": [
+          "39F25C35-3060-F111-BEC5-001DD80012DB",
+          "5C8E2964-AF5A-F111-BEC5-001DD80C4FA2"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1198129358-audio-low.mp4",
@@ -2099,7 +3459,19 @@
           ],
           "archive_manifest": "Meetings/2026-06/2026-06-04 Committee on Zoning, Landmarks and Building Standards [77DF81CD-3C59-F111-BEC5-001DD803F39A]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2026-06-04",
+        "meeting_type": "Committee on Zoning, Landmarks and Building Standards"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "77DF81CD-3C59-F111-BEC5-001DD803F39A"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1198513547-audio-low.mp4",
@@ -2117,7 +3489,19 @@
           ],
           "archive_manifest": "Meetings/2026-06/2026-06-09 Committee on Pedestrian and Traffic Safety [4676B95A-2A55-F111-BEC6-001DD8033B18]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2026-06-09",
+        "meeting_type": "Committee on Pedestrian and Traffic Safety"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "4676B95A-2A55-F111-BEC6-001DD8033B18"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1199824423-audio-low.mp4",
@@ -2135,7 +3519,19 @@
           ],
           "archive_manifest": "Meetings/2026-06/2026-06-09 Committee on License and Consumer Protection [E5CB2C3F-3955-F111-BEC6-001DD8033B18]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2026-06-09",
+        "meeting_type": "Committee on License and Consumer Protection"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "E5CB2C3F-3955-F111-BEC6-001DD8033B18"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1199849882-audio-low.mp4",
@@ -2153,7 +3549,19 @@
           ],
           "archive_manifest": "Meetings/2026-06/2026-06-10 Committee on Ethics and Government Oversight [1AE40A9B-855F-F111-BEC5-001DD80754E8]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2026-06-10",
+        "meeting_type": "Committee on Ethics and Government Oversight"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "1AE40A9B-855F-F111-BEC5-001DD80754E8"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1199872272-audio-low.mp4",
@@ -2171,7 +3579,19 @@
           ],
           "archive_manifest": "Meetings/2026-06/2026-06-10 Committee on Transportation and Public Way [39D621DE-1A59-F111-BEC5-001DD80C412B]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2026-06-10",
+        "meeting_type": "Committee on Transportation and Public Way"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "39D621DE-1A59-F111-BEC5-001DD80C412B"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1200159992-audio-low.mp4",
@@ -2189,7 +3609,19 @@
           ],
           "archive_manifest": "Meetings/2026-06/2026-06-10 Committee on Housing and Real Estate [3E5CBC21-F359-F111-BEC5-001DD80C412B]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2026-06-10",
+        "meeting_type": "Committee on Housing and Real Estate"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "3E5CBC21-F359-F111-BEC5-001DD80C412B"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1200176629-audio-low.mp4",
@@ -2207,7 +3639,19 @@
           ],
           "archive_manifest": "Meetings/2026-06/2026-06-11 Committee on Economic, Capital and Technology Development [29B731BD-4755-F111-BEC6-001DD80B0E39]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2026-06-11",
+        "meeting_type": "Committee on Economic, Capital and Technology Development"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "29B731BD-4755-F111-BEC6-001DD80B0E39"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1200250847-audio-low.mp4",
@@ -2225,7 +3669,19 @@
           ],
           "archive_manifest": "Meetings/2026-06/2026-06-11 Committee on Immigrant and Refugee Rights [646D14F0-995E-F111-BEC5-001DD8080738]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2026-06-11",
+        "meeting_type": "Committee on Immigrant and Refugee Rights"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "646D14F0-995E-F111-BEC5-001DD8080738"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1200524681-audio-low.mp4",
@@ -2243,7 +3699,19 @@
           ],
           "archive_manifest": "Meetings/2026-06/2026-06-11 Committee on Health and Human Relations [00E171F6-F55D-F111-BEC5-001DD80012DB]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2026-06-11",
+        "meeting_type": "Committee on Health and Human Relations"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "00E171F6-F55D-F111-BEC5-001DD80012DB"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1200527375-audio-low.mp4",
@@ -2261,7 +3729,19 @@
           ],
           "archive_manifest": "Meetings/2026-06/2026-06-15 Committee on Finance [C171A4A5-3F55-F111-BEC5-001DD801AB0F]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2026-06-15",
+        "meeting_type": "Committee on Finance"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "C171A4A5-3F55-F111-BEC5-001DD801AB0F"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1200557018-audio-low.mp4",
@@ -2279,7 +3759,19 @@
           ],
           "archive_manifest": "Meetings/2026-06/2026-06-15 Committee on Budget and Government Operations [7C5833BC-5060-F111-BEC5-001DD80012DB]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2026-06-15",
+        "meeting_type": "Committee on Budget and Government Operations"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "7C5833BC-5060-F111-BEC5-001DD80012DB"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1201520564-audio-low.mp4",
@@ -2297,7 +3789,19 @@
           ],
           "archive_manifest": "Meetings/2026-06/2026-06-16 Committee on Zoning, Landmarks and Building Standards [E677DA7E-4F55-F111-BEC6-001DD80B0E39]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2026-06-16",
+        "meeting_type": "Committee on Zoning, Landmarks and Building Standards"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "E677DA7E-4F55-F111-BEC6-001DD80B0E39"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1201525192-audio-low.mp4",
@@ -2315,7 +3819,19 @@
           ],
           "archive_manifest": "Meetings/2026-06/2026-06-16 Committee on Economic, Capital and Technology Development [DCB098AC-E165-F111-A823-001DD80EA58E]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2026-06-16",
+        "meeting_type": "Committee on Economic, Capital and Technology Development"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "DCB098AC-E165-F111-A823-001DD80EA58E"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1201841750-audio-low.mp4",
@@ -2333,7 +3849,19 @@
           ],
           "archive_manifest": "Meetings/2026-06/2026-06-24 Committee on Workforce Development [CFF37FBD-416B-F111-A823-001DD801545D]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2026-06-24",
+        "meeting_type": "Committee on Workforce Development"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "CFF37FBD-416B-F111-A823-001DD801545D"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1201890835-audio-low.mp4",
@@ -2351,7 +3879,19 @@
           ],
           "archive_manifest": "Meetings/2026-06/2026-06-17 City Council [73347594-0E55-F111-BEC6-001DD80B0E39]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2026-06-17",
+        "meeting_type": "City Council"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "73347594-0E55-F111-BEC6-001DD80B0E39"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1202267652-audio-low.mp4",
@@ -2369,7 +3909,19 @@
           ],
           "archive_manifest": "Meetings/2026-06/2026-06-24 Committee on Workforce Development- Subcommittee on Youth Employment [5A7AA61D-A469-F111-A823-001DD801545D]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2026-06-24",
+        "meeting_type": "Committee on Workforce Development: Subcommittee on Youth Employment"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "5A7AA61D-A469-F111-A823-001DD801545D"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1204268397-audio-low.mp4",
@@ -2387,7 +3939,19 @@
           ],
           "archive_manifest": "Meetings/2026-07/2026-07-07 Committee on Ethics and Government Oversight [C99FA55A-0970-F111-AB0C-001DD80F88E2]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2026-07-07",
+        "meeting_type": "Committee on Ethics and Government Oversight"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "C99FA55A-0970-F111-AB0C-001DD80F88E2"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1204299658-audio-low.mp4",
@@ -2405,7 +3969,19 @@
           ],
           "archive_manifest": "Meetings/2026-06/2026-06-25 Committee on Finance [936C4F51-EA60-F111-BEC5-001DD8001CD7]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2026-06-25",
+        "meeting_type": "Committee on Finance"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "936C4F51-EA60-F111-BEC5-001DD8001CD7"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1204641833-audio-low.mp4",
@@ -2423,7 +3999,19 @@
           ],
           "archive_manifest": "Meetings/2026-06/2026-06-29 Committee on Housing and Real Estate [E665005F-5B6E-F111-AB0C-001DD8007078]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2026-06-29",
+        "meeting_type": "Committee on Housing and Real Estate"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "E665005F-5B6E-F111-AB0C-001DD8007078"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1205553939-audio-low.mp4",
@@ -2441,7 +4029,19 @@
           ],
           "archive_manifest": "Meetings/2026-06/2026-06-30 Committee on Police and Fire [C475AF0E-EE64-F111-A823-001DD806162C]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2026-06-30",
+        "meeting_type": "Committee on Police and Fire"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "C475AF0E-EE64-F111-A823-001DD806162C"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1205906917-audio-low.mp4",
@@ -2459,7 +4059,19 @@
           ],
           "archive_manifest": "Meetings/2026-07/2026-07-01 Committee on Transportation and Public Way [77962045-576E-F111-AB0C-001DD8007078]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2026-07-01",
+        "meeting_type": "Committee on Transportation and Public Way"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "77962045-576E-F111-AB0C-001DD8007078"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1206213504-audio-low.mp4",
@@ -2477,7 +4089,19 @@
           ],
           "archive_manifest": "Meetings/2026-07/2026-07-07 Committee on Pedestrian and Traffic Safety [C09189D6-506E-F111-AB0C-001DD803C499]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2026-07-07",
+        "meeting_type": "Committee on Pedestrian and Traffic Safety"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "C09189D6-506E-F111-AB0C-001DD803C499"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1207804636-audio-low.mp4",
@@ -2495,7 +4119,19 @@
           ],
           "archive_manifest": "Meetings/2026-07/2026-07-07 Committee on Special Events, Cultural Affairs and Recreation [41AE03EE-B570-F111-AB0C-001DD80F88E2]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2026-07-07",
+        "meeting_type": "Committee on Special Events, Cultural Affairs and Recreation"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "41AE03EE-B570-F111-AB0C-001DD80F88E2"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1207845830-audio-low.mp4",
@@ -2513,7 +4149,19 @@
           ],
           "archive_manifest": "Meetings/2026-07/2026-07-08 Committee on Transportation and Public Way [05AA7DD0-596E-F111-AB0C-001DD8007078]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2026-07-08",
+        "meeting_type": "Committee on Transportation and Public Way"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "05AA7DD0-596E-F111-AB0C-001DD8007078"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1207872522-audio-low.mp4",
@@ -2531,7 +4179,19 @@
           ],
           "archive_manifest": "Meetings/2026-07/2026-07-08 Committee on Budget and Government Operations [C462FEBC-A474-F111-AB0C-001DD81325B3]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2026-07-08",
+        "meeting_type": "Committee on Budget and Government Operations"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "C462FEBC-A474-F111-AB0C-001DD81325B3"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1208145395-audio-low.mp4",
@@ -2549,7 +4209,19 @@
           ],
           "archive_manifest": "Meetings/2026-07/2026-07-08 Committee on Housing and Real Estate [E375BA07-406F-F111-AB0C-001DD80F88E2]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2026-07-08",
+        "meeting_type": "Committee on Housing and Real Estate"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "E375BA07-406F-F111-AB0C-001DD80F88E2"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1208169797-audio-low.mp4",
@@ -2567,7 +4239,19 @@
           ],
           "archive_manifest": "Meetings/2026-07/2026-07-08 Committee on License and Consumer Protection [18D62577-4F6E-F111-AB0C-001DD80F88E2]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2026-07-08",
+        "meeting_type": "Committee on License and Consumer Protection"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "18D62577-4F6E-F111-AB0C-001DD80F88E2"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1208175670-audio-low.mp4",
@@ -2585,7 +4269,19 @@
           ],
           "archive_manifest": "Meetings/2026-07/2026-07-09 Committee on Economic, Capital and Technology Development [9750AC6C-396F-F111-AB0C-001DD808E0AF]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2026-07-09",
+        "meeting_type": "Committee on Economic, Capital and Technology Development"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "9750AC6C-396F-F111-AB0C-001DD808E0AF"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1208220943-audio-low.mp4",
@@ -2603,7 +4299,19 @@
           ],
           "archive_manifest": "Meetings/2026-07/2026-07-09 Committee on Public Safety [07293FA2-416B-F111-A823-001DD8019941]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2026-07-09",
+        "meeting_type": "Committee on Public Safety"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "07293FA2-416B-F111-A823-001DD8019941"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1208494812-audio-low.mp4",
@@ -2621,7 +4329,19 @@
           ],
           "archive_manifest": "Meetings/2026-07/2026-07-13 Committee on Environmental Protection and Energy [2620748D-6E6E-F111-AB0C-001DD808E0AF]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2026-07-13",
+        "meeting_type": "Committee on Environmental Protection and Energy"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "2620748D-6E6E-F111-AB0C-001DD808E0AF"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1208548404-audio-low.mp4",
@@ -2659,7 +4379,21 @@
           ],
           "archive_manifest": "Meetings/2026-07/2026-07-13 Committee on Finance [928171B3-3C79-F111-AB0D-001DD8066831]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2026-07-13",
+        "meeting_type": "Committee on Finance"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "multiple_clerk_records",
+        "meeting_ids": [
+          "46526B3A-3D79-F111-AB0D-001DD8066831",
+          "73020FF8-0E6B-F111-A823-001DD80F48AE",
+          "928171B3-3C79-F111-AB0D-001DD8066831"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1209643300-audio-low.mp4",
@@ -2677,7 +4411,19 @@
           ],
           "archive_manifest": "Meetings/2026-07/2026-07-14 Committee on Health and Human Relations [B7124BD8-CA73-F111-AB0C-001DD81325B3]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2026-07-14",
+        "meeting_type": "Committee on Health and Human Relations"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "B7124BD8-CA73-F111-AB0C-001DD81325B3"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1209660651-audio-low.mp4",
@@ -2695,7 +4441,19 @@
           ],
           "archive_manifest": "Meetings/2026-07/2026-07-14 Committee on Housing and Real Estate [258CB191-607C-F111-AB0D-001DD80C6696]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2026-07-14",
+        "meeting_type": "Committee on Housing and Real Estate"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "258CB191-607C-F111-AB0D-001DD80C6696"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1209890145-audio-low.mp4",
@@ -2713,7 +4471,19 @@
           ],
           "archive_manifest": "Meetings/2026-07/2026-07-14 Committee on Zoning, Landmarks and Building Standards [3939FB57-546E-F111-AB0C-001DD80EA6A1]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2026-07-14",
+        "meeting_type": "Committee on Zoning, Landmarks and Building Standards"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "3939FB57-546E-F111-AB0C-001DD80EA6A1"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1209921736-audio-low.mp4",
@@ -2731,7 +4501,19 @@
           ],
           "archive_manifest": "Meetings/2026-07/2026-07-14 Committee on Transportation and Public Way [7885112A-5D76-F111-AB0C-001DD80EDD69]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2026-07-14",
+        "meeting_type": "Committee on Transportation and Public Way"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "7885112A-5D76-F111-AB0C-001DD80EDD69"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1209938978-audio-low.mp4",
@@ -2749,7 +4531,19 @@
           ],
           "archive_manifest": "Meetings/2026-07/2026-07-14 Committee on Aviation [563500FE-2D76-F111-AB0C-001DD803F73F]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2026-07-14",
+        "meeting_type": "Committee on Aviation"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "563500FE-2D76-F111-AB0C-001DD803F73F"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1209979957-audio-low.mp4",
@@ -2767,7 +4561,19 @@
           ],
           "archive_manifest": "Meetings/2026-07/2026-07-15 City Council [DF5C52EA-0D6B-F111-A823-001DD8019941]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2026-07-15",
+        "meeting_type": "City Council"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "DF5C52EA-0D6B-F111-A823-001DD8019941"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1209984898-audio-low.mp4",
@@ -2785,7 +4591,19 @@
           ],
           "archive_manifest": "Meetings/2026-09/2026-09-09 Committee on Transportation and Public Way [37BFBB2C-128D-F111-AB0F-001DD8022103]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2026-09-09",
+        "meeting_type": "Committee on Transportation and Public Way"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "37BFBB2C-128D-F111-AB0F-001DD8022103"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1210310337-audio-low.mp4",
@@ -2803,7 +4621,19 @@
           ],
           "archive_manifest": "Meetings/2026-07/2026-07-16 Committee on Budget and Government Operations [B2E99313-3D76-F111-AB0C-001DD80BE073]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2026-07-16",
+        "meeting_type": "Committee on Budget and Government Operations"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "B2E99313-3D76-F111-AB0C-001DD80BE073"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1210612137-audio-low.mp4",
@@ -2821,7 +4651,19 @@
           ],
           "archive_manifest": "Meetings/2026-07/2026-07-17 Committee on Immigrant and Refugee Rights [D8625F02-4C6B-F111-A823-001DD80F48C2]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2026-07-17",
+        "meeting_type": "Committee on Immigrant and Refugee Rights"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "D8625F02-4C6B-F111-A823-001DD80F48C2"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1210889386-audio-low.mp4",
@@ -2839,7 +4681,19 @@
           ],
           "archive_manifest": "Meetings/2026-07/2026-07-22 City Council [AA0648B8-8A80-F111-AB0E-001DD80216AA]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2026-07-22",
+        "meeting_type": "City Council"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "AA0648B8-8A80-F111-AB0E-001DD80216AA"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1212089526-audio-low.mp4",
@@ -2857,7 +4711,19 @@
           ],
           "archive_manifest": "Meetings/2026-09/2026-09-01 Committee on Environmental Protection and Energy [4593541C-F685-F111-AB0E-001DD81326F5]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2026-09-01",
+        "meeting_type": "Committee on Environmental Protection and Energy"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "4593541C-F685-F111-AB0E-001DD81326F5"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1223110788-audio-low.mp4",
@@ -2875,7 +4741,19 @@
           ],
           "archive_manifest": "Meetings/2026-09/2026-09-09 Committee on Budget and Government Operations [9633DF32-25A6-F111-B8DD-001DD80FDA55]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2026-09-09",
+        "meeting_type": "Committee on Budget and Government Operations"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "9633DF32-25A6-F111-B8DD-001DD80FDA55"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1225329148-audio-low.mp4",
@@ -2893,7 +4771,19 @@
           ],
           "archive_manifest": "Meetings/2026-09/2026-09-09 Committee on License and Consumer Protection [61670194-C09C-F111-8076-001DD803894A]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2026-09-09",
+        "meeting_type": "Committee on License and Consumer Protection"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "61670194-C09C-F111-8076-001DD803894A"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1225336638-audio-low.mp4",
@@ -2911,7 +4801,19 @@
           ],
           "archive_manifest": "Meetings/2026-09/2026-09-09 Committee on Ethics and Government Oversight [D3DB4140-E29F-F111-B8DB-001DD803894A]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2026-09-09",
+        "meeting_type": "Committee on Ethics and Government Oversight"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "D3DB4140-E29F-F111-B8DB-001DD803894A"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1225368422-audio-low.mp4",
@@ -2929,7 +4831,19 @@
           ],
           "archive_manifest": "Meetings/2026-09/2026-09-15 Committee on Economic, Capital and Technology Development [84EA0F1F-0886-F111-AB0E-001DD80BE3C0]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2026-09-15",
+        "meeting_type": "Committee on Economic, Capital and Technology Development"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "84EA0F1F-0886-F111-AB0E-001DD80BE3C0"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1226632992-audio-low.mp4",
@@ -2947,7 +4861,19 @@
           ],
           "archive_manifest": "Meetings/2026-09/2026-09-14 Committee on Finance [EA43DE95-F685-F111-AB0E-001DD80648E2]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2026-09-14",
+        "meeting_type": "Committee on Finance"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "EA43DE95-F685-F111-AB0E-001DD80648E2"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1226691639-audio-low.mp4",
@@ -2965,7 +4891,19 @@
           ],
           "archive_manifest": "Meetings/2026-09/2026-09-15 Committee on Pedestrian and Traffic Safety [BDCBA318-C5AB-F111-AAAB-001DD80B58E5]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2026-09-15",
+        "meeting_type": "Committee on Pedestrian and Traffic Safety"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "BDCBA318-C5AB-F111-AAAB-001DD80B58E5"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1227026378-audio-low.mp4",
@@ -2983,7 +4921,19 @@
           ],
           "archive_manifest": "Meetings/2026-09/2026-09-15 Joint Committee- License and Consumer Protection; Workforce Development [ADE02A48-39AD-F111-AAAB-001DD80FDA55]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2026-09-15",
+        "meeting_type": "Joint Committee: License and Consumer Protection; Workforce Development"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "ADE02A48-39AD-F111-AAAB-001DD80FDA55"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1227035261-audio-low.mp4",
@@ -3001,7 +4951,19 @@
           ],
           "archive_manifest": "Meetings/2026-09/2026-09-17 Committee on Workforce Development [82462D24-57AD-F111-AAAB-001DD80AA3CC]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2026-09-17",
+        "meeting_type": "Committee on Workforce Development"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "82462D24-57AD-F111-AAAB-001DD80AA3CC"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1227112522-audio-low.mp4",
@@ -3019,7 +4981,19 @@
           ],
           "archive_manifest": "Meetings/2026-09/2026-09-16 Committee on Housing and Real Estate [9E52303E-7387-F111-AB0E-001DD80BE3C0]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2026-09-16",
+        "meeting_type": "Committee on Housing and Real Estate"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "9E52303E-7387-F111-AB0E-001DD80BE3C0"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1227517217-audio-low.mp4",
@@ -3037,7 +5011,19 @@
           ],
           "archive_manifest": "Meetings/2026-09/2026-09-17 Committee on Zoning, Landmarks and Building Standards [A44FB4F3-45B0-F111-AAAC-001DD80B58E5]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2026-09-17",
+        "meeting_type": "Committee on Zoning, Landmarks and Building Standards"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "A44FB4F3-45B0-F111-AAAC-001DD80B58E5"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1227817475-audio-low.mp4",
@@ -3055,7 +5041,19 @@
           ],
           "archive_manifest": "Meetings/2026-09/2026-09-22 Committee on Zoning, Landmarks and Building Standards [BDC8C0C1-8B87-F111-AB0E-001DD80BE3C0]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2026-09-22",
+        "meeting_type": "Committee on Zoning, Landmarks and Building Standards"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "BDC8C0C1-8B87-F111-AB0E-001DD80BE3C0"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1227831734-audio-low.mp4",
@@ -3073,7 +5071,19 @@
           ],
           "archive_manifest": "Meetings/2026-09/2026-09-22 Committee on Police and Fire [AA65B062-89A8-F111-B8DD-001DD803894A]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2026-09-22",
+        "meeting_type": "Committee on Police and Fire"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "AA65B062-89A8-F111-B8DD-001DD803894A"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1229230583-audio-low.mp4",
@@ -3091,7 +5101,19 @@
           ],
           "archive_manifest": "Meetings/2026-09/2026-09-22 Committee on Contracting Oversight and Equity [1AF98496-3D97-F111-AB0E-001DD80E4FDE]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2026-09-22",
+        "meeting_type": "Committee on Contracting Oversight and Equity"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "1AF98496-3D97-F111-AB0E-001DD80E4FDE"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1229280462-audio-low.mp4",
@@ -3109,7 +5131,19 @@
           ],
           "archive_manifest": "Meetings/2026-10/2026-10-01 Committee on Ethics and Government Oversight [CFABDAC7-FAB5-F111-AAAC-001DD803894A]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2026-10-01",
+        "meeting_type": "Committee on Ethics and Government Oversight"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "CFABDAC7-FAB5-F111-AAAC-001DD803894A"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1229284895-audio-low.mp4",
@@ -3127,7 +5161,19 @@
           ],
           "archive_manifest": "Meetings/2026-09/2026-09-22 Committee on Finance [266D113E-7AB3-F111-AAAB-001DD80AA3CC]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2026-09-22",
+        "meeting_type": "Committee on Finance"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "266D113E-7AB3-F111-AAAB-001DD80AA3CC"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1229341127-audio-low.mp4",
@@ -3145,7 +5191,19 @@
           ],
           "archive_manifest": "Meetings/2026-09/2026-09-23 City Council [5F86622E-F485-F111-AB0E-001DD80ED7AA]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2026-09-23",
+        "meeting_type": "City Council"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "5F86622E-F485-F111-AB0E-001DD80ED7AA"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1229670520-audio-low.mp4",
@@ -3163,7 +5221,19 @@
           ],
           "archive_manifest": "Meetings/2026-09/2026-09-24 Committee on Finance [FB63A09D-D9B6-F111-AAAC-001DD80AA3CC]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2026-09-24",
+        "meeting_type": "Committee on Finance"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "FB63A09D-D9B6-F111-AAAC-001DD80AA3CC"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1229992624-audio-low.mp4",
@@ -3181,7 +5251,19 @@
           ],
           "archive_manifest": "Meetings/2026-09/2026-09-25 City Council [E9ED48EE-61B7-F111-AAAC-001DD803894A]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2026-09-25",
+        "meeting_type": "City Council"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "E9ED48EE-61B7-F111-AAAC-001DD803894A"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1230273462-audio-low.mp4",
@@ -3199,7 +5281,19 @@
           ],
           "archive_manifest": "Meetings/2026-09/2026-09-29 City Council [E9154AB7-96B7-F111-AAAC-001DD803894A]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2026-09-29",
+        "meeting_type": "City Council"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "E9154AB7-96B7-F111-AAAC-001DD803894A"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1231373679-audio-low.mp4",
@@ -3217,7 +5311,19 @@
           ],
           "archive_manifest": "Meetings/2026-10/2026-10-01 Committee on Health and Human Relations [33C89F1A-A9AB-F111-AAAB-001DD80FDA55]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2026-10-01",
+        "meeting_type": "Committee on Health and Human Relations"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "33C89F1A-A9AB-F111-AAAB-001DD80FDA55"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1232104228-audio-low.mp4",
@@ -3235,7 +5341,19 @@
           ],
           "archive_manifest": "Meetings/2026-10/2026-10-07 Committee on Workforce Development [E227099C-73BE-F111-AAAE-001DD80FDAD3]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2026-10-07",
+        "meeting_type": "Committee on Workforce Development"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "E227099C-73BE-F111-AAAE-001DD80FDAD3"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1232120004-audio-low.mp4",
@@ -3253,7 +5371,19 @@
           ],
           "archive_manifest": "Meetings/2026-10/2026-10-01 Committee on Police and Fire [63CCE87C-CBA7-F111-B8DD-001DD803894A]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2026-10-01",
+        "meeting_type": "Committee on Police and Fire"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "63CCE87C-CBA7-F111-B8DD-001DD803894A"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1232129590-audio-low.mp4",
@@ -3291,7 +5421,21 @@
           ],
           "archive_manifest": "Meetings/2026-10/2026-10-05 Committee on Finance [531B4778-99B7-F111-AAAC-001DD80FDAD3]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2026-10-05",
+        "meeting_type": "Committee on Finance"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "multiple_clerk_records",
+        "meeting_ids": [
+          "266A5A62-53B8-F111-AAAC-001DD80AA3CC",
+          "30125FE9-53B8-F111-AAAC-001DD80AA3CC",
+          "531B4778-99B7-F111-AAAC-001DD80FDAD3"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1233117771-audio-low.mp4",
@@ -3309,7 +5453,19 @@
           ],
           "archive_manifest": "Meetings/2026-10/2026-10-07 Committee on Transportation and Public Way [D36223D9-04B9-F111-AAAC-001DD80B58E5]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2026-10-07",
+        "meeting_type": "Committee on Transportation and Public Way"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "D36223D9-04B9-F111-AAAC-001DD80B58E5"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1233779359-audio-low.mp4",
@@ -3327,7 +5483,19 @@
           ],
           "archive_manifest": "Meetings/2026-10/2026-10-07 Committee on License and Consumer Protection [769788B7-E0BC-F111-AAAE-001DD80FDA55]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2026-10-07",
+        "meeting_type": "Committee on License and Consumer Protection"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "769788B7-E0BC-F111-AAAE-001DD80FDA55"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1233831459-audio-low.mp4",
@@ -3345,7 +5513,19 @@
           ],
           "archive_manifest": "Meetings/2026-10/2026-10-08 Committee on Housing and Real Estate [4C6D0E57-8EB7-F111-AAAC-001DD80AA3CC]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2026-10-08",
+        "meeting_type": "Committee on Housing and Real Estate"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "4C6D0E57-8EB7-F111-AAAC-001DD80AA3CC"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1233832827-audio-low.mp4",
@@ -3363,7 +5543,19 @@
           ],
           "archive_manifest": "Meetings/2026-10/2026-10-07 Joint Committee- Public Safety; Police and Fire [35130D9B-B7A7-F111-B8DD-001DD80B58E5]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2026-10-07",
+        "meeting_type": "Joint Committee: Public Safety; Police and Fire"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "35130D9B-B7A7-F111-B8DD-001DD80B58E5"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1233855375-audio-low.mp4",
@@ -3381,7 +5573,19 @@
           ],
           "archive_manifest": "Meetings/2026-10/2026-10-08 Committee on Public Safety [FFEA7202-C3A7-F111-B8DD-001DD80B58E5]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2026-10-08",
+        "meeting_type": "Committee on Public Safety"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "FFEA7202-C3A7-F111-B8DD-001DD80B58E5"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1234141196-audio-low.mp4",
@@ -3399,7 +5603,19 @@
           ],
           "archive_manifest": "Meetings/2026-10/2026-10-08 Committee on Environmental Protection and Energy [AD9CED9F-78BB-F111-AAAE-001DD80AA3CC]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2026-10-08",
+        "meeting_type": "Committee on Environmental Protection and Energy"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "AD9CED9F-78BB-F111-AAAE-001DD80AA3CC"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1234158910-audio-low.mp4",
@@ -3417,7 +5633,19 @@
           ],
           "archive_manifest": "Meetings/2026-10/2026-10-08 Committee on Economic, Capital and Technology Development [251A0456-0CB9-F111-AAAC-001DD80FDAD3]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2026-10-08",
+        "meeting_type": "Committee on Economic, Capital and Technology Development"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "251A0456-0CB9-F111-AAAC-001DD80FDAD3"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1234177208-audio-low.mp4",
@@ -3435,7 +5663,19 @@
           ],
           "archive_manifest": "Meetings/2026-10/2026-10-09 Committee on Pedestrian and Traffic Safety [C0886D80-0AB9-F111-AAAC-001DD80FDA55]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2026-10-09",
+        "meeting_type": "Committee on Pedestrian and Traffic Safety"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "C0886D80-0AB9-F111-AAAC-001DD80FDA55"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1234183508-audio-low.mp4",
@@ -3453,7 +5693,19 @@
           ],
           "archive_manifest": "Meetings/2026-10/2026-10-13 Committee on Ethics and Government Oversight [0B2A9146-77BE-F111-AAAE-001DD80EFCF5]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2026-10-13",
+        "meeting_type": "Committee on Ethics and Government Oversight"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "0B2A9146-77BE-F111-AAAE-001DD80EFCF5"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1234481036-audio-low.mp4",
@@ -3471,7 +5723,19 @@
           ],
           "archive_manifest": "Meetings/2026-10/2026-10-13 Committee on Zoning, Landmarks and Building Standards [3FC06450-8AB7-F111-AAAC-001DD80AA3CC]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2026-10-13",
+        "meeting_type": "Committee on Zoning, Landmarks and Building Standards"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "3FC06450-8AB7-F111-AAAC-001DD80AA3CC"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1235498029-audio-low.mp4",
@@ -3489,7 +5753,19 @@
           ],
           "archive_manifest": "Meetings/2026-10/2026-10-13 Committee on Aviation [7C3DF870-75BE-F111-AAAE-001DD80AA3CC]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2026-10-13",
+        "meeting_type": "Committee on Aviation"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "7C3DF870-75BE-F111-AAAE-001DD80AA3CC"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1235504794-audio-low.mp4",
@@ -3507,7 +5783,19 @@
           ],
           "archive_manifest": "Meetings/2026-10/2026-10-13 Committee on Finance [63DD2BFA-6DBE-F111-AAAE-001DD80B58E5]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2026-10-13",
+        "meeting_type": "Committee on Finance"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "63DD2BFA-6DBE-F111-AAAE-001DD80B58E5"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1235540637-audio-low.mp4",
@@ -3525,7 +5813,19 @@
           ],
           "archive_manifest": "Meetings/2026-10/2026-10-13 Committee on Budget and Government Operations [62158D66-D2C0-F111-AAAE-001DD80AA3CC]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2026-10-13",
+        "meeting_type": "Committee on Budget and Government Operations"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "62158D66-D2C0-F111-AAAE-001DD80AA3CC"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1235564993-audio-low.mp4",
@@ -3543,7 +5843,19 @@
           ],
           "archive_manifest": "Meetings/2026-10/2026-10-14 City Council [39FE6EE4-2FBC-F111-AAAE-001DD80B58E5]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2026-10-14",
+        "meeting_type": "City Council"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "39FE6EE4-2FBC-F111-AAAE-001DD80B58E5"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1235973744-audio-low.mp4",
@@ -3561,7 +5873,19 @@
           ],
           "archive_manifest": "Meetings/2026-10/2026-10-15 Committee on Immigrant and Refugee Rights [F97D1D10-EABC-F111-AAAE-001DD80B58E5]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2026-10-15",
+        "meeting_type": "Committee on Immigrant and Refugee Rights"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "F97D1D10-EABC-F111-AAAE-001DD80B58E5"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1236296809-audio-low.mp4",
@@ -3579,7 +5903,19 @@
           ],
           "archive_manifest": "Meetings/2026-10/2026-10-20 Committee on Contracting Oversight and Equity [6AC88818-A8C8-F111-AAAE-001DD80B58E5]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2026-10-20",
+        "meeting_type": "Committee on Contracting Oversight and Equity"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "6AC88818-A8C8-F111-AAAE-001DD80B58E5"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1237727064-audio-low.mp4",
@@ -3597,7 +5933,19 @@
           ],
           "archive_manifest": "Meetings/2026-10/2026-10-21 City Council [6AE8B3E3-86C9-F111-AAAE-001DD80FDA55]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2026-10-21",
+        "meeting_type": "City Council"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "6AE8B3E3-86C9-F111-AAAE-001DD80FDA55"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1238089923-audio-low.mp4",
@@ -3615,7 +5963,19 @@
           ],
           "archive_manifest": "Meetings/2026-10/2026-10-23 Committee on Budget and Government Operations [54F057FC-81CC-F111-A05C-001DD80B58E5]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2026-10-23",
+        "meeting_type": "Committee on Budget and Government Operations"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "54F057FC-81CC-F111-A05C-001DD80B58E5"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1238928881-audio-low.mp4",
@@ -3633,7 +5993,19 @@
           ],
           "archive_manifest": "Meetings/2026-10/2026-10-26 Committee on Budget and Government Operations [4E4F726A-90C9-F111-AAAE-001DD80B58E5]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2026-10-26",
+        "meeting_type": "Committee on Budget and Government Operations"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "4E4F726A-90C9-F111-AAAE-001DD80B58E5"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1239662145-audio-low.mp4",
@@ -3651,7 +6023,19 @@
           ],
           "archive_manifest": "Meetings/2026-10/2026-10-27 Committee on Budget and Government Operations [851CA01E-91C9-F111-AAAE-001DD80B58E5]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2026-10-27",
+        "meeting_type": "Committee on Budget and Government Operations"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "851CA01E-91C9-F111-AAAE-001DD80B58E5"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1240029984-audio-low.mp4",
@@ -3669,7 +6053,19 @@
           ],
           "archive_manifest": "Meetings/2026-10/2026-10-28 Committee on Budget and Government Operations [2D73B4D3-91C9-F111-AAAE-001DD80B58E5]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2026-10-28",
+        "meeting_type": "Committee on Budget and Government Operations"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "2D73B4D3-91C9-F111-AAAE-001DD80B58E5"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1240513369-audio-low.mp4",
@@ -3687,7 +6083,19 @@
           ],
           "archive_manifest": "Meetings/2026-10/2026-10-29 Committee on Budget and Government Operations [31EFF839-92C9-F111-AAAE-001DD80B58E5]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2026-10-29",
+        "meeting_type": "Committee on Budget and Government Operations"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "31EFF839-92C9-F111-AAAE-001DD80B58E5"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1241090076-low.mp4",
@@ -3705,7 +6113,19 @@
           ],
           "archive_manifest": "Meetings/2026-11/2026-11-02 City Council [481E7A8F-2BD2-F111-A05C-001DD80B58E5]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2026-11-02",
+        "meeting_type": "City Council"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "481E7A8F-2BD2-F111-A05C-001DD80B58E5"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1242480051-low.mp4",
@@ -3723,7 +6143,19 @@
           ],
           "archive_manifest": "Meetings/2026-11/2026-11-04 Committee on Budget and Government Operations [8A97D1CA-92C9-F111-AAAE-001DD80B58E5]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2026-11-04",
+        "meeting_type": "Committee on Budget and Government Operations"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "8A97D1CA-92C9-F111-AAAE-001DD80B58E5"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1243534584-low.mp4",
@@ -3741,7 +6173,19 @@
           ],
           "archive_manifest": "Meetings/2026-11/2026-11-05 Committee on Budget and Government Operations [93474B73-93C9-F111-AAAE-001DD80B58E5]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2026-11-05",
+        "meeting_type": "Committee on Budget and Government Operations"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "93474B73-93C9-F111-AAAE-001DD80B58E5"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1244025929-low.mp4",
@@ -3759,7 +6203,19 @@
           ],
           "archive_manifest": "Meetings/2026-11/2026-11-06 Committee on Budget and Government Operations [62AEBFEC-93C9-F111-AAAE-001DD80B58E5]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2026-11-06",
+        "meeting_type": "Committee on Budget and Government Operations"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "62AEBFEC-93C9-F111-AAAE-001DD80B58E5"
+        ]
+      }
     },
     {
       "audio_filename": "vimeo-1244474142-low.mp4",
@@ -3777,7 +6233,19 @@
           ],
           "archive_manifest": "Meetings/2026-11/2026-11-09 Committee on Budget and Government Operations [1D6DFF77-94C9-F111-AAAE-001DD80B58E5]/manifest.json"
         }
-      ]
+      ],
+      "database_metadata": {
+        "meeting_date": "2026-11-09",
+        "meeting_type": "Committee on Budget and Government Operations"
+      },
+      "metadata_evidence": {
+        "source": "archive_manifests",
+        "match_method": "vimeo_id",
+        "status": "matched",
+        "meeting_ids": [
+          "1D6DFF77-94C9-F111-AAAE-001DD80B58E5"
+        ]
+      }
     }
   ]
 }
