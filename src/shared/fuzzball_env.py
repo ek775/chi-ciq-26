@@ -1,13 +1,10 @@
 """Pipe selected dotenv values into user-scoped Fuzzball value secrets."""
 
 import argparse
-import ipaddress
 import json
 import os
-import shlex
 import subprocess
 from pathlib import Path
-from urllib.parse import urlsplit
 
 import yaml
 from dotenv import dotenv_values
@@ -15,16 +12,7 @@ from dotenv import dotenv_values
 VARIABLES = {
     "POSTGRES_PASSWORD": "postgres-password",
     "HF_TOKEN": "hf-token",
-    "VLLM_REASONING_EFFORT": "vllm-reasoning-effort",
-    "VLLM_REASONING_TOKENS": "vllm-reasoning-tokens",
-    "LOG_LEVEL": "log-level",
 }
-DEFAULTS = {
-    "VLLM_REASONING_EFFORT": "low",
-    "VLLM_REASONING_TOKENS": "4096",
-    "LOG_LEVEL": "INFO",
-}
-ALLOW_EMPTY = {"VLLM_REASONING_EFFORT"}
 
 
 def read_values(path: Path) -> dict[str, str]:
@@ -32,7 +20,7 @@ def read_values(path: Path) -> dict[str, str]:
         raise FileNotFoundError(f"Environment file not found: {path}")
     # Do not source shell code or expand references from the submitter environment.
     values = dotenv_values(path, interpolate=False)
-    return DEFAULTS | {
+    return {
         name: value
         for name, value in values.items()
         if name in VARIABLES and value is not None
@@ -40,38 +28,8 @@ def read_values(path: Path) -> dict[str, str]:
 
 
 def validate_value(name: str, value: str) -> None:
-    if not value.strip() and name not in ALLOW_EMPTY:
+    if not value.strip():
         raise ValueError(f"{name} must not be empty")
-    if name == "VLLM_BASE_URL":
-        try:
-            url = urlsplit(value)
-            host = url.hostname
-            port = url.port
-        except ValueError:
-            raise ValueError(f"{name} is not a valid service URL") from None
-        if url.scheme not in {"http", "https"} or not host or not url.path.strip("/"):
-            raise ValueError(f"{name} must be a complete service URL")
-        if port is not None and port < 1:
-            raise ValueError(f"{name} has an invalid port")
-        normalized = host.lower().rstrip(".")
-        try:
-            address = ipaddress.ip_address(normalized)
-        except ValueError:
-            local = normalized == "localhost" or normalized.endswith(".localhost")
-        else:
-            local = address.is_loopback or address.is_unspecified
-        if local:
-            raise ValueError(f"{name} must use a cluster-reachable host, not loopback")
-    if name == "VLLM_REASONING_TOKENS" and not value.isdecimal():
-        raise ValueError(f"{name} must be a nonnegative integer")
-    if name == "LOG_LEVEL" and value.upper() not in {
-        "DEBUG",
-        "INFO",
-        "WARNING",
-        "ERROR",
-        "CRITICAL",
-    }:
-        raise ValueError(f"{name} is not a supported logging level")
 
 
 def selected_values(values: dict[str, str], names: list[str]) -> dict[str, str]:
@@ -117,16 +75,11 @@ def sync_values(fuzzball: str, values: dict[str, str]) -> None:
         for item in existing
         if item.get("reference", "").startswith("secret://user/chi-ciq-")
     }
-    for name, value in values.items():
-        if not value and name in ALLOW_EMPTY:
-            continue
+    for name in values:
         ref = f"secret://user/chi-ciq-{VARIABLES[name]}"
         if ref in refs and refs[ref].get("type") != "SECRET_TYPE_VALUE":
             raise ValueError(f"{ref} exists but is not a value secret")
     for name, value in values.items():
-        if not value and name in ALLOW_EMPTY:
-            print(f"inline empty: {name} (Fuzzball rejects empty value secrets)")
-            continue
         ref = f"secret://user/chi-ciq-{VARIABLES[name]}"
         action = "update" if ref in refs else "create"
         arguments = ["secret", action, ref]
@@ -150,32 +103,12 @@ def configured_workflow(path: Path, values: dict[str, str]) -> dict:
     nodes.append(definition.get("defaults", {}).get("job", {}))
     for node in nodes:
         env = node.get("env", [])
-        updated = []
-        empty = []
-        for entry in env:
+        for index, entry in enumerate(env):
             name = entry.partition("=")[0]
-            if name in ALLOW_EMPTY and name in values:
-                if values[name]:
-                    entry = f"{name}=secret://user/chi-ciq-{VARIABLES[name]}"
-                else:
-                    empty.append(name)
-                    continue
-            updated.append(entry)
+            if name in VARIABLES and name in values:
+                env[index] = f"{name}=secret://user/chi-ciq-{VARIABLES[name]}"
         if "env" in node:
-            node["env"] = updated
-        if empty:
-            exports = "\n".join(f"export {name}=''" for name in empty) + "\n"
-            if "command" in node:
-                node["script"] = (
-                    "#!/bin/sh\n"
-                    + exports
-                    + "exec "
-                    + shlex.join(node.pop("command"))
-                    + "\n"
-                )
-            elif "script" in node:
-                first, separator, rest = node["script"].partition("\n")
-                node["script"] = first + separator + exports + rest
+            node["env"] = env
     return definition
 
 
@@ -191,9 +124,7 @@ def write_workflow(path: Path, definition: dict) -> None:
 def main(argv: list[str] | None = None) -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--env-file", type=Path, default=Path(".env"))
-    parser.add_argument(
-        "--fuzzball", default=os.environ.get("FUZZBALL_BIN", "fuzzball")
-    )
+    parser.add_argument("--fuzzball", default="fuzzball")
     parser.add_argument(
         "--only",
         nargs="+",

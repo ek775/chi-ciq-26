@@ -166,21 +166,21 @@ use another. Removed topics are deactivated (history is retained).
 ## Running
 
 ```sh
+export PGPASSWORD='your-local-postgres-password'
 export ANALYTICS_DATABASE_URL=postgresql+psycopg://analytics:...@localhost:5435/analytics
 export MEETINGS_DATABASE_URL=postgresql+psycopg://web_reader:...@localhost:5433/transcription
 export DOCUMENTS_DATABASE_URL=postgresql+psycopg://documents:...@localhost:5434/documents
-export VLLM_BASE_URL=http://127.0.0.1:8000/v1   # served model name: VLLM_SERVED_MODEL=local-ai
 chi-ciq-analytics-database migrate
 chi-ciq-analytics roster data/analytics/roster.csv   # optional overrides
-chi-ciq-analytics run --device cpu            # or --device cuda
+chi-ciq-analytics run --device cpu --vllm-url http://127.0.0.1:8000/v1
 chi-ciq-analytics roster-candidates --output candidates.csv
 chi-ciq-analytics run --sources meetings --stages sync attribute refresh
 chi-ciq-analytics refresh
 ```
 
 `MEETINGS_DATABASE_URL` falls back to `DATABASE_URL`. Use SELECT-only logins for
-sources. `VLLM_API_KEY` is sent as a bearer token when set. The Compose
-`analytics` service mounts `ANALYTICS_INPUT_DIR` (default `data/analytics`) at
+sources. The `--vllm-url` option defaults to `http://127.0.0.1:8000/v1`; the
+served model name is fixed as `local-ai`. Compose mounts `data/analytics` at
 `/inputs`; see the [project overview](../../README.md#analytics-dashboard).
 
 ## Interpretation caveats
@@ -188,7 +188,7 @@ sources. `VLLM_API_KEY` is sent as a bearer token when set. The Compose
 - **Attribution is inferred.** Voice matches are similarity, not verified
   identity; the dashboard exposes method (`manual`/`voice`) and confidence. Use
   manual labels for anything consequential.
-- **Stance is model output**, by default from `zai-org/GLM-5.3-Flash`; stances
+- **Stance is model output**, by default from `openai/gpt-oss-20b`; stances
   are keyed by the served model, so switching models recomputes them. Evidence quotes are checked
   against the source text (`evidence_verified`), and the dashboard can filter to
   verified evidence. Source text is treated as untrusted data: it is delimited in

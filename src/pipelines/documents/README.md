@@ -37,9 +37,10 @@ protect inputs with cluster filesystem ACLs.
 
 ## Local run
 
-Set `DOCUMENTS_POSTGRES_PASSWORD` and `DOCUMENTS_INPUT_DIR` in the root `.env`
-(see [.env.example](../../../.env.example)). The default input is `data-reference`,
-including its `Transcripts` directory. Use URL-safe development passwords.
+Set the shared `POSTGRES_PASSWORD` and, optionally, `DOCUMENTS_INPUT_DIR` in
+the root `.env` (see [.env.example](../../../.env.example)). The default input
+is `data-reference`, including its `Transcripts` directory. Passwords are passed
+separately from database URLs, so they do not need URL encoding.
 Run from the repository root:
 
 ```sh

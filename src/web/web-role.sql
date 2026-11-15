@@ -1,4 +1,4 @@
-\getenv web_password WEB_POSTGRES_PASSWORD
+\getenv web_password PGPASSWORD
 
 SELECT 'CREATE ROLE web_reader'
 WHERE NOT EXISTS (SELECT FROM pg_roles WHERE rolname = 'web_reader')

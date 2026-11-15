@@ -139,10 +139,9 @@ def test_vllm_is_an_internal_gpu_service():
         "path": "/health",
         "port": 8000,
     }
-    assert (
-        "VLLM_BASE_URL=http://vllm:8000/v1"
-        in definition["jobs"]["analytics-stance"]["env"]
-    )
+    stance = definition["jobs"]["analytics-stance"]
+    assert "VLLM_BASE_URL" not in "\n".join(stance["env"])
+    assert "--vllm-url http://vllm:8000/v1" in stance["script"]
 
 
 def test_ingestion_arrays_have_consistent_disjoint_shards(tmp_path):
@@ -242,7 +241,7 @@ def test_analytics_fanout_and_join_cover_every_stage_once():
 def test_database_urls_use_the_workflow_service_and_carry_no_password():
     definition = workflow()
     nodes = definition["jobs"] | definition["services"]
-    credentials = {"PGPASSWORD", "POSTGRES_PASSWORD", "HF_TOKEN", "VLLM_API_KEY"}
+    credentials = {"PGPASSWORD", "POSTGRES_PASSWORD", "HF_TOKEN"}
     for node in nodes.values():
         for value in node.get("env", []):
             key, _, setting = value.partition("=")

@@ -44,14 +44,20 @@ PostgreSQL and vLLM use upstream images; web releases never replace live databas
 
 Run these commands from the repository root:
 
-1. Copy [.env.example](.env.example) to `.env`, set a Hugging Face read token,
-   and set separate passwords for the admin and web database logins, including
-   the analytics owner and dashboard reader (the `web` profile starts the
-   analytics database). Use URL-safe passwords.
+1. Copy [.env.example](.env.example) to `.env`, set a Hugging Face read token
+   and one local PostgreSQL password. Compose passes the password via
+   `PGPASSWORD`, not inside database URLs.
 2. Accept the
    [pyannote model conditions](https://huggingface.co/pyannote/speaker-diarization-community-1).
 3. Put complete MP4s in `data/mp4/`, or run the downloads command below.
    Credentials and data are gitignored.
+
+   Compose uses the same `POSTGRES_PASSWORD` for its local databases and reader
+   roles. Existing database volumes keep the passwords they were initialized with;
+   when upgrading a setup that used separate passwords, align the stored passwords
+   before running the updated services. The root `.env` intentionally omits
+   service URLs: direct host-side database commands should set the appropriate
+   `*_DATABASE_URL` and `PGPASSWORD` in that shell only.
 
 ```sh
 docker compose up -d db
@@ -82,8 +88,8 @@ results. Backups are append-only. See the [update contract](src/pipelines/transc
 The independent documents container mirrors directories as chunk tables and
 preserves each file's full extracted text and relative path. TXT/Markdown, PDF,
 DOCX, and HTML are supported with local embeddings shared with transcription.
-Set `DOCUMENTS_POSTGRES_PASSWORD` and `DOCUMENTS_INPUT_DIR` in `.env`
-(default input: `data-reference`).
+The documents profile uses the shared `POSTGRES_PASSWORD`. Set
+`DOCUMENTS_INPUT_DIR` only when overriding the default input (`data-reference`).
 
 ```sh
 docker compose --profile documents up -d documents-db
@@ -129,9 +135,9 @@ docker compose --profile analytics run --build --rm analytics-backup
 
 Append `chi-ciq-analytics run --sources meetings` to the analytics job when the
 documents database is not running. The job reads meetings as `web_reader`. Voice-based attributions are inferred, not verified; the dashboard
-shows each attribution method and confidence. Stances default to
-`zai-org/GLM-5.3-Flash`, which needs about 306 GiB of GPU memory (for example
-8× H100/H200); see [vLLM](src/vllm/README.md) for smaller alternatives.
+shows each attribution method and confidence. The vLLM service uses
+`openai/gpt-oss-20b` with one GPU, matching the per-machine cluster limit; see
+the [vLLM guide](src/vllm/README.md) for its setup.
 
 ## Alderman speech and action tracker
 
@@ -323,9 +329,8 @@ Fuzzfile. URLs must use cluster-reachable hostnames, not submitter `localhost`.
 
 | Secret name (prefix `chi-ciq-`) | Value / privileges |
 |---|---|
-| `postgres-password` | Password of the `postgres` superuser and the reader roles (`POSTGRES_PASSWORD` in `.env`) |
+| `postgres-password` | Password of the `postgres` superuser and all database reader roles (`POSTGRES_PASSWORD` in `.env`) |
 | `hf-token` | Hugging Face read token with accepted pyannote model terms |
-| `vllm-reasoning-effort`, `vllm-reasoning-tokens`, `log-level` | Settings read from the submitter's `.env` |
 
 Use the installed helper to pipe your `.env` variables into these secrets:
 
@@ -336,27 +341,25 @@ chi-ciq-fuzzball-env --env-file .env
 fuzzball workflow validate data/deployment/fuzzball.yaml
 fuzzball workflow start data/deployment/fuzzball.yaml --name chi-ciq-web-release
 # Sync a subset without requiring the full deployment configuration:
-chi-ciq-fuzzball-env --env-file .env --only HF_TOKEN LOG_LEVEL
+chi-ciq-fuzzball-env --env-file .env --only HF_TOKEN
 ```
 
-The helper parses dotenv without executing shell code or interpolating variables.
-It validates the selected values before making any changes, creates missing
-user-scoped value secrets, and updates existing ones. Values travel on stdin,
-not command-line arguments, output, or generated workflow files. A failed CLI
-call stops synchronization; earlier successful uploads are not rolled back.
-`--check` is entirely local. Use `--fuzzball` or `FUZZBALL_BIN` to select the CLI.
+The helper reads only `POSTGRES_PASSWORD` and `HF_TOKEN` from dotenv, without
+executing shell code or interpolating variables. It validates both before
+making any changes, creates missing user-scoped value secrets, and updates
+existing ones. Values travel on stdin, not command-line arguments, output, or
+generated workflow files. A failed CLI call stops synchronization; earlier
+successful uploads are not rolled back. `--check` is entirely local. Use
+`--fuzzball` to select a non-default CLI executable.
 The helper writes a gitignored configured Fuzzfile at
 `data/deployment/fuzzball.yaml` (`--output` overrides it). Submit this file when
-using dotenv: Fuzzball rejects empty value secrets and empty environment entries,
-so deliberately empty reasoning effort is exported inside worker scripts instead
-of a secret reference. All nonempty credentials remain secret references.
+using dotenv. The Fuzzball workflow itself uses only the PostgreSQL password and
+Hugging Face token secrets; model settings, service addresses, and logging levels
+are fixed in the workflow or use application defaults.
 
-The helper forwards `POSTGRES_PASSWORD` and no service URL: database and vLLM
-addresses are fixed text in the Fuzzfile.
-Local input directories and unrelated variables are not forwarded.
-`LOG_LEVEL`, `VLLM_REASONING_EFFORT`, and `VLLM_REASONING_TOKENS` use the
-application defaults when absent. Empty reasoning effort is preserved
-deliberately.
+The helper forwards no connection URLs: database and vLLM service addresses are
+fixed text in the Fuzzfile. Local input directories and unrelated variables
+are not forwarded.
 
 The job `postgres-provision` creates the reader roles and their default
 privileges before the migrations run; the workflow's `web-check` verifies SELECT
@@ -464,7 +467,7 @@ bash scripts/logs.sh WORKFLOW JOB --follow --lines 0
 tail -f data/logs/*/*.log
 ```
 
-Set `LOG_DIR` to change the host directory, or `FUZZBALL_BIN` to select the CLI.
+Set `LOG_DIR` to change the host directory, or pass `--fuzzball` to select the CLI.
 Ctrl-C stops collection, not the remote job. CLI failures remain visible and
 return a nonzero exit code. Re-running collection with history enabled appends
 duplicates; there is no automatic reconnect, deduplication, or rotation.
@@ -473,8 +476,8 @@ workflows or the cluster's log retention expires.
 
 Python services use shared JSON logging on stderr: UTC `timestamp`, `level`,
 `service`, `logger`, `message`, and `exception` when present. Uvicorn access/error
-logs and Python warnings use the same format. Set `LOG_LEVEL` (default `INFO`)
-and optionally `LOG_SERVICE_NAME` in each Fuzzball job's environment.
+logs and Python warnings use the same format. `LOG_LEVEL` defaults to `INFO`;
+optionally set it in an individual development or worker environment.
 Machine-readable CLI results remain on stdout. PostgreSQL, vLLM, subprocesses,
 and CLI output keep their native format, so collected files are mixed text,
 not guaranteed JSONL. Add `--timestamp` to collection for server timestamps on

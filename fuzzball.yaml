@@ -3,7 +3,6 @@ version: v4
 defaults:
   job:
     env:
-      - LOG_LEVEL=secret://user/chi-ciq-log-level
       - HOME=/tmp
       # The database URLs carry no password: libpq reads it from PGPASSWORD.
       - PGPASSWORD=secret://user/chi-ciq-postgres-password
@@ -192,10 +191,6 @@ jobs:
       - ANALYTICS_DATABASE_URL=postgresql+psycopg://postgres@postgres:5432/analytics
       - MEETINGS_DATABASE_URL=postgresql+psycopg://web_reader@postgres:5432/meetings
       - DOCUMENTS_DATABASE_URL=postgresql+psycopg://documents_reader@postgres:5432/documents
-      - VLLM_BASE_URL=http://vllm:8000/v1
-      - VLLM_SERVED_MODEL=local-ai
-      - VLLM_REASONING_EFFORT=secret://user/chi-ciq-vllm-reasoning-effort
-      - VLLM_REASONING_TOKENS=secret://user/chi-ciq-vllm-reasoning-tokens
       - OMP_NUM_THREADS=2
       - MKL_NUM_THREADS=2
       - OPENBLAS_NUM_THREADS=2
@@ -296,6 +291,7 @@ jobs:
       #!/bin/sh
       set -eu
       exec chi-ciq-analytics run --stages stance --parallel-stage \
+        --vllm-url http://vllm:8000/v1 \
         --shard-index "$((FB_TASK_ID - 1))" --shard-count 32 \
         --stance-concurrency 2
 
@@ -337,7 +333,6 @@ jobs:
       - DATABASE_URL=postgresql+psycopg://web_reader@postgres:5432/meetings
       - ANALYTICS_DATABASE_URL=postgresql+psycopg://analytics_reader@postgres:5432/analytics
       - PGPASSWORD=secret://user/chi-ciq-postgres-password
-      - LOG_LEVEL=secret://user/chi-ciq-log-level
       - HOME=/tmp
     resource: *small
     depends-on:

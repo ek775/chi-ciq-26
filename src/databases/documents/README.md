@@ -47,8 +47,9 @@ docker compose --profile documents run --build --rm documents-backup
 
 Host equivalents: `chi-ciq-documents-database migrate`, `check`, or
 `backup --output-dir data/documents-database`. Set `DOCUMENTS_DATABASE_URL`
-explicitly; `DATABASE_URL` is only a fallback. The local server is bound to
-`127.0.0.1:5434`, database/user `documents`. No meetings storage is reused.
+and `PGPASSWORD` in the host shell; `DATABASE_URL` is only a fallback. The local
+server is bound to `127.0.0.1:5434`, database/user `documents`. No meetings
+storage is reused.
 
 Back up before migration and after successful ingestion. Custom-format dumps
 are private, append-only files named `documents-TIMESTAMP-UUID.dump`, published

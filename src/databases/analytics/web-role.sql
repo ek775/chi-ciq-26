@@ -1,4 +1,4 @@
-\getenv web_password ANALYTICS_WEB_POSTGRES_PASSWORD
+\getenv web_password PGPASSWORD
 
 SELECT 'CREATE ROLE analytics_reader'
 WHERE NOT EXISTS (SELECT FROM pg_roles WHERE rolname = 'analytics_reader')

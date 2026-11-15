@@ -15,8 +15,9 @@ chi-ciq-database check
 chi-ciq-database backup --output-dir data/database
 ```
 
-Use `DATABASE_URL` for the intended database. Compose supplies container
-connections at `db:5432`; host connections use `127.0.0.1:5433`.
+Use `DATABASE_URL` and `PGPASSWORD` for the intended database in host commands.
+Compose supplies container connections at `db:5432`; host connections use
+`127.0.0.1:5433`.
 `create_database` creates missing tables but does not migrate existing ones.
 The migration command serializes additive changes and checks compatibility.
 
