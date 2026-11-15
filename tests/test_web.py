@@ -44,7 +44,7 @@ def web(engine, tmp_path):
 def test_ui_health_and_readiness(web):
     client, _, _ = web
     assert client.get("/").status_code == 200
-    assert "Chicago meeting transcripts" in client.get("/").text
+    assert "Alder Audit" in client.get("/").text
     assert "words.textContent" in client.get("/static/app.js").text
     assert client.get("/health").json() == {"status": "ok"}
     assert client.get("/ready").json() == {"status": "ready"}

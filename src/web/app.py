@@ -26,6 +26,7 @@ from databases.meetings.schema import check_schema, connect_database
 from shared.logging import configure_logging
 
 from .analytics import analytics_router
+from .tracker import tracker_router
 
 logger = logging.getLogger(__name__)
 STATIC = Path(__file__).with_name("static")
@@ -85,7 +86,7 @@ def create_app(
             if analytics_engine is None and analytics is not None:
                 analytics.dispose()
 
-    app = FastAPI(title="Chicago meeting transcripts", lifespan=lifespan)
+    app = FastAPI(title="Alder Audit", lifespan=lifespan)
 
     def session(request: Request) -> Iterator[Session]:
         with Session(request.app.state.database) as database, database.begin():
@@ -210,6 +211,7 @@ def create_app(
         return {"meetings": total}
 
     app.include_router(analytics_router())
+    app.include_router(tracker_router())
 
     @app.get("/", include_in_schema=False)
     def index():

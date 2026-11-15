@@ -3,22 +3,28 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Chicago policy positions dashboard</title>
+  <title>Policy analytics | Alder Audit</title>
   <link rel="stylesheet" href="/static/style.css">
   <script src="/static/dashboard.js" defer></script>
 </head>
 <body class="dashboard">
-  <header>
-    <nav><a href="/">Transcripts</a> · <a href="/dashboard" aria-current="page">Policy dashboard</a></nav>
-    <h1>Policy positions dashboard</h1>
+  <div class="site-shell">
+  <header class="site-header">
+    <a class="brand" href="/"><span class="brand-mark" aria-hidden="true">✳</span><span>Alder <strong>Audit</strong><small>CHICAGO, ON THE RECORD</small></span></a>
+    <nav aria-label="Main navigation"><a href="/#tracker">Commitments</a><a href="/#meetings-section">Transcripts</a><a href="/dashboard" aria-current="page">Policy analytics</a></nav>
+    <a class="nav-cta" href="/#find-your-alder">Find your alder ↗</a>
+  </header>
+  <div class="dashboard-intro">
+    <p class="eyebrow">THE BIGGER PICTURE</p>
+    <h1>Policy, in <em>context.</em></h1>
+    <p class="hero-description">Explore the patterns across Chicago's public record.</p>
     <p class="caveat">
-      Positions, sentiment, and emotion are machine estimates from meeting
-      transcripts. Speakers marked <strong>voice match</strong> were attributed
-      automatically and may be wrong; only <strong>manual</strong> attributions
-      were checked by a person. Review the quoted evidence before relying on a result.
+      These analytics are experimental machine estimates, not verified positions.
+      Representative-level totals include inferred voice matches and may be wrong.
+      Only manually attributed speakers are named alongside transcript evidence.
     </p>
     <dl id="summary" class="cards"></dl>
-  </header>
+  </div>
   <p id="status" role="status" aria-live="polite"></p>
   <main class="dashboard-grid">
     <section aria-labelledby="topics-heading">
@@ -95,5 +101,7 @@
       <button id="more-statements" type="button" hidden>More statements</button>
     </section>
   </main>
+  <footer><span class="brand-mark" aria-hidden="true">✳</span><strong>Alder Audit</strong><span>Chicago, on the record.</span><a href="/">Back to the record ↗</a></footer>
+  </div>
 </body>
 </html>

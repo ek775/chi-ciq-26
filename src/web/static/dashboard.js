@@ -196,9 +196,9 @@ async function selectRepresentative(id) {
 
 function statementItem(statement) {
   const item = document.createElement("li");
-  const who = statement.representative_id
-    ? `${statement.representative_id} (${statement.attribution_method === "manual" ? "manual" : `voice match ${number(statement.attribution_confidence)}`})`
-    : statement.speaker_label || "Unattributed speaker";
+  const who = statement.representative_id && statement.attribution_method === "manual"
+    ? `${statement.representative_id} (manually labeled)`
+    : "Unconfirmed speaker";
   const header = node("p", null, "meta");
   header.append(
     node("strong", `${statement.stance.toUpperCase()} · ${statement.topic_key}`),
@@ -207,11 +207,8 @@ function statementItem(statement) {
   );
   item.append(header);
   if (statement.summary) item.append(node("p", statement.summary));
-  if (statement.evidence) {
+  if (statement.evidence && statement.evidence_verified) {
     const quote = node("blockquote", statement.evidence);
-    if (!statement.evidence_verified) {
-      quote.append(node("small", " (quote not found in transcript)"));
-    }
     item.append(quote);
   }
   const details = document.createElement("details");
@@ -231,8 +228,12 @@ async function loadStatements(reset = false) {
   for (const [key, value] of [...form.entries(), ...Object.entries(filters)]) {
     if (value) params.set(key, value);
   }
+  // A representative-scoped quote must never be attached through voice matching.
+  if (filters.representative_id) params.set("method", "manual");
   const scope = [filters.representative_id, filters.topic_key].filter(Boolean).join(" · ");
-  element("statement-scope").textContent = scope ? `Showing: ${scope}` : "Showing all statements";
+  element("statement-scope").textContent = scope
+    ? `Showing: ${scope}${filters.representative_id ? " · manually attributed speakers only" : ""}`
+    : "Showing all statements";
   element("more-statements").disabled = true;
   try {
     const rows = await request(`/api/analytics/statements?${params}`);
