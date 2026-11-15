@@ -40,7 +40,8 @@ async function loadMeetings(reset = false) {
       const item = document.createElement("li");
       const button = document.createElement("button");
       button.textContent = `${meeting.meeting_date ?? "Undated"} - ${meeting.meeting_type ?? meeting.filename}`;
-      button.addEventListener("click", () => selectMeeting(meeting));
+      button.setAttribute("aria-pressed", String(selected?.id === meeting.id));
+      button.addEventListener("click", () => selectMeeting(meeting, button));
       item.append(button);
       element("meetings").append(item);
     }
@@ -54,7 +55,9 @@ async function loadMeetings(reset = false) {
   }
 }
 
-function selectMeeting(meeting) {
+function selectMeeting(meeting, button) {
+  element("meetings").querySelector('[aria-pressed="true"]')?.setAttribute("aria-pressed", "false");
+  button.setAttribute("aria-pressed", "true");
   selected = meeting;
   segmentQuery = "";
   element("segment-query").value = "";

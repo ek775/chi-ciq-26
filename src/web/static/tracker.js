@@ -35,35 +35,45 @@
     return list;
   }
 
+  function evidenceDisclosure(label, citations) {
+    const details = node("details");
+    details.append(node("summary", label), citations);
+    return details;
+  }
+
   function render(batch) {
     content.replaceChildren();
     const statements = new Map(batch.statements.map((item) => [item.statement_id, item]));
     if (batch.coverage) content.append(node("p", `Coverage: ${batch.coverage}`, "coverage"));
     const columns = node("div", null, "tracker-columns");
     const commitments = node("div", null, "tracker-column");
-    commitments.append(node("p", "01 / COMMITMENTS", "eyebrow"), node("h4", "What was promised"));
+    commitments.append(node("h3", "What was promised"));
     const promises = batch.statements.filter((item) => item.type === "commitment");
     if (!promises.length) commitments.append(node("p", "No verified commitments in this batch.", "muted"));
     promises.forEach((item) => {
       const card = node("article", null, "record-card");
-      card.append(node("h5", item.topic || "Commitment"));
+      card.append(node("h4", item.topic || "Commitment"));
       if (item.commitment?.what) card.append(node("p", item.commitment.what));
       if (item.commitment?.deadline) card.append(node("p", `Deadline: ${item.commitment.deadline}`, "muted"));
       const quote = evidence([item.statement_id], statements);
-      if (quote) card.append(quote);
+      if (quote) card.append(evidenceDisclosure("Read the original quote", quote));
       const follow = batch.follow_up;
       if (follow && follow.commitment === item.statement_id) {
         const citations = evidence(follow.evidence, statements);
         if (citations) {
-          card.append(node("p", `Reviewed follow-up: ${follow.status || "unknown"}`, "follow-up"));
-          if (follow.summary) card.append(node("p", follow.summary));
-          card.append(citations);
+          const outcome = node("div", null, "outcome");
+          outcome.append(node("p", "What happened next", "eyebrow"));
+          if (follow.status) outcome.append(node("p", follow.status, "follow-up"));
+          if (follow.summary) outcome.append(node("p", follow.summary));
+          outcome.append(evidenceDisclosure("Read follow-up evidence", citations));
+          card.append(outcome);
         }
       }
       commitments.append(card);
     });
     const digest = node("div", null, "tracker-column");
-    digest.append(node("p", "02 / MEETING DIGEST", "eyebrow"), node("h4", batch.digest?.title || "A meeting, in brief"));
+    digest.append(node("h3", "Meeting digest"));
+    if (batch.digest?.title) digest.append(node("p", batch.digest.title, "digest-title"));
     if (batch.digest?.scope) digest.append(node("p", batch.digest.scope, "muted"));
     let displayed = 0;
     for (const bullet of batch.digest?.bullets || []) {
@@ -71,10 +81,8 @@
       if (!citations) continue;
       displayed += 1;
       const card = node("article", null, "record-card");
-      card.append(node("span", bullet.category || "REVIEWED", "pill"), node("p", bullet.text));
-      const details = node("details");
-      details.append(node("summary", "View transcript evidence"), citations);
-      card.append(details);
+      if (bullet.category) card.append(node("p", bullet.category, "eyebrow"));
+      card.append(node("p", bullet.text), evidenceDisclosure("Read transcript evidence", citations));
       digest.append(card);
     }
     if (!displayed) digest.append(node("p", "No digest with verified citations in this batch.", "muted"));
@@ -82,7 +90,7 @@
     content.append(columns);
     if (batch.actions.length) {
       const section = node("section", null, "tracker-actions");
-      section.append(node("p", "03 / OFFICIAL ACTIONS", "eyebrow"), node("h4", "On the official record"));
+      section.append(node("h3", "Official actions"));
       for (const action of batch.actions) {
         const description = action.type === "recorded_vote"
           ? `${action.person}: ${action.vote} · ${action.matter_id}`

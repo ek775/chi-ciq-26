@@ -74,16 +74,24 @@ async function loadSummary() {
     ["Policy positions", summary.positions],
     ["Meetings", summary.meetings],
     ["Transcript documents", summary.documents],
+  ];
+  const refresh = [
     ["Last refresh", summary.refreshed_at ? new Date(summary.refreshed_at).toLocaleString() : "never"],
     ["Last run", summary.last_run ? summary.last_run.status : "none"],
   ];
   element("summary").replaceChildren(
-    ...cards.flatMap(([label, value]) => {
+    ...cards.map(([label, value]) => {
       const wrapper = node("div");
       wrapper.append(node("dt", label), node("dd", value));
-      return [wrapper];
+      return wrapper;
     }),
   );
+  element("analysis-status").replaceChildren(
+    ...refresh.flatMap(([label, value]) => [node("dt", label), node("dd", value)]),
+  );
+  if (!summary.refreshed_at && !summary.topics && !summary.representatives) {
+    status.textContent = "No policy analytics are available in this database yet.";
+  }
 }
 
 async function loadTopics() {
