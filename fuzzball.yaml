@@ -20,7 +20,10 @@ volumes:
     name: volume_test
   postgres-data:
     use: team8
-    name: postgres-data
+    name: postgres-data-v2
+  database-backups:
+    use: team8
+    name: database-backups
   vllm-model-cache:
     use: team8
     name: vllm-model-data
@@ -68,28 +71,18 @@ jobs:
         GRANT SELECT ON TABLES TO documents_reader;
       SQL
 
-  meetings-backup-before:
-    image: &meetings-image
-      uri: docker://ghcr.io/ek775/chi-ciq-26-meetings:fuzzball
-    env: &meetings-env
-      - DATABASE_URL=postgresql+psycopg://postgres@postgres:5432/meetings
-    mounts: &archive-mount
-      /datasets:
-        volume: datasets
-    resource: *small
-    depends-on: &database-provisioned
-      - {name: postgres-provision, status: FINISHED}
-    command: [chi-ciq-database, backup, --output-dir, /datasets/database/meetings]
-
   documents-backup-before:
     image: &documents-db-image
       uri: docker://ghcr.io/ek775/chi-ciq-26-documents-db:fuzzball
     env: &documents-env
       - DOCUMENTS_DATABASE_URL=postgresql+psycopg://postgres@postgres:5432/documents
-    mounts: *archive-mount
+    mounts: &archive-mount
+      /backups:
+        volume: database-backups
     resource: *small
-    depends-on: *database-provisioned
-    command: [chi-ciq-documents-database, backup, --output-dir, /datasets/database/documents]
+    depends-on: &database-provisioned
+      - {name: postgres-provision, status: FINISHED}
+    command: [chi-ciq-documents-database, backup, --output-dir, /backups/documents]
 
   analytics-backup-before:
     image: &analytics-db-image
@@ -99,14 +92,15 @@ jobs:
     mounts: *archive-mount
     resource: *small
     depends-on: *database-provisioned
-    command: [chi-ciq-analytics-database, backup, --output-dir, /datasets/database/analytics]
+    command: [chi-ciq-analytics-database, backup, --output-dir, /backups/analytics]
 
   meetings-migrate:
-    image: *meetings-image
-    env: *meetings-env
+    image:
+      uri: docker://ghcr.io/ek775/chi-ciq-26-meetings:fuzzball
+    env:
+      - DATABASE_URL=postgresql+psycopg://postgres@postgres:5432/meetings
     resource: *small
-    depends-on:
-      - {name: meetings-backup-before, status: FINISHED}
+    depends-on: *database-provisioned
     command: [chi-ciq-database, migrate]
 
   documents-migrate:
@@ -129,6 +123,7 @@ jobs:
     image:
       uri: docker://ghcr.io/ek775/chi-ciq-26-transcription:fuzzball
     env:
+      - POSTGRES_PASSWORD=secret://user/chi-ciq-postgres-password
       - DATABASE_URL=postgresql+psycopg://postgres@postgres:5432/meetings
       - HF_TOKEN=secret://user/chi-ciq-hf-token
       - SHARD_COUNT=128
@@ -154,16 +149,18 @@ jobs:
       #!/bin/sh
       set -eu
       exec chi-ciq-ingest --input-dir /volume/audio --namespace recordings \
-        --metadata-file /datasets/analytics/recording-metadata.json \
         --shard-index "$((FB_TASK_ID - 1))" --shard-count "$SHARD_COUNT"
 
   documents:
     image:
       uri: docker://ghcr.io/ek775/chi-ciq-26-documents:fuzzball
     env:
+      - POSTGRES_PASSWORD=secret://user/chi-ciq-postgres-password
       - DOCUMENTS_DATABASE_URL=postgresql+psycopg://postgres@postgres:5432/documents
       - SHARD_COUNT=4
-    mounts: *archive-mount
+    mounts:
+      /volume:
+        volume: recordings
     resource: &inference
       cpu:
         cores: 4
@@ -178,7 +175,7 @@ jobs:
     script: |
       #!/bin/sh
       set -eu
-      exec chi-ciq-ingest-documents --input-dir /datasets/Transcripts \
+      exec chi-ciq-ingest-documents --input-dir /volume/chicago-city-council-archive/Meetings \
         --namespace transcripts --device cpu \
         --shard-index "$((FB_TASK_ID - 1))" --shard-count "$SHARD_COUNT"
 
@@ -206,7 +203,9 @@ jobs:
   analytics-roster:
     image: *analytics-image
     env: *analytics-env
-    mounts: *archive-mount
+    mounts:
+      /datasets:
+        volume: datasets
     resource: *inference
     depends-on:
       - {name: analytics-sync, status: FINISHED}
@@ -307,15 +306,6 @@ jobs:
       - {name: analytics-stance, status: FINISHED}
     command: [chi-ciq-analytics, run, --stages, refresh]
 
-  meetings-backup-after:
-    image: *meetings-image
-    env: *meetings-env
-    mounts: *archive-mount
-    resource: *small
-    depends-on:
-      - {name: transcription, status: FINISHED}
-    command: [chi-ciq-database, backup, --output-dir, /datasets/database/meetings]
-
   documents-backup-after:
     image: *documents-db-image
     env: *documents-env
@@ -323,7 +313,7 @@ jobs:
     resource: *small
     depends-on:
       - {name: documents, status: FINISHED}
-    command: [chi-ciq-documents-database, backup, --output-dir, /datasets/database/documents]
+    command: [chi-ciq-documents-database, backup, --output-dir, /backups/documents]
 
   analytics-backup-after:
     image: *analytics-db-image
@@ -332,7 +322,7 @@ jobs:
     resource: *small
     depends-on:
       - {name: analytics-refresh, status: FINISHED}
-    command: [chi-ciq-analytics-database, backup, --output-dir, /datasets/database/analytics]
+    command: [chi-ciq-analytics-database, backup, --output-dir, /backups/analytics]
 
   web-check:
     image: &web-image
@@ -345,7 +335,7 @@ jobs:
       - HOME=/tmp
     resource: *small
     depends-on:
-      - {name: meetings-backup-after, status: FINISHED}
+      - {name: transcription, status: FINISHED}
       - {name: documents-backup-after, status: FINISHED}
       - {name: analytics-backup-after, status: FINISHED}
     script: |

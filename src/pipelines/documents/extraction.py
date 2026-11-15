@@ -95,6 +95,8 @@ def discover_tree(root: Path) -> tuple[list[Path], list[Path]]:
         # Never follow document or directory links outside the mounted input tree.
         if path.is_symlink():
             raise ValueError(f"Input tree contains a symlink: {path}")
+        if any(part.startswith("._") for part in path.relative_to(root).parts):
+            continue
         if path.is_dir():
             directories.append(path)
         elif path.is_file() and path.suffix.lower() in SUPPORTED_SUFFIXES:

@@ -32,8 +32,8 @@ class Meeting(Base):
     id: Mapped[UUID] = mapped_column(primary_key=True, default=uuid4)
     source_path: Mapped[str]
     filename: Mapped[str]
-    meeting_date: Mapped[date]
-    meeting_type: Mapped[str]
+    meeting_date: Mapped[date | None]
+    meeting_type: Mapped[str | None]
     status: Mapped[str] = mapped_column(default="processing")
     recording_duration_seconds: Mapped[float | None] = mapped_column(
         comment="Decoded first audio track duration in seconds; NULL before extraction."

@@ -1,0 +1,156 @@
+{
+  "provenance": "reference-autocaptions; excerpt offsets estimated from cue boundaries",
+  "coverage": "selected excerpts only",
+  "candidates": {
+    "committee-proposal": {
+      "published_source_key": "commitment-demo/vimeo-1154082574.mp4",
+      "segment_sequence": 0,
+      "quote": "Uh, moving on to item number eight, which is a substitute ordinance authorizing submission of the United States Department of Housing and Urban Development, HUD 1 0 8 loan application for the rehabilitation of 2135 North Milwaukee Avenue, better known as the Congress Theater In the first ward.",
+      "speaker": null,
+      "speaker_confidence": "unconfirmed",
+      "start_s": 11066.005,
+      "end_s": 11088.325,
+      "recording_url": "https://vimeo.com/1154082574",
+      "type": "statement",
+      "topic": "Congress Theater rehabilitation financing",
+      "matter_id": null,
+      "agenda_item": null,
+      "recording_id": "vimeo:1154082574"
+    },
+    "committee-risk": {
+      "published_source_key": "commitment-demo/vimeo-1154082574.mp4",
+      "segment_sequence": 1,
+      "quote": "Uh, in, in the event of a, uh, default and yes, foreclosure. So the, The more eloquent way of saying it, The, the city will be guaranteeing these funds through future CBDG payments. However, the senior loan will provide a risk mitigation, um, in the potential of result of a foreclosure to recapture any funds from the sale of the property.",
+      "speaker": null,
+      "speaker_confidence": "unconfirmed",
+      "start_s": 11967.195,
+      "end_s": 11993.305,
+      "recording_url": "https://vimeo.com/1154082574",
+      "type": "statement",
+      "topic": "Congress Theater rehabilitation financing",
+      "matter_id": null,
+      "agenda_item": null,
+      "recording_id": "vimeo:1154082574"
+    },
+    "committee-vote": {
+      "published_source_key": "commitment-demo/vimeo-1154082574.mp4",
+      "segment_sequence": 2,
+      "quote": "If they're seeing none, alderman Irvin moves to pass. All those in favor signify by saying Aye. Aye. Aye. Opposed? In the opinion of the chair, the ayes have it,",
+      "speaker": null,
+      "speaker_confidence": "unconfirmed",
+      "start_s": 12082.775,
+      "end_s": 12093.415,
+      "recording_url": "https://vimeo.com/1154082574",
+      "type": "vote_voice",
+      "topic": "Congress Theater rehabilitation financing",
+      "matter_id": null,
+      "agenda_item": null,
+      "recording_id": "vimeo:1154082574"
+    },
+    "report-out": {
+      "published_source_key": "commitment-demo/vimeo-1154082574.mp4",
+      "segment_sequence": 3,
+      "quote": "and the substitute ordinance will be reported out of the do pass recommendation will report it out at the next city Council meeting.",
+      "speaker": null,
+      "speaker_confidence": "unconfirmed",
+      "start_s": 12093.415,
+      "end_s": 12100.485,
+      "recording_url": "https://vimeo.com/1154082574",
+      "type": "commitment",
+      "topic": "Congress Theater rehabilitation financing",
+      "matter_id": null,
+      "agenda_item": null,
+      "commitment": {
+        "who": null,
+        "what": "Report the substitute ordinance to City Council with a recommendation to pass.",
+        "deadline": "next city Council meeting"
+      },
+      "recording_id": "vimeo:1154082574"
+    },
+    "council-introduction": {
+      "published_source_key": "commitment-demo/vimeo-1156547113.mp4",
+      "segment_sequence": 0,
+      "quote": "Item number three is the substitute ordinance authorizing the submission of the US Department of Housing and Urban Development Section 1 0 8 loan application for the rehabilitation of 2135 North Milwaukee Avenue, better known as the Congress Theater in the first ward in an amount up to $25.25 million.",
+      "speaker": null,
+      "speaker_confidence": "unconfirmed",
+      "start_s": 5616.375,
+      "end_s": 5638.705,
+      "recording_url": "https://vimeo.com/1156547113",
+      "type": "statement",
+      "topic": "Congress Theater rehabilitation financing",
+      "matter_id": null,
+      "agenda_item": null,
+      "recording_id": "vimeo:1156547113"
+    },
+    "council-motion": {
+      "published_source_key": "commitment-demo/vimeo-1156547113.mp4",
+      "segment_sequence": 1,
+      "quote": "I move passage of this item by the same motion",
+      "speaker": null,
+      "speaker_confidence": "unconfirmed",
+      "start_s": 5638.705,
+      "end_s": 5640.905,
+      "recording_url": "https://vimeo.com/1156547113",
+      "type": "statement",
+      "topic": "Congress Theater rehabilitation financing",
+      "matter_id": null,
+      "agenda_item": null,
+      "recording_id": "vimeo:1156547113"
+    },
+    "council-disposition": {
+      "published_source_key": "commitment-demo/vimeo-1156547113.mp4",
+      "segment_sequence": 2,
+      "quote": "Hearing. No objection. So ordered",
+      "speaker": null,
+      "speaker_confidence": "unconfirmed",
+      "start_s": 5640.905,
+      "end_s": 5642.815,
+      "recording_url": "https://vimeo.com/1156547113",
+      "type": "vote_voice",
+      "topic": "Congress Theater rehabilitation financing",
+      "matter_id": null,
+      "agenda_item": null,
+      "recording_id": "vimeo:1156547113"
+    }
+  },
+  "follow_up": {
+    "commitment": "report-out",
+    "evidence": [
+      "council-introduction",
+      "council-motion",
+      "council-disposition"
+    ],
+    "status": "fulfilled",
+    "review_basis": "reference transcript",
+    "summary": "The substitute ordinance was reported to the Council at its next meeting."
+  },
+  "digest": {
+    "meeting": "2026-01-14",
+    "title": "Finance Committee digest: Congress Theater agenda item",
+    "scope": "Selected excerpts about one agenda item",
+    "bullets": [
+      {
+        "category": "proposal",
+        "text": "The committee considered authorizing a federal loan application for the rehabilitation of the Congress Theater.",
+        "evidence": [
+          "committee-proposal"
+        ]
+      },
+      {
+        "category": "debate",
+        "text": "The discussion covered the city’s exposure if the project defaulted and how a senior loan might let it recover funds.",
+        "evidence": [
+          "committee-risk"
+        ]
+      },
+      {
+        "category": "decision",
+        "text": "The committee voted to recommend passage and said it would report the ordinance to Council at its next meeting.",
+        "evidence": [
+          "committee-vote",
+          "report-out"
+        ]
+      }
+    ]
+  }
+}

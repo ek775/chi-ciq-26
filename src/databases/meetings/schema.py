@@ -20,11 +20,17 @@ def connect_database(url: str) -> Engine:
 
 
 def migrate_database(engine: Engine) -> None:
-    """Apply only additive changes, serialized across ingestion/deployment jobs."""
+    """Preserve data while updating schema and nullable meeting metadata."""
     with engine.begin() as connection:
         connection.execute(text("SELECT pg_advisory_xact_lock(738491025)"))
         connection.execute(text("CREATE EXTENSION IF NOT EXISTS vector"))
         Base.metadata.create_all(connection)
+        connection.execute(
+            text("ALTER TABLE meetings ALTER COLUMN meeting_date DROP NOT NULL")
+        )
+        connection.execute(
+            text("ALTER TABLE meetings ALTER COLUMN meeting_type DROP NOT NULL")
+        )
         connection.execute(
             text(
                 "ALTER TABLE meetings ADD COLUMN IF NOT EXISTS "
@@ -41,11 +47,21 @@ def check_schema(engine: Engine) -> None:
         for table in Base.metadata.sorted_tables:
             if not inspector.has_table(table.name):
                 raise RuntimeError(f"Missing table {table.name}; run database migrate")
-            actual = {column["name"] for column in inspector.get_columns(table.name)}
-            missing = set(table.columns.keys()) - actual
+            actual = {
+                column["name"]: column for column in inspector.get_columns(table.name)
+            }
+            missing = set(table.columns.keys()) - actual.keys()
             if missing:
                 raise RuntimeError(
                     f"Missing columns in {table.name}: {sorted(missing)}; "
+                    "run database migrate"
+                )
+            if table.name == "meetings" and any(
+                not actual[name]["nullable"]
+                for name in ("meeting_date", "meeting_type")
+            ):
+                raise RuntimeError(
+                    "Meeting metadata must allow NULL for opaque filenames; "
                     "run database migrate"
                 )
 

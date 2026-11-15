@@ -32,14 +32,9 @@ def validate_meeting_filename(filename: str) -> str:
 
 def meeting_filename(source: Path, metadata: dict[str, str]) -> str:
     video_id = vimeo_audio_id(source)
-    if video_id is not None:
-        if video_id not in metadata:
-            raise ValueError(
-                f"Missing meeting metadata for Vimeo ID {video_id}; "
-                "provide --metadata-file mapping IDs to dated MP4 filenames"
-            )
+    if video_id is not None and video_id in metadata:
         return validate_meeting_filename(metadata[video_id])
-    return validate_meeting_filename(source.name)
+    return source.name
 
 
 def discover_recordings(

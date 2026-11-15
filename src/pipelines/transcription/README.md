@@ -27,31 +27,24 @@ The Fuzzball volume `team8/volume_test` contains an `audio` directory at the
 volume root. Inspection on 2026-11-14 found dated MP4s and a growing set of
 `vimeo-<id>-audio-low.mp4` files; sampled files contain AAC audio without video.
 When the volume is mounted at `/volume`, use `/volume/audio`, not
-`/volume/data/audio`. The ID-only filenames do not identify the meeting date or
-type. Generate a mapping in the downloads environment (with Vimeo network
-access), review the titles and dates, and supply it to the transcription worker:
+`/volume/data/audio`. Filenames are opaque identifiers; neither dated names nor
+metadata mappings are required. Transcription leaves meeting date/type NULL.
+Analytics derives missing meeting metadata from transcript content, not filenames:
 
 ```sh
-chi-ciq-vimeo-metadata --input-dir /volume/audio > metadata.pending.json
-# Review and correct metadata.pending.json; then make it available to the worker.
-chi-ciq-ingest --input-dir /volume/audio --namespace recordings \
-  --metadata-file /path/to/metadata.pending.json
+chi-ciq-ingest --input-dir /volume/audio --namespace recordings
 ```
 
-The generator queries public Vimeo titles and fails without producing a partial
-JSON mapping if a title cannot be parsed. It never uses an upload date as a
-meeting date. Supply or correct entries manually when titles lack meeting
-metadata, and rerun with `--metadata-file overrides.json` to skip title lookup
-for those IDs. The JSON maps IDs to dated MP4 filenames, for example
-`{"1200176629": "2026-06-11_economic_development.mp4"}`. Dated files need no
-entry. Each worker validates the complete mapping before inference and processes
-its assigned recordings sequentially. Configure the worker's
+Legacy `--metadata-file` and `--meeting-filename` options remain available only
+for explicitly reviewed overrides; they are not required and filenames are never
+parsed implicitly. Unknown or conflicting content metadata remains unknown.
+Each worker processes its assigned recordings sequentially. Configure the worker's
 `DATABASE_URL` and `HF_TOKEN` using cluster secrets. The worker must be able to
 reach the private meetings database and download required models; mount a
 persistent model cache if the cluster supports it. Run the schema migration
 before ingestion and back up only after the job succeeds.
 
-Wait for acquisition to finish before generating the mapping or ingesting:
+Wait for acquisition to finish before ingesting:
 the observed ID-named files appeared while inspection was in progress, and
 their names alone do not prove that downloads are complete. Mount inputs
 read-only for inference using cluster filesystem ACLs.
@@ -69,10 +62,9 @@ not allow 128 simultaneous GPU jobs. Model startup repeats per shard, so measure
 that cost before increasing the count further. Whole-GPU concurrency remains
 two unless the cluster explicitly supports and has tested GPU sharing.
 
-`chi-ciq-dispatch --input-dir /volume/audio --metadata-file mapping.json ...`
-also accepts this mapping and embeds each resolved filename in the individual
-worker command; the worker does not need the mapping file. Use
-`--meeting-filename` with `--input-file` for an individual ID-named recording.
+`chi-ciq-dispatch --input-dir /volume/audio ...` likewise accepts opaque names.
+An optional reviewed metadata mapping is embedded in individual worker commands
+for backward compatibility.
 
 ## Ingestion versus updates
 
@@ -118,7 +110,7 @@ stages may accumulate and need an explicit retention policy.
 
 Public Vimeo acquisition is provided by `pipelines.downloads`; other raw
 document/video acquisition remains an upstream handoff, not implemented here.
-Current transcription ingestion accepts complete, filename-validated MP4 files directly inside
+Current transcription ingestion accepts complete MP4 files with opaque filenames directly inside
 the input directory (non-recursive). It does not claim to ingest arbitrary
 documents. Vimeo downloading is a separate acquisition service.
 
@@ -162,7 +154,7 @@ chi-ciq-database backup --output-dir data/database
 ```
 
 Run backup only after ingestion succeeds. Input discovery is non-recursive and
-sorted by filename; invalid filenames and empty directories fail before inference.
+sorted by filename; missing and empty directories fail before inference.
 The worker loads models once per invocation, skips unchanged inputs, and
 publishes each successful recording independently. Failures preserve previously
 published results and propagate to the caller.

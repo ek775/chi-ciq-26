@@ -13,6 +13,8 @@ from uuid import UUID
 
 import numpy as np
 
+from databases.meetings.metadata import MeetingMetadata
+
 from .backends import (
     SAMPLE_RATE,
     Audio,
@@ -25,7 +27,6 @@ from .backends import (
     VoiceEmbedder,
 )
 from .database import TranscriptStore
-from .metadata import parse_filename
 from .models import TranscriptSegment
 from .progress import timed_operation
 
@@ -152,7 +153,7 @@ class TranscriptionWorkflow:
     def transcribe(self, source: str | Path) -> Iterator[TranscriptSegment]:
         """Commit each segment before yielding it; close the iterator if stopping early."""
         source = Path(source)
-        metadata = parse_filename(source)
+        metadata = MeetingMetadata(source.name, None, None)
         if not source.is_file():
             raise FileNotFoundError(source)
         meeting_id = self.store.start(

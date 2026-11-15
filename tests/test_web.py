@@ -56,11 +56,14 @@ def test_browse_search_pagination_and_no_sensitive_fields(web):
     rows = client.get("/api/meetings").json()
     assert len(rows) == 1
     meeting = rows[0]
+    assert meeting["meeting_date"] is None
+    assert meeting["meeting_type"] is None
     assert "source_path" not in meeting
     assert "text_embedding" not in meeting
+    assert client.get("/api/meetings?q=2026-11-10").json() == rows
     assert client.get("/api/meetings?q=budget").json() == rows
     assert client.get("/api/meetings?q=100%25").json() == rows
-    assert client.get("/api/meetings?q=_").json() == []
+    assert client.get("/api/meetings?q=_").json() == rows
     assert client.get("/api/meetings?q=missing").json() == []
     assert client.get("/api/meetings?offset=1").json() == []
     assert client.get(f"/api/meetings/{meeting['id']}").json() == meeting

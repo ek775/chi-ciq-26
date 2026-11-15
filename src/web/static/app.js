@@ -39,7 +39,7 @@ async function loadMeetings(reset = false) {
     for (const meeting of rows) {
       const item = document.createElement("li");
       const button = document.createElement("button");
-      button.textContent = `${meeting.meeting_date} - ${meeting.meeting_type}`;
+      button.textContent = `${meeting.meeting_date ?? "Undated"} - ${meeting.meeting_type ?? meeting.filename}`;
       button.addEventListener("click", () => selectMeeting(meeting));
       item.append(button);
       element("meetings").append(item);
@@ -59,7 +59,7 @@ function selectMeeting(meeting) {
   segmentQuery = "";
   element("segment-query").value = "";
   element("segment-search").hidden = false;
-  element("title").textContent = `${meeting.meeting_date} - ${meeting.meeting_type}`;
+  element("title").textContent = `${meeting.meeting_date ?? "Undated"} - ${meeting.meeting_type ?? meeting.filename}`;
   loadSegments(true);
 }
 

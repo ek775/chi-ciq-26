@@ -28,8 +28,8 @@ MONTHS = {
 @dataclass(frozen=True)
 class MeetingMetadata:
     filename: str
-    meeting_date: date
-    meeting_type: str
+    meeting_date: date | None
+    meeting_type: str | None
 
 
 def vimeo_audio_id(source: str | Path) -> str | None:

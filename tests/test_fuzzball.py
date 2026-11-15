@@ -1,3 +1,5 @@
+import os
+import subprocess
 from pathlib import Path
 from urllib.parse import urlsplit
 
@@ -16,6 +18,54 @@ def workflow():
 
 def dependencies(job):
     return {dependency["name"] for dependency in job.get("depends-on", [])}
+
+
+def test_transcription_does_not_require_filename_metadata(tmp_path):
+    executable = tmp_path / "chi-ciq-ingest"
+    executable.write_text("#!/bin/sh\nprintf '%s\\n' \"$@\"\n")
+    executable.chmod(0o700)
+    script = workflow()["jobs"]["transcription"]["script"]
+    result = subprocess.run(
+        ["sh", "-c", script],
+        env=os.environ
+        | {
+            "PATH": f"{tmp_path}:{os.environ['PATH']}",
+            "FB_TASK_ID": "1",
+            "SHARD_COUNT": "128",
+        },
+        text=True,
+        capture_output=True,
+        check=True,
+    )
+    arguments = result.stdout.splitlines()
+    assert "--metadata-file" not in arguments
+    assert not result.stderr
+    assert arguments[-4:] == ["--shard-index", "0", "--shard-count", "128"]
+
+
+def test_backups_use_team_storage_separate_from_input_datasets():
+    definition = workflow()
+    assert definition["volumes"]["database-backups"] == {
+        "use": "team8",
+        "name": "database-backups",
+    }
+    for database in ("documents", "analytics"):
+        for phase in ("before", "after"):
+            job = definition["jobs"][f"{database}-backup-{phase}"]
+            assert job["mounts"] == {"/backups": {"volume": "database-backups"}}
+            assert job["command"][-2:] == [
+                "--output-dir",
+                f"/backups/{database}",
+            ]
+    assert definition["jobs"]["analytics-roster"]["mounts"] == {
+        "/datasets": {"volume": "datasets"}
+    }
+    job = definition["jobs"]["documents"]
+    assert job["mounts"] == {"/volume": {"volume": "recordings"}}
+    assert (
+        "--input-dir /volume/chicago-city-council-archive/Meetings"
+        in job["script"]
+    )
 
 
 def test_deployment_dag_is_acyclic_and_fail_closed():
@@ -42,7 +92,9 @@ def test_deployment_dag_is_acyclic_and_fail_closed():
         remaining -= ready
     assert dependencies(nodes["postgres-provision"]) == {"postgres"}
     assert dependencies(nodes["vllm"]) == {"transcription", "documents"}
-    for database in ("meetings", "documents", "analytics"):
+    assert dependencies(nodes["meetings-migrate"]) == {"postgres-provision"}
+    assert not any(name.startswith("meetings-backup") for name in nodes)
+    for database in ("documents", "analytics"):
         assert dependencies(nodes[f"{database}-backup-before"]) == {
             "postgres-provision"
         }
@@ -53,7 +105,7 @@ def test_deployment_dag_is_acyclic_and_fail_closed():
     }
     assert dependencies(nodes["web"]) == {"web-check"}
     assert dependencies(nodes["web-check"]) == {
-        "meetings-backup-after",
+        "transcription",
         "documents-backup-after",
         "analytics-backup-after",
     }
@@ -82,9 +134,10 @@ def test_vllm_is_an_internal_gpu_service():
         "path": "/health",
         "port": 8000,
     }
-    assert "VLLM_BASE_URL=http://vllm:8000/v1" in definition["jobs"][
-        "analytics-stance"
-    ]["env"]
+    assert (
+        "VLLM_BASE_URL=http://vllm:8000/v1"
+        in definition["jobs"]["analytics-stance"]["env"]
+    )
 
 
 def test_ingestion_arrays_have_consistent_disjoint_shards(tmp_path):
@@ -252,3 +305,20 @@ def test_workstation_resource_budget_and_bounded_vllm_requests():
     assert stance["task-array"]["concurrency"] * 2 == 8
     for stage in ("sentiment", "emotion"):
         assert "OMP_NUM_THREADS=2" in jobs[f"analytics-{stage}"]["env"]
+
+
+def test_postgres_shell_workflow_uses_the_deployment_database_volume():
+    deployment = workflow()
+    shell_workflow = yaml.safe_load((ROOT / "fuzzball-postgres-shell.yaml").read_text())
+    assert (
+        shell_workflow["volumes"]["postgres-data"]
+        == deployment["volumes"]["postgres-data"]
+    )
+    deployment_service = deployment["services"]["postgres"]
+    shell_service = shell_workflow["services"]["postgres"]
+    for field in ("image", "env", "mounts", "command"):
+        assert shell_service[field] == deployment_service[field]
+    shell_job = shell_workflow["jobs"]["postgres-shell"]
+    assert shell_job["mounts"] == deployment_service["mounts"]
+    assert shell_job["image"] == deployment_service["image"]
+    assert dependencies(shell_job) == {"postgres"}

@@ -7,9 +7,10 @@ from types import SimpleNamespace
 import pytest
 from sqlalchemy import func, select, text
 
+from databases.meetings.metadata import MeetingMetadata
 from databases.meetings.models import PublishedSource
 from databases.meetings.schema import check_schema, migrate_database
-from pipelines.transcription import Meeting, TranscriptSegment, parse_filename
+from pipelines.transcription import Meeting, TranscriptSegment
 from pipelines.transcription.pipeline import (
     IngestionPipeline,
     content_digest,
@@ -26,7 +27,7 @@ class FakeWorkflow:
     def transcribe(self, path):
         meeting_id = self.store.start(
             path,
-            parse_filename(path),
+            MeetingMetadata(path.name, None, None),
             transcription_model="fake",
             diarization_model="fake",
             text_embedding_model="fake",
@@ -94,6 +95,42 @@ def test_ingestion_skips_unchanged_without_loading_models(engine, recording):
         )
 
 
+@pytest.mark.parametrize(
+    "filename",
+    [
+        "arbitrary recording.mp4",
+        "vimeo-1135462361-audio-low.mp4",
+        "2026-11-10_budget.mp4",
+    ],
+)
+def test_ingestion_does_not_infer_metadata_from_filenames(engine, tmp_path, filename):
+    source = tmp_path / filename
+    source.write_text("This meeting is called to order.")
+    pipeline = IngestionPipeline(engine, FakeWorkflow)
+    assert pipeline.ingest(source)
+    assert not pipeline.ingest(source)
+    with pipeline.store.sessions() as session:
+        meeting = session.get(Meeting, published(engine)[0].meeting_id)
+        assert meeting.filename == filename
+        assert meeting.meeting_date is None
+        assert meeting.meeting_type is None
+
+
+def test_migration_relaxes_legacy_meeting_metadata_constraints(engine):
+    with engine.begin() as connection:
+        connection.execute(
+            text("ALTER TABLE meetings ALTER COLUMN meeting_date SET NOT NULL")
+        )
+        connection.execute(
+            text("ALTER TABLE meetings ALTER COLUMN meeting_type SET NOT NULL")
+        )
+    with pytest.raises(RuntimeError, match="metadata must allow NULL"):
+        check_schema(engine)
+    migrate_database(engine)
+    migrate_database(engine)
+    check_schema(engine)
+
+
 def test_vimeo_metadata_change_republishes_with_original_source_identity(
     engine, tmp_path
 ):
@@ -104,6 +141,7 @@ def test_vimeo_metadata_change_republishes_with_original_source_identity(
     assert pipeline.ingest(recording, metadata_filename=metadata)
     first = published(engine)[0].meeting_id
     assert not pipeline.ingest(recording, metadata_filename=metadata)
+    assert not pipeline.ingest(recording)
     assert pipeline.ingest(recording, metadata_filename="2026-06-12_budget.mp4")
     current = published(engine)[0]
     assert current.key == f"recordings/{recording.name}"

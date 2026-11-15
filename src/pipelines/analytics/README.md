@@ -30,6 +30,31 @@ exclusive session advisory lock, and each run is recorded in `analysis_runs`.
 | `stance` | For relevant units, ask vLLM for a schema-constrained stance (support/oppose/mixed/neutral/not_addressed) toward each topic's proposition, with confidence, summary, and a verbatim evidence quote. Reasoning models get `--vllm-reasoning-effort` (default `low`; empty to omit) and `--vllm-reasoning-tokens` of thinking budget; `--vllm-timeout` defaults to 300 s. |
 | `refresh` | Refresh the dashboard materialized views in one transaction. |
 
+### Content-derived meeting metadata
+
+Filenames and directory paths are opaque identifiers/display labels, never
+metadata evidence. During `sync`, analytics preserves known legacy meeting
+database dates/bodies and fills missing fields from transcript content.
+Documents use their full stored text, not their filename, directory, or only
+the embedded chunks.
+
+The deterministic extractor accepts explicit self-identification: opening
+statements such as “Today is November 4, 2026” / “This meeting of the Committee
+on Finance …”, labeled `Meeting date: …` fields, and standalone body/date
+headers near the beginning of a document. Dates support ISO and full English
+month names with a four-digit year. Policy deadlines, ordinary mentions of
+past/future meetings, upload dates, and Vimeo metadata are not used.
+Missing or contradictory evidence leaves the date null and body `unknown`;
+each field resolves independently. Source logs include inferred/existing/
+unavailable/conflicting status and matching content evidence with provenance.
+No speaker identification, attribution, or quote text is changed.
+
+Extraction is deliberately narrow; unrecognized wording remains unknown.
+The extraction version participates in both reader signatures and loaded
+snapshots, so changing it forces existing sources to resync. As with other
+source replacements, this invalidates downstream analytics and source-signature
+bound manual speaker labels; review/reimport labels after the first resync.
+
 ### Parallel deployment stages
 
 [fuzzball.yaml](../../../fuzzball.yaml) syncs after both ingestion arrays finish

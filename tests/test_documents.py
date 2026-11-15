@@ -189,6 +189,9 @@ def test_discovery_preserves_empty_directories_and_ignores_other_files(tmp_path)
     (tmp_path / "empty").mkdir()
     (tmp_path / "UPPER.TXT").write_text("text")
     (tmp_path / "image.png").write_bytes(b"image")
+    (tmp_path / "._UPPER.TXT").write_bytes(b"\x00\x05\x16\x07")
+    (tmp_path / "._folder").mkdir()
+    (tmp_path / "._folder" / "sidecar.txt").write_bytes(b"\x00")
     dirs, files = discover_tree(tmp_path)
     assert dirs == [tmp_path, tmp_path / "empty"]
     assert files == [tmp_path / "UPPER.TXT"]
