@@ -1,0 +1,152 @@
+# Alderman speech and action tracker
+
+This job reads published transcript segments from the meetings PostgreSQL
+database and writes a dataset for the tracker. Run it independently of
+transcription and the stance dashboard. It uses a read-only transaction.
+
+The first version accepts quote candidates prepared by a reviewer or a
+separate extraction job. It checks each quote against its referenced segment,
+uses the segment's time range to resolve evidence, and saves the source
+recording link. The resolver supplies speaker names and person IDs. Each
+reviewed follow-up and digest citation is resolved to a verified statement ID.
+An invalid quote is rejected. If a digest or follow-up references a rejected
+quote, the build fails so that it cannot publish a broken citation.
+
+## Build and query
+
+Point `MEETINGS_DATABASE_URL` at the current meetings database using a
+reader connection. Install the project with `python -m pip install -e .`
+to use the CLI outside the container.
+
+```sh
+chi-ciq-alderman-tracker build \
+  --candidates /path/to/candidates.json \
+  --evidence-dir data-reference/evidence \
+  --legislation /path/to/Legislation/SO2025-0021894.json \
+  --output-dir data/tracker/congress-theater
+```
+
+`--legislation` can be omitted for a speech-only dataset or repeated with
+additional archive legislation files. The importer reads the filing sponsor
+and individual votes explicitly recorded in each legislative action. It
+preserves recorded vote wording and source locators. The voice-vote discussion
+in the speech records cannot assign an individual a vote.
+
+The output directory contains `tracker.json` with the statements, official
+actions, optional reviewed follow-up and digest, and rejected candidates.
+It also contains `statements/<meeting-id>.jsonl` for each supplied meeting.
+Each build replaces the addressed JSONL partitions and creates a new
+`tracker.json` snapshot of exactly the inputs supplied for that build.
+Use `tracker.json` for queries. Use separate output directories for different
+pilot batches.
+
+For example, retrieve the official records for the bill's filing sponsor
+using the person ID recorded in the archive:
+
+```sh
+chi-ciq-alderman-tracker query data/tracker/congress-theater/tracker.json \
+  --person-id 41A0E156-F788-EC11-8D20-001DD804FD38 \
+  --from-date 2025-01-01 --through-date 2026-12-31
+```
+
+This returns cited data for a later answer layer. Person queries include
+speech only when the evidence resolves a person ID. Unknown speakers are
+still available in the full dataset.
+
+## Point it at real transcripts
+
+Use the [candidate fixture](../../../tests/fixtures/tracker/candidates.json)
+as a schema example. Set each
+`published_source_key` to the existing key in `published_sources` and
+`segment_sequence` to the referenced transcript segment. Supply the
+original recording ID and URL from a reviewed recording mapping. For clips,
+supply `recording_offset_s` in seconds. Where available, include the
+published source's `content_sha256` to reject a candidate built against
+different recording bytes. Quote timing has segment precision, and the
+first version accepts quotes that fit within a single segment.
+
+For a new meeting, supply reviewed candidates and evidence for that
+recording. An automated candidate extractor and an LLM answer interface
+can call the same build and retrieval steps when ready.
+
+## Run on Fuzzball after the current workflow
+
+The [standalone Fuzzfile](../../../fuzzball-alderman-tracker.yaml) restores a completed
+`meetings-backup-after` dump into its own disposable PostgreSQL service, then
+runs the tracker with a SELECT-only role. It uses a separate service port and
+never mounts the live PostgreSQL data directory. The original workflow can
+keep serving its dashboard. Both jobs are CPU-only.
+
+1. Wait for `meetings-backup-after` to finish. Find the exact dump path in its
+   logs and set `TRACKER_MEETINGS_DUMP` to that path in a copy of the Fuzzfile.
+   The dump must be readable by the restore job on the shared datasets volume.
+2. In `TRACKER_INPUT_DIR` on that volume, stage `candidates.json` for the
+   transcripts in the dump, an `evidence/` directory of JSONL records, and
+   optionally `Legislation/*.json` from the archive. Use the published
+   source keys and segment sequences from the backup. Quote candidates still need to be
+   prepared before submission.
+3. Use a fresh `TRACKER_OUTPUT_DIR` for each batch. The Fuzzfile uses the
+   existing `chi-ciq-postgres-password` secret for the disposable database.
+   After this PR merges, the ARM64 image workflow publishes
+   `ghcr.io/ek775/chi-ciq-26-alderman-tracker:fuzzball`. To run before merge, dispatch the image workflow
+   on the PR branch and use its `sha-<full-commit>` image tag in your Fuzzfile.
+4. Validate and submit the configured copy:
+
+   ```sh
+   fuzzball workflow validate fuzzball-alderman-tracker.yaml
+   fuzzball workflow start fuzzball-alderman-tracker.yaml --name alderman-speech-and-action-tracker
+   ```
+
+The tracker job reports counts of accepted statements, rejected candidates,
+and imported actions. Read `tracker.json` from the output directory. The
+temporary PostgreSQL service needs enough local disk space to restore the
+meetings database, including its indexes.
+
+## Publish a completed batch to the analytics database
+
+Publishing is a separate step from the CPU build. It preserves the generated
+files for inspection and stores the same batch in the live `analytics`
+database under its own `tracker` schema:
+
+- `tracker.batches` stores coverage, digest, follow-up, and rejection details.
+- `tracker.statements` stores verified speech and its citations.
+- `tracker.actions` stores votes and sponsorships with source references.
+
+Run these commands from a machine that can reach the live analytics database.
+If it is only reachable inside the existing Fuzzball workflow, an authorized
+operator can forward the PostgreSQL service port from another terminal:
+
+```sh
+fuzzball workflow port-forward WORKFLOW_ID postgres 15432:5432
+```
+
+Use a database URL ending in `/analytics`, with host `127.0.0.1:15432` for
+that tunnel. Set `TRACKER_ANALYTICS_DATABASE_URL` using your usual secret
+handling. The schema owner runs the one-time migration. The publisher runs
+with a dedicated login provisioned by the database owner:
+
+```sh
+chi-ciq-alderman-tracker migrate
+# Switch TRACKER_ANALYTICS_DATABASE_URL to the publisher connection.
+chi-ciq-alderman-tracker publish /path/to/tracker.json --batch-id congress-theater
+```
+
+After the migration, grant the existing publisher and reader roles only the
+tracker permissions they need. For example, with roles already provisioned:
+
+```sql
+GRANT CONNECT ON DATABASE analytics TO tracker_publisher, analytics_reader;
+GRANT USAGE ON SCHEMA tracker TO tracker_publisher, analytics_reader;
+GRANT SELECT, INSERT, UPDATE ON tracker.batches TO tracker_publisher;
+GRANT SELECT, INSERT, DELETE ON tracker.statements, tracker.actions TO tracker_publisher;
+GRANT SELECT ON tracker.batches, tracker.statements, tracker.actions TO analytics_reader;
+```
+
+Run the migration and grants while connected to `analytics`. The publish
+command atomically replaces the same batch ID on rerun. It only accesses
+tracker tables. Query via the reader connection:
+
+```sh
+chi-ciq-alderman-tracker query --batch-id congress-theater \
+  --person-id 41A0E156-F788-EC11-8D20-001DD804FD38
+```

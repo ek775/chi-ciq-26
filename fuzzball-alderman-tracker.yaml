@@ -1,0 +1,98 @@
+version: v4
+
+defaults:
+  job:
+    env:
+      - PGPASSWORD=secret://user/chi-ciq-postgres-password
+    policy:
+      timeout:
+        execute: 4h
+
+volumes:
+  datasets:
+    use: shared
+    name: datasets
+
+jobs:
+  restore-meetings-backup:
+    image: &postgres-image
+      uri: docker://docker.io/pgvector/pgvector:pg17
+    env:
+      # Select the exact successful meetings-backup-after artifact.
+      - TRACKER_MEETINGS_DUMP=/datasets/database/meetings/REPLACE_WITH_COMPLETED_BACKUP.dump
+    mounts: &datasets
+      /datasets:
+        volume: datasets
+    resource: &small
+      cpu:
+        cores: 2
+      memory:
+        size: 2GiB
+    depends-on:
+      - {name: tracker-snapshot-db, status: RUNNING}
+    script: |
+      #!/bin/sh
+      set -eu
+      test -r "$TRACKER_MEETINGS_DUMP" || {
+        echo "Set TRACKER_MEETINGS_DUMP to a readable meetings-backup-after artifact" >&2
+        exit 1
+      }
+      pg_restore --exit-on-error --single-transaction --no-owner --no-acl \
+        --no-password --host=tracker-snapshot-db --port=55432 --username=postgres \
+        --dbname=meetings "$TRACKER_MEETINGS_DUMP"
+      psql --no-password --host=tracker-snapshot-db --port=55432 --username=postgres \
+        --dbname=meetings --set=ON_ERROR_STOP=1 <<'SQL'
+      \getenv reader_password PGPASSWORD
+      CREATE ROLE tracker_reader LOGIN PASSWORD :'reader_password';
+      GRANT CONNECT ON DATABASE meetings TO tracker_reader;
+      GRANT USAGE ON SCHEMA public TO tracker_reader;
+      GRANT SELECT ON meetings, published_sources, transcript_segments TO tracker_reader;
+      SQL
+
+  build-alderman-tracker:
+    image:
+      uri: docker://ghcr.io/ek775/chi-ciq-26-alderman-tracker:fuzzball
+    env:
+      - MEETINGS_DATABASE_URL=postgresql+psycopg://tracker_reader@tracker-snapshot-db:55432/meetings
+      - TRACKER_INPUT_DIR=/datasets/tracker/input
+      - TRACKER_OUTPUT_DIR=/datasets/tracker/output
+    mounts: *datasets
+    resource: *small
+    depends-on:
+      - {name: restore-meetings-backup, status: FINISHED}
+    script: |
+      #!/bin/sh
+      set -eu
+      set -- --candidates "$TRACKER_INPUT_DIR/candidates.json" \
+        --evidence-dir "$TRACKER_INPUT_DIR/evidence" --output-dir "$TRACKER_OUTPUT_DIR"
+      for path in "$TRACKER_INPUT_DIR"/Legislation/*.json; do
+        if [ -f "$path" ]; then
+          set -- "$@" --legislation "$path"
+        fi
+      done
+      exec chi-ciq-alderman-tracker build "$@"
+
+services:
+  tracker-snapshot-db:
+    image: *postgres-image
+    env:
+      - POSTGRES_PASSWORD=secret://user/chi-ciq-postgres-password
+      - POSTGRES_DB=meetings
+      - PGDATA=/tmp/tracker-pgdata
+    resource:
+      cpu:
+        cores: 2
+      memory:
+        size: 4GiB
+    command: [docker-entrypoint.sh, postgres, -p, "55432"]
+    persist: false
+    network:
+      ports:
+        - {name: postgres, port: 55432, protocol: tcp}
+    readiness-probe:
+      exec:
+        command: [pg_isready, --host, 127.0.0.1, --port, "55432", --username, postgres]
+      initial-delay-seconds: 5
+      period-seconds: 10
+      timeout-seconds: 5
+      failure-threshold: 12
