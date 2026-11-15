@@ -91,6 +91,61 @@ def test_vimeo_directory_mapping_is_preflighted_and_passed_to_ingestion(
     assert calls[1][1]["metadata_filename"] == "2026-06-12_budget.mp4"
 
 
+def test_audio_map_is_passed_to_ingestion_by_exact_input_filename(tmp_path, monkeypatch):
+    source = tmp_path / "vimeo-1200176629-low.mp4"
+    source.touch()
+    map_path = tmp_path / "audio-map.json"
+    map_path.write_text(
+        json.dumps(
+            {
+                "format_version": 2,
+                "schema_mapping": {
+                    "target": "databases.meetings.models.Meeting",
+                    "fields": {
+                        "meeting_date": "audio_files[].database_metadata.meeting_date",
+                        "meeting_type": "audio_files[].database_metadata.meeting_type",
+                    },
+                    "unknown_value": None,
+                },
+                "audio_files": [
+                    {
+                        "audio_filename": source.name,
+                        "database_metadata": {
+                            "meeting_date": "2025-11-12",
+                            "meeting_type": "Committee on Finance",
+                        },
+                    }
+                ],
+            }
+        )
+    )
+    monkeypatch.setattr(pipeline, "load_dotenv", lambda: None)
+    monkeypatch.setenv("DATABASE_URL", "postgresql://unused")
+    calls = []
+    monkeypatch.setattr(
+        pipeline,
+        "connect_database",
+        lambda url: SimpleNamespace(dispose=lambda: None),
+    )
+    monkeypatch.setattr(pipeline, "check_schema", lambda engine: None)
+    monkeypatch.setattr(
+        pipeline,
+        "IngestionPipeline",
+        lambda engine, factory: SimpleNamespace(
+            ingest=lambda recording, **kwargs: calls.append((recording, kwargs))
+        ),
+    )
+
+    pipeline.main(
+        ["--input-dir", str(tmp_path), "--audio-meeting-map", str(map_path)]
+    )
+    assert calls[0][0] == source
+    metadata = calls[0][1]["meeting_metadata"]
+    assert metadata.filename == source.name
+    assert metadata.meeting_date.isoformat() == "2025-11-12"
+    assert metadata.meeting_type == "Committee on Finance"
+
+
 def test_directory_shards_process_every_recording_once(tmp_path, monkeypatch):
     for index in range(12):
         (tmp_path / f"2026-11-{index + 1:02}_budget.mp4").touch()

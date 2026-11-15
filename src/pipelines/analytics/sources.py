@@ -43,7 +43,12 @@ logger = logging.getLogger(__name__)
 
 def _meeting_signature(row) -> str:
     metadata = json.dumps(
-        [str(row["id"]), str(row["meeting_date"]), row["meeting_type"]]
+        [
+            str(row["id"]),
+            str(row["meeting_date"]),
+            row["meeting_type"],
+            row["recording_duration_seconds"],
+        ]
     )
     return f"{EXTRACTION_VERSION};{hashlib.sha256(metadata.encode()).hexdigest()}"
 

@@ -37,9 +37,10 @@ protect inputs with cluster filesystem ACLs.
 
 ## Local run
 
-Set `DOCUMENTS_POSTGRES_PASSWORD` and `DOCUMENTS_INPUT_DIR` in the root `.env`
-(see [.env.example](../../../.env.example)). The default input is `data-reference`,
-including its `Transcripts` directory. Use URL-safe development passwords.
+Set the shared `POSTGRES_PASSWORD` and, optionally, `DOCUMENTS_INPUT_DIR` in
+the root `.env` (see [.env.example](../../../.env.example)). The default input
+is `data-reference`, including its `Transcripts` directory. Passwords are passed
+separately from database URLs, so they do not need URL encoding.
 Run from the repository root:
 
 ```sh
@@ -56,6 +57,27 @@ volumes, separate from transcription. The image installs CPU-only PyTorch wheels
 CPU inference is the default; no Whisper,
 pyannote, FFmpeg, or gated models are required. First-time builds/model downloads
 require network access. GPU use requires an explicitly configured GPU container.
+
+To run against the archive mounted on this machine, set the Compose host path
+to the `Meetings` directory (not the archive root):
+
+```sh
+DOCUMENTS_INPUT_DIR="/run/media/ek224/New Volume/chicago-city-council-archive/Meetings" \
+  docker compose --profile documents run --build --rm documents \
+  chi-ciq-ingest-documents --input-dir /inputs --namespace clerk-archive
+```
+
+The archive's meeting-level `manifest.json` files pair each PDF with its
+`text_path` sidecar and original byte count/SHA-256. The pipeline uses that
+sidecar (which includes OCR text where the archive produced it), checks the
+original PDF against the manifest, and does not index the sidecar as a second
+document. If a prior run indexed that sidecar separately, it is removed after
+the PDF is safely published. Sidecar changes trigger reprocessing. PDFs without
+a sidecar use the native PDF extractor; manifest-listed zero-byte PDFs are
+retained with empty text and a warning. A sidecar containing only page labels
+is likewise retained without chunks. Archive OCR covers scanned meeting
+attachments, not all linked legislation, so some PDFs intentionally have no
+searchable text.
 
 ```sh
 # Override the container command, retaining the tree mount:
@@ -76,8 +98,9 @@ when absent. Always point them at the documents database, not meetings.
 
 - TXT, Markdown (`.md`, `.markdown`): UTF-8, optional BOM, original text retained.
 - PDF: embedded text extracted in page order; encrypted PDFs and PDFs without
-  extractable text fail explicitly. OCR and visual/table-layout reconstruction
-  are not included.
+  extractable text fail explicitly unless an archive manifest supplies a
+  companion text sidecar. OCR and visual/table-layout reconstruction are not
+  included in the generic PDF fallback.
 - DOCX: body paragraphs and tables in document order. Headers, footers, images,
   and embedded objects are not extracted.
 - HTML: text extracted without executing scripts or fetching linked resources;
@@ -102,18 +125,22 @@ silently truncating. Default model: `sentence-transformers/all-MiniLM-L6-v2`
 
 Re-run the same command and namespace for initial builds and periodic updates.
 Byte-identical files with the same model, extraction version, and chunk settings
-are skipped before model loading. Use `--force` after an in-place model revision
-or dependency update if the model name and extraction version did not change.
-Hashing and parsing use the same byte snapshot. File replacements are atomic:
-old full text and chunks survive any extraction, inference, or database failure.
-Concurrent workers serialize the same file using PostgreSQL advisory locks.
-Directory table creation is also serialized and transactional.
+are skipped before model loading; archive PDFs also include their sidecar hash
+in the processing signature. Use `--force` after an in-place model revision or
+dependency update if the model name and extraction version did not change.
+Source PDF bytes are checked against the archive manifest, and the text
+sidecar's hash makes its changes trigger reprocessing. File replacements are
+atomic: old full text and chunks survive any extraction, inference, or database
+failure. Concurrent workers serialize the PDF and its associated sidecar using
+PostgreSQL advisory locks. Directory table creation is also serialized and
+transactional.
 
 Publication is per file, **not one transaction for the entire tree**. A failed
 job exits nonzero; already-published earlier files remain. Re-running resumes
-via unchanged-file checks. Removed files/directories are retained by design;
-renaming creates a new source without deleting the old one. Namespace identifies
-an input tree independently of its mount location. Use distinct namespaces for
+via unchanged-file checks. Removed files/directories are retained by design,
+except for a PDF's obsolete separately indexed archive text sidecar; renaming
+creates a new source without deleting the old one. Namespace identifies an
+input tree independently of its mount location. Use distinct namespaces for
 distinct roots. No polling daemon, scheduler, document web API, or Fuzzball
 dispatcher is included.
 
@@ -128,6 +155,7 @@ RUN_DOCUMENT_EMBEDDING_TESTS=1 TEST_DOCUMENTS_DATABASE_URL="$DOCUMENTS_DATABASE_
   python -m pytest -q tests/test_documents.py -k real_embeddings
 ```
 
-Without a test database, parser/chunking tests run and database tests skip.
+Without a test database, parser/chunking and archive-manifest tests run and
+database tests skip.
 Integration tests use isolated schemas and prove table mirroring, vectors,
 updates, rollback, namespace separation, CLI behavior, and concurrent runs.

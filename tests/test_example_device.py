@@ -1,3 +1,4 @@
+import logging
 import sys
 from types import SimpleNamespace
 
@@ -8,8 +9,9 @@ from pipelines.transcription import runtime as transcribe
 
 @pytest.mark.parametrize("available, expected", [(True, "cuda"), (False, "cpu")])
 def test_workflow_selects_device_for_all_models(
-    monkeypatch, capsys, available, expected
+    monkeypatch, caplog, available, expected
 ):
+    caplog.set_level(logging.INFO, logger="pipelines.transcription.runtime")
     checks = []
 
     def is_available():
@@ -48,7 +50,7 @@ def test_workflow_selects_device_for_all_models(
     assert calls["WhisperTranscriber"][1]["language"] == "en"
     assert calls["StreamingPyannoteDiarizer"][0] == ("test-token",)
     assert calls["PyannoteVoiceEmbedder"][0] == ("test-token",)
-    assert f"Inference device: {expected}" in capsys.readouterr().out
+    assert f"Inference device: {expected}" in caplog.text
 
 
 def test_gpu_model_errors_propagate(monkeypatch):

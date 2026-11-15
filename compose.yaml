@@ -23,10 +23,9 @@ services:
       - .:/workspace
       - model-cache:/root/.cache
     environment:
-      LOG_LEVEL: ${LOG_LEVEL:-INFO}
       HF_TOKEN: ${HF_TOKEN:-}
-      TRANSCRIPTION_INPUT_DIR: ${TRANSCRIPTION_INPUT_DIR:-data/mp4}
-      DATABASE_URL: postgresql+psycopg://transcription:${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in .env}@db:5432/transcription
+      PGPASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in .env}
+      DATABASE_URL: postgresql+psycopg://transcription@db:5432/transcription
     depends_on:
       db:
         condition: service_healthy
@@ -37,8 +36,8 @@ services:
       context: .
       dockerfile: src/databases/meetings/Dockerfile
     environment:
-      LOG_LEVEL: ${LOG_LEVEL:-INFO}
-      DATABASE_URL: postgresql+psycopg://transcription:${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in .env}@db:5432/transcription
+      PGPASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in .env}
+      DATABASE_URL: postgresql+psycopg://transcription@db:5432/transcription
     depends_on:
       db:
         condition: service_healthy
@@ -48,7 +47,6 @@ services:
     profiles: ["web"]
     environment:
       PGPASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in .env}
-      WEB_POSTGRES_PASSWORD: ${WEB_POSTGRES_PASSWORD:?Set WEB_POSTGRES_PASSWORD in .env}
     volumes:
       - ./src/web/web-role.sql:/web-role.sql:ro
     depends_on:
@@ -71,9 +69,9 @@ services:
       - ./data/mp4:/inputs:ro
       - model-cache:/root/.cache
     environment:
-      LOG_LEVEL: ${LOG_LEVEL:-INFO}
       HF_TOKEN: ${HF_TOKEN:-}
-      DATABASE_URL: postgresql+psycopg://transcription:${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in .env}@db:5432/transcription
+      PGPASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in .env}
+      DATABASE_URL: postgresql+psycopg://transcription@db:5432/transcription
     depends_on:
       meetings-migrate:
         condition: service_completed_successfully
@@ -83,8 +81,6 @@ services:
       context: .
       dockerfile: src/pipelines/downloads/Dockerfile
     init: true
-    environment:
-      LOG_LEVEL: ${LOG_LEVEL:-INFO}
     volumes:
       - ./data/mp4:/outputs
   documents-db:
@@ -93,8 +89,7 @@ services:
     environment:
       POSTGRES_USER: documents
       POSTGRES_DB: documents
-      # The server rejects an empty password when this opt-in profile runs.
-      POSTGRES_PASSWORD: ${DOCUMENTS_POSTGRES_PASSWORD:-}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in .env}
     ports:
       - "127.0.0.1:5434:5432"
     volumes:
@@ -110,8 +105,8 @@ services:
       context: .
       dockerfile: src/databases/documents/Dockerfile
     environment:
-      LOG_LEVEL: ${LOG_LEVEL:-INFO}
-      DOCUMENTS_DATABASE_URL: postgresql+psycopg://documents:${DOCUMENTS_POSTGRES_PASSWORD:-}@documents-db:5432/documents
+      PGPASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in .env}
+      DOCUMENTS_DATABASE_URL: postgresql+psycopg://documents@documents-db:5432/documents
     depends_on:
       documents-db:
         condition: service_healthy
@@ -126,9 +121,9 @@ services:
       - ${DOCUMENTS_INPUT_DIR:-./data-reference}:/inputs:ro
       - documents-model-cache:/root/.cache
     environment:
-      LOG_LEVEL: ${LOG_LEVEL:-INFO}
       HF_TOKEN: ${HF_TOKEN:-}
-      DOCUMENTS_DATABASE_URL: postgresql+psycopg://documents:${DOCUMENTS_POSTGRES_PASSWORD:-}@documents-db:5432/documents
+      PGPASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in .env}
+      DOCUMENTS_DATABASE_URL: postgresql+psycopg://documents@documents-db:5432/documents
     depends_on:
       documents-migrate:
         condition: service_completed_successfully
@@ -140,8 +135,8 @@ services:
     volumes:
       - ./data/documents-database:/backups
     environment:
-      LOG_LEVEL: ${LOG_LEVEL:-INFO}
-      DOCUMENTS_DATABASE_URL: postgresql+psycopg://documents:${DOCUMENTS_POSTGRES_PASSWORD:-}@documents-db:5432/documents
+      PGPASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in .env}
+      DOCUMENTS_DATABASE_URL: postgresql+psycopg://documents@documents-db:5432/documents
     depends_on:
       documents-db:
         condition: service_healthy
@@ -154,8 +149,8 @@ services:
     volumes:
       - ./data/database:/backups
     environment:
-      LOG_LEVEL: ${LOG_LEVEL:-INFO}
-      DATABASE_URL: postgresql+psycopg://transcription:${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in .env}@db:5432/transcription
+      PGPASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in .env}
+      DATABASE_URL: postgresql+psycopg://transcription@db:5432/transcription
     depends_on:
       db:
         condition: service_healthy
@@ -166,8 +161,7 @@ services:
     environment:
       POSTGRES_USER: analytics
       POSTGRES_DB: analytics
-      # The server rejects an empty password when an analytics profile runs.
-      POSTGRES_PASSWORD: ${ANALYTICS_POSTGRES_PASSWORD:-}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in .env}
     ports:
       - "127.0.0.1:5435:5432"
     volumes:
@@ -183,8 +177,8 @@ services:
       context: .
       dockerfile: src/databases/analytics/Dockerfile
     environment:
-      LOG_LEVEL: ${LOG_LEVEL:-INFO}
-      ANALYTICS_DATABASE_URL: postgresql+psycopg://analytics:${ANALYTICS_POSTGRES_PASSWORD:-}@analytics-db:5432/analytics
+      PGPASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in .env}
+      ANALYTICS_DATABASE_URL: postgresql+psycopg://analytics@analytics-db:5432/analytics
     depends_on:
       analytics-db:
         condition: service_healthy
@@ -193,8 +187,7 @@ services:
     image: pgvector/pgvector:pg17
     profiles: ["analytics", "web"]
     environment:
-      PGPASSWORD: ${ANALYTICS_POSTGRES_PASSWORD:-}
-      ANALYTICS_WEB_POSTGRES_PASSWORD: ${ANALYTICS_WEB_POSTGRES_PASSWORD:-}
+      PGPASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in .env}
     volumes:
       - ./src/databases/analytics/web-role.sql:/web-role.sql:ro
     depends_on:
@@ -214,23 +207,23 @@ services:
       dockerfile: src/pipelines/analytics/Dockerfile
     init: true
     volumes:
-      - ${ANALYTICS_INPUT_DIR:-./data/analytics}:/inputs:ro
+      - ./data/analytics:/inputs:ro
       - analytics-model-cache:/root/.cache
     environment:
-      LOG_LEVEL: ${LOG_LEVEL:-INFO}
       HF_TOKEN: ${HF_TOKEN:-}
-      ANALYTICS_DATABASE_URL: postgresql+psycopg://analytics:${ANALYTICS_POSTGRES_PASSWORD:-}@analytics-db:5432/analytics
+      PGPASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in .env}
+      ANALYTICS_DATABASE_URL: postgresql+psycopg://analytics@analytics-db:5432/analytics
       # Sources are read-only inputs; meetings use the SELECT-only web role.
-      MEETINGS_DATABASE_URL: postgresql+psycopg://web_reader:${WEB_POSTGRES_PASSWORD:-}@db:5432/transcription
-      DOCUMENTS_DATABASE_URL: postgresql+psycopg://documents:${DOCUMENTS_POSTGRES_PASSWORD:-}@documents-db:5432/documents
-      VLLM_BASE_URL: ${ANALYTICS_VLLM_BASE_URL:-http://vllm:8000/v1}
-      VLLM_SERVED_MODEL: local-ai
-      VLLM_REASONING_EFFORT: ${VLLM_REASONING_EFFORT-low}
-      VLLM_REASONING_TOKENS: ${VLLM_REASONING_TOKENS:-4096}
+      MEETINGS_DATABASE_URL: postgresql+psycopg://web_reader@db:5432/transcription
+      DOCUMENTS_DATABASE_URL: postgresql+psycopg://documents_reader@documents-db:5432/documents
     depends_on:
       analytics-web-role:
         condition: service_completed_successfully
-    command: ["chi-ciq-analytics", "run"]
+    command:
+      - chi-ciq-analytics
+      - run
+      - --vllm-url
+      - http://vllm:8000/v1
   analytics-backup:
     profiles: ["analytics"]
     build:
@@ -239,8 +232,8 @@ services:
     volumes:
       - ./data/analytics-database:/backups
     environment:
-      LOG_LEVEL: ${LOG_LEVEL:-INFO}
-      ANALYTICS_DATABASE_URL: postgresql+psycopg://analytics:${ANALYTICS_POSTGRES_PASSWORD:-}@analytics-db:5432/analytics
+      PGPASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in .env}
+      ANALYTICS_DATABASE_URL: postgresql+psycopg://analytics@analytics-db:5432/analytics
     depends_on:
       analytics-db:
         condition: service_healthy
@@ -254,10 +247,10 @@ services:
     ports:
       - "127.0.0.1:8080:8080"
     environment:
-      LOG_LEVEL: ${LOG_LEVEL:-INFO}
-      DATABASE_URL: postgresql+psycopg://web_reader:${WEB_POSTGRES_PASSWORD:?Set WEB_POSTGRES_PASSWORD in .env}@db:5432/transcription
+      PGPASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in .env}
+      DATABASE_URL: postgresql+psycopg://web_reader@db:5432/transcription
       # Dashboard reads only the granted analytics views and summary tables.
-      ANALYTICS_DATABASE_URL: postgresql+psycopg://analytics_reader:${ANALYTICS_WEB_POSTGRES_PASSWORD:-}@analytics-db:5432/analytics
+      ANALYTICS_DATABASE_URL: postgresql+psycopg://analytics_reader@analytics-db:5432/analytics
     depends_on:
       meetings-web-role:
         condition: service_completed_successfully
@@ -280,19 +273,24 @@ services:
       - vllm-model-cache:/root/.cache/huggingface
     environment:
       HF_TOKEN: ${HF_TOKEN:-}
-      # First start downloads ~306 GiB of FP8 weights and compiles kernels.
       VLLM_ENGINE_READY_TIMEOUT_S: "3600"
-    # String form so VLLM_EXTRA_ARGS can expand to several arguments; set it
-    # empty for models without a GLM reasoning parser.
-    command: >-
-      --model ${VLLM_MODEL:-zai-org/GLM-5.3-Flash}
-      --served-model-name local-ai
-      --host 0.0.0.0
-      --port 8000
-      --max-model-len ${VLLM_MAX_MODEL_LEN:-32768}
-      --gpu-memory-utilization ${VLLM_GPU_MEMORY_UTILIZATION:-0.9}
-      --tensor-parallel-size ${VLLM_TENSOR_PARALLEL_SIZE:-8}
-      ${VLLM_EXTRA_ARGS---reasoning-parser glm47}
+    command:
+      - --model
+      - openai/gpt-oss-20b
+      - --served-model-name
+      - local-ai
+      - --host
+      - 0.0.0.0
+      - --port
+      - "8000"
+      - --max-model-len
+      - "32768"
+      - --gpu-memory-utilization
+      - "0.9"
+      - --tensor-parallel-size
+      - "1"
+      - --reasoning-parser
+      - openai_gpt-oss
     healthcheck:
       test:
         - CMD

@@ -1323,7 +1323,6 @@ def _factories(args) -> Factories:
         return VllmStanceClient(
             args.vllm_url,
             served_model=args.vllm_model,
-            api_key=os.environ.get("VLLM_API_KEY") or None,
             timeout=args.vllm_timeout,
             reasoning_effort=args.vllm_reasoning_effort or None,
             reasoning_tokens=args.vllm_reasoning_tokens,
@@ -1362,22 +1361,20 @@ def _parser() -> argparse.ArgumentParser:
     run.add_argument("--emotion-model", default=DEFAULT_EMOTION_MODEL)
     run.add_argument(
         "--vllm-url",
-        default=os.environ.get("VLLM_BASE_URL", "http://127.0.0.1:8000/v1"),
+        default="http://127.0.0.1:8000/v1",
     )
-    run.add_argument(
-        "--vllm-model", default=os.environ.get("VLLM_SERVED_MODEL", "local-ai")
-    )
+    run.add_argument("--vllm-model", default="local-ai")
     run.add_argument("--vllm-timeout", type=float, default=300.0)
     run.add_argument(
         "--vllm-reasoning-effort",
-        default=os.environ.get("VLLM_REASONING_EFFORT", "low"),
+        default="low",
         help="chat_template_kwargs reasoning_effort for reasoning models; "
         "empty to omit",
     )
     run.add_argument(
         "--vllm-reasoning-tokens",
         type=int,
-        default=int(os.environ.get("VLLM_REASONING_TOKENS", "4096")),
+        default=4096,
         help="Token budget for thinking, added to the answer budget",
     )
     run.add_argument(

@@ -44,14 +44,20 @@ PostgreSQL and vLLM use upstream images; web releases never replace live databas
 
 Run these commands from the repository root:
 
-1. Copy [.env.example](.env.example) to `.env`, set a Hugging Face read token,
-   and set separate passwords for the admin and web database logins, including
-   the analytics owner and dashboard reader (the `web` profile starts the
-   analytics database). Use URL-safe passwords.
+1. Copy [.env.example](.env.example) to `.env`, set a Hugging Face read token
+   and one local PostgreSQL password. Compose passes the password via
+   `PGPASSWORD`, not inside database URLs.
 2. Accept the
    [pyannote model conditions](https://huggingface.co/pyannote/speaker-diarization-community-1).
 3. Put complete MP4s in `data/mp4/`, or run the downloads command below.
    Credentials and data are gitignored.
+
+   Compose uses the same `POSTGRES_PASSWORD` for its local databases and reader
+   roles. Existing database volumes keep the passwords they were initialized with;
+   when upgrading a setup that used separate passwords, align the stored passwords
+   before running the updated services. The root `.env` intentionally omits
+   service URLs: direct host-side database commands should set the appropriate
+   `*_DATABASE_URL` and `PGPASSWORD` in that shell only.
 
 ```sh
 docker compose up -d db
@@ -82,8 +88,8 @@ results. Backups are append-only. See the [update contract](src/pipelines/transc
 The independent documents container mirrors directories as chunk tables and
 preserves each file's full extracted text and relative path. TXT/Markdown, PDF,
 DOCX, and HTML are supported with local embeddings shared with transcription.
-Set `DOCUMENTS_POSTGRES_PASSWORD` and `DOCUMENTS_INPUT_DIR` in `.env`
-(default input: `data-reference`).
+The documents profile uses the shared `POSTGRES_PASSWORD`. Set
+`DOCUMENTS_INPUT_DIR` only when overriding the default input (`data-reference`).
 
 ```sh
 docker compose --profile documents up -d documents-db
@@ -129,9 +135,9 @@ docker compose --profile analytics run --build --rm analytics-backup
 
 Append `chi-ciq-analytics run --sources meetings` to the analytics job when the
 documents database is not running. The job reads meetings as `web_reader`. Voice-based attributions are inferred, not verified; the dashboard
-shows each attribution method and confidence. Stances default to
-`zai-org/GLM-5.3-Flash`, which needs about 306 GiB of GPU memory (for example
-8× H100/H200); see [vLLM](src/vllm/README.md) for smaller alternatives.
+shows each attribution method and confidence. The vLLM service uses
+`openai/gpt-oss-20b` with one GPU, matching the per-machine cluster limit; see
+the [vLLM guide](src/vllm/README.md) for its setup.
 
 ## Alderman speech and action tracker
 
@@ -154,9 +160,14 @@ chi-ciq-dispatch --input-dir data/mp4 --output-dir data/dispatch \
 
 ## Fuzzball deployment
 
-[fuzzball.yaml](fuzzball.yaml) is an executable v4 deployment Fuzzfile, validated
-with CLI v4.3.1. It uses the existing persistent volumes `shared/datasets` and
-`team8/volume_test`, and `team8/postgres-data` for the database. PostgreSQL and vLLM run as services of this workflow; see
+[fuzzball.yaml](fuzzball.yaml) is a v4 deployment Fuzzfile. Local tests cover its
+YAML structure, job dependencies, and embedded scripts; run
+`fuzzball workflow validate fuzzball.yaml` against the target cluster before
+starting it. It uses the cluster volumes `shared/datasets` and
+`team8/volume_test`, and expects `team8/postgres-data-v2` for the database.
+Verify that this is the intended existing database volume before launch; using
+an empty or incorrect volume could initialize a new database. PostgreSQL and
+vLLM run as services of this workflow; see
 [PostgreSQL service](#postgresql-service) and [vLLM service](#vllm-service).
 
 The workflow starts PostgreSQL, creates the databases and reader roles, backs up
@@ -169,18 +180,19 @@ mentions, sentiment, emotion, and topics run in parallel. Sentiment and emotion
 each use 32 shards with four active CPU tasks. Stance waits for topics
 attribution and the ready vLLM service, and uses 32 shards with four active
 tasks, each sending at most two vLLM requests (eight across the array). Dashboard
-refresh waits for every analysis branch. Completed document and analytics backups
-and reader/schema checks gate the persistent web service. The meetings database
-is not dumped by this workflow; its data remains on the persistent PostgreSQL
-volume. Failed jobs prevent dependent deployment.
+refresh waits for every analysis branch. The meetings database is backed up
+after transcription; documents and analytics are backed up after their
+respective ingestion and refresh jobs. Reader/schema checks gate the persistent
+web service. Failed jobs prevent dependent deployment.
 
 ### PostgreSQL service
 
 The `postgres` service of [fuzzball.yaml](fuzzball.yaml) is PostgreSQL 17 with
-pgvector (`pgvector/pgvector:pg17`, arm64). Its data directory is on the
-persistent NFS volume `team8/postgres-data`, so the databases survive a stop, a
-failure, or a move to a different node. The service has `persist: true`: it runs
-until you stop the workflow.
+pgvector (`pgvector/pgvector:pg17`, arm64). Its data directory is configured on
+the persistent NFS volume `team8/postgres-data-v2`, so the databases survive a
+stop, a failure, or a move to a different node. Confirm that this is the
+intended existing volume before launch. The service has `persist: true`: it
+runs until you stop the workflow.
 
 ```mermaid
 flowchart LR
@@ -190,7 +202,7 @@ flowchart LR
     pipeline_jobs["Backup, migration, ingestion<br/>and analytics jobs"]
     web_service["Service web"]
   end
-  data_volume[("Volume team8/postgres-data<br/>NFS, persistent")]
+  data_volume[("Volume team8/postgres-data-v2<br/>NFS, persistent")]
   password_secret["Secret chi-ciq-postgres-password"]
   provision_job -->|"creates databases and reader roles"| postgres_service
   pipeline_jobs -->|"postgres:5432 as postgres"| postgres_service
@@ -216,36 +228,46 @@ flowchart LR
   the service claims port 5432 on its node. Stop the workflow before you start
   another copy.
 
-One-time setup (the PostgreSQL volume already exists on the hackathon cluster;
-create the model-cache volume once):
+One-time setup (create the model-cache volume once; do not create a replacement
+PostgreSQL volume if the configured existing volume is missing):
 
 ```sh
-fuzzball volume create team8 postgres-data
-fuzzball volume create team8 vllm-model-cache
+fuzzball volume create team8 vllm-model-data
 ```
 
-#### psql shell on the database volume
+#### Optional PostgreSQL shell
 
-[fuzzball-postgres-shell.yaml](fuzzball-postgres-shell.yaml) is a maintenance
-workflow. It starts the same `postgres` service on the same volume as
-[fuzzball.yaml](fuzzball.yaml), and one idle job `postgres-shell` that has
-`psql` and the volume at `/var/lib/postgresql/data`. The job stays up for 48
-hours or until you stop the workflow.
+The canonical [Fuzzball workflow](fuzzball.yaml) includes a `postgres-shell`
+job, disabled by default. To enable it, set `POSTGRES_SHELL_ENABLED=true` in
+the configured `data/deployment/fuzzball.yaml`, validate, and start that
+workflow. The shell job waits until ingestion, backups, and read checks finish,
+then stays open for up to 48 hours:
 
 ```sh
-fuzzball workflow start fuzzball-postgres-shell.yaml --name postgres-shell
+fuzzball workflow validate data/deployment/fuzzball.yaml
+fuzzball workflow start data/deployment/fuzzball.yaml --name postgres-shell
 # Use the returned workflow ID:
 fuzzball workflow exec --tty WORKFLOW postgres-shell -- /bin/bash
-# In the shell, psql connects to the service as postgres with no arguments:
+# In the shell, psql connects to the workflow's postgres service:
 psql
 psql --dbname=analytics
-# One command without a shell:
 fuzzball workflow exec WORKFLOW postgres-shell -- psql --list
 fuzzball workflow stop WORKFLOW
 ```
 
-Do not run this workflow while the deployment workflow runs: the two `postgres`
-services would share one data directory.
+The integrated Fuzzfile also runs its normal jobs. Do not start it while
+another workflow is using the persistent PostgreSQL volume; only one PostgreSQL
+service may use that data directory at a time.
+
+#### Optional Alderman tracker build
+
+The same Fuzzfile includes CPU-only tracker jobs. They skip unless both a
+completed meetings backup and `tracker/input/candidates.json` are staged. The
+backup is restored into a separate disposable PostgreSQL service, not the live
+database. See the [tracker runbook](src/pipelines/tracker/README.md#run-on-fuzzball)
+for the input contract and configuration steps. Tracker jobs are part of the
+normal workflow DAG and no-op when their inputs are absent. Fuzzball still
+starts the small 1-CPU/2-GiB disposable restore service for the workflow.
 
 ### vLLM service
 
@@ -253,7 +275,7 @@ The workflow starts a persistent, one-GPU `vllm/vllm-openai:v0.32.0` service
 after both ingestion jobs complete, so it does not compete with transcription
 for a GPU. It serves `openai/gpt-oss-20b` as `local-ai`, and analytics calls it
 at the internal address `http://vllm:8000/v1`. The model cache is kept on the
-persistent NFS volume `team8/vllm-model-cache`; no public endpoint or external
+persistent NFS volume `team8/vllm-model-data`; no public endpoint or external
 vLLM URL is needed. The vLLM readiness probe gates only the stance stage.
 
 The service needs model-download egress and the `HF_TOKEN` secret. Its selected
@@ -263,12 +285,12 @@ the local Compose deployment remains configurable independently.
 ### Build and publish
 
 The [Build and publish Fuzzball images workflow](.github/workflows/build-publish-images.yml)
-builds the seven service images on a native ARM64 GitHub-hosted runner and
+builds the eight application images on a native ARM64 GitHub-hosted runner and
 publishes them to GHCR. It runs on relevant pushes to `main` or can be started
 manually from the Actions tab. Each image gets a `sha-<commit>` tag; builds on
 the default branch also update the `fuzzball` tag used by this Fuzzfile.
-For an immutable deployment, replace the `fuzzball` tag in all seven image
-definitions with that build's full `sha-<commit>` tag.
+For an immutable deployment, replace the `fuzzball` tag in all eight application
+image references with that build's full `sha-<commit>` tag.
 
 Make the images readable by cluster workers, or add a singular `image.secret`
 registry reference to each image definition (the anchored definitions cover
@@ -288,14 +310,20 @@ ingestion run. Worker paths are not submitter-local paths:
 | Volume | Required paths |
 |---|---|
 | `team8/volume_test` mounted at `/volume` | Complete MP4 files directly under `/volume/audio`; recursive document tree under `/volume/chicago-city-council-archive/Meetings` |
-| `shared/datasets` mounted at `/datasets` in roster jobs | Optional roster and speaker-label CSVs under `/datasets/analytics` |
-| `team8/database-backups` mounted at `/backups` in backup jobs | Writable `/backups/documents` and `/backups/analytics` |
-| `team8/vllm-model-cache` mounted at `/root/.cache/huggingface` | Persistent Hugging Face model cache |
+| `shared/datasets` mounted at `/datasets` | Required `/datasets/audio-meeting-map.json` for transcription; optional roster and speaker-label CSVs under `/datasets/analytics` |
+| `team8/database-backups` mounted at `/backups` in backup jobs | Writable `/backups/meetings`, `/backups/documents`, and `/backups/analytics` |
+| `team8/vllm-model-data` mounted at `/root/.cache/huggingface` | Persistent Hugging Face model cache |
 
-Recording filenames need no meeting date or committee name. Transcription stores
-unknown date/type as NULL; analytics derives metadata from explicit statements
-in transcript/document content and leaves unsupported or conflicting details
-unknown. No Vimeo title lookup or recording-metadata JSON is required. Existing
+`/volume/audio` is the flat audio inventory; the nested
+`/volume/chicago-city-council-archive/Meetings/<YYYY-MM>/<meeting>/` archive
+contains per-meeting `Documents/`, `Transcripts/`, `manifest.json`, and
+`meeting.json`. The generated
+[audio meeting map](data-reference/audio-meeting-map.json) maps those MP4
+basenames to schema-ready meeting dates/types and preserves all matched Clerk
+IDs. Stage it as `/datasets/audio-meeting-map.json` before Fuzzball submission.
+Fields with unmatched or conflicting archive metadata remain NULL; archive
+matches do not verify the audio contents. Analytics may infer unknown date/type
+from transcript/document content. No Vimeo title lookup is required. Existing
 databases must run the meetings migration to permit NULL metadata before using
 the new worker images. See the
 [transcription guide](src/pipelines/transcription/README.md#fuzzball-batch-input).
@@ -317,9 +345,8 @@ Fuzzfile. URLs must use cluster-reachable hostnames, not submitter `localhost`.
 
 | Secret name (prefix `chi-ciq-`) | Value / privileges |
 |---|---|
-| `postgres-password` | Password of the `postgres` superuser and the reader roles (`POSTGRES_PASSWORD` in `.env`) |
+| `postgres-password` | Password of the `postgres` superuser and all database reader roles (`POSTGRES_PASSWORD` in `.env`) |
 | `hf-token` | Hugging Face read token with accepted pyannote model terms |
-| `vllm-reasoning-effort`, `vllm-reasoning-tokens`, `log-level` | Settings read from the submitter's `.env` |
 
 Use the installed helper to pipe your `.env` variables into these secrets:
 
@@ -330,27 +357,25 @@ chi-ciq-fuzzball-env --env-file .env
 fuzzball workflow validate data/deployment/fuzzball.yaml
 fuzzball workflow start data/deployment/fuzzball.yaml --name chi-ciq-web-release
 # Sync a subset without requiring the full deployment configuration:
-chi-ciq-fuzzball-env --env-file .env --only HF_TOKEN LOG_LEVEL
+chi-ciq-fuzzball-env --env-file .env --only HF_TOKEN
 ```
 
-The helper parses dotenv without executing shell code or interpolating variables.
-It validates the selected values before making any changes, creates missing
-user-scoped value secrets, and updates existing ones. Values travel on stdin,
-not command-line arguments, output, or generated workflow files. A failed CLI
-call stops synchronization; earlier successful uploads are not rolled back.
-`--check` is entirely local. Use `--fuzzball` or `FUZZBALL_BIN` to select the CLI.
+The helper reads only `POSTGRES_PASSWORD` and `HF_TOKEN` from dotenv, without
+executing shell code or interpolating variables. It validates both before
+making any changes, creates missing user-scoped value secrets, and updates
+existing ones. Values travel on stdin, not command-line arguments, output, or
+generated workflow files. A failed CLI call stops synchronization; earlier
+successful uploads are not rolled back. `--check` is entirely local. Use
+`--fuzzball` to select a non-default CLI executable.
 The helper writes a gitignored configured Fuzzfile at
 `data/deployment/fuzzball.yaml` (`--output` overrides it). Submit this file when
-using dotenv: Fuzzball rejects empty value secrets and empty environment entries,
-so deliberately empty reasoning effort is exported inside worker scripts instead
-of a secret reference. All nonempty credentials remain secret references.
+using dotenv. The Fuzzball workflow itself uses only the PostgreSQL password and
+Hugging Face token secrets; model settings, service addresses, and logging levels
+are fixed in the workflow or use application defaults.
 
-The helper forwards `POSTGRES_PASSWORD` and no service URL: database and vLLM
-addresses are fixed text in the Fuzzfile.
-Local input directories and unrelated variables are not forwarded.
-`LOG_LEVEL`, `VLLM_REASONING_EFFORT`, and `VLLM_REASONING_TOKENS` use the
-application defaults when absent. Empty reasoning effort is preserved
-deliberately.
+The helper forwards no connection URLs: database and vLLM service addresses are
+fixed text in the Fuzzfile. Local input directories and unrelated variables
+are not forwarded.
 
 The job `postgres-provision` creates the reader roles and their default
 privileges before the migrations run; the workflow's `web-check` verifies SELECT
@@ -458,7 +483,7 @@ bash scripts/logs.sh WORKFLOW JOB --follow --lines 0
 tail -f data/logs/*/*.log
 ```
 
-Set `LOG_DIR` to change the host directory, or `FUZZBALL_BIN` to select the CLI.
+Set `LOG_DIR` to change the host directory, or pass `--fuzzball` to select the CLI.
 Ctrl-C stops collection, not the remote job. CLI failures remain visible and
 return a nonzero exit code. Re-running collection with history enabled appends
 duplicates; there is no automatic reconnect, deduplication, or rotation.
@@ -467,8 +492,8 @@ workflows or the cluster's log retention expires.
 
 Python services use shared JSON logging on stderr: UTC `timestamp`, `level`,
 `service`, `logger`, `message`, and `exception` when present. Uvicorn access/error
-logs and Python warnings use the same format. Set `LOG_LEVEL` (default `INFO`)
-and optionally `LOG_SERVICE_NAME` in each Fuzzball job's environment.
+logs and Python warnings use the same format. `LOG_LEVEL` defaults to `INFO`;
+optionally set it in an individual development or worker environment.
 Machine-readable CLI results remain on stdout. PostgreSQL, vLLM, subprocesses,
 and CLI output keep their native format, so collected files are mixed text,
 not guaranteed JSONL. Add `--timestamp` to collection for server timestamps on

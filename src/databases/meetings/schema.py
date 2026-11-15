@@ -34,9 +34,28 @@ def migrate_database(engine: Engine) -> None:
         connection.execute(
             text(
                 "ALTER TABLE meetings ADD COLUMN IF NOT EXISTS "
-                "recording_duration_seconds double precision "
+                "recording_duration_seconds double precision"
+            )
+        )
+        connection.execute(
+            text(
+                "ALTER TABLE meetings ALTER COLUMN "
+                "recording_duration_seconds DROP NOT NULL"
+            )
+        )
+        connection.execute(
+            text(
+                "DO $$ BEGIN "
+                "IF NOT EXISTS ("
+                "SELECT FROM pg_constraint "
+                "WHERE conrelid = 'meetings'::regclass "
+                "AND conname = 'meetings_recording_duration_seconds_check'"
+                ") THEN "
+                "ALTER TABLE meetings ADD CONSTRAINT "
+                "meetings_recording_duration_seconds_check "
                 "CHECK (recording_duration_seconds >= 0 AND "
-                "recording_duration_seconds < 'Infinity'::double precision)"
+                "recording_duration_seconds < 'Infinity'::double precision); "
+                "END IF; END $$"
             )
         )
 
@@ -58,11 +77,22 @@ def check_schema(engine: Engine) -> None:
                 )
             if table.name == "meetings" and any(
                 not actual[name]["nullable"]
-                for name in ("meeting_date", "meeting_type")
+                for name in (
+                    "meeting_date",
+                    "meeting_type",
+                    "recording_duration_seconds",
+                )
             ):
                 raise RuntimeError(
-                    "Meeting metadata must allow NULL for opaque filenames; "
+                    "Meeting metadata and recording duration must allow NULL; "
                     "run database migrate"
+                )
+            if table.name == "meetings" and not any(
+                constraint["name"] == "meetings_recording_duration_seconds_check"
+                for constraint in inspector.get_check_constraints(table.name)
+            ):
+                raise RuntimeError(
+                    "Missing recording duration constraint; run database migrate"
                 )
 
 

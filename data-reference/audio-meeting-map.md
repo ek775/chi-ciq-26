@@ -2,7 +2,11 @@
 
 Source: local `chicago-city-council-archive/Meetings/**/manifest.json` and `fuzzball-audio-filenames.txt`.
 
+The Fuzzball volume keeps MP4s flat under `audio/`. The Clerk archive is a separate tree under `chicago-city-council-archive/Meetings/<YYYY-MM>/<meeting>/`, with `Documents/`, `Transcripts/`, `manifest.json`, and `meeting.json` per meeting.
+
 Vimeo matches use the recording ID in the filename and the archive video URL. Filename matches use date and committee name only; audio contents have not been verified. Multiple Clerk records are retained rather than choosing one arbitrarily.
+
+`database_metadata.meeting_date` and `database_metadata.meeting_type` map to the corresponding columns in `meetings`. A field is populated only when all matched Clerk records agree; unmatched or conflicting values remain null. `metadata_evidence` retains the match method, status, and every Clerk meeting ID.
 
 Audio files: 204. Status counts: {"matched": 196, "multiple_clerk_records": 8}.
 

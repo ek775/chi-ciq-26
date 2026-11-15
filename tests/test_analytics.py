@@ -27,7 +27,7 @@ from databases.analytics.models import (
     stance_results,
 )
 from databases.analytics.schema import check_schema, migrate_database
-from databases.meetings.metadata import parse_filename
+from databases.meetings.metadata import MeetingMetadata, parse_filename
 from pipelines.analytics.attribution import (
     SpeakerVoice,
     build_voiceprints,
@@ -800,7 +800,7 @@ class ScriptWorkflow:
     def transcribe(self, path):
         meeting_id = self.store.start(
             path,
-            parse_filename(path),
+            self.store.metadata or parse_filename(path),
             transcription_model="fake",
             diarization_model="fake",
             text_embedding_model="fake-text",
@@ -916,7 +916,14 @@ def world(engine, documents_engine, analytics_engine, tmp_path):
     first.write_text(MEETING_A)
     second.write_text(MEETING_B)
     ingestion = IngestionPipeline(engine, ScriptWorkflow)
-    assert ingestion.ingest(first) and ingestion.ingest(second)
+    assert ingestion.ingest(
+        first,
+        meeting_metadata=MeetingMetadata(first.name, date(2026, 11, 10), "Budget"),
+    )
+    assert ingestion.ingest(
+        second,
+        meeting_metadata=MeetingMetadata(second.name, date(2026, 12, 1), "Budget"),
+    )
     # An unpublished, incomplete run must not be analyzed.
     TranscriptStore(engine).start(
         tmp_path / "2026-12-02_budget.mp4",
@@ -929,6 +936,8 @@ def world(engine, documents_engine, analytics_engine, tmp_path):
     tree = tmp_path / "tree" / "Transcripts"
     tree.mkdir(parents=True)
     (tree / "2025-11-12 Committee on Budget [87415BD7].txt").write_text(
+        "Committee on Budget meeting\n"
+        "Meeting date: 2025-11-12\n\n"
         "[00:00:01.000] The committee will discuss housing programs and climate "
         "resilience grants for every ward in the city this year.\n"
         "[00:00:09.500] The meeting is adjourned.\n"

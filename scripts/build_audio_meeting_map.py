@@ -14,6 +14,20 @@ def normalize(body):
     return re.sub(r"[^a-z0-9]", "", body.lower()).removeprefix("committeeon")
 
 
+def schema_metadata(meetings):
+    values = {
+        field: {meeting.get(source) for meeting in meetings}
+        for field, source in (
+            ("meeting_date", "date"),
+            ("meeting_type", "body"),
+        )
+    }
+    return {
+        field: next(iter(candidates)) if len(candidates) == 1 else None
+        for field, candidates in values.items()
+    }
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("archive", type=Path, help="Local chicago-city-council-archive directory")
@@ -49,6 +63,13 @@ def main():
             "vimeo_id_from_filename": vid,
             "match_method": method,
             "status": status,
+            "database_metadata": schema_metadata(hits),
+            "metadata_evidence": {
+                "source": "archive_manifests",
+                "match_method": method,
+                "status": status,
+                "meeting_ids": [m["id"] for m in hits],
+            },
             "meetings": [{
                 "meeting_id": m["id"], "date": m["date"], "body": m["body"],
                 "meeting_url": m["source"], "video_urls": m.get("video_links", []),
@@ -57,15 +78,27 @@ def main():
         })
     counts = dict(Counter(row["status"] for row in rows))
     output = {
+        "format_version": 2,
         "audio_inventory": "fuzzball-audio-filenames.txt",
         "archive_root": "chicago-city-council-archive",
         "notes": "Matches reflect archived metadata, not verification of audio contents. Preserve all Clerk records sharing a recording; filename-based matches need content verification.",
+        "schema_mapping": {
+            "target": "databases.meetings.models.Meeting",
+            "fields": {
+                "meeting_date": "audio_files[].database_metadata.meeting_date",
+                "meeting_type": "audio_files[].database_metadata.meeting_type",
+            },
+            "unknown_value": None,
+            "policy": "A field is populated only when every matched Clerk record agrees; unmatched or conflicting values remain null.",
+        },
         "counts": counts, "audio_files": rows,
     }
     (reference / "audio-meeting-map.json").write_text(json.dumps(output, indent=2) + "\n")
     lines = ["# Audio files and council meetings", "",
              "Source: local `chicago-city-council-archive/Meetings/**/manifest.json` and `fuzzball-audio-filenames.txt`.", "",
+             "The Fuzzball volume keeps MP4s flat under `audio/`. The Clerk archive is a separate tree under `chicago-city-council-archive/Meetings/<YYYY-MM>/<meeting>/`, with `Documents/`, `Transcripts/`, `manifest.json`, and `meeting.json` per meeting.", "",
              "Vimeo matches use the recording ID in the filename and the archive video URL. Filename matches use date and committee name only; audio contents have not been verified. Multiple Clerk records are retained rather than choosing one arbitrarily.", "",
+             "`database_metadata.meeting_date` and `database_metadata.meeting_type` map to the corresponding columns in `meetings`. A field is populated only when all matched Clerk records agree; unmatched or conflicting values remain null. `metadata_evidence` retains the match method, status, and every Clerk meeting ID.", "",
              f"Audio files: {len(rows)}. Status counts: {json.dumps(counts, sort_keys=True)}.", "",
              "Regenerate: `python3 scripts/build_audio_meeting_map.py /path/to/chicago-city-council-archive`.", "",
              "| Audio file | Meeting date | Council body | Clerk meeting links | Match evidence |", "| --- | --- | --- | --- | --- |"]

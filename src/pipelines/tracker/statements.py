@@ -82,7 +82,11 @@ def build_statements(manifest: dict, segments: dict, evidence: EvidenceIndex):
         statement = {
             "statement_id": f"{meeting_id}#{identity}",
             "meeting_id": meeting_id,
-            "date": str(row["meeting_date"]),
+            "date": (
+                str(row["meeting_date"])
+                if row["meeting_date"] is not None
+                else None
+            ),
             "body": row["meeting_type"],
             "recording_id": recording_id,
             "published_source_key": source_key,

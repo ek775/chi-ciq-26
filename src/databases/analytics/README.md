@@ -45,8 +45,8 @@ when it changes.
 ## Reader role
 
 [web-role.sql](web-role.sql) creates `analytics_reader` (password from
-`ANALYTICS_WEB_POSTGRES_PASSWORD`) with SELECT on the dashboard objects only
-(`DASHBOARD_OBJECTS` in [views.py](views.py)). Voice centroids, embeddings,
+`PGPASSWORD`, set from the shared `POSTGRES_PASSWORD`) with SELECT on the
+dashboard objects only (`DASHBOARD_OBJECTS` in [views.py](views.py)). Voice centroids, embeddings,
 manual-label notes, roster candidates, and speaker internals stay private. `migrate` re-applies the
 grants after rebuilding views when the role exists.
 

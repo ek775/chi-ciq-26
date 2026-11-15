@@ -243,10 +243,18 @@ def test_unavailable_and_conflicting_metadata_are_logged(caplog):
 
 
 def test_legacy_metadata_change_invalidates_signature():
-    row = {"id": "id", "meeting_date": None, "meeting_type": None}
+    row = {
+        "id": "id",
+        "meeting_date": None,
+        "meeting_type": None,
+        "recording_duration_seconds": None,
+    }
     old = sources._meeting_signature(row)
     assert sources._meeting_signature({**row, "meeting_type": "Finance"}) != old
     assert sources._meeting_signature({**row, "meeting_date": date(2026, 11, 4)}) != old
+    assert (
+        sources._meeting_signature({**row, "recording_duration_seconds": 7200}) != old
+    )
 
 
 def test_undated_meeting_does_not_read_metadata_from_filename(monkeypatch):
