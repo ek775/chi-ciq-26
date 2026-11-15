@@ -1,51 +1,39 @@
-# Alder Audit: Making Chicago City Council Meetings Searchable
+# Alder Audit: City Hall, Made Easier to Follow
 
-Alder Audit is a civic information project that turns Chicago City Council
-meeting recordings and related documents into searchable public records. Its
-goal is to make the discussions behind local decisions easier to find and
-understand, including questions, explanations, and commitments that may not
-appear in a recorded individual vote.
+Chicago's most important decisions start with conversations. Alder Audit helps
+residents find those conversations, follow the issues they care about, and
+see what was said in City Council meetings.
 
-## From recordings to evidence
+## From meetings to insight
 
-The project acquires meeting videos, transcribes their audio, and separates
-speech into speaker segments. It stores published transcripts in PostgreSQL
-with pgvector, alongside a separate database of ingested reference documents.
-A read-only web application lets users browse meetings and search transcript
-text. Its home page also includes an informational ward lookup using the City
-of Chicago's service.
+![Alder Audit data flow](architecture.svg)
 
-An independent tracker builds a cited dataset of speech, commitments, and
-official actions. It checks candidate quotations against the referenced
-transcript segment and links evidence back to the recording. Reviewed
-follow-ups and meeting digests can be included and published for the web UI.
-The current tracker requires prepared candidates and supporting evidence;
-it is not yet a fully automated end-to-end meeting analysis.
+Search meeting transcripts, explore an experimental policy dashboard, and look
+up your ward using the City's service. Alder Audit also supports a tracker for
+reviewed statements, commitments, and official actions, with links back to
+source recordings. Reviewed meeting summaries and follow-ups can be published
+as they become available.
 
-## Trust and interpretation
+## Built around the evidence
 
-The intended public-facing standard is to show only quotations verified
-word-for-word against the transcript and to leave a speaker unnamed when
-their identity is unconfirmed. Recording links and source references let
-readers examine the evidence. The tracker verifies against the transcript,
-which is itself a transcription of the recording rather than a guarantee
-that every word was heard correctly.
+The tracker checks quotes against meeting transcripts, protects against
+unconfirmed speaker attribution, and links readers to source recordings.
+Reviewed evidence grounds tracker quotes and summaries. The experimental
+dashboard uses AI to help surface patterns, not establish official positions.
+Recordings provide the original context when transcripts contain errors.
 
-The project also contains an experimental analytics dashboard that estimates
-topics, sentiment, emotion, and policy stances. Those outputs are model
-interpretations, not verified positions or a substitute for the underlying
-record. Voice-based speaker matches are inferred rather than confirmed.
+## Designed to grow
 
-## Computing at scale
+Built for the SC26 CIQ Local AI Hackathon, Alder Audit uses CIQ Fuzzball to
+distribute processing across two ThinkStation machines. This approach makes
+it possible to work through more meetings while keeping the resulting
+information easy to explore.
 
-Built for an HPC and AI hackathon, the system uses containerized pipelines and
-CIQ Fuzzball to schedule work across two Arm-based Lenovo ThinkStation PGX
-machines, each with one GPU. Transcription is split into shards, document
-ingestion and analytics run as separate jobs, and a vLLM model service supports
-stance analysis. Persistent databases, backups, reader roles, and readiness
-checks support the final private web service. The design keeps each GPU model
-within a single machine rather than assuming GPUs can be shared.
+Our goal is a clearer picture of local government: concise meeting digests and
+an evidence-linked view of commitments, grounded in the public record.
 
-The longer-term direction is a neutral, evidence-linked commitment tracker
-and concise meeting digests: do the expensive processing once, then make the
-verified material easy for residents to explore.
+## Authors
+
+Eliot Kmiec, Faye Xu, Everett Bogue, Michael Ho, and Sabrina Pena.
+
+[Explore the project on GitHub](https://github.com/ek775/chi-ciq-26).

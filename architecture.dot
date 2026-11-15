@@ -1,0 +1,27 @@
+digraph architecture {
+  graph [rankdir=LR, bgcolor="transparent", margin=0.05, nodesep=0.28, ranksep=0.4];
+  node [shape=box, style="rounded,filled", fillcolor="#f4f4f4", color="#555555",
+        fontname="Liberation Sans", fontsize=11, margin="0.12,0.08"];
+  edge [color="#555555", arrowsize=0.7];
+
+  recordings [label="Meeting\nrecordings"];
+  transcription [label="Transcribe\nand organize"];
+  meetings [label="Meeting\nrecords"];
+  documents [label="Reference\ndocuments"];
+  ingestion [label="Process\ndocuments"];
+  documents_db [label="Document\nrecords"];
+  analytics [label="AI-assisted\nanalysis"];
+  tracker [label="Tracker\n(reviewed evidence)"];
+  analytics_db [label="Insights and\ntracker records"];
+  web [label="Alder Audit\nweb app"];
+
+  recordings -> transcription -> meetings;
+  documents -> ingestion -> documents_db;
+  meetings -> analytics;
+  documents_db -> analytics;
+  meetings -> tracker;
+  analytics -> analytics_db;
+  tracker -> analytics_db [label=" publish", fontname="Liberation Sans", fontsize=9];
+  meetings -> web;
+  analytics_db -> web;
+}
