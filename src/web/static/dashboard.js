@@ -229,7 +229,7 @@ async function loadStatements(reset = false) {
     if (value) params.set(key, value);
   }
   // A representative-scoped quote must never be attached through voice matching.
-  if (filters.representative_id) params.set("method", "manual");
+  if (filters.representative_id && !params.has("method")) params.set("method", "manual");
   const scope = [filters.representative_id, filters.topic_key].filter(Boolean).join(" · ");
   element("statement-scope").textContent = scope
     ? `Showing: ${scope}${filters.representative_id ? " · manually attributed speakers only" : ""}`
