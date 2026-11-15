@@ -67,10 +67,10 @@ def test_backups_use_team_storage_separate_from_input_datasets():
     }
     job = definition["jobs"]["documents"]
     assert job["mounts"] == {"/volume": {"volume": "recordings"}}
-    assert (
-        "--input-dir /volume/chicago-city-council-archive/Meetings"
-        in job["script"]
-    )
+    assert 'archive=/volume/chicago-city-council-archive' in job["script"]
+    assert 'test -d "$archive/Meetings"' in job["script"]
+    assert 'exec chi-ciq-ingest-documents --input-dir "$archive/Meetings"' in job["script"]
+    assert 'test -f "$archive/index.json"' in job["script"]
 
 
 def test_deployment_dag_is_acyclic_and_fail_closed():

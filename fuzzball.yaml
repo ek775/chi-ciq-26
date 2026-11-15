@@ -178,7 +178,10 @@ jobs:
     script: |
       #!/bin/sh
       set -eu
-      exec chi-ciq-ingest-documents --input-dir /volume/chicago-city-council-archive/Meetings \
+      archive=/volume/chicago-city-council-archive
+      test -d "$archive/Meetings"
+      test -f "$archive/index.json"
+      exec chi-ciq-ingest-documents --input-dir "$archive/Meetings" \
         --namespace transcripts --device cpu \
         --shard-index "$((FB_TASK_ID - 1))" --shard-count "$SHARD_COUNT"
 

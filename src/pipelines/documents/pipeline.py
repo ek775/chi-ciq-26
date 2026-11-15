@@ -7,7 +7,7 @@ from pathlib import Path
 
 from dotenv import load_dotenv
 from sqlalchemy import delete, func, select
-from sqlalchemy.engine import Engine
+from sqlalchemy.engine import Connection, Engine
 
 from databases.documents.schema import (
     check_schema,
@@ -21,7 +21,13 @@ from shared.embeddings import SentenceTextEmbedder, TextEmbedder, validate_vecto
 from shared.logging import configure_logging
 from shared.sharding import shard_paths, validate_shard
 
-from .extraction import EXTRACTION_VERSION, discover_tree, extract_text, split_text
+from .extraction import (
+    EXTRACTION_VERSION,
+    ArchivePdfSource,
+    discover_document_sources,
+    extract_text,
+    split_text,
+)
 
 logger = logging.getLogger(__name__)
 
@@ -45,16 +51,48 @@ class DocumentPipeline:
         self.signature = f"extract:{EXTRACTION_VERSION};chars:{chunk_characters}"
 
     def ingest_file(
-        self, source: Path, root: Path, *, namespace: str, force: bool = False
+        self,
+        source: Path,
+        root: Path,
+        *,
+        namespace: str,
+        force: bool = False,
+        archive_pdf: ArchivePdfSource | None = None,
     ) -> bool:
         relative_path = source.relative_to(root).as_posix()
         key = source_key(namespace, relative_path)
         directory_path = source.parent.relative_to(root).as_posix()
+        sidecar_key = (
+            source_key(namespace, archive_pdf.text_path.relative_to(root).as_posix())
+            if archive_pdf is not None and archive_pdf.text_path is not None
+            else None
+        )
         with self.engine.begin() as connection:
-            lock_key(connection, f"document:{key}")
+            lock_keys = [key]
+            if sidecar_key is not None and sidecar_key != key:
+                lock_keys.append(sidecar_key)
+            for lock in sorted(lock_keys):
+                lock_key(connection, f"document:{lock}")
             # Snapshot after locking so waiting workers cannot publish stale bytes.
             content = source.read_bytes()
             digest = hashlib.sha256(content).hexdigest()
+            processing_signature = self.signature
+            pdf_text = None
+            if archive_pdf is not None:
+                if digest != archive_pdf.sha256 or len(content) != archive_pdf.size:
+                    raise ValueError(f"PDF does not match its archive manifest: {source}")
+                if archive_pdf.text_path is not None and archive_pdf.text_path.is_file():
+                    pdf_text = archive_pdf.text_path.read_bytes()
+                    sidecar_digest = hashlib.sha256(pdf_text).hexdigest()
+                    processing_signature += f";archive-text:{sidecar_digest}"
+                elif not content:
+                    pdf_text = b""
+                    logger.warning("Empty PDF recorded by archive manifest: %s", source)
+                elif archive_pdf.text_path is not None:
+                    logger.warning(
+                        "PDF text sidecar is missing; using embedded-text extraction: %s",
+                        archive_pdf.text_path,
+                    )
             existing = (
                 connection.execute(select(documents).where(documents.c.key == key))
                 .mappings()
@@ -64,13 +102,16 @@ class DocumentPipeline:
                 not force
                 and existing is not None
                 and existing["content_sha256"] == digest
-                and existing["processing_signature"] == self.signature
+                and existing["processing_signature"] == processing_signature
                 and existing["text_embedding_model"] == self.model_name
             ):
                 logger.info("Unchanged, skipping %s", key)
+                self._remove_pdf_sidecar(connection, sidecar_key)
                 return False
             logger.info("Processing %s", key)
-            full_text = extract_text(content, source.suffix)
+            full_text = extract_text(content, source.suffix, pdf_text=pdf_text)
+            if archive_pdf is not None and content and not full_text.strip():
+                logger.warning("No readable text in archived PDF: %s", source)
             chunks = split_text(full_text, self.chunk_characters)
             rows = []
             dimensions = None
@@ -104,7 +145,7 @@ class DocumentPipeline:
                     filename=source.name,
                     format=source.suffix.lower(),
                     content_sha256=digest,
-                    processing_signature=self.signature,
+                    processing_signature=processing_signature,
                     text=full_text,
                     text_embedding_model=self.model_name,
                     text_embedding_dimensions=dimensions,
@@ -114,8 +155,21 @@ class DocumentPipeline:
             )
             if rows:
                 connection.execute(table.insert(), rows)
+            self._remove_pdf_sidecar(connection, sidecar_key)
         logger.info("Published %s (%d chunks)", key, len(rows))
         return True
+
+    @staticmethod
+    def _remove_pdf_sidecar(
+        connection: Connection, sidecar_key: str | None
+    ) -> None:
+        if sidecar_key is None:
+            return
+        result = connection.execute(
+            delete(documents).where(documents.c.key == sidecar_key)
+        )
+        if result.rowcount:
+            logger.info("Removed previously indexed PDF text sidecar %s", sidecar_key)
 
     def ingest_tree(
         self,
@@ -128,7 +182,7 @@ class DocumentPipeline:
     ) -> int:
         validate_shard(shard_index, shard_count)
         source_key(namespace, ".")
-        directories, files = discover_tree(root)
+        directories, files, archive_pdfs = discover_document_sources(root)
         files = shard_paths(files, root, index=shard_index, count=shard_count)
         for directory in directories:
             with self.engine.begin() as connection:
@@ -141,7 +195,11 @@ class DocumentPipeline:
         published = 0
         for source in files:
             published += self.ingest_file(
-                source, root, namespace=namespace, force=force
+                source,
+                root,
+                namespace=namespace,
+                force=force,
+                archive_pdf=archive_pdfs.get(source),
             )
         logger.info(
             "Document ingestion completed: %d published, %d unchanged",
