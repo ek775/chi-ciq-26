@@ -48,6 +48,33 @@ def test_transcription_does_not_require_filename_metadata(tmp_path):
     assert arguments[-4:] == ["--shard-index", "0", "--shard-count", "128"]
 
 
+def test_transcription_reports_missing_audio_map_before_ingestion(tmp_path):
+    audio_map = tmp_path / "missing-map.json"
+    result = subprocess.run(
+        ["sh", "-c", workflow()["jobs"]["transcription"]["script"]],
+        env=os.environ
+        | {
+            "FB_TASK_ID": "1",
+            "SHARD_COUNT": "128",
+            "AUDIO_MEETING_MAP": str(audio_map),
+        },
+        text=True,
+        capture_output=True,
+        check=False,
+    )
+    assert result.returncode == 1
+    assert not result.stdout
+    assert "Required audio meeting map is missing" in result.stderr
+    assert str(audio_map) in result.stderr
+    assert "data-reference/audio-meeting-map.json" in result.stderr
+
+
+def test_transcription_map_uses_team_owned_recordings_volume():
+    job = workflow()["jobs"]["transcription"]
+    assert "AUDIO_MEETING_MAP=/volume/audio-meeting-map.json" in job["env"]
+    assert job["mounts"]["/volume"] == {"volume": "recordings"}
+
+
 def test_backups_use_team_storage_separate_from_input_datasets():
     definition = workflow()
     assert definition["volumes"]["database-backups"] == {

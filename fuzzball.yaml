@@ -137,7 +137,7 @@ jobs:
       - DATABASE_URL=postgresql+psycopg://postgres@postgres:5432/meetings
       - HF_TOKEN=secret://user/chi-ciq-hf-token
       - SHARD_COUNT=128
-      - AUDIO_MEETING_MAP=/datasets/audio-meeting-map.json
+      - AUDIO_MEETING_MAP=/volume/audio-meeting-map.json
     mounts:
       /volume:
         volume: recordings
@@ -159,7 +159,10 @@ jobs:
     script: |
       #!/bin/sh
       set -eu
-      test -f "$AUDIO_MEETING_MAP"
+      if [ ! -f "$AUDIO_MEETING_MAP" ]; then
+        printf 'ERROR: Required audio meeting map is missing: %s. Stage data-reference/audio-meeting-map.json on the recordings volume before submission.\n' "$AUDIO_MEETING_MAP" >&2
+        exit 1
+      fi
       exec chi-ciq-ingest --input-dir /volume/audio \
         --audio-meeting-map "$AUDIO_MEETING_MAP" --namespace recordings \
         --shard-index "$((FB_TASK_ID - 1))" --shard-count "$SHARD_COUNT"

@@ -309,8 +309,8 @@ ingestion run. Worker paths are not submitter-local paths:
 
 | Volume | Required paths |
 |---|---|
-| `team8/volume_test` mounted at `/volume` | Complete MP4 files directly under `/volume/audio`; recursive document tree under `/volume/chicago-city-council-archive/Meetings` |
-| `shared/datasets` mounted at `/datasets` | Required `/datasets/audio-meeting-map.json` for transcription; optional roster and speaker-label CSVs under `/datasets/analytics` |
+| `team8/volume_test` mounted at `/volume` | Complete MP4 files directly under `/volume/audio`; required `/volume/audio-meeting-map.json`; recursive document tree under `/volume/chicago-city-council-archive/Meetings` |
+| `shared/datasets` mounted at `/datasets` | Optional roster and speaker-label CSVs under `/datasets/analytics` |
 | `team8/database-backups` mounted at `/backups` in backup jobs | Writable `/backups/meetings`, `/backups/documents`, and `/backups/analytics` |
 | `team8/vllm-model-data` mounted at `/root/.cache/huggingface` | Persistent Hugging Face model cache |
 
@@ -320,7 +320,19 @@ contains per-meeting `Documents/`, `Transcripts/`, `manifest.json`, and
 `meeting.json`. The generated
 [audio meeting map](data-reference/audio-meeting-map.json) maps those MP4
 basenames to schema-ready meeting dates/types and preserves all matched Clerk
-IDs. Stage it as `/datasets/audio-meeting-map.json` before Fuzzball submission.
+IDs. Stage it as `/volume/audio-meeting-map.json` before Fuzzball submission.
+From the repository root, upload it to the shared volume with:
+
+```sh
+fuzzball run --image docker://docker.io/pgvector/pgvector:pg17 \
+  --volume team8/volume_test:/volume \
+  --file ./data-reference/audio-meeting-map.json:/tmp/audio-meeting-map.json \
+  -- /bin/sh -c 'set -eu; install -m 0644 /tmp/audio-meeting-map.json /volume/audio-meeting-map.json'
+```
+
+If the map is missing, transcription exits before Python starts. The startup
+check reports the missing path; stage the map, then resubmit the workflow.
+The team-owned volume is used because the shared datasets volume may not permit writes.
 Fields with unmatched or conflicting archive metadata remain NULL; archive
 matches do not verify the audio contents. Analytics may infer unknown date/type
 from transcript/document content. No Vimeo title lookup is required. Existing

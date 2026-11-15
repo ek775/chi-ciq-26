@@ -37,12 +37,14 @@ The Fuzzball volume `team8/volume_test` has two distinct input trees:
 Use the generated
 [audio meeting map](../../../data-reference/audio-meeting-map.json) to map audio
 basenames to the existing `meetings.meeting_date` and `meetings.meeting_type`
-columns. Stage the map at `/datasets/audio-meeting-map.json` on
-`shared/datasets`; the Fuzzball task-array requires it:
+columns. Stage the map at `/volume/audio-meeting-map.json` on
+`team8/volume_test`; the Fuzzball task-array requires it. See the
+[deployment guide](../../../README.md#fuzzball-deployment) for the CLI upload
+command. A missing map produces a startup error before Python runs:
 
 ```sh
 chi-ciq-ingest --input-dir /volume/audio \
-  --audio-meeting-map /datasets/audio-meeting-map.json \
+  --audio-meeting-map /volume/audio-meeting-map.json \
   --namespace recordings
 ```
 
@@ -80,7 +82,7 @@ that cost before increasing the count further. Whole-GPU concurrency remains
 two unless the cluster explicitly supports and has tested GPU sharing.
 
 `chi-ciq-dispatch --input-dir /volume/audio ...` likewise accepts the flat
-inventory. Pass `--audio-meeting-map /datasets/audio-meeting-map.json` to
+inventory. Pass `--audio-meeting-map /volume/audio-meeting-map.json` to
 forward that worker-visible path to every job, and mount the map at that path in
 the cluster template. The map path is optional for general-purpose dispatches.
 
