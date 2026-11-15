@@ -112,7 +112,12 @@
   async function init() {
     try {
       const response = await fetch("/api/tracker/batches", { cache: "no-store" });
-      if (response.status === 503) throw new Error("The tracker is not available yet. A reviewed batch must be published to the analytics database.");
+      if (response.status === 503) {
+        const { detail } = await response.json().catch(() => ({}));
+        throw new Error(detail === "Tracker has not been published"
+          ? "The tracker is not available yet. A reviewed batch must be published to the analytics database."
+          : "The tracker database is unavailable. Please try again later.");
+      }
       if (!response.ok) throw new Error("Could not load the tracker. Please try again.");
       const batches = await response.json();
       select.replaceChildren();
