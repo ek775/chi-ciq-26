@@ -82,11 +82,40 @@ def tracker_router() -> APIRouter:
             id=batch_id,
         )
         details = batches[0]["details"]
+        public_ids = {statement["statement_id"] for statement in statements}
+
+        def has_public_evidence(view):
+            return (
+                isinstance(view, dict)
+                and isinstance(view.get("evidence"), list)
+                and bool(view["evidence"])
+                and all(
+                    isinstance(id, str) and id in public_ids
+                    for id in view["evidence"]
+                )
+            )
+
+        digest = details.get("digest")
+        if isinstance(digest, dict):
+            digest = {
+                **digest,
+                "bullets": [
+                    bullet for bullet in digest.get("bullets", [])
+                    if has_public_evidence(bullet)
+                ],
+            }
+        follow_up = details.get("follow_up")
+        if not (
+            has_public_evidence(follow_up)
+            and isinstance(follow_up.get("commitment"), str)
+            and follow_up["commitment"] in public_ids
+        ):
+            follow_up = None
         return {
             "batch_id": batch_id,
             "coverage": details.get("coverage"),
-            "digest": details.get("digest"),
-            "follow_up": details.get("follow_up"),
+            "digest": digest,
+            "follow_up": follow_up,
             "statements": statements,
             "actions": [row["record"] for row in actions],
         }
