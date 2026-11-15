@@ -1,0 +1,21 @@
+@page {
+  size: letter;
+  margin: 1in;
+}
+
+body {
+  max-width: none;
+  margin: 0;
+  font-family: "Liberation Serif", serif;
+  font-size: 11pt;
+  line-height: 1.25;
+}
+
+h1 {
+  text-align: center;
+  font-size: 20pt;
+}
+
+h2 {
+  font-size: 13pt;
+}
