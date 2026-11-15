@@ -89,7 +89,8 @@ def test_deployment_dag_is_acyclic_and_fail_closed():
                 dependency["status"]
                 == (
                     "RUNNING"
-                    if dependency["name"] in {"postgres", "vllm"}
+                    if dependency["name"]
+                    in {"postgres", "tracker-snapshot-db", "vllm"}
                     else "FINISHED"
                 )
                 for dependency in nodes[name].get("depends-on", [])
@@ -97,8 +98,8 @@ def test_deployment_dag_is_acyclic_and_fail_closed():
         remaining -= ready
     assert dependencies(nodes["postgres-provision"]) == {"postgres"}
     assert dependencies(nodes["vllm"]) == {"transcription", "documents"}
-    assert dependencies(nodes["meetings-migrate"]) == {"postgres-provision"}
-    assert not any(name.startswith("meetings-backup") for name in nodes)
+    assert dependencies(nodes["meetings-migrate"]) == {"meetings-backup-before"}
+    assert dependencies(nodes["meetings-backup-before"]) == {"postgres-provision"}
     for database in ("documents", "analytics"):
         assert dependencies(nodes[f"{database}-backup-before"]) == {
             "postgres-provision"
@@ -247,7 +248,13 @@ def test_database_urls_use_the_workflow_service_and_carry_no_password():
             key, _, setting = value.partition("=")
             if key.endswith("DATABASE_URL"):
                 url = urlsplit(setting)
-                assert (url.hostname, url.port) == ("postgres", 5432)
+                expected_host = (
+                    ("tracker-snapshot-db", 55432)
+                    if key == "MEETINGS_DATABASE_URL"
+                    and node is nodes["tracker-build"]
+                    else ("postgres", 5432)
+                )
+                assert (url.hostname, url.port) == expected_host
                 assert url.password is None
             if key in credentials:
                 assert setting.startswith("secret://user/chi-ciq-")
@@ -311,18 +318,39 @@ def test_workstation_resource_budget_and_bounded_vllm_requests():
         assert "OMP_NUM_THREADS=2" in jobs[f"analytics-{stage}"]["env"]
 
 
-def test_postgres_shell_workflow_uses_the_deployment_database_volume():
+def test_tracker_jobs_restore_a_backup_in_an_isolated_database():
     deployment = workflow()
-    shell_workflow = yaml.safe_load((ROOT / "fuzzball-postgres-shell.yaml").read_text())
-    assert (
-        shell_workflow["volumes"]["postgres-data"]
-        == deployment["volumes"]["postgres-data"]
+    jobs = deployment["jobs"]
+    service = deployment["services"]["tracker-snapshot-db"]
+    assert service["persist"] is False
+    assert "devices" not in service["resource"]
+    assert jobs["meetings-backup-after"]["command"] == [
+        "chi-ciq-database",
+        "backup",
+        "--output-dir",
+        "/backups/meetings",
+    ]
+    assert dependencies(jobs["tracker-restore-meetings"]) == {
+        "meetings-backup-after",
+        "tracker-snapshot-db",
+    }
+    assert jobs["tracker-restore-meetings"]["mounts"]["/backups"]["volume"] == (
+        "database-backups"
     )
-    deployment_service = deployment["services"]["postgres"]
-    shell_service = shell_workflow["services"]["postgres"]
-    for field in ("image", "env", "mounts", "command"):
-        assert shell_service[field] == deployment_service[field]
-    shell_job = shell_workflow["jobs"]["postgres-shell"]
-    assert shell_job["mounts"] == deployment_service["mounts"]
-    assert shell_job["image"] == deployment_service["image"]
-    assert dependencies(shell_job) == {"postgres"}
+    assert dependencies(jobs["tracker-build"]) == {"tracker-restore-meetings"}
+    assert "REPLACE_WITH_COMPLETED_BACKUP.dump" in jobs["tracker-restore-meetings"][
+        "env"
+    ][0]
+    assert "Tracker disabled" in jobs["tracker-restore-meetings"]["script"]
+
+
+def test_postgres_shell_is_opt_in_and_runs_after_release_jobs_finish():
+    shell_job = workflow()["jobs"]["postgres-shell"]
+    assert "POSTGRES_SHELL_ENABLED=false" in shell_job["env"]
+    assert "sleep infinity" in shell_job["script"]
+    assert dependencies(shell_job) == {
+        "web-check",
+        "meetings-backup-after",
+        "documents-backup-after",
+        "analytics-backup-after",
+    }

@@ -93,13 +93,24 @@ jobs:
     depends-on: *database-provisioned
     command: [chi-ciq-analytics-database, backup, --output-dir, /backups/analytics]
 
+  meetings-backup-before:
+    image: &meetings-db-image
+      uri: docker://ghcr.io/ek775/chi-ciq-26-meetings:fuzzball
+    env: &meetings-env
+      - DATABASE_URL=postgresql+psycopg://postgres@postgres:5432/meetings
+    mounts: *archive-mount
+    resource: *small
+    depends-on: *database-provisioned
+    command: [chi-ciq-database, backup, --output-dir, /backups/meetings]
+
   meetings-migrate:
     image:
       uri: docker://ghcr.io/ek775/chi-ciq-26-meetings:fuzzball
     env:
       - DATABASE_URL=postgresql+psycopg://postgres@postgres:5432/meetings
     resource: *small
-    depends-on: *database-provisioned
+    depends-on:
+      - {name: meetings-backup-before, status: FINISHED}
     command: [chi-ciq-database, migrate]
 
   documents-migrate:
@@ -317,6 +328,15 @@ jobs:
       - {name: documents, status: FINISHED}
     command: [chi-ciq-documents-database, backup, --output-dir, /backups/documents]
 
+  meetings-backup-after:
+    image: *meetings-db-image
+    env: *meetings-env
+    mounts: *archive-mount
+    resource: *small
+    depends-on:
+      - {name: transcription, status: FINISHED}
+    command: [chi-ciq-database, backup, --output-dir, /backups/meetings]
+
   analytics-backup-after:
     image: *analytics-db-image
     env: *analytics-db-env
@@ -363,6 +383,117 @@ jobs:
               engine.dispose()
       PY
 
+  # Optional tracker build. Leave the placeholder dump path and absent
+  # candidates in place for normal dashboard releases; these jobs exit
+  # successfully without restoring or building until configured.
+  tracker-restore-meetings:
+    image: *postgres-image
+    env:
+      - &tracker-meetings-dump TRACKER_MEETINGS_DUMP=/backups/meetings/REPLACE_WITH_COMPLETED_BACKUP.dump
+    mounts:
+      /backups:
+        volume: database-backups
+      /datasets:
+        volume: datasets
+    resource: *small
+    depends-on:
+      - {name: meetings-backup-after, status: FINISHED}
+      - {name: tracker-snapshot-db, status: RUNNING}
+    script: |
+      #!/bin/sh
+      set -eu
+      case "$TRACKER_MEETINGS_DUMP" in
+        */REPLACE_WITH_COMPLETED_BACKUP.dump)
+          echo "Tracker disabled: set TRACKER_MEETINGS_DUMP to a completed meetings backup."
+          exit 0
+          ;;
+      esac
+      if [ ! -r "$TRACKER_MEETINGS_DUMP" ]; then
+        echo "Tracker meetings backup is not readable: $TRACKER_MEETINGS_DUMP" >&2
+        exit 1
+      fi
+      if [ ! -f /datasets/tracker/input/candidates.json ]; then
+        echo "Tracker disabled: stage tracker/input/candidates.json to enable it."
+        exit 0
+      fi
+      pg_restore --exit-on-error --single-transaction --no-owner --no-acl \
+        --no-password --host=tracker-snapshot-db --port=55432 --username=postgres \
+        --dbname=meetings "$TRACKER_MEETINGS_DUMP"
+      psql --no-password --host=tracker-snapshot-db --port=55432 --username=postgres \
+        --dbname=meetings --set=ON_ERROR_STOP=1 <<'SQL'
+      \getenv reader_password PGPASSWORD
+      CREATE ROLE tracker_reader LOGIN PASSWORD :'reader_password';
+      GRANT CONNECT ON DATABASE meetings TO tracker_reader;
+      GRANT USAGE ON SCHEMA public TO tracker_reader;
+      GRANT SELECT ON meetings, published_sources, transcript_segments TO tracker_reader;
+      SQL
+
+  tracker-build:
+    image:
+      uri: docker://ghcr.io/ek775/chi-ciq-26-alderman-tracker:fuzzball
+    env:
+      - *tracker-meetings-dump
+      - MEETINGS_DATABASE_URL=postgresql+psycopg://tracker_reader@tracker-snapshot-db:55432/meetings
+      - TRACKER_INPUT_DIR=/datasets/tracker/input
+      - TRACKER_OUTPUT_DIR=/datasets/tracker/output
+    mounts:
+      /datasets:
+        volume: datasets
+    resource: *small
+    depends-on:
+      - {name: tracker-restore-meetings, status: FINISHED}
+    script: |
+      #!/bin/sh
+      set -eu
+      case "$TRACKER_MEETINGS_DUMP" in
+        */REPLACE_WITH_COMPLETED_BACKUP.dump)
+          echo "Tracker disabled: set TRACKER_MEETINGS_DUMP to a completed meetings backup."
+          exit 0
+          ;;
+      esac
+      if [ ! -r "$TRACKER_MEETINGS_DUMP" ]; then
+        echo "Tracker meetings backup is not readable: $TRACKER_MEETINGS_DUMP" >&2
+        exit 1
+      fi
+      if [ ! -f "$TRACKER_INPUT_DIR/candidates.json" ]; then
+        echo "Tracker disabled: stage tracker/input/candidates.json to enable it."
+        exit 0
+      fi
+      set -- --candidates "$TRACKER_INPUT_DIR/candidates.json" \
+        --evidence-dir "$TRACKER_INPUT_DIR/evidence" --output-dir "$TRACKER_OUTPUT_DIR"
+      for path in "$TRACKER_INPUT_DIR"/Legislation/*.json; do
+        if [ -f "$path" ]; then
+          set -- "$@" --legislation "$path"
+        fi
+      done
+      exec chi-ciq-alderman-tracker build "$@"
+
+  postgres-shell:
+    image: *postgres-image
+    env:
+      - PGHOST=postgres
+      - PGPORT=5432
+      - PGUSER=postgres
+      - PGDATABASE=postgres
+      - POSTGRES_SHELL_ENABLED=false
+    resource: *small
+    policy:
+      timeout:
+        execute: 48h
+    depends-on:
+      - {name: web-check, status: FINISHED}
+      - {name: meetings-backup-after, status: FINISHED}
+      - {name: documents-backup-after, status: FINISHED}
+      - {name: analytics-backup-after, status: FINISHED}
+    script: |
+      #!/bin/sh
+      set -eu
+      if [ "$POSTGRES_SHELL_ENABLED" != "true" ]; then
+        echo "PostgreSQL shell disabled; set POSTGRES_SHELL_ENABLED=true to keep it open."
+        exit 0
+      fi
+      exec sleep infinity
+
 services:
   # Jobs reach the database as postgres:5432. The data directory is on the
   # persistent volume team8/postgres-data and survives workflow teardown.
@@ -390,6 +521,32 @@ services:
       # initialization listens on the socket only, and must not count as ready.
       exec:
         command: [pg_isready, --host, 127.0.0.1, --port, "5432", --username, postgres]
+      initial-delay-seconds: 5
+      period-seconds: 10
+      timeout-seconds: 5
+      failure-threshold: 12
+
+  # Isolated restore target for the optional tracker build; never shares the
+  # persistent production PostgreSQL data directory.
+  tracker-snapshot-db:
+    image: *postgres-image
+    env:
+      - POSTGRES_PASSWORD=secret://user/chi-ciq-postgres-password
+      - POSTGRES_DB=meetings
+      - PGDATA=/tmp/tracker-pgdata
+    resource:
+      cpu:
+        cores: 1
+      memory:
+        size: 2GiB
+    command: [docker-entrypoint.sh, postgres, -p, "55432"]
+    persist: false
+    network:
+      ports:
+        - {name: postgres, port: 55432, protocol: tcp}
+    readiness-probe:
+      exec:
+        command: [pg_isready, --host, 127.0.0.1, --port, "55432", --username, postgres]
       initial-delay-seconds: 5
       period-seconds: 10
       timeout-seconds: 5

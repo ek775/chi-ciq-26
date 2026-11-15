@@ -230,28 +230,39 @@ fuzzball volume create team8 postgres-data
 fuzzball volume create team8 vllm-model-data
 ```
 
-#### psql shell on the database volume
+#### Optional PostgreSQL shell
 
-[fuzzball-postgres-shell.yaml](fuzzball-postgres-shell.yaml) is a maintenance
-workflow. It starts the same `postgres` service on the same volume as
-[fuzzball.yaml](fuzzball.yaml), and one idle job `postgres-shell` that has
-`psql` and the volume at `/var/lib/postgresql/data`. The job stays up for 48
-hours or until you stop the workflow.
+The canonical [Fuzzball workflow](fuzzball.yaml) includes a `postgres-shell`
+job, disabled by default. To enable it, set `POSTGRES_SHELL_ENABLED=true` in
+the configured `data/deployment/fuzzball.yaml`, validate, and start that
+workflow. The shell job waits until ingestion, backups, and read checks finish,
+then stays open for up to 48 hours:
 
 ```sh
-fuzzball workflow start fuzzball-postgres-shell.yaml --name postgres-shell
+fuzzball workflow validate data/deployment/fuzzball.yaml
+fuzzball workflow start data/deployment/fuzzball.yaml --name postgres-shell
 # Use the returned workflow ID:
 fuzzball workflow exec --tty WORKFLOW postgres-shell -- /bin/bash
-# In the shell, psql connects to the service as postgres with no arguments:
+# In the shell, psql connects to the workflow's postgres service:
 psql
 psql --dbname=analytics
-# One command without a shell:
 fuzzball workflow exec WORKFLOW postgres-shell -- psql --list
 fuzzball workflow stop WORKFLOW
 ```
 
-Do not run this workflow while the deployment workflow runs: the two `postgres`
-services would share one data directory.
+The integrated Fuzzfile also runs its normal jobs. Do not start it while
+another workflow is using the persistent PostgreSQL volume; only one PostgreSQL
+service may use that data directory at a time.
+
+#### Optional Alderman tracker build
+
+The same Fuzzfile includes CPU-only tracker jobs. They skip unless both a
+completed meetings backup and `tracker/input/candidates.json` are staged. The
+backup is restored into a separate disposable PostgreSQL service, not the live
+database. See the [tracker runbook](src/pipelines/tracker/README.md#run-on-fuzzball)
+for the input contract and configuration steps. Tracker jobs are part of the
+normal workflow DAG and no-op when their inputs are absent. Fuzzball still
+starts the small 1-CPU/2-GiB disposable restore service for the workflow.
 
 ### vLLM service
 

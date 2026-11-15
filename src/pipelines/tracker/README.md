@@ -69,34 +69,35 @@ For a new meeting, supply reviewed candidates and evidence for that
 recording. An automated candidate extractor and an LLM answer interface
 can call the same build and retrieval steps when ready.
 
-## Run on Fuzzball after the current workflow
+## Run on Fuzzball
 
-The [standalone Fuzzfile](../../../fuzzball-alderman-tracker.yaml) restores a completed
-`meetings-backup-after` dump into its own disposable PostgreSQL service, then
-runs the tracker with a SELECT-only role. It uses a separate service port and
-never mounts the live PostgreSQL data directory. The original workflow can
-keep serving its dashboard. Both jobs are CPU-only.
+The canonical [Fuzzball workflow](../../../fuzzball.yaml) contains the tracker
+jobs. They restore a completed meetings backup into an isolated, disposable
+PostgreSQL service and use a SELECT-only role; they never mount the live
+PostgreSQL data directory.
 
-1. Wait for `meetings-backup-after` to finish. Find the exact dump path in its
-   logs and set `TRACKER_MEETINGS_DUMP` to that path in a copy of the Fuzzfile.
-   The dump must be readable by the restore job on the shared datasets volume.
-2. In `TRACKER_INPUT_DIR` on that volume, stage `candidates.json` for the
-   transcripts in the dump, an `evidence/` directory of JSONL records, and
-   optionally `Legislation/*.json` from the archive. Use the published
-   source keys and segment sequences from the backup. Quote candidates still need to be
-   prepared before submission.
-3. Use a fresh `TRACKER_OUTPUT_DIR` for each batch. The Fuzzfile uses the
-   existing `chi-ciq-postgres-password` secret for the disposable database.
-   After this PR merges, the ARM64 image workflow publishes
-   `ghcr.io/ek775/chi-ciq-26-alderman-tracker:fuzzball`. To run before merge, dispatch the image workflow
-   on the PR branch and use its `sha-<full-commit>` image tag in your Fuzzfile.
-4. Validate and submit the configured copy:
+1. Stage `candidates.json`, an `evidence/` directory of JSONL records, and
+   optionally `Legislation/*.json` under `/datasets/tracker/input` on the shared
+   `datasets` volume. Use published source keys and segment sequences. Quote
+   candidates still need to be prepared before submission.
+2. Set `TRACKER_MEETINGS_DUMP` in `fuzzball.yaml` to the exact readable backup
+   path under `/backups/meetings` on the `database-backups` volume. The default
+   placeholder intentionally skips the tracker. Use a fresh
+   `/datasets/tracker/output` directory for each batch.
+3. Ensure the ARM64 image
+   `ghcr.io/ek775/chi-ciq-26-alderman-tracker:fuzzball` is available. To run
+   before merge, dispatch the image workflow on the PR branch and use its
+   `sha-<full-commit>` image tag in `fuzzball.yaml`.
+4. Configure the Fuzzball secrets and submit the configured single workflow:
 
    ```sh
-   fuzzball workflow validate fuzzball-alderman-tracker.yaml
-   fuzzball workflow start fuzzball-alderman-tracker.yaml --name alderman-speech-and-action-tracker
+   chi-ciq-fuzzball-env --env-file .env
+   fuzzball workflow validate data/deployment/fuzzball.yaml
+   fuzzball workflow start data/deployment/fuzzball.yaml --name alderman-speech-and-action-tracker
    ```
 
+The tracker jobs require both the backup and candidate inputs; they exit
+successfully without running when either is absent or left at the placeholder.
 The tracker job reports counts of accepted statements, rejected candidates,
 and imported actions. Read `tracker.json` from the output directory. The
 temporary PostgreSQL service needs enough local disk space to restore the
