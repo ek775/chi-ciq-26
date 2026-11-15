@@ -17,7 +17,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 .brand-mark { display: inline-block; font-size: 2.8rem; line-height: 1; color: var(--green); }
 nav { display: flex; align-items: center; flex-wrap: wrap; gap: 2.2rem; font-size: .8rem; font-weight: 600; }
 nav a { text-decoration: none; }
-nav a:hover, nav a[aria-current="page"] { color: #638359; }
+nav a:hover, nav a[aria-current="page"] { color: var(--green); }
 .nav-cta { padding: .85rem 1.2rem; border: 1px solid #263d30; border-radius: 3px; text-decoration: none; font-size: .78rem; font-weight: 700; white-space: nowrap; }
 .hero { display: grid; grid-template-columns: 1.08fr .92fr; min-height: 520px; align-items: center; gap: 4rem; padding: 5.2rem 0; }
 .eyebrow { font-size: .64rem; font-weight: 700; letter-spacing: .15em; color: #687b6a; text-transform: uppercase; }
